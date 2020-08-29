@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.css" />
-		<script data-require="mocha" data-semver="1.13.0" src="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.js"></script>
+		<script data-require="mocha" data-semver="1.13.0" src="lib/mocha-1.13.0-tacitscript.js"></script>
 		<script data-require="chaijs" data-semver="1.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js"></script>
 		<style>
 				#mocha {
@@ -14,16 +14,28 @@
 		</style>
 	</head>
 	<body>
-		<div id="mocha"></div>
+		<div id="mocha1"></div>
+		<div>SOME TEXT</div>
+		<div id="mocha2"></div>
 
 		<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
 		<script src="systemjs.config.js"></script>
 		
-		<script>mocha.setup('bdd')</script>
 		<script>
-			System.import('src/test.js').catch(function(err) {
+			mocha.setup("bdd");
+			System.import('tutorial.js').catch(function(err) {
 				console.error(err);
-			}).then(() => mocha.run());
+			}).then(() => {
+				mocha.setup({
+					grep: /pipe/,
+				});
+				mocha.run(null, "mocha1");
+				mocha.setup({
+					grep: /applyTo/,
+				});
+				mocha.run(null, "mocha2");
+			});
+
 		</script>
 		
 	</body>
