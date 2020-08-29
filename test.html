@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.css" />
+		<script data-require="mocha" data-semver="1.13.0" src="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.js"></script>
+		<script data-require="chaijs" data-semver="1.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js"></script>
+		<style>
+				#mocha {
+					margin-left: 0;
+					margin-right: 0;
+						font-family: consolas, monospace, Helvetica, sans-serif;
+				}
+				#mocha .test {overflow: auto}
+		</style>
+	</head>
+	<body>
+		<div id="mocha"></div>
+
+		<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
+		<script src="systemjs.config.js"></script>
+		
+		<script>mocha.setup('bdd')</script>
+		<script>
+			System.import('./test.js').catch(function(err) {
+				console.error(err);
+			}).then(() => mocha.run());
+		</script>
+		<script></script>
+		
+	</body>
+</html>
