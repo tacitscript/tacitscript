@@ -1,5 +1,5 @@
 const {expect, assert} = chai;
-import ts from "./tacitscript.js";
+import ts from "tacitscript";
 
 ///==========================================================
 // functional utilites
