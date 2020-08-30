@@ -21,7 +21,7 @@
 		
 		<script>mocha.setup('bdd')</script>
 		<script>
-			System.import('https://raw.githubusercontent.com/tacitscript/tacitscript/master/src/test.js').catch(function(err) {
+			System.import('src/test.js').catch(function(err) {
 				console.error(err);
 			}).then(() => mocha.run());
 		</script>
