@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.css" />
-		<script data-require="mocha" data-semver="1.13.0" src="lib/mocha-1.13.0-tacitscript.js"></script>
+		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="src/mocha-1.13.0-tacitscript.css" />
+		<script data-require="mocha" data-semver="1.13.0" src="src/mocha-1.13.0-tacitscript.js"></script>
 		<script data-require="chaijs" data-semver="1.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js"></script>
 		<style>
-				#mocha {
+				.mocha {
 					margin-left: 0;
 					margin-right: 0;
 						font-family: consolas, monospace, Helvetica, sans-serif;
 				}
-				#mocha .test {overflow: auto}
+				.mocha .test {overflow: auto}
 		</style>
 	</head>
 	<body>
-		<div id="mocha1"></div>
+		<div id="mocha1" class="mocha"></div>
 		<div>SOME TEXT</div>
-		<div id="mocha2"></div>
+		<div id="mocha2" class="mocha"></div>
 
 		<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
 		<script src="systemjs.config.js"></script>
