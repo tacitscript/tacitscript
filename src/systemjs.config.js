@@ -3,7 +3,6 @@
     transpiler: 'plugin-babel-tacitscript',
     paths: {
       "npm:": 'https://unpkg.com/',
-      "ramda": "https://cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.js"
     }, 
     map: {
       // babel transpiler
