@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="styles/mocha-1.13.0-tacitscript.css" />
+		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="styles/mocha-1.13.0-tacitscript.css"/>
 		<script data-require="mocha" data-semver="1.13.0" src="styles/mocha-1.13.0-tacitscript.js"></script>
 		<script data-require="chaijs" data-semver="1.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js"></script>
 		<style>
@@ -19,10 +19,31 @@
 		<div id="mocha2" class="mocha"></div>
 
 		<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
-		<script src="src/systemjs.config.js"></script>
-		
+		<script>mocha.setup('bdd')</script>
 		<script>
-			mocha.setup("bdd");
+			(function (global) {
+				System.config({
+					transpiler: 'plugin-babel-tacitscript',
+					paths: {
+						"npm:": 'https://unpkg.com/',
+						"github:": "https://raw.githubusercontent.com/tacitscript/tacitscript/master/src/",
+					}, 
+					map: {
+						// babel transpiler
+						'plugin-babel-tacitscript': 'github:plugin-babel-0.0.25-tacitscript.js',
+						'systemjs-babel-build': 'npm:systemjs-plugin-babel@0.0.25/systemjs-babel-browser.js',
+						"tacitscript": "github:tacitscript.js",
+					},
+					meta: {
+					'*.jsx': {
+						babelOptions: {
+							react: true
+						}
+					}
+				}
+				});
+			})(this);
+
 			System.import('tutorial.js').catch(function(err) {
 				console.error(err);
 			}).then(() => {
@@ -35,7 +56,6 @@
 				});
 				mocha.run(null, "mocha2");
 			});
-
 		</script>
 		
 	</body>
