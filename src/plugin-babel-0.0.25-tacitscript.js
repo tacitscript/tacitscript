@@ -377,14 +377,25 @@ const getDefinitionJs = definitionSymbols => {
 const processTsBlock = userDefinitions => ts => {
 	let updatedDefinitions = userDefinitions;
 	let js = "";
+	const inlineDefinition = ts[0] === " ";
 
-	const tokensToParse = (ts[0] === "\n") ? ts : ts.slice(1);
+	const tokensToParse = inlineDefinition ? ts.slice(1) : ts;
 	const symbols = tokenize(tokensToParse).tokens;
 
 	console.log("=========================================================");
 	console.log("symbols", JSON.stringify(symbols));
 
-	if (ts[0] === "\n") {
+	if (inlineDefinition) {
+		const firstWhitespace = symbols.findIndex(matches(/^\s+$/));
+		const definitionSymbols = (firstWhitespace === -1) ? symbols : symbols.slice(0, firstWhitespace);
+		const postDefinitionWhitespace = (firstWhitespace === -1) ? "" : pipe(
+			filter(symbol => (typeof symbol === "string") && symbol.includes("\n")),
+			join(""),
+		)(symbols.slice(firstWhitespace));
+		const {definition} = getDefinitionJs(definitionSymbols);
+
+		js += definition + postDefinitionWhitespace;
+	} else {
 		let variable = "";
 		let definitionSeparator = "";
 		let definitionSymbols = [];
@@ -426,16 +437,6 @@ const processTsBlock = userDefinitions => ts => {
 				definitionSymbols.push(symbol);
 			} // ignore text comment on this line
 		});
-	} else if (ts[0] === " ") {
-		const firstWhitespace = symbols.findIndex(matches(/^\s+$/));
-		const definitionSymbols = (firstWhitespace === -1) ? symbols : symbols.slice(0, firstWhitespace);
-		const postDefinitionWhitespace = (firstWhitespace === -1) ? "" : pipe(
-			filter(symbol => (typeof symbol === "string") && symbol.includes("\n")),
-			join(""),
-		)(symbols.slice(firstWhitespace));
-		const {definition} = getDefinitionJs(definitionSymbols);
-
-		js += definition + postDefinitionWhitespace;
 	}
 
 	return {js, userDefinitions: updatedDefinitions};
