@@ -31,7 +31,7 @@
 		<h1>tacitscript tutorial</h1>
 		<div class="section">
 			<p><strong>tacitscript - a language for building algorithms</strong></p>
-			<p>tacitscript is a programming language optimized for building algorithms from composable parts, through a simplified, concise syntax. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
+			<p>tacitscript is a programming language optimized for building algorithms from composable parts, using a simplified, concise syntax. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
 			<p>This tutorial will introduce the language incrementally through example and interactive exercises.</p>
 		</div>
 
@@ -48,7 +48,7 @@
 	decimal		3.5		also a number. NB: terminating line comments need not be prefixed with //
 
 	string		"strings may continue
-over several lines"			they are delimited by double-quotes <i>only</i>
+over several lines"			strings are delimited by double-quotes <i>only</i>
 
 	falsey		()		there is only one falsey value, <strong>undefined</strong>, denoted ()
 
@@ -75,9 +75,11 @@ console.log(pitfall); // 4 <i>("+ number" is considered a comment)</i>
 				<li>Any characters on the line following a closed ts expression are considered to be from a comment.</li>
 			</ul>
 			<h3>Exercises</h3>
+			<p>Please select the file <span class="code">tutorial.js</span> in the panel to the left. This will display the interactive exercises for these lessons.</p>
+			<p>The exercises are a sequence of automated tests, whose results are output below on save. The first set of tests will verify the assertions made in the lesson above.</p>
+			<p><div class="code-block"><div id="lesson-1" class="mocha"></div></div></p>
 		</div>
 
-		<div id="mocha1" class="mocha"></div>
 		<div>SOME TEXT</div>
 		<div id="mocha2" class="mocha"></div>
 
@@ -90,11 +92,11 @@ console.log(pitfall); // 4 <i>("+ number" is considered a comment)</i>
 				console.error(err);
 			}).then(() => {
 				mocha.setup({
-					grep: /pipe/,
+					grep: /^Lesson 1/,
 				});
-				mocha.run(null, "mocha1");
+				mocha.run(null, "lesson-1");
 				mocha.setup({
-					grep: /applyTo/,
+					grep: /Parsing/,
 				});
 				mocha.run(null, "mocha2");
 			});
