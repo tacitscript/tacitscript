@@ -1,8 +1,10 @@
 const {expect, assert} = chai;
 import ts from "tacitscript";
 
+//=======================================================================================================
+// LESSON 1
 
-describe("Lesson 1", () => {
+describe("Lesson 1 Tests", () => {
 	const jsVariable = 4;
 
 	/*ts
@@ -23,14 +25,18 @@ over several lines"			strings are delimited by double-quotes <i>only</i>
 		pitfall		4 + number	NB: tokens <i>cannot</i> be freely separated by whitespace
 	*/
 
+	const calculation = jsVariable + array[3];
+
 	it("number equals 3", () => expect(number).eql(3));
 	it("decimal equals 3.5", () => expect(decimal).eql(3.5));
 	it('string equals "strings may continue\\nover several lines"', () => expect(string).eql("strings may continue\nover several lines"));
 	it("falsey equals undefined", () => expect(falsey).eql(undefined));
 	it('array equals [1, "hello", undefined, 3]', () => expect(array).eql([1, "hello", undefined, 3]));
 	it("expression equals 8", () => expect(expression).eql(8));
-	it("pitfall equals 4", () => expect(pitfall).eql(4));
+	it('pitfall equals 4 ("+ number" is considered a comment)', () => expect(pitfall).eql(4));
+	it('calculation equals 7', () => expect(calculation).eql(7));
 });
+
 
 ///==========================================================
 // functional utilites
