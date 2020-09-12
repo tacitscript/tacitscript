@@ -17,6 +17,15 @@ const isUnique = array => {
 //===========================================================
 // tests
 
+describe("Multiline Strings", () => {
+	/*ts
+		multiLineString			"some words
+ and some others on a new line"				a comment about this
+	*/
+
+	it('"some words\\n and some others on a new line" a comment about this eql "some words\\n and some others on a new line"', () => expect(multiLineString).eql("some words\n and some others on a new line"));
+});
+
 describe("Parsing", () => {
 	const doubleRecurse = /*ts 2*({"Math.sqrt(/*ts *$(2 2 4)*/)")*/;
 	const singleRecurse = /*ts {"Math.sqrt(9)"*2*/;

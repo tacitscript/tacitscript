@@ -255,7 +255,7 @@ const getDefinition = symbols => {
 		if (Array.isArray(symbol)) return getDefinition(symbol);
 		if (symbol.match(/^\s+$/)) return `[${symbol}]`;
 		if (typeof symbol === "string") {
-			if (symbol.startsWith("\"") && symbol.endsWith("\"")) return symbol;
+			if (symbol.startsWith("\"") && symbol.endsWith("\"")) return `\`${symbol.slice(1, -1)}\``;
 			return lookup(symbol);
 		}
 	}
@@ -292,7 +292,7 @@ const getDefinition = symbols => {
 
 const isAlphabetic = string => /^[a-z]+$/i.test(string);
 const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
-const isString = string => string.startsWith('"') && string.endsWith('"');
+const isString = string => string.startsWith('`') && string.endsWith('`');
 
 var isNewSymbol = ({currentToken, character}) => {
 	const jointSymbol = currentToken + character;
