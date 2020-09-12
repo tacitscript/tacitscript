@@ -37,6 +37,16 @@ over several lines"			strings are delimited by double-quotes <i>only</i>
 	it('calculation equals 7', () => expect(calculation).eql(7));
 });
 
+describe("Lesson 1 Exercise Tests", () => {
+	/*ts
+		numbers		()
+	*/
+
+	xit('"numbers" is an array', () => expect(Array.isArray(numbers)).eql(true));
+	xit('"numbers" has more than one element', () => expect(numbers.length > 1).eql(true));
+	xit('all elements of "numbers" are numbers', () => expect(numbers.every(number => typeof(number) === "number")));
+	xit('sum of elements in "numbers" equals 20', () => expect(numbers.reduce((a, b) => a + b)).eql(20));
+});
 
 ///==========================================================
 // functional utilites

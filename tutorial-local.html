@@ -12,7 +12,7 @@
 				.mocha .test {overflow: auto}
 				.mocha .test a.replay {display: none;}
 				.mocha .suite {margin-left: 0;}
-				.mocha h1 {margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem;}
+				.mocha h1 {margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem; color: #9656a1;}
 
 				body {background-color: #140d0b; color: #fff3ec; font-family: proxima-nova, sans-serif; font-size: 14px;}
 				.primary {background-color: #55423d;}
@@ -24,6 +24,7 @@
 				a {color: rgba(20, 13, 11, 1); font-weight: bold; text-decoration: none;}
 				a:hover {color: rgba(20, 13, 11, 0.7);}
 				.section > h2 {margin: 0.5rem 0;}
+				.section > h3 {margin-top: 2.5rem; font-size: 1.25rem;}
 				.section > hr {margin-bottom: 1.5rem;}
 				.code {font-family: Roboto Mono, monospace; color: #ffc0ad;}
 				.code-block {font-family: Roboto Mono, monospace; background-color: #ffc0ad; color: #271c19; white-space: pre-wrap; padding: 0.5rem; border-radius: 0.25rem; font-size: 0.8rem; pointer-events: none;}
@@ -33,7 +34,7 @@
 		<h1>tacitscript tutorial</h1>
 		<div class="section">
 			<p><strong>tacitscript - a language for building algorithms</strong></p>
-			<p>tacitscript is a programming language optimized for building algorithms from composable parts, using a simplified, concise syntax. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
+			<p>tacitscript is a programming language optimized for building algorithms from composable parts, using a simplified syntax. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
 			<p>This tutorial will introduce the language incrementally through example and interactive exercises.</p>
 		</div>
 
@@ -63,18 +64,25 @@ over several lines"			strings are delimited by double-quotes <i>only</i>
 */
 
 const calculation = jsVariable + array[3];
-	<div id="lesson-1" class="mocha"></div>
+	<div id="lesson-1-tests" class="mocha"></div>
 </div></p>
 			<ul>
 				<li>Each ts block consists of a list of name-value bindings.</li>
 				<li>Each ts name is made from upper and lower-case alphabetic characters <i>only</i>.</li>
 				<li>The value bound to a name is given by any valid ts expression.</li>
-				<li>Any characters on the line following a closed ts expression are considered to be from a comment.</li>
+				<li>Any characters on the line following a closed ts expression are considered to be a comment.</li>
 			</ul>
 			<h3>Exercises</h3>
 			<p>Please select the file <span class="code">tutorial.js</span> in the panel to the left. This will display the interactive exercises for these lessons.</p>
-			<p>The exercises are a sequence of automated tests, whose results are output on this page on save. The first set of tests is driving the assertions made in the lesson above.</p>
-			<p><div class="code-block"></div></p>
+			<p>The exercises are a sequence of automated tests, whose results are output on this page on save. The first set of tests is driving the assertions made in the lesson above. The second block of tests
+				contains stubs for ts declarations, initially left undefined. Replace these null definitions with your own submissions, and click Save to see the tests run against them. (Remove the <i>x</i> before
+				the test declaration to enable it.)</p>
+			<p><div class="code-block">
+				<ul>
+					<li>Define an array <b>numbers</b> that contains multiple numbers, and only numbers, that add up to 20.</li>
+				</ul>
+				<div id="lesson-1-exercise-tests" class="mocha"></div>
+			</div></p>
 		</div>
 
 		<div>SOME TEXT</div>
@@ -91,11 +99,11 @@ const calculation = jsVariable + array[3];
 				mocha.setup({
 					grep: /^Lesson 1 Tests/,
 				});
-				mocha.run(null, "lesson-1");
+				mocha.run(null, "lesson-1-tests");
 				mocha.setup({
-					grep: /Parsing/,
+					grep: /^Lesson 1 Exercise Tests/,
 				});
-				mocha.run(null, "mocha2");
+				mocha.run(null, "lesson-1-exercise-tests");
 			});
 
 		</script>
