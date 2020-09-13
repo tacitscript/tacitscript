@@ -1,0 +1,25 @@
+{
+  "name": "tacitscript",
+  "version": "1.0.0",
+  "description": "<!-- **tacitscript/tacitscript** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.",
+  "main": "build.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tacitscript/tacitscript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tacitscript/tacitscript/issues"
+  },
+  "homepage": "https://github.com/tacitscript/tacitscript#readme",
+  "devDependencies": {
+    "systemjs-builder": "^0.16.4"
+  }
+}

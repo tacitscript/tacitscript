@@ -17,13 +17,11 @@
 		<div id="mocha"></div>
 
 		<script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
-		<script src="src/systemjs.config.js"></script>
-		
-		<script>mocha.setup('bdd')</script>
+		<script src="test/config.js"></script>
 		<script>
-			System.import('src/test.js').catch(function(err) {
+			System.import('test/logic/main.js').catch(function(err) {
 				console.error(err);
-			}).then(() => mocha.run());
+			});
 		</script>
 		
 	</body>

@@ -1,6 +1,8 @@
 const {expect, assert} = chai;
 import ts from "tacitscript";
 
+mocha.setup('bdd');
+
 ///==========================================================
 // functional utilites
 
@@ -1422,3 +1424,5 @@ describe("99 Haskell Problems", () => {
 		});
 	});
 });
+
+mocha.run();

@@ -42,10 +42,10 @@ describe("Lesson 1 Exercise Tests", () => {
 		numbers		()
 	*/
 
-	xit('"numbers" is an array', () => expect(Array.isArray(numbers)).eql(true));
-	xit('"numbers" has more than one element', () => expect(numbers.length > 1).eql(true));
-	xit('all elements of "numbers" are numbers', () => expect(numbers.every(number => typeof(number) === "number")));
-	xit('sum of elements in "numbers" equals 20', () => expect(numbers.reduce((a, b) => a + b)).eql(20));
+	it('"numbers" is an array', () => expect(Array.isArray(numbers)).eql(true));
+	it('"numbers" has more than one element', () => expect(numbers.length > 1).eql(true));
+	it('all elements of "numbers" are numbers', () => expect(numbers.every(number => typeof(number) === "number")));
+	it('sum of elements in "numbers" equals 20', () => expect(numbers.reduce((a, b) => a + b)).eql(20));
 });
 
 ///==========================================================
