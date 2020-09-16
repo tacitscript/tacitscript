@@ -4,7 +4,7 @@
     globalName: "tutorial",
     map: {
       // babel transpiler
-      'plugin-babel-tacitscript': 'common/src/plugin-babel_c72965b-tacitscript.js',
+      'plugin-babel-tacitscript': 'common/lib/plugin-babel_c72965b.js',
       'systemjs-babel-build': "common/lib/systemjs-babel-browser_c72965b.js",
       "tacitscript": "common/src/tacitscript.js",
       "react": "https://cdnjs.cloudflare.com/ajax/libs/react/16.8.1/umd/react.development.js",
