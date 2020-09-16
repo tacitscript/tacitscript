@@ -4,11 +4,12 @@
     globalName: "test",
     map: {
       // babel transpiler
-      'plugin-babel-tacitscript': 'common/src/plugin-babel-0.0.25-tacitscript.js',
+      'plugin-babel-tacitscript': 'common/src/plugin-babel_c72965b-tacitscript.js',
       'systemjs-babel-build': "common/lib/systemjs-babel-browser_c72965b.js",
       "tacitscript": "common/src/tacitscript.js",
     },
     babelOptions: {
+      modularRuntime: false,
       react: true,
     },  
   });

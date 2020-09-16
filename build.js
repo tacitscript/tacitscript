@@ -29,6 +29,7 @@ var build = remainingBuilds => {
 
 const remainingBuilds = [
 	"test",
+	"tutorial",
 ];
 
 build(remainingBuilds);
