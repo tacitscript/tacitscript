@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.css" />
+		<script data-require="mocha" data-semver="1.13.0" src="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.js"></script>
+		<script data-require="chaijs" data-semver="1.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js"></script>
+		<style>
+				.mocha {
+					margin: 0;
+					font-family: consolas, monospace, Helvetica, sans-serif;
+				}
+				.mocha .test {overflow: auto}
+				.mocha .test a.replay {display: none;}
+				.mocha .suite {margin-left: 0;}
+				.mocha h1 {margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem; color: #9656a1;}
+		</style>
+	</head>
+	<body>
+		<div id="app"></div>
+
+		<script type="text/javascript" src="https://unpkg.com/systemjs@0.20.9/dist/system.src.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/glamor/3.0.0-1/index.js"></script>
+		<script type="text/javascript" src="tutorial/config.js"></script>
+		<script>
+			System.import('tutorial/logic/main.js').catch(function(err) {
+				console.error(err);
+			});
+		</script>
+		
+	</body>
+</html>
