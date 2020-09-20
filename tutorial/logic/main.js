@@ -9,6 +9,7 @@ import routerReducer from "common/lib/redux-first/reducer.js";
 import routerMiddleware from "common/lib/redux-first/middleware.js";
 import routerListener from "common/lib/redux-first/listener.js";
 import processRoute from "./process-route.js";
+import "./tutorial.js";
 
 
 const {applyMiddleware, createStore, combineReducers} = Redux;
