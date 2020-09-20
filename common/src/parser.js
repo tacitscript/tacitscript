@@ -1,62 +1,41 @@
 //==========================================================
 // functional utilities
 
-const pipe = (...args) => value => args.reduce((acc, fn) => fn(acc), value);
-const prop = property => object => object[property];
-const concat = array1 => array2 => [...array1, ...array2];
-const map = fn => array => array.map(fn);
-const reduce = reducer => startingValue => array => array.reduce(reducer, startingValue);
-const startsWith = match => array => array.indexOf(match) === 0;
-const join = delimiter => array => array.join(delimiter);
-const equals = value => test => value === test;
-const matches = regex => test => (typeof test === "string") && test.match(regex);
-const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
-const find = search => reduce((acc, value) => (acc == undefined) ? (search(value) ? value : undefined) : acc)(undefined);
-const unnest = reduce((acc, array) => [...acc, ...array])([]);
-const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
-const filter = check => array => array.filter(check);
-const negate = check => value => !check(value);
-const reject = check => array => array.filter(negate(check));
-const partition = check => array => [filter(check)(array), reject(check)(array)];
-const any = check => array => array.some(check);
-const none = check => array => !array.some(check);
-const tap = sideEffectFn => value => {sideEffectFn(value); return value;};
-const all = check => array => array.every(check);
-const first = vector => vector[0];
-const last = vector => vector[vector.length - 1];
-const groupBy = fn => reduce((acc, value) => {const key = fn(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({});
-const values = obj => Object.values(obj);
-const forEach = fn => array => array.forEach(fn);
-const nth = index => array => array[index];
-const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
-const flatten = reduce((acc, value) => [...acc, ...(Array.isArray(value) ? flatten(value) : [value])])([]);
-const identity = x => x;
-const compact = filter(identity);
-const contains = value => array => array.includes(value);
-const omit = keys => object => {const copy = {...object}; keys.forEach(key => delete copy[key]); return copy;};
+const pipe = function () {const args = Array.prototype.slice.call(arguments); return function(value) {return args.reduce(function(acc, fn) {return fn(acc);}, value);}};
+const map = function(fn) {return function(array) { return array.map(fn);};};
+const reduce = function(reducer) {return function(startingValue) {return function(array) {return array.reduce(reducer, startingValue);};};};
+const join = function(delimiter) {return function(array) {return array.join(delimiter);};};
+const matches = function(regex) {return function(test) {return (typeof test === "string") && test.match(regex);};};
+const filter = function(check) {return function(array) {return array.filter(check);};};
+const any = function(check) {return function(array) {return array.some(check);};};
+const none = function(check) {return function(array) {return !array.some(check);};};
+const last = function(vector) {return vector[vector.length - 1];};
+const flatten = reduce(function(acc, value) {return acc.concat(Array.isArray(value) ? flatten(value) : [value]);})([]);
+const contains = function(value) {return function(array) {return array.includes(value);};};
+const omit = function(keys) {return function(object) {const copy = Object.assign({}, object); keys.forEach(function(key) {delete copy[key];}); return copy;};};
 
 //==================================================================
 // type utilities
 
-const isArray = value => Array.isArray(value);
-const isObject = value => (typeof value === 'object') && !isArray(value);
+const isArray = function(value) {return Array.isArray(value);};
+const isObject = function(value) {return (typeof value === 'object') && !isArray(value);};
 
 //==================================================================
 // parsing
 
-const parseTrampoline = data => {
+const parseTrampoline = function(data) {
 	const {remaining, type, blocks, blockCommentDepth, lineComment, quotationMark} = data;
 
 	if (lineComment) {
-		if (remaining[0] !== "\n") return {...data, remaining: remaining.slice(1)};
+		if (remaining[0] !== "\n") return Object.assign({}, data, {remaining: remaining.slice(1)});
 		// otherwise, add the newline to the block data, and remove the lineComment
 	} else if (blockCommentDepth) {
-		if (remaining.startsWith("*/")) return {...data, remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth - 1};
-		else if (remaining.startsWith("/*")) return {...data, remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth + 1};
-		else if (remaining[0] !== "\n") return {...data, remaining: remaining.slice(1)};
+		if (remaining.startsWith("*/")) return Object.assign({}, data, {remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth - 1});
+		else if (remaining.startsWith("/*")) return Object.assign({}, data, {remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth + 1});
+		else if (remaining[0] !== "\n") return Object.assign({}, data, {remaining: remaining.slice(1)});
 		// otherwise, add the newline to the block data
 	} else if (!quotationMark && remaining.startsWith("//")) {
-		return {...data, remaining: remaining.slice(2), lineComment: true};
+		return Object.assign({}, data, {remaining: remaining.slice(2), lineComment: true});
 	} else if ((type === "js") && !quotationMark && (remaining.match(/^\/\*ts\s{1}/))) {
 		let data = {
 			type: "ts",
@@ -71,14 +50,13 @@ const parseTrampoline = data => {
 			data = parseTrampoline(data);
 		}
 
-		return {
-			...data,
+		return Object.assign({}, data, {
 			type: "js",
-			blocks: data.blocks.length ? [...blocks, omit(["remaining", "blockCommentDepth", "lineComment"])(data)] : blocks,
+			blocks: data.blocks.length ? blocks.concat(omit(["remaining", "blockCommentDepth", "lineComment"])(data)) : blocks,
 			remaining: data.remaining.slice(2),
-		};
+		});
 	} else if (!quotationMark && remaining.startsWith("/*")) {
-		return {...data, remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth + 1};
+		return Object.assign({}, data, {remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth + 1});
 	} else if ((type === "ts") && !quotationMark && remaining.startsWith('{"')) {
 		let data = {
 			type: "js",
@@ -93,21 +71,19 @@ const parseTrampoline = data => {
 			data = parseTrampoline(data);
 		}
 
-		return {
-			...data,
+		return Object.assign({}, data, {
 			type: "ts",
-			blocks: data.blocks.length ? [...blocks, omit(["remaining", "blockCommentDepth", "lineComment"])(data)] : blocks,
+			blocks: data.blocks.length ? blocks.concat(omit(["remaining", "blockCommentDepth", "lineComment"])(data)) : blocks,
 			remaining: data.remaining.slice(1),
-		};
+		});
 	} else if (quotationMark && (remaining[0] === "\\")) {
-		return { // parse two characters
-			...data,
-			blocks: blocks.length ? (isObject(last(blocks)) ? [...blocks, ...remaining.slice(0, 2)] : [...blocks.slice(0, -1), `${last(blocks)}${remaining.slice(0, 2)}`]) : [remaining.slice(0, 2)],
+		return Object.assign({}, data, { // parse two characters
+			blocks: blocks.length ? (isObject(last(blocks)) ? blocks.concat(remaining.slice(0, 2)) : blocks.slice(0, -1).concat(`${last(blocks)}${remaining.slice(0, 2)}`)) : [remaining.slice(0, 2)],
 			remaining: remaining.slice(2),
-		};
+		});
 	}
 
-	const newQuotationMark = (() => {
+	const newQuotationMark = (function() {
 		if (quotationMark) return (remaining[0] === quotationMark) ? "" : quotationMark;
 		if (blockCommentDepth) return "";
 
@@ -117,15 +93,14 @@ const parseTrampoline = data => {
 		return isQuotationMark ? remaining[0] : "";
 	})();
 
-	return { // parse one character
-		...data,
-		blocks: blocks.length ? (isObject(last(blocks)) ? [...blocks, remaining[0]] : [...blocks.slice(0, -1), `${last(blocks)}${remaining[0]}`]) : [remaining[0]],
+	return Object.assign({}, data, {// parse one character
+		blocks: blocks.length ? (isObject(last(blocks)) ? blocks.concat([remaining[0]]) : blocks.slice(0, -1).concat(`${last(blocks)}${remaining[0]}`)) : [remaining[0]],
 		remaining: remaining.slice(1),
 		lineComment: false,
 		quotationMark: newQuotationMark,
-	};
+	});
 };
-const parse = remaining => {
+const parse = function(remaining) {
 	let data = {
 		type: "js",
 		blocks: [],
@@ -145,27 +120,27 @@ const parse = remaining => {
 //==========================================================
 // tacitscript conversion code
 
-const applySymbols = (left, right) => {
+const applySymbols = function(left, right) {
 	// first symbol in evaluation
 	if (!left) return right;
 
 	return `ts.apply(${left}, ${right})`;
 };
-const mergeBlocks = ({currentBlock, blocks}) => [...blocks, ...(currentBlock.length ? [currentBlock] : [])];
-const processSymbols = ({symbols, acc, userDefinitions}) => {
+const mergeBlocks = function({currentBlock, blocks}) {return blocks.concat(currentBlock.length ? [currentBlock] : []);}
+const processSymbols = function({symbols, acc, userDefinitions}) {
 	if (Array.isArray(symbols)) {
 		return pipe(
 			// separate into space delimited blocks
-			reduce(({currentBlock, blocks}, symbol) => {
+			reduce(function({currentBlock, blocks}, symbol) {
 				if ((typeof symbol === "string") && symbol.match(/^\s+$/)) {
 					return {currentBlock: [], blocks: mergeBlocks({currentBlock, blocks})};
 				} else {
-					return {currentBlock: [...currentBlock, symbol], blocks};
+					return {currentBlock: currentBlock.concat([symbol]), blocks};
 				}
 			})({currentBlock: [], blocks: []}),
 			mergeBlocks,
-			map(reduce((acc, symbol) => applySymbols(acc, lookup({symbol, userDefinitions})))(undefined)),
-			terms => {
+			map(reduce(function(acc, symbol) {return applySymbols(acc, lookup({symbol, userDefinitions}));})(undefined)),
+			function(terms) {
 				// if any spaces, return the array, otherwise, return terms[0];
 				return any(matches(/^\s+$/))(symbols) ? stringify(map(stringify)(terms)) : stringify(terms[0]);
 			}
@@ -174,45 +149,45 @@ const processSymbols = ({symbols, acc, userDefinitions}) => {
 		return applySymbols(acc, lookup({symbol: symbols, userDefinitions}));
 	}
 };
-const deprioritizeMedialDots = symbols => {
-	const {segments, current} = reduce(({segments, current}, symbol) => {
-		if (Array.isArray(symbol)) return {segments, current: [...current, ...deprioritizeDots(symbol)]};
-		if (".,".includes(symbol)) return {segments: [...segments, current, symbol], current: []};
+const deprioritizeMedialDots = function(symbols) {
+	const {segments, current} = reduce(function({segments, current}, symbol) {
+		if (Array.isArray(symbol)) return {segments, current: current.concat(deprioritizeDots(symbol))};
+		if (".,".includes(symbol)) return {segments: segments.concat([current, symbol]), current: []};
 
-		return {segments, current: [...current, symbol]};
+		return {segments, current: current.concat([symbol])};
 	})({segments: [], current: []})(symbols);
 
-	return current.length ? [...segments, current] : segments;
+	return current.length ? segments.concat([current]) : segments;
 };
-const deprioritizeDots = symbols => {
+const deprioritizeDots = function(symbols) {
 	if (symbols.length < 2) return [symbols];
-	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0], ...deprioritizeMedialDots(symbols.slice(1, -1)), symbols[symbols.length - 1]];
-	if ([".", ","].includes(symbols[0])) return [symbols[0], ...deprioritizeMedialDots(symbols.slice(1))];
-	if ([".", ","].includes(symbols[symbols.length - 1])) return [...deprioritizeMedialDots(symbols.slice(0, -1)), symbols[symbols.length - 1]];
+	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
+	if ([".", ","].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
+	if ([".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, -1)).concat([symbols[symbols.length - 1]]);
 
 	return [deprioritizeMedialDots(symbols)];
 };
-const prioritizeSpaces = symbols => {
+const prioritizeSpaces = function(symbols) {
 	return Array.isArray(symbols) ? pipe(
 		map(prioritizeSpaces),
-		symbols => {
+		function(symbols) {
 			if (symbols.length < 2) return symbols;
 			if (none(matches(/^\s+$/))(symbols)) return symbols;
 
 			return pipe(
-				reduce((acc, value) => {
+				reduce(function(acc, value) {
 					const lastArray = last(acc);
 
 					if (matches(/^\s+$/)(value)) {
-						return lastArray.length ? [...acc, value, []] : [value, []];
-					} else return [...acc.slice(0, -1), [...lastArray, value]];
+						return lastArray.length ? acc.concat([value, []]) : [value, []];
+					} else return acc.slice(0, -1).concat([lastArray.concat([value])]);
 				})([[]]),
-				chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
+				function(chunks) {return last(chunks).length ? chunks : chunks.slice(0, -1);}
 			)(symbols);
 		}
 	)(symbols) : symbols;
 };
-const lookup = symbol => {
+const lookup = function(symbol) {
 	switch(symbol) {
 		case "+": return "ts.plus";
 		case "-": return "ts.minus";
@@ -247,7 +222,7 @@ const lookup = symbol => {
 
 	return symbol;
 };
-const getDefinition = symbols => {
+const getDefinition = function(symbols) {
 	if (!symbols.length) return "undefined";
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
@@ -261,40 +236,40 @@ const getDefinition = symbols => {
 	}
 
 	return pipe(
-		reduce(({sections, append}, symbol) => {
+		reduce(function({sections, append}, symbol) {
 			if (matches(/^\s+$/)(symbol)) {
-				return {sections: [...sections.slice(0, -1), `${sections.length ? sections[sections.length - 1] : ""}${symbol}`], append: true};
+				return {sections: sections.slice(0, -1).concat(`${sections.length ? sections[sections.length - 1] : ""}${symbol}`), append: true};
 			}
-			if (append) return {sections: [...sections, getDefinition([symbol])], append: false};
+			if (append) return {sections: sections.concat([getDefinition([symbol])]), append: false};
 
 			const left = sections[sections.length - 1];
 			const right = getDefinition([symbol]);
 
-			const definition = (() => {
+			const definition = (function() {
 				if ((left === "ts.tilde") && isNumber(right)) return `-${right}`;
 				if ((left === "ts.braceleft") && isString(right)) return right.slice(1, -1).replace(/\\"/g, '"');
 
 				return `ts.apply(${left}, ${right})`;
 			})();
 
-			return {sections: [...sections.slice(0, -1), definition], append: false};
+			return {sections: sections.slice(0, -1).concat([definition]), append: false};
 		})({
 			sections: [],
 			append: true,
 		}),
-		({sections, append}) => {
-			const processedSections = sections[0].match(/^\s+$/) ? [`${sections[0]}${sections[1]}`, ...sections.slice(2)] : sections;
+		function({sections, append}) {
+			const processedSections = sections[0].match(/^\s+$/) ? [`${sections[0]}${sections[1]}`].concat(sections.slice(2)) : sections;
 
 			return (append || (processedSections.length > 1)) ? `[${processedSections.join(", ")}]` : processedSections[0];
 		},
 	)(symbols);
 };
 
-const isAlphabetic = string => /^[a-z]+$/i.test(string);
-const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
-const isString = string => string.startsWith('`') && string.endsWith('`');
+const isAlphabetic = function(string) {return /^[a-z]+$/i.test(string);};
+const isNumber = function(n) {return !isNaN(parseFloat(n)) && isFinite(n);};
+const isString = function(string) {return string.startsWith('`') && string.endsWith('`');}
 
-var isNewSymbol = ({currentToken, character}) => {
+var isNewSymbol = function({currentToken, character}) {
 	const jointSymbol = currentToken + character;
 	const canAddSymbol = (isNumber(currentToken) && isNumber(jointSymbol)) ||
 		(isAlphabetic(currentToken) && isAlphabetic(jointSymbol));
@@ -303,29 +278,29 @@ var isNewSymbol = ({currentToken, character}) => {
 };
 
 // if the last token is multi-character and ends with a ., then the dot is a separate token
-const getCombinedTokens = ({tokens, currentToken}) => [...tokens, ...(() => {
+const getCombinedTokens = function({tokens, currentToken}) {return tokens.concat((function() {
 	if (!currentToken) return [];
 	if ((currentToken.length > 1) && ".,".includes(currentToken[currentToken.length - 1])) return [currentToken.slice(0, -1), currentToken[currentToken.length - 1]];
 
 	return [currentToken];
-})()];
+})());};
 
-const tokenizeTrampoline = ({characters, currentToken, tokens}) => {
+const tokenizeTrampoline = function({characters, currentToken, tokens}) {
 	const firstCharacter = characters[0];
 	const restCharacters = characters.slice(1);
 	
 	if (currentToken.startsWith("\"")) {
 		if ((firstCharacter === "\"") && (currentToken.slice(-1) !== "\\")) {
-			return {characters: restCharacters, currentToken: "", tokens: [...tokens, `${currentToken}\"`]};
+			return {characters: restCharacters, currentToken: "", tokens: tokens.concat(`${currentToken}\"`)};
 		}
 	} else if (firstCharacter === "(") {
 		const {characters: remainingCharacters, tokens: subtokens} = tokenize(restCharacters);
 
 		// non-array bracketting
 		if ((subtokens.length === 1) && !matches(/^\s+$/)(subtokens[0])) {
-			return {characters: remainingCharacters, currentToken: "", tokens: [...getCombinedTokens({tokens, currentToken}), ...subtokens]};
+			return {characters: remainingCharacters, currentToken: "", tokens: getCombinedTokens({tokens, currentToken}).concat(subtokens)};
 		} else {
-			return {characters: remainingCharacters, currentToken: "", tokens: [...getCombinedTokens({tokens, currentToken}), subtokens]};
+			return {characters: remainingCharacters, currentToken: "", tokens: getCombinedTokens({tokens, currentToken}).concat([subtokens])};
 		}
 	} else if (firstCharacter === ")") {
 		return {characters: restCharacters, currentToken: "", tokens: getCombinedTokens({tokens, currentToken})};
@@ -340,7 +315,7 @@ const tokenizeTrampoline = ({characters, currentToken, tokens}) => {
 
 	return {characters: restCharacters, currentToken: `${currentToken}${firstCharacter}`, tokens};
 };
-const tokenize = characters => {
+const tokenize = function(characters) {
 	let acc = {characters, currentToken: "", tokens: []};
 
 	while (acc.characters.length) {
@@ -354,7 +329,7 @@ const tokenize = characters => {
 	return {characters: acc.characters, tokens: getCombinedTokens({tokens: acc.tokens, currentToken: acc.currentToken})};
 };
 
-const stringify = value => {
+const stringify = function(value) {
 	if (Array.isArray(value)) return`[${pipe(map(stringify), join(","))(value)}]`;
 	if (value == undefined) return "undefined";
 	if (typeof value === "string") return JSON.stringify(value.replace(/\\"/g, '"'));
@@ -362,7 +337,7 @@ const stringify = value => {
 	return value;
 };
 
-const getDefinitionJs = definitionSymbols => {
+const getDefinitionJs = function(definitionSymbols) {
 	const spacePrioritizedSymbols = prioritizeSpaces(definitionSymbols);
 	console.log("spacePrioritizedSymbols", JSON.stringify(spacePrioritizedSymbols));
 	const processedSymbols = deprioritizeDots(spacePrioritizedSymbols);
@@ -374,7 +349,7 @@ const getDefinitionJs = definitionSymbols => {
 	return {definition, processedSymbols};
 };
 
-const processTsBlock = userDefinitions => ts => {
+const processTsBlock = function(userDefinitions) {return function(ts) {
 	let updatedDefinitions = userDefinitions;
 	let js = "";
 	const inlineDefinition = ts[0] === " ";
@@ -389,7 +364,7 @@ const processTsBlock = userDefinitions => ts => {
 		const firstWhitespace = symbols.findIndex(matches(/^\s+$/));
 		const definitionSymbols = (firstWhitespace === -1) ? symbols : symbols.slice(0, firstWhitespace);
 		const postDefinitionWhitespace = (firstWhitespace === -1) ? "" : pipe(
-			filter(symbol => (typeof symbol === "string") && symbol.includes("\n")),
+			filter(function(symbol) {return (typeof symbol === "string") && symbol.includes("\n");}),
 			join(""),
 		)(symbols.slice(firstWhitespace));
 		const {definition} = getDefinitionJs(definitionSymbols);
@@ -401,7 +376,7 @@ const processTsBlock = userDefinitions => ts => {
 		let definitionSymbols = [];
 		let comment = false;
 
-		symbols.forEach(symbol => {
+		symbols.forEach(function(symbol) {
 			if (matches(/^\s+$/)(symbol)) {
 				if (definitionSymbols.length) {
 					if (!comment) {
@@ -414,7 +389,7 @@ const processTsBlock = userDefinitions => ts => {
 						const declaration =  isRecursive ? `let ${variable} =${definitionSeparator}x => ${definition}(x);` : `const ${variable} =${definitionSeparator}${definition};`;
 
 						js += declaration;
-						updatedDefinitions = {...updatedDefinitions, [variable]: solution};
+						updatedDefinitions = Object.assign({}, updatedDefinitions, {[variable]: solution});
 					}
 
 					if (symbol.includes("\n")) {
@@ -440,49 +415,11 @@ const processTsBlock = userDefinitions => ts => {
 	}
 
 	return {js, userDefinitions: updatedDefinitions};
-};
+};};
 
-var processTsBlocks = lines => {
-	let userDefinitions = {}; // {[variable]: String(def)} ! mutating
-
-	return pipe(reduce((lineDetails, line) => {
-		if (startsWith("/*ts")(line)) {
-			return {
-				lines: concat(lineDetails.lines)([""]),
-				isTsBlock: true,
-				previousTsBlock: true
-			};
-		} if (startsWith("*/")(line) && lineDetails.isTsBlock) {
-			return {
-				lines: concat(lineDetails.lines)([""]),
-				isTsBlock: false,
-				previousTsBlock: lineDetails.previousTsBlock
-			};
-		} else if (line.startsWith("//")) {
-			return {
-				lines: concat(lineDetails.lines)([line]),
-				isTsBlock: lineDetails.isTsBlock,
-				previousTsBlock: lineDetails.previousTsBlock
-			};
-		} else {
-			return {
-				lines: concat(lineDetails.lines)([lineDetails.isTsBlock ? (() => {
-					const {js, userDefinitions: updatedUserTypes} = ts2js({line, userDefinitions});
-
-					userDefinitions = updatedUserTypes;
-
-					return js;
-				})() : line]),
-				isTsBlock: lineDetails.isTsBlock,
-				previousTsBlock: lineDetails.previousTsBlock
-			};
-		}
-	})({lines: [], isTsBlock: false, previousTsBlock: false}), prop("lines"))(lines);
-};
-
-const expandTs = ({blocks, userDefinitions}) => {
+const expandTs = function({blocks, userDefinitions}) {
 	const {js, userDefinitions: processedDefinitions} = pipe(
-		map(block => {
+		map(function(block) {
 			if (typeof block === "string") return block;
 
 			const js = expandJs({blocks: block.blocks, userDefinitions});
@@ -496,11 +433,11 @@ const expandTs = ({blocks, userDefinitions}) => {
 	return {js, userDefinitions: processedDefinitions};
 };
 
-const expandJs = ({blocks, userDefinitions}) => {
+const expandJs = function({blocks, userDefinitions}) {
 	let localDefinitions = userDefinitions;
 
 	const js = pipe(
-		map(block => {
+		map(function(block) {
 			if (typeof block === "string") return block;
 
 			const {userDefinitions: updatedDefinitions, js} = expandTs({blocks: block.blocks, userDefinitions: localDefinitions});
@@ -515,7 +452,7 @@ const expandJs = ({blocks, userDefinitions}) => {
 	return js;
 };
 
-exports.ts2es6 = source => {
+exports.ts2es6 = function(source) {
 	const parsed = parse(source);
 	const js = expandJs({blocks: parsed.blocks, userDefinitions: {}});
 
