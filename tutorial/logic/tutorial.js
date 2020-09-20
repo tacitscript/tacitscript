@@ -4,6 +4,7 @@ import l1 from "../data/1.js";
 import parser from "common/src/parser.js";
 
 const {ts2es6} = parser;
+window.ts = ts; // required for release build
 
 mocha.setup("bdd");
 
