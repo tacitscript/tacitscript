@@ -12,6 +12,7 @@ const last = function(vector) {return vector[vector.length - 1];};
 const flatten = reduce(function(acc, value) {return acc.concat(Array.isArray(value) ? flatten(value) : [value]);})([]);
 const contains = function(value) {return function(array) {return array.includes(value);};};
 const omit = function(keys) {return function(object) {const copy = Object.assign({}, object); keys.forEach(function(key) {delete copy[key];}); return copy;};};
+const fromPairs = function(pairs) {return pairs.reduce(function(prev, curr) {prev[curr[0]] = curr[1]; return prev;}, {});};
 
 //==================================================================
 // type utilities
@@ -402,7 +403,7 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x);" : "const " + variable + " =" + definitionSeparator + definition + ";";
 
 						js += declaration;
-						updatedDefinitions = Object.assign({}, updatedDefinitions, Object.fromEntries([[variable, solution]]));
+						updatedDefinitions = Object.assign({}, updatedDefinitions, fromPairs([[variable, solution]]));
 					}
 
 					if (symbol.includes("\n")) {
