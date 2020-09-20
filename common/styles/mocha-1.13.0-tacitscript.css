@@ -244,6 +244,16 @@ body {
   height: 40px;
 }
 
+.mocha {
+  margin: 0;
+  font-family: consolas, monospace, Helvetica, sans-serif;
+  pointer-events: none;
+}
+.mocha .test {overflow: auto}
+.mocha .test a.replay {display: none;}
+.mocha .suite {margin-left: 0;}
+.mocha h1 {margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem; color: #9656a1;}
+
 .mocha code .comment { color: #ddd }
 .mocha code .init { color: #2F6FAD }
 .mocha code .string { color: #5890AD }

@@ -87,7 +87,6 @@ export default ({store}) => {
 			<p>They are defined within special comment blocks beginning with a <span className="code">/*ts</span> and ending with a <span className="code">*/</span>. The tacitscript transpiler will convert these blocks to normal JavaScript code. Definitions are shared freely between js and ts code.</p>
 			<div className="code-block">
 				<div dangerouslySetInnerHTML={{__html: l1}}/>
-				<script dangerouslySetInnerHTML={{__html: l1}}></script>
 				<div id="lesson-1-tests" className="mocha"></div>
 			</div>
 			<ul>
