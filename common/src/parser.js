@@ -24,7 +24,12 @@ const isObject = function(value) {return (typeof value === 'object') && !isArray
 // parsing
 
 const parseTrampoline = function(data) {
-	const {remaining, type, blocks, blockCommentDepth, lineComment, quotationMark} = data;
+	const remaining = data.remaining;
+	const type = data.type;
+	const blocks = data.blocks;
+	const blockCommentDepth = data.blockCommentDepth;
+	const lineComment = data.lineComment;
+	const quotationMark = data.quotationMark;
 
 	if (lineComment) {
 		if (remaining[0] !== "\n") return Object.assign({}, data, {remaining: remaining.slice(1)});
@@ -150,12 +155,14 @@ const processSymbols = function({symbols, acc, userDefinitions}) {
 	}
 };
 const deprioritizeMedialDots = function(symbols) {
-	const {segments, current} = reduce(function({segments, current}, symbol) {
+	const data = reduce(function({segments, current}, symbol) {
 		if (Array.isArray(symbol)) return {segments, current: current.concat(deprioritizeDots(symbol))};
 		if (".,".includes(symbol)) return {segments: segments.concat([current, symbol]), current: []};
 
 		return {segments, current: current.concat([symbol])};
 	})({segments: [], current: []})(symbols);
+	const segments = data.segments;
+	const current = data.current;
 
 	return current.length ? segments.concat([current]) : segments;
 };
@@ -294,7 +301,9 @@ const tokenizeTrampoline = function({characters, currentToken, tokens}) {
 			return {characters: restCharacters, currentToken: "", tokens: tokens.concat(`${currentToken}\"`)};
 		}
 	} else if (firstCharacter === "(") {
-		const {characters: remainingCharacters, tokens: subtokens} = tokenize(restCharacters);
+		const data = tokenize(restCharacters);
+		const remainingCharacters = data.characters;
+		const subtokens = data.tokens;
 
 		// non-array bracketting
 		if ((subtokens.length === 1) && !matches(/^\s+$/)(subtokens[0])) {
@@ -367,7 +376,7 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 			filter(function(symbol) {return (typeof symbol === "string") && symbol.includes("\n");}),
 			join(""),
 		)(symbols.slice(firstWhitespace));
-		const {definition} = getDefinitionJs(definitionSymbols);
+		const definition = getDefinitionJs(definitionSymbols).definition;
 
 		js += definition + postDefinitionWhitespace;
 	} else {
@@ -383,7 +392,9 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const flattenedSymbols = flatten(definitionSymbols);
 						const isRecursive = contains(variable)(flattenedSymbols);
 
-						const {definition, processedSymbols} = getDefinitionJs(definitionSymbols);
+						const result = getDefinitionJs(definitionSymbols);
+						const definition = result.definition;
+						const processedSymbols = result.processedSymbols;
 
 						const solution = processSymbols({symbols: processedSymbols, acc: undefined, userDefinitions: updatedDefinitions});
 						const declaration =  isRecursive ? `let ${variable} =${definitionSeparator}x => ${definition}(x);` : `const ${variable} =${definitionSeparator}${definition};`;
@@ -418,7 +429,7 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 };};
 
 const expandTs = function({blocks, userDefinitions}) {
-	const {js, userDefinitions: processedDefinitions} = pipe(
+	return pipe(
 		map(function(block) {
 			if (typeof block === "string") return block;
 
@@ -429,8 +440,6 @@ const expandTs = function({blocks, userDefinitions}) {
 		join(""),
 		processTsBlock(userDefinitions),
 	)(blocks);
-
-	return {js, userDefinitions: processedDefinitions};
 };
 
 const expandJs = function({blocks, userDefinitions}) {
@@ -440,11 +449,11 @@ const expandJs = function({blocks, userDefinitions}) {
 		map(function(block) {
 			if (typeof block === "string") return block;
 
-			const {userDefinitions: updatedDefinitions, js} = expandTs({blocks: block.blocks, userDefinitions: localDefinitions});
+			const result = expandTs({blocks: block.blocks, userDefinitions: localDefinitions});
 
-			localDefinitions = updatedDefinitions;
+			localDefinitions = result.userDefinitions;
 
-			return js;
+			return result.js;
 		}),
 		join(""),
 	)(blocks);
