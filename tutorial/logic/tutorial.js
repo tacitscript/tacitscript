@@ -11,7 +11,7 @@ mocha.setup("bdd");
 // LESSON 1
 
 describe("Lesson 1 Tests", () => {
-	eval(ts2es6(l1));
+	eval(ts2es6(l1).replace(/const /g, "var "));
 
 	it("number equals 3", () => expect(number).eql(3));
 	it("decimal equals 3.5", () => expect(decimal).eql(3.5));
