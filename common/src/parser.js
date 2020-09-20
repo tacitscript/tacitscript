@@ -109,7 +109,7 @@ const parse = function(remaining) {
 	var data = {
 		type: "js",
 		blocks: [],
-		remaining,
+		remaining: remaining,
 		blockCommentDepth: 0,
 		lineComment: false,
 		quotationMark: ""
@@ -121,7 +121,6 @@ const parse = function(remaining) {
 
 	return omit(["remaining", "blockCommentDepth", "lineComment"])(data);
 };
-const dummy = a => 2+a;
 
 //==========================================================
 // tacitscript conversion code
