@@ -42,13 +42,13 @@ const parseTrampoline = function(data) {
 	} else if (!quotationMark && remaining.startsWith("//")) {
 		return Object.assign({}, data, {remaining: remaining.slice(2), lineComment: true});
 	} else if ((type === "js") && !quotationMark && (remaining.match(/^\/\*ts\s{1}/))) {
-		let data = {
+		var data = {
 			type: "ts",
 			blocks: [],
 			remaining: remaining.slice(4),
 			blockCommentDepth: 0,
 			lineComment: false,
-			quotationMark: "",
+			quotationMark: ""
 		};
 
 		while (data.blockCommentDepth || !data.remaining.startsWith("*/")) {
@@ -58,18 +58,18 @@ const parseTrampoline = function(data) {
 		return Object.assign({}, data, {
 			type: "js",
 			blocks: data.blocks.length ? blocks.concat(omit(["remaining", "blockCommentDepth", "lineComment"])(data)) : blocks,
-			remaining: data.remaining.slice(2),
+			remaining: data.remaining.slice(2)
 		});
 	} else if (!quotationMark && remaining.startsWith("/*")) {
 		return Object.assign({}, data, {remaining: remaining.slice(2), blockCommentDepth: blockCommentDepth + 1});
 	} else if ((type === "ts") && !quotationMark && remaining.startsWith('{"')) {
-		let data = {
+		var data = {
 			type: "js",
 			blocks: [],
 			remaining: remaining.slice(2),
 			blockCommentDepth: 0,
 			lineComment: false,
-			quotationMark: "",
+			quotationMark: ""
 		};
 
 		while (data.blockCommentDepth || !data.remaining.startsWith('"')) {
@@ -79,12 +79,12 @@ const parseTrampoline = function(data) {
 		return Object.assign({}, data, {
 			type: "ts",
 			blocks: data.blocks.length ? blocks.concat(omit(["remaining", "blockCommentDepth", "lineComment"])(data)) : blocks,
-			remaining: data.remaining.slice(1),
+			remaining: data.remaining.slice(1)
 		});
 	} else if (quotationMark && (remaining[0] === "\\")) {
 		return Object.assign({}, data, { // parse two characters
-			blocks: blocks.length ? (isObject(last(blocks)) ? blocks.concat(remaining.slice(0, 2)) : blocks.slice(0, -1).concat(`${last(blocks)}${remaining.slice(0, 2)}`)) : [remaining.slice(0, 2)],
-			remaining: remaining.slice(2),
+			blocks: blocks.length ? (isObject(last(blocks)) ? blocks.concat(remaining.slice(0, 2)) : blocks.slice(0, -1).concat(last(blocks) + remaining.slice(0, 2))) : [remaining.slice(0, 2)],
+			remaining: remaining.slice(2)
 		});
 	}
 
@@ -99,20 +99,20 @@ const parseTrampoline = function(data) {
 	})();
 
 	return Object.assign({}, data, {// parse one character
-		blocks: blocks.length ? (isObject(last(blocks)) ? blocks.concat([remaining[0]]) : blocks.slice(0, -1).concat(`${last(blocks)}${remaining[0]}`)) : [remaining[0]],
+		blocks: blocks.length ? (isObject(last(blocks)) ? blocks.concat([remaining[0]]) : blocks.slice(0, -1).concat(last(blocks) + remaining[0])) : [remaining[0]],
 		remaining: remaining.slice(1),
 		lineComment: false,
-		quotationMark: newQuotationMark,
+		quotationMark: newQuotationMark
 	});
 };
 const parse = function(remaining) {
-	let data = {
+	var data = {
 		type: "js",
 		blocks: [],
 		remaining,
 		blockCommentDepth: 0,
 		lineComment: false,
-		quotationMark: "",
+		quotationMark: ""
 	};
 
 	while (data.remaining) {
@@ -121,6 +121,7 @@ const parse = function(remaining) {
 
 	return omit(["remaining", "blockCommentDepth", "lineComment"])(data);
 };
+const dummy = a => 2+a;
 
 //==========================================================
 // tacitscript conversion code
@@ -129,10 +130,10 @@ const applySymbols = function(left, right) {
 	// first symbol in evaluation
 	if (!left) return right;
 
-	return `ts.apply(${left}, ${right})`;
+	return "ts.apply(" + left + ", " + right + ")";
 };
 const mergeBlocks = function({currentBlock, blocks}) {return blocks.concat(currentBlock.length ? [currentBlock] : []);}
-const processSymbols = function({symbols, acc, userDefinitions}) {
+const processSymbols = function(symbols, acc, userDefinitions) {
 	if (Array.isArray(symbols)) {
 		return pipe(
 			// separate into space delimited blocks
@@ -235,9 +236,9 @@ const getDefinition = function(symbols) {
 		const symbol = symbols[0];
 
 		if (Array.isArray(symbol)) return getDefinition(symbol);
-		if (symbol.match(/^\s+$/)) return `[${symbol}]`;
+		if (symbol.match(/^\s+$/)) return "[" + symbol + "]";
 		if (typeof symbol === "string") {
-			if (symbol.startsWith("\"") && symbol.endsWith("\"")) return `\`${symbol.slice(1, -1)}\``;
+			if (symbol.startsWith("\"") && symbol.endsWith("\"")) return "`" + symbol.slice(1, -1) + "`";
 			return lookup(symbol);
 		}
 	}
@@ -245,7 +246,7 @@ const getDefinition = function(symbols) {
 	return pipe(
 		reduce(function({sections, append}, symbol) {
 			if (matches(/^\s+$/)(symbol)) {
-				return {sections: sections.slice(0, -1).concat(`${sections.length ? sections[sections.length - 1] : ""}${symbol}`), append: true};
+				return {sections: sections.slice(0, -1).concat((sections.length ? sections[sections.length - 1] : "") + symbol), append: true};
 			}
 			if (append) return {sections: sections.concat([getDefinition([symbol])]), append: false};
 
@@ -253,22 +254,22 @@ const getDefinition = function(symbols) {
 			const right = getDefinition([symbol]);
 
 			const definition = (function() {
-				if ((left === "ts.tilde") && isNumber(right)) return `-${right}`;
+				if ((left === "ts.tilde") && isNumber(right)) return "-" + right;
 				if ((left === "ts.braceleft") && isString(right)) return right.slice(1, -1).replace(/\\"/g, '"');
 
-				return `ts.apply(${left}, ${right})`;
+				return "ts.apply(" + left + ", " + right + ")";
 			})();
 
 			return {sections: sections.slice(0, -1).concat([definition]), append: false};
 		})({
 			sections: [],
-			append: true,
+			append: true
 		}),
 		function({sections, append}) {
-			const processedSections = sections[0].match(/^\s+$/) ? [`${sections[0]}${sections[1]}`].concat(sections.slice(2)) : sections;
+			const processedSections = sections[0].match(/^\s+$/) ? [sections[0] + sections[1]].concat(sections.slice(2)) : sections;
 
-			return (append || (processedSections.length > 1)) ? `[${processedSections.join(", ")}]` : processedSections[0];
-		},
+			return (append || (processedSections.length > 1)) ? "[" + processedSections.join(", ") + "]" : processedSections[0];
+		}
 	)(symbols);
 };
 
@@ -298,7 +299,7 @@ const tokenizeTrampoline = function({characters, currentToken, tokens}) {
 	
 	if (currentToken.startsWith("\"")) {
 		if ((firstCharacter === "\"") && (currentToken.slice(-1) !== "\\")) {
-			return {characters: restCharacters, currentToken: "", tokens: tokens.concat(`${currentToken}\"`)};
+			return {characters: restCharacters, currentToken: "", tokens: tokens.concat(currentToken + "\"")};
 		}
 	} else if (firstCharacter === "(") {
 		const data = tokenize(restCharacters);
@@ -316,16 +317,16 @@ const tokenizeTrampoline = function({characters, currentToken, tokens}) {
 	} else if (firstCharacter.match(/\s/)) {
 		const isCurrentTokenWhitespace = currentToken.match(/^\s+$/);
 
-		return {characters: restCharacters, currentToken: isCurrentTokenWhitespace ? `${currentToken}${firstCharacter}` : firstCharacter,
+		return {characters: restCharacters, currentToken: isCurrentTokenWhitespace ? currentToken + firstCharacter : firstCharacter,
 			tokens: getCombinedTokens({tokens, currentToken: isCurrentTokenWhitespace ? "" : currentToken})};
 	} else if (isNewSymbol({currentToken, character: firstCharacter})) {
 		return {characters: restCharacters, currentToken: firstCharacter, tokens: getCombinedTokens({tokens, currentToken})};
 	}
 
-	return {characters: restCharacters, currentToken: `${currentToken}${firstCharacter}`, tokens};
+	return {characters: restCharacters, currentToken: currentToken + firstCharacter, tokens};
 };
 const tokenize = function(characters) {
-	let acc = {characters, currentToken: "", tokens: []};
+	var acc = {characters, currentToken: "", tokens: []};
 
 	while (acc.characters.length) {
 		const exit = (acc.characters[0] === ")") && !acc.currentToken.startsWith("\"");
@@ -339,7 +340,7 @@ const tokenize = function(characters) {
 };
 
 const stringify = function(value) {
-	if (Array.isArray(value)) return`[${pipe(map(stringify), join(","))(value)}]`;
+	if (Array.isArray(value)) return "[" + pipe(map(stringify), join(","))(value) + "]";
 	if (value == undefined) return "undefined";
 	if (typeof value === "string") return JSON.stringify(value.replace(/\\"/g, '"'));
 
@@ -359,8 +360,8 @@ const getDefinitionJs = function(definitionSymbols) {
 };
 
 const processTsBlock = function(userDefinitions) {return function(ts) {
-	let updatedDefinitions = userDefinitions;
-	let js = "";
+	var updatedDefinitions = userDefinitions;
+	var js = "";
 	const inlineDefinition = ts[0] === " ";
 
 	const tokensToParse = inlineDefinition ? ts.slice(1) : ts;
@@ -374,16 +375,16 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 		const definitionSymbols = (firstWhitespace === -1) ? symbols : symbols.slice(0, firstWhitespace);
 		const postDefinitionWhitespace = (firstWhitespace === -1) ? "" : pipe(
 			filter(function(symbol) {return (typeof symbol === "string") && symbol.includes("\n");}),
-			join(""),
+			join("")
 		)(symbols.slice(firstWhitespace));
 		const definition = getDefinitionJs(definitionSymbols).definition;
 
 		js += definition + postDefinitionWhitespace;
 	} else {
-		let variable = "";
-		let definitionSeparator = "";
-		let definitionSymbols = [];
-		let comment = false;
+		var variable = "";
+		var definitionSeparator = "";
+		var definitionSymbols = [];
+		var comment = false;
 
 		symbols.forEach(function(symbol) {
 			if (matches(/^\s+$/)(symbol)) {
@@ -396,8 +397,8 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const definition = result.definition;
 						const processedSymbols = result.processedSymbols;
 
-						const solution = processSymbols({symbols: processedSymbols, acc: undefined, userDefinitions: updatedDefinitions});
-						const declaration =  isRecursive ? `let ${variable} =${definitionSeparator}x => ${definition}(x);` : `const ${variable} =${definitionSeparator}${definition};`;
+						const solution = processSymbols(processedSymbols, undefined, updatedDefinitions);
+						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x);" : "const " + variable + " =" + definitionSeparator + definition + ";";
 
 						js += declaration;
 						updatedDefinitions = Object.assign({}, updatedDefinitions, {[variable]: solution});
@@ -428,34 +429,34 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 	return {js, userDefinitions: updatedDefinitions};
 };};
 
-const expandTs = function({blocks, userDefinitions}) {
+const expandTs = function(blocks, userDefinitions) {
 	return pipe(
 		map(function(block) {
 			if (typeof block === "string") return block;
 
-			const js = expandJs({blocks: block.blocks, userDefinitions});
+			const js = expandJs(block.blocks, userDefinitions);
 
-			return `{"${js}"`;
+			return '{"' + js + '"';
 		}),
 		join(""),
-		processTsBlock(userDefinitions),
+		processTsBlock(userDefinitions)
 	)(blocks);
 };
 
-const expandJs = function({blocks, userDefinitions}) {
-	let localDefinitions = userDefinitions;
+const expandJs = function(blocks, userDefinitions) {
+	var localDefinitions = userDefinitions;
 
 	const js = pipe(
 		map(function(block) {
 			if (typeof block === "string") return block;
 
-			const result = expandTs({blocks: block.blocks, userDefinitions: localDefinitions});
+			const result = expandTs(block.blocks, localDefinitions);
 
 			localDefinitions = result.userDefinitions;
 
 			return result.js;
 		}),
-		join(""),
+		join("")
 	)(blocks);
 
 	return js;
@@ -463,7 +464,7 @@ const expandJs = function({blocks, userDefinitions}) {
 
 exports.ts2es6 = function(source) {
 	const parsed = parse(source);
-	const js = expandJs({blocks: parsed.blocks, userDefinitions: {}});
+	const js = expandJs(parsed.blocks, {});
 
 	return js;
 };
