@@ -1,8 +1,8 @@
-import React from "react";
 import l1 from "../data/1.js";
 
 const {css} = Glamor;
 const {useEffect} = React;
+const {useSelector} = ReactRedux;
 
 const style = css({
 	" .primary": {backgroundColor: "#55423d"},
@@ -62,8 +62,8 @@ const style = css({
 	},
 });
 
-export default ({store}) => {
-	const {} = store.getState().app;
+export default () => {
+	const lesson1 = useSelector(R.path(["lesson1"]));
 
 	useEffect(() => {
 		mocha.setup({

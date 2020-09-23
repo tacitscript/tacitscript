@@ -15,6 +15,7 @@ var build = remainingBuilds => {
 			"jquery": "$",
 			"material-ui": "MaterialUI",
 			"react-scrollbars-custom": "Scrollbar",
+			"ramda": "R",
 		}
 	}).then(function() {
 		console.log(folder + ' build complete');

@@ -1,5 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import reducer from "./reducer.js";
 import App from "../components/app.js";
 import createDebounce from "common/lib/redux-debounced.js";
@@ -14,6 +12,7 @@ import "./tutorial.js";
 
 const {applyMiddleware, createStore, combineReducers} = Redux;
 const {css} = Glamor;
+const {Provider} = ReactRedux;
 
 const history = createBrowserHistory();
 const historyMiddleware = routerMiddleware(history);
@@ -33,7 +32,7 @@ const store = createStore(
 routerListener(history, store);
 
 const render = () => {
-	ReactDOM.render(<App key="app" store={store}/>, document.getElementById("app"));
+	ReactDOM.render(<Provider store={store}><App key="app"/></Provider>, document.getElementById("app"));
 };
 
 store.subscribe(render);

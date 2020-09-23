@@ -1,6 +1,8 @@
 
 const initialState = {
-
+    lesson1: {
+        numbers: "",
+    },
 };
 
 export default (state = initialState, action = {}) => {
