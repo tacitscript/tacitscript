@@ -1,6 +1,7 @@
 const {expect, assert} = chai;
 import ts from "tacitscript";
-import l1 from "../data/1.js";
+import lesson1 from "../data/lesson1.js";
+import exercise1 from "../data/exercise1.js";
 import parser from "common/src/parser.js";
 
 const {ts2es6} = parser;
@@ -12,7 +13,7 @@ mocha.setup("bdd");
 // LESSON 1
 
 describe("Lesson 1 Tests", () => {
-	eval(ts2es6(l1).replace(/const /g, "var "));
+	eval(ts2es6(lesson1).replace(/const /g, "var "));
 
 	it("number equals 3", () => expect(number).eql(3));
 	it("decimal equals 3.5", () => expect(decimal).eql(3.5));
@@ -25,9 +26,7 @@ describe("Lesson 1 Tests", () => {
 });
 
 describe("Lesson 1 Exercise Tests", () => {
-	/*ts
-		numbers		()
-	*/
+	eval(ts2es6(exercise1).replace(/const /g, "var "));
 
 	it('"numbers" is an array', () => expect(Array.isArray(numbers)).eql(true));
 	it('"numbers" has more than one element', () => expect(numbers.length > 1).eql(true));

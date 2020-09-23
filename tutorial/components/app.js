@@ -1,9 +1,8 @@
-import l1 from "../data/1.js";
+import lesson1 from "../data/lesson1.js";
 import Exercise1 from "./exercise1.js";
 
 const {css} = Glamor;
 const {useEffect} = React;
-const {useSelector} = ReactRedux;
 
 const style = css({
 	" .primary": {backgroundColor: "#55423d"},
@@ -52,7 +51,7 @@ const style = css({
 		borderRadius: "0.25rem",
 		fontSize: "0.8rem",
 		"> li": {
-			marginLeft: "1rem",
+			margin: "0.5rem 0 1rem 0.8rem",
 		},
 		" pre": {
 			margin: 0,
@@ -64,14 +63,12 @@ const style = css({
 });
 
 export default () => {
-	const lesson1 = useSelector(R.path(["lesson1"]));
-
 	useEffect(() => {
 		mocha.setup({
-			grep: /^Lesson 1 Tests/,
+			grep: /^Lesson \d+ Tests/,
 		});
 		mocha.run(null, "lesson-1-tests");		
-	});
+	}, []);
 
 	return <div {...style}>
 		<h1>tacitscript tutorial</h1>
@@ -81,14 +78,14 @@ export default () => {
 			<p>This tutorial will introduce the language incrementally through example and interactive exercises.</p>
 		</div>
 
-		<div className="section">
+		<div className="section" id="lesson1">
 			<h2 className="heading">Lesson 1: tacitscript (ts) Blocks</h2>
 			<hr/>
 			<p>tacitscript blocks of code are embedded within JavaScript code.</p>
 			<p>They are defined within special comment blocks beginning with a <span className="code">/*ts</span> and ending with a <span className="code">*/</span>. The tacitscript transpiler will convert these blocks to standard JavaScript code. Definitions are shared freely between js and ts code.</p>
 			<p>Each ts block consists of a list of name-value bindings.</p>
 			<div className="code-block">
-				<div dangerouslySetInnerHTML={{__html: l1}}/>
+				<div dangerouslySetInnerHTML={{__html: lesson1}}/>
 				<div id="lesson-1-tests" className="mocha"></div>
 			</div>
 			<ul>
@@ -99,7 +96,7 @@ export default () => {
 			<h3>Exercises</h3>
 			<Exercise1/>
 		</div>
-		<div className="section">
+		<div className="section" id="lesson2">
 			<h2 className="heading">Lesson 2: Operators</h2>
 			<hr/>
 			<p>
@@ -108,15 +105,15 @@ export default () => {
 			</p>
 			<p>The standard arithmetic operators +, -, * and /, all retain their meaning in tacitscript.</p>
 		</div>
-		<div className="section">
+		<div className="section" id="lesson3">
 			<h2 className="heading">Lesson 3: Functions</h2>
 			<hr/>
 		</div>
-		<div className="section">
+		<div className="section" id="lesson4">
 			<h2 className="heading">Lesson 4: Chaining</h2>
 			<hr/>
 		</div>
-		<div className="section">
+		<div className="section" id="lesson5">
 			<h2 className="heading">Lesson 5: Higher-Order Operators</h2>
 			<hr/>
 		</div>
