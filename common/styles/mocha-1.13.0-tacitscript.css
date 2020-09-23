@@ -77,11 +77,13 @@ body {
 
 .mocha .test.pass::before {
   content: '✓';
-  font-size: 12px;
+  font-size: 14px;
   display: block;
   float: left;
   margin-right: 5px;
-  color: #00d6b2;
+  color: #00ad5a;
+  line-height: 12px;
+  margin-top: 2px;
 }
 
 .mocha .test.pass .duration {
@@ -131,23 +133,19 @@ body {
 
 .mocha .test pre.error {
   color: #c00;
-  max-height: 300px;
-  overflow: auto;
+  max-height: 1rem;
+  overflow: hidden;
 }
 
 .mocha .test pre {
   display: block;
   float: left;
   clear: left;
+  margin-bottom: 0.5rem;
   font: 12px/1.5 monaco, monospace;
-  margin: 5px;
-  padding: 15px;
-  border: 1px solid #eee;
   border-bottom-color: #ddd;
   -webkit-border-radius: 3px;
-  -webkit-box-shadow: 0 1px 3px #eee;
   -moz-border-radius: 3px;
-  -moz-box-shadow: 0 1px 3px #eee;
   border-radius: 3px;
 }
 
