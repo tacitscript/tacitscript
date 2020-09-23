@@ -1,4 +1,5 @@
 import exercise1 from "../data/exercise1.js";
+import TextEdit from "./text-edit.js";
 
 const {useSelector} = ReactRedux;
 const {useEffect} = React;
@@ -15,6 +16,7 @@ export default ({}) => {
 
 	return 	<div className="code-block exercises">
 		<li>Define an array <b>numbers</b> that contains multiple numbers, and only numbers, that add up to 20.</li>
+		<TextEdit/>
 		<div dangerouslySetInnerHTML={{__html: exercise1}}/>
 		<div id="exercise-1-tests" className="mocha"></div>
 	</div>;
