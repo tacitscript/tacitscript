@@ -1,4 +1,4 @@
-const {expect, assert} = chai;
+const {expect} = chai;
 import ts from "tacitscript";
 import lesson1 from "../data/lesson1.js";
 import parser from "common/src/parser.js";

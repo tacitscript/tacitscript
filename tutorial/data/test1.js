@@ -1,3 +1,5 @@
-export default textEdit => `/*ts
-    numbers               ${textEdit}
-*/`;
+export default textEdit => [
+    [`/*ts`],
+    [`    numbers               `, textEdit],
+    [`*/`]
+];
