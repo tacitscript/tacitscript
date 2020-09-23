@@ -5027,6 +5027,10 @@
       suite.timeout(this.timeout());
       suite.slow(this.slow());
       suite.bail(this.bail());
+
+      // dwsmorris
+      this.suites = this.suites.filter(({title}) => title !== suite.title);
+
       this.suites.push(suite);
       this.emit('suite', suite);
       return this;

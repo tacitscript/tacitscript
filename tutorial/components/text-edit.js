@@ -1,5 +1,6 @@
 const {InputBase} = MaterialUI;
 const {css} = Glamor;
+const {useDispatch} = ReactRedux;
 
 
 const style = css({
@@ -17,7 +18,14 @@ const style = css({
 	},
 });
 
-export default ({}) => {
+export default ({path}) => {
+	const dispatch = useDispatch();
 
-	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline/></span>;
+	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline onChange={(event) => dispatch({
+		type: "ANSWER",
+		payload: {
+			path,
+			value: event.target.value,
+		},
+	})}/></span>;
 };
