@@ -1,4 +1,5 @@
 import l1 from "../data/1.js";
+import Exercise1 from "./exercise1.js";
 
 const {css} = Glamor;
 const {useEffect} = React;
@@ -96,10 +97,7 @@ export default () => {
 				<li>Any characters on the line following a closed ts expression are considered a comment.</li>
 			</ul>
 			<h3>Exercises</h3>
-			<div className="code-block exercises">
-				<li>Define an array <b>numbers</b> that contains multiple numbers, and only numbers, that add up to 20.</li>
-				<div id="lesson-1-exercise-tests" className="mocha"></div>
-			</div>
+			<Exercise1/>
 		</div>
 		<div className="section">
 			<h2 className="heading">Lesson 2: Operators</h2>
