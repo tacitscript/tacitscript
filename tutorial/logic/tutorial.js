@@ -1,7 +1,6 @@
 const {expect, assert} = chai;
 import ts from "tacitscript";
 import lesson1 from "../data/lesson1.js";
-import exercise1 from "../data/exercise1.js";
 import parser from "common/src/parser.js";
 
 const {ts2es6} = parser;
@@ -25,11 +24,4 @@ describe("Lesson 1 Tests", () => {
 	it('calculation equals 7', () => expect(calculation).eql(7));
 });
 
-describe("Lesson 1 Exercise Tests", () => {
-	eval(ts2es6(exercise1).replace(/const /g, "var "));
 
-	it('"numbers" is an array', () => expect(Array.isArray(numbers)).eql(true));
-	it('"numbers" has more than one element', () => expect(numbers.length > 1).eql(true));
-	it('all elements of "numbers" are numbers', () => expect(numbers.every(number => typeof(number) === "number")));
-	it('sum of elements in "numbers" equals 20', () => expect(numbers.reduce((a, b) => a + b)).eql(20));
-});
