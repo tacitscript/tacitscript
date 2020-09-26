@@ -22,6 +22,8 @@ export default ({}) => {
 		document.getElementById("exercise-1-tests").innerHTML = "";
 
 		setTimeout(() => {
+			document.getElementById("exercise-1-tests").innerHTML = "";
+
 			describe("Lesson 1 Exercise Tests", () => {
 				const run = (!answer || syntaxError) ? xit : it;
 
