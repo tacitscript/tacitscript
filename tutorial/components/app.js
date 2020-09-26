@@ -1,4 +1,5 @@
 import lesson1 from "../data/lesson1.js";
+import lesson2 from "../data/lesson2.js";
 import Exercise1 from "./exercise1.js";
 
 const {css} = Glamor;
@@ -30,7 +31,7 @@ const style = css({
 		margin: "0 auto 1rem",
 		backgroundColor: "#55423d",
 		padding: "0.5rem 1.5rem",
-		borderRadius: "1rem",
+		borderRadius: "0.5rem",
 		position: "relative",
 		"> h2": {margin: "0.5rem 0"},
 		"> h3": {marginTop: "2.5rem", fontSize: "1.25rem"},
@@ -65,7 +66,8 @@ const style = css({
 		},
 	},
 	" .exercises": {
-		backgroundColor: "#f8dca0"
+		backgroundColor: "#f8dca0",
+		marginBottom: "0.5rem",
 	},
 	"> .preview": {
 		whiteSpace: "pre-wrap",
@@ -81,9 +83,13 @@ const style = css({
 export default () => {
 	useEffect(() => {
 		mocha.setup({
-			grep: /^Lesson \d+ Tests/,
+			grep: /^Lesson 1 Tests/,
 		});
 		mocha.run(null, "lesson-1-tests");		
+		mocha.setup({
+			grep: /^Lesson 2 Tests/,
+		});
+		mocha.run(null, "lesson-2-tests");
 	}, []);
 
 	return <div {...style}>
@@ -96,8 +102,8 @@ export default () => {
 			<p>tacitscript is an esolang optimized for building algorithms from concise, composable parts. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
 			<p>This tutorial will introduce the language incrementally through example and interactive exercises.</p>
 			<ul>
-				<li>Part 1 will take you through the main language concepts</li>
-				<li>Part 2 is a more comprehensive operator reference</li>
+				<li><b>Part 1</b> will take you through the main language concepts</li>
+				<li><b>Part 2</b> is a comprehensive operator reference</li>
 			</ul>
 		</div>
 
@@ -110,7 +116,7 @@ export default () => {
 			<p>They are defined within special comment blocks beginning with a <span className="code">/*ts</span> and ending with a <span className="code">*/</span>. The tacitscript transpiler will convert these blocks to standard JavaScript code. Definitions are shared freely between js and ts code.</p>
 			<p>Each ts block consists of a list of name-value bindings.</p>
 			<div className="code-block">
-				<div dangerouslySetInnerHTML={{__html: lesson1}}/>
+				<div>{lesson1}</div>
 				<div id="lesson-1-tests" className="mocha"></div>
 			</div>
 			<ul>
@@ -118,7 +124,7 @@ export default () => {
 				<li>The value bound to a name can be any valid ts expression.</li>
 				<li>Any characters on the line following a closed ts expression are considered a comment.</li>
 			</ul>
-			<h3>Exercises</h3>
+			<h3>Exercise 1</h3>
 			<Exercise1/>
 		</div>
 		<div className="section" id="lesson2">
@@ -128,7 +134,29 @@ export default () => {
 				tacitscript is a language of operators. Most non-alphabetic characters on the standard keyboard have been repurposed to act as operators within a ts block.
 				Operators in tacitscript are each a single character long.
 			</p>
-			<p>The standard arithmetic operators +, -, * and /, all retain their meaning in tacitscript.</p>
+			<p>In programming languages, operators typically come in two flavours:</p>
+			<ul>
+				<li><b>binary</b> - requiring operands to the left and right, eg. addition <span className="code">+</span></li>
+				<li><b>unary</b> - requiring one operand, typically to the right, eg. not <span className="code">!</span></li>
+			</ul>
+			<p>The standard binary arithmetic operators +, -, * and /, all retain their meaning in tacitscript.</p>
+			<p>Some operators may have different meanings depending on context, eg. in JavaScript, <span className="code">+</span> can represent numeric addition as well as string concatenation.
+			tacitscript also <i>overloads</i> operators in this way, where the actual operation depends on the types of operands involved. In tacitscript, <span className="code">+</span> can
+			also represent string, and array, concatenation.</p>
+			<p>In some languages, an operator may act as both a <i>binary</i> and <i>unary</i> operator. In JavaScript, <span className="code">-</span> can represent binary <i>minus</i>, or
+			unary <i>negative</i>. In tacitscript, operators are either always binary, or always unary. 
+			Negation in tacitscript is therefore represented by a different operator, <span className="code">~</span>. All unary operators in tacitscript take their operand to the right.</p>
+			<p>In mathematics, the order in which operations resolved, is dependent on operator precedence rules. These rules are often ported into programming languages. For instance,
+				in JavaScript, <span className="code">2+3*4</span> gives the same result as <span className="code">3*4+2</span>, because multiplication operations take precedence over addition.
+				In tacitscript, there are typically no precedence rules and all operators are <i>left-associative</i>.</p>
+			<div className="code-block">
+				<div>{lesson2}</div>
+				<div id="lesson-2-tests" className="mocha"></div>
+			</div>
+			<ul>
+				<li><span className="code">5+~2</span> would be a syntax error as no implementation of operator <span className="code">+</span> takes a right hand operand of the same type
+				as the <span className="code">~</span> operator</li>
+			</ul>
 		</div>
 		<div className="section" id="lesson3">
 			<h2 className="heading">Lesson 3: Functions</h2>
@@ -145,3 +173,5 @@ export default () => {
 
 	</div>;
 };
+
+
