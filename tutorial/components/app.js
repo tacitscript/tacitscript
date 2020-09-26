@@ -145,7 +145,7 @@ export default () => {
 			also represent string, and array, concatenation.</p>
 			<p>In some languages, an operator may act as both a <i>binary</i> and <i>unary</i> operator. In JavaScript, <span className="code">-</span> can represent binary <i>minus</i>, or
 			unary <i>negative</i>. In tacitscript, operators are either always binary, or always unary. 
-			Negation in tacitscript is therefore represented by a different operator, <span className="code">~</span>. All unary operators in tacitscript take their operand to the right.</p>
+			Negation in tacitscript is therefore represented by a different operator, <span className="code">~</span>.</p>
 			<p>In mathematics, the order in which operations resolved, is dependent on operator precedence rules. These rules are often ported into programming languages. For instance,
 				in JavaScript, <span className="code">2+3*4</span> gives the same result as <span className="code">3*4+2</span>, because multiplication operations take precedence over addition.
 				In tacitscript, there are typically no precedence rules and all operators are <i>left-associative</i>.</p>

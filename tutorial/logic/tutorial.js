@@ -36,6 +36,7 @@ describe("Lesson 2 Tests", () => {
 	it("negative equals -5", () => expect(negative).eql(-5));
 	it("leftAssoc equals 20", () => expect(leftAssoc).eql(20));
 	it("mathematical equals 14", () => expect(mathematical).eql(14));
+	it("requiredBrackets equals 3", () => expect(requiredBrackets).eql(3));
 });
 
 
