@@ -12,6 +12,12 @@ const style = css({
 		fontWeight: 700,
 		lineHeight: 1.3,
 		textAlign: "center",
+		marginBottom: 0,
+	},
+	"> h2": {
+		marginLeft: "7.5%",
+		fontSize: "1.7rem",
+		marginTop: "2rem",
 	},
 	" .secondary": {
 		backgroundColor: "#ffc0ad",
@@ -29,6 +35,7 @@ const style = css({
 		"> h2": {margin: "0.5rem 0"},
 		"> h3": {marginTop: "2.5rem", fontSize: "1.25rem"},
 		"> hr": {marginBottom: "1.5rem"},
+		"> ul": {paddingInlineStart: "2rem"},
 	},
 	" a": {
 		color: "rgba(20, 13, 11, 1)",
@@ -60,6 +67,15 @@ const style = css({
 	" .exercises": {
 		backgroundColor: "#f8dca0"
 	},
+	"> .preview": {
+		whiteSpace: "pre-wrap",
+		display: "flex",
+		flex: "1 1 auto",
+		alignItems: "center",
+		flexDirection: "column",
+		margin: "1rem 0",
+		fontSize: "1.2rem",
+	},
 });
 
 export default () => {
@@ -72,11 +88,20 @@ export default () => {
 
 	return <div {...style}>
 		<h1>tacitscript tutorial</h1>
+		<div className="preview">
+			<div className="code">avg .(+$ #)./$</div>
+		</div>
 		<div className="section">
-			<p><strong>tacitscript - a language for building algorithms</strong></p>
+			<p><strong>tacitscript - a symbolic language for building algorithms</strong></p>
 			<p>tacitscript is an esolang optimized for building algorithms from concise, composable parts. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
 			<p>This tutorial will introduce the language incrementally through example and interactive exercises.</p>
+			<ul>
+				<li>Part 1 will take you through the main language concepts</li>
+				<li>Part 2 is a more comprehensive operator reference</li>
+			</ul>
 		</div>
+
+		<h2>Part 1: Concepts</h2>
 
 		<div className="section" id="lesson1">
 			<h2 className="heading">Lesson 1: tacitscript (ts) Blocks</h2>
