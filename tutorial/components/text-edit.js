@@ -18,14 +18,16 @@ const style = css({
 	},
 });
 
+const update = _.debounce(({dispatch, path, value}) => dispatch({
+	type: "ANSWER",
+	payload: {
+		path,
+		value,
+	},
+}), 300);
+
 export default ({path}) => {
 	const dispatch = useDispatch();
 
-	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline onChange={(event) => dispatch({
-		type: "ANSWER",
-		payload: {
-			path,
-			value: event.target.value,
-		},
-	})}/></span>;
+	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline onChange={(event) => update({dispatch, path, value: event.target.value})}/></span>;
 };
