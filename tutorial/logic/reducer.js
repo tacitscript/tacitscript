@@ -1,6 +1,7 @@
 
 const initialState = {
     tacitscriptBlocks: "",
+    repl: "",
 };
 
 export default (state = initialState, action = {}) => {

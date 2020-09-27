@@ -1,6 +1,7 @@
 import tacitscriptBlocksLesson from "../data/tacitscript-blocks-lesson.js";
 import operatorsLesson from "../data/operators-lesson.js";
 import TacitscriptBlocks from "./tacitscript-blocks.js";
+import Repl from "./repl.js";
 
 const {css} = Glamor;
 const {useEffect} = React;
@@ -140,7 +141,14 @@ export default () => {
 				<a href="#higher-order-operators">5. Higher-Order Operators</a>
 			</div>
 			<h4><a href="#operator-reference">Part 2: Operator Reference</a></h4>
+			<div className="listings">
+				<a href="#plus">+</a>
+			</div>
 			<h4><a href="#appendices">Appendices</a></h4>
+			<div className="listings">
+				<a href="#repl">Multiline REPL</a>
+				<a href="#background">Background</a>
+			</div>
 		</div>
 
 		<h2 id="concepts">Part 1: Concepts</h2>
@@ -218,8 +226,10 @@ export default () => {
 		<h2 id="appendices">Appendices</h2>
 
 		<div className="section" id="repl">
-			<h2 className="heading">Appendix A: Live REPL</h2>
+			<h2 className="heading">Appendix A: Multiline REPL</h2>
 			<hr/>
+			<p>The value of <span className="code">result</span> will be output below.</p>
+			<Repl/>
 		</div>
 
 		<div className="section" id="background">
