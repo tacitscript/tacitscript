@@ -2,6 +2,7 @@ import replExercise from "../data/repl-exercise.js";
 import TextEdit from "./text-edit.js";
 import parser from "common/src/parser.js";
 import getReconstructedHtml from "../logic/get-reconstructed-html.js";
+import getReconstructedScript from "../logic/get-reconstructed-script.js";
 
 const {ts2es6} = parser;
 const {useSelector} = ReactRedux;
@@ -14,7 +15,7 @@ export default ({}) => {
 	let result;
 
 	try {
-		if (answer) eval(ts2es6(R.flatten(replExercise(answer)).join("\n")).replace(/const /g, "var "));
+		if (answer) eval(ts2es6(getReconstructedScript(replExercise(answer))).replace(/const /g, "var "));
 	} catch(ex) {
 		syntaxError = true;
 	}

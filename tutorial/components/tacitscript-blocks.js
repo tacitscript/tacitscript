@@ -2,6 +2,7 @@ import tacitscriptBlocksExercise from "../data/tacitscript-blocks-exercise.js";
 import TextEdit from "./text-edit.js";
 import parser from "common/src/parser.js";
 import getReconstructedHtml from "../logic/get-reconstructed-html.js";
+import getReconstructedScript from "../logic/get-reconstructed-script.js";
 
 const {ts2es6} = parser;
 const {useSelector} = ReactRedux;
@@ -18,7 +19,7 @@ export default ({}) => {
 	let syntaxError = false;
 
 	try {
-		if (answer) eval(ts2es6(R.flatten(tacitscriptBlocksExercise(answer || "()")).join("\n")).replace(/const /g, "var "));
+		if (answer) eval(ts2es6(getReconstructedScript(tacitscriptBlocksExercise(answer || "()"))).replace(/const /g, "var "));
 	} catch(ex) {
 		syntaxError = true;
 	}
@@ -35,7 +36,7 @@ export default ({}) => {
 				run('result is an array', () => expect(Array.isArray(result)).eql(true));
 				run('result has more than one element', () => expect(result.length > 1).eql(true));
 				run('all elements of result are numbers', () => expect(result.every(number => typeof(number) === "number")));
-				run('sum of elements in result equals 38', () => expect(result.reduce((a, b) => a + b)).eql(10));
+				run('sum of elements in result equals 10', () => expect(result.reduce((a, b) => a + b)).eql(10));
 			});
 
 			mocha.setup({
