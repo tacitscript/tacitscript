@@ -7,6 +7,11 @@ const {ts2es6} = parser;
 const {useSelector} = ReactRedux;
 const {useEffect} = React;
 const {expect} = chai;
+const {css} = Glamor;
+
+const style = css({
+	marginLeft: "1rem",
+});
 
 export default ({}) => {
 	const answer = useSelector(R.path(["app", "tacitscriptBlocks"]));
@@ -42,7 +47,7 @@ export default ({}) => {
 
 	return 	<div className="code-block exercises">
 		<li>Define an array <b>result</b> that contains multiple numbers, and only numbers, that add up to 10.</li>
-		{getReconstructedHtml(tacitscriptBlocksExercise(<TextEdit path={["tacitscriptBlocks"]}/>))}
+		<div {...style}>{getReconstructedHtml(tacitscriptBlocksExercise(<TextEdit path={["tacitscriptBlocks"]}/>))}</div>
 		{syntaxError ? <div className="mocha"><h2 className="test fail">Syntax Error</h2></div> : null}
 		<div id="tacitscript-blocks-exercise" className="mocha"></div>
 	</div>;

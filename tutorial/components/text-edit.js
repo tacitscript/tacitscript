@@ -5,13 +5,15 @@ const {useDispatch} = ReactRedux;
 
 const style = css({
 	width: "100%",
-	"> .MuiInputBase-multiline": {
+	"> .MuiInputBase-root": {
 		width: "100%",
-		padding: "0 !important",
 		borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
-		color: "#271c19",
+		".MuiInputBase-multiline": {
+			padding: 0,
+		},
 	},
 	" .MuiInputBase-input": {
+		":not(.MuiInputBase-inputMultiline)": {padding: "0 0 2px"},
 		fontFamily: "Roboto Mono, monospace",
 		fontSize: "0.8rem",
 	},
@@ -25,8 +27,8 @@ const update = _.debounce(({dispatch, path, value}) => dispatch({
 	},
 }), 300);
 
-export default ({path}) => {
+export default ({path, multiline}) => {
 	const dispatch = useDispatch();
 
-	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline onChange={(event) => update({dispatch, path, value: event.target.value})}/></span>;
+	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, path, value: event.target.value})}/></span>;
 };

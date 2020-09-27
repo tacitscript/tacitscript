@@ -22,7 +22,7 @@ export default ({}) => {
 	const className = syntaxError ? "fail" : result ? "pass" : "pass pending";
 
 	return 	<div className="code-block exercises">
-		{getReconstructedHtml(replExercise(<TextEdit path={["repl"]}/>))}
+		{getReconstructedHtml(replExercise(<TextEdit multiline={true} path={["repl"]}/>))}
 		<div className="mocha"><h2 className={`test ${className}`}>{syntaxError ? "Syntax Error" : `result: ${result && JSON.stringify(result)}`}</h2></div>
 	</div>;
 };
