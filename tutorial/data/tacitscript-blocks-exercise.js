@@ -1,5 +1,5 @@
 export default textEdit => [
     [`/*ts`],
-    [`    numbers               `, textEdit],
+    [`    result               `, textEdit],
     [`*/`]
 ];

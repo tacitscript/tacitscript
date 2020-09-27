@@ -27,10 +27,10 @@ export default ({}) => {
 			describe("tacitscript-blocks-exercise", () => {
 				const run = (!answer || syntaxError) ? xit : it;
 
-				run('result is an array', () => expect(Array.isArray(numbers)).eql(true));
-				run('result has more than one element', () => expect(numbers.length > 1).eql(true));
-				run('all elements of result are numbers', () => expect(numbers.every(number => typeof(number) === "number")));
-				run('sum of elements in result equals 38', () => expect(numbers.reduce((a, b) => a + b)).eql(38));
+				run('result is an array', () => expect(Array.isArray(result)).eql(true));
+				run('result has more than one element', () => expect(result.length > 1).eql(true));
+				run('all elements of result are numbers', () => expect(result.every(number => typeof(number) === "number")));
+				run('sum of elements in result equals 38', () => expect(result.reduce((a, b) => a + b)).eql(10));
 			});
 
 			mocha.setup({
@@ -41,7 +41,7 @@ export default ({}) => {
 	}, [answer]);
 
 	return 	<div className="code-block exercises">
-		<li>Define an array <b>numbers</b> that contains multiple numbers, and only numbers, that add up to 38.</li>
+		<li>Define an array <b>result</b> that contains multiple numbers, and only numbers, that add up to 10.</li>
 		{getReconstructedHtml(tacitscriptBlocksExercise(<TextEdit path={["tacitscriptBlocks"]}/>))}
 		{syntaxError ? <div className="mocha"><h2 className="test fail">Syntax Error</h2></div> : null}
 		<div id="tacitscript-blocks-exercise" className="mocha"></div>

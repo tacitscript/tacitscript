@@ -204,7 +204,7 @@ body {
 
 #mocha-stats {
   position: absolute;
-  top: 15px;
+  top: 0;
   right: 10px;
   font-size: 12px;
   margin: 0;

@@ -19,6 +19,7 @@ describe("tacitscript-blocks-lesson", () => {
 	it('array equals [1, "hello", undefined, 3]', () => expect(array).eql([1, "hello", undefined, 3]));
 	it("expression equals 8", () => expect(expression).eql(8));
 	it('pitfall equals 4 ("+ number" is considered a comment)', () => expect(pitfall).eql(4));
+	it("inline equals [1, 2, 3]", () => expect(inline).eql([1, 2, 3]));
 	it('calculation equals 7', () => expect(calculation).eql(7));
 });
 

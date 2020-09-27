@@ -6,7 +6,6 @@ const {css} = Glamor;
 const {useEffect} = React;
 
 const style = css({
-	" .primary": {backgroundColor: "#55423d"},
 	"> h1": {
 		color: "#fffffe",
 		fontSize: "3rem",
@@ -20,39 +19,58 @@ const style = css({
 		fontSize: "1.7rem",
 		marginTop: "2rem",
 	},
-	" .secondary": {
-		backgroundColor: "#ffc0ad",
-		color: "#271c19"
-	},
-	" .highlight": {color: "#e78fb3"},
-	" .tertiary": {color: "#9656a1"},
 	" .section": {
 		width: "85%",
 		margin: "0 auto 1rem",
-		backgroundColor: "#55423d",
-		padding: "0.5rem 1.5rem",
+		backgroundColor: "var(--brown)",
+		padding: "0.5rem 1.2rem",
 		borderRadius: "0.5rem",
 		position: "relative",
 		"> h2": {margin: "0.5rem 0"},
 		"> h3": {marginTop: "2.5rem", fontSize: "1.25rem"},
 		"> hr": {marginBottom: "1.5rem"},
 		"> ul": {paddingInlineStart: "2rem"},
+		".contents": {
+			backgroundColor: "var(--background)",
+			"> hr": {
+				borderColor: "var(--yellow)",
+				marginBottom: "1rem",
+			},
+			"> h4": {
+				margin: "1rem 0",
+				fontSize: "1rem",
+			},
+			"> .listings": {
+				display: "flex",
+				flexWrap: "wrap",
+				marginBottom: "1.5rem",
+				"> a": {
+					width: "15rem",
+					lineHeight: "1.3rem",
+				},
+			},
+			" a": {
+				color: "white",
+				":hover,:focus": {color: "var(--yellow)"},
+			},
+		},
 	},
 	" a": {
-		color: "rgba(20, 13, 11, 1)",
-		fontWeight: "bold",
+		color: "var(--yellow)",
 		textDecoration: "none",
-		":hover": {
-			color: "rgba(20, 13, 11, 0.7)",
+		":hover,:focus": {
+			color: "white",
 		},
 	},
 	" .code": {
 		fontFamily: "Roboto Mono, monospace",
-		color: "#ffc0ad",
+		color: "var(--orange)",
 	},
 	" .code-block": {
+		display: "flex",
+		flexDirection: "column",
 		fontFamily: "Roboto Mono, monospace",
-		backgroundColor: "#ffc0ad",
+		backgroundColor: "var(--orange)",
 		color: "#271c19",
 		whiteSpace: "pre-wrap",
 		padding: "0.5rem",
@@ -66,7 +84,7 @@ const style = css({
 		},
 	},
 	" .exercises": {
-		backgroundColor: "#f8dca0",
+		backgroundColor: "var(--yellow)",
 		marginBottom: "0.5rem",
 	},
 	"> .preview": {
@@ -93,28 +111,46 @@ export default () => {
 	}, []);
 
 	return <div {...style}>
-		<h1>tacitscript tutorial</h1>
+		<h1>tacitscript</h1>
+
 		<div className="preview">
 			<div className="code">avg .(+$ #)./$</div>
 		</div>
+
 		<div className="section">
 			<p><strong>tacitscript - a symbolic language for building algorithms</strong></p>
-			<p>tacitscript is an esolang optimized for building algorithms from concise, composable parts. To learn more about the ideas behind tacitscript, see <a href="#appendix-a">here</a>.</p>
-			<p>This tutorial will introduce the language incrementally through example and interactive exercises.</p>
+			<p>tacitscript is an esolang optimized for building algorithms from concise, composable parts. To learn more about the ideas behind tacitscript, see <a href="#background">here</a>.</p>
 			<ul>
-				<li><b>Part 1</b> will take you through the main language concepts</li>
-				<li><b>Part 2</b> is a comprehensive operator reference</li>
+				<li><a href="#concepts"><b>Part 1</b></a> is a tutorial that takes you through the main language concepts with examples and interactive exercises</li>
+				<li><a href="#operator-reference"><b>Part 2</b></a> is a comprehensive operator reference</li>
+				<li>The <a href="#appendices"><b>Appendices</b></a> contains a live repl and background details about the language</li>
 			</ul>
+			<p>Throughout this document are test blocks that execute against the live contents of the page.</p>
 		</div>
 
-		<h2>Part 1: Concepts</h2>
+		<div className="section contents">
+			<h2 className="heading">Contents</h2>
+			<hr/>
+			<h4><a href="#concepts">Part 1: Concepts</a></h4>
+			<div className="listings">
+				<a href="#tacitscript-blocks">1. tacitscript (ts) Blocks</a>
+				<a href="#operators">2. Operators</a>
+				<a href="#functions">3. Functions</a>
+				<a href="#function-application">4. Function Application</a>
+				<a href="#higher-order-operators">5. Higher-Order Operators</a>
+			</div>
+			<h4><a href="#operator-reference">Part 2: Operator Reference</a></h4>
+			<h4><a href="#appendices">Appendices</a></h4>
+		</div>
+
+		<h2 id="concepts">Part 1: Concepts</h2>
 
 		<div className="section" id="tacitscript-blocks">
-			<h2 className="heading">Lesson 1: tacitscript (ts) Blocks</h2>
+			<h2 className="heading">Lesson 1. tacitscript (ts) Blocks</h2>
 			<hr/>
 			<p>tacitscript blocks of code are embedded within JavaScript code.</p>
 			<p>They are defined within special comment blocks beginning with a <span className="code">/*ts</span> and ending with a <span className="code">*/</span>. The tacitscript transpiler will convert these blocks to standard JavaScript code. Definitions are shared freely between js and ts code.</p>
-			<p>Each ts block consists of a list of name-value bindings.</p>
+			<p>A ts block consists of either a list of name-value bindings, or an inline expression.</p>
 			<div className="code-block">
 				<div>{tacitscriptBlocksLesson}</div>
 				<div id="tacitscript-blocks-lesson" className="mocha"></div>
@@ -127,8 +163,9 @@ export default () => {
 			<h3>Exercise</h3>
 			<TacitscriptBlocks/>
 		</div>
+
 		<div className="section" id="operators">
-			<h2 className="heading">Lesson 2: Operators</h2>
+			<h2 className="heading">Lesson 2. Operators</h2>
 			<hr/>
 			<p>
 				tacitscript is a language of operators. Most non-alphabetic characters on the standard keyboard have been repurposed to act as operators within a ts block.
@@ -158,16 +195,35 @@ export default () => {
 				as the <span className="code">~</span> operator</li>
 			</ul>
 		</div>
-		<div className="section" id="lesson3">
+		<div className="section" id="functions">
 			<h2 className="heading">Lesson 3: Functions</h2>
 			<hr/>
 		</div>
-		<div className="section" id="lesson4">
-			<h2 className="heading">Lesson 4: Chaining</h2>
+		<div className="section" id="function-application">
+			<h2 className="heading">Lesson 4: Function Application</h2>
 			<hr/>
 		</div>
-		<div className="section" id="lesson5">
+		<div className="section" id="higher-order-operators">
 			<h2 className="heading">Lesson 5: Higher-Order Operators</h2>
+			<hr/>
+		</div>
+
+		<h2 id="operator-reference">Part 2: Operator Reference</h2>
+
+		<div className="section" id="plus">
+			<h2 className="heading">+</h2>
+			<hr/>
+		</div>
+
+		<h2 id="appendices">Appendices</h2>
+
+		<div className="section" id="repl">
+			<h2 className="heading">Appendix A: Live REPL</h2>
+			<hr/>
+		</div>
+
+		<div className="section" id="background">
+			<h2 className="heading">Appendix B: Background</h2>
 			<hr/>
 		</div>
 
