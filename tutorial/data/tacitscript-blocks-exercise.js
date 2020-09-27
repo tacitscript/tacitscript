@@ -1,3 +1,3 @@
 export default textEdit => [
-	["const result = /*ts ", textEdit, " */"],
+	["const result = /*ts ", textEdit, "*/"],
 ];
