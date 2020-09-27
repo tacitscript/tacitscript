@@ -11,6 +11,7 @@ const {expect} = chai;
 export default ({}) => {
 	const answer = useSelector(R.path(["app", "repl"]));
 	let syntaxError = false;
+	let result;
 
 	try {
 		if (answer) eval(ts2es6(R.flatten(replExercise(answer)).join("\n")).replace(/const /g, "var "));
@@ -18,10 +19,10 @@ export default ({}) => {
 		syntaxError = true;
 	}
 
-	const className = syntaxError ? "fail" : window.result ? "pass" : "pass pending";
+	const className = syntaxError ? "fail" : result ? "pass" : "pass pending";
 
 	return 	<div className="code-block exercises">
 		{getReconstructedHtml(replExercise(<TextEdit path={["repl"]}/>))}
-		<div className="mocha"><h2 className={`test ${className}`}>{syntaxError ? "Syntax Error" : `result: ${window.result && JSON.stringify(window.result)}`}</h2></div>
+		<div className="mocha"><h2 className={`test ${className}`}>{syntaxError ? "Syntax Error" : `result: ${result && JSON.stringify(result)}`}</h2></div>
 	</div>;
 };
