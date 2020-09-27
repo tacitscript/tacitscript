@@ -1,7 +1,7 @@
 const {expect} = chai;
 import ts from "tacitscript";
-import lesson1 from "../data/lesson1.js";
-import lesson2 from "../data/lesson2.js";
+import tacitscriptBlocksLesson from "../data/tacitscript-blocks-lesson.js";
+import operatorsLesson from "../data/operators-lesson.js";
 import parser from "common/src/parser.js";
 
 const {ts2es6} = parser;
@@ -9,11 +9,8 @@ window.ts = ts; // required for release build
 
 mocha.setup("bdd");
 
-//=======================================================================================================
-// LESSON 1
-
-describe("Lesson 1 Tests", () => {
-	eval(ts2es6(lesson1).replace(/const /g, "var "));
+describe("tacitscript-blocks-lesson", () => {
+	eval(ts2es6(tacitscriptBlocksLesson).replace(/const /g, "var "));
 
 	it("number equals 3", () => expect(number).eql(3));
 	it("decimal equals 3.5", () => expect(decimal).eql(3.5));
@@ -25,11 +22,8 @@ describe("Lesson 1 Tests", () => {
 	it('calculation equals 7', () => expect(calculation).eql(7));
 });
 
-//=======================================================================================================
-// LESSON 2
-
-describe("Lesson 2 Tests", () => {
-	eval(ts2es6(lesson2).replace(/const /g, "var "));
+describe("operators-lesson", () => {
+	eval(ts2es6(operatorsLesson).replace(/const /g, "var "));
 
 	it('stringCat equals "hello world"', () => expect(stringCat).eql("hello world"));
 	it("arrayCat equals [1, 2, 3, 4]", () => expect(arrayCat).eql([1, 2, 3, 4]));

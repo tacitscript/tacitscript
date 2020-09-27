@@ -1,6 +1,6 @@
-import lesson1 from "../data/lesson1.js";
-import lesson2 from "../data/lesson2.js";
-import Exercise1 from "./exercise1.js";
+import tacitscriptBlocksLesson from "../data/tacitscript-blocks-lesson.js";
+import operatorsLesson from "../data/operators-lesson.js";
+import TacitscriptBlocks from "./tacitscript-blocks.js";
 
 const {css} = Glamor;
 const {useEffect} = React;
@@ -83,13 +83,13 @@ const style = css({
 export default () => {
 	useEffect(() => {
 		mocha.setup({
-			grep: /^Lesson 1 Tests/,
+			grep: /^tacitscript-blocks-lesson/,
 		});
-		mocha.run(null, "lesson-1-tests");		
+		mocha.run(null, "tacitscript-blocks-lesson");
 		mocha.setup({
-			grep: /^Lesson 2 Tests/,
+			grep: /^operators-lesson/,
 		});
-		mocha.run(null, "lesson-2-tests");
+		mocha.run(null, "operators-lesson");
 	}, []);
 
 	return <div {...style}>
@@ -109,25 +109,25 @@ export default () => {
 
 		<h2>Part 1: Concepts</h2>
 
-		<div className="section" id="lesson1">
+		<div className="section" id="tacitscript-blocks">
 			<h2 className="heading">Lesson 1: tacitscript (ts) Blocks</h2>
 			<hr/>
 			<p>tacitscript blocks of code are embedded within JavaScript code.</p>
 			<p>They are defined within special comment blocks beginning with a <span className="code">/*ts</span> and ending with a <span className="code">*/</span>. The tacitscript transpiler will convert these blocks to standard JavaScript code. Definitions are shared freely between js and ts code.</p>
 			<p>Each ts block consists of a list of name-value bindings.</p>
 			<div className="code-block">
-				<div>{lesson1}</div>
-				<div id="lesson-1-tests" className="mocha"></div>
+				<div>{tacitscriptBlocksLesson}</div>
+				<div id="tacitscript-blocks-lesson" className="mocha"></div>
 			</div>
 			<ul>
 				<li>Each ts name is made from upper and lower-case alphabetic characters <i>only</i>.</li>
 				<li>The value bound to a name can be any valid ts expression.</li>
 				<li>Any characters on the line following a closed ts expression are considered a comment.</li>
 			</ul>
-			<h3>Exercise 1</h3>
-			<Exercise1/>
+			<h3>Exercise</h3>
+			<TacitscriptBlocks/>
 		</div>
-		<div className="section" id="lesson2">
+		<div className="section" id="operators">
 			<h2 className="heading">Lesson 2: Operators</h2>
 			<hr/>
 			<p>
@@ -150,8 +150,8 @@ export default () => {
 				in JavaScript, <span className="code">2+3*4</span> gives the same result as <span className="code">3*4+2</span>, because multiplication operations take precedence over addition.
 				In tacitscript, there are typically no precedence rules and all operators are <i>left-associative</i>.</p>
 			<div className="code-block">
-				<div>{lesson2}</div>
-				<div id="lesson-2-tests" className="mocha"></div>
+				<div>{operatorsLesson}</div>
+				<div id="operators-lesson" className="mocha"></div>
 			</div>
 			<ul>
 				<li><span className="code">5+~2</span> would be a syntax error as no implementation of operator <span className="code">+</span> takes a right hand operand of the same type

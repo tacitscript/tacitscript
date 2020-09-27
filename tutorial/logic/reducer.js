@@ -1,8 +1,6 @@
 
 const initialState = {
-    lesson1: {
-        numbers: "",
-    },
+    tacitscriptBlocks: "",
 };
 
 export default (state = initialState, action = {}) => {
