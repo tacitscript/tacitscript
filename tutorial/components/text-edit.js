@@ -5,7 +5,6 @@ const {useDispatch} = ReactRedux;
 
 const style = css({
 	width: "100%",
-	marginRight: "4rem",
 	"> .MuiInputBase-multiline": {
 		width: "100%",
 		padding: "0 !important",

@@ -27,7 +27,9 @@ const style = css({
 		padding: "0.5rem 1.2rem",
 		borderRadius: "0.5rem",
 		position: "relative",
-		"> h2": {margin: "0.5rem 0"},
+		"> h2": {
+			margin: "0.5rem 0",
+		},
 		"> h3": {marginTop: "2.5rem", fontSize: "1.25rem"},
 		"> hr": {marginBottom: "1.5rem"},
 		"> ul": {paddingInlineStart: "2rem"},
@@ -41,6 +43,12 @@ const style = css({
 				margin: "1rem 0",
 				fontSize: "1rem",
 			},
+			" a": {
+				color: "var(--text-color)",
+				":hover,:focus": {
+					color: "var(--yellow)",
+				},
+			},
 			"> .listings": {
 				display: "flex",
 				flexWrap: "wrap",
@@ -48,11 +56,18 @@ const style = css({
 				"> a": {
 					width: "15rem",
 					lineHeight: "1.3rem",
+					backgroundColor: "#1a110e",
+					border: "3px solid var(--background)",
+					padding: "2px 5px",
+					borderRadius: "6px",
+					":hover,:focus": {
+						color: "var(--text-color)",
+						backgroundColor: "var(--brown)"
+					},
 				},
-			},
-			" a": {
-				color: "white",
-				":hover,:focus": {color: "var(--yellow)"},
+				".operators > a": {
+					textAlign: "center",
+				},
 			},
 		},
 	},
@@ -60,7 +75,7 @@ const style = css({
 		color: "var(--yellow)",
 		textDecoration: "none",
 		":hover,:focus": {
-			color: "white",
+			color: "var(--text-color)",
 		},
 	},
 	" .code": {
@@ -141,7 +156,7 @@ export default () => {
 				<a href="#higher-order-operators">5. Higher-Order Operators</a>
 			</div>
 			<h4><a href="#operator-reference">Part 2: Operator Reference</a></h4>
-			<div className="listings">
+			<div className="listings operators">
 				<a href="#plus">+</a>
 			</div>
 			<h4><a href="#appendices">Appendices</a></h4>
@@ -160,7 +175,7 @@ export default () => {
 			<p>They are defined within special comment blocks beginning with a <span className="code">/*ts</span> and ending with a <span className="code">*/</span>. The tacitscript transpiler will convert these blocks to standard JavaScript code. Definitions are shared freely between js and ts code.</p>
 			<p>A ts block consists of either a list of name-value bindings, or an inline expression.</p>
 			<div className="code-block">
-				<div>{tacitscriptBlocksLesson}</div>
+				<div dangerouslySetInnerHTML={{__html: tacitscriptBlocksLesson}}/>
 				<div id="tacitscript-blocks-lesson" className="mocha"></div>
 			</div>
 			<ul>
@@ -187,7 +202,7 @@ export default () => {
 			<p>The standard binary arithmetic operators +, -, * and /, all retain their meaning in tacitscript.</p>
 			<p>Some operators may have different meanings depending on context, eg. in JavaScript, <span className="code">+</span> can represent numeric addition as well as string concatenation.
 			tacitscript also <i>overloads</i> operators in this way, where the actual operation depends on the types of operands involved. In tacitscript, <span className="code">+</span> can
-			also represent string, and array, concatenation.</p>
+			also represent string, and array concatenation.</p>
 			<p>In some languages, an operator may act as both a <i>binary</i> and <i>unary</i> operator. In JavaScript, <span className="code">-</span> can represent binary <i>minus</i>, or
 			unary <i>negative</i>. In tacitscript, operators are either always binary, or always unary. 
 			Negation in tacitscript is therefore represented by a different operator, <span className="code">~</span>.</p>
