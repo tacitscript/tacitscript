@@ -12,6 +12,6 @@ over several lines"                                       strings are delimited 
     pitfall               4 + number                      NB: tokens <i>cannot</i> be freely separated by whitespace
 */
 
-const inline = /*ts (1 2 3)*/;
+const inline = /*ts (1 2 3) */;
 
 const calculation = jsVariable + array[3];`
