@@ -151,7 +151,7 @@ export default () => {
 			<div className="listings">
 				<a href="#tacitscript-blocks">1. tacitscript (ts) Blocks</a>
 				<a href="#operators">2. Operators</a>
-				<a href="#functions">3. Functions</a>
+				<a href="#custom-operators">3. Custom Operators</a>
 				<a href="#function-application">4. Function Application</a>
 				<a href="#higher-order-operators">5. Higher-Order Operators</a>
 			</div>
@@ -215,15 +215,34 @@ export default () => {
 			</div>
 			<ul>
 				<li><span className="code">5+~2</span> would be a syntax error as no implementation of operator <span className="code">+</span> takes a right hand operand of the same type
-				as the <span className="code">~</span> operator</li>
+				as the <span className="code">~</span> operator.</li>
+				<li>All unary operators take their operand to the right.</li>
 			</ul>
+
+			--- Exercise use all operators ---
 		</div>
-		<div className="section" id="functions">
-			<h2 className="heading">Lesson 3: Functions</h2>
+		<div className="section" id="custom-operators">
+			<h2 className="heading">Lesson 3: Custom Operators</h2>
 			<hr/>
+			<p>You have now learnt the entirety of tacitscript syntax. tacitscript expressions are understood solely in terms of the application of its operators. We can think of these as functions of
+				either one or two arguments. (Indeed, the tacitscript transpiler exports the language's inbuilt and custom operators in this way.)</p>
+			<p>tacitscript's minimal syntax does not even provide a lambda construct, that is, a way of defining a function in terms of an arbitrary list of arguments. Instead, we build custom operators
+				by applying values to existing operators.
+			</p>
+			<p>I can define a new unary operator <span className="code">double</span> that doubles from any number that I pass to it, with the expression <span className="code">2*</span>. I have created a new operator 
+			by <i>baking-in</i> the value of <span className="code">2</span> to the left-side of the <span className="code">*</span> operator. I can now use this operator in expressions such
+			as <span className="code">double4</span> which gives a value of <span className="code">8</span>.
+			</p>
+			<p>
+				Similarly, I can bake-in values to the right-side of a binary operator. The operator <span className="code">minusThree</span> defined as <span className="code">-3</span> will
+				subtract <span className="code">3</span> from any number I apply it to. <span className="code">minusThree7</span> gives <span className="code">4</span>. 
+				(Note that all unary operators take their operands to the right, so <span className="code">7minusThree</span> is a syntax error. This extends to the use of braces,
+				so <span className="code">7(-3)</span> is a syntax error, while <span className="code">(-3)7</span> gives the intended result, 4.)</p>
+
+			--- Exercise inverse ---
 		</div>
 		<div className="section" id="function-application">
-			<h2 className="heading">Lesson 4: Function Application</h2>
+			<h2 className="heading">Lesson 4: The Application Operator</h2>
 			<hr/>
 		</div>
 		<div className="section" id="higher-order-operators">
