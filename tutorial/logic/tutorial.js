@@ -31,7 +31,7 @@ describe("operators-lesson", () => {
 	it("negative equals -5", () => expect(negative).eql(-5));
 	it("leftAssoc equals 20", () => expect(leftAssoc).eql(20));
 	it("mathematical equals 14", () => expect(mathematical).eql(14));
-	it("requiredBraces equals 3", () => expect(requiredBraces).eql(3));
+	it("requiredParentheses equals 3", () => expect(requiredParentheses).eql(3));
 });
 
 

@@ -7,7 +7,7 @@ export default `const jsVariable = 4;
 over several lines"                                       strings are delimited by double-quotes <i>only</i>
     falsey                ()                              there is only one falsey value, <strong>undefined</strong>, denoted ()
     array                 (1 "hello"
-                          () number)                      arrays are bounded by brackets and delimited by any kind of whitespace
+                          () number)                      arrays are bounded by parentheses and delimited by any kind of whitespace
     expression            2*jsVariable                    js variables in scope may be directly referenced within ts block
     pitfall               4 + number                      NB: tokens <i>cannot</i> be freely separated by whitespace
 */
