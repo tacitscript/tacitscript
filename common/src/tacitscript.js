@@ -111,46 +111,6 @@ const applyOver = ({path, fn, container}) => {
 	}
 };
 
-const lookup = symbol => {
-	switch(symbol) {
-		case "+": return plus;
-		case ".": return dot;
-		case "[": return leftSquareBracket;
-		case "#": return hash;
-		case "<": return lessThan;
-		case "/": return slash;
-		case "-": return minus;
-	}
-
-	return eval(symbol);
-};
-const execute = symbols => {
-	if (symbols.length === 0) return undefined;
-	if (symbols.length === 1) {
-		const symbol = symbols[0];
-
-		if (Array.isArray(symbol)) return execute(symbol); // double brace wrapping
-		if (symbol === " ") return [];
-		if (!isNaN(+symbol)) return +symbol;
-		if (typeof symbol === "string") {
-			if (symbol.startsWith("\"") && symbol.endsWith("\"")) return symbol.slice(1, -1);
-			return lookup(symbol);
-		}
-	}
-	return pipe(
-		reduce(({sections, append}, symbol) => {
-			if (symbol === " ") return {sections, append: true};
-			if (append) return {sections: [...sections, execute([symbol])], append: false};
-			return {sections: [...sections.slice(0, -1), apply(sections[sections.length - 1], execute([symbol]))], append: false};
-		})({
-			sections: [],
-			append: true,
-		}),
-		({sections, append}) => {
-			return (append || (sections.length > 1)) ? sections : sections[0];
-		},
-	)(symbols);
-};
 //const matchTypes = (left, right) => (left === "?") || (right === "?") || (left === right);
 const replaceType = ({from, to}) => type => {
 	if (!Array.isArray(type)) return (type === from) ? to : type;
@@ -709,7 +669,6 @@ export default {
 	apply,
 	leftApply,
 	rightApply,
-	execute,
 
 	plus,
 	tilde,
