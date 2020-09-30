@@ -93,6 +93,7 @@ const style = css({
 							fontWeight: "bold",
 							borderBottomRightRadius: 3,
 							borderTopRightRadius: 3,
+							borderLeft: "1px solid #1a110e",
 						}
 					},
 				},
