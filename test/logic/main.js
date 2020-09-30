@@ -397,6 +397,7 @@ describe("Operators", () => {
 			evalString			{"\"hello\""
 			evalArray			{"[4, 5, 6]"
 			evalFunction		{"x => Math.max.apply(Math, x)"
+			binaryFunction		2({"Math.pow")3
 		*/
 			it('{"2" eql 2', () => expect(evalNumber).eql(2));
 			it('{"\\"hello\\"" eql "hello"', () => expect(evalString).eql("hello"));
@@ -404,6 +405,7 @@ describe("Operators", () => {
 			it('{"({a: 4})" eql {a: 4}', () => expect(evalObject).eql({a: 4}));
 			it('{"x => Math.max.apply(Math, x)"([2, 3, 7, 4]) eql 7', () => expect(evalFunction([2, 3, 7, 4])).eql(7));
 			it('{"Math.sqrt"4 eql 2', () => expect(evalFunctionApplied).eql(2));
+			it('2({"Math.pow")3 eql 8', () => expect(binaryFunction).eql(8));
 		});
 	});
 
