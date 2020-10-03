@@ -3,6 +3,21 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+//==========================================================
+// underscore
+
+describe("Underscore", () => {
+	/*ts
+		map						@
+	*/
+
+	describe("map @", () => {
+		it("map(num => num * 3, [1, 2, 3]) = [3, 6, 9]", () => expect(map(num => num * 3, [1, 2, 3])).eql([3, 6, 9]));
+		it("map(num => num * 3, {one: 1, two: 2, three: 3}) = {one: 3, two: 6, three: 9}", () => expect(map(num => num * 3, {one: 1, two: 2, three: 3})).eql({one: 3, two: 6, three: 9}));
+
+	});
+});
+
 ///==========================================================
 // functional utilites
 
