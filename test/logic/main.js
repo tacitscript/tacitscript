@@ -8,19 +8,27 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 	/*ts
+		reduce					$
+	*/
+
+	describe("reduce $", () => {
+		it("reduce([(a, b) => a + b, 0], [1, 2, 3]) eql 6", () => expect(reduce([(a, b) => a + b, 0], [1, 2, 3])).eql(6));
+	});
+
+	/*ts
 		map						@
 		mapIndexed				:@
 	*/
 
 	describe("map @", () => {
-		it("@(num => num * 3, [1, 2, 3]) eql [3, 6, 9]", () => expect(map(num => num * 3, [1, 2, 3])).eql([3, 6, 9]));
-		it("@(num => num * 3, {one: 1, two: 2, three: 3}) eql {one: 3, two: 6, three: 9}", () => expect(map(num => num * 3, {one: 1, two: 2, three: 3})).eql({one: 3, two: 6, three: 9}));
-		it("@(array => array[0], [[1, 2], [3, 4]]) eql [1, 3]", () => expect(map(array => array[0], [[1, 2], [3, 4]])).eql([1, 3]));
-		it("@((value, index) => [value, index], ['a', 'b', 'c']) eql [['a', 0], ['b', 1], ['c', 2]]", () => expect(map((value, index) => [value, index], ['a', 'b', 'c'])).eql([['a', 0], ['b', 1], ['c', 2]]));
-		it(":@(['a', 'b', 'c']) eql [['a', 0], ['b', 1], ['c', 2]]", () => expect(mapIndexed(['a', 'b', 'c'])).eql([['a', 0], ['b', 1], ['c', 2]]));
-		it("@((value, key) => [value, key], {one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
+		it("map(num => num * 3, [1, 2, 3]) eql [3, 6, 9]", () => expect(map(num => num * 3, [1, 2, 3])).eql([3, 6, 9]));
+		it("map(num => num * 3, {one: 1, two: 2, three: 3}) eql {one: 3, two: 6, three: 9}", () => expect(map(num => num * 3, {one: 1, two: 2, three: 3})).eql({one: 3, two: 6, three: 9}));
+		it("map(array => array[0], [[1, 2], [3, 4]]) eql [1, 3]", () => expect(map(array => array[0], [[1, 2], [3, 4]])).eql([1, 3]));
+		it("map((value, index) => [value, index], ['a', 'b', 'c']) eql [['a', 0], ['b', 1], ['c', 2]]", () => expect(map((value, index) => [value, index], ['a', 'b', 'c'])).eql([['a', 0], ['b', 1], ['c', 2]]));
+		it(":map(['a', 'b', 'c']) eql [['a', 0], ['b', 1], ['c', 2]]", () => expect(mapIndexed(['a', 'b', 'c'])).eql([['a', 0], ['b', 1], ['c', 2]]));
+		it("map((value, key) => [value, key], {one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
 			() => expect(map((value, key) => [value, key], {one: 'a', two: 'b', three: 'c'})).eql({one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}));
-		it(":@({one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
+		it(":map({one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
 			() => expect(mapIndexed({one: 'a', two: 'b', three: 'c'})).eql({one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}));
 	});
 });
