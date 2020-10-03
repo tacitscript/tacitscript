@@ -495,12 +495,13 @@ let atsign = (left, right) => {
 }; atsign.types = [[["V", "V"], "A", "A"], [["V", "N", "V"], "A", "A"], [["V", "V"], "O", "O"], [["V", "S", "V"], "0", "0"]];
 // atsign.types = [[1, 0, 0], [2, 0, 0]];
 let asterisk = (left, right) => {
+	if (isFunction(left) && isArray(right)) return filter(left)(right); // 100
 	if (Array.isArray(left)) { // AOO
 		return pick(left)(right);
 	}
 
 	return left * right; // 000
-}; asterisk.types = [["N", "N", "N"], ["A", "O", "O"]];
+}; asterisk.types = [["N", "N", "N"], ["A", "O", "O"], [["?", "V"], "A", "A"]];
 // asterisk.types = [[0, 0, 0]];
 let dollar = (left, right) => {
 	if (isArray(right)) {
@@ -516,7 +517,6 @@ let dollar = (left, right) => {
 // dollar.types = [[2, 0, "?"], [0, 0, "?"]];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at
-	if (isFunction(left) && isArray(right)) return filter(left)(right); // 100
 	if (isString(left) && isObject(right)) return right[left]; // prop SO?
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // over AAA AOO
@@ -527,7 +527,7 @@ let apostrophe = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ' with arguments: ${JSON.stringify({left, right})}`;
-}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], [["?", "V"], "A", "A"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"]];
+}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"]];
 // apostrophe.types = [[0, 0, "?"], [1, 0, 0], [0, 1, 1]];
 let equal = (left, right) => {
 	return (toString(left) === toString(right)) ? left : undefined;

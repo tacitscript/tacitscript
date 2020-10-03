@@ -319,6 +319,15 @@ describe("Operators", () => {
 		*/
 			it('("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3))) eql {a: 1, c: 3}', () => expect(pickedObject).eql({a: 1, c: 3}));
 		});
+
+		describe("filter (?? A A) 7", () => {
+		/*ts
+			lessThanFilter		<5*(4 9 2 7 3)
+			emptyFilter			;*( )
+		*/
+			it("<5*(4 9 2 7 3) eql [4, 2, 3]", () => expect(lessThanFilter).eql([4, 2, 3]));
+			it(";*( ) eql []", () => expect(emptyFilter).eql([]));
+		});	
 	});
 
 	describe("+", () => {
@@ -480,15 +489,6 @@ describe("Operators", () => {
 			prop			"key"'(\(("a" 2) ("key" 4)))
 		*/
 			it(`"key"'(\(("a" 2) ("key" 4))) eql 4`, () => expect(prop).eql(4));
-		});
-
-		describe("filter (?? A A) 7", () => {
-		/*ts
-			lessThanFilter		<5'(4 9 2 7 3)
-			emptyFilter			;'( )
-		*/
-			it("<5'(4 9 2 7 3) eql [4, 2, 3]", () => expect(lessThanFilter).eql([4, 2, 3]));
-			it(";'( ) eql []", () => expect(emptyFilter).eql([]));
 		});
 
 		describe("path AA?, AO?", () => {
