@@ -4,6 +4,7 @@
 const pipe = (...args) => value => args.reduce((acc, fn) => fn(acc), value);
 const map = fn => array => array.map(fn);
 const mapObj = fn => object => Object.assign({}, ...Object.keys(object).map(key => ({[key]: fn(object[key])})));
+const mapObjIndexed = fn => object => Object.assign({}, ...Object.keys(object).map(key => ({[key]: fn(object[key], key)})));
 const reduce = reducer => startingValue => array => array.reduce(reducer, startingValue);
 const find = search => reduce((acc, value) => (acc == undefined) ? (search(value) ? value : undefined) : acc)(undefined);
 const mergeDeep = (...objects) => {
@@ -486,10 +487,11 @@ let question = (left, right) => {
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	if (isObject(right)) {
-		if (isUnaryFunction(left)) return mapObj(left)(right);
+		if (isUnaryFunction(left)) return mapObj(left)(right); // (VV)OO
+		if (isBinaryFunction(left)) return mapObjIndexed(left)(right); // (VSV)OO
 	}
 
-	return right.map(left);
+	return right.map(left); // (VV)AA (VNV)AA
 }; atsign.types = [[["V", "V"], "A", "A"], [["V", "N", "V"], "A", "A"], [["V", "V"], "O", "O"], [["V", "S", "V"], "0", "0"]];
 // atsign.types = [[1, 0, 0], [2, 0, 0]];
 let asterisk = (left, right) => {

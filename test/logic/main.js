@@ -18,6 +18,10 @@ describe("Underscore", () => {
 		it("@(array => array[0], [[1, 2], [3, 4]]) eql [1, 3]", () => expect(map(array => array[0], [[1, 2], [3, 4]])).eql([1, 3]));
 		it("@((value, index) => [value, index], ['a', 'b', 'c']) eql [['a', 0], ['b', 1], ['c', 2]]", () => expect(map((value, index) => [value, index], ['a', 'b', 'c'])).eql([['a', 0], ['b', 1], ['c', 2]]));
 		it(":@(['a', 'b', 'c']) eql [['a', 0], ['b', 1], ['c', 2]]", () => expect(mapIndexed(['a', 'b', 'c'])).eql([['a', 0], ['b', 1], ['c', 2]]));
+		it("@((value, key) => [value, key], {one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
+			() => expect(map((value, key) => [value, key], {one: 'a', two: 'b', three: 'c'})).eql({one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}));
+		it(":@({one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
+			() => expect(mapIndexed({one: 'a', two: 'b', three: 'c'})).eql({one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}));
 	});
 });
 
