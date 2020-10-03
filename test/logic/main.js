@@ -7,28 +7,36 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("find '", () => {
+	/*ts
+		find					'
+	*/
+
+		it("find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql 2", () => expect(find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql(2));
+	});
+
+	describe("reduceRight :,(; _).$$", () => {
 	/*ts
 		reduceRight				:,(; _).$$
 	*/
 
-	describe("reduceRight :,(; _).$$", () => {
 		it("reduceRight((a, b) => a.concat(b), [[0, 1], [2, 3], [4, 5]]) eql [4, 5, 2, 3, 0, 1]", () => expect(reduceRight((a, b) => a.concat(b), [[0, 1], [2, 3], [4, 5]])).eql([4, 5, 2, 3, 0, 1]));
 	});
 
+	describe("reduce $", () => {
 	/*ts
 		reduce					$
 	*/
 
-	describe("reduce $", () => {
 		it("reduce([(a, b) => a + b, 0], [1, 2, 3]) eql 6", () => expect(reduce([(a, b) => a + b, 0], [1, 2, 3])).eql(6));
 	});
 
+	describe("map @", () => {
 	/*ts
 		map						@
 		mapIndexed				:@
 	*/
 
-	describe("map @", () => {
 		it("map(num => num * 3, [1, 2, 3]) eql [3, 6, 9]", () => expect(map(num => num * 3, [1, 2, 3])).eql([3, 6, 9]));
 		it("map(num => num * 3, {one: 1, two: 2, three: 3}) eql {one: 3, two: 6, three: 9}", () => expect(map(num => num * 3, {one: 1, two: 2, three: 3})).eql({one: 3, two: 6, three: 9}));
 		it("map(array => array[0], [[1, 2], [3, 4]]) eql [1, 3]", () => expect(map(array => array[0], [[1, 2], [3, 4]])).eql([1, 3]));

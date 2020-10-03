@@ -517,6 +517,7 @@ let dollar = (left, right) => {
 // dollar.types = [[2, 0, "?"], [0, 0, "?"]];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at
+	if (isFunction(left) && isArray(right)) return find(left)(right); // 1A?
 	if (isString(left) && isObject(right)) return right[left]; // prop SO?
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // over AAA AOO
@@ -527,7 +528,7 @@ let apostrophe = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ' with arguments: ${JSON.stringify({left, right})}`;
-}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"]];
+}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["?", "?"], "A", "?"]];
 // apostrophe.types = [[0, 0, "?"], [1, 0, 0], [0, 1, 1]];
 let equal = (left, right) => {
 	return (toString(left) === toString(right)) ? left : undefined;
