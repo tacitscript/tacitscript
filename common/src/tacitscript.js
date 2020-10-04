@@ -55,6 +55,11 @@ const prepend = value => array => [value, ...array];
 const first = array => array[0];
 
 //==========================================================
+// ts functional utilities using ts logic (falsey is only undefined or false)
+
+const tsFilter = tsCheck => array => {const check = value => {const result = tsCheck(value); return !((result == undefined) || (result === false));}; return filter(check)(array);};
+
+//==========================================================
 // type utilites
 
 const isUndefined = value => value == undefined;
@@ -495,7 +500,7 @@ let atsign = (left, right) => {
 }; atsign.types = [[["V", "V"], "A", "A"], [["V", "N", "V"], "A", "A"], [["V", "V"], "O", "O"], [["V", "S", "V"], "0", "0"]];
 // atsign.types = [[1, 0, 0], [2, 0, 0]];
 let asterisk = (left, right) => {
-	if (isFunction(left) && isArray(right)) return filter(left)(right); // 100
+	if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // 100
 	if (Array.isArray(left)) { // AOO
 		return pick(left)(right);
 	}
@@ -762,7 +767,7 @@ export default {
 	concatArray: (array1, array2) => isValid(array1) && isValid(array2) && [...array1, ...array2],
 	groupBy: (fn, array) => isValid(fn) && isValid(array) && reduce((acc, value) => {const key = toString(fn(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(array),
 	ascendingSort: (fn, array) => isValid(fn) && isValid(array) && sortBy(fn)(array),
-	filter: (check, array) => isValid(check) && isValid(array) && filter(check)(array),
+	filter: (check, array) => isValid(check) && isValid(array) && tsFilter(check)(array),
 	modulo: (left, right) => isValid(left) && isValid(right) && (left % right),
 	chunkArray: (sizes, array) => isValid(sizes) && isValid(array) && chunk({sizes, vector: array, newVector: [], append: (acc, value) => [...acc, value]}),
 	chunkString: (sizes, string) => isValid(sizes) && isValid(string) && chunk({sizes, vector: string.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}),

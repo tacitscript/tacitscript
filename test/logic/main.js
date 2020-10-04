@@ -7,13 +7,25 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("some *.#.>0", () => {
+	/*ts
+		some					*.#.>0
+		someValues				;some(() 0 "yes")
+		filterByIdentity		;*(() 0)
+	*/
+
+		it("some(x => x, [undefined, 0, 'yes', false]) eql 1", () => expect(some(x => x, [undefined, 0, 'yes', false])).eql(2));
+		it(";some(() 0 'yes') eql 1", () => expect(someValues).eql(2));
+		it(";*(() 0) eql []", () => expect(filterByIdentity).eql([0]));
+	});
+
 	describe("every :.(*$ ]).#@.=$", () => {
 	/*ts
 		every					:.(*$ ]).#@.=$
 	*/
 
 		it("every(num => (num % 2) === 0, [2, 4, 5]) eql undefined", () => expect(every(num => (num % 2) === 0, [2, 4, 5])).eql(undefined));
-		it("every(num => (num % 2) === 0, [2, 4, 6]) eql undefined", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(3));
+		it("every(num => (num % 2) === 0, [2, 4, 6]) eql 3", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(3));
 	});
 
 	describe("reject :,(! ;).*$", () => {
