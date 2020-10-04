@@ -7,6 +7,15 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("every :.(*$ ]).#@.=$", () => {
+	/*ts
+		every					:.(*$ ]).#@.=$
+	*/
+
+		it("every(num => (num % 2) === 0, [2, 4, 5]) eql undefined", () => expect(every(num => (num % 2) === 0, [2, 4, 5])).eql(undefined));
+		it("every(num => (num % 2) === 0, [2, 4, 6]) eql undefined", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(3));
+	});
+
 	describe("reject :,(! ;).*$", () => {
 	/*ts
 		complimentAndArray		:,(! ;)
