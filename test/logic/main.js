@@ -7,6 +7,15 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("pluck :,(' ;).@$", () => {
+	/*ts
+		pluck					:,(' ;).@$
+	*/
+
+		it("pluck('name', [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]) eql ['moe', 'larry', 'curly']",
+			() => expect(pluck('name', [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}])).eql(['moe', 'larry', 'curly']));
+	});
+
 	describe("contains :,(= ;).'$", () => {
 	/*ts
 		intermediateB			(4 (2 3 4 5)),(= ;).'$
