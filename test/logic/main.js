@@ -7,6 +7,14 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("filter *", () => {
+	/*ts
+		filter *
+	*/
+
+		it("filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [2, 4, 6]", () => expect(filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([2, 4, 6]));
+	});
+
 	describe("find '", () => {
 	/*ts
 		find					'
