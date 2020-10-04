@@ -7,6 +7,20 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("contains :,(= ;).'$", () => {
+	/*ts
+		intermediateB			(4 (2 3 4 5)),(= ;).'$
+		intermediate			(=4 (2 3 4 5)).'$
+		containsFour			=4'(2 3 4 5)
+		contains				:,(= ;).'$
+	*/
+
+		it("(4 (2 3 4 5)),(= ;).'$ eql 4", () => expect(intermediateB).eql(4));
+		it("(=4 (2 3 4 5)).'$ eql 4", () => expect(intermediate).eql(4));
+		it("contains(4, [2, 3, 4, 5]) eql 4", () => expect(contains(4, [2, 3, 4, 5])).eql(4));
+		it("=4'(2 3 4 5) eql 4", () => expect(containsFour).eql(4));
+	});
+
 	describe("some *.#.>0", () => {
 	/*ts
 		some					*.#.>0
