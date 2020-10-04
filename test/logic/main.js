@@ -7,9 +7,23 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("reject :,(! ;).*$", () => {
+	/*ts
+		complimentAndArray		:,(! ;)
+		reject					:,(! ;).*$
+		notLessThanThree		!(<3)
+	*/
+
+		it("!(<3)(4) eql 4", () => expect(notLessThanThree(4)).eql(4));
+		it(":,(! ;)(value => value < 3, 2)[0](4) eql []", () => expect(complimentAndArray(value => value < 3, 2)[0](4)).eql(4));
+		it("!(<3)(2) eql undefined", () => expect(notLessThanThree(2)).eql(undefined));
+		it(":,(! ;)(() => {}, [1, 2, 3])[1] eql [1, 2, 3]", () => expect(complimentAndArray(() => {}, [1, 2, 3])[1]).eql([1, 2, 3]));
+		it("reject(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [1, 3, 5]", () => expect(reject(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([1, 3, 5]));
+	});
+
 	describe("filter *", () => {
 	/*ts
-		filter *
+		filter					*
 	*/
 
 		it("filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [2, 4, 6]", () => expect(filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([2, 4, 6]));

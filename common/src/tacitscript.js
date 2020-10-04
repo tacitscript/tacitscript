@@ -483,7 +483,7 @@ let question = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
-}; question.types = [[["X", "?"], "X", "X"], ["A", "X", "X"], ["S", "S", "S"], ["X", "A", "X"]]; 
+}; question.types = [[["X", "?"], "X", "X"], ["A", "?", "A"], ["S", "S", "S"], ["N", "A", "N"]];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	if (isObject(right)) {
@@ -646,17 +646,25 @@ let semicolon = value => {
 }; semicolon.types = [["X", "X"]];
 let braceright = value => {
 	return typeOf(value);
-}; braceright.types = [["?", "S"], [["?", "?"], "S"], [["?", "?", "?"], "S"]];
+}; braceright.types = [["V", "S"], [["?", "?"], "S"], [["?", "?", "?"], "S"]];
 let bang = value => {
 	if (isBinaryFunction(value)) {
-		let fn = (x, y) => (value(x, y) == undefined) ? x : undefined;
+		let fn = (x, y) => {
+			const result = value(x, y);
+
+			return ((result == undefined) || (result === false)) ? x : undefined;
+		};
 
 		fn.types = value.types;
 
 		return fn;
 	}
 	if (isUnaryFunction(value)) {
-		let fn = x => (value(x) == undefined) ? x : undefined;
+		let fn = x => {
+			const result = value(x);
+
+			return ((result == undefined) || (result === false)) ? x : undefined;
+		};
 
 		fn.types = value.types;
 
