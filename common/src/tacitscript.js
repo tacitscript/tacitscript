@@ -553,8 +553,9 @@ let apostrophe = (left, right) => {
 }; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["?", "?"], "A", "?"]];
 // apostrophe.types = [[0, 0, "?"], [1, 0, 0], [0, 1, 1]];
 let equal = (left, right) => {
-	return (toString(left) === toString(right)) ? left : undefined;
-}; equal.types = [["V", "V", "V"]];
+	return toString(left) === toString(right);
+}; equal.types = [["V", "V", "B"]];
+equal.supportsUndefined = true;
 let bar = (left, right) => {
 	if ((left == undefined) || (right == undefined)) {
 		return (left == undefined) ? right : left;

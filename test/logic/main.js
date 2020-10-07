@@ -11,7 +11,7 @@ describe("Underscore", () => {
 	/*ts
 		isEqualOne			=1.?
 		partition			:,(? ;).@$.~.;*@
-		calculation			(%2.=1)partition(0 1 2 3 4 5)
+		//calculation			(%2.=1)partition(0 1 2 3 4 5)
 		intermediate		:,(? ;).@$.~
 		intermediateB		:,(? ;).@$
 		intermediateC		(%2.=1)?@(1 2 3)
@@ -154,10 +154,10 @@ describe("Underscore", () => {
 		calculationB			(%2.=0)every(2 4 6)
 	*/
 
-		it("(%2.=0)every(2 4 6) eql 3", () => expect(calculationB).eql(3));
-		it("(%2.=0)every(2 4 5) eql undefined", () => expect(calculation).eql(undefined));
-		it("every(num => (num % 2) === 0, [2, 4, 5]) eql undefined", () => expect(every(num => (num % 2) === 0, [2, 4, 5])).eql(undefined));
-		it("every(num => (num % 2) === 0, [2, 4, 6]) eql 3", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(3));
+		it("(%2.=0)every(2 4 6) eql true", () => expect(calculationB).eql(true));
+		it("(%2.=0)every(2 4 5) eql false", () => expect(calculation).eql(false));
+		it("every(num => (num % 2) === 0, [2, 4, 5]) eql false", () => expect(every(num => (num % 2) === 0, [2, 4, 5])).eql(false));
+		it("every(num => (num % 2) === 0, [2, 4, 6]) eql true", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(true));
 	});
 
 	describe("reject :,(! ;).*$", () => {
@@ -770,16 +770,16 @@ describe("Operators", () => {
 			mixedEquality		(1 "hello")=(1 "hello")
 			undefinedEquality	()=()
 		*/
-			it("=7(\"Dan\") eql undefined", () => expect(equalsSeven("Dan")).eql(undefined));
-			it("\"Peter\"=(\"Peter\") eql \"Peter\"", () => expect(peterEquals("Peter")).eql("Peter"));
-			it("(2 \"Jane\" (3 4))=(2 \"Jane\" (3 4)) eql [[2, \"Jane\", [3, 4]], [\"A\"]]", () => expect([mixedEqualsMixed, ts.typeOf(mixedEqualsMixed)]).eql([[2, "Jane", [3, 4]], "A"]));
-			it("2=4 eql undefined", () => expect(failedEquality).eql(undefined));
-			it('(1 2 3)=(1 2 3) eql [1, 2, 3]', () => expect(arrayEqualsArray).eql([1, 2, 3]));
-			it('=(1 2 3)(1) eql undefined', () => expect(numberEqualsArray(1)).eql(undefined));
-			it('1=2 eql undefined', () => expect(inequality).eql(undefined));
-			it('1=() eql undefined', () => expect(equalsUndefined).eql(undefined));
-			it('(1 "hello")=(1 "hello") eql [1, "hello"]', () => expect(mixedEquality).eql([1, "hello"]));
-			it('()=() eql undefined', () => expect(undefinedEquality).eql(undefined));
+			it("=7(\"Dan\") eql false", () => expect(equalsSeven("Dan")).eql(false));
+			it("\"Peter\"=(\"Peter\") eql true", () => expect(peterEquals("Peter")).eql(true));
+			it("(2 \"Jane\" (3 4))=(2 \"Jane\" (3 4)) eql true", () => expect(mixedEqualsMixed).eql(true));
+			it("2=4 eql false", () => expect(failedEquality).eql(false));
+			it('(1 2 3)=(1 2 3) eql true', () => expect(arrayEqualsArray).eql(true));
+			it('=(1 2 3)(1) eql false', () => expect(numberEqualsArray(1)).eql(false));
+			it('1=2 eql false', () => expect(inequality).eql(false));
+			it('1=() eql false', () => expect(equalsUndefined).eql(false));
+			it('(1 "hello")=(1 "hello") eql true', () => expect(mixedEquality).eql(true));
+			it('()=() eql true', () => expect(undefinedEquality).eql(true));
 		});
 	});
 
@@ -811,7 +811,7 @@ describe("Operators", () => {
 		*/
 			it('<5|(%2.=0)(3) eql 3', () => expect(lessThanFiveOrEven(3)).eql(3));
 			it('<5|(%2.=0)(10) not eql undefined', () => expect(lessThanFiveOrEven(10)).not.eql(undefined));
-			it('<5|(%2.=0)(7) eql undefined', () => expect(lessThanFiveOrEven(7)).eql(undefined));
+			it('<5|(%2.=0)(7) eql false', () => expect(lessThanFiveOrEven(7)).eql(false));
 		});
 
 		describe("orOperator 222", () => {
@@ -822,9 +822,9 @@ describe("Operators", () => {
 			sevenLessThanOrEqualUndefined		7(<|=)()
 		*/
 			it('5(<|=)7 eql 5', () => expect(fiveLessThanOrEqualSeven).eql(5));
-			it('7(<|=)5 eql undefined', () => expect(sevenLessThanOrEqualFive).eql(undefined));
-			it('<|=(5, 5) eql 5', () => expect(lessThanOrEqual(5, 5)).eql(5));
-			it('<|=(6, 4) eql undefined', () => expect(lessThanOrEqual(6, 4)).eql(undefined));
+			it('7(<|=)5 eql false', () => expect(sevenLessThanOrEqualFive).eql(false));
+			it('<|=(5, 5) eql true', () => expect(lessThanOrEqual(5, 5)).eql(true));
+			it('<|=(6, 4) eql false', () => expect(lessThanOrEqual(6, 4)).eql(false));
 			it('7(<|=)() eql undefined', () => expect(sevenLessThanOrEqualUndefined).eql(undefined));
 		});
 
@@ -1319,8 +1319,8 @@ describe("Operators", () => {
 	/*ts
 		firstEqualsThree		=3.([.)
 	*/
-		it('=3.([.)([3, 2, 1]) eql 3', () => expect(firstEqualsThree([3, 2, 1])).eql(3));
-		it('=3.([.)([1, 2, 3]) eql undefined', () => expect(firstEqualsThree([1, 2, 3])).eql(undefined));
+		it('=3.([.)([3, 2, 1]) eql true', () => expect(firstEqualsThree([3, 2, 1])).eql(true));
+		it('=3.([.)([1, 2, 3]) eql false', () => expect(firstEqualsThree([1, 2, 3])).eql(false));
 	});
 
 	describe("Highest priority for spaces", () => {
@@ -1428,11 +1428,11 @@ describe("99 Haskell Problems", () => {
 		it(".(; _)([1, 2, 3]) eql [[1, 2, 3], [3, 2, 1]]", () => expect(forwardAndReverse([1, 2, 3])).eql([[1, 2, 3], [3, 2, 1]]));
 		it(".(; _).# arity 1", () => expect(ts.arity(forwardAndReverseThenLength)).eql(1));
 		it(".(; _).#([1, 2, 3]) eql 2", () => expect(forwardAndReverseThenLength([1, 2, 3])).eql(2));
-		it("isPalindrome([1, 2, 3]) eql undefined", () => expect(isPalindrome([1, 2, 3])).eql(undefined));
-		it("isPalindrome(\"madamimadam\") eql \"madamimadam\"", () => expect(isPalindrome("madamimadam")).eql("madamimadam"));
-		it("isPalindrome([1, 2, 4, 8, 16, 8, 4, 2, 1]) eql [1, 2, 4, 8, 16, 8, 4, 2, 1]", () => expect(isPalindrome([1, 2, 4, 8, 16, 8, 4, 2, 1])).eql([1, 2, 4, 8, 16, 8, 4, 2, 1]));
-		it("(1 2 3).(; _).=$ eql undefined", () => expect(isPalindromeFalse).eql(undefined));
-		it("\"madamimadam\".(; _).=$ eql \"madamimadam\" type \"S\"", () => expect([isPalindromeTrue, ts.typeOf(isPalindromeTrue)]).eql(["madamimadam", "S"]));
+		it("isPalindrome([1, 2, 3]) eql false", () => expect(isPalindrome([1, 2, 3])).eql(false));
+		it("isPalindrome(\"madamimadam\") eql true", () => expect(isPalindrome("madamimadam")).eql(true));
+		it("isPalindrome([1, 2, 4, 8, 16, 8, 4, 2, 1]) eql true", () => expect(isPalindrome([1, 2, 4, 8, 16, 8, 4, 2, 1])).eql(true));
+		it("(1 2 3).(; _).=$ eql false", () => expect(isPalindromeFalse).eql(false));
+		it("\"madamimadam\".(; _).=$ eql true", () => expect(isPalindromeTrue).eql(true));
 	});
 
 
