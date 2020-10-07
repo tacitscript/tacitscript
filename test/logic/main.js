@@ -7,6 +7,13 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("min <.[", () => {
+	/*ts
+		min						<.[
+	*/
+
+		it("min(x => x, [10, 5, 100, 2, 1000]) eql 2", () => expect(min(x => x, [10, 5, 100, 2, 1000])).eql(2));
+	});
 	describe("max <.]", () => {
 	/*ts
 		max						<.]
