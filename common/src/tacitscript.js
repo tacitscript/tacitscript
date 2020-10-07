@@ -87,7 +87,7 @@ const types = value => {
 	if (isObject(value)) return ["O"];
 	//if (isFunction(value)) return arity(value);
 
-	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["?", "?"] : ["?", "?", "?"]]; // assume external functions are not higher order
+	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["V", "V"] : ["V", "V", "V"]]; // assume external functions are not higher order
 
 //	return [[0]];
 };
@@ -118,7 +118,6 @@ const applyOver = ({path, fn, container}) => {
 	}
 };
 
-//const matchTypes = (left, right) => (left === "?") || (right === "?") || (left === right);
 const replaceType = ({from, to}) => type => {
 	if (!Array.isArray(type)) return (type === from) ? to : type;
 	return type.map(replaceType({from, to}));
@@ -151,9 +150,9 @@ const getReducedLeftAppliedType = ({leftType, rightType}) => getReducedType({rem
 const getReducedRightAppliedType = ({leftType, rightType}) => getReducedType({remainderType: splice(leftType, 1, 1), typeMap: getTypeMap(leftType[1], rightType)});
 const matchSymbol = (left, right) => {
 	return (left === right) ||
-		"XYZW".includes(left) ||
-		"XYZW".includes(right) ||
-		any(([source, match]) => ["V", "?"].includes(source) && !Array.isArray(match))([[left, right], [right, left]]);
+		"XYZW?".includes(left) ||
+		"XYZW?".includes(right) ||
+		any(([source, match]) => (source === "V") && !Array.isArray(match))([[left, right], [right, left]]);
 };
 const matchType = (left, right) => {
 	const match = matchSymbol(left, right) ||
@@ -217,12 +216,12 @@ const apply = (left, right) => {
 	throw `Unable to resolve dynamic function application: ${JSON.stringify({left, right})}`;
 };
 const typeOf = value => {
-	if (value == undefined) return undefined;
 	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
 	if (isObject(value)) return "O";
 	if (isFunction(value)) return arity(value);
+	if (value == undefined) return undefined;
 
 	throw `Unknown type of value: ${value}`;
 };
@@ -233,6 +232,7 @@ const argumentMatch = ({arg, type}) => {
 	if (type === "N") return isNumber(arg);
 	if (type === "O") return isObject(arg);
 	if (isArray(type)) return isFunction(arg);
+	if (type === "V") return true;
 
 	throw `Unknown type: ${type}`;
 };
@@ -426,7 +426,7 @@ let plus = (left, right) => {
 	if (isObject(left)) return  mergeDeep(left, right); // OOO
 
 	return left + right; // NNN
-}; plus.types = [["N", "N", "N"], ["S", "?", "S"], ["A", "A", "A"], ["O", "O", "O"]];
+}; plus.types = [["N", "N", "N"], ["S", "V", "S"], ["A", "A", "A"], ["O", "O", "O"]];
 let slash = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 
@@ -492,7 +492,7 @@ let question = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
-}; question.types = [[["X", "?"], "X", "X"], ["A", "?", "A"], ["S", "S", "S"], ["N", "A", "N"]];
+}; question.types = [[["X", "?"], "X", "X"], ["A", "?", "A"], ["S", "S", "N"], ["N", "A", "N"]];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	if (isObject(right)) {
@@ -510,7 +510,7 @@ let asterisk = (left, right) => {
 	}
 
 	return left * right; // 000
-}; asterisk.types = [["N", "N", "N"], ["A", "O", "O"], [["?", "V"], "A", "A"]];
+}; asterisk.types = [["N", "N", "N"], ["A", "O", "O"], [["?", "?"], "A", "A"]];
 // asterisk.types = [[0, 0, 0]];
 let dollar = (left, right) => {
 	if (isArray(right)) {
@@ -619,7 +619,7 @@ let tilde = value => { // not referenced directly when passed number (standard f
 	}
 
 	throw `Unable to resolve application of operator ~ with arguments: ${JSON.stringify({left, right})}`;
-}; tilde.types = [["N", "N"], ["A", "A"], [["X", "Y", "?"], ["Y", "X", "?"]]];
+}; tilde.types = [["N", "N"], ["A", "A"], [["X", "Y", "Z"], ["Y", "X", "Z"]]];
 // tilde.types = [[0, 0], [2, 2]];
 let underscore = vector => {
 	if (isArray(vector)) return vector.slice(0).reverse();
@@ -727,7 +727,9 @@ export default {
 	resolve: solutions => (...args) => {
 		const firstMatch = find(typeMatch(args))(solutions);
 
-		if (!firstMatch) throw `Unable to resolve dynamic function application: ${{solutions, args}}`;
+		if (!firstMatch) {
+			throw `Unable to resolve dynamic function application: ${{solutions, args}}`;
+		}
 
 		return firstMatch.def.apply(undefined, args);
 	},

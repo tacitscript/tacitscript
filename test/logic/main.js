@@ -135,15 +135,17 @@ describe("Underscore", () => {
 	describe("reduceRight :,(; _).$$", () => {
 	/*ts
 		reduceRight				:,(; _).$$
+		calculation				+reduceRight((0 1) (2 3) (4 5))
 	*/
 
+		it("+reduceRight((0 1) (2 3) (4 5)) eql [4, 5, 2, 3, 0, 1]", () => expect(calculation).eql([4, 5, 2, 3, 0, 1]));
 		it("reduceRight((a, b) => a.concat(b), [[0, 1], [2, 3], [4, 5]]) eql [4, 5, 2, 3, 0, 1]", () => expect(reduceRight((a, b) => a.concat(b), [[0, 1], [2, 3], [4, 5]])).eql([4, 5, 2, 3, 0, 1]));
 	});
 
 	describe("reduce $", () => {
 	/*ts
 		reduce					$
-		calculation				(+ 0)$(1 2 3)
+		calculation				(+ 0)reduce(1 2 3)
 	*/
 
 		it("(+ 0)$(1 2 3) eql 6", () => expect(calculation).eql(6));
@@ -154,9 +156,9 @@ describe("Underscore", () => {
 	/*ts
 		map						@
 		mapIndexed				:@
-		calculation				*3@(1 2 3)
-		calculationA			*3@({"{one: 1, two: 2, three: 3}")
-		calculationB			[@((1 2) (3 4))
+		calculation				*3map(1 2 3)
+		calculationA			*3map({"{one: 1, two: 2, three: 3}")
+		calculationB			[map((1 2) (3 4))
 	*/
 
 		it("[@((1 2) (3 4)) eql [1, 3]", () => expect(calculationB).eql([1, 3]));
