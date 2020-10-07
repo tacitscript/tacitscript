@@ -67,6 +67,7 @@ const isNumber = value => typeof value === "number";
 const isFunction = value => typeof value === "function";
 const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
+const isBoolean = value => typeof value === "boolean";
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -84,6 +85,7 @@ const types = value => {
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
 	if (isObject(value)) return ["O"];
+	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
 
 	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["V", "V"] : ["V", "V", "V"]]; // assume external functions are not higher order
@@ -219,6 +221,7 @@ const typeOf = value => {
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
 	if (isObject(value)) return "O";
+	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
 	if (value == undefined) return undefined;
 
@@ -230,6 +233,7 @@ const argumentMatch = ({arg, type}) => {
 	if (type === "S") return isString(arg);
 	if (type === "N") return isNumber(arg);
 	if (type === "O") return isObject(arg);
+	if (type === "B") return isBoolean(arg);
 	if (isArray(type)) return isFunction(arg);
 	if (type === "V") return true;
 
@@ -247,7 +251,8 @@ const toEncodedString = value => {
 	return toString(value);
 };
 const toString = value => {
-	if (value == undefined) return "()";
+	if ((value == undefined) || (value === false)) return "()";
+	if (value === true) return "!()";
 	if (isNumber(value)) return `${value}`;
 	if (isString(value)) return value;
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
