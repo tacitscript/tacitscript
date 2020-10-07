@@ -73,8 +73,12 @@ describe("Underscore", () => {
 		intermediate			(=4 (2 3 4 5)).'$
 		containsFour			=4'(2 3 4 5)
 		contains				:,(= ;).'$
+		calculation				3contains(1 2 3)
+		calculationB			4contains(1 2 3)
 	*/
 
+		it("3contains(1 2 3) eql 3", () => expect(calculation).eql(3));
+		it("4contains(1 2 3) eql undefined", () => expect(calculationB).eql(undefined));
 		it("(4 (2 3 4 5)),(= ;).'$ eql 4", () => expect(intermediateB).eql(4));
 		it("(=4 (2 3 4 5)).'$ eql 4", () => expect(intermediate).eql(4));
 		it("contains(4, [2, 3, 4, 5]) eql 4", () => expect(contains(4, [2, 3, 4, 5])).eql(4));
