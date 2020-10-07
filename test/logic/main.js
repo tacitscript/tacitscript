@@ -35,8 +35,13 @@ describe("Underscore", () => {
 	describe("sortBy <", () => {
 	/*ts
 		sortBy					<
+		calculation				{"Math.sin"sortBy(1 2 3 4 5 6)
+		calculationB			"name"'sortBy({"[{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]")
 	*/
 
+		it(`"name"'sortBy({"[{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]") eql [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}]`,
+			() => expect(calculationB).eql([{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}]));
+		it('{"Math.sin"<(1 2 3 4 5 6) eql [5, 4, 6, 3, 1, 2]', () => expect(calculation).eql([5, 4, 6, 3, 1, 2]));
 		it("sortBy(num => Math.sin(num), [1, 2, 3, 4, 5, 6]) eql [5, 4, 6, 3, 1, 2]", () => expect(sortBy(num => Math.sin(num), [1, 2, 3, 4, 5, 6])).eql([5, 4, 6, 3, 1, 2]));
 		it("sortBy(stooge => stooge.name, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]) eql [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}]",
 			() => expect(sortBy(stooge => stooge.name, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}])).eql([{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}]));
@@ -135,7 +140,7 @@ describe("Underscore", () => {
 	describe("filter *", () => {
 	/*ts
 		filter					*
-		calculation				(%2.=0)*(1 2 3 4 5 6)
+		calculation				(%2.=0)filter(1 2 3 4 5 6)
 	*/
 
 		it("(%2.=0)*(1 2 3 4 5 6) eql [2, 4, 6]", () => expect(calculation).eql([2, 4, 6]));
@@ -145,7 +150,7 @@ describe("Underscore", () => {
 	describe("find '", () => {
 	/*ts
 		find					'
-		calculation				(%2.=0)'(1 2 3 4 5 6)
+		calculation				(%2.=0)find(1 2 3 4 5 6)
 	*/
 
 		it("(%2.=0)'(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
