@@ -45,8 +45,10 @@ describe("Underscore", () => {
 	describe("min <.[", () => {
 	/*ts
 		min						<.[
+		calculation				;min(10 5 100 2 1000)
 	*/
 
+		it(";min(10 5 100 2 1000) eql 2", () => expect(calculation).eql(2));
 		it("min(x => x, [10, 5, 100, 2, 1000]) eql 2", () => expect(min(x => x, [10, 5, 100, 2, 1000])).eql(2));
 	});
 	describe("max <.]", () => {
