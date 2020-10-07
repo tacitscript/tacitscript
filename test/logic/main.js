@@ -7,6 +7,22 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("countBy /.#@", () => {
+	/*ts
+		calculationC			(%2.=0)?2
+		countBy					/.#@
+		calculation				((%2.=0)?,(`"even" `"odd").|$)countBy(1 2 3 4 5)
+		calculationA			((%2.=0)?,(`"even" `"odd").|$)@(1 2 3 4 5)
+		calculationB			(%2.=0)?@(1 2 3 4 5)
+	*/
+
+		it("(%2.=0)?2 eql [2, undefined]", () => expect(calculationC).eql([2, undefined]));
+		it('(%2.=0)?@(1 2 3 4 5) eql [[undefined, 1], [2, undefined], [undefined, 3], [4, undefined], [undefined, 5]]', () => expect(calculationB).eql([[undefined, 1], [2, undefined], [undefined, 3], [4, undefined], [undefined, 5]]));
+		it('((%2.=0)?,(`"even" `"odd").|$)@(1 2 3 4 5) eql ["odd", "even", "odd", "even", "odd"]', () => expect(calculationA).eql(["odd", "even", "odd", "even", "odd"]));
+		it('((%2.=0)?,(`"even" `"odd").|$)countBy(1 2 3 4 5) eql {odd: 3, even: 2}', () => expect(calculation).eql({odd: 3, even: 2}));
+		it("countBy(num => ((num % 2) === 0) ? 'even' : 'odd', [1, 2, 3, 4, 5]) eql {odd: 3, even: 2}", () => expect(countBy(num => ((num % 2) === 0) ? 'even' : 'odd', [1, 2, 3, 4, 5])).eql({odd: 3, even: 2}));
+	});
+
 	describe("groupBy /", () => {
 	/*ts
 		groupBy					/
@@ -20,6 +36,7 @@ describe("Underscore", () => {
 	/*ts
 		sortBy					<
 	*/
+
 		it("sortBy(num => Math.sin(num), [1, 2, 3, 4, 5, 6]) eql [5, 4, 6, 3, 1, 2]", () => expect(sortBy(num => Math.sin(num), [1, 2, 3, 4, 5, 6])).eql([5, 4, 6, 3, 1, 2]));
 		it("sortBy(stooge => stooge.name, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]) eql [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}]",
 			() => expect(sortBy(stooge => stooge.name, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}])).eql([{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}]));

@@ -461,7 +461,9 @@ let colon = (left, right) => {
 }; colon.types = [["?", "?", "A"]];
 let question = (left, right) => {
 	if (isFunction(left)) { // if 100
-		return left(right) ? [right, undefined] : [undefined, right];
+		const result = left(right);
+
+		return ((result == undefined) || (result === false)) ? [undefined, right] : [right, undefined];
 	}
 
 	if (isArray(left)) { // cond AAA
