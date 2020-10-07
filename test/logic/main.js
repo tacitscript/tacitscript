@@ -7,6 +7,15 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("max <.]", () => {
+	/*ts
+		max						<.]
+	*/
+
+		it("max(stooge => stooge.age, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]) eql {name: 'curly', age: 60}",
+			() => expect(max(stooge => stooge.age, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}])).eql({name: 'curly', age: 60}));
+	});
+
 	describe("pluck :,(' ;).@$", () => {
 	/*ts
 		pluck					:,(' ;).@$
