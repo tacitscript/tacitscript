@@ -428,10 +428,12 @@ let plus = (left, right) => {
 	return left + right; // NNN
 }; plus.types = [["N", "N", "N"], ["S", "?", "S"], ["A", "A", "A"], ["O", "O", "O"]];
 let slash = (left, right) => {
+	if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+
 	if (right === 0) return undefined;
 
 	return left / right;
-}; slash.types = [["N", "N", "N"]];
+}; slash.types = [["N", "N", "N"], [["V", "S"], "A", "O"]];
 let less = (left, right) => {
 	if (isFunction(left) && isArray(right)) return sortBy(left)(right);
 
@@ -571,14 +573,13 @@ bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left % right; // modulo
 	if (isNumber(left) && (isArray(right) || isString(right))) return [right.slice(0, left), right.slice(left)]; // split
-	if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 	if (isArray(left) && isArray(right)) return chunk({sizes: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // chunkArray
 	if (isArray(left) && isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // chunkString
 	if (isBinaryFunction(left) && isArray(right)) return chunkWhen({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // chunkArrayWhen
 	if (isFunction(left) && isString(right)) return chunkWhen({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // chunkStringWhen
 
 	throw `Unable to resolve application of operator % with arguments: ${JSON.stringify({left, right})}`;
-}; percent.types = [["N", "N", "N"], ["N", "A", "A"], ["N", "S", "A"], [["V", "S"], "A", "O"], ["A", "A", "A"], ["A", "S", "A"], [["V", "V", "V"], "A", "A"], [["S", "S", "S"], "S", "A"]];
+}; percent.types = [["N", "N", "N"], ["N", "A", "A"], ["N", "S", "A"], ["A", "A", "A"], ["A", "S", "A"], [["V", "V", "V"], "A", "A"], [["S", "S", "S"], "S", "A"]];
 //percent.types = [[0, 0, 0], [1, 0, 0], [2, 0, 0]];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // power

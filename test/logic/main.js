@@ -772,6 +772,15 @@ describe("Operators", () => {
 			it('/2(10) eql 5', () => expect(divideByDenominator(10)).eql(5));
 			it('/0(8) eql undefined', () => expect(divideByZero(8)).eql(undefined));
 		});
+
+		describe("groupBy (?? A O) |", () => {
+		/*ts
+			groupByFirst	[/("ann" "ben" "ade")
+			groupByEmpty	[/( )
+		*/
+			it('[/("ann" "ben" "ade") eql {a: ["ann", "ade"], b: ["ben"]}', () => expect(groupByFirst).eql({a: ["ann", "ade"], b: ["ben"]}));
+			it('[/( ) eql {}', () => expect(groupByEmpty).eql({}));
+		});
 	});
 
 	describe("#", () => {
@@ -864,15 +873,6 @@ describe("Operators", () => {
 			it('2split("abcde") eql ["ab", "cde"]', () => expect(splitTwo("abcde")).eql(["ab", "cde"]));
 			it("~2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
 			it('~2split("abcde") eql ["abc", "de"]', () => expect(splitMinusTwo("abcde")).eql(["abc", "de"]));
-		});
-
-		describe("groupBy (?? A O) |", () => {
-		/*ts
-			groupByFirst	[%("ann" "ben" "ade")
-			groupByEmpty	[%( )
-		*/
-			it('[%("ann" "ben" "ade") eql {a: ["ann", "ade"], b: ["ben"]}', () => expect(groupByFirst).eql({a: ["ann", "ade"], b: ["ben"]}));
-			it('[%( ) eql {}', () => expect(groupByEmpty).eql({}));
 		});
 
 		/*ts
