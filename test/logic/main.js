@@ -119,8 +119,10 @@ describe("Underscore", () => {
 	describe("filter *", () => {
 	/*ts
 		filter					*
+		calculation				(%2.=0)*(1 2 3 4 5 6)
 	*/
 
+		it("(%2.=0)*(1 2 3 4 5 6) eql [2, 4, 6]", () => expect(calculation).eql([2, 4, 6]));
 		it("filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [2, 4, 6]", () => expect(filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([2, 4, 6]));
 	});
 
