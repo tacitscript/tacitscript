@@ -633,8 +633,10 @@ let bracketright = vector => {
 	return vector[vector.length - 1];
 }; bracketright.types = [["A", "?"], ["S", "S"]];
 let hash = vector => {
+	if (isObject(vector)) return Object.keys(vector).length;
+
 	return vector.length;
-}; hash.types = [["A", "N"], ["S", "N"]];
+}; hash.types = [["A", "N"], ["S", "N"], ["O", "N"]];
 let backslash = from => {
 	if (Array.isArray(from)) return Object.fromEntries(from );
 	else return Object.entries(from); // from is an object

@@ -7,6 +7,18 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("size #", () => {
+	/*ts
+		size					#
+		calculation				#(1 2 3 4 5)
+		calculationB			#({"{one: 1, two: 2, three: 3}")
+	*/
+		it("#(1 2 3 4 5) eql 5", () => expect(calculation).eql(5));
+		it('#({"{one: 1, two: 2, three: 3}") eql 3', () => expect(calculationB).eql(3));
+		it("size([1, 2, 3, 4, 5]) eql 5", () => expect(size([1, 2, 3, 4, 5])).eql(5));
+		it('size({one: 1, two: 2, three: 3}) eql 3', () => expect(size({one: 1, two: 2, three: 3})).eql(3));
+	});
+
 	describe("countBy /.#@", () => {
 	/*ts
 		calculationC			(%2.=0)?2
