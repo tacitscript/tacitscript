@@ -432,7 +432,7 @@ let slash = (left, right) => {
 	if (right === 0) return undefined;
 
 	return left / right;
-}; slash.types = [["N", "N", "N"], [["V", "S"], "A", "O"]];
+}; slash.types = [["N", "N", "N"], [["?", "V"], "A", "O"]];
 let less = (left, right) => {
 	if (isFunction(left) && isArray(right)) return sortBy(left)(right);
 
