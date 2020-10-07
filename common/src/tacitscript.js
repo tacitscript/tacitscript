@@ -68,6 +68,8 @@ const isFunction = value => typeof value === "function";
 const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
 const isBoolean = value => typeof value === "boolean";
+const isTruthy = value => (value != undefined) && (value !== false);
+const isFalsey = value => (value == undefined) || (value === false);
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -673,30 +675,22 @@ let braceright = value => {
 }; braceright.types = [["V", "S"], [["?", "?"], "S"], [["?", "?", "?"], "S"]];
 let bang = value => {
 	if (isBinaryFunction(value)) {
-		let fn = (x, y) => {
-			const result = value(x, y);
-
-			return ((result == undefined) || (result === false)) ? x : undefined;
-		};
+		let fn = (x, y) => !isTruthy(value(x, y));
 
 		fn.types = value.types;
 
 		return fn;
 	}
 	if (isUnaryFunction(value)) {
-		let fn = x => {
-			const result = value(x);
-
-			return ((result == undefined) || (result === false)) ? x : undefined;
-		};
+		let fn = x => !isTruthy(value(x));
 
 		fn.types = value.types;
 
 		return fn;
 	}
 
-	return (value == undefined) ? [ ] : undefined;
-}; bang.types = [["V", "V"], [["X", "Y", "Z"], ["X", "Y", "Z"]], [["X", "Y"], ["X", "Y"]]];
+	return !isTruthy(value);
+}; bang.types = [["V", "N"], [["X", "Y", "Z"], ["X", "Y", "Z"]], [["X", "Y"], ["X", "Y"]]];
 // bang.types = [[0, 0], [1, 1], [2, 2]];
 bang.supportsUndefined = true;
 

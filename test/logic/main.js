@@ -169,9 +169,9 @@ describe("Underscore", () => {
 	*/
 
 		it("(%2.=0)reject(1 2 3 4 5 6) eql [1, 3, 5]", () => expect(calculation).eql([1, 3, 5]));
-		it("!(<3)(4) eql 4", () => expect(notLessThanThree(4)).eql(4));
-		it(":,(! ;)(value => value < 3, 2)[0](4) eql []", () => expect(complimentAndArray(value => value < 3, 2)[0](4)).eql(4));
-		it("!(<3)(2) eql undefined", () => expect(notLessThanThree(2)).eql(undefined));
+		it("!(<3)(4) eql true", () => expect(notLessThanThree(4)).eql(true));
+		it(":,(! ;)(value => value < 3, 2)[0](4) eql true", () => expect(complimentAndArray(value => value < 3, 2)[0](4)).eql(true));
+		it("!(<3)(2) eql false", () => expect(notLessThanThree(2)).eql(false));
 		it(":,(! ;)(() => {}, [1, 2, 3])[1] eql [1, 2, 3]", () => expect(complimentAndArray(() => {}, [1, 2, 3])[1]).eql([1, 2, 3]));
 		it("reject(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [1, 3, 5]", () => expect(reject(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([1, 3, 5]));
 	});
@@ -1124,19 +1124,19 @@ describe("Operators", () => {
 			not							!
 			notDivideByZero				!(1/0)
 		*/
-			it("!4 eql undefined", () => expect(notNumber).eql(undefined));
-			it('!0 eql undefined', () => expect(notZero).eql(undefined));
-			it('!() eql []', () => expect(notUndefined).eql([]));
-			it('!(1 2 3) eql undefined', () => expect(notArray).eql(undefined));
-			it('!"hello" eql undefined', () => expect(notString).eql(undefined));
-			it('!=(2, 3) eql 2', () => expect(notEqual(2, 3)).eql(2));
-			it('!=(3, 3) eql undefined', () => expect(notEqual(3, 3)).eql(undefined));
-			it('!(<3)(4) eql 4', () => expect(notLessThanThree(4)).eql(4));
-			it('!(<3)(2) eql undefined', () => expect(notLessThanThree(2)).eql(undefined));
-			it('!("hello") eql undefined', () => expect(not("hello")).eql(undefined));
-			it('!(x => x)({a: 2}) eql undefined', () => expect(not(x => x)({a: 2})).eql(undefined));
-			it('!(x => undefined)(3) eql []', () => expect(not(x => undefined)(3)).eql(3));
-			it('!(1/0) eql []', () => expect(notDivideByZero).eql([]));
+			it("!4 eql false", () => expect(notNumber).eql(false));
+			it('!0 eql false', () => expect(notZero).eql(false));
+			it('!() eql true', () => expect(notUndefined).eql(true));
+			it('!(1 2 3) eql false', () => expect(notArray).eql(false));
+			it('!"hello" eql false', () => expect(notString).eql(false));
+			it('!=(2, 3) eql true', () => expect(notEqual(2, 3)).eql(true));
+			it('!=(3, 3) eql false', () => expect(notEqual(3, 3)).eql(false));
+			it('!(<3)(4) eql true', () => expect(notLessThanThree(4)).eql(true));
+			it('!(<3)(2) eql false', () => expect(notLessThanThree(2)).eql(false));
+			it('!("hello") eql false', () => expect(not("hello")).eql(false));
+			it('!(x => x)({a: 2}) eql false', () => expect(not(x => x)({a: 2})).eql(false));
+			it('!(x => undefined)(3) eql true', () => expect(not(x => undefined)(3)).eql(true));
+			it('!(1/0) eql true', () => expect(notDivideByZero).eql(true));
 		});
 	});
 });
