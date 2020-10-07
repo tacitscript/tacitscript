@@ -7,6 +7,15 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("groupBy /", () => {
+	/*ts
+		groupBy					/
+	*/
+
+		it("groupBy(num => Math.floor(num), [1.3, 2.1, 2.4]) eql {1: [1.3], 2: [2.1, 2.4]}", () => expect(groupBy(num => Math.floor(num), [1.3, 2.1, 2.4])).eql({1: [1.3], 2: [2.1, 2.4]}));
+		it("groupBy(string => string.length, ['one', 'two', 'three']) eql {3: ['one', 'two'], 5: ['three']}", () => expect(groupBy(string => string.length, ['one', 'two', 'three'])).eql({3: ['one', 'two'], 5: ['three']}));
+	});
+
 	describe("sortBy <", () => {
 	/*ts
 		sortBy					<
