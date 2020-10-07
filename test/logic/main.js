@@ -7,6 +7,29 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("partition :,(? ;).@$.~.;*@", () => {
+	/*ts
+		isEqualOne			=1.?
+		partition			:,(? ;).@$.~.;*@
+		calculation			(%2.=1)partition(0 1 2 3 4 5)
+		intermediate		:,(? ;).@$.~
+		intermediateB		:,(? ;).@$
+		intermediateC		(%2.=1)?@(1 2 3)
+		intermediateD		((%2.=1)? (1 2 3)).@$
+		//intermediateE		((%2.=1).?)1
+		//intermediateF		(=1.?)1
+	*/
+
+		//it("(=1.?)1 eql [1, undefined]", () => expect(intermediateF).eql([1, undefined]));
+		//it("((%2.=1).?)1 eql [1, undefined]", () => expect(intermediateE).eql([1, undefined]));
+		it("((%2.=1)? (1 2 3)).@$ eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateD).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+		it("(%2.=1)?@(1 2 3) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateC).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+		//it(":,(? ;).@$(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateB(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+		//it(":,(? ;).@$.~(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined, 3], [undefined, 2, undefined]]", () => expect(intermediate(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined, 3], [undefined, 2, undefined]]));
+		//it("(%2.=1)partition(0 1 2 3 4 5) eql [[1, 3, 5], [2, 4, 6]]", () => expect(calculation).eql([[1, 3, 5], [2, 4, 6]]));
+		//it("partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5]) eql [[1, 3, 5], [2, 4, 6]]", () => expect(partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5])).eql([[1, 3, 5], [2, 4, 6]]));
+	});
+
 	describe("size #", () => {
 	/*ts
 		size					#
