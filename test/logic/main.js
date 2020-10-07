@@ -127,8 +127,10 @@ describe("Underscore", () => {
 	describe("find '", () => {
 	/*ts
 		find					'
+		calculation				(%2.=0)'(1 2 3 4 5 6)
 	*/
 
+		it("(%2.=0)'(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
 		it("find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql 2", () => expect(find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql(2));
 	});
 

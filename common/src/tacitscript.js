@@ -57,7 +57,9 @@ const first = array => array[0];
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
 
-const tsFilter = tsCheck => array => {const check = value => {const result = tsCheck(value); return !((result == undefined) || (result === false));}; return filter(check)(array);};
+const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return !((result == undefined) || (result === false));}; return fn(predicate);};
+const tsFilter = tsPredicate(filter);
+const tsFind = tsPredicate(find);
 
 //==========================================================
 // type utilites
@@ -526,7 +528,7 @@ let dollar = (left, right) => {
 // dollar.types = [[2, 0, "?"], [0, 0, "?"]];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at
-	if (isFunction(left) && isArray(right)) return find(left)(right); // 1A?
+	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // 1A?
 	if (isString(left) && isObject(right)) return right[left]; // prop SO?
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // over AAA AOO
