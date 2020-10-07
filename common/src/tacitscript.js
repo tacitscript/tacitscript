@@ -366,15 +366,6 @@ let dot = (left, right) => {
 			return fn;
 		}
 
-		const solutions122 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
-		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions122.length) { // 122 eg. +1./
-			let fn = value => leftApply(left(value), right);
-
-			fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions122);
-
-			return fn;
-		}
-
 		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) { // 121 eg. =1.?
 			let result = right(left);
@@ -382,6 +373,15 @@ let dot = (left, right) => {
 			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions121);
 
 			return result;
+		}
+
+		const solutions122 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
+		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions122.length) { // 122 eg. +1./
+			let fn = value => leftApply(left(value), right);
+
+			fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions122);
+
+			return fn;
 		}
 
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
