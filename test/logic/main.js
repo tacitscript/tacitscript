@@ -96,8 +96,12 @@ describe("Underscore", () => {
 	describe("every :.(*$ ]).#@.=$", () => {
 	/*ts
 		every					:.(*$ ]).#@.=$
+		calculation				(%2.=0)every(2 4 5)
+		calculationB			(%2.=0)every(2 4 6)
 	*/
 
+		it("(%2.=0)every(2 4 6) eql 3", () => expect(calculationB).eql(3));
+		it("(%2.=0)every(2 4 5) eql undefined", () => expect(calculation).eql(undefined));
 		it("every(num => (num % 2) === 0, [2, 4, 5]) eql undefined", () => expect(every(num => (num % 2) === 0, [2, 4, 5])).eql(undefined));
 		it("every(num => (num % 2) === 0, [2, 4, 6]) eql 3", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(3));
 	});
@@ -107,8 +111,10 @@ describe("Underscore", () => {
 		complimentAndArray		:,(! ;)
 		reject					:,(! ;).*$
 		notLessThanThree		!(<3)
+		calculation				(%2.=0)reject(1 2 3 4 5 6)
 	*/
 
+		it("(%2.=0)reject(1 2 3 4 5 6) eql [1, 3, 5]", () => expect(calculation).eql([1, 3, 5]));
 		it("!(<3)(4) eql 4", () => expect(notLessThanThree(4)).eql(4));
 		it(":,(! ;)(value => value < 3, 2)[0](4) eql []", () => expect(complimentAndArray(value => value < 3, 2)[0](4)).eql(4));
 		it("!(<3)(2) eql undefined", () => expect(notLessThanThree(2)).eql(undefined));
