@@ -7,6 +7,16 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("compact ;*", () => {
+	/*ts
+		compact				;*
+		calculation			compact(0 1 false 2 "" 3)
+	*/
+
+		it('compact(0 1 false 2 "" 3) eql [0, 1, 2, "", 3]', () => expect(calculation).eql([0, 1, 2, '', 3]));
+		it("compact([0, 1, false, 2, '', 3]) eql [0, 1, 2, '', 3]", () => expect(compact([0, 1, false, 2, '', 3])).eql([0, 1, 2, '', 3]));
+	});
+
 	describe("partition :,(? ;).@$.~.;*@", () => {
 	/*ts
 		isEqualToOne		=1.?
