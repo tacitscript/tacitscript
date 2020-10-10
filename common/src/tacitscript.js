@@ -692,7 +692,7 @@ let bang = value => {
 	}
 
 	return !isTruthy(value);
-}; bang.types = [["V", "N"], [["X", "Y", "Z"], ["X", "Y", "Z"]], [["X", "Y"], ["X", "Y"]]];
+}; bang.types = [["V", "B"], [["X", "Y", "Z"], ["X", "Y", "Z"]], [["X", "Y"], ["X", "Y"]]];
 // bang.types = [[0, 0], [1, 1], [2, 2]];
 bang.supportsUndefined = true;
 
