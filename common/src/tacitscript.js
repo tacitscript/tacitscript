@@ -559,8 +559,10 @@ let equal = (left, right) => {
 }; equal.types = [["V", "V", "B"]];
 equal.supportsUndefined = true;
 let bar = (left, right) => {
-	if ((left == undefined) || (right == undefined)) {
-		return (left == undefined) ? right : left;
+	const isFalseyLeft = isFalsey(left);
+
+	if (isFalseyLeft || isFalsey(right)) {
+		return isFalseyLeft ? right : left;
 	}
 
 	if (isUnaryFunction(left) && isUnaryFunction(right)) {

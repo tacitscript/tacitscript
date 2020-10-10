@@ -540,12 +540,12 @@ describe("Operators", () => {
 		describe("arrayConcat (A A A) |||", () => {
 		/*ts
 			concatArray				(1 2 3)+("hello" (4 5))
-			undefinedConcatArray	()+(1 2 3)
-			arrayConcatUndefined	(1 2 3)+()
+			//undefinedConcatArray	()+(1 2 3)
+			//arrayConcatUndefined	(1 2 3)+()
 		*/
 			it('(1 2 3)+("hello" (4 5)) eql [1, 2, 3, "hello", [4, 5]]', () => expect(concatArray).eql([1, 2, 3, "hello", [4, 5]]));
-			it('(1 2 3)+() eql undefined', () => expect(undefinedConcatArray).eql(undefined));
-			it('()+(1 2 3) eql undefined', () => expect(arrayConcatUndefined).eql(undefined));
+			//it('(1 2 3)+() eql undefined', () => expect(undefinedConcatArray).eql(undefined));
+			//it('()+(1 2 3) eql undefined', () => expect(arrayConcatUndefined).eql(undefined));
 		});
 
 		describe("merge (O O O) 3", () => {
@@ -560,7 +560,7 @@ describe("Operators", () => {
 
 		describe("stringConcat (S ? S) 3", () => {
 		/*ts
-			undefinedString				"me"+()
+			//undefinedString				"me"+()
 			numberString				"me"+1
 			stringString				"me"+"hello"
 			arrayString					"me"+(1 2 3)
@@ -570,7 +570,7 @@ describe("Operators", () => {
 			//functionString			me+(+2)
 			mixedString					""+(\(("a" (1 "hello")) ))
 		*/
-			it('"me"+() eql undefined', () => expect(undefinedString).eql(undefined));
+			//it('"me"+() eql undefined', () => expect(undefinedString).eql(undefined));
 			it('"me"+1 eql "me1"', () => expect(numberString).eql("me1"));
 			it('"me"+"hello" eql "mehello"', () => expect(stringString).eql("mehello"));
 			it('"me"+(1 2 3) eql "me(1 2 3)"', () => expect(arrayString).eql("me(1 2 3)"));
@@ -595,13 +595,13 @@ describe("Operators", () => {
 			timesInsert					*$
 			timesInsertSingle			*$(4 )
 			insertEmpty					$( )
-			timesInsertUndefined		*$()
+			//timesInsertUndefined		*$()
 			timesInsertArray			*$(5 6 7)
 		*/
 			it("*$([4, 5, 6]) eql 120", () => expect(timesInsert([4, 5, 6])).eql(120));
 			it("*$(4 ) eql 4", () => expect(timesInsertSingle).eql(4));
 			it("$( )((x, y) => x + y) eql undefined", () => expect(insertEmpty((x, y) => x + y)).eql(undefined));
-			it("*$() eql undefined", () => expect(timesInsertUndefined).eql(undefined));
+			//it("*$() eql undefined", () => expect(timesInsertUndefined).eql(undefined));
 			it("*$(5 6 7) eql [210, N]", () => expect([timesInsertArray, ts.typeOf(timesInsertArray)]).eql([210,  "N"]));
 		});
 
@@ -825,7 +825,7 @@ describe("Operators", () => {
 			it('7(<|=)5 eql false', () => expect(sevenLessThanOrEqualFive).eql(false));
 			it('<|=(5, 5) eql true', () => expect(lessThanOrEqual(5, 5)).eql(true));
 			it('<|=(6, 4) eql false', () => expect(lessThanOrEqual(6, 4)).eql(false));
-			it('7(<|=)() eql undefined', () => expect(sevenLessThanOrEqualUndefined).eql(undefined));
+			it('7(<|=)() eql false', () => expect(sevenLessThanOrEqualUndefined).eql(false));
 		});
 
 	});
@@ -1030,7 +1030,7 @@ describe("Operators", () => {
 			typeOfFirst				}[
 		*/
 			it('}(undefined) eql undefined', () => expect(typeOf(undefined)).eql(undefined));
-			it('}() eql undefined', () => expect(typeOfUndefined).eql(undefined));
+			it('}() eql false', () => expect(typeOfUndefined).eql("B"));
 			it('}(4) eql "N"', () => expect(typeOf(4)).eql("N"));
 			it('}4.5 eql "N"', () => expect(typeOfNumber).eql("N"));
 			it('}("hello") eql "S"', () => expect(typeOf("hello")).eql("S"));
@@ -1081,8 +1081,8 @@ describe("Operators", () => {
 			andHello					&"hello"
 			helloAnd					"hello"&
 		*/
-			it('5&() eql undefined', () => expect(fiveAndUndefined).eql(undefined));
-			it('()&5 eql undefined', () => expect(undefinedAndFive).eql(undefined));
+			it('5&() eql false', () => expect(fiveAndUndefined).eql(false));
+			it('()&5 eql false', () => expect(undefinedAndFive).eql(false));
 			it('&"hello"([4, 5, 6]) eql "hello"', () => expect(andHello([4, 5, 6])).eql("hello"));
 			it('"hello"&([7, 8, 9]) eql [7, 8, 9]', () => expect(helloAnd([7, 8, 9])).eql([7, 8, 9]));
 		});
@@ -1204,9 +1204,9 @@ describe("Operators", () => {
 		emptyArray			( )
 		arrayOfEmpties		(( ) (  ) () ())
 	*/
-		it("() eql undefined", () => expect(undefinedValue).eql(undefined));
+		it("() eql false", () => expect(undefinedValue).eql(false));
 		it("( ) eql []", () => expect(emptyArray).eql([]));
-		it("(( ) (  ) () ()) eql [[], [], undefined, undefined]", () => expect(arrayOfEmpties).eql([[], [], undefined, undefined]));
+		it("(( ) (  ) () ()) eql [[], [], undefined, undefined]", () => expect(arrayOfEmpties).eql([[], [], false, false]));
 
 		describe("singleArray (5 ) some comment", () => {
 		/*ts
@@ -1463,11 +1463,11 @@ describe("99 Haskell Problems", () => {
 		it('(:,(; .(; )).+$ ( ))$([3, 4, 5]) eql [3, 4, 5]', () => expect(concat([1, 2, 3])).eql([1, 2, 3]));
 		it('(}.="A")?(1) eql [undefined, 1]', () => expect(isArray(1)).eql([undefined, 1]));
 		it('(}.="A")?([2, 3]) eql [[2, 3], undefined]', () => expect(isArray([2, 3])).eql([[2, 3], undefined]));
-		it('().; eql undefined', () => expect(undefinedDotIdentity).eql(undefined));
-		it('(() ()),(; ;) eql (() ())', () => expect(undefinedCommaIdentity).eql([undefined, undefined]));
+		it('().; eql false', () => expect(undefinedDotIdentity).eql(false));
+		it('(() ()),(; ;) eql (() ())', () => expect(undefinedCommaIdentity).eql([false, false]));
 		it('(}.="A")?,(; .(; ))(1) eql [undefined, [1]]', () => expect(makeArrayIfNot(1)).eql([undefined, [1]]));
-		it("().(; ) eql undefined", () => expect(undefinedDotArray).eql(undefined));
-		it('(() ),(.(; ) ) eql [undefined]', () => expect(undefinedCommaArray).eql([undefined]));
+		it("().(; ) eql [false]", () => expect(undefinedDotArray).eql([false]));
+		it('(() ),(.(; ) ) eql [[false]]', () => expect(undefinedCommaArray).eql([[false]]));
 		it('(}.="A")?,(; .(; ))([1]) eql [[1], undefined]', () => expect(makeArrayIfNot([1])).eql([[1], undefined]));
 		it('(}.="A")?,(flattenOrMakeArray .(; )).|$(1) eql [1]', () => expect(flattenOrMakeArray(1)).eql([1]));
 		it('myFlatten([1, 2, 3]) eql [1, 2, 3]', () => expect(myFlatten([1, 2, 3])).eql([1, 2, 3]));

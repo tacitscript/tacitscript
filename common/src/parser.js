@@ -230,7 +230,7 @@ const lookup = function(symbol) {
 	return symbol;
 };
 const getDefinition = function(symbols) {
-	if (!symbols.length) return "undefined";
+	if (!symbols.length) return false;
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
 
@@ -345,6 +345,7 @@ const stringify = function(value) {
 	if (Array.isArray(value)) return "[" + pipe(map(stringify), join(","))(value) + "]";
 	if (value == undefined) return "undefined";
 	if (typeof value === "string") return JSON.stringify(value.replace(/\\"/g, '"'));
+	if (typeof value === "boolean") return value ? "true" : "false";
 
 	return value;
 };
