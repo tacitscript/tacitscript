@@ -54,7 +54,7 @@ const first = array => array[0];
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
 
-const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return !((result == undefined) || (result === false));}; return fn(predicate);};
+const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return isTruthy(result);}; return fn(predicate);};
 const tsFilter = tsPredicate(filter);
 const tsFind = tsPredicate(find);
 
@@ -225,7 +225,7 @@ const typeOf = value => {
 	if (isObject(value)) return "O";
 	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
-	if (value == undefined) return undefined;
+	if (value == undefined) return "U";
 
 	throw `Unknown type of value: ${value}`;
 };
@@ -246,14 +246,15 @@ const typeMatch = ([first, second]) => ({type}) => {
 
 	return argumentMatch({arg: first, type: type[0]}) && (second ? argumentMatch({arg: second, type: type[1]}) : true);
 };
-const isValid = value => (value != undefined) ? true : undefined;
+const isValid = value => value != undefined;
 const toEncodedString = value => {
 	if (isString(value)) return `"${value}"`;
 
 	return toString(value);
 };
 const toString = value => {
-	if ((value == undefined) || (value === false)) return "()";
+	if (value == undefined) return "undefined";
+	if (value === false) return "()";
 	if (value === true) return "!()";
 	if (isNumber(value)) return `${value}`;
 	if (isString(value)) return value;
@@ -308,7 +309,7 @@ const applyTo = left => rightFn => {
 const whileInternal = ({fns, startingArray}) => {
 	let result = [...startingArray];
 
-	while (fns[0](result) != undefined) result.push(fns[1](result));
+	while (isTruthy(fns[0](result))) result.push(fns[1](result));
 
 	return result;
 };
@@ -452,13 +453,13 @@ let slash = (left, right) => {
 let less = (left, right) => {
 	if (isFunction(left) && isArray(right)) return sortBy(left)(right);
 
-	return (left < right) ? left : undefined;
-}; less.types = [["N", "N", "N"], ["S", "S", "S"], [["?", "?"], "A", "A"]];
+	return left < right;
+}; less.types = [["N", "N", "B"], ["S", "S", "B"], [["?", "?"], "A", "A"]];
 let greater = (left, right) => {
 	if (isFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);
 
-	return (left > right) ? left : undefined;
-}; greater.types = [["N", "N", "N"], ["S", "S", "S"], [["?", "?"], "A", "A"]];
+	return left > right;
+}; greater.types = [["N", "N", "B"], ["S", "S", "B"], [["?", "?"], "A", "A"]];
 let minus = (left, right) => {
 	if (isString(left) && isObject(right)) { // omitKey
 		const {[left]: deletedKey, ...remainder} = right;
@@ -478,7 +479,7 @@ let question = (left, right) => {
 	if (isFunction(left)) { // if 100
 		const result = left(right);
 
-		return ((result == undefined) || (result === false)) ? [undefined, right] : [right, undefined];
+		return isFalsey(result) ? [undefined, right] : [right, undefined];
 	}
 
 	if (isArray(left)) { // cond AAA
@@ -488,7 +489,7 @@ let question = (left, right) => {
 		for (; i < left.length; ++i) {
 			const result = left[i](right);
 
-			if (result != undefined) {
+			if (isTruthy(result)) {
 				output[i] = right;
 				break;
 			}
@@ -507,7 +508,7 @@ let question = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
-}; question.types = [[["X", "?"], "X", "X"], ["A", "?", "A"], ["S", "S", "N"], ["N", "A", "N"]];
+}; question.types = [[["X", "B"], "X", "X"], ["A", "?", "A"], ["S", "S", "N"], ["N", "A", "N"]];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	if (isObject(right)) {
@@ -569,7 +570,7 @@ let bar = (left, right) => {
 		let fn = x => {
 			const leftResult = left(x);
 
-			return (leftResult == undefined) ? right(x) : leftResult;
+			return isFalsey(leftResult) ? right(x) : leftResult;
 		};
 		fn.types = types(left); // assume
 
@@ -579,7 +580,7 @@ let bar = (left, right) => {
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 
-			return (leftResult == undefined) ? right(x, y) : leftResult;
+			return isFalsey(leftResult) ? right(x, y) : leftResult;
 		};
 		fn. types = types(left); // assume
 
@@ -694,7 +695,6 @@ let bang = value => {
 	return !isTruthy(value);
 }; bang.types = [["V", "B"], [["X", "Y", "Z"], ["X", "Y", "Z"]], [["X", "Y"], ["X", "Y"]]];
 // bang.types = [[0, 0], [1, 1], [2, 2]];
-bang.supportsUndefined = true;
 
 //==========================================================
 // main exports
@@ -775,7 +775,7 @@ export default {
 	divideBy: (left, right) => isValid(left) && isValid(right) && (left / right),
 	pick: (keys, object) => isValid(keys) && isValid(object) && pick(keys)(object),
 	//lessThan: (left, right) => isValid(left) && isValid(right) && ((left < right) ? left : undefined),
-	greaterThan: (left, right) => isValid(left) && isValid(right) && ((left > right) ? left : undefined),
+	greaterThan: (left, right) => isValid(left) && isValid(right) && (left > right),
 	if: (fn, value) => isValid(fn) && isValid(value) && (fn(value) ? [value, undefined] : [undefined, value]),
 	zipApplyTo: (array1, array2) => isValid(array1) && isValid(array2) && pipe(transpose, map(([left, right]) => isValid(left) && isValid(right) && applyToInternal(left, right)))([array1, array2]),
 	constant: value => dummy => isValid(dummy) && value,

@@ -142,8 +142,8 @@ describe("Underscore", () => {
 		filterByIdentity		;*(() 0)
 	*/
 
-		it("some(x => x, [undefined, 0, 'yes', false]) eql 1", () => expect(some(x => x, [undefined, 0, 'yes', false])).eql(2));
-		it(";some(() 0 'yes') eql 1", () => expect(someValues).eql(2));
+		it("some(x => x, [undefined, 0, 'yes', false]) eql true", () => expect(some(x => x, [undefined, 0, 'yes', false])).eql(true));
+		it(";some(() 0 'yes') eql true", () => expect(someValues).eql(true));
 		it(";*(() 0) eql []", () => expect(filterByIdentity).eql([0]));
 	});
 
@@ -304,7 +304,7 @@ describe("Operators", () => {
 			it("[.(value => value * 2)([3, 4, 5]) eql 6", () => expect(firstThen(value => value * 2)([3, 4, 5])).eql(6));
 			it(".(/2)(array => array[0])([10, 8, 9]) eql 5", () => expect(thenDivideByTwo(array => array[0])([10, 8, 9])).eql(5));
 			it("[./2([4, 5, 7]) eql 4", () => expect(firstThenDivideByTwo([4, 5, 7])).eql(2));
-			it('#.<3([4, 5]) eql 2', () => expect(sizeLessThanThree([4, 5])).eql(2));
+			it('#.<3([4, 5]) eql true', () => expect(sizeLessThanThree([4, 5])).eql(true));
 		});
 
 		describe("applyTo 34", () => {
@@ -809,7 +809,7 @@ describe("Operators", () => {
 		/*ts
 			lessThanFiveOrEven				<5|(%2.=0)
 		*/
-			it('<5|(%2.=0)(3) eql 3', () => expect(lessThanFiveOrEven(3)).eql(3));
+			it('<5|(%2.=0)(3) eql true', () => expect(lessThanFiveOrEven(3)).eql(true));
 			it('<5|(%2.=0)(10) not eql undefined', () => expect(lessThanFiveOrEven(10)).not.eql(undefined));
 			it('<5|(%2.=0)(7) eql false', () => expect(lessThanFiveOrEven(7)).eql(false));
 		});
@@ -821,7 +821,7 @@ describe("Operators", () => {
 			sevenLessThanOrEqualFive			7(<|=)5
 			sevenLessThanOrEqualUndefined		7(<|=)()
 		*/
-			it('5(<|=)7 eql 5', () => expect(fiveLessThanOrEqualSeven).eql(5));
+			it('5(<|=)7 eql true', () => expect(fiveLessThanOrEqualSeven).eql(true));
 			it('7(<|=)5 eql false', () => expect(sevenLessThanOrEqualFive).eql(false));
 			it('<|=(5, 5) eql true', () => expect(lessThanOrEqual(5, 5)).eql(true));
 			it('<|=(6, 4) eql false', () => expect(lessThanOrEqual(6, 4)).eql(false));
@@ -900,8 +900,8 @@ describe("Operators", () => {
 				passedLessThan			2<3
 				failedLessThan			3<2
 			*/
-				it("2<3 eql 2", () => expect(passedLessThan).eql(2));
-				it("3<2 eql undefined", () => expect(failedLessThan).eql(undefined));
+				it("2<3 eql true", () => expect(passedLessThan).eql(true));
+				it("3<2 eql false", () => expect(failedLessThan).eql(false));
 		});
 
 		describe("lessThan (S S S)", () => {
@@ -909,8 +909,8 @@ describe("Operators", () => {
 				passedLessThan			"ab"<"bc"
 				failedLessThan			"b"<"a"
 			*/
-				it('"ab"<"bc" eql "ab"', () => expect(passedLessThan).eql("ab"));
-				it('"b"<"a" eql undefined', () => expect(failedLessThan).eql(undefined));
+				it('"ab"<"bc" eql true', () => expect(passedLessThan).eql(true));
+				it('"b"<"a" eql false', () => expect(failedLessThan).eql(false));
 			});
 
 		describe("ascendingSort (?? A A) |", () => {
@@ -929,8 +929,8 @@ describe("Operators", () => {
 			failedGreaterThan			2>3
 			passedGreaterThan			3>2
 		*/
-			it("2>3 eql undefined", () => expect(failedGreaterThan).eql(undefined));
-			it("3>2 eql 3", () => expect(passedGreaterThan).eql(3));
+			it("2>3 eql false", () => expect(failedGreaterThan).eql(false));
+			it("3>2 eql true", () => expect(passedGreaterThan).eql(true));
 		});
 
 		describe("greaterThan (S S S)", () => {
@@ -938,8 +938,8 @@ describe("Operators", () => {
 			failedGreaterThan			"ab">"bc"
 			passedGreaterThan			"b">"a"
 		*/
-			it('"ab">"bc" eql undefined', () => expect(failedGreaterThan).eql(undefined));
-			it('"b">"a" eql "b"', () => expect(passedGreaterThan).eql("b"));
+			it('"ab">"bc" eql false', () => expect(failedGreaterThan).eql(false));
+			it('"b">"a" eql true', () => expect(passedGreaterThan).eql(true));
 		});
 
 		describe("descendingSort (?? A A) |", () => {
@@ -1029,7 +1029,7 @@ describe("Operators", () => {
 			typeOfPlus				}+
 			typeOfFirst				}[
 		*/
-			it('}(undefined) eql undefined', () => expect(typeOf(undefined)).eql(undefined));
+			it('}(undefined) eql "U"', () => expect(typeOf(undefined)).eql("U"));
 			it('}() eql false', () => expect(typeOfUndefined).eql("B"));
 			it('}(4) eql "N"', () => expect(typeOf(4)).eql("N"));
 			it('}4.5 eql "N"', () => expect(typeOfNumber).eql("N"));
@@ -1091,9 +1091,9 @@ describe("Operators", () => {
 		/*ts
 			greaterAndLessThan				>3&(<6)
 		*/
-			it('>3&(<6)(4) eql 4', () => expect(greaterAndLessThan(4)).eql(4));
-			it('>3&(<6)(7) eql undefined', () => expect(greaterAndLessThan(7)).eql(undefined));
-			it('>3&(<6)(3) eql undefined', () => expect(greaterAndLessThan(3)).eql(undefined));
+			it('>3&(<6)(4) eql true', () => expect(greaterAndLessThan(4)).eql(true));
+			it('>3&(<6)(7) eql false', () => expect(greaterAndLessThan(7)).eql(false));
+			it('>3&(<6)(3) eql false', () => expect(greaterAndLessThan(3)).eql(false));
 		});
 	})
 
@@ -1136,7 +1136,7 @@ describe("Operators", () => {
 			it('!("hello") eql false', () => expect(not("hello")).eql(false));
 			it('!(x => x)({a: 2}) eql false', () => expect(not(x => x)({a: 2})).eql(false));
 			it('!(x => undefined)(3) eql true', () => expect(not(x => undefined)(3)).eql(true));
-			it('!(1/0) eql true', () => expect(notDivideByZero).eql(true));
+			it('!(1/0) eql undefined', () => expect(notDivideByZero).eql(undefined));
 		});
 	});
 });
