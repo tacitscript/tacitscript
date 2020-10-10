@@ -9,7 +9,7 @@ mocha.setup('bdd');
 describe("Underscore", () => {
 	describe("partition :,(? ;).@$.~.;*@", () => {
 	/*ts
-		isEqualOne			=1.?
+		isEqualToOne		=1.?
 		partition			:,(? ;).@$.~.;*@
 		//calculation			(%2.=1)partition(0 1 2 3 4 5)
 		intermediate		:,(? ;).@$.~
@@ -20,6 +20,7 @@ describe("Underscore", () => {
 		//intermediateF		(=1.?)1
 	*/
 
+		it("=1.?(1) eql [1, undefined]", () => expect(isEqualToOne(1)).eql([1, undefined]));
 		//it("(=1.?)1 eql [1, undefined]", () => expect(intermediateF).eql([1, undefined]));
 		//it("((%2.=1).?)1 eql [1, undefined]", () => expect(intermediateE).eql([1, undefined]));
 		it("((%2.=1)? (1 2 3)).@$ eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateD).eql([[1, undefined], [undefined, 2], [3, undefined]]));
@@ -448,24 +449,6 @@ describe("Operators", () => {
 	});
 
 	describe("?", () => {
-		describe("indexOfString (S S N) 5", () => {
-		/*ts
-			foundSubstring			"ell"?"hello"
-			unfoundSubstring		"bye"?"hello"
-		*/
-			it('"ell"?"hello" eql 1', () => expect(foundSubstring).eql(1));
-			it('"bye"?"hello" eql undefined', () => expect(unfoundSubstring).eql(undefined));
-		});
-
-		describe("indexOfNumber (N A N) 2", () => {
-		/*ts
-			indexOfNumber		2?(1 5 3 7 2 4)
-			unfoundIndex		2?(1 5 7 3)
-		*/
-			it('2?(1 5 3 7 2 4) eql 4', () => expect(indexOfNumber).eql(4));
-			it('2?(1 5 7 3) eql undefined', () => expect(unfoundIndex).eql(undefined));
-		});
-
 		describe("if (X? X N) 6", () => {
 		/*ts
 			yes				<3?2

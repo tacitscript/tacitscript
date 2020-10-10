@@ -127,6 +127,7 @@ const replaceType = ({from, to}) => type => {
 };
 const getSymbolMap = (acceptorSymbol, donorSymbol) => {
 	if ("XYZW".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
+
 	return [];
 }
 const getTypeMap = (acceptorType, donorType) => {
@@ -369,9 +370,9 @@ let dot = (left, right) => {
 
 		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) { // 121 eg. =1.?
-			let result = right(left);
+			let result = x => right(left, x);
 
-			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions121);
+			result.types = map(([leftType, rightType]) => rightType.slice(1))(solutions121);
 
 			return result;
 		}
@@ -500,15 +501,8 @@ let question = (left, right) => {
 		return output;
 	}
 
-	if ((isString(left) && isString(right)) || // indexInString SSN
-		isNumber(left)  && isArray(right)) { // indexInArray NAN
-		const index = right.indexOf(left);
-
-		return (index === -1) ? undefined : index;
-	}
-
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
-}; question.types = [[["X", "B"], "X", "X"], ["A", "?", "A"], ["S", "S", "N"], ["N", "A", "N"]];
+}; question.types = [[["V", "B"], "V", "A"], ["A", "?", "A"]];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	if (isObject(right)) {
