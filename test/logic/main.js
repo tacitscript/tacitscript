@@ -12,6 +12,7 @@ describe("Underscore", () => {
 		isEqualToOne		=1.?
 		partition			:,(? ;).@$.~.;*@
 		calculation			(%2.=1)partition(0 1 2 3 4 5)
+		calculationB		(%2.=0)partition(0 1 2 3 4 5)
 		intermediate		:,(? ;).@$.~
 		intermediateB		:,(? ;).@$
 		intermediateC		(%2.=1)?@(1 2 3)
@@ -20,6 +21,8 @@ describe("Underscore", () => {
 		intermediateF		(=1.?)1
 	*/
 
+		it("(%2.=0)partition(0 1 2 3 4 5) eql [[0, 2, 4], [1, 3, 5]]", () => expect(calculationB).eql([[0, 2, 4], [1, 3, 5]]));
+		it("partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5]) eql [[0, 2, 4], [1, 3, 5]]", () => expect(partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5])).eql([[0, 2, 4], [1, 3, 5]]));
 		it("=1.?(1) eql [1, undefined]", () => expect(isEqualToOne(1)).eql([1, undefined]));
 		it("(=1.?)1 eql [1, undefined]", () => expect(intermediateF).eql([1, undefined]));
 		it("((%2.=1).?)1 eql [1, undefined]", () => expect(intermediateE).eql([1, undefined]));
