@@ -7,6 +7,16 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("first [", () => {
+	/*ts
+		first				[
+		calculation			[(5 4 3 2 1)
+	*/
+
+		it("first([5, 4, 3, 2, 1]) eql 5", () => expect(first([5, 4, 3, 2, 1])).eql(5));
+		it("[(5 4 3 2 1) eql 5", () => expect(calculation).eql(5));
+	});
+
 	describe("compact ;*", () => {
 	/*ts
 		compact				;*
