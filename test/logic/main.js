@@ -7,6 +7,30 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe('flatten :,(.(+1.>.(#.) `(].{)) .(; )).^$.]', () => {
+	/*ts
+		intermediateC		+1.>.(#.)
+		constLast			`]
+		endIntoConst		].`
+		flatten				:,(.(+1.>.(#.) `(].{)) .(; )).^$.]
+		flattenAll			.(`(~2%.].!=$ ].{) .(; )).^$.]
+		intermediate		.(`1 .(; ))
+		intermediateB		].{
+		calculation			flattenAll(1 (2 ) (3 ((4 ) )))
+		calculationB		2flatten(1 (2 ) (3 ((4 ) )))
+	*/
+
+		it("2flatten(1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, [4]]", () => expect(calculationB).eql([1, 2, 3, [4]]));
+		it("+1.>.(#.)(2)([1, 2, 3, 4]) eql false", () => expect(intermediateC(2)([1, 2, 3, 4])).eql(false));
+		it("].`([1, 2, 3])([3, 2, 1]) eql 3", () => expect(endIntoConst([1, 2, 3])([3, 2, 1])).eql(3));
+		it("`]([1, 2, 3])([3, 2, 1]) eql 1", () => expect(constLast([1, 2, 3])([3, 2, 1])).eql(1));
+		it("flatten(2, [1, [2], [3, [[4]]]]) eql [1, 2, 3, [4]]", () => expect(flatten(2, [1, [2], [3, [[4]]]])).eql([1, 2, 3, [4]]));
+		it("flattenAll(1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, 4]", () => expect(calculation).eql([1, 2, 3, 4]));
+		it(".(`(~2%.].!=$ ].{) .(; )).^$.]([1, [2], [3, [[4]]]]) eql [1, 2, 3, 4]", () => expect(flattenAll([1, [2], [3, [[4]]]])).eql([1, 2, 3, 4]));
+		it("].{([1, [1, [2, [3, 4]]]]) eql [1, 2, [3, 4]]", () => expect(intermediateB([1, [1, [2, [3, 4]]]])).eql([1, 2, [3, 4]]));
+		it(".(`1 .(; ))([1, 2, 3]) eql [1, [[1, 2, 3]]]", () => expect(intermediate([1, 2, 3])).eql([1, [[1, 2, 3]]]));
+	});
+
 	describe("rest %.]", () => {
 	/*ts
 		rest				%.]
@@ -986,15 +1010,6 @@ describe("Operators", () => {
 		*/
 			it('"ab">"bc" eql false', () => expect(failedGreaterThan).eql(false));
 			it('"b">"a" eql true', () => expect(passedGreaterThan).eql(true));
-		});
-
-		describe("descendingSort (?? A A) |", () => {
-		/*ts
-			sortArray	{"Math.abs">(~7 3 ~1 4)
-			sortStrings	[>("tom" "ann" "sam")
-		*/
-			it('{"Math.abs">(~7 3 _~1 4) eql [-7, 4, 3, -1]', () => expect(sortArray).eql([-7, 4, 3, -1]));
-			it('[>("tom" "ann" "sam") eql ["tom", "sam", "ann"]', () => expect(sortStrings).eql(["tom", "sam", "ann"]));
 		});
 	});
 

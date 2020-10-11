@@ -386,6 +386,15 @@ let dot = (left, right) => {
 			return fn;
 		}
 
+		const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
+		if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) { // 111 eg. +1./2
+			let fn = value => right(left(value));
+
+			fn.types = map(([leftType, rightType]) => [leftType[0], rightType[1]])(solutions111);
+
+			return fn;
+		}
+
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
 		if (isUnaryFunction(right) && solutionsInvert.length) {
 			let result = right(left);
@@ -396,15 +405,6 @@ let dot = (left, right) => {
 			)(solutionsInvert);
 
 			return result;
-		}
-
-		const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
-		if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) { // 111 eg. +1./2
-			let fn = value => right(left(value));
-
-			fn.types = map(([leftType, rightType]) => [leftType[0], rightType[1]])(solutions111);
-
-			return fn;
 		}
 	}
 
@@ -457,10 +457,8 @@ let less = (left, right) => {
 	return left < right;
 }; less.types = [["N", "N", "B"], ["S", "S", "B"], [["?", "?"], "A", "A"]];
 let greater = (left, right) => {
-	if (isFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);
-
 	return left > right;
-}; greater.types = [["N", "N", "B"], ["S", "S", "B"], [["?", "?"], "A", "A"]];
+}; greater.types = [["N", "N", "B"], ["S", "S", "B"]];
 let minus = (left, right) => {
 	if (isString(left) && isObject(right)) { // omitKey
 		const {[left]: deletedKey, ...remainder} = right;
@@ -660,7 +658,7 @@ let backtick = value => {
 	fn.types = map(prepend("?"))(types(value));
 
 	return fn;
-}; backtick.types = [["V", ["?", "V"]]];
+}; backtick.types = [["X", ["?", "X"]]];
 let braceleft = input => { // should never be referenced directly as literal evaluation - can be referenced as a function
 	if (isArray(input)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(input);
 
