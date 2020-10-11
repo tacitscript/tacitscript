@@ -661,9 +661,11 @@ let backtick = value => {
 
 	return fn;
 }; backtick.types = [["V", ["?", "V"]]];
-let braceleft = string => { // should never be referenced directly as literal evaluation - can be referenced as a function
-	return eval(string);
-}; braceleft.types = [["S", "?"]];
+let braceleft = input => { // should never be referenced directly as literal evaluation - can be referenced as a function
+	if (isArray(input)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(input);
+
+	return eval(input); // S?
+}; braceleft.types = [["S", "?"], ["A", "A"]];
 let semicolon = value => {
 	return value;
 }; semicolon.types = [["X", "X"]];

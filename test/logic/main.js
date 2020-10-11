@@ -689,6 +689,16 @@ describe("Operators", () => {
 			it('{"Math.sqrt"4 eql 2', () => expect(evalFunctionApplied).eql(2));
 			it('2({"Math.pow")3 eql 8', () => expect(binaryFunction).eql(8));
 		});
+
+		describe("unnest AA", () => {
+		/*ts
+			unnest				{
+			calculation			{(1 (2 (3 4)) (5) ((6 7) ))
+		*/
+
+			it("unnest([1, [2, [3, 4]], [5], [[6, 7]]]) eql [1, 2, [3, 4], 5, [6, 7]]", () => expect(unnest([1, [2, [3, 4]], [5], [[6, 7]]])).eql([1, 2, [3, 4], 5, [6, 7]]));
+			it("{(1 (2 (3 4)) (5) ((6 7) )) eql [1, 2, [3, 4], 5, [6, 7]]", () => expect(calculation).eql([1, 2, [3, 4], 5, [6, 7]]));
+		});
 	});
 
 	describe(";", () => {
