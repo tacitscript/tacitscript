@@ -175,7 +175,12 @@ const apply = (left, right) => {
 	if ((left == undefined) && !supportsUndefined(right)) return undefined;
 	if ((right == undefined) && !supportsUndefined(left)) return undefined;
 
-	var allCombinations = combinations(types(left))(types(right));
+	const leftTypes = types(left);
+	const rightTypes = types(right);
+	const allCombinations = pipe(
+		reduce((acc, types) => ({...acc, [JSON.stringify(types)]: types}))({}),
+		values,
+	)(combinations(leftTypes)(rightTypes));
 
 	// binary left application
 	const binaryLeftSolutions = filter(([leftType, rightType]) => Array.isArray(rightType) && (rightType.length == 3) && matchType(leftType,  rightType[0]))(allCombinations);
