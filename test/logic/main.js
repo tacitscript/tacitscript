@@ -7,6 +7,25 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("without :,(!=@.&$ ;).*$", () => {
+	/*ts
+		//intermediateE		!=@
+		intermediateD		(!=0&(!=1))*(1 2 1 0 3 1 4)
+		intermediateC		&$(<2 <3 <4)
+		intermediateB		&$
+		//intermediateA		!=@.&$
+		//without				:,(!=@.&$ ;).*$
+		//calculation			(0 1)without(1 2 1 0 3 1 4)
+	*/
+		//it("!=@([1, 2, 3])[1](3) eql true", () => expect(intermediateE([1, 2, 3])[1](3)).eql(true));
+		//it("(0 1)without(1 2 1 0 3 1 4) eql [2, 3, 4]", () => expect(calculation).eql([2, 3, 4]));
+		it("(!=0&(!=1))*(1 2 1 0 3 1 4) eql [2, 3, 4]", () => expect(intermediateD).eql([2, 3, 4]));
+		it("&$(<2 <3 <4)(1) eql true", () => expect(intermediateC(1)).eql(true));
+		it("&$([1, 2, 3]) eql 3", () => expect(intermediateB([1, 2, 3])).eql(3));
+		//it("(!=@.&$)([2, 3, 4])(5) eql true", () => expect(intermediateA([2, 3, 4])(5)).eql(true));
+		//it("without([0, 1], [1, 2, 1, 0, 3, 1, 4]) eql [2, 3, 4]", () => expect(without([0, 1], [1, 2, 1, 0, 3, 1, 4])).eql([2, 3, 4]));
+	});
+
 	describe('flatten :,(.(+1.>.(#.) `(].{)) .(; )).^$.]', () => {
 	/*ts
 		intermediateC		+1.>.(#.)
