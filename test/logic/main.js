@@ -7,6 +7,29 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	/*ts
+		leftPad				:.(.([ ].#).-$.`"0"^.""$ ]).+$
+	*/
+
+	describe('leftPad :.(.([ ].#).-$.`"0"^.""$ ]).+$', () => {
+	/*ts
+		calculation			6leftPad"123"
+	*/
+
+		it("leftPad(6, '123') eql '000123'", () => expect(leftPad(6, "123")).eql("000123"));
+		it('6leftPad"123" eql "000123"', () => expect(calculation).eql("000123"));
+	});
+
+	describe(`union +$.(""+.6leftPad)/.\\.(1 0)'@`, () => {
+	/*ts
+		union				+$.(""+.6leftPad)/.\.(1 0)'@
+		calculation			union((1 2 3) (101 2 1 10) (2 1))
+	*/
+
+		it("union([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [1, 2, 3, 101, 10]", () => expect(union([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([1, 2, 3, 101, 10]));
+		it("union((1 2 3) (101 2 1 10) (2 1)) eql [1, 2, 3, 101, 10]", () => expect(calculation).eql([1, 2, 3, 101, 10]));
+	});
+
 	describe("without :,(!=@.&$ ;).*$", () => {
 	/*ts
 		intermediateF		!=$
