@@ -537,7 +537,7 @@ let apostrophe = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ' with arguments: ${JSON.stringify({left, right})}`;
-}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["?", "?"], "A", "?"]];
+}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["?", "B"], "A", "?"]];
 // apostrophe.types = [[0, 0, "?"], [1, 0, 0], [0, 1, 1]];
 let equal = (left, right) => {
 	return toString(left) === toString(right);
