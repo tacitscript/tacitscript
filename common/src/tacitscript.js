@@ -235,24 +235,6 @@ const typeOf = value => {
 
 	throw `Unknown type of value: ${value}`;
 };
-const argumentMatch = ({arg, type}) => {
-	if (type === "?") return true;
-	if (type === "A") return isArray(arg);
-	if (type === "S") return isString(arg);
-	if (type === "N") return isNumber(arg);
-	if (type === "O") return isObject(arg);
-	if (type === "B") return isBoolean(arg);
-	if (isArray(type)) return isFunction(arg);
-	if (type === "V") return true;
-
-	throw `Unknown type: ${type}`;
-};
-const typeMatch = ([first, second]) => ({type}) => {
-	if (second && (type.length < 3)) return false;
-
-	return argumentMatch({arg: first, type: type[0]}) && (second ? argumentMatch({arg: second, type: type[1]}) : true);
-};
-const isValid = value => value != undefined;
 const toEncodedString = value => {
 	if (isString(value)) return `"${value}"`;
 
@@ -269,7 +251,6 @@ const toString = value => {
 
 	throw `Unable to stringify value: ${value}`;
 };
-const applyToInternal = (left, right) => isFunction(left) ? (value => right(left(value))) : isFunction(right) ? right(left) : map(fn => fn(left))(right);
 const transpose = array => {
 	var newArray = [], origArrayLength = array.length, arrayLength = Math.min.apply(Math, map(array => array.length)(array)), i;
 	for(i = 0; i < arrayLength; i++){
@@ -307,11 +288,6 @@ const chunkWhen = ({when, vector, newVector, append}) => pipe(
 )(vector);
 const leftApply = (left, binaryFn) => right => binaryFn(left, right);
 const rightApply = (binaryFn, right) => left => binaryFn(left, right);
-const applyTo = left => rightFn => {
-	if ((rightFn.length === 2) || (rightFn.types && (rightFn.types[0].length === 3))) return leftApply(left, rightFn);
-
-	return rightFn(left);
-};
 const whileInternal = ({fns, startingArray}) => {
 	let result = [...startingArray];
 
