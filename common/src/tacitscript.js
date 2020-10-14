@@ -402,7 +402,7 @@ let dot = (left, right) => {
 
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
 		if (isUnaryFunction(right) && solutionsInvert.length) {
-			let result = right(left);
+			let result = apply(right, left);
 
 			if (isFunction(result)) result.types = pipe(
 				map(([leftType, rightType]) => rightType[1]),
@@ -481,7 +481,7 @@ let colon = (left, right) => {
 }; colon.types = [["?", "?", "A"]];
 let question = (left, right) => {
 	if (isFunction(left)) { // if 100
-		const result = left(right);
+		const result = apply(left, right);
 
 		return isFalsey(result) ? [undefined, right] : [right, undefined];
 	}
