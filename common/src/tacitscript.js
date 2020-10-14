@@ -37,7 +37,6 @@ const last = array => array[array.length - 1];
 const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
 const unnest = reduce((acc, array) => [...acc, ...array])([]);
 const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
-const reverse = array => array.slice(0).reverse();
 const omit = keys => object => {const copy = {...object}; keys.forEach(key => delete copy[key]); return copy;};
 const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
 const all = check => array => array.every(check);
