@@ -571,15 +571,10 @@ describe("Operators", () => {
 		describe("map (?? A A) 17", () => {
 		/*ts
 			timesTwoMapArray			*2@(3 4 5)
+			indexedSum					.(; #.;^).~.+$@
 		*/
 			it("*2@(3 4 5) eql [6, 8, 10]", () => expect(timesTwoMapArray).eql([6, 8, 10]));
-		});
-
-		describe("mapIndexed (?NX A X)", () => {
-		/*ts
-			indexedSum				(:.+$)@(4 5 6)
-		*/
-			it('(:.+$)@(4 5 6) = [4, 6, 8]', () => expect(indexedSum).eql([4, 6, 8]))
+			it('.(; #.;^).~.+$@(4 5 6) = [4, 6, 8]', () => expect(indexedSum([4, 5, 6])).eql([4, 6, 8]))
 		});
 	});
 
