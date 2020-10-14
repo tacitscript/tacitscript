@@ -508,13 +508,16 @@ let question = (left, right) => {
 }; question.types = [[["V", "B"], "V", "A"], ["A", "?", "A"]];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
+	const applyLeft = value => apply(left, value);
+	const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
+
 	if (isObject(right)) {
-		if (isUnaryFunction(left)) return mapObj(left)(right); // (VV)OO
-		if (isBinaryFunction(left)) return mapObjIndexed(left)(right); // (VSV)OO
+		if (isUnaryFunction(left)) return mapObj(applyLeft)(right); // (VV)OO
+		if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
 	}
 
-	return right.map(left); // (VV)AA (VNV)AA
-}; atsign.types = [[["V", "V"], "A", "A"], [["V", "N", "V"], "A", "A"], [["V", "V"], "O", "O"], [["V", "S", "V"], "0", "0"]];
+	return map(applyLeft)(right); // (VV)AA (VNV)AA
+}; atsign.types = [[["V", "V"], "A", "A"], [["V", "V", "V"], "A", "A"], [["V", "V"], "O", "O"], [["V", "S", "V"], "O", "O"]];
 // atsign.types = [[1, 0, 0], [2, 0, 0]];
 let asterisk = (left, right) => {
 	if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // 100
