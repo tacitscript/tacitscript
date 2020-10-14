@@ -339,6 +339,15 @@ let dot = (left, right) => {
 			return fn;
 		}
 
+		const solutions211 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType.slice(1), rightType[0]))(typeCombinations);
+		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { // 211 eg. =.'(1 2 3)
+			let fn = x => right(leftApply(x, left));
+
+			fn.types = map(([leftType, rightType]) => [leftType[1], rightType[1]])(solutions211);
+
+			return fn;
+		}
+
 		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isValue(left) && isBinaryFunction(right) && solutions021.length) { // 021 eg. 2.+
 			let fn = value => leftApply(left, right)(value);
@@ -390,7 +399,7 @@ let dot = (left, right) => {
 
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
 }; dot.types = [[["X", "Y"], ["Y", "Z"], ["X", "Z"]], [["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], ["X", ["X", "Y"], "Y"], ["X", ["X", "Y", "Z"], ["Y", "Z"]], ["V", "A", "A"], [["X", "?"], "A", ["X", "A"]],
-	[["X", "Y", "?"], "A", ["X", "Y", "?"]], [["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], [["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]]];
+	[["X", "Y", "?"], "A", ["X", "Y", "?"]], [["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], [["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]], [["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]]];
 //dot.types = [[1, 1, 1], [2, 1, 2], [0, 1, 0], [0, 2, 1], [0, 0, 0], [1, 0, 1], [2, 0, 2]];
 let comma = (left, right) => {
 	if (isUndefined(left) || isUndefined(right)) return undefined;

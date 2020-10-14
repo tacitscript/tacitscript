@@ -7,6 +7,22 @@ mocha.setup('bdd');
 // underscore
 
 describe("Underscore", () => {
+	describe("intersection", () => {
+	/*ts
+		intermediateD		=.'(1 2 3)
+		intermediateC		=2'(1 2 3)
+		intermediateB		(=.'(1 2 3))*(2 3 4 5)
+		intermediateA		~1%((1 2 3) (101 2 1 10) (2 1))
+		//intersection		~1%,(~'@.&$.(=.) [).*$
+	*/
+
+		it("=.'(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
+		it("=2'(1 2 3) eql 2", () => expect(intermediateC).eql(2));
+		it("(=.'(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
+		it("~1%((1 2 3) (101 2 1 10) (2 1)) eql [[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]", () => expect(intermediateA).eql([[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]));
+		//it("intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [2, 1]", () => expect(intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([2, 1]));
+	});
+
 	/*ts
 		leftPad				:.(.([ ].#).-$.`"0"^.""$ ]).+$
 	*/
