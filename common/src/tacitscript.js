@@ -700,10 +700,8 @@ let bang = value => {
 
 export default {
 	arity,
-	types,
 	apply,
-	leftApply,
-	rightApply,
+	typeOf,
 
 	plus,
 	tilde,
@@ -734,64 +732,4 @@ export default {
 	ampersand,
 	greater,
 	bang,
-
-	resolve: solutions => (...args) => {
-		const firstMatch = find(typeMatch(args))(solutions);
-
-		if (!firstMatch) {
-			throw `Unable to resolve dynamic function application: ${{solutions, args}}`;
-		}
-
-		return firstMatch.def.apply(undefined, args);
-	},
-	typeOf,
-	first: array => isValid(array) && array[0],
-	last: array => isValid(array) && array[array.length - 1],
-	negative: number => isValid(number) && -number,
-	reverseArray: array => isValid(array) && array.slice(0).reverse(),
-	reverseString: string => isValid(string) && string.split("").reverse().join(""),
-	split: (index, array) => isValid(index) && isValid(array) && [array.slice(0, index), array.slice(index)],
-	at: (index, array) => (!isValid(index) || !isValid(array)) ? undefined : (index >= 0) ? array[index] : array[array.length + index],
-	pipe: (leftFn, rightFn) => isValid(leftFn) && isValid(rightFn) && (value => rightFn(leftFn(value))),
-	pipeBinary: (leftBinaryFn, rightFn) => isValid(leftBinaryFn) && isValid(rightFn) && ((left, right) => rightFn(leftBinaryFn(left, right))),
-	applyTo: (left, rightFn) => isValid(left) && isValid(rightFn) && applyTo(left)(rightFn),
-	applyToArray: (left, rightArray) => isValid(left) && isValid(rightArray) && map(applyTo(left))(rightArray),
-	//minus: (left, right) => isValid(left) && isValid(right) && (left - right),
-	times: (left, right) => isValid(left) && isValid(right) && (left * right),
-	length: array => isValid(array) && array.length,
-	identity: value => value,
-	//equals: (left, right) => (toString(left) === toString(right)) ? left : undefined,
-	insert: (binaryFn, array) => isValid(binaryFn) && isValid(array) && array.slice(1).reduce((acc, value) => binaryFn(acc, value), array[0]),
-	fromPairs: pairs => isValid(pairs) && Object.fromEntries(pairs),
-	toPairs: object => isValid(object) && Object.entries(object),
-	merge: (first, second) => isValid(first) && isValid(second) && mergeDeep(first, second),
-	omitKey: (key, object) => isValid(key) && isValid(object) && (() => {const {[key]: deletedKey, ...remainder} = object; return remainder;})(),
-	indexOf: (number, array) => isValid(number) && isValid(array) && (() => {const index = array.indexOf(number); return (index === -1) ? undefined : index;})(),
-	map: (fn, array) => isValid(fn) && isValid(array) && array.map(fn),
-	or: (number, right) => number || right,
-	orString: (string, right) => isValid(string) ? string : right, // allow for valid ""
-	concatString: (string, value) => isValid(string) && isValid(value) && `${string}${toString(value)}`,
-	divideBy: (left, right) => isValid(left) && isValid(right) && (left / right),
-	pick: (keys, object) => isValid(keys) && isValid(object) && pick(keys)(object),
-	//lessThan: (left, right) => isValid(left) && isValid(right) && ((left < right) ? left : undefined),
-	greaterThan: (left, right) => isValid(left) && isValid(right) && (left > right),
-	if: (fn, value) => isValid(fn) && isValid(value) && (fn(value) ? [value, undefined] : [undefined, value]),
-	zipApplyTo: (array1, array2) => isValid(array1) && isValid(array2) && pipe(transpose, map(([left, right]) => isValid(left) && isValid(right) && applyToInternal(left, right)))([array1, array2]),
-	constant: value => dummy => isValid(dummy) && value,
-	prop: (key, object) => isValid(key) && isValid(object) && object[key],
-	eval: string => isValid(string) && eval(string),
-	concatArray: (array1, array2) => isValid(array1) && isValid(array2) && [...array1, ...array2],
-	groupBy: (fn, array) => isValid(fn) && isValid(array) && reduce((acc, value) => {const key = toString(fn(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(array),
-	ascendingSort: (fn, array) => isValid(fn) && isValid(array) && sortBy(fn)(array),
-	filter: (check, array) => isValid(check) && isValid(array) && tsFilter(check)(array),
-	modulo: (left, right) => isValid(left) && isValid(right) && (left % right),
-	chunkArray: (sizes, array) => isValid(sizes) && isValid(array) && chunk({sizes, vector: array, newVector: [], append: (acc, value) => [...acc, value]}),
-	chunkString: (sizes, string) => isValid(sizes) && isValid(string) && chunk({sizes, vector: string.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}),
-	chunkArrayWhen: (when, array) => isValid(when) && isValid(array) && chunkWhen({when, vector: array, newVector: [], append: (acc, value) => [...acc, value]}),
-	chunkStringWhen: (when, string) => isValid(when) && isValid(string) && chunkWhen({when, vector: string.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}),
-	power: (base, exponent) => isValid(base) && isValid(exponent) && Math.pow(base, exponent),
-	generate: (fn, length) => isValid(fn) && isValid(length) && map((value, index) => fn(index))(Array.from(Array(length))),
-	while: (fns, startingArray) => isValid(fns) && isValid(startingArray) && whileInternal({fns, startingArray}),
-	andPredicate: (fn1, fn2) => value => isValid(fn1) && isValid(fn2) && fn1(value) && fn2(value),
-	pair: (left, right) => [left, right],
 };

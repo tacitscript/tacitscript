@@ -10,7 +10,7 @@ describe("Underscore", () => {
 	describe("without :,(!=@.&$ ;).*$", () => {
 	/*ts
 		//intermediateF		!=$
-		//intermediateE		!=@
+		//intermediateE		(.(!=))@
 		//intermediateD		(!=0&(!=1))*(1 2 1 0 3 1 4)
 		//intermediateC		&$(<2 <3 <4)
 		//intermediateB		&$
