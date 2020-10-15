@@ -9,9 +9,12 @@ mocha.setup('bdd');
 describe("Underscore", () => {
 	describe("intersection", () => {
 	/*ts
+		intermediateJ		&$(<2 <3 <4)
+		intermediateI		<2&(>0)
+		//intermediateE		((1 2 3) (2 3 4)).'@.&$.(=.)
+		intermediateH		((1 2 3) (2 3 4)).'@.&$
 		intermediateG		(2 3 4).~'
 		intermediateF		((1 2 3) (2 3 4)).'@
-		//intermediateE		((1 2 3) (2 3 4)).~'@.&$.(=.)
 		intermediateD		=.'(1 2 3)
 		intermediateC		=2'(1 2 3)
 		intermediateB		(=.'(1 2 3))*(2 3 4 5)
@@ -19,9 +22,10 @@ describe("Underscore", () => {
 		//intersection		~1%,(~'@.&$.(=.) [).*$
 	*/
 
+		//it("((1 2 3) (2 3 4)).'@.&$.(=.)(2) eql 2", () => expect(intermediateE(2)).eql(2));
+		it("((1 2 3) (2 3 4)).'@.&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
 		it("((1 2 3) (2 3 4)).'@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
 		it("(2 3 4).~'(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
-		//it("((1 2 3) (2 3 4)).~'@.&$.(=.)(2) eql 2", () => expect(intermediateE(2)).eql(2));
 		it("=.'(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
 		it("=2'(1 2 3) eql 2", () => expect(intermediateC).eql(2));
 		it("(=.'(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
