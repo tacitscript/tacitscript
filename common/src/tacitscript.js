@@ -325,10 +325,13 @@ let dot = (left, right) => {
 			return fn;
 		}
 
+		// 000
+		/*
 		const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
 		if (isValue(left) && solutions000.length) { // 000 eg. 2.(+1 -1)
 			return map(value => dot(left, value))(right);
 		}
+		*/
 	} else {
 		// binaryPipe (XYZ)(ZW)(XYW)
 		const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
@@ -400,6 +403,13 @@ let comma = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
 
 	if (isArray(right)) {
+		// applyToArray ?AA
+		const solutions000 = filter(([leftType, rightType]) => rightType === "A")(typeCombinations);
+		if (solutions000.length) { // 000 eg. 2.(+1 -1)
+			return map(value => comma(left, value))(right);
+		}
+
+		/*
 		if (isUnaryFunction(left)) { // 101
 			let fn = x => comma(left(x), right);
 			fn.types = combinations(map(first)(types(left)))(["A"]);
@@ -418,6 +428,7 @@ let comma = (left, right) => {
 				map(([leftValue, rightValue]) => dot(leftValue, rightValue)),
 			)([left, right])
 		}
+		*/
 	} else {
 		// applyToBinary X(XYZ)(YZ)
 		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
@@ -447,9 +458,10 @@ let comma = (left, right) => {
 }; comma.types = [
 	["X", ["X", "Y"], "Y"], // applyTo
 	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary
-	["A", "A", "A"],
-	[["X", "?"], "A", ["X", "A"]],
-	[["X", "Y", "?"], "A", ["X", "Y", "A"]]
+	["?", "A", "A"], // applyToArray
+	//["A", "A", "A"],
+	//[["X", "?"], "A", ["X", "A"]],
+	//[["X", "Y", "?"], "A", ["X", "Y", "A"]]
 ];
 // comma.types = [[0, 0, 0], [1, 0, 1], [2, 0, 2]];
 let plus = (left, right) => {

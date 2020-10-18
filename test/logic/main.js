@@ -50,6 +50,15 @@ describe("Operators", () => {
 			it("applyToBinary(12, (x, y) => x / y)(4) eql 3", () => expect(applyToBinary(12, (x, y) => x / y)(4)).eql(3));
 			it("(12,/)4 eql 3", () => expect(calculation).eql(3));
 		});
+
+		describe("applyToArray ?AA", () => {
+		/*ts
+			applyToArray		,
+			calculation			2,(10/ 5-)
+		*/
+			it("applyToArray(2, [x => 10 / x, x => 5 - x]) eql [5, 3]", () => expect(applyToArray(2, [x => 10 / x, x => 5 - x])).eql([5, 3]));
+			it("2,(10/ 5-) eql [5, 3]", () => expect(calculation).eql([5, 3]));
+		});
 	});
 });
 
