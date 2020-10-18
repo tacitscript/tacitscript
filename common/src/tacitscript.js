@@ -326,12 +326,7 @@ let comma = (left, right) => {
 
 			return fn;
 		}
-		if (isArray(left)) { // 000
-			return pipe(
-				transpose,
-				map(([leftValue, rightValue]) => dot(leftValue, rightValue)),
-			)([left, right])
-		}
+		// 000
 		*/
 	} else {
 		// applyToBinary X(XYZ)(YZ)
@@ -380,16 +375,18 @@ let dot = (left, right) => {
 				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
 			)([left, right])
 		}
-/*
+
+		// pipeToArray (??)A(?A)
 		const solutions101 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 2))(typeCombinations);
 		if (isUnaryFunction(left) && solutions101.length) { // 101 eg. [.(+1 -2)
-			let fn = x => map(value => dot(left(x), value))(right);
+			let fn = x => map(value => comma(left(x), value))(right);
 
 			fn.types = map(([leftType]) => [leftType[0], "A"])(solutions101);
 
 			return fn;
 		}
 
+		/*
 		const solutions202 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 3))(typeCombinations);
 		if (isBinaryFunction(left) && solutions202.length) { // 202 eg. :.(+$ -$)
 			let fn = (x, y) => map(value => dot(left(x, y), value))(right);
@@ -400,11 +397,11 @@ let dot = (left, right) => {
 		}
 */
 		// 000
-		/*
-		const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
-		if (isValue(left) && solutions000.length) { // 000 eg. 2.(+1 -1)
-			return map(value => dot(left, value))(right);
-		}
+		/* moved
+		// const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
+		// if (isValue(left) && solutions000.length) { // 000 eg. 2.(+1 -1)
+		// 	return map(value => dot(left, value))(right);
+		// }
 		*/
 	} else {
 		// binaryPipe (XYZ)(ZW)(XYW)
@@ -464,9 +461,9 @@ let dot = (left, right) => {
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe
 	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryPipe
 	["A", "A", "A"], // zipApplyTo
+	[["?", "?"], "A", ["?", "A"]], // pipeToArray
 	/*
 	["V", "A", "A"],
-	[["X", "?"], "A", ["X", "A"]],
 	[["X", "Y", "?"], "A", ["X", "Y", "?"]],
 	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]],
 	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]],

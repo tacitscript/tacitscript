@@ -5,6 +5,16 @@ mocha.setup('bdd');
 
 describe("Operators", () => {
 	describe(".", () => {
+		describe("pipeToArray (??)A(?A)", () => {
+		/*ts
+			arrayPipe			.
+			calculation			(10/.(10- 3*))2
+		*/
+
+			it("arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x])(2) eql [5, 15]", () => expect(arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x])(2)).eql([5, 15]));
+			it("(10/.(10- 3*))2 eql [5, 15]", () => expect(calculation).eql([5, 15]));
+		});
+
 		describe("pipe (XY)(YZ)(XZ)", () => {
 		/*ts
 			pipe				.
@@ -25,14 +35,6 @@ describe("Operators", () => {
 
 			it("binaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
 			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
-		});
-
-		describe("arrayPipe (??)AA", () => {
-		/*ts
-			//arrayPipe			.
-		*/
-
-			//it("arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x]) ")
 		});
 
 		describe("zipApplyTo AAA", () => {
@@ -73,9 +75,11 @@ describe("Operators", () => {
 		/*ts
 			applyToArray		,
 			calculation			2,(10/ 5-)
+			calculationB		(4 5 6),(# ])
 		*/
 			it("applyToArray(2, [x => 10 / x, x => 5 - x]) eql [5, 3]", () => expect(applyToArray(2, [x => 10 / x, x => 5 - x])).eql([5, 3]));
 			it("2,(10/ 5-) eql [5, 3]", () => expect(calculation).eql([5, 3]));
+			it("(4 5 6),(# ]) eql [3, 6]", () => expect(calculationB).eql([3, 6]));
 		});
 	});
 });
