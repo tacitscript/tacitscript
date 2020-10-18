@@ -26,6 +26,24 @@ describe("Operators", () => {
 			it("binaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
 			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
 		});
+
+		describe("arrayPipe (??)AA", () => {
+		/*ts
+			//arrayPipe			.
+		*/
+
+			//it("arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x]) ")
+		});
+
+		describe("zipApplyTo AAA", () => {
+		/*ts
+			zipApplyTo			.
+			calculation			(2 3).(10/ 7-)
+		*/
+
+			it("zipApplyTo([2, 3], [x => 10 / x, x => 7 - x]) eql [5, 4]", () => expect(zipApplyTo([2, 3], [x => 10 / x, x => 7 - x])).eql([5, 4]));
+			it("(2 3).(10/ 7-) eql [5, 4]", () => expect(calculation).eql([5, 4]));
+		})
 	});
 
 	describe(",", () => {
