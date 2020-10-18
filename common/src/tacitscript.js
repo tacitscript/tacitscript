@@ -330,6 +330,7 @@ let dot = (left, right) => {
 			return map(value => dot(left, value))(right);
 		}
 	} else {
+		// binaryPipe (XYZ)(ZW)(XYW)
 		const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
 		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions212.length) { // 212 eg. :.+$
 			let fn = (a, b) => right(left(a, b));
@@ -384,7 +385,7 @@ let dot = (left, right) => {
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
 }; dot.types = [
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe
-	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]],
+	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryPipe
 	["V", "A", "A"],
 	[["X", "?"], "A", ["X", "A"]],
 	[["X", "Y", "?"], "A", ["X", "Y", "?"]],

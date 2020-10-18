@@ -7,13 +7,22 @@ describe("Operators", () => {
 	describe(".", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
 		/*ts
-			calculations		(12,/)4
 			pipe				.
 			calculation			(+2.(*3))4
 		*/
 
 			it("pipe(x => x + 2, x => x * 3)(4) eql 18", () => expect(pipe(x => x + 2, x => x * 3)(4)).eql(18));
 			it("(+2.(*3))4 eql 18", () => expect(calculation).eql(18));
+		});
+
+		describe("binaryPipe (XYZ)(ZW)(XYW)", () => {
+		/*ts
+			binaryPipe			.
+			calculation			6(/.(*3))2
+		*/
+
+			it("binaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
+			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
 		});
 	});
 
