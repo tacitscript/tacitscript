@@ -680,7 +680,7 @@ let backtick = value => {
 	fn.types = map(prepend("?"))(types(value));
 
 	return fn;
-}; backtick.types = [["X", ["?", "X"]]];
+}; backtick.types = [["?", ["?", "?"]]];
 let braceleft = input => { // should never be referenced directly as literal evaluation - can be referenced as a function
 	if (isArray(input)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(input);
 

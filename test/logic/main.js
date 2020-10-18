@@ -9,10 +9,12 @@ describe("Operators", () => {
 		/*ts
 			pipe				.
 			calculation			(+2.(*3))4
+			pipeToBacktick		+2.`
 		*/
 
 			it("pipe(x => x + 2, x => x * 3)(4) eql 18", () => expect(pipe(x => x + 2, x => x * 3)(4)).eql(18));
 			it("(+2.(*3))4 eql 18", () => expect(calculation).eql(18));
+			it("+2.`(3)(4) eql 5", () => expect(pipeToBacktick(3)(4)).eql(5));
 		});
 
 		describe("binaryPipe (XYZ)(ZW)(XYW)", () => {
@@ -31,10 +33,12 @@ describe("Operators", () => {
 		/*ts
 			applyTo				,
 			calculation			3,(12/)
+			applyToBacktick		+2,`
 		*/
 
 			it("applyTo(3, x => 12 / x) eql 4", () => expect(applyTo(3, x => 12 / x)).eql(4));
 			it("3,(12/) eql 4", () => expect(calculation).eql(4));
+			it("+2,`(3)(4) eql 6", () => expect(applyToBacktick(3)(4)).eql(6));
 		});
 
 		describe("applyToBinary X(XYZ)(YZ)", () => {
