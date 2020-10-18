@@ -89,7 +89,7 @@ const types = value => {
 	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
 
-	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["V", "V"] : ["V", "V", "V"]]; // assume external functions are not higher order
+	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["?", "?"] : ["?", "?", "?"]];
 
 //	return [[0]];
 };
