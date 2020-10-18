@@ -81,14 +81,30 @@ describe("Operators", () => {
 	describe(", (comma)", () => {
 		describe("applyTo X(XY)Y", () => {
 		/*ts
-			applyTo				,
-			calculation			3,(12/)
-			applyToBacktick		+2,`
+			applyTo					,
+			calculation				3,(12/)
+			applyToBacktick			+2,`
+			twoApplyTo				2,
+			stringApplyTo			"hello",
+			arrayApplyTo			(1 2 3),
+			twoApplyToThreePlus		2,(3+)
+			stringApplyToLength		"hello",#
+			arrayApplyToFirst		(1 2 3),[
+			twoDotPlusThree			2,+3
+			twoApplyToPlusThree		2applyTo(+3)
 		*/
 
 			it("applyTo(3, x => 12 / x) eql 4", () => expect(applyTo(3, x => 12 / x)).eql(4));
 			it("3,(12/) eql 4", () => expect(calculation).eql(4));
 			it("+2,`(3)(4) eql 6", () => expect(applyToBacktick(3)(4)).eql(6));
+			it("2,(x => 3 + x) eql 5", () => expect(twoApplyTo(x => 3 + x)).eql(5));
+			it("\"hello\",(x => x.length) eql 6", () => expect(stringApplyTo(x => x.length)).eql(5));
+			it("(1 2 3),(x => x[0]) eql 6", () => expect(arrayApplyTo(x => x[0])).eql(1));
+			it("2,(3+) eql 5", () => expect(twoApplyToThreePlus).eql(5));
+			it("\"hello\",# eql 5", () => expect(stringApplyToLength).eql(5));
+			it("(1 2 3),[ eql 1]", () => expect(arrayApplyToFirst).eql(1));
+			it("2,+3 eql 5", () => expect(twoDotPlusThree).eql(5));
+			it("2applyTo(+3) eql 5", () => expect(twoApplyToPlusThree).eql(5));
 		});
 
 		describe("applyToBinary X(XYZ)(YZ)", () => {
@@ -96,11 +112,13 @@ describe("Operators", () => {
 			applyToBinary		,
 			calculation			(12,/)4
 			applyToBacktick		+,`
+			fiveMinus			5,-
 		*/
 
 			it("applyToBinary(12, (x, y) => x / y)(4) eql 3", () => expect(applyToBinary(12, (x, y) => x / y)(4)).eql(3));
 			it("(12,/)4 eql 3", () => expect(calculation).eql(3));
 			it("+,`(2, 3)(4, 5) eql 9", () => expect(applyToBacktick(2, 3)(4, 5)).eql(9));
+			it('(5,-)(2) eql 3', () => expect(fiveMinus(2)).eql(3));
 		});
 
 		describe("applyToArray ?AA", () => {
@@ -108,10 +126,13 @@ describe("Operators", () => {
 			applyToArray		,
 			calculation			2,(10/ 5-)
 			calculationB		(4 5 6),(# ])
+			sevenApplyToArray	7,(+2 -)
 		*/
 			it("applyToArray(2, [x => 10 / x, x => 5 - x]) eql [5, 3]", () => expect(applyToArray(2, [x => 10 / x, x => 5 - x])).eql([5, 3]));
 			it("2,(10/ 5-) eql [5, 3]", () => expect(calculation).eql([5, 3]));
 			it("(4 5 6),(# ]) eql [3, 6]", () => expect(calculationB).eql([3, 6]));
+			it('7,(+2 -)[0] eql 9', () => expect(sevenApplyToArray[0]).eql(9));
+			it('7,(+2 -)[1](3) eql 4', () => expect(sevenApplyToArray[1](3)).eql(4));
 		});
 	});
 });
