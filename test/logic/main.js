@@ -7,14 +7,22 @@ describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
 		/*ts
-			pipe				.
-			calculation			(+2.(*3))4
-			pipeToBacktick		+2.`
+			pipe						.
+			calculation					(+2.(*3))4
+			pipeToBacktick				+2.`
+			firstThen					[pipe
+			thenDivideByTwo				pipe(/2)
+			firstThenDivideByTwo		[pipe(/2)
+			sizeLessThanThree			#.<3
 		*/
 
 			it("pipe(x => x + 2, x => x * 3)(4) eql 18", () => expect(pipe(x => x + 2, x => x * 3)(4)).eql(18));
 			it("(+2.(*3))4 eql 18", () => expect(calculation).eql(18));
 			it("+2.`(3)(4) eql 5", () => expect(pipeToBacktick(3)(4)).eql(5));
+			it("[.(value => value * 2)([3, 4, 5]) eql 6", () => expect(firstThen(value => value * 2)([3, 4, 5])).eql(6));
+			it(".(/2)(array => array[0])([10, 8, 9]) eql 5", () => expect(thenDivideByTwo(array => array[0])([10, 8, 9])).eql(5));
+			it("[./2([4, 5, 7]) eql 4", () => expect(firstThenDivideByTwo([4, 5, 7])).eql(2));
+			it('#.<3([4, 5]) eql true', () => expect(sizeLessThanThree([4, 5])).eql(true));
 		});
 
 		describe("binaryUnaryPipe (XYZ)(ZW)(XYW)", () => {
