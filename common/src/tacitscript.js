@@ -514,7 +514,11 @@ let asterisk = (left, right) => {
 // asterisk.types = [[0, 0, 0]];
 let dollar = (left, right) => {
 	if (isArray(right)) {
-		if (isFunction(left)) return right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // insert 20?
+		if (isFunction(left)) {
+			const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // insert 20?
+
+			return result;
+		}
 		if (isString(left)) return pipe(map(toString), join(left))(right); // join SAS
 	}
 	if (isArray(left)) { // reduce 000
@@ -522,7 +526,7 @@ let dollar = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator $ with arguments: ${JSON.stringify({left, right})}`;
-}; dollar.types = [[["V", "V", "V"], "A", "?"], [[["X", "Y"], "X", "Y"], "A", "?"], ["S", "A", "S"], ["A", "A", "?"]];
+}; dollar.types = [[["V", "V", "X"], "A", "X"], [[["X", "Y"], "X", "Y"], "A", "?"], ["S", "A", "S"], ["A", "A", "?"], [[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]]];
 // dollar.types = [[2, 0, "?"], [0, 0, "?"]];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at
@@ -537,7 +541,7 @@ let apostrophe = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ' with arguments: ${JSON.stringify({left, right})}`;
-}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["?", "B"], "A", "?"]];
+}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["V", "B"], "A", "V"]];
 // apostrophe.types = [[0, 0, "?"], [1, 0, 0], [0, 1, 1]];
 let equal = (left, right) => {
 	return toString(left) === toString(right);
@@ -604,7 +608,7 @@ let ampersand = (left, right) => {
 	}
 
 	return left && right; // andValue 000
-}; ampersand.types = [["V", "V", "V"], [["?", "?"], ["?", "?"], ["?", "?"]]];
+}; ampersand.types = [["V", "V", "V"], [["V", "V"], ["V", "V"], ["V", "V"]]];
 // ampersand.types = [[0, 0, 0], [1, 1, 1]];
 
 //----------------------------------------------------------

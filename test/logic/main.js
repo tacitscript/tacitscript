@@ -9,12 +9,14 @@ mocha.setup('bdd');
 describe("Underscore", () => {
 	describe("intersection", () => {
 	/*ts
+		intermediateF		((1 2 3) (2 3 4)).'@
+		intermediateL		&$
+		intermediateK		intermediateF.intermediateL
 		intermediateJ		&$(<2 <3 <4)
 		intermediateI		<2&(>0)
 		//intermediateE		((1 2 3) (2 3 4)).'@.&$.(=.)
 		intermediateH		((1 2 3) (2 3 4)).'@.&$
 		intermediateG		(2 3 4).~'
-		intermediateF		((1 2 3) (2 3 4)).'@
 		intermediateD		=.'(1 2 3)
 		intermediateC		=2'(1 2 3)
 		intermediateB		(=.'(1 2 3))*(2 3 4 5)
