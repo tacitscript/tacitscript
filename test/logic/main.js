@@ -20,9 +20,11 @@ describe("Operators", () => {
 		describe("applyTo X(XY)Y", () => {
 		/*ts
 			applyTo				,
+			calculation			3,(2*)
 		*/
 
 			it("applyTo(3, x => 2 * x) eql 6", () => expect(applyTo(3, x => 2 * x)).eql(6));
+			it("3,(2*) eql 6", () => expect(calculation).eql(6));
 		});
 	});
 });
