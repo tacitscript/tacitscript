@@ -31,10 +31,12 @@ describe("Operators", () => {
 		/*ts
 			binaryPipe			.
 			calculation			6(/.(*3))2
+			pipeToBacktick		+.`
 		*/
 
 			it("binaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
 			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
+			it("+.`(2, 3)(4, 5) eql 5", () => expect(pipeToBacktick(2, 3)(4, 5)).eql(5));
 		});
 
 		describe("zipApplyTo AAA", () => {
@@ -65,10 +67,12 @@ describe("Operators", () => {
 		/*ts
 			applyToBinary		,
 			calculation			(12,/)4
+			applyToBacktick		+,`
 		*/
 
 			it("applyToBinary(12, (x, y) => x / y)(4) eql 3", () => expect(applyToBinary(12, (x, y) => x / y)(4)).eql(3));
 			it("(12,/)4 eql 3", () => expect(calculation).eql(3));
+			it("+,`(2, 3)(4, 5) eql 9", () => expect(applyToBacktick(2, 3)(4, 5)).eql(9));
 		});
 
 		describe("applyToArray ?AA", () => {
