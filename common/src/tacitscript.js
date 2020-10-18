@@ -420,7 +420,7 @@ let comma = (left, right) => {
 	} else {
 		// applyToBinary X(XYZ)(YZ)
 		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isValue(left) && isBinaryFunction(right) && solutions021.length) { // 021 eg. 2.+
+		if (isValue(left) && isBinaryFunction(right) && solutions021.length) { // 021 eg. 2,+
 			let fn = value => leftApply(left, right)(value);
 
 			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
@@ -459,12 +459,12 @@ let plus = (left, right) => {
 	return left + right; // NNN
 }; plus.types = [["N", "N", "N"], ["S", "V", "S"], ["A", "A", "A"], ["O", "O", "O"]];
 let slash = (left, right) => {
-	if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+	//if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 
 	if (right === 0) return undefined;
 
 	return left / right;
-}; slash.types = [["N", "N", "N"], [["?", "V"], "A", "O"]];
+}; slash.types = [["N", "N", "N"]/*, [["?", "V"], "A", "O"]*/];
 let less = (left, right) => {
 	if (isFunction(left) && isArray(right)) return sortBy(left)(right);
 

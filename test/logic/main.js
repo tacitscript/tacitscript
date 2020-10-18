@@ -7,6 +7,7 @@ describe("Operators", () => {
 	describe(".", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
 		/*ts
+			calculations		(12,/)4
 			pipe				.
 			calculation			(+2.(*3))4
 		*/
@@ -20,19 +21,21 @@ describe("Operators", () => {
 		describe("applyTo X(XY)Y", () => {
 		/*ts
 			applyTo				,
-			calculation			3,(2*)
+			calculation			3,(12/)
 		*/
 
-			it("applyTo(3, x => 2 * x) eql 6", () => expect(applyTo(3, x => 2 * x)).eql(6));
-			it("3,(2*) eql 6", () => expect(calculation).eql(6));
+			it("applyTo(3, x => 12 / x) eql 4", () => expect(applyTo(3, x => 12 / x)).eql(4));
+			it("3,(12/) eql 4", () => expect(calculation).eql(4));
 		});
 
 		describe("applyToBinary X(XYZ)(YZ)", () => {
 		/*ts
 			applyToBinary		,
+			calculation			(12,/)4
 		*/
 
-			it("applyToBinary(3, (x, y) => x * y)(4) eql 12", () => expect(applyToBinary(3, (x, y) => x * y)(4)).eql(12));
+			it("applyToBinary(12, (x, y) => x / y)(4) eql 3", () => expect(applyToBinary(12, (x, y) => x / y)(4)).eql(3));
+			it("(12,/)4 eql 3", () => expect(calculation).eql(3));
 		});
 	});
 });
