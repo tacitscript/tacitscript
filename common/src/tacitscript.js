@@ -385,25 +385,13 @@ let dot = (left, right) => {
 			return fn;
 		}
 
-		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
-		if (isUnaryFunction(right) && solutionsInvert.length) {
-			let result = apply(right, left);
-
-			if (isFunction(result)) result.types = pipe(
-				map(([leftType, rightType]) => rightType[1]),
-				filter(Array.isArray)
-			)(solutionsInvert);
-
-			return result;
-		}
+		// applyTo
 	}
 
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
 }; dot.types = [
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe
 	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]],
-	["X", ["X", "Y"], "Y"],
-	["X", ["X", "Y", "Z"], ["Y", "Z"]],
 	["V", "A", "A"],
 	[["X", "?"], "A", ["X", "A"]],
 	[["X", "Y", "?"], "A", ["X", "Y", "?"]],
@@ -437,10 +425,24 @@ let comma = (left, right) => {
 			)([left, right])
 		}
 	} else {
+		// applyTo X(XY)Y
+		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
+		if (isUnaryFunction(right) && solutionsInvert.length) {
+			let result = apply(right, left);
+
+			if (isFunction(result)) result.types = pipe(
+				map(([leftType, rightType]) => rightType[1]),
+				filter(Array.isArray)
+			)(solutionsInvert);
+
+			return result;
+		}
 	}
 
 	throw `Unable to resolve application of operator , with arguments: ${JSON.stringify({left, right})}`;
 }; comma.types = [
+	["X", ["X", "Y"], "Y"], // applyTo
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary
 	["A", "A", "A"],
 	[["X", "?"], "A", ["X", "A"]],
 	[["X", "Y", "?"], "A", ["X", "Y", "A"]]
