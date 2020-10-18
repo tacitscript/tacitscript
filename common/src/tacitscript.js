@@ -348,14 +348,7 @@ let dot = (left, right) => {
 			return fn;
 		}
 
-		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isValue(left) && isBinaryFunction(right) && solutions021.length) { // 021 eg. 2.+
-			let fn = value => leftApply(left, right)(value);
-
-			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
-
-			return fn;
-		}
+		// 021
 
 		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) { // 121 eg. =1.?
@@ -425,6 +418,16 @@ let comma = (left, right) => {
 			)([left, right])
 		}
 	} else {
+		// applyToBinary X(XYZ)(YZ)
+		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
+		if (isValue(left) && isBinaryFunction(right) && solutions021.length) { // 021 eg. 2.+
+			let fn = value => leftApply(left, right)(value);
+
+			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
+
+			return fn;
+		}
+
 		// applyTo X(XY)Y
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
 		if (isUnaryFunction(right) && solutionsInvert.length) {

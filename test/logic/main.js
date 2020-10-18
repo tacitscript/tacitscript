@@ -26,6 +26,14 @@ describe("Operators", () => {
 			it("applyTo(3, x => 2 * x) eql 6", () => expect(applyTo(3, x => 2 * x)).eql(6));
 			it("3,(2*) eql 6", () => expect(calculation).eql(6));
 		});
+
+		describe("applyToBinary X(XYZ)(YZ)", () => {
+		/*ts
+			applyToBinary		,
+		*/
+
+			it("applyToBinary(3, (x, y) => x * y)(4) eql 12", () => expect(applyToBinary(3, (x, y) => x * y)(4)).eql(12));
+		});
 	});
 });
 
