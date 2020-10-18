@@ -4,17 +4,7 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Operators", () => {
-	describe(".", () => {
-		describe("pipeToArray (??)A(?A)", () => {
-		/*ts
-			arrayPipe			.
-			calculation			(10/.(10- 3*))2
-		*/
-
-			it("arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x])(2) eql [5, 15]", () => expect(arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x])(2)).eql([5, 15]));
-			it("(10/.(10- 3*))2 eql [5, 15]", () => expect(calculation).eql([5, 15]));
-		});
-
+	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
 		/*ts
 			pipe				.
@@ -27,16 +17,46 @@ describe("Operators", () => {
 			it("+2.`(3)(4) eql 5", () => expect(pipeToBacktick(3)(4)).eql(5));
 		});
 
-		describe("binaryPipe (XYZ)(ZW)(XYW)", () => {
+		describe("binaryUnaryPipe (XYZ)(ZW)(XYW)", () => {
 		/*ts
-			binaryPipe			.
+			binaryUnaryPipe		.
 			calculation			6(/.(*3))2
 			pipeToBacktick		+.`
 		*/
 
-			it("binaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
+			it("binaryUnaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryUnaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
 			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
 			it("+.`(2, 3)(4, 5) eql 5", () => expect(pipeToBacktick(2, 3)(4, 5)).eql(5));
+		});
+
+		describe("unaryBinaryPipe (XY)(YZW)(X(ZW))", () => {
+		/*ts
+			unaryBinaryPipe		.
+			calculation			((-3./)9)3
+		*/
+
+			it("unaryBinaryPipe(x => x - 3, (x, y) => x / y)(9)(3) eql 2", () => expect(unaryBinaryPipe(x => x - 3, (x, y) => x / y)(9)(3)).eql(2));
+			it("((-3./)9)3 eql 2", () => expect(calculation).eql(2));
+		});
+
+		describe("pipeToArray (??)A(?A)", () => {
+		/*ts
+			arrayPipe			.
+			calculation			(10/.(10- 3*))2
+		*/
+
+			it("arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x])(2) eql [5, 15]", () => expect(arrayPipe(x => 10 / x, [x => 10 - x, x => 3 * x])(2)).eql([5, 15]));
+			it("(10/.(10- 3*))2 eql [5, 15]", () => expect(calculation).eql([5, 15]));
+		});
+
+		describe("binaryPipeToArray (???)A(??A)", () => {
+		/*ts
+			binaryPipeToArray	.
+			calculation			5(-.(10- 3*))2
+		*/
+
+			it("binaryPipeToArray((x, y) => x - y, [x => 10 - x, x => 3 * x])(5, 2) eql [7, 9]", () => expect(binaryPipeToArray((x, y) => x - y, [x => 10 - x, x => 3 * x])(5, 2)).eql([7, 9]));
+			it("5(-.(10- 3*))2 eql [7, 9]", () => expect(calculation).eql([7, 9]));
 		});
 
 		describe("zipApplyTo AAA", () => {
@@ -50,7 +70,7 @@ describe("Operators", () => {
 		})
 	});
 
-	describe(",", () => {
+	describe(", (comma)", () => {
 		describe("applyTo X(XY)Y", () => {
 		/*ts
 			applyTo				,
