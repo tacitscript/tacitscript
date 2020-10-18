@@ -375,6 +375,7 @@ let dot = (left, right) => {
 			return fn;
 		}
 
+		// pipe (XY)(YZ)(XZ)
 		const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) { // 111 eg. +1./2
 			let fn = value => right(left(value));
@@ -398,33 +399,52 @@ let dot = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
-}; dot.types = [[["X", "Y"], ["Y", "Z"], ["X", "Z"]], [["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], ["X", ["X", "Y"], "Y"], ["X", ["X", "Y", "Z"], ["Y", "Z"]], ["V", "A", "A"], [["X", "?"], "A", ["X", "A"]],
-	[["X", "Y", "?"], "A", ["X", "Y", "?"]], [["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], [["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]], [["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]]];
+}; dot.types = [
+	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe
+	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]],
+	["X", ["X", "Y"], "Y"],
+	["X", ["X", "Y", "Z"], ["Y", "Z"]],
+	["V", "A", "A"],
+	[["X", "?"], "A", ["X", "A"]],
+	[["X", "Y", "?"], "A", ["X", "Y", "?"]],
+	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]],
+	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]],
+	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]]
+];
 //dot.types = [[1, 1, 1], [2, 1, 2], [0, 1, 0], [0, 2, 1], [0, 0, 0], [1, 0, 1], [2, 0, 2]];
 let comma = (left, right) => {
 	if (isUndefined(left) || isUndefined(right)) return undefined;
 
-	if (isUnaryFunction(left) && isArray(right)) { // 101
-		let fn = x => comma(left(x), right);
-		fn.types = combinations(map(first)(types(left)))(["A"]);
+	const typeCombinations = combinations(types(left))(types(right));
 
-		return fn;
-	}
-	if (isBinaryFunction(left) && isArray(right)) { // 202
-		let fn = (x, y) => comma(left(x, y), right);
-		fn.types = map(pipe(take(2), append("A")))(types(left));
+	if (isArray(right)) {
+		if (isUnaryFunction(left)) { // 101
+			let fn = x => comma(left(x), right);
+			fn.types = combinations(map(first)(types(left)))(["A"]);
 
-		return fn;
-	}
-	if (isArray(left) && isArray(right)) { // 000
-		return pipe(
-			transpose,
-			map(([leftValue, rightValue]) => dot(leftValue, rightValue)),
-		)([left, right])
+			return fn;
+		}
+		if (isBinaryFunction(left)) { // 202
+			let fn = (x, y) => comma(left(x, y), right);
+			fn.types = map(pipe(take(2), append("A")))(types(left));
+
+			return fn;
+		}
+		if (isArray(left)) { // 000
+			return pipe(
+				transpose,
+				map(([leftValue, rightValue]) => dot(leftValue, rightValue)),
+			)([left, right])
+		}
+	} else {
 	}
 
 	throw `Unable to resolve application of operator , with arguments: ${JSON.stringify({left, right})}`;
-}; comma.types = [["A", "A", "A"], [["X", "?"], "A", ["X", "A"]], [["X", "Y", "?"], "A", ["X", "Y", "A"]]]
+}; comma.types = [
+	["A", "A", "A"],
+	[["X", "?"], "A", ["X", "A"]],
+	[["X", "Y", "?"], "A", ["X", "Y", "A"]]
+];
 // comma.types = [[0, 0, 0], [1, 0, 1], [2, 0, 2]];
 let plus = (left, right) => {
 	if (typeof left === "string") return `${left}${toString(right)}`; // S?S
