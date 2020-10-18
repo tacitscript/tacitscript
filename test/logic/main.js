@@ -8,9 +8,11 @@ describe("Operators", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
 		/*ts
 			pipe				.
+			calculation			(+2.(*3))4
 		*/
 
 			it("pipe(x => x + 2, x => x * 3)(4) eql 18", () => expect(pipe(x => x + 2, x => x * 3)(4)).eql(18));
+			it("(+2.(*3))4 eql 18", () => expect(calculation).eql(18));
 		});
 	});
 
