@@ -30,11 +30,15 @@ describe("Operators", () => {
 			binaryUnaryPipe		.
 			calculation			6(/.(*3))2
 			pipeToBacktick		+.`
+			add					:.+$
+			addTwoAndThree		2add3
 		*/
 
 			it("binaryUnaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryUnaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
 			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
 			it("+.`(2, 3)(4, 5) eql 5", () => expect(pipeToBacktick(2, 3)(4, 5)).eql(5));
+			it('2(:.+$)3 eql 5', () => expect(addTwoAndThree).eql(5));
+			it(':.+$(2, 3) eql 5', () => expect(add(2, 3)).eql(5));
 		});
 
 		describe("unaryBinaryPipe (XY)(YZW)(X(ZW))", () => {
