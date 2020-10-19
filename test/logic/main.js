@@ -123,16 +123,24 @@ describe("Operators", () => {
 
 		describe("applyToArray ?AA", () => {
 		/*ts
-			applyToArray		,
-			calculation			2,(10/ 5-)
-			calculationB		(4 5 6),(# ])
-			sevenApplyToArray	7,(+2 -)
+			applyToArray			,
+			calculation				2,(10/ 5-)
+			calculationB			(4 5 6),(# ])
+			sevenApplyToArray		7,(+2 -)
+			sixApplyToArray			6,
+			stringApplyToArray		"hello",
+			applyToArrayArray		,(# ])
+			arrayApplyToArray		(5 6),(# [)
 		*/
 			it("applyToArray(2, [x => 10 / x, x => 5 - x]) eql [5, 3]", () => expect(applyToArray(2, [x => 10 / x, x => 5 - x])).eql([5, 3]));
 			it("2,(10/ 5-) eql [5, 3]", () => expect(calculation).eql([5, 3]));
 			it("(4 5 6),(# ]) eql [3, 6]", () => expect(calculationB).eql([3, 6]));
 			it('7,(+2 -)[0] eql 9', () => expect(sevenApplyToArray[0]).eql(9));
 			it('7,(+2 -)[1](3) eql 4', () => expect(sevenApplyToArray[1](3)).eql(4));
+			it("6,([x => x + 3, x => x * 3]) eql [5, 6]", () => expect(sixApplyToArray([x => x + 3, x => x * 3])).eql([9, 18]));
+			it("\"hello\",([x => x.length, x => x[0]]) eql [5, \"h\"]", () => expect(stringApplyToArray([x => x.length, x => x[0]])).eql([5, "h"]));
+			it(",(# ])([7, 8, 9]) eql [3, 9]", () => expect(applyToArrayArray([7, 8, 9])).eql([3, 9]));
+			it("(5 6),(# [) eql [2, 5]", () => expect([arrayApplyToArray, ts.typeOf(arrayApplyToArray)]).eql([[2, 5], "A"]));
 		});
 	});
 });

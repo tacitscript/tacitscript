@@ -157,7 +157,7 @@ const processSymbols = function(symbols, acc, userDefinitions) {
 const deprioritizeMedialDots = function(symbols) {
 	const data = reduce(function(details, symbol) {
 		if (Array.isArray(symbol)) return {segments: details.segments, current: details.current.concat(deprioritizeDots(symbol))};
-		if (".,".includes(symbol)) return {segments: details.segments.concat([details.current, symbol]), current: []};
+		if (/*".,"*/".".includes(symbol)) return {segments: details.segments.concat([details.current, symbol]), current: []};
 
 		return {segments: details.segments, current: details.current.concat([symbol])};
 	})({segments: [], current: []})(symbols);
