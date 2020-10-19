@@ -147,6 +147,41 @@ describe("Operators", () => {
 			it("(5 6),(# [) eql [2, 5]", () => expect([arrayApplyToArray, ts.typeOf(arrayApplyToArray)]).eql([[2, 5], "A"]));
 		});
 	});
+
+	describe("~ (tilde)", () => {
+		describe("negative NN", () => {
+		/*ts
+			negative                    ~
+			negativeFive				~5
+		*/
+			it("~(4) eql -4", () => expect(negative(4)).eql(-4));
+			it("~(-4) eql 4", () => expect(negative(-4)).eql(4));
+			it('~5 eql 5', () => expect(negativeFive).eql(-5));
+		});
+
+		describe("transpose AA", () => {
+		/*ts
+			transposedMatrix				~((1 2 3) (4 5 6) (7 8 9))
+			unequalTransposition			~((1 2 3) (4 5) (6 7 8))
+		*/
+			it('~((1 2 3) (4 5 6) (7 8 9)) eql [[1, 4, 7], [2, 5, 8], [3, 6, 9]]', () => expect(transposedMatrix).eql([[1, 4, 7], [2, 5, 8], [3, 6, 9]]));
+			it('~((1 2 3) (4 5) (6 7 8)) eql [[1, 4, 6], [2, 5, 7]]', () => expect(unequalTransposition).eql([[1, 4, 6], [2, 5, 7]]));
+		});
+
+		describe("flip (XYZ)(YXZ)", () => {
+		/*ts
+			flipMinus				~-
+			flipPairMinus			(:.-$).~
+			flipPairMinusApplied	2flipPairMinus6
+			flipPow					~({"Math.pow")				NB: this causes need for js functions to be imported as VV/VVV rather ??/???
+		*/
+			it('~-(2, 7) eql 5', () => expect(flipMinus(2, 7)).eql(5));
+			it('2((:.-$).~)6 eql 4', () => expect(flipPairMinusApplied).eql(4));
+			it('(:.-$).~(9, 6) eql -3', () => expect(flipPairMinus(9, 6)).eql(-3));
+			it('~({"Math.pow")(2, 3) eql 9', () => expect(flipPow(2, 3)).eql(9));
+		});
+	});
+
 });
 
 mocha.run();

@@ -89,7 +89,7 @@ const types = value => {
 	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
 
-	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["?", "?"] : ["?", "?", "?"]];
+	if (isFunction(value)) return value.types || [contains(value.length)([0, 1]) ? ["V", "V"] : ["V", "V", "V"]]; // assume referenced js functions and not higher order
 
 //	return [[0]];
 };
@@ -662,9 +662,9 @@ let ampersand = (left, right) => {
 // Unary
 
 let tilde = value => { // not referenced directly when passed number (standard form exported)
-	if (isNumber(value)) return -value;
-	if (isArray(value)) return transpose(value);
-	if (isBinaryFunction(value)) {
+	if (isNumber(value)) return -value; // NN negative
+	if (isArray(value)) return transpose(value); // AA transpose
+	if (isBinaryFunction(value)) { // (XYZ)(YXZ) flip
 		let fn = (x, y) => value(y, x);
 
 		fn.types = map(([left, right, output]) => [right, left, output])(types(value));
@@ -673,7 +673,12 @@ let tilde = value => { // not referenced directly when passed number (standard f
 	}
 
 	throw `Unable to resolve application of operator ~ with arguments: ${JSON.stringify({left, right})}`;
-}; tilde.types = [["N", "N"], ["A", "A"], [["X", "Y", "Z"], ["Y", "X", "Z"]]];
+}; 
+tilde.types = [
+	["N", "N"], // negative
+	["A", "A"], // transpose
+	[["X", "Y", "Z"], ["Y", "X", "Z"]], //flip
+];
 // tilde.types = [[0, 0], [2, 2]];
 let underscore = vector => {
 	if (isArray(vector)) return vector.slice(0).reverse();
