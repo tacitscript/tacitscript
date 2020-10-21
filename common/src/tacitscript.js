@@ -315,20 +315,21 @@ let comma = (left, right) => {
 			)([left, right])
 		}
 
-		/*
-		if (isUnaryFunction(left)) { // 101
+		// (XA)A(XA) unaryZipApplyTo +1@,(*2 /2)
+		if (isUnaryFunction(left)) {
 			let fn = x => comma(left(x), right);
 			fn.types = combinations(map(first)(types(left)))(["A"]);
 
 			return fn;
 		}
+
+		// (XYA)A(XYA) binaryZipApplyTo :,(+1 -1)
 		if (isBinaryFunction(left)) { // 202
 			let fn = (x, y) => comma(left(x, y), right);
 			fn.types = map(pipe(take(2), append("A")))(types(left));
 
 			return fn;
 		}
-		*/
 	} else {
 		// X(XYZ)(YZ) applyToBinary 3,+
 		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
@@ -359,8 +360,8 @@ let comma = (left, right) => {
 	["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
 	["X", ["X", "Y"], "Y"], // applyTo 3,+1
 	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+
-	//[["X", "?"], "A", ["X", "A"]],
-	//[["X", "Y", "?"], "A", ["X", "Y", "A"]]
+	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
+	[["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
 ];
 let dot = (left, right) => {
 	if (isUndefined(left) || isUndefined(right)) return undefined;

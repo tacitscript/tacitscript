@@ -164,7 +164,17 @@ describe("Operators", () => {
 
 			it("zipApplyTo([2, 3], [x => 10 / x, x => 7 - x]) eql [5, 4]", () => expect(zipApplyTo([2, 3], [x => 10 / x, x => 7 - x])).eql([5, 4]));
 			it("(2 3),(10/ 7-) eql [5, 4]", () => expect(calculation).eql([5, 4]));
-		})
+		});
+
+		describe("unaryZipApplyTo (XA)A(XA)", () => {
+		/*ts
+			addOneAndZipApply				+1@,(*2 /2)
+			calculation						(+1@,(*2 /2))(3 5)
+		*/
+		
+			it("+1@,(*2 /2)([3, 5]) eql [8, 3]", () => expect(addOneAndZipApply([3, 5])).eql([8, 3]));
+			it("(+1@,(*2 /2))(3 5) eql [8, 3]", () => expect(calculation).eql([8, 3]));
+		});
 	});
 
 	describe("~ (tilde)", () => {
