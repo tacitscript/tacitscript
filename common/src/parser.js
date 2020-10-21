@@ -157,7 +157,7 @@ const processSymbols = function(symbols, acc, userDefinitions) {
 const deprioritizeMedialDots = function(symbols) {
 	const data = reduce(function(details, symbol) {
 		if (Array.isArray(symbol)) return {segments: details.segments, current: details.current.concat(deprioritizeDots(symbol))};
-		if (/*".,"*/".".includes(symbol)) return {segments: details.segments.concat([details.current, symbol]), current: []};
+		if (".,".includes(symbol)) return {segments: details.segments.concat([details.current, symbol]), current: []};
 
 		return {segments: details.segments, current: details.current.concat([symbol])};
 	})({segments: [], current: []})(symbols);
@@ -168,9 +168,9 @@ const deprioritizeMedialDots = function(symbols) {
 };
 const deprioritizeDots = function(symbols) {
 	if (symbols.length < 2) return [symbols];
-	if (["."/*, ","*/].includes(symbols[0]) && ["."/*, ","*/].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
-	if (["."/*, ","*/].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
-	if (["."/*, ","*/].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, -1)).concat([symbols[symbols.length - 1]]);
+	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
+	if ([".", ","].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
+	if ([".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, -1)).concat([symbols[symbols.length - 1]]);
 
 	return [deprioritizeMedialDots(symbols)];
 };
