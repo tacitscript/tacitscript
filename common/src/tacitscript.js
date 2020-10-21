@@ -664,10 +664,15 @@ tilde.types = [
 	[["X", "Y", "Z"], ["Y", "X", "Z"]], // flip ~/
 ];
 let underscore = vector => {
+	// AA reverseArray _(1 2 3)
 	if (isArray(vector)) return vector.slice(0).reverse();
 
+	// SS reverseString _"Hello"
 	return vector.split("").reverse().join(""); // string
-}; underscore.types = [["A", "A"], ["S", "S"]];
+}; underscore.types = [
+	["A", "A"], // reverseArray _(1 2 3)
+	["S", "S"], // reverseString _"Hello"
+];
 // underscore.types = [[0, 0]];
 let bracketleft = vector => {
 	return vector[0];

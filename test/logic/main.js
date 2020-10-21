@@ -221,6 +221,27 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("_ (underscore)", () => {
+		/*ts
+			reverse						_
+		*/
+
+		describe("reverseArray AA", () => {
+		/*ts
+			reversedArray				_(7 8 9)
+		*/
+			it("_([3, 4, 5]) eql [5, 4, 3]", () => expect(reverse([3, 4, 5])).eql([5, 4, 3]));
+			it("_(7 8 9) eql [9, 8, 7]", () => expect(reversedArray).eql([9, 8, 7]));
+		});
+
+		describe("reverseString SS", () => {
+		/*ts
+			reversedString				_"Howdy!"
+		*/
+			it("reverse(\"Hello!\") eql \"!olleH\"", () => expect(reverse("Hello!")).eql("!olleH"));
+			it("_\"Howdy!\" eql \"!ydwoH\"", () => expect(reversedString).eql("!ydwoH"));
+		});
+	});
 });
 
 mocha.run();
