@@ -331,16 +331,6 @@ let comma = (left, right) => {
 			return fn;
 		}
 	} else {
-		// X(XYZ)(YZ) applyToBinary 3,+
-		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isValue(left) && isBinaryFunction(right) && solutions021.length) {
-			let fn = value => leftApply(left, right)(value);
-
-			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
-
-			return fn;
-		}
-
 		// X(XY)Y applyTo 3,+1
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
 		if (isUnaryFunction(right) && solutionsInvert.length) {
@@ -353,15 +343,25 @@ let comma = (left, right) => {
 
 			return result;
 		}
+
+		// X(XYZ)(YZ) applyToBinary 3,+
+		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
+		if (isValue(left) && isBinaryFunction(right) && solutions021.length) {
+			let fn = value => leftApply(left, right)(value);
+
+			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
+
+			return fn;
+		}
 	}
 
 	throw `Unable to resolve application of operator , with arguments: ${JSON.stringify({left, right})}`;
 }; comma.types = [
 	["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
-	["X", ["X", "Y"], "Y"], // applyTo 3,+1
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+
 	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
 	[["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
+	["X", ["X", "Y"], "Y"], // applyTo 3,+1
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+
 ];
 let dot = (left, right) => {
 	if (isUndefined(left) || isUndefined(right)) return undefined;
