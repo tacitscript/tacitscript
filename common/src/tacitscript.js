@@ -414,16 +414,6 @@ let dot = (left, right) => {
 
 			return fn;
 		}		
-/*
-		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) { // 121 eg. =1.?
-			let result = x => right(left, x);
-
-			result.types = map(([leftType, rightType]) => rightType.slice(1))(solutions121);
-
-			return result;
-		}
-*/
 
 		// unaryBinaryPipe (XY)(YZW)(X(ZW)) +1./
 		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
@@ -433,6 +423,16 @@ let dot = (left, right) => {
 			fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions121);
 
 			return fn;
+		}
+
+		// unaryBinaryApply (XY)((XY)ZW)(ZW) =1.?
+		const solutions121a = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
+		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121a.length) {
+			let result = x => right(left, x);
+
+			result.types = map(([leftType, rightType]) => rightType.slice(1))(solutions121a);
+
+			return result;
 		}
 
 		// pipe (XY)(YZ)(XZ) +1./2
@@ -448,18 +448,14 @@ let dot = (left, right) => {
 
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
 }; dot.types = [
-	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
-	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
-	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
 	["A", "A", "A"], // zipApplyTo (3 4).(+1 +)
 	[["?", "?"], "A", ["?", "A"]], // pipeToArray [.(+1 -2)
 	[["?", "?", "?"], "A", ["?", "?", "A"]], // pipeBinaryToArray :.(+$ -$)
+	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
 	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =.'(1 2 3)
-	/*
-	["V", "A", "A"],
-	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]],
-	
-	*/
+	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
+	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]], // unaryBinaryApply =1.?
+	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
 	if (typeof left === "string") return `${left}${toString(right)}`; // S?S
