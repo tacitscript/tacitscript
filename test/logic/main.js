@@ -41,6 +41,16 @@ describe("Operators", () => {
 			it(':.+$(2, 3) eql 5', () => expect(add(2, 3)).eql(5));
 		});
 
+		describe("binaryUnaryApply (XYZ)((YZ)W)(XW)", () => {
+		/*ts
+			contained			=.'(1 2 3)
+			calculation			contained2
+		*/
+
+			it("=.'(1 2 3)(2) eql 2", () => expect(contained(2)).eql(2));
+			it("(=.'(1 2 3))2 eql 2", () => expect(calculation).eql(2));
+		});
+
 		describe("unaryBinaryPipe (XY)(YZW)(X(ZW))", () => {
 		/*ts
 			unaryBinaryPipe		.
