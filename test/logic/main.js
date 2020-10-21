@@ -175,6 +175,16 @@ describe("Operators", () => {
 			it("+1@,(*2 /2)([3, 5]) eql [8, 3]", () => expect(addOneAndZipApply([3, 5])).eql([8, 3]));
 			it("(+1@,(*2 /2))(3 5) eql [8, 3]", () => expect(calculation).eql([8, 3]));
 		});
+
+		describe("binaryZipApplyTo (XYA)A(XYA)", () => {
+		/*ts
+			pairAndArray			:,(+1 -1)
+			calculation				3pairAndArray4
+		*/
+		
+			it(":,(+1 -1)(3, 4) eql [4, 3]", () => expect(pairAndArray(3, 4)).eql([4, 3]));
+			it("3(:,(+1 -1))4 eql [4, 3]", () => expect(calculation).eql([4, 3]));
+		});
 	});
 
 	describe("~ (tilde)", () => {
