@@ -61,6 +61,15 @@ describe("Operators", () => {
 			it("((-3./)9)3 eql 2", () => expect(calculation).eql(2));
 		});
 
+		describe("unaryBinaryApply (XY)((XY)ZW)(ZW)", () => {
+		/*ts
+			isEqualOne			=1.?
+			calculation			isEqualOne2
+		*/
+			it("=1.?(1) eql [1, undefined]", () => expect(isEqualOne(1)).eql([1, undefined]));
+			it("(=1.?)2 eql [undefined, 2]", () => expect(calculation).eql([undefined, 2]));
+		});
+
 		describe("pipeToArray (??)A(?A)", () => {
 		/*ts
 			arrayPipe			.
