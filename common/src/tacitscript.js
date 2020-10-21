@@ -492,8 +492,11 @@ let minus = (left, right) => {
 	return left - right; // minus
 }; minus.types = [["N", "N", "N"], ["S", "O", "O"], ["A", "O", "O"]];
 let colon = (left, right) => {
-	return [left, right];
-}; colon.types = [["?", "?", "A"]];
+	return [left, right]; // ??A pair +:2
+}; 
+colon.types = [
+	["?", "?", "A"], // pair +:2
+];
 let question = (left, right) => {
 	if (isFunction(left)) { // if 100
 		const result = apply(left, right);

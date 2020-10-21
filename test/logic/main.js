@@ -242,6 +242,15 @@ describe("Operators", () => {
 			it("_\"Howdy!\" eql \"!ydwoH\"", () => expect(reversedString).eql("!ydwoH"));
 		});
 	});
+
+	describe(": (colon)", () => {
+		describe("pair ??A", () => {
+		/*ts
+			numberAndString		4:"hello"
+		*/
+			it('4:"hello" eql [4, "hello"]', () => expect(numberAndString).eql([4, "hello"]));
+		});
+	});
 });
 
 mocha.run();
