@@ -307,10 +307,12 @@ let comma = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
 
 	if (isArray(right)) {
-		// ?AA applyToArray 3,(+1 +)
-		const solutions000 = filter(([leftType, rightType]) => rightType === "A")(typeCombinations);
-		if (solutions000.length) { // 000 eg. 2.(+1 -1)
-			return map(value => comma(left, value))(right);
+		// AAA zipApplyTo (3 4),(+1 +)
+		if (isArray(left)) {
+			return pipe(
+				transpose,
+				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
+			)([left, right])
 		}
 
 		/*
@@ -326,7 +328,6 @@ let comma = (left, right) => {
 
 			return fn;
 		}
-		// 000
 		*/
 	} else {
 		// X(XYZ)(YZ) applyToBinary 3,+
@@ -355,9 +356,9 @@ let comma = (left, right) => {
 
 	throw `Unable to resolve application of operator , with arguments: ${JSON.stringify({left, right})}`;
 }; comma.types = [
+	["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
 	["X", ["X", "Y"], "Y"], // applyTo 3,+1
 	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+
-	["?", "A", "A"], // applyToArray 3,(+1 +)
 	//[["X", "?"], "A", ["X", "A"]],
 	//[["X", "Y", "?"], "A", ["X", "Y", "A"]]
 ];
@@ -367,15 +368,13 @@ let dot = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
 
 	if (isArray(right)) {
-		// AAA zipApplyTo (3 4).(+1 +)
-		if (isArray(left)) {
-			return pipe(
-				transpose,
-				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
-			)([left, right])
+		// VAA applyToArray (1 2 3).(# ])
+		const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
+		if (isValue(left) && solutions000.length) {
+			return map(value => comma(left, value))(right);
 		}
 
-		// (??)A(?A) pipeToArray [.(+1 -2)
+		// (VV)A(VA) pipeToArray [.(+1 -2)
 		const solutions101 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 2))(typeCombinations);
 		if (isUnaryFunction(left) && solutions101.length) {
 			let fn = x => map(value => comma(left(x), value))(right);
@@ -385,7 +384,7 @@ let dot = (left, right) => {
 			return fn;
 		}
 
-		// (???)A(??A) pipeBinaryToArray :.(+$ -$)
+		// (VVV)A(VVA) pipeBinaryToArray :.(+$ -$)
 		const solutions202 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 3))(typeCombinations);
 		if (isBinaryFunction(left) && solutions202.length) {
 			let fn = (x, y) => map(value => comma(left(x, y), value))(right);
@@ -448,9 +447,9 @@ let dot = (left, right) => {
 
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
 }; dot.types = [
-	["A", "A", "A"], // zipApplyTo (3 4).(+1 +)
-	[["?", "?"], "A", ["?", "A"]], // pipeToArray [.(+1 -2)
-	[["?", "?", "?"], "A", ["?", "?", "A"]], // pipeBinaryToArray :.(+$ -$)
+	["V", "A", "A"], // applyToArray (1 2 3).(# ])
+	[["V", "V"], "A", ["V", "A"]], // pipeToArray [.(+1 -2) -- OLD (??)A(?A)
+	[["V", "V", "V"], "A", ["V", "V", "A"]], // pipeBinaryToArray :.(+$ -$) -- OLD (???)A(??A)
 	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
 	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =.'(1 2 3)
 	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./

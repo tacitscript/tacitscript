@@ -70,7 +70,7 @@ describe("Operators", () => {
 			it("(=1.?)2 eql [undefined, 2]", () => expect(calculation).eql([undefined, 2]));
 		});
 
-		describe("pipeToArray (??)A(?A)", () => {
+		describe("pipeToArray (VV)A(VA)", () => {
 		/*ts
 			arrayPipe			.
 			calculation			(10/.(10- 3*))2
@@ -80,7 +80,7 @@ describe("Operators", () => {
 			it("(10/.(10- 3*))2 eql [5, 15]", () => expect(calculation).eql([5, 15]));
 		});
 
-		describe("binaryPipeToArray (???)A(??A)", () => {
+		describe("binaryPipeToArray (VVV)A(VVA)", () => {
 		/*ts
 			binaryPipeToArray	.
 			calculation			5(-.(10- 3*))2
@@ -144,7 +144,7 @@ describe("Operators", () => {
 			it('(5,-)(2) eql 3', () => expect(fiveMinus(2)).eql(3));
 		});
 
-		describe("applyToArray ?AA", () => {
+		describe("applyToArray VAA", () => {
 		/*ts
 			applyToArray			,
 			calculation				2,(10/ 5-)
