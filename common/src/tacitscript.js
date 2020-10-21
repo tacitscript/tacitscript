@@ -404,18 +404,17 @@ let dot = (left, right) => {
 
 			return fn;
 		}
-/*
+
+		// binaryUnaryApply (XYZ)((YZ)W)(XW) =.'(1 2 3)
 		const solutions211 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType.slice(1), rightType[0]))(typeCombinations);
-		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { // 211 eg. =.'(1 2 3)
+		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { 
 			let fn = x => right(leftApply(x, left));
 
 			fn.types = map(([leftType, rightType]) => [leftType[1], rightType[1]])(solutions211);
 
 			return fn;
-		}
-
-		// 021
-
+		}		
+/*
 		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) { // 121 eg. =1.?
 			let result = x => right(left, x);
@@ -445,8 +444,6 @@ let dot = (left, right) => {
 
 			return fn;
 		}
-
-		// applyTo
 	}
 
 	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
@@ -457,10 +454,11 @@ let dot = (left, right) => {
 	["A", "A", "A"], // zipApplyTo (3 4).(+1 +)
 	[["?", "?"], "A", ["?", "A"]], // pipeToArray [.(+1 -2)
 	[["?", "?", "?"], "A", ["?", "?", "A"]], // pipeBinaryToArray :.(+$ -$)
+	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =.'(1 2 3)
 	/*
 	["V", "A", "A"],
 	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]],
-	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]]
+	
 	*/
 ];
 let plus = (left, right) => {
