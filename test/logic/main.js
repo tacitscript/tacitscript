@@ -372,17 +372,14 @@ describe("Operators", () => {
 
 		describe("stringConcat SVS", () => {
 		/*ts
-			//undefinedString				"me"+()
 			numberString				"me"+1
 			stringString				"me"+"hello"
 			arrayString					"me"+(1 2 3)
 			singleArrayString			""+(9 )
 			emptyArrayString			"me"+( )
 			objectString				"me"+(\(("a" 1) ))
-			//functionString			me+(+2)
 			mixedString					""+(\(("a" (1 "hello")) ))
 		*/
-			//it('"me"+() eql undefined', () => expect(undefinedString).eql(undefined));
 			it('"me"+1 eql "me1"', () => expect(numberString).eql("me1"));
 			it('"me"+"hello" eql "mehello"', () => expect(stringString).eql("mehello"));
 			it('"me"+(1 2 3) eql "me(1 2 3)"', () => expect(arrayString).eql("me(1 2 3)"));
