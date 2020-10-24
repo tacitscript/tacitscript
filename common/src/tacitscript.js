@@ -690,9 +690,13 @@ let hash = vector => {
 	return vector.length;
 }; hash.types = [["A", "N"], ["S", "N"], ["O", "N"]];
 let backslash = from => {
-	if (Array.isArray(from)) return Object.fromEntries(from );
-	else return Object.entries(from); // from is an object
-}; backslash.types = [["A", "O"], ["O", "A"]];
+	if (Array.isArray(from)) return Object.fromEntries(from ); // AO fromPairs \(("a" 1) ("b" 2))
+	else return Object.entries(from); // OA toPairs \({"{a: 1, b: 2}")
+};
+backslash.types = [
+	["A", "O"], // fromPairs \(("a" 1) ("b" 2))
+	["O", "A"], // toPairs \({"{a: 1, b: 2}")
+];
 let backtick = value => {
 	let fn = dummy => value;
 	fn.types = map(prepend("?"))(types(value));
