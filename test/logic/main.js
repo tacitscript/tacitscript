@@ -5,7 +5,6 @@ mocha.setup('bdd');
 
 
 
-
 describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
@@ -422,6 +421,17 @@ describe("Operators", () => {
 			sum					(+ 0)$
 		*/
 			it('(+ 0)$([2, 3, 4]) eql 9', () => expect(sum([2, 3, 4])).eql(9));
+		});
+	});
+
+	describe("` (backtick)", () => {
+		describe("constant ?(??)", () => {
+		/*ts
+			constNumber			`3
+			constObject			`(\(("a" 3) ))
+		*/
+			it('`3("hello") eql 3', () => expect(constNumber("hello")).eql(3));
+			it('`(\(("a" 3) )([1, 2]) eql {a: 3}', () => expect(constObject([1, 2])).eql({a: 3}));
 		});
 	});
 

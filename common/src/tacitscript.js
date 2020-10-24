@@ -587,7 +587,6 @@ let dollar = (left, right) => {
 	//[[["X", "Y"], "X", "Y"], "A", "Y"],
 	//[[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]],
 ];
-// dollar.types = [[2, 0, "?"], [0, 0, "?"]];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at
 	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // 1A?
@@ -723,11 +722,13 @@ backslash.types = [
 	["O", "A"], // toPairs \({"{a: 1, b: 2}")
 ];
 let backtick = value => {
-	let fn = dummy => value;
+	let fn = dummy => value; // ?(??) constant `2
 	fn.types = map(prepend("?"))(types(value));
 
 	return fn;
-}; backtick.types = [["?", ["?", "?"]]];
+}; backtick.types = [
+	["?", ["?", "?"]], // constant `2
+];
 let braceleft = input => { // should never be referenced directly as literal evaluation - can be referenced as a function
 	if (isArray(input)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(input);
 
