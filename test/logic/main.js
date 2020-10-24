@@ -603,8 +603,54 @@ describe("Operators", () => {
 			it('()=() eql true', () => expect(undefinedEquality).eql(true));
 		});
 	});
+
+
+	describe("| (bar)", () => {
+		describe("orValue VVV", () => {
+		/*ts
+			oneOrTwo			1|2
+			arrayOrArray		(1 2 3)|(4 5)
+			oneOrNull			1|()
+			nullOrOne			()|1
+			nullOr				()|
+			orNull				|()
+			helloOrBye			"hello"|"bye"
+			nullOrHello			()|(1 2 3)
+		*/
+			it('1|2 eql 1', () => expect(oneOrTwo).eql(1));
+			it("(1 2 3)|(4 5) eql [1, 2, 3]", () => expect(arrayOrArray).eql([1, 2, 3]));
+			it('1|() eql 1', () => expect(oneOrNull).eql(1));
+			it('()|1 eql 1', () => expect(nullOrOne).eql(1));
+			it('()|(2) eql 2', () => expect(nullOr(2)).eql(2));
+			it('|()(3) eql 3', () => expect(orNull(3)).eql(3));
+			it('"hello"|"bye" eql "hello"', () => expect(helloOrBye).eql("hello"));
+			it('()|(1 2 3) eql [1, 2, 3]', () => expect(nullOrHello).eql([1, 2, 3]));
+		});
 	
+		describe("orPredicate (??)(??)(??)", () => {
+		/*ts
+			lessThanFiveOrEven				<5|(%2.=0)
+		*/
+			it('<5|(%2.=0)(3) eql true', () => expect(lessThanFiveOrEven(3)).eql(true));
+			it('<5|(%2.=0)(10) not eql undefined', () => expect(lessThanFiveOrEven(10)).not.eql(undefined));
+			it('<5|(%2.=0)(7) eql false', () => expect(lessThanFiveOrEven(7)).eql(false));
+		});
 	
+		describe("orBinary (???)(???)(???)", () => {
+		/*ts
+			lessThanOrEqual						<|=
+			fiveLessThanOrEqualSeven			5lessThanOrEqual7
+			sevenLessThanOrEqualFive			7(<|=)5
+		*/
+			it('5(<|=)7 eql true', () => expect(fiveLessThanOrEqualSeven).eql(true));
+			it('7(<|=)5 eql false', () => expect(sevenLessThanOrEqualFive).eql(false));
+			it('<|=(5, 5) eql true', () => expect(lessThanOrEqual(5, 5)).eql(true));
+			it('<|=(6, 4) eql false', () => expect(lessThanOrEqual(6, 4)).eql(false));
+		});
+	});
+
+
+
 });
 
 mocha.run();

@@ -619,11 +619,11 @@ equal.supportsUndefined = true;
 let bar = (left, right) => {
 	const isFalseyLeft = isFalsey(left);
 
-	if (isFalseyLeft || isFalsey(right)) {
+	if (isFalseyLeft || isFalsey(right)) { // VVV orValue 2|0
 		return isFalseyLeft ? right : left;
 	}
 
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (??)(??)(??) orPredicate >0|(%2.=0)
 		let fn = x => {
 			const leftResult = left(x);
 
@@ -633,7 +633,7 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) {
+	if (isBinaryFunction(left) && isBinaryFunction(right)) { // orBinary <|=
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 
@@ -645,7 +645,11 @@ let bar = (left, right) => {
 	}
 
 	return left;
-}; bar.types = [["V", "V", "V"], [["?", "?"], ["?", "?"], ["?", "?"]], [["?", "?", "?"], ["?", "?", "?"], ["?", "?", "?"]]];
+}; bar.types = [
+	["V", "V", "V"], // orValue 2|0
+	[["?", "?"], ["?", "?"], ["?", "?"]], // orPredicate >0|(%2.=0)
+	[["?", "?", "?"], ["?", "?", "?"], ["?", "?", "?"]] // orBinary <|=
+];
 //bar.types = [[0, 0, 0], [1, 1, 1], [2, 2, 2]];
 bar.supportsUndefined = true;
 let percent = (left, right) => {
