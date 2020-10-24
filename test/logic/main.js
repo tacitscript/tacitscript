@@ -4,7 +4,6 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 
-
 describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
@@ -297,6 +296,26 @@ describe("Operators", () => {
 			it('(<10 <20)?(15) eql [undefined, 15, undefined]', () => expect(tens(15)).eql([undefined, 15, undefined]));
 			it('(<10 <20)?(25) eql [undefined, undefined, 25]', () => expect(tens(25)).eql([undefined, undefined, 25]));
 			it('(<10 <20)?12 eql [undefined, 12, undefined]', () => expect(tensTwelve).eql([undefined, 12, undefined]));
+		});
+	});
+
+	describe("@ (atsign)", () => {
+		describe("map (VV)AA", () => {
+		/*ts
+			timesTwoMapArray			*2@(3 4 5)
+			indexedSum					.(; #.;^).~.+$@
+		*/
+			it("*2@(3 4 5) eql [6, 8, 10]", () => expect(timesTwoMapArray).eql([6, 8, 10]));
+			it('.(; #.;^).~.+$@(4 5 6) = [4, 6, 8]', () => expect(indexedSum([4, 5, 6])).eql([4, 6, 8]))
+		});
+
+		describe("mapBinary (VVV)AA", () => {
+		/*ts
+			contains					:._,(=@.|$ ;).?$.[
+			calculation					2contains(1 2 3)
+		*/
+			it(":.~,(=@.|$ ;).?$.[(2, [1, 2, 3]) eql 2", () => expect(contains(2, [1, 2, 3])).eql(2));
+			it("2(:._,(=@.|$ ;).?$.[)(1 2 3) eql 2", () => expect(calculation).eql(2));
 		});
 	});
 
