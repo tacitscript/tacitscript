@@ -528,7 +528,6 @@ let question = (left, right) => {
 	[["V", "B"], "V", "A"], // if <3?2
 	["A", "V", "A"], // cond (<10 <20)?15
 ];
-//question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	const applyLeft = value => comma(value, left); // apply(left, value);
 	// const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
@@ -550,16 +549,18 @@ let atsign = (left, right) => {
 	//[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
 	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
 ];
-// atsign.types = [[1, 0, 0], [2, 0, 0]];
 let asterisk = (left, right) => {
-	if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // 100
-	if (Array.isArray(left)) { // AOO
+	if (isFunction(left)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
+	if (Array.isArray(left)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 		return pick(left)(right);
 	}
 
-	return left * right; // 000
-}; asterisk.types = [["N", "N", "N"], ["A", "O", "O"], [["?", "?"], "A", "A"]];
-// asterisk.types = [[0, 0, 0]];
+	return left * right; // NNN times 2*3
+}; asterisk.types = [
+	["N", "N", "N"], // times 2*3
+	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
+	[["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
+];
 let dollar = (left, right) => {
 	if (isArray(right)) {
 		if (isFunction(left)) {

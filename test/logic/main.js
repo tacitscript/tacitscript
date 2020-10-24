@@ -319,6 +319,32 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("* (asterisk)", () => {
+		describe("times NNN", () => {
+		/*ts
+			timesSix		*6
+		*/
+			it('*6(4) eql 24', () => expect(timesSix(4)).eql(24));
+		});
+
+		describe("pick AOO", () => {
+		/*ts
+			pickedObject ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
+		*/
+			it('("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3))) eql {a: 1, c: 3}', () => expect(pickedObject).eql({a: 1, c: 3}));
+		});
+
+		describe("filter (VB)AA", () => {
+		/*ts
+			lessThanFilter		<5*(4 9 2 7 3)
+			emptyFilter			;*( )
+		*/
+			it("<5*(4 9 2 7 3) eql [4, 2, 3]", () => expect(lessThanFilter).eql([4, 2, 3]));
+			it(";*( ) eql []", () => expect(emptyFilter).eql([]));
+		});	
+	});
+
+
 });
 
 mocha.run();
