@@ -588,20 +588,28 @@ let dollar = (left, right) => {
 	//[[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]],
 ];
 let apostrophe = (left, right) => {
-	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at
-	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // 1A?
-	if (isString(left) && isObject(right)) return right[left]; // prop SO?
+	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
+	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)find(1 2 3)
+	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
 	if (isArray(left) && (isArray(right) || isObject(right))) {
-		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // over AAA AOO
+		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // AAA AOO over ((1 ) +1)'(3 5 7) (("a" ) +1)'{({"a": 1})
 			return applyOver({path: left[0], fn: left[1], container: right});
 		} else {
-			return path(left)(right); // path AA?, AO?
+			return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
 		}
 	}
 
 	throw `Unable to resolve application of operator ' with arguments: ${JSON.stringify({left, right})}`;
-}; apostrophe.types =[["N", "A", "?"], ["N", "S", "S"], ["S", "O", "?"], ["A", "A", "?"], ["A", "O", "?"], ["A", "O", "O"], ["A", "A", "A"], [["V", "B"], "A", "V"]];
-// apostrophe.types = [[0, 0, "?"], [1, 0, 0], [0, 1, 1]];
+}; apostrophe.types =[
+	["N", "A", "?"], // at 1'(1 2 3)
+	["N", "S", "S"], // at 1'"abc"
+	["S", "O", "?"], // prop "a"'{({"a": 1})
+	["A", "A", "?"], // path (1 )'(5 6 7)
+	["A", "O", "?"], // path ("a" )'{({"a": 1})
+	["A", "O", "O"], // over ((1 ) +1)'(3 5 7)
+	["A", "A", "A"], // over (("a" ) +1)'{({"a": 1})
+	[["V", "B"], "A", "V"], // find (%2.=0)find(1 2 3)
+];
 let equal = (left, right) => {
 	return toString(left) === toString(right);
 }; equal.types = [["V", "V", "B"]];

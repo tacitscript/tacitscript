@@ -495,8 +495,70 @@ describe("Operators", () => {
 			it("identity(<fn>) eql <fn>", () => expect(identity(fn)).eql(fn));
 		});
 	});
-	
-	
+
+	describe("' (apostrophe)", () => {
+		describe("at NA? NSS", () => {
+		/*ts
+			at				'
+			twoAt			2at
+			atArray			at(1 2 3 4)
+			atString		at"help"
+		*/
+			it("2at([1, 2, 3]) eql 3", () => expect(twoAt([1, 2, 3])).eql(3));
+			it("2at(\"help\") eql \"l\"", () => expect(twoAt("help")).eql("l"));
+			it("at(1 2 3 4)(1) eql 2", () => expect(atArray(1)).eql(2));
+			it("at\"help\"(1) eql \"e\"", () => expect(atString(1)).eql("e"));
+		});
+
+		describe("prop SO?", () => {
+		/*ts
+			prop			"key"'(\(("a" 2) ("key" 4)))
+		*/
+			it(`"key"'(\(("a" 2) ("key" 4))) eql 4`, () => expect(prop).eql(4));
+		});
+
+		describe("path AA? AO?", () => {
+		/*ts
+			singleArrayArrayPath					(1 )'(5 6 7)
+			singleArrayObjectPath					("key1" )'(\(("key0" 3) ("key1" 4) ("key3" 5)))
+			multiArrayArrayPath						(1 "mykey" 0)'
+			multiArrayObjectPath					("mykey" 1)'
+		*/
+			it(`(1 )'(5 6 7) eql 6`, () => expect(singleArrayArrayPath).eql(6));
+			it(`("key1" )'(\(("key0" 3) ("key1" 4) ("key3" 5))) eql 4`, () => expect(singleArrayObjectPath).eql(4));
+			it(`(1 "mykey" 0)'([3, {mykey: ["hello", "bye"]}]) eql "hello"`, () => expect(multiArrayArrayPath([3, {mykey: ["hello", "bye"]}])).eql("hello"));
+			it(`("mykey" 1)'({no: "hello", mykey: [5, 44]}) eql 44`, () => expect(multiArrayObjectPath({no: "hello", mykey: [5, 44]})).eql(44));
+			it(`("mykey" 1)'({no: [2, 3]}) eql undefined`, () => expect(multiArrayObjectPath({no: [2, 3]})).eql(undefined));
+		});
+
+		describe("over AOO AAA", () => {
+		/*ts
+			applyAtIndex			((1 ) +1)'(3 5 7)
+			applyAtNegativeIndex	((~2 ) *2)'
+			applyAtKey				(("b" ) +" John")'
+			applyAtInvalidIndex		((3 ) +1)'(0 1 2)
+			applyAtInvalidKey		(("c" ) `"hi")'
+			applyAtPath				((~2 "a" 1) -2)'
+			createAtPath			(("a" "b" "c") `"created")'
+		*/
+			it(`(1 )'(+1)(3 5 7) eql [3, 6, 7]`, () => expect(applyAtIndex).eql([3, 6, 7]));
+			it(`(~2 )'(*2)([1, 2, 3, 4, 5]) eql [1, 2, 3, 8, 5]`, () => expect(applyAtNegativeIndex([1, 2, 3, 4, 5])).eql([1, 2, 3, 8, 5]));
+			it(`("b" )'(+" John")({a: "Hello", b: "Bye", c: "Welcome"}) eql {a: "Hello", b: "Bye John", c: "Welcome"}`, () => expect(applyAtKey({a: "Hello", b: "Bye", c: "Welcome"})).eql({a: "Hello", b: "Bye John", c: "Welcome"}));
+			it(`(3 )'(+1)(0 1 2) eql [0, 1, 2]`, () => expect(applyAtInvalidIndex).eql([0, 1, 2]));
+			it(`("c" )'(\`"hi")({a: "hello", b: "morning"}) eql {a: "hello", b: "morning", c: "hi"}`, () => expect(applyAtInvalidKey({a: "hello", b: "morning"})).eql({a: "hello", b: "morning", c: "hi"}));
+			it(`(~2 "a" 1)'(-2)([1, 2, {a: [0, 1, 2]}, 3]) eql [1, 2, {a: [0, -1, 2]}, 3]`, () => expect(applyAtPath([1, 2, {a: [0, 1, 2]}, 3])).eql([1, 2, {a: [0, -1, 2]}, 3]));
+			it(`(~2 "a" 1)'(-2)([0]) eql [0]`, () => expect(applyAtPath([0])).eql([0]));
+			it(`("a" "b" "c")'(\`"created")({}) eql {a: {b: {c: "created"}}}`, () => expect(createAtPath({})).eql({a: {b: {c: "created"}}}));
+		});
+
+		describe("find (VB)AV", () => {
+			/*ts
+				calculation				(%2.=0)'(1 2 3 4 5 6)
+			*/
+
+			it("(%2.=0)'(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
+		});
+	});
 
 
 });
