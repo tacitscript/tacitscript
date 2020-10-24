@@ -569,18 +569,24 @@ let asterisk = (left, right) => {
 let dollar = (left, right) => {
 	if (isArray(right)) {
 		if (isFunction(left)) {
-			const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // insert 20?
+			const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
 
 			return result;
 		}
-		if (isString(left)) return pipe(map(toString), join(left))(right); // join SAS
+		if (isString(left)) return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
 	}
-	if (isArray(left)) { // reduce 000
+	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 		return reduce(left[0])(left[1])(right);
 	}
 
 	throw `Unable to resolve application of operator $ with arguments: ${JSON.stringify({left, right})}`;
-}; dollar.types = [[["V", "V", "X"], "A", "X"], [[["X", "Y"], "X", "Y"], "A", "?"], ["S", "A", "S"], ["A", "A", "?"], [[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]]];
+}; dollar.types = [
+	[["?", "?", "X"], "A", "X"], // insert +$(1 2)
+	["S", "A", "S"], // join ","$(1 2 3)
+	["A", "A", "?"], // reduce (+ 0)$(1 2 3)
+	//[[["X", "Y"], "X", "Y"], "A", "Y"],
+	//[[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]],
+];
 // dollar.types = [[2, 0, "?"], [0, 0, "?"]];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // at

@@ -3,6 +3,9 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+
+
+
 describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
@@ -387,6 +390,38 @@ describe("Operators", () => {
 			it('"me"+( ) eql "me( )"', () => expect(emptyArrayString).eql("me( )"));
 			it('"me"+(\\(("a" 1) )) eql "me(\\(("a" 1) ))"', () => expect(objectString).eql('me(\\(("a" 1) ))'));
 			it('""+(\\(("a" (1 "hello")) )) eql "(\\(("a" (1 "hello")) ))"', () => expect(mixedString).eql('(\\(("a" (1 "hello")) ))'));
+		});
+	});
+
+	describe("$ (dollar)", () => {
+		describe("join SAS", () => {
+		/*ts
+			csv			","$(1 2 3)
+		*/
+			it('","$(1 2 3) eql "1,2,3"', () => expect(csv).eql("1,2,3"));
+		});
+	
+		describe("insert (??X)AX", () => {
+		/*ts
+			insert						$
+			timesInsert					*$
+			timesInsertSingle			*$(4 )
+			insertEmpty					$( )
+			timesInsertEmpty			*$( )
+			timesInsertArray			*$(5 6 7)
+		*/
+			it("*$([4, 5, 6]) eql 120", () => expect(timesInsert([4, 5, 6])).eql(120));
+			it("*$(4 ) eql 4", () => expect(timesInsertSingle).eql(4));
+			it("$( )((x, y) => x + y) eql undefined", () => expect(insertEmpty((x, y) => x + y)).eql(undefined));
+			it("*$( ) eql undefined", () => expect(timesInsertEmpty).eql(undefined));
+			it("*$(5 6 7) eql [210, N]", () => expect([timesInsertArray, ts.typeOf(timesInsertArray)]).eql([210,  "N"]));
+		});
+	
+		describe("reduce AA?", () => {
+		/*ts
+			sum					(+ 0)$
+		*/
+			it('(+ 0)$([2, 3, 4]) eql 9', () => expect(sum([2, 3, 4])).eql(9));
 		});
 	});
 
