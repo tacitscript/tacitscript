@@ -354,12 +354,10 @@ describe("Operators", () => {
 		describe("arrayConcat AAA", () => {
 		/*ts
 			concatArray				(1 2 3)+("hello" (4 5))
-			//undefinedConcatArray	()+(1 2 3)
-			//arrayConcatUndefined	(1 2 3)+()
+			emptyConcatArray		( )+(1 2 3)
 		*/
 			it('(1 2 3)+("hello" (4 5)) eql [1, 2, 3, "hello", [4, 5]]', () => expect(concatArray).eql([1, 2, 3, "hello", [4, 5]]));
-			//it('(1 2 3)+() eql undefined', () => expect(undefinedConcatArray).eql(undefined));
-			//it('()+(1 2 3) eql undefined', () => expect(arrayConcatUndefined).eql(undefined));
+			it('( )+(1 2 3) eql [1, 2, 3]', () => expect(emptyConcatArray).eql([1, 2, 3]));
 		});
 
 		describe("merge OOO", () => {
