@@ -498,13 +498,14 @@ colon.types = [
 	["?", "?", "A"], // pair +:2
 ];
 let question = (left, right) => {
-	if (isFunction(left)) { // if 100
-		const result = left(right); // apply(left, right);
+	if (isFunction(left)) { // (VB)VA if <3?2
+		// const result = apply(left, right);
+		const result = left(right); // AVA  cond (<10 <20)?15
 
 		return isFalsey(result) ? [undefined, right] : [right, undefined];
 	}
 
-	if (isArray(left)) { // cond AAA
+	if (isArray(left)) { // AVA cond (<10 <20)?15
 		const output = Array.from(Array(left.length + 1));
 		let i = 0;
 
@@ -523,7 +524,10 @@ let question = (left, right) => {
 	}
 
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
-}; question.types = [[["V", "B"], "V", "A"], ["A", "?", "A"]];
+}; question.types = [
+	[["V", "B"], "V", "A"], // if <3?2
+	["A", "V", "A"], // cond (<10 <20)?15
+];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
 	const applyLeft = value => comma(value, left); // apply(left, value);

@@ -4,6 +4,28 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 
+describe("? (question)", () => {
+	describe("if (VB)VA", () => {
+	/*ts
+		yes				<3?2
+		no				<3?4
+	*/
+		it("<3?2 eql [2, undefined]", () => expect(yes).eql([2, undefined]));
+		it("<3?4 eql [undefined, 4]", () => expect(no).eql([undefined, 4]));
+	});
+
+	describe("cond AVA", () => {
+	/*ts
+		tens			(<10 <20)?
+		tensTwelve		tens12
+	*/
+		it('(<10 <20)?(5) eql [5, undefined, undefined]', () => expect(tens(5)).eql([5, undefined, undefined]));
+		it('(<10 <20)?(15) eql [undefined, 15, undefined]', () => expect(tens(15)).eql([undefined, 15, undefined]));
+		it('(<10 <20)?(25) eql [undefined, undefined, 25]', () => expect(tens(25)).eql([undefined, undefined, 25]));
+		it('(<10 <20)?12 eql [undefined, 12, undefined]', () => expect(tensTwelve).eql([undefined, 12, undefined]));
+	});
+});
+
 
 describe("Operators", () => {
 	describe(". (dot)", () => {
@@ -277,6 +299,29 @@ describe("Operators", () => {
 			it('\\(\\(("a" 1) ("b" \(("ba" 2) )))) eql [["a", 1], ["b", {ba: 2}]] type A', () => expect([fromCompoundObject, ts.typeOf(fromCompoundObject)]).eql([[["a", 1], ["b", {ba: 2}]], "A"]));
 		});
 	});
+
+	describe("? (question)", () => {
+		describe("if (VB)VA", () => {
+		/*ts
+			yes				<3?2
+			no				<3?4
+		*/
+			it("<3?2 eql [2, undefined]", () => expect(yes).eql([2, undefined]));
+			it("<3?4 eql [undefined, 4]", () => expect(no).eql([undefined, 4]));
+		});
+
+		describe("cond AVA", () => {
+		/*ts
+			tens			(<10 <20)?
+			tensTwelve		tens12
+		*/
+			it('(<10 <20)?(5) eql [5, undefined, undefined]', () => expect(tens(5)).eql([5, undefined, undefined]));
+			it('(<10 <20)?(15) eql [undefined, 15, undefined]', () => expect(tens(15)).eql([undefined, 15, undefined]));
+			it('(<10 <20)?(25) eql [undefined, undefined, 25]', () => expect(tens(25)).eql([undefined, undefined, 25]));
+			it('(<10 <20)?12 eql [undefined, 12, undefined]', () => expect(tensTwelve).eql([undefined, 12, undefined]));
+		});
+	});
+
 });
 
 mocha.run();
