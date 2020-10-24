@@ -435,6 +435,22 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("] (bracketRight)", () => {
+		describe("last A?", () => {
+		/*ts
+			last                        ]
+		*/
+			it("last([1, 2, 3]) eql 3", () => expect(last([1, 2, 3])).eql(3));
+		});
+
+		describe("lastInString SS", () => {
+		/*ts
+			lastInString                ]
+		*/
+			it("lastInString(\"abcd\") eql \"d\"", () => expect(lastInString("abcd")).eql("d"));
+		});
+	});
+
 });
 
 mocha.run();

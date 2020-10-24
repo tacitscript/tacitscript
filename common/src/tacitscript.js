@@ -701,13 +701,18 @@ let underscore = vector => {
 	["A", "A"], // reverseArray _(1 2 3)
 	["S", "S"], // reverseString _"Hello"
 ];
-// underscore.types = [[0, 0]];
 let bracketleft = vector => {
-	return vector[0];
-}; bracketleft.types = [["A", "?"], ["S", "S"]];
+	return vector[0]; // A? SS first firstInString [(1 2 3) ["abc"
+}; bracketleft.types = [
+	["A", "?"], // first [(1 2 3)
+	["S", "S"], // firstInString ["abc"
+];
 let bracketright = vector => {
-	return vector[vector.length - 1];
-}; bracketright.types = [["A", "?"], ["S", "S"]];
+	return vector[vector.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
+}; bracketright.types = [
+	["A", "?"], // last ](1 2 3)
+	["S", "S"], // lastInString ]"abc"
+];
 let hash = vector => {
 	if (isObject(vector)) return Object.keys(vector).length;
 
