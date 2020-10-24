@@ -485,17 +485,21 @@ let greater = (left, right) => {
 	return left > right;
 }; greater.types = [["N", "N", "B"], ["S", "S", "B"]];
 let minus = (left, right) => {
-	if (isString(left) && isObject(right)) { // omitKey
+	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
 		const {[left]: deletedKey, ...remainder} = right;
 
 		return remainder;
 	}
-	if (isArray(left) && isObject(right)) { // omitKeys
+	if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
 		return omit(left)(right);
 	}
 
-	return left - right; // minus
-}; minus.types = [["N", "N", "N"], ["S", "O", "O"], ["A", "O", "O"]];
+	return left - right; // NNN subtract 5-2
+}; minus.types = [
+	["N", "N", "N"], // subtract 5-2
+	["S", "O", "O"], // omitKey "a"-({"{a: 1}")
+	["A", "O", "O"], // omitKeys ("a" "b")-({"{a: 1, b: 2}")
+];
 let colon = (left, right) => {
 	return [left, right]; // ??A pair +:2
 }; 

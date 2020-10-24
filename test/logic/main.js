@@ -626,7 +626,7 @@ describe("Operators", () => {
 			it('"hello"|"bye" eql "hello"', () => expect(helloOrBye).eql("hello"));
 			it('()|(1 2 3) eql [1, 2, 3]', () => expect(nullOrHello).eql([1, 2, 3]));
 		});
-	
+
 		describe("orPredicate (??)(??)(??)", () => {
 		/*ts
 			lessThanFiveOrEven				<5|(%2.=0)
@@ -635,7 +635,7 @@ describe("Operators", () => {
 			it('<5|(%2.=0)(10) not eql undefined', () => expect(lessThanFiveOrEven(10)).not.eql(undefined));
 			it('<5|(%2.=0)(7) eql false', () => expect(lessThanFiveOrEven(7)).eql(false));
 		});
-	
+
 		describe("orBinary (???)(???)(???)", () => {
 		/*ts
 			lessThanOrEqual						<|=
@@ -649,6 +649,34 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("-", () => {
+		describe("minus NNN", () => {
+		/*ts
+			minusFive			4-9
+			minusSix			-6
+			nineMinus			9-
+		*/
+			it('4-9 eql -5', () => expect(minusFive).eql(-5));
+			it('-6(10) eql 4', () => expect(minusSix(10)).eql(4));
+			it('9-(-5) eql 14', () => expect(nineMinus(-5)).eql(14));
+		});
+
+		describe("omitKey SOO", () => {
+		/*ts
+			removedKey			"key1"-(\(("key1" 1) ("key2" 2)))
+		*/
+			it('"key1"-(\\(("key1" 1) ("key2" 2))) eql {key1: 1}', () => expect(removedKey).eql({key2: 2}));
+		});
+
+		describe("omitKeys AOO", () => {
+		/*ts
+			keysOmitted				("a" "no" "hen")-(\(("a" 4) ("be" "hello") ("hen" (1 2 3))))
+			omitTheseKeys			("c" "ex")-
+		*/
+			it('("a" "no" "hen")-(\(("a" 4) ("be" "hello") ("hen" (1 2 3)))) eql {be: "hello"}', () => expect(keysOmitted).eql({be: "hello"}));
+			it('("c" "ex")-({a: "head", ex: 4}) eql {a: "head}', () => expect(omitTheseKeys({a: "head", ex: 4})).eql({a: "head"}));
+		});
+	});
 
 
 });
