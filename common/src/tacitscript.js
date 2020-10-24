@@ -458,12 +458,17 @@ let dot = (left, right) => {
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
-	if (typeof left === "string") return `${left}${toString(right)}`; // S?S
-	if (Array.isArray(left)) return [...left, ...right]; // A?A
-	if (isObject(left)) return  mergeDeep(left, right); // OOO
+	if (typeof left === "string") return `${left}${toString(right)}`; // SVS stringConcat ""+4
+	if (Array.isArray(left)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
+	if (isObject(left)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
 
-	return left + right; // NNN
-}; plus.types = [["N", "N", "N"], ["S", "V", "S"], ["A", "A", "A"], ["O", "O", "O"]];
+	return left + right; // NNN add 2+3
+}; plus.types = [
+	["N", "N", "N"], // add 2+3
+	["S", "V", "S"], // stringConcat ""+4
+	["A", "A", "A"], // arrayConcat (1 2 3)+(4 5 6)
+	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
+];
 let slash = (left, right) => {
 	//if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 

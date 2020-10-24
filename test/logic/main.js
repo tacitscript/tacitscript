@@ -3,7 +3,6 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
-
 describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
@@ -344,6 +343,57 @@ describe("Operators", () => {
 		});	
 	});
 
+	describe("+ (plus)", () => {
+		describe("add NNN", () => {
+		/*ts
+			plusThree		+3
+		*/
+			it("+3(4) eql 7", () => expect(plusThree(4)).eql(7));
+		});
+
+		describe("arrayConcat AAA", () => {
+		/*ts
+			concatArray				(1 2 3)+("hello" (4 5))
+			//undefinedConcatArray	()+(1 2 3)
+			//arrayConcatUndefined	(1 2 3)+()
+		*/
+			it('(1 2 3)+("hello" (4 5)) eql [1, 2, 3, "hello", [4, 5]]', () => expect(concatArray).eql([1, 2, 3, "hello", [4, 5]]));
+			//it('(1 2 3)+() eql undefined', () => expect(undefinedConcatArray).eql(undefined));
+			//it('()+(1 2 3) eql undefined', () => expect(arrayConcatUndefined).eql(undefined));
+		});
+
+		describe("merge OOO", () => {
+			/*ts
+				mergedObjects			\(("a" 1) ("b" \(("b1" 2) ("b3" (1 2)))) ("c" 3))+(\(("b" \(("b2" 2.5) ("b3" (4 )))) ("c" \(("c1" 3.5) ))))
+			*/
+			it(
+				'\\(("a" 1) ("b" \\(("b1" 2) ("b3" (1 2)))) ("c" 3))+(\\(("b" \\(("b2" 2.5) ("b3" (4 )))) ("c" \\(("c1" 3.5) )))) eql {a: 1, b: {b1: 2, b3: [4], b2: 2.5}, c: {c1: 3.5}}',
+				() => expect(mergedObjects).eql({a: 1, b: {b1: 2, b3: [4], b2: 2.5}, c: {c1: 3.5}})
+			);
+		});
+
+		describe("stringConcat SVS", () => {
+		/*ts
+			//undefinedString				"me"+()
+			numberString				"me"+1
+			stringString				"me"+"hello"
+			arrayString					"me"+(1 2 3)
+			singleArrayString			""+(9 )
+			emptyArrayString			"me"+( )
+			objectString				"me"+(\(("a" 1) ))
+			//functionString			me+(+2)
+			mixedString					""+(\(("a" (1 "hello")) ))
+		*/
+			//it('"me"+() eql undefined', () => expect(undefinedString).eql(undefined));
+			it('"me"+1 eql "me1"', () => expect(numberString).eql("me1"));
+			it('"me"+"hello" eql "mehello"', () => expect(stringString).eql("mehello"));
+			it('"me"+(1 2 3) eql "me(1 2 3)"', () => expect(arrayString).eql("me(1 2 3)"));
+			it('""+(9 ) eql "(9 )"', () => expect(singleArrayString).eql("(9 )"));
+			it('"me"+( ) eql "me( )"', () => expect(emptyArrayString).eql("me( )"));
+			it('"me"+(\\(("a" 1) )) eql "me(\\(("a" 1) ))"', () => expect(objectString).eql('me(\\(("a" 1) ))'));
+			it('""+(\\(("a" (1 "hello")) )) eql "(\\(("a" (1 "hello")) ))"', () => expect(mixedString).eql('(\\(("a" (1 "hello")) ))'));
+		});
+	});
 
 });
 
