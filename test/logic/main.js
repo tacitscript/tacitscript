@@ -162,10 +162,14 @@ describe("Operators", () => {
 		/*ts
 			zipApplyTo			,
 			calculation			(2 3),(10/ 7-)
+			topHeavy		(1 2 3),(*3 +7)
+			bottomHeavy		(4 5),(/2 -1 *8)
 		*/
 
 			it("zipApplyTo([2, 3], [x => 10 / x, x => 7 - x]) eql [5, 4]", () => expect(zipApplyTo([2, 3], [x => 10 / x, x => 7 - x])).eql([5, 4]));
 			it("(2 3),(10/ 7-) eql [5, 4]", () => expect(calculation).eql([5, 4]));
+			it('(1 2 3),(*3 +7) eql [3, 9]', () => expect(topHeavy).eql([3, 9]));
+			it('(4 5),(/2 -1 *8) eql [2, 4]', () => expect(bottomHeavy).eql([2, 4]));
 		});
 
 		describe("unaryZipApplyTo (XA)A(XA)", () => {
