@@ -188,7 +188,7 @@ const apply = (left, right) => {
 		let result = leftApply(left, right);
 
 		if (isFunction(result)) {
-			result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
+			if (!result.types) result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
 
 			if (right.supportsUndefined) result.supportsUndefined = true;
 		}
@@ -203,7 +203,7 @@ const apply = (left, right) => {
 		let result = rightApply(left, right);
 
 		if (isFunction(result)) {
-			result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
+			if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
 
 			if (left.supportsUndefined) result.supportsUndefined = true;
 		}
@@ -216,7 +216,7 @@ const apply = (left, right) => {
 	if (unarySolutions.length) {
 		let result = left(right);
 
-		if (isFunction(result)) result.types = map(([leftType, rightType]) => getReducedUnaryType({leftType, rightType}))(unarySolutions);
+		if (isFunction(result) && !result.types) result.types = map(([leftType, rightType]) => getReducedUnaryType({leftType, rightType}))(unarySolutions);
 
 		return result;
 	}
@@ -334,7 +334,7 @@ let comma = (left, right) => {
 		// X(XY)Y applyTo 3,+1
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
 		if (isUnaryFunction(right) && solutionsInvert.length) {
-			let result = apply(right, left);
+			let result = right(left); // apply(right, left);
 
 			if (isFunction(result)) result.types = pipe(
 				map(([leftType, rightType]) => rightType[1]),
@@ -499,7 +499,7 @@ colon.types = [
 ];
 let question = (left, right) => {
 	if (isFunction(left)) { // if 100
-		const result = apply(left, right);
+		const result = left(right); // apply(left, right);
 
 		return isFalsey(result) ? [undefined, right] : [right, undefined];
 	}
@@ -526,8 +526,9 @@ let question = (left, right) => {
 }; question.types = [[["V", "B"], "V", "A"], ["A", "?", "A"]];
 //question.types = [[0, 0, 0], [1, 0, 0]];
 let atsign = (left, right) => {
-	const applyLeft = value => apply(left, value);
-	const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
+	const applyLeft = value => comma(value, left); // apply(left, value);
+	// const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
+	const applyIndexedLeft = (value, index) => comma(value, (() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})());
 
 	if (isObject(right)) {
 		if (isUnaryFunction(left)) return mapObj(applyLeft)(right); // (VV)OO
