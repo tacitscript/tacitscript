@@ -576,7 +576,35 @@ describe("Operators", () => {
 		});
 	});
 
-
+	describe("= (equal)", () => {
+		describe("equals XXX", () => {
+		/*ts
+			equals				=
+			equalsSeven			=7
+			peterEquals			"Peter"=
+			mixedEqualsMixed	(2 "Jane" (3 4))=(2 "Jane" (3 4))
+			failedEquality		2=4
+			arrayEqualsArray	(1 2 3)=(1 2 3)
+			numberEqualsArray	=(1 2 3)
+			inequality			1=2
+			equalsUndefined		1=()
+			mixedEquality		(1 "hello")=(1 "hello")
+			undefinedEquality	()=()
+		*/
+			it("=7(\"Dan\") eql false", () => expect(equalsSeven("Dan")).eql(false));
+			it("\"Peter\"=(\"Peter\") eql true", () => expect(peterEquals("Peter")).eql(true));
+			it("(2 \"Jane\" (3 4))=(2 \"Jane\" (3 4)) eql true", () => expect(mixedEqualsMixed).eql(true));
+			it("2=4 eql false", () => expect(failedEquality).eql(false));
+			it('(1 2 3)=(1 2 3) eql true', () => expect(arrayEqualsArray).eql(true));
+			it('=(1 2 3)(1) eql false', () => expect(numberEqualsArray(1)).eql(false));
+			it('1=2 eql false', () => expect(inequality).eql(false));
+			it('1=() eql false', () => expect(equalsUndefined).eql(false));
+			it('(1 "hello")=(1 "hello") eql true', () => expect(mixedEquality).eql(true));
+			it('()=() eql true', () => expect(undefinedEquality).eql(true));
+		});
+	});
+	
+	
 });
 
 mocha.run();

@@ -611,8 +611,10 @@ let apostrophe = (left, right) => {
 	[["V", "B"], "A", "V"], // find (%2.=0)find(1 2 3)
 ];
 let equal = (left, right) => {
-	return toString(left) === toString(right);
-}; equal.types = [["V", "V", "B"]];
+	return toString(left) === toString(right); // VVB equal 2=4
+}; equal.types = [
+	["V", "V", "B"]
+];
 equal.supportsUndefined = true;
 let bar = (left, right) => {
 	const isFalseyLeft = isFalsey(left);
