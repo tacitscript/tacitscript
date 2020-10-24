@@ -483,10 +483,15 @@ let slash = (left, right) => {
 	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let less = (left, right) => {
-	if (isFunction(left) && isArray(right)) return sortBy(left)(right);
+	if (isFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA ascendingSortByValue ;<("dan" "sue" "alan")
 
-	return left < right;
-}; less.types = [["N", "N", "B"], ["S", "S", "B"], [["?", "?"], "A", "A"]];
+	return left < right; // NNB SSB lessThan s<3 "abc"<"def"
+}; less.types = [
+	["N", "N", "B"], // lessThan 2<3
+	["S", "S", "B"], // lessThan "abc"<"bcd"
+	[["V", "S"], "A", "A"], // ascendingSortByValue ;<("dan" "sue" "alan")
+	[["V", "N"], "A", "A"], // ascendingSortByValue ;<(1 2 3)
+];
 let greater = (left, right) => {
 	return left > right;
 }; greater.types = [["N", "N", "B"], ["S", "S", "B"]];
