@@ -702,6 +702,24 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("#", () => {
+		describe("arrayLength stringLength keyLength AN SN ON", () => {
+		/*ts
+			length					#
+			lengthOfArray			#(3 4 5 6 7)
+			calculation				#"abcd"
+			calculationB			#({"{a: 1, b: 2}")
+		*/
+			it("length([5, 6, 7, 8]) eql 4", () => expect(length([5, 6, 7, 8])).eql(4));
+			it("#(3 4 5 6 7) eql [5, [N]]", () => expect([lengthOfArray, ts.typeOf(lengthOfArray)]).eql([5,  "N"]));
+			it('#"abcd" eql 4', () => expect(calculation).eql(4));
+			it('#({"a": 1, "b": 2}) eql 2', () => expect(calculationB).eql(2));
+		});
+	});
+
+
+
+
 
 });
 

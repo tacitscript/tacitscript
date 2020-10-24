@@ -738,10 +738,14 @@ let bracketright = vector => {
 	["S", "S"], // lastInString ]"abc"
 ];
 let hash = vector => {
-	if (isObject(vector)) return Object.keys(vector).length;
+	if (isObject(vector)) return Object.keys(vector).length; // ON keyLength #({"{a: 1}")
 
-	return vector.length;
-}; hash.types = [["A", "N"], ["S", "N"], ["O", "N"]];
+	return vector.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
+}; hash.types = [
+	["A", "N"], // arrayLength #(4 5 6)
+	["S", "N"], // stringLength #"abcd"
+	["O", "N"], // keyLength #({"{a: 1}")
+];
 let backslash = from => {
 	if (Array.isArray(from)) return Object.fromEntries(from ); // AO fromPairs \(("a" 1) ("b" 2))
 	else return Object.entries(from); // OA toPairs \({"{a: 1, b: 2}")
