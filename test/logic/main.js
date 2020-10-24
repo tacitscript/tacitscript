@@ -129,6 +129,7 @@ describe("Operators", () => {
 			arrayApplyToFirst		(1 2 3),[
 			twoDotPlusThree			2,+3
 			twoApplyToPlusThree		2applyTo(+3)
+			invertedSense			-1,(7,)
 		*/
 
 			it("applyTo(3, x => 12 / x) eql 4", () => expect(applyTo(3, x => 12 / x)).eql(4));
@@ -142,6 +143,7 @@ describe("Operators", () => {
 			it("(1 2 3),[ eql 1]", () => expect(arrayApplyToFirst).eql(1));
 			it("2,+3 eql 5", () => expect(twoDotPlusThree).eql(5));
 			it("2applyTo(+3) eql 5", () => expect(twoApplyToPlusThree).eql(5));
+			it('-1,(7,) eql 6', () => expect(invertedSense).eql(6));
 		});
 
 		describe("applyToBinary X(XYZ)(YZ)", () => {
@@ -162,14 +164,24 @@ describe("Operators", () => {
 		/*ts
 			zipApplyTo			,
 			calculation			(2 3),(10/ 7-)
-			topHeavy		(1 2 3),(*3 +7)
-			bottomHeavy		(4 5),(/2 -1 *8)
+			topHeavy			(1 2 3),(*3 +7)
+			bottomHeavy			(4 5),(/2 -1 *8)
+			commaArray			,(-1 )
+			chainedComma		,(- ),(5, )
+			zipPipe				,(+2 -),(; 5,)
+			zipPipeInPlace		zipPipe(5 3)
+			inlineApplication	(4 8),(+2 -),(; 5,)
 		*/
 
+			it(',(-1 )([5]) eql [4]', () => expect(commaArray([5])).eql([4]));
 			it("zipApplyTo([2, 3], [x => 10 / x, x => 7 - x]) eql [5, 4]", () => expect(zipApplyTo([2, 3], [x => 10 / x, x => 7 - x])).eql([5, 4]));
 			it("(2 3),(10/ 7-) eql [5, 4]", () => expect(calculation).eql([5, 4]));
 			it('(1 2 3),(*3 +7) eql [3, 9]', () => expect(topHeavy).eql([3, 9]));
 			it('(4 5),(/2 -1 *8) eql [2, 4]', () => expect(bottomHeavy).eql([2, 4]));
+			it(',(- ),(5, )([9]) eql 4', () => expect(chainedComma([9])).eql([4]));
+			it(',(+2 -),(; 5,)([7, 9]) eql [9, 4]', () => expect(zipPipe([7, 9])).eql([9, 4]));
+			it(',(+2 -),(; 5.)(5 3) eql [7, -2]', () => expect(zipPipeInPlace).eql([7, -2]));
+			it('(4 8),(+2 -),(; 5.) eql [6, 3]', () => expect(inlineApplication).eql([6, 3]));
 		});
 
 		describe("unaryZipApplyTo (XA)A(XA)", () => {
