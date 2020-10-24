@@ -470,12 +470,18 @@ let plus = (left, right) => {
 	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
 ];
 let slash = (left, right) => {
-	//if (isUnaryFunction(left) && isArray(right)) return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+	if (isUnaryFunction(left) && isArray(right)) {
+		// (VS)AO groupBy [/("ann" "ben" "ade")
+		return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+	}
 
 	if (right === 0) return undefined;
 
-	return left / right;
-}; slash.types = [["N", "N", "N"]/*, [["?", "V"], "A", "O"]*/];
+	return left / right; // NNN divide 8/2
+}; slash.types = [
+	["N", "N", "N"], // divide 8/2
+	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
+];
 let less = (left, right) => {
 	if (isFunction(left) && isArray(right)) return sortBy(left)(right);
 

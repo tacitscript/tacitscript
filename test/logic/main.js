@@ -649,7 +649,7 @@ describe("Operators", () => {
 		});
 	});
 
-	describe("-", () => {
+	describe("- (minus)", () => {
 		describe("minus NNN", () => {
 		/*ts
 			minusFive			4-9
@@ -675,6 +675,30 @@ describe("Operators", () => {
 		*/
 			it('("a" "no" "hen")-(\(("a" 4) ("be" "hello") ("hen" (1 2 3)))) eql {be: "hello"}', () => expect(keysOmitted).eql({be: "hello"}));
 			it('("c" "ex")-({a: "head", ex: 4}) eql {a: "head}', () => expect(omitTheseKeys({a: "head", ex: 4})).eql({a: "head"}));
+		});
+	});
+
+	describe("/ (slash)", () => {
+		describe("divide NNN", () => {
+		/*ts
+			basicDivide				9/2
+			numeratorDivide			8/
+			divideByDenominator		/2
+			divideByZero			/0
+		*/
+			it('9/2 eql 4.5', () => expect(basicDivide).eql(4.5));
+			it('8/(4) eql 2', () => expect(numeratorDivide(4)).eql(2));
+			it('/2(10) eql 5', () => expect(divideByDenominator(10)).eql(5));
+			it('/0(8) eql undefined', () => expect(divideByZero(8)).eql(undefined));
+		});
+
+		describe("groupBy (VS)AO", () => {
+		/*ts
+			groupByFirst	[/("ann" "ben" "ade")
+			groupByEmpty	[/( )
+		*/
+			it('[/("ann" "ben" "ade") eql {a: ["ann", "ade"], b: ["ben"]}', () => expect(groupByFirst).eql({a: ["ann", "ade"], b: ["ben"]}));
+			it('[/( ) eql {}', () => expect(groupByEmpty).eql({}));
 		});
 	});
 
