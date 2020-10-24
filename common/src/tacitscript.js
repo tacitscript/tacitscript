@@ -744,7 +744,7 @@ let braceleft = input => {
 	["A", "A"], // unnest {(1 (2 3))
 ];
 let semicolon = value => {
-	return value;
+	return value; // XX identiy ;1
 }; semicolon.types = [
 	["X", "X"], // identity ;1
 ];

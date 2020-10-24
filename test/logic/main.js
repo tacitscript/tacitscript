@@ -482,6 +482,21 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("; (semicolon)", () => {
+		describe("identity XX", () => {
+			const fn = x => x + 3;
+	
+		/*ts
+			identity			;
+			mixedTypes			;(3 "hello" (4 5 6))
+		*/
+			it("identity(76) eql 76", () => expect(identity(76)).eql(76));
+			it("\;(3 \"hello\" (4 5 6)) eql [3, \"hello\", [4, 5, 6]]", () => expect(mixedTypes).eql([3, "hello", [4, 5, 6]]));
+			it("identity(<fn>) eql <fn>", () => expect(identity(fn)).eql(fn));
+		});
+	});
+	
+	
 
 
 });
