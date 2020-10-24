@@ -425,7 +425,7 @@ describe("Operators", () => {
 	});
 
 	describe("` (backtick)", () => {
-		describe("constant ?(??)", () => {
+		describe("constant X(?X)", () => {
 		/*ts
 			constNumber			`3
 			constObject			`(\(("a" 3) ))
@@ -435,7 +435,7 @@ describe("Operators", () => {
 		});
 	});
 
-	describe("] (bracketRight)", () => {
+	describe("] (bracketright)", () => {
 		describe("last A?", () => {
 		/*ts
 			last                        ]

@@ -727,12 +727,12 @@ backslash.types = [
 	["O", "A"], // toPairs \({"{a: 1, b: 2}")
 ];
 let backtick = value => {
-	let fn = dummy => value; // ?(??) constant `2
+	let fn = dummy => value; // X(?X) constant `2
 	fn.types = map(prepend("?"))(types(value));
 
 	return fn;
 }; backtick.types = [
-	["?", ["?", "?"]], // constant `2
+	["X", ["?", "X"]], // constant `2
 ];
 let braceleft = input => {
 	if (isArray(input)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(input); // AA unnest {(1 (2 3))
@@ -745,7 +745,9 @@ let braceleft = input => {
 ];
 let semicolon = value => {
 	return value;
-}; semicolon.types = [["X", "X"]];
+}; semicolon.types = [
+	["X", "X"], // identity ;1
+];
 let braceright = value => {
 	return typeOf(value);
 }; braceright.types = [["V", "S"], [["?", "?"], "S"], [["?", "?", "?"], "S"]];
