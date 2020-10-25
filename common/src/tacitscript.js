@@ -480,7 +480,7 @@ let plus = (left, right) => {
 ];
 let slash = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) {
-		// (VS)AO groupBy [/("ann" "ben" "ade")
+		// (VV)AO groupBy [/("ann" "ben" "ade")
 		return reduce((acc, value) => {const key = toString(left(value)); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 	}
 
@@ -489,7 +489,7 @@ let slash = (left, right) => {
 	return left / right; // NNN divide 8/2
 }; slash.types = [
 	["N", "N", "N"], // divide 8/2
-	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
+	[["V", "V"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let less = (left, right) => {
 	if (isFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA ascendingSort ;<("dan" "sue" "alan")
