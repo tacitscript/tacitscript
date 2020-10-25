@@ -830,6 +830,38 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("} (braceright)", () => {
+		describe("typeOf ?S", () => {
+		/*ts
+			typeOf					}
+			typeOfUndefined			}()
+			typeOfNumber			}4.5
+			typeOfString			}"hello"
+			typeOfArray				}(7 8 9)
+			typeOfObject			}(\(("a" 4) ))
+			typeOfPow				}({"Math.pow")
+			typeOfPlus				}+
+			typeOfFirst				}[
+		*/
+			it('}(undefined) eql "U"', () => expect(typeOf(undefined)).eql("U"));
+			it('}() eql false', () => expect(typeOfUndefined).eql("B"));
+			it('}(4) eql "N"', () => expect(typeOf(4)).eql("N"));
+			it('}4.5 eql "N"', () => expect(typeOfNumber).eql("N"));
+			it('}("hello") eql "S"', () => expect(typeOf("hello")).eql("S"));
+			it('}"hello" eql "S"', () => expect(typeOfString).eql("S"));
+			it('}([1, 2, 3]) eql "A"', () => expect(typeOf([1, 2, 3])).eql("A"));
+			it('}(7 8 9) eql "A"', () => expect(typeOfArray).eql("A"));
+			it('}({a: 3}) eql "O"', () => expect(typeOf({a: 3})).eql("O"));
+			it('}(\\(("a" 4) )) eql "O"', () => expect(typeOfObject).eql("O"));
+			it('}(Math.random) eql 1 (0 arity functions returned as 1)', () => expect(typeOf(Math.random)).eql(1));
+			it('}(Math.sin) eql 1', () => expect(typeOf(Math.sin)).eql(1));
+			it('}(Math.pow) eql 2', () => expect(typeOf(Math.pow)).eql(2));
+			it('}({"Math.pow") eql 2', () => expect(typeOfPow).eql(2));
+			it('}+ eql 2', () => expect(typeOfPlus).eql(2));
+			it('}[ eql 1', () => expect(typeOfFirst).eql(1));
+		});
+	});
+
 
 });
 

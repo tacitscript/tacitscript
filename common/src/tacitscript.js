@@ -812,8 +812,10 @@ let semicolon = value => {
 	["X", "X"], // identity ;1
 ];
 let braceright = value => {
-	return typeOf(value);
-}; braceright.types = [["V", "S"], [["?", "?"], "S"], [["?", "?", "?"], "S"]];
+	return typeOf(value); // ?S typeof }3
+}; braceright.types = [
+	["?", "S"], // typeof }3
+];
 let bang = value => {
 	if (isBinaryFunction(value)) {
 		let fn = (x, y) => !isTruthy(value(x, y));
