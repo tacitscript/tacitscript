@@ -565,12 +565,11 @@ let atsign = (left, right) => {
 	// const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
 	//const applyIndexedLeft = (value, index) => comma(value, (() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})());
 
-	/*
+	
 	if (isObject(right)) {
-		if (isUnaryFunction(left)) return mapObj(applyLeft)(right); // (VV)OO
-		if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
+		/*if (isUnaryFunction(left)) */return mapObj(applyLeft)(right); // (VV)OO mapObject *2@({"{a: 1, b: 2, c: 3}")
+		//if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
 	}
-	*/
 
 	// (VV)AA map *2@(3 4 5)
 	// (VVV)AA mapBinary =@(2 3 4)
@@ -578,7 +577,7 @@ let atsign = (left, right) => {
 }; atsign.types = [
 	[["V", "V"], "A", "A"], // map *2@(3 4 5)
 	[["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
-	//[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
+	[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
 	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
 ];
 let asterisk = (left, right) => {

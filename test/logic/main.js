@@ -4,7 +4,28 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 
+describe("Underscore", () => {
 
+
+	describe("map @", () => {
+	/*ts
+		map						@
+		mapIndexed				\.(.([ _))@.\
+		calculation				*3map(1 2 3)
+		calculationA			*3map({"{one: 1, two: 2, three: 3}")
+		calculationB			[map((1 2) (3 4))
+	*/
+
+		it("[@((1 2) (3 4)) eql [1, 3]", () => expect(calculationB).eql([1, 3]));
+		it('*3@({"{one: 1, two: 2, three: 3}"}) eql {one: 3, two: 6, three: 9}', () => expect(calculationA).eql({one: 3, two: 6, three: 9}));
+		it("*3@(1 2 3) eql [3, 6, 9]", () => expect(calculation).eql([3, 6, 9]));
+		it("map(num => num * 3, [1, 2, 3]) eql [3, 6, 9]", () => expect(map(num => num * 3, [1, 2, 3])).eql([3, 6, 9]));
+		it("map(num => num * 3, {one: 1, two: 2, three: 3}) eql {one: 3, two: 6, three: 9}", () => expect(map(num => num * 3, {one: 1, two: 2, three: 3})).eql({one: 3, two: 6, three: 9}));
+		it("map(array => array[0], [[1, 2], [3, 4]]) eql [1, 3]", () => expect(map(array => array[0], [[1, 2], [3, 4]])).eql([1, 3]));
+		it("(\.(.([ _))@.\)map({one: 'a', two: 'b', three: 'c'}) eql {one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}",
+			() => expect(mapIndexed({one: 'a', two: 'b', three: 'c'})).eql({one: ['a', 'one'], two: ['b', 'two'], three: ['c', 'three']}));
+	});
+});
 
 describe("Operators", () => {
 	describe(". (dot)", () => {
