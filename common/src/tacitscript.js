@@ -714,7 +714,11 @@ let hat = (left, right) => {
 	if (isArray(left) && isArray(right)) return whileInternal({fns: left, startingArray: right}); // while
 
 	throw `Unable to resolve application of operator ^ with arguments: ${JSON.stringify({left, right})}`;
-}; hat.types = [["N", "N", "N"], [["N", "?"], "N", "A"], ["A", "A", "A"]];
+}; hat.types = [
+	["N", "N", "N"], // power 2^3
+	[["N", "?"], "N", "A"], // generate ;^3
+	["A", "A", "A"], // while (#.<5 #.+1)^( )
+];
 // hat.types = [[0, 0, 0], [1, 0, 0], [1, 1, 1]];
 let ampersand = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) { // andPredicate 111

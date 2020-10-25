@@ -862,6 +862,31 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("^", () => {
+		describe("power NNN", () => {
+		/*ts
+			cube		^3
+		*/
+			it("^3(2) eql 8", () => expect(cube(2)).eql(8));
+		});
+
+		describe("generate (N?)NA", () => {
+		/*ts
+			timesTwoGenerate	*2^
+		*/
+			it('*2^(5) eql [0, 2, 4, 6, 8]', () => expect(timesTwoGenerate(5)).eql([0, 2, 4, 6, 8]));
+		});
+
+		describe("while AAA", () => {
+		/*ts
+			firstFiveNaturalNumbers	(#.<5 #.+1)^( )
+			firstFiveFibonacci	(#.<5 ~2%.].+$)^(1 1)
+		*/
+			it('(#.<5 #.+1)^( ) eql [1, 2, 3, 4, 5]', () => expect(firstFiveNaturalNumbers).eql([1, 2, 3, 4, 5]));
+			it('(#.<5 ~2%.].+$)^(1 1) eql [1, 1, 2, 3, 5]', () => expect(firstFiveFibonacci).eql([1, 1, 2, 3, 5]));
+		});
+	});
+
 
 });
 
