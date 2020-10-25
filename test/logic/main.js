@@ -4,6 +4,64 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 
+describe("% (percent)", () => {
+	/*ts
+		split						%
+	*/
+
+		describe("modulo NNN", () => {
+		/*ts
+			moduloTwo		%2
+		*/
+			it("%2(3) eql 1", () => expect(moduloTwo(3)).eql(1));
+		});
+
+		describe("split NAA NSA", () => {
+		/*ts
+			splitTwo					2split
+			splitMinusTwo				~2split
+		*/
+			it("2split([1, 2, 3, 4, 5]) eql [[1, 2], [3, 4, 5]]", () => expect(splitTwo([1, 2, 3, 4, 5])).eql([[1, 2], [3, 4, 5]]));
+			it('2split("abcde") eql ["ab", "cde"]', () => expect(splitTwo("abcde")).eql(["ab", "cde"]));
+			it("~2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
+			it('~2split("abcde") eql ["abc", "de"]', () => expect(splitMinusTwo("abcde")).eql(["abc", "de"]));
+		});
+
+		describe("chunk AAA ASA", () => {
+		/*ts
+			threeChunk			(3 )%
+			threeTwoChunk		(3 2)%
+			threeTwoZeroChunk	(3 2 0)%
+		*/
+			it('(3 )%([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) eql [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]', () => expect(threeChunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).eql([[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]));
+			it('(3 2)%([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) eql [[0, 1, 2], [3, 4], [5, 6, 7], [8, 9]]', () => expect(threeTwoChunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).eql([[0, 1, 2], [3, 4], [5, 6, 7], [8, 9]]));
+			it('(3 2 0)%([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) eql [[0, 1, 2], [3, 4], [5, 6, 7, 8, 9]]', () => expect(threeTwoZeroChunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).eql([[0, 1, 2], [3, 4], [5, 6, 7, 8, 9]]));
+			it('(3 )%"abcdefghij" eql ["abc", "def", "ghi", "j]', () => expect(threeChunk("abcdefghij")).eql(["abc", "def", "ghi", "j"]));
+			it('(3 2)%"abcdefghij" eql ["abc", "de", "fgh", "ij"]', () => expect(threeTwoChunk("abcdefghij")).eql(["abc", "de", "fgh", "ij"]));
+			it('(3 2 0)%"abcdefghij" eql ["abc", "de", "fgh", "ij"]', () => expect(threeTwoZeroChunk("abcdefghij")).eql(["abc", "de", "fghij"]));
+		});
+
+		describe("chunkWhenPredicate (VB)AA (SB)SA", () => {
+		/*ts
+			calculationA		=2%(1 2 3 2 1)
+			calculationB		="b"%"abcba"
+		*/
+			it("=2%(1 2 3 2 1) eql [[1], [2, 3], [2, 1]]", () => expect(calculationA).eql([[1], [2, 3], [2, 1]]));
+			it('="b"%"abcba" eql ["a", "bc", "ba"]', () => expect(calculationB).eql(["a", "bc", "ba"]));
+		});
+
+		describe("chunkWhenComparator (VVB)AA (SSB)SA", () => {
+		/*ts
+			chunkWhenLessThan		<%
+		*/
+			it('<%([9, 6, 4, 8, 5, 2, 7, 4, 1, 0]) eql [[9, 6, 4], [8, 5, 2], [7, 4, 1, 0]]', () => expect(chunkWhenLessThan([9, 6, 4, 8, 5, 2, 7, 4, 1, 0])).eql([[9, 6, 4], [8, 5, 2], [7, 4, 1, 0]]));
+			it('<%("jgeifcheba") eql ["jge", "ifc", "heba"]', () => expect(chunkWhenLessThan("jgeifcheba")).eql(["jge", "ifc", "heba"]));
+		});
+	});
+
+
+
+
 describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {

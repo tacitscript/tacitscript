@@ -276,7 +276,16 @@ const chunk = ({sizes, vector, newVector, append}) => pipe(
 	})([newVector]),
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
-const chunkWhen = ({when, vector, newVector, append}) => pipe(
+const chunkWhenPredicate = ({when, vector, newVector, append}) => pipe(
+	reduce((acc, value) => {
+		const lastArray = last(acc);
+
+		if ((lastArray.length < 1) || !when(value)) return [...acc.slice(0, -1), append(lastArray, value)];
+		else return [...acc, [value]];
+	})([newVector]),
+	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
+)(vector);
+const chunkWhenComparator = ({when, vector, newVector, append}) => pipe(
 	reduce((acc, value) => {
 		const lastArray = last(acc);
 
@@ -668,19 +677,37 @@ let bar = (left, right) => {
 	[["?", "?"], ["?", "?"], ["?", "?"]], // orPredicate >0|(%2.=0)
 	[["?", "?", "?"], ["?", "?", "?"], ["?", "?", "?"]] // orBinary <|=
 ];
-//bar.types = [[0, 0, 0], [1, 1, 1], [2, 2, 2]];
 bar.supportsUndefined = true;
 let percent = (left, right) => {
-	if (isNumber(left) && isNumber(right)) return left % right; // modulo
-	if (isNumber(left) && (isArray(right) || isString(right))) return [right.slice(0, left), right.slice(left)]; // split
-	if (isArray(left) && isArray(right)) return chunk({sizes: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // chunkArray
-	if (isArray(left) && isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // chunkString
-	if (isBinaryFunction(left) && isArray(right)) return chunkWhen({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // chunkArrayWhen
-	if (isFunction(left) && isString(right)) return chunkWhen({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // chunkStringWhen
+	if (isNumber(left)) {
+		if (isNumber(right)) return left % right; // NNN modulo 7%2
+		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
+	}
+	else if (isArray(left)) {
+		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // AAA chunk (1 2 0)%(1 2 3 4 5)
+		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // ASA chunk chunk (1 2 0)%"abcde"
+	}
+	else if (isUnaryFunction(left)) {
+		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
+		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
+	}
+	else if (isBinaryFunction(left)) {
+		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
+		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // (SSB)SA chunkWhenComparator <%"abcba"
+	}
 
 	throw `Unable to resolve application of operator % with arguments: ${JSON.stringify({left, right})}`;
-}; percent.types = [["N", "N", "N"], ["N", "A", "A"], ["N", "S", "A"], ["A", "A", "A"], ["A", "S", "A"], [["V", "V", "V"], "A", "A"], [["S", "S", "S"], "S", "A"]];
-//percent.types = [[0, 0, 0], [1, 0, 0], [2, 0, 0]];
+}; percent.types = [
+	["N", "N", "N"], // modulo 7%2
+	["N", "A", "A"], // split 2%(1 2 3 4 5)
+	["N", "S", "A"], // split 2%"abcde"
+	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
+	["A", "S", "A"], // chunk (1 2 0)%"abcde"
+	[["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
+	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
+	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
+	[["S", "S", "B"], "S", "A"], // `chunkWhenComparator` <%"abcba"
+];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // power
 	if (isFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // generate
