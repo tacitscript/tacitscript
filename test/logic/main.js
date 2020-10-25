@@ -745,6 +745,26 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("> (greater)", () => {
+		describe("greaterThan NNB", () => {
+		/*ts
+			failedGreaterThan			2>3
+			passedGreaterThan			3>2
+		*/
+			it("2>3 eql false", () => expect(failedGreaterThan).eql(false));
+			it("3>2 eql true", () => expect(passedGreaterThan).eql(true));
+		});
+
+		describe("greaterThanString SSB", () => {
+		/*ts
+			failedGreaterThan			"ab">"bc"
+			passedGreaterThan			"b">"a"
+		*/
+			it('"ab">"bc" eql false', () => expect(failedGreaterThan).eql(false));
+			it('"b">"a" eql true', () => expect(passedGreaterThan).eql(true));
+		});
+	});
+
 
 
 

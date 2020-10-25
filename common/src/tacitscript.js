@@ -493,8 +493,11 @@ let less = (left, right) => {
 	[["V", "N"], "A", "A"], // ascendingSort ;<(1 2 3)
 ];
 let greater = (left, right) => {
-	return left > right;
-}; greater.types = [["N", "N", "B"], ["S", "S", "B"]];
+	return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
+}; greater.types = [
+	["N", "N", "B"], // greaterThan 3>2
+	["S", "S", "B"], // greaterThanString "bcd">"abc"
+];
 let minus = (left, right) => {
 	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
 		const {[left]: deletedKey, ...remainder} = right;
