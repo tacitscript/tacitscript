@@ -356,6 +356,15 @@ describe("Operators", () => {
 			it(":.~,(=@.|$ ;).?$.[(2, [1, 2, 3]) eql 2", () => expect(contains(2, [1, 2, 3])).eql(2));
 			it("2(:._,(=@.|$ ;).?$.[)(1 2 3) eql 2", () => expect(calculation).eql(2));
 		});
+
+		describe("mapObject (VV)OO", () => {
+		/*ts
+			mapObject					@
+			calculation					*2@({"{a: 1, b: 2, c: 3}")
+		*/
+			it("@(x => x * 2, {a: 1, b: 2, c: 3})", () => expect(mapObject(x => x * 2, {a: 1, b: 2, c: 3})).eql({a: 2, b: 4, c: 6}));
+			it('*2@({"{a: 1, b: 2, c: 3}") eql {a: 2, b: 4, c: 6}', () => expect(calculation).eql({a: 2, b: 4, c: 6}));
+		});
 	});
 
 	describe("* (asterisk)", () => {
