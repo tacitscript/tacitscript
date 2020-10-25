@@ -6,6 +6,85 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 
+	describe("contains :,(= ;).'$", () => {
+	/*ts
+		intermediateB			(4 (2 3 4 5)),(= ;),'$
+		intermediate			(=4 (2 3 4 5)),'$
+		containsFour			=4'(2 3 4 5)
+		contains				:,(= ;).'$
+		calculation				3contains(1 2 3)
+		calculationB			4contains(1 2 3)
+	*/
+
+		it("3contains(1 2 3) eql 3", () => expect(calculation).eql(3));
+		it("4contains(1 2 3) eql undefined", () => expect(calculationB).eql(undefined));
+		it("(4 (2 3 4 5)),(= ;),'$ eql 4", () => expect(intermediateB).eql(4));
+		it("(=4 (2 3 4 5)),'$ eql 4", () => expect(intermediate).eql(4));
+		it("contains(4, [2, 3, 4, 5]) eql 4", () => expect(contains(4, [2, 3, 4, 5])).eql(4));
+		it("=4'(2 3 4 5) eql 4", () => expect(containsFour).eql(4));
+	});
+
+	describe("some *.#.>0", () => {
+	/*ts
+		some					*.#.>0
+		someValues				;some(() 0 "yes")
+		filterByIdentity		;*(() 0)
+	*/
+
+		it("some(x => x, [undefined, 0, 'yes', false]) eql true", () => expect(some(x => x, [undefined, 0, 'yes', false])).eql(true));
+		it(";some(() 0 'yes') eql true", () => expect(someValues).eql(true));
+		it(";*(() 0) eql []", () => expect(filterByIdentity).eql([0]));
+	});
+
+	describe("every :.(*$ ]).#@.=$", () => {
+	/*ts
+		every					:.(*$ ]).#@.=$
+		calculation				(%2.=0)every(2 4 5)
+		calculationB			(%2.=0)every(2 4 6)
+	*/
+
+		it("(%2.=0)every(2 4 6) eql true", () => expect(calculationB).eql(true));
+		it("(%2.=0)every(2 4 5) eql false", () => expect(calculation).eql(false));
+		it("every(num => (num % 2) === 0, [2, 4, 5]) eql false", () => expect(every(num => (num % 2) === 0, [2, 4, 5])).eql(false));
+		it("every(num => (num % 2) === 0, [2, 4, 6]) eql true", () => expect(every(num => (num % 2) === 0, [2, 4, 6])).eql(true));
+	});
+
+	describe("reject :,(! ;).*$", () => {
+	/*ts
+		complimentAndArray		:,(! ;)
+		reject					:,(! ;).*$
+		notLessThanThree		!(<3)
+		calculation				(%2.=0)reject(1 2 3 4 5 6)
+	*/
+
+		it("(%2.=0)reject(1 2 3 4 5 6) eql [1, 3, 5]", () => expect(calculation).eql([1, 3, 5]));
+		it("!(<3)(4) eql true", () => expect(notLessThanThree(4)).eql(true));
+		it(":,(! ;)(value => value < 3, 2)[0](4) eql true", () => expect(complimentAndArray(value => value < 3, 2)[0](4)).eql(true));
+		it("!(<3)(2) eql false", () => expect(notLessThanThree(2)).eql(false));
+		it(":,(! ;)(() => {}, [1, 2, 3])[1] eql [1, 2, 3]", () => expect(complimentAndArray(() => {}, [1, 2, 3])[1]).eql([1, 2, 3]));
+		it("reject(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [1, 3, 5]", () => expect(reject(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([1, 3, 5]));
+	});
+
+	describe("filter *", () => {
+	/*ts
+		filter					*
+		calculation				(%2.=0)filter(1 2 3 4 5 6)
+	*/
+
+		it("(%2.=0)*(1 2 3 4 5 6) eql [2, 4, 6]", () => expect(calculation).eql([2, 4, 6]));
+		it("filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [2, 4, 6]", () => expect(filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([2, 4, 6]));
+	});
+
+	describe("find '", () => {
+	/*ts
+		find					'
+		calculation				(%2.=0)find(1 2 3 4 5 6)
+	*/
+
+		it("(%2.=0)'(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
+		it("find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql 2", () => expect(find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql(2));
+	});
+
 	describe("reduceRight :,(; _).$$", () => {
 	/*ts
 		reduceRight				:,(; _).$$
