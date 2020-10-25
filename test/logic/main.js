@@ -6,6 +6,81 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 
+	describe('flatten :,(.(+1.>.(#.) `(].{)) .(; )).^$.]', () => {
+	/*ts
+		intermediateC		+1.>.(#.)
+		constLast			`]
+		endIntoConst		].`
+		//flatten				:,(.(+1.>.(#.) `(].{)) .(; )).^$.]
+		flattenAll			.(`(~2%.].!=$ ].{) .(; )).^$.]
+		intermediate		.(`1 .(; ))
+		intermediateB		].{
+		calculation			flattenAll(1 (2 ) (3 ((4 ) )))
+		//calculationB		2flatten(1 (2 ) (3 ((4 ) )))
+	*/
+
+		//it("2flatten(1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, [4]]", () => expect(calculationB).eql([1, 2, 3, [4]]));
+		it("+1.>.(#.)(2)([1, 2, 3, 4]) eql false", () => expect(intermediateC(2)([1, 2, 3, 4])).eql(false));
+		it("+1.>.(#.)(5)([1, 2, 3, 4]) eql true", () => expect(intermediateC(5)([1, 2, 3, 4])).eql(true));
+		it("].`([1, 2, 3])([3, 2, 1]) eql 3", () => expect(endIntoConst([1, 2, 3])([3, 2, 1])).eql(3));
+		it("`]([1, 2, 3])([3, 2, 1]) eql 1", () => expect(constLast([1, 2, 3])([3, 2, 1])).eql(1));
+		//it("flatten(2, [1, [2], [3, [[4]]]]) eql [1, 2, 3, [4]]", () => expect(flatten(2, [1, [2], [3, [[4]]]])).eql([1, 2, 3, [4]]));
+		it(".(`(~2%.].!=$ ].{) .(; )).^$.](1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, 4]", () => expect(calculation).eql([1, 2, 3, 4]));
+		it(".(`(~2%.].!=$ ].{) .(; )).^$.]([1, [2], [3, [[4]]]]) eql [1, 2, 3, 4]", () => expect(flattenAll([1, [2], [3, [[4]]]])).eql([1, 2, 3, 4]));
+		it("].{([1, [1, [2, [3, 4]]]]) eql [1, 2, [3, 4]]", () => expect(intermediateB([1, [1, [2, [3, 4]]]])).eql([1, 2, [3, 4]]));
+		it(".(`1 .(; ))([1, 2, 3]) eql [1, [[1, 2, 3]]]", () => expect(intermediate([1, 2, 3])).eql([1, [[1, 2, 3]]]));
+	});
+
+	describe("rest %.]", () => {
+	/*ts
+		rest				%.]
+		calculation			1rest(5 4 3 2 1)
+	*/
+
+		it("rest(1, [5, 4, 3, 2, 1]) eql [4, 3, 2, 1]", () => expect(rest(1, [5, 4, 3, 2, 1])).eql([4, 3, 2, 1]));
+		it("1rest(5 4 3 2 1) eql [4, 3, 2, 1]", () => expect(calculation).eql([4, 3, 2, 1]));
+	});
+
+	describe("last :,(~1* ;).%$.]", () => {
+	/*ts
+		last				:,(~1* ;).%$.]
+		calculation			2last(5 4 3 2 1)
+	*/
+
+		it("last(2, [5, 4, 3, 2, 1]) eql [2, 1]", () => expect(last(2, [5, 4, 3, 2, 1])).eql([2, 1]));
+		it("2last(5 4 3 2 1) eql [2, 1]", () => expect(calculation).eql([2, 1]));
+	});
+
+	describe("initial :,(~1* ;).%$.[", () => {
+	/*ts
+		initial				:,(~1* ;).%$.[
+		calculation			2initial(5 4 3 2 1)
+	*/
+
+		it("initial(2, [5, 4, 3, 2, 1]) eql [5, 4, 3]", () => expect(initial(2, [5, 4, 3, 2, 1])).eql([5, 4, 3]));
+		it("2initial(5 4 3 2 1) eql [5, 4, 3]", () => expect(calculation).eql([5, 4, 3]));
+	});
+
+	describe("first [", () => {
+	/*ts
+		first				[
+		calculation			first(5 4 3 2 1)
+	*/
+
+		it("first([5, 4, 3, 2, 1]) eql 5", () => expect(first([5, 4, 3, 2, 1])).eql(5));
+		it("[(5 4 3 2 1) eql 5", () => expect(calculation).eql(5));
+	});
+
+	describe("compact ;*", () => {
+	/*ts
+		compact				;*
+		calculation			compact(0 1 false 2 "" 3)
+	*/
+
+		it('compact(0 1 false 2 "" 3) eql [0, 1, 2, "", 3]', () => expect(calculation).eql([0, 1, 2, '', 3]));
+		it("compact([0, undefined, 1, false, 2, '', 3]) eql [0, 1, 2, '', 3]", () => expect(compact([0, undefined, 1, false, 2, '', 3])).eql([0, 1, 2, '', 3]));
+	});
+
 	describe("partition :,(? ;).@$.~.;*@", () => {
 	/*ts
 		isEqualToOne		=1.?
