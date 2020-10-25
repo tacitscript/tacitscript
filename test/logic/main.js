@@ -911,6 +911,20 @@ describe("Operators", () => {
 		});
 	})
 
+	describe("_ (underscore)", () => {
+		describe("reverse AA SS", () => {
+		/*ts
+			reversedArray			_(1 2 3)
+			reversedString			_"Hello"
+			reverse					_
+		*/
+			it('_(1 2 3) eql [3, 2, 1]', () => expect(reversedArray).eql([3, 2, 1]));
+			it('_"Hello" eql "olleH"', () => expect(reversedString).eql("olleH"));
+			it('_([4, 5, 6]) eql [6, 5, 4]', () => expect(reverse([4, 5, 6])).eql([6, 5, 4]));
+			it('_("Bye") eql "eyB"', () => expect(reverse("Bye")).eql("eyB"));
+		});
+	});
+
 });
 
 mocha.run();
