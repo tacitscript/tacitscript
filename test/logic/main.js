@@ -887,6 +887,29 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("& (ampersand)", () => {
+		describe("andValue VVV", () => {
+		/*ts
+			fiveAndUndefined			5&()
+			undefinedAndFive			()&5
+			andHello					&"hello"
+			helloAnd					"hello"&
+		*/
+			it('5&() eql false', () => expect(fiveAndUndefined).eql(false));
+			it('()&5 eql false', () => expect(undefinedAndFive).eql(false));
+			it('&"hello"([4, 5, 6]) eql "hello"', () => expect(andHello([4, 5, 6])).eql("hello"));
+			it('"hello"&([7, 8, 9]) eql [7, 8, 9]', () => expect(helloAnd([7, 8, 9])).eql([7, 8, 9]));
+		});
+
+		describe("andPredicate (VB)(VB)(VB)", () => {
+		/*ts
+			greaterAndLessThan				>3&(<6)
+		*/
+			it('>3&(<6)(4) eql true', () => expect(greaterAndLessThan(4)).eql(true));
+			it('>3&(<6)(7) eql false', () => expect(greaterAndLessThan(7)).eql(false));
+			it('>3&(<6)(3) eql false', () => expect(greaterAndLessThan(3)).eql(false));
+		});
+	})
 
 });
 

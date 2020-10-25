@@ -709,9 +709,9 @@ let percent = (left, right) => {
 	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
 ];
 let hat = (left, right) => {
-	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // power
-	if (isFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // generate
-	if (isArray(left) && isArray(right)) return whileInternal({fns: left, startingArray: right}); // while
+	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
+	if (isFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
+	if (isArray(left) && isArray(right)) return whileInternal({fns: left, startingArray: right}); // AAA while (#.<5 #.+1)^( )
 
 	throw `Unable to resolve application of operator ^ with arguments: ${JSON.stringify({left, right})}`;
 }; hat.types = [
@@ -719,9 +719,8 @@ let hat = (left, right) => {
 	[["N", "?"], "N", "A"], // generate ;^3
 	["A", "A", "A"], // while (#.<5 #.+1)^( )
 ];
-// hat.types = [[0, 0, 0], [1, 0, 0], [1, 1, 1]];
 let ampersand = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // andPredicate 111
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VB)(VB)(VB) andPredicate >2&(<6)
 		let result = value => left(value) && right(value);
 
 		result.types = types(left); // TODO: edge cases abound here
@@ -729,9 +728,11 @@ let ampersand = (left, right) => {
 		return result;
 	}
 
-	return left && right; // andValue 000
-}; ampersand.types = [["V", "V", "V"], [["V", "V"], ["V", "V"], ["V", "V"]]];
-// ampersand.types = [[0, 0, 0], [1, 1, 1]];
+	return left && right; // VVV andValue 1&2
+}; ampersand.types = [
+	["V", "V", "V"], // andValue 1&2
+	[["V", "B"], ["V", "B"], ["V", "B"]], // andPredicate >2&(<6)
+];
 
 //----------------------------------------------------------
 // Unary
