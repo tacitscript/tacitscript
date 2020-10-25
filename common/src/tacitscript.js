@@ -345,7 +345,7 @@ let comma = (left, right) => {
 		if (isUnaryFunction(right) && solutionsInvert.length) {
 			let result = right(left); // apply(right, left);
 
-			if (isFunction(result)) result.types = pipe(
+			if (isFunction(result) && !result.types) result.types = pipe(
 				map(([leftType, rightType]) => rightType[1]),
 				filter(Array.isArray)
 			)(solutionsInvert);

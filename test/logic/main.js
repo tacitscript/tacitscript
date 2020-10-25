@@ -6,6 +6,16 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 
+	describe("reduceRight :,(; _).$$", () => {
+	/*ts
+		reduceRight				:,(; _).$$
+		calculation				+reduceRight((0 1) (2 3) (4 5))
+	*/
+
+		it("+reduceRight((0 1) (2 3) (4 5)) eql [4, 5, 2, 3, 0, 1]", () => expect(calculation).eql([4, 5, 2, 3, 0, 1]));
+		it("reduceRight((a, b) => a.concat(b), [[0, 1], [2, 3], [4, 5]]) eql [4, 5, 2, 3, 0, 1]", () => expect(reduceRight((a, b) => a.concat(b), [[0, 1], [2, 3], [4, 5]])).eql([4, 5, 2, 3, 0, 1]));
+	});
+
 	describe("reduce $", () => {
 	/*ts
 		reduce					$
