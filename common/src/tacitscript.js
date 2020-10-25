@@ -280,8 +280,8 @@ const chunkWhenPredicate = ({when, vector, newVector, append}) => pipe(
 	reduce((acc, value) => {
 		const lastArray = last(acc);
 
-		if ((lastArray.length < 1) || !when(value)) return [...acc.slice(0, -1), append(lastArray, value)];
-		else return [...acc, [value]];
+		if (!when(value)) return [...acc.slice(0, -1), append(lastArray, value)];
+		else return [...acc, append(newVector, value)];
 	})([newVector]),
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
@@ -290,7 +290,7 @@ const chunkWhenComparator = ({when, vector, newVector, append}) => pipe(
 		const lastArray = last(acc);
 
 		if ((lastArray.length < 1) || !when(last(lastArray), value)) return [...acc.slice(0, -1), append(lastArray, value)];
-		else return [...acc, [value]];
+		else return [...acc, append(newVector, value)];
 	})([newVector]),
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
