@@ -6,6 +6,15 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 
+	describe("reduce $", () => {
+	/*ts
+		reduce					$
+		calculation				(+ 0)reduce(1 2 3)
+	*/
+
+		it("(+ 0)$(1 2 3) eql 6", () => expect(calculation).eql(6));
+		it("reduce([(a, b) => a + b, 0], [1, 2, 3]) eql 6", () => expect(reduce([(a, b) => a + b, 0], [1, 2, 3])).eql(6));
+	});
 
 	describe("map @", () => {
 	/*ts
