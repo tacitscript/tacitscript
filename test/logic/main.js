@@ -4,7 +4,6 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 
-
 describe("Operators", () => {
 	describe(". (dot)", () => {
 		describe("pipe (XY)(YZ)(XZ)", () => {
@@ -717,6 +716,34 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("< (less)", () => {
+		describe("lessThan NNB", () => {
+			/*ts
+				passedLessThan			2<3
+				failedLessThan			3<2
+			*/
+				it("2<3 eql true", () => expect(passedLessThan).eql(true));
+				it("3<2 eql false", () => expect(failedLessThan).eql(false));
+		});
+
+		describe("lessThanString SSB", () => {
+			/*ts
+				passedLessThan			"ab"<"bc"
+				failedLessThan			"b"<"a"
+			*/
+				it('"ab"<"bc" eql true', () => expect(passedLessThan).eql(true));
+				it('"b"<"a" eql false', () => expect(failedLessThan).eql(false));
+			});
+
+		describe("ascendingSort (VN)AA (VS)AA", () => {
+		/*ts
+			sortArray	{"Math.abs"<(~7 3 ~1 4)
+			sortStrings	[<("tom" "ann" "sam")
+		*/
+			it('{"Math.abs"<(~7 3 _~1 4) eql [-1, 3, 4, -7]', () => expect(sortArray).eql([-1, 3, 4, -7]));
+			it('[<("tom" "ann" "sam") eql ["ann", "sam", "tom"]', () => expect(sortStrings).eql(["ann", "sam", "tom"]));
+		});
+	});
 
 
 
