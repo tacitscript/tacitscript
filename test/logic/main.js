@@ -6,6 +6,61 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 
+	describe("partition :,(? ;).@$.~.;*@", () => {
+	/*ts
+		isEqualToOne		=1.?
+		partition			:,(? ;).@$.~.;*@
+		calculation			(%2.=1)partition(0 1 2 3 4 5)
+		calculationB		(%2.=0)partition(0 1 2 3 4 5)
+		intermediate		:,(? ;).@$.~
+		intermediateB		:,(? ;).@$
+		intermediateC		(%2.=1)?@(1 2 3)
+		intermediateD		((%2.=1)? (1 2 3)),@$
+		intermediateE		((%2.=1).?)1
+		intermediateF		(=1.?)1
+	*/
+
+		it("(%2.=0)partition(0 1 2 3 4 5) eql [[0, 2, 4], [1, 3, 5]]", () => expect(calculationB).eql([[0, 2, 4], [1, 3, 5]]));
+		it("partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5]) eql [[0, 2, 4], [1, 3, 5]]", () => expect(partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5])).eql([[0, 2, 4], [1, 3, 5]]));
+		it("=1.?(1) eql [1, undefined]", () => expect(isEqualToOne(1)).eql([1, undefined]));
+		it("(=1.?)1 eql [1, undefined]", () => expect(intermediateF).eql([1, undefined]));
+		it("((%2.=1).?)1 eql [1, undefined]", () => expect(intermediateE).eql([1, undefined]));
+		it("((%2.=1)? (1 2 3)),@$ eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateD).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+		it("(%2.=1)?@(1 2 3) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateC).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+		it(":,(? ;).@$(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateB(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+		it(":,(? ;).@$.~(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined, 3], [undefined, 2, undefined]]", () => expect(intermediate(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined, 3], [undefined, 2, undefined]]));
+		it("(%2.=1)partition(0 1 2 3 4 5) eql [[1, 3, 5], [0, 2, 4]]", () => expect(calculation).eql([[1, 3, 5], [0, 2, 4]]));
+		it("partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5]) eql [[1, 3, 5], [0, 2, 4]]", () => expect(partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5])).eql([[1, 3, 5], [0, 2, 4]]));
+	});
+
+	describe("size #", () => {
+	/*ts
+		size					#
+		calculation				#(1 2 3 4 5)
+		calculationB			#({"{one: 1, two: 2, three: 3}")
+	*/
+		it("#(1 2 3 4 5) eql 5", () => expect(calculation).eql(5));
+		it('#({"{one: 1, two: 2, three: 3}") eql 3', () => expect(calculationB).eql(3));
+		it("size([1, 2, 3, 4, 5]) eql 5", () => expect(size([1, 2, 3, 4, 5])).eql(5));
+		it('size({one: 1, two: 2, three: 3}) eql 3', () => expect(size({one: 1, two: 2, three: 3})).eql(3));
+	});
+
+	describe("countBy /.#@", () => {
+	/*ts
+		calculationC			(%2.=0)?2
+		countBy					/.#@
+		calculation				((%2.=0)?,(`"even" `"odd").|$)countBy(1 2 3 4 5)
+		calculationA			((%2.=0)?,(`"even" `"odd").|$)@(1 2 3 4 5)
+		calculationB			(%2.=0)?@(1 2 3 4 5)
+	*/
+
+		it("(%2.=0)?2 eql [2, undefined]", () => expect(calculationC).eql([2, undefined]));
+		it('(%2.=0)?@(1 2 3 4 5) eql [[undefined, 1], [2, undefined], [undefined, 3], [4, undefined], [undefined, 5]]', () => expect(calculationB).eql([[undefined, 1], [2, undefined], [undefined, 3], [4, undefined], [undefined, 5]]));
+		it('((%2.=0)?,(`"even" `"odd").|$)@(1 2 3 4 5) eql ["odd", "even", "odd", "even", "odd"]', () => expect(calculationA).eql(["odd", "even", "odd", "even", "odd"]));
+		it('((%2.=0)?,(`"even" `"odd").|$)countBy(1 2 3 4 5) eql {odd: 3, even: 2}', () => expect(calculation).eql({odd: 3, even: 2}));
+		it("countBy(num => ((num % 2) === 0) ? 'even' : 'odd', [1, 2, 3, 4, 5]) eql {odd: 3, even: 2}", () => expect(countBy(num => ((num % 2) === 0) ? 'even' : 'odd', [1, 2, 3, 4, 5])).eql({odd: 3, even: 2}));
+	});
+
 	describe("groupBy /", () => {
 	/*ts
 		groupBy					/

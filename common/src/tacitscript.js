@@ -354,8 +354,8 @@ let comma = (left, right) => {
 		}
 
 		// X(XYZ)(YZ) applyToBinary 3,+
-		const solutions021 = filter(([leftType, rightType]) => !Array.isArray(leftType) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isValue(left) && isBinaryFunction(right) && solutions021.length) {
+		const solutions021 = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
+		if (isBinaryFunction(right) && solutions021.length) {
 			let fn = value => leftApply(left, right)(value);
 
 			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
