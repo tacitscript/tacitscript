@@ -453,19 +453,23 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("[ (bracketleft)", () => {
+		describe("first A? SS", () => {
+		/*ts
+			first                       [
+		*/
+			it("first([1, 2, 3]) eql 1", () => expect(first([1, 2, 3])).eql(1));
+			it("first(\"abcd\") eql \"a\"", () => expect(first("abcd")).eql("a"));
+		});
+	});
+
 	describe("] (bracketright)", () => {
-		describe("last A?", () => {
+		describe("last A? SS", () => {
 		/*ts
 			last                        ]
 		*/
 			it("last([1, 2, 3]) eql 3", () => expect(last([1, 2, 3])).eql(3));
-		});
-
-		describe("lastInString SS", () => {
-		/*ts
-			lastInString                ]
-		*/
-			it("lastInString(\"abcd\") eql \"d\"", () => expect(lastInString("abcd")).eql("d"));
+			it("last(\"abcd\") eql \"d\"", () => expect(last("abcd")).eql("d"));
 		});
 	});
 

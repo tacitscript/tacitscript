@@ -706,7 +706,7 @@ let percent = (left, right) => {
 	[["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
 	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
 	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
-	[["S", "S", "B"], "S", "A"], // `chunkWhenComparator` <%"abcba"
+	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // power
