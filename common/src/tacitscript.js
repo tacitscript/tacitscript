@@ -822,14 +822,14 @@ let braceright = value => {
 	["?", "S"], // typeof }3
 ];
 let bang = value => {
-	if (isBinaryFunction(value)) {
+	if (isBinaryFunction(value)) { // (XYZ)(XYZ) not !< 
 		let fn = (x, y) => !isTruthy(value(x, y));
 
 		fn.types = value.types;
 
 		return fn;
 	}
-	if (isUnaryFunction(value)) {
+	if (isUnaryFunction(value)) { // (XY)(XY) not !(<2)
 		let fn = x => !isTruthy(value(x));
 
 		fn.types = value.types;
@@ -837,9 +837,12 @@ let bang = value => {
 		return fn;
 	}
 
-	return !isTruthy(value);
-}; bang.types = [["V", "B"], [["X", "Y", "Z"], ["X", "Y", "Z"]], [["X", "Y"], ["X", "Y"]]];
-// bang.types = [[0, 0], [1, 1], [2, 2]];
+	return !isTruthy(value); // VB not !2
+}; bang.types = [
+	["V", "B"], // not !2
+	[["X", "Y", "Z"], ["X", "Y", "Z"]], // not !<
+	[["X", "Y"], ["X", "Y"]], // not !(<2)
+];
 
 //==========================================================
 // main exports

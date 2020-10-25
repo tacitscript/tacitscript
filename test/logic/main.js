@@ -925,6 +925,34 @@ describe("Operators", () => {
 		});
 	});
 
+	describe("! (bang)", () => {
+		describe("not VB (XY)(XY) (XYZ)(XYZ)", () => {
+		/*ts
+			notNumber					!4
+			notZero						!0
+			notUndefined				!()
+			notArray					!( )
+			notString					!"hello"
+			notEqual					!=
+			notLessThanThree			!(<3)
+			not							!
+			notDivideByZero				!(1/0)
+		*/
+			it("!4 eql false", () => expect(notNumber).eql(false));
+			it('!0 eql false', () => expect(notZero).eql(false));
+			it('!() eql true', () => expect(notUndefined).eql(true));
+			it('!(1 2 3) eql false', () => expect(notArray).eql(false));
+			it('!"hello" eql false', () => expect(notString).eql(false));
+			it('!=(2, 3) eql true', () => expect(notEqual(2, 3)).eql(true));
+			it('!=(3, 3) eql false', () => expect(notEqual(3, 3)).eql(false));
+			it('!(<3)(4) eql true', () => expect(notLessThanThree(4)).eql(true));
+			it('!(<3)(2) eql false', () => expect(notLessThanThree(2)).eql(false));
+			it('!("hello") eql false', () => expect(not("hello")).eql(false));
+			it('!(x => x)({a: 2}) eql false', () => expect(not(x => x)({a: 2})).eql(false));
+			it('!(x => undefined)(3) eql true', () => expect(not(x => undefined)(3)).eql(true));
+			it('!(1/0) eql undefined', () => expect(notDivideByZero).eql(undefined));
+		});
+	});
 });
 
 mocha.run();
