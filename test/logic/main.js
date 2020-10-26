@@ -6,6 +6,50 @@ mocha.setup('bdd');
 
 describe("Underscore", () => {
 
+	/*ts
+		leftPad				:.(.([ ].#).-$.`"0"^.""$ ]).+$
+	*/
+
+	describe('leftPad :.(.([ ].#).-$.`"0"^.""$ ]).+$', () => {
+	/*ts
+		calculation			6leftPad"123"
+	*/
+
+		it("leftPad(6, '123') eql '000123'", () => expect(leftPad(6, "123")).eql("000123"));
+		it('6leftPad"123" eql "000123"', () => expect(calculation).eql("000123"));
+	});
+
+	describe(`union +$.(""+.6leftPad)/.\\.(1 0)'@`, () => {
+	/*ts
+		union				+$.(""+.6leftPad)/.\.(1 0)'@
+		calculation			union((1 2 3) (101 2 1 10) (2 1))
+	*/
+
+		it("union([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [1, 2, 3, 101, 10]", () => expect(union([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([1, 2, 3, 101, 10]));
+		it("union((1 2 3) (101 2 1 10) (2 1)) eql [1, 2, 3, 101, 10]", () => expect(calculation).eql([1, 2, 3, 101, 10]));
+	});
+
+	describe("without :,(!=@.&$ ;).*$", () => {
+	/*ts
+		intermediateF		!=$
+		intermediateE		!=@
+		intermediateD		(!=0&(!=1))*(1 2 1 0 3 1 4)
+		intermediateC		&$(<2 <3 <4)
+		intermediateB		&$
+		intermediateA		!=@.&$
+		without				:,(!=@.&$ ;).*$
+		calculation			(0 1)without(1 2 1 0 3 1 4)
+	*/
+		it("!=$(1 2 3) eql true", () => expect(intermediateF([1, 2, 3])).eql(true));
+		it("!=@([1, 2, 3])[1](3) eql true", () => expect(intermediateE([1, 2, 3])[1](3)).eql(true));
+		it("(0 1)without(1 2 1 0 3 1 4) eql [2, 3, 4]", () => expect(calculation).eql([2, 3, 4]));
+		it("(!=0&(!=1))*(1 2 1 0 3 1 4) eql [2, 3, 4]", () => expect(intermediateD).eql([2, 3, 4]));
+		it("&$(<2 <3 <4)(1) eql true", () => expect(intermediateC(1)).eql(true));
+		it("&$([1, 2, 3]) eql 3", () => expect(intermediateB([1, 2, 3])).eql(3));
+		it("(!=@.&$)([2, 3, 4])(5) eql true", () => expect(intermediateA([2, 3, 4])(5)).eql(true));
+		it("without([0, 1], [1, 2, 1, 0, 3, 1, 4]) eql [2, 3, 4]", () => expect(without([0, 1], [1, 2, 1, 0, 3, 1, 4])).eql([2, 3, 4]));
+	});
+
 	describe('flatten :,(.(+1.>.(#.) `(].{)) .(; )).^$.]', () => {
 	/*ts
 		flatten				:,(.(+1.>.(#.) `(].{)) .(; )).^$.]
