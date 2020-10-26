@@ -8,23 +8,23 @@ describe("Underscore", () => {
 
 	describe('flatten :,(.(+1.>.(#.) `(].{)) .(; )).^$.]', () => {
 	/*ts
+		flatten				:,(.(+1.>.(#.) `(].{)) .(; )).^$.]
 		intermediateC		+1.>.(#.)
 		constLast			`]
 		endIntoConst		].`
-		//flatten				:,(.(+1.>.(#.) `(].{)) .(; )).^$.]
 		flattenAll			.(`(~2%.].!=$ ].{) .(; )).^$.]
 		intermediate		.(`1 .(; ))
 		intermediateB		].{
 		calculation			flattenAll(1 (2 ) (3 ((4 ) )))
-		//calculationB		2flatten(1 (2 ) (3 ((4 ) )))
+		calculationB		2flatten(1 (2 ) (3 ((4 ) )))
 	*/
 
-		//it("2flatten(1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, [4]]", () => expect(calculationB).eql([1, 2, 3, [4]]));
+		it("flatten(2, [1, [2], [3, [[4]]]]) eql [1, 2, 3, [4]]", () => expect(flatten(2, [1, [2], [3, [[4]]]])).eql([1, 2, 3, [4]]));
+		it("2flatten(1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, [4]]", () => expect(calculationB).eql([1, 2, 3, [4]]));
 		it("+1.>.(#.)(2)([1, 2, 3, 4]) eql false", () => expect(intermediateC(2)([1, 2, 3, 4])).eql(false));
 		it("+1.>.(#.)(5)([1, 2, 3, 4]) eql true", () => expect(intermediateC(5)([1, 2, 3, 4])).eql(true));
 		it("].`([1, 2, 3])([3, 2, 1]) eql 3", () => expect(endIntoConst([1, 2, 3])([3, 2, 1])).eql(3));
 		it("`]([1, 2, 3])([3, 2, 1]) eql 1", () => expect(constLast([1, 2, 3])([3, 2, 1])).eql(1));
-		//it("flatten(2, [1, [2], [3, [[4]]]]) eql [1, 2, 3, [4]]", () => expect(flatten(2, [1, [2], [3, [[4]]]])).eql([1, 2, 3, [4]]));
 		it(".(`(~2%.].!=$ ].{) .(; )).^$.](1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, 4]", () => expect(calculation).eql([1, 2, 3, 4]));
 		it(".(`(~2%.].!=$ ].{) .(; )).^$.]([1, [2], [3, [[4]]]]) eql [1, 2, 3, 4]", () => expect(flattenAll([1, [2], [3, [[4]]]])).eql([1, 2, 3, 4]));
 		it("].{([1, [1, [2, [3, 4]]]]) eql [1, 2, [3, 4]]", () => expect(intermediateB([1, [1, [2, [3, 4]]]])).eql([1, 2, [3, 4]]));

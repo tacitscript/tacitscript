@@ -795,7 +795,7 @@ backslash.types = [
 ];
 let backtick = value => {
 	let fn = dummy => value; // X(?X) constant `2
-	fn.types = map(prepend("?"))(types(value));
+	fn.types = map(type => ["?", type])(types(value));
 
 	return fn;
 }; backtick.types = [
