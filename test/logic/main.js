@@ -5,6 +5,20 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("lastIndexOf", () => {
+	/*ts
+		intermediate		~1%((1 2 3) )
+		lastIndexOf			:,(= ;).%$.~1%.([.#.=0)?,(`() [.+$.#).|$
+		calculation			2lastIndexOf(1 2 3 1 2 3)
+	*/
+		it("~1%((1 2 3) ) eql [[], [[1, 2, 3]]]", () => expect(intermediate).eql([[], [[1, 2, 3]]]));
+		it("lastIndexOf(2, [1, 2, 3, 1, 2, 3]) eql 4", () => expect(lastIndexOf(2, [1, 2, 3, 1, 2, 3])).eql(4));
+		it("2lastIndexOf(1 2 3 1 2 3) eql 4", () => expect(calculation).eql(4));
+		it("lastIndexOf(1, [1, 2, 3, 4, 2, 3]) eql 0", () => expect(lastIndexOf(1, [1, 2, 3, 4, 2, 3])).eql(0));
+		it("lastIndexOf(3, [1, 2, 3, 4, 2, 3]) eql 5", () => expect(lastIndexOf(3, [1, 2, 3, 4, 2, 3])).eql(5));
+		it("lastIndexOf(5, [1, 2, 3, 4, 2, 3]) eql undefined", () => expect(lastIndexOf(5, [1, 2, 3, 4, 2, 3])).eql(undefined));
+	});
+
 	describe("indexOf :.(].#.= ,(= ;).%$.[.#).?$,(`() ;).|$", () => {
 	/*ts
 		indexOf				:.(].#.= ,(= ;).%$.[.#).?$,(`() ;).|$
