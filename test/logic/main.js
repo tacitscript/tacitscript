@@ -5,7 +5,19 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
-	describe("chunk", () => {
+	describe("indexOf :.(].#.= ,(= ;).%$.[.#).?$,(`() ;).|$", () => {
+	/*ts
+		indexOf				:.(].#.= ,(= ;).%$.[.#).?$,(`() ;).|$
+		calculation			2indexOf(1 2 3)
+		calculationB		4indexOf(1 2 3)
+	*/
+		it("indexOf(2, [1, 2, 3]) eql 1", () => expect(indexOf(2, [1, 2, 3])).eql(1));
+		it("2indexOf(1 2 3) eql 1", () => expect(calculation).eql(1));
+		it("indexOf(4, [1, 2, 3]) eql undefined", () => expect(indexOf(4, [1, 2, 3])).eql(undefined));
+		it("4indexOf(1 2 3) eql undefined", () => expect(calculationB).eql(undefined));
+	});
+
+	describe("chunk :,(.(; ) ;).%$", () => {
 	/*ts
 		chunk				:,(.(; ) ;).%$
 		calculation			2chunk("Tyrone" "Elie" "Aidan" "Sam" "Katrina" "Billie" "Little Timmy")
