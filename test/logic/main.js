@@ -5,7 +5,7 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
-	describe("lastIndexOf", () => {
+	describe("lastIndexOf :,(= ;).%$.~1%.([.#.=0)?,(`() [.+$.#).|$", () => {
 	/*ts
 		intermediate		~1%((1 2 3) )
 		lastIndexOf			:,(= ;).%$.~1%.([.#.=0)?,(`() [.+$.#).|$
