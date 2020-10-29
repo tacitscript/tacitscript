@@ -5,7 +5,18 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
-	describe("uniq", () => {
+	describe("zip ~", () => {
+	/*ts
+		zip					~
+		calculation			~(("moe" "larry" "curly") (30 40 50) (!() () ()))
+	*/
+		it("zip([['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]]) eql [['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]",
+			() => expect(zip([['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]])).eql([['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]));
+		it(`~(("moe" "larry" "curly") (30 40 50) (!() () ())) eql [['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]`,
+			() => expect(calculation).eql([['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]));
+	});
+
+	describe("uniq (:.([ .([.(#.=0)?,(`(`(!())) !=@.&$).|$ .(] )).*$).+$ ( ))$", () => {
 	/*ts
 		intermediateA		(#.=0)?,(`(`(!())) !=@.&$).|$
 		uniq				(:.([ .([.intermediateA .(] )).*$).+$ ( ))$
