@@ -5,6 +5,17 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("chunk", () => {
+	/*ts
+		chunk				:,(.(; ) ;).%$
+		calculation			2chunk("Tyrone" "Elie" "Aidan" "Sam" "Katrina" "Billie" "Little Timmy")
+	*/
+		it(`chunk(2, ["Tyrone", "Elie", "Aidan", "Sam", "Katrina", "Billie", "Little Timmy"]) eql [["Tyrone", "Elie"], ["Aidan", "Sam"], ["Katrina", "Billie"], ["Little Timmy"]]`,
+			() => expect(chunk(2, ["Tyrone", "Elie", "Aidan", "Sam", "Katrina", "Billie", "Little Timmy"])).eql([["Tyrone", "Elie"], ["Aidan", "Sam"], ["Katrina", "Billie"], ["Little Timmy"]]));
+		it(`2chunk("Tyrone" "Elie" "Aidan" "Sam" "Katrina" "Billie" "Little Timmy") eql [["Tyrone", "Elie"], ["Aidan", "Sam"], ["Katrina", "Billie"], ["Little Timmy"]]`,
+			() => expect(calculation).eql([["Tyrone", "Elie"], ["Aidan", "Sam"], ["Katrina", "Billie"], ["Little Timmy"]]));
+	});
+
 	describe("object \\", () => {
 	/*ts
 		object				\
