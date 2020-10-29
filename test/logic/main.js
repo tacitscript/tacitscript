@@ -5,7 +5,16 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
-	describe("zip ~", () => {
+	describe("object \\", () => {
+	/*ts
+		object				\
+		calculation			object(("moe" 30) ("larry" 40) ("curly" 50))
+	*/
+		it("object([['moe', 30], ['larry', 40], ['curly', 50]]) eql {moe: 30, larry: 40, curly: 50}", () => expect(object([['moe', 30], ['larry', 40], ['curly', 50]])).eql({moe: 30, larry: 40, curly: 50}));
+		it(`object(("moe" 30) ("larry", 40) ("curly" 50)) eql {moe: 30, larry: 40, curly: 50}`, () => expect(calculation).eql({moe: 30, larry: 40, curly: 50}));
+	});
+
+	describe("zip unzip ~", () => {
 	/*ts
 		zip					~
 		calculation			~(("moe" "larry" "curly") (30 40 50) (!() () ()))
