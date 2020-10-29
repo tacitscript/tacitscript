@@ -5,7 +5,20 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
-	describe("difference :._,(+$.;/.\.(1 0)'@.!=@.&$ ;).*$", () => {
+	describe("uniq", () => {
+	/*ts
+		intermediateA		(#.=0)?,(`(`(!())) !=@.&$).|$
+		uniq				(:.([ .([.intermediateA .(] )).*$).+$ ( ))$
+		calculation			uniq(1 2 1 4 1 3)
+	*/
+		it("!=@.&$([])(3) eql true", () => expect(intermediateA([])(3)).eql(true));
+		it("!=@.&$([2, 4])(3) eql true", () => expect(intermediateA([2, 4])(3)).eql(true));
+		it("!=@.&$([2, 4])(4) eql false", () => expect(intermediateA([2, 4])(4)).eql(false));
+		it("uniq([1, 2, 1, 4, 1, 3]) eql [1, 2, 4, 3]", () => expect(uniq([1, 2, 1, 4, 1, 3])).eql([1, 2, 4, 3]));
+		it("uniq(1 2 1 4 1 3) eql [1, 2, 4, 3]", () => expect(calculation).eql([1, 2, 4, 3]));
+	});
+
+	describe("difference :._,(+$.;/.\\.(1 0)'@.!=@.&$ ;).*$", () => {
 	/*ts
 		difference			:._,(+$.;/.\.(1 0)'@.!=@.&$ ;).*$
 		intermediateA		:._,(+$.;/.\.(1 0)'@ ;)
