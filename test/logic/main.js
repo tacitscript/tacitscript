@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("extend +$", () => {
+	/*ts
+		extend				+$
+		calculation			extend({"{name: \"moe\"}" {"{age: 50}")
+	*/
+		it(`extend({"{name: \"moe\"}" {"{age: 50}") eql {name: "moe", age: 50}`, () => expect(calculation).eql({name: "moe", age: 50}));
+		it(`extend([{name: "moe"}, {age: 50}]) eql {name: "moe", age: 50}`, () => expect(extend([{name: "moe"}, {age: 50}])).eql({name: "moe", age: 50}));
+	});
+
 	describe("invert \\._@.\\", () => {
 	/*ts
 		invert				\._@.\
@@ -32,7 +41,7 @@ describe("Underscore", () => {
 		it(`+5mapObject({"{start: 5, end: 12}") eql {start: 10, end: 17}`, () => expect(calculation).eql({start: 10, end: 17}));
 	});
 
-	describe("values \.]@", () => {
+	describe("values \\.]@", () => {
 	/*ts
 		values				\.]@
 		calculation			values({"{one: 1, two: 2, three: 3}")
@@ -41,7 +50,7 @@ describe("Underscore", () => {
 		it(`values({"{one: 1, two: 2, three: 3}") eql [1, 2, 3]`, () => expect(calculation).eql([1, 2, 3]));
 	});
 
-	describe("keys \.[@", () => {
+	describe("keys \\.[@", () => {
 	/*ts
 		keys				\.[@
 		calculation			keys({"{one: 1, two: 2, three: 3}")
