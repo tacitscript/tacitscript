@@ -5,6 +5,17 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("range", () => {
+	/*ts
+		rangeStop			;^
+		rangeLimits			.([.+ _.-$).^$
+		rangeStep			.(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$
+	*/
+		it(";^(4) eql [0, 1, 2, 3]", () => expect(rangeStop(4)).eql([0, 1, 2, 3]));
+		it(".([.+ _.-$).^$([1, 4]) eql [1, 2, 3]", () => expect(rangeLimits([1, 4])).eql([1, 2, 3]));
+		it(".(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$([10, 25, 5]) eql [10, 15, 20]", () => expect(rangeStep([10, 25, 5])).eql([10, 15, 20]));
+	});
+
 	describe("findLastIndex :.(%$ ].#).([.#.=1)?,(`() .(] [.].#).-$).|$", () => {
 	/*ts
 		findLastIndex		:.(%$ ].#).([.#.=1)?,(`() .(] [.].#).-$).|$
