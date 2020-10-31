@@ -5,7 +5,7 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
-	describe("range", () => {
+	describe(`range (}.="N" #.=2)?,(;^ .([.+ _.-$).^$ .(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$).|$`, () => {
 	/*ts
 		rangeStop			;^
 		rangeLimits			.([.+ _.-$).^$
