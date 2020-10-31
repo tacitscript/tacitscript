@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("pick *", () => {
+	/*ts
+		pick				*
+		calculation			("name" "age")pick({"{name: 'moe', age: 50, userid: 'moe1'}")
+	*/
+		it(`pick(["name", "age"], {name: 'moe', age: 50, userid: 'moe1'}) eql {name: 'moe', age: 50}`, () => expect(pick(["name", "age"], {name: 'moe', age: 50, userid: 'moe1'})).eql({name: 'moe', age: 50}));
+		it(`("name" "age")pick({"{name: 'moe', age: 50, userid: 'moe1'}") eql {name: 'moe', age: 50}`, () => expect(calculation).eql({name: 'moe', age: 50}));
+	});
+
 	describe("extend +$", () => {
 	/*ts
 		extend				+$
