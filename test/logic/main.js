@@ -5,6 +5,14 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("negate !", () => {
+	/*ts
+		negate				!
+		calculation			negate(%2.=0)'(0 1 2 3)
+	*/
+		it("negate(%2.=0)'(0 1 2 3) eql 1", () => expect(calculation).eql(1));
+	});
+
 	describe(`range (}.="N" #.=2)?,(;^ .([.+ _.-$).^$ .(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$).|$`, () => {
 	/*ts
 		rangeStop			;^
