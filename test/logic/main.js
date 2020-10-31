@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("omit -", () => {
+	/*ts
+		omit				-
+		calculation			("userid" )omit({"{name: 'moe', age: 50, userid: 'moe1'}")
+	*/
+		it(`omit(["userid"], {name: 'moe', age: 50, userid: 'moe1'}) eql {name: 'moe', age: 50}`, () => expect(omit(["userid"], {name: 'moe', age: 50, userid: 'moe1'})).eql({name: 'moe', age: 50}));
+		it(`("userid" )omit({"{name: 'moe', age: 50, userid: 'moe1'}") eql {name: 'moe', age: 50}`, () => expect(calculation).eql({name: 'moe', age: 50}));
+	});
+
 	describe("pick *", () => {
 	/*ts
 		pick				*
