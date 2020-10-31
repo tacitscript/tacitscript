@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("compose _.(.$)", () => {
+	/*ts
+		compose				_.(.$)
+		calculation			compose(+1 *2)3
+	*/
+		it("compose([x => x + 1, x => x * 2])(3) eql 7", () => expect(compose([x => x + 1, x => x * 2])(3)).eql(7));
+		it("compose(+1 *2)3 eql 7", () => expect(calculation).eql(7));
+	});
+
 	describe("negate !", () => {
 	/*ts
 		negate				!
