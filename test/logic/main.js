@@ -5,6 +5,26 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("sortedIndex", () => {
+	/*ts
+		intermediateE		>.(].).?.(:.)
+		intermediateF		>.(].).?.(:.)
+		intermediateD		>.(:.].)
+		intermediateC		35>,([.)
+		intermediateB		35>,(:.[.)
+		//intermediate		(35>,(:.[.).?,([.+1 [).|$ 0)$(10 20 30 40 50)
+		//sortedIndex			:,(.(>.([.).?,([.+1 [).|$ `0) ;).$$
+	*/
+		it(">.(].).?,([.+1 [).|$.(:.)(35)(2, 30) eql 3", () => expect(intermediateE(35)(2, 30)).eql(3));
+		it(">.(].).?.(:.)(35)(2, 30) eql [[2, 30], undefined]", () => expect(intermediateF(35)(2, 30)).eql([[2, 30], undefined]));
+		it("(>.(:.].))(35)(2, 40) eql false", () => expect(intermediateD(35)(2, 40)).eql(false));
+		it("(>.(:.].))(35)(2, 30) eql true", () => expect(intermediateD(35)(2, 30)).eql(true));
+		it("35>,([.)([20, 50]) eql true", () => expect(intermediateC([20, 50])).eql(true));
+		it("35>,(:.[.)(20, 50) eql true", () => expect(intermediateB(20, 50)).eql(true));
+		//it("(35>,([.).?,([.+1 [).|$ 0)$(10 20 30 40 50) eql 3", () => expect(intermediate).eql(3));
+		//it("sortedIndex(35, [10, 20, 30, 40, 50]) eql 3", () => expect(sortedIndex(35, [10, 20, 30, 40, 50])).eql(3));
+	});
+
 	describe("lastIndexOf :,(= ;).%$.~1%.([.#.=0)?,(`() [.+$.#).|$", () => {
 	/*ts
 		intermediate		~1%((1 2 3) )
