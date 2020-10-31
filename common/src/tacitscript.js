@@ -444,6 +444,16 @@ let dot = (left, right) => {
 			return result;
 		}
 
+		// fn that returns a function that pipes
+		// const solutionsDeferred = filter(([leftType, rightType]) => (leftType.length === 2) && (leftType[1].length > 1) && (rightType.length > 1) && (rightType[0].length > 1))(typeCombinations);
+		// if(isUnaryFunction(left) && isFunction(right) && solutionsDeferred.length) {
+		// 	let fn = value => apply(comma(value, left), right);
+
+		// 	// types will be added by apply
+
+		// 	return fn;
+		// }
+
 		// (XY)(YZ)(XZ) pipe +1./2
 		const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) {
@@ -465,6 +475,10 @@ let dot = (left, right) => {
 	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
 	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]], // unaryBinaryApply =1.?
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
+	// [["V", ["V", "V"]], ["V", "V"], "?"],
+	// [["V", ["V", "V"]], ["V", "V", "V"], "?"],
+	// [["V", ["V", "V", "V"]], ["V", "V"], "?"],
+	// [["V", ["V", "V", "V"]], ["V", "V", "V"], "?"],
 ];
 let plus = (left, right) => {
 	if (typeof left === "string") return `${left}${toString(right)}`; // SVS stringConcat ""+4
