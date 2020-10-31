@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("mapObject @", () => {
+	/*ts
+		mapObject			@
+		calculation			+5mapObject({"{start: 5, end: 12}")
+	*/
+		it("mapObject(x => x + 5, {start: 5, end: 12}) eql {start: 10, end: 17}", () => expect(mapObject(x => x + 5, {start: 5, end: 12})).eql({start: 10, end: 17}));
+		it(`+5mapObject({"{start: 5, end: 12}") eql {start: 10, end: 17}`, () => expect(calculation).eql({start: 10, end: 17}));
+	});
+
 	describe("values \.]@", () => {
 	/*ts
 		values				\.]@
