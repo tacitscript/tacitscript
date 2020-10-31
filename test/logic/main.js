@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("invert \\._@.\\", () => {
+	/*ts
+		invert				\._@.\
+		calculation			invert({"{Moe: 'Moses', Larry: 'Louis', Curly: 'Jerome'}")
+	*/
+		it(`invert({Moe: 'Moses', Larry: 'Louis', Curly: 'Jerome'}) eql {Moses: "Moe", Louis: "Larry", Jerome: "Curly"}`, () => expect(invert({Moe: 'Moses', Larry: 'Louis', Curly: 'Jerome'})).eql({Moses: "Moe", Louis: "Larry", Jerome: "Curly"}));
+		it(`invert({"{Moe: 'Moses', Larry: 'Louis', Curly: 'Jerome'}") eql {Moses: "Moe", Louis: "Larry", Jerome: "Curly"}`, () => expect(calculation).eql({Moses: "Moe", Louis: "Larry", Jerome: "Curly"}));
+	});
+
 	describe("pairs \\", () => {
 	/*ts
 		pairs				\
