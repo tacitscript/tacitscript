@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("defaults +", () => {
+	/*ts
+		defaults			+
+		calculation			{"{flavor: 'vanilla', sprinkles: 'lots'}"defaults({"{flavor: 'chocolate'}")
+	*/
+		it(`defaults({flavor: 'vanilla', sprinkles: 'lots'}, {flavor: 'chocolate'}) eql {flavor: "chocolate", sprinkles: "lots"}`, () => expect(defaults({flavor: 'vanilla', sprinkles: 'lots'}, {flavor: 'chocolate'})).eql({flavor: "chocolate", sprinkles: "lots"}));
+		it(`{"{flavor: 'vanilla', sprinkles: 'lots'}"defaults({"{flavor: 'chocolate'}") eql {flavor: "chocolate", sprinkles: "lots"}`, () => expect(calculation).eql({flavor: "chocolate", sprinkles: "lots"}));
+	});
+
 	describe("omit -", () => {
 	/*ts
 		omit				-
