@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("pairs \\", () => {
+	/*ts
+		pairs				\
+		calculation			pairs({"{one: 1, two: 2, three: 3}")
+	*/
+		it("pairs({one: 1, two: 2, three: 3}) eql [['one', 1], ['two', 2], ['three', 3]]", () => expect(pairs({one: 1, two: 2, three: 3})).eql([['one', 1], ['two', 2], ['three', 3]]));
+		it(`pairs({"{one: 1, two: 2, three: 3}") eql [['one', 1], ['two', 2], ['three', 3]]`, () => expect(calculation).eql([['one', 1], ['two', 2], ['three', 3]]));
+	});
+
 	describe("mapObject @", () => {
 	/*ts
 		mapObject			@
