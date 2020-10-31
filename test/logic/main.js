@@ -10,7 +10,13 @@ describe("Underscore", () => {
 		rangeStop			;^
 		rangeLimits			.([.+ _.-$).^$
 		rangeStep			.(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$
+		range				(}.="N" #.=2)?,(rangeStop rangeLimits rangeStep).|$
 	*/
+		it("range(0) eql []", () => expect(range(0)).eql([]));
+		it("range([0, -10, -1) eql [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]", () => expect(range([0, -10, -1])).eql([0, -1, -2, -3, -4, -5, -6, -7, -8, -9]));
+		it("range([0, 30, 5]) eql [0, 5, 10, 15, 20, 25]", () => expect(range([0, 30, 5])).eql([0, 5, 10, 15, 20, 25]));
+		it("range([1, 11]) eql [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]", () => expect(range([1, 11])).eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+		it("range(10) eql [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]", () => expect(range(10)).eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
 		it(";^(4) eql [0, 1, 2, 3]", () => expect(rangeStop(4)).eql([0, 1, 2, 3]));
 		it(".([.+ _.-$).^$([1, 4]) eql [1, 2, 3]", () => expect(rangeLimits([1, 4])).eql([1, 2, 3]));
 		it(".(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$([10, 25, 5]) eql [10, 15, 20]", () => expect(rangeStep([10, 25, 5])).eql([10, 15, 20]));
