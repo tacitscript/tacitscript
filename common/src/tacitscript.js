@@ -47,7 +47,6 @@ const values = obj => Object.values(obj);
 const any = check => array => array.some(check);
 const take = number => array => array.slice(0, number);
 const append = value => array => [...array, value];
-const prepend = value => array => [value, ...array];
 const first = array => array[0];
 
 //==========================================================
