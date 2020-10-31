@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("has '.!.!", () => {
+	/*ts
+		has					'.!.!
+		calculation			"b"has({"{a: 1, b: 2, c: 3}")
+	*/
+		it(`"b"has({"{a: 1, b: 2, c: 3}") eql true`, () => expect(calculation).eql(true));
+		it(`has("b", {a: 1, b: 2, c: 3}) eql true`, () => expect(has("b", {a: 1, b: 2, c: 3})).eql(true));
+	});
+
 	describe("defaults +", () => {
 	/*ts
 		defaults			+
