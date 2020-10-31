@@ -5,6 +5,16 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("findLastIndex :.(%$ ].#).([.#.=1)?,(`() .(] [.].#).-$).|$", () => {
+	/*ts
+		findLastIndex		:.(%$ ].#).([.#.=1)?,(`() .(] [.].#).-$).|$
+		calculation			(%2.=1)findLastIndex(1 2 3 4)
+	*/
+		it("findLastIndex(x => (x % 2) === 1, [2, 4]) eql undefined", () => expect(findLastIndex(x => (x % 2) === 1, [2, 4])).eql(undefined));
+		it("findLastIndex(x => (x % 2) === 1, [1, 2, 3, 4]) eql 2", () => expect(findLastIndex(x => (x % 2) === 1, [1, 2, 3, 4])).eql(2));
+		it("(%2.=1)findLastIndex(1 2 3 4) eql 2", () => expect(calculation).eql(2));
+	});
+
 	describe("findIndex :.(%$.[.# ].#).=$?,(`() [).|$", () => {
 	/*ts
 		findIndex			:.(%$.[.# ].#).=$?,(`() [).|$
