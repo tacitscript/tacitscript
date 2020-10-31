@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Underscore", () => {
+	describe("keys \.[@", () => {
+	/*ts
+		keys				\.[@
+		calculation			keys({"{one: 1, two: 2, three: 3}")
+	*/
+		it("keys({one: 1, two: 2, three: 3}) eql ['one', 'two', 'three']", () => expect(keys({one: 1, two: 2, three: 3})).eql(["one", "two", "three"]));
+		it(`keys({"{one: 1, two: 2, three: 3}") eql ['one', 'two', 'three']`, () => expect(calculation).eql(["one", "two", "three"]));
+	});
+
 	describe("compose _.(.$)", () => {
 	/*ts
 		compose				_.(.$)
