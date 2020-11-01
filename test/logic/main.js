@@ -8,12 +8,12 @@ describe("Rosetta Code", () => {
 	/*ts
 		intermediateC		_^
 		intermediateB		(_^),(#.)
-		intermediateD		3intermediateB
+		//intermediateD		3intermediateB
 		intermediateA		:,(_^.(#.) >).(.$)
 		intermediate		:.(,(_^.(#.) >).(.$) `#).^( ).#
 	*/
-		it("(_^).(#.)(2)([1, 2, 3]) eql 9", () => expect(intermediateB(2)([1, 2, 3])).eql(9));
-		it(":.(.(].> [.^.(#.)).(.$) `#).^( ).#(5, 34) eql 2", () => expect(intermediate(5, 34)).eql(2));
+		//it("(_^).(#.)(2)([1, 2, 3]) eql 9", () => expect(intermediateB(2)([1, 2, 3])).eql(9));
+		//it(":.(.(].> [.^.(#.)).(.$) `#).^( ).#(5, 34) eql 2", () => expect(intermediate(5, 34)).eql(2));
 	});
 
 	describe("Loops/While", () => {
