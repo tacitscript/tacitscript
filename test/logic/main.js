@@ -6,11 +6,13 @@ mocha.setup('bdd');
 describe("Rosetta Code", () => {
 	describe("Nth root", () => {
 	/*ts
-		intermediateC		~^
-		intermediateB		(~^).(#.)
-		intermediateA		:,(~^.(#.) >).(.$)
-		intermediate		:.(,(~^.(#.) >).(.$) `#).^( ).#
+		intermediateC		_^
+		intermediateB		(_^),(#.)
+		intermediateD		3intermediateB
+		intermediateA		:,(_^.(#.) >).(.$)
+		intermediate		:.(,(_^.(#.) >).(.$) `#).^( ).#
 	*/
+		it("(_^).(#.)(2)([1, 2, 3]) eql 9", () => expect(intermediateB(2)([1, 2, 3])).eql(9));
 		it(":.(.(].> [.^.(#.)).(.$) `#).^( ).#(5, 34) eql 2", () => expect(intermediate(5, 34)).eql(2));
 	});
 
