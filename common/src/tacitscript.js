@@ -339,6 +339,16 @@ let comma = (left, right) => {
 			return fn;
 		}
 	} else {
+		// (XYZ)((YZ)W)(XW) binaryUnaryApply =,'(1 2 3)
+		const solutions211 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType.slice(1), rightType[0]))(typeCombinations);
+		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { 
+			let fn = x => right(leftApply(x, left));
+
+			fn.types = map(([leftType, rightType]) => [leftType[1], rightType[1]])(solutions211);
+
+			return fn;
+		}		
+
 		// X(XY)Y applyTo 3,+1
 		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
 		if (isUnaryFunction(right) && solutionsInvert.length) {
@@ -352,7 +362,7 @@ let comma = (left, right) => {
 			return result;
 		}
 
-		// X(XYZ)(YZ) applyToBinary 3,+
+		// X(XYZ)(YZ) applyToBinary 3,+ =1.?
 		const solutions021 = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isBinaryFunction(right) && solutions021.length) {
 			let fn = value => leftApply(left, right)(value);
@@ -369,7 +379,8 @@ let comma = (left, right) => {
 	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
 	[["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
 	["X", ["X", "Y"], "Y"], // applyTo 3,+1
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+ =1.?
+	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
 	if (isUndefined(left) || isUndefined(right)) return undefined;
@@ -413,16 +424,6 @@ let dot = (left, right) => {
 			return fn;
 		}
 
-		// (XYZ)((YZ)W)(XW) binaryUnaryApply =.'(1 2 3)
-		const solutions211 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType.slice(1), rightType[0]))(typeCombinations);
-		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { 
-			let fn = x => right(leftApply(x, left));
-
-			fn.types = map(([leftType, rightType]) => [leftType[1], rightType[1]])(solutions211);
-
-			return fn;
-		}		
-
 		// (XY)(YZW)(X(ZW)) unaryBinaryPipe +1./
 		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
 		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
@@ -431,16 +432,6 @@ let dot = (left, right) => {
 			fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions121);
 
 			return fn;
-		}
-
-		// (XY)((XY)ZW)(ZW) unaryBinaryApply =1.?
-		const solutions121a = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121a.length) {
-			let result = x => right(left, x);
-
-			result.types = map(([leftType, rightType]) => rightType.slice(1))(solutions121a);
-
-			return result;
 		}
 
 		// (XY)(YZ)(XZ) pipe +1./2
@@ -460,9 +451,7 @@ let dot = (left, right) => {
 	[["V", "V"], "A", ["V", "A"]], // pipeToArray [.(+1 -2) -- OLD (??)A(?A)
 	[["V", "V", "V"], "A", ["V", "V", "A"]], // pipeBinaryToArray :.(+$ -$) -- OLD (???)A(??A)
 	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
-	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =.'(1 2 3)
 	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
-	[["X", "Y"], [["X", "Y"], "Z", "W"], ["Z", "W"]], // unaryBinaryApply =1.?
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
