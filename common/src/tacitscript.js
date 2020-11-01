@@ -470,9 +470,9 @@ let plus = (left, right) => {
 	if (Array.isArray(left)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
 	if (isObject(left)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
 
-	return left + right; // NNN add 2+3
+	return left + (+right); // NVN add 2+"3"
 }; plus.types = [
-	["N", "N", "N"], // add 2+3
+	["N", "V", "N"], // add 2+3
 	["S", "V", "S"], // stringConcat ""+4
 	["A", "A", "A"], // arrayConcat (1 2 3)+(4 5 6)
 	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")

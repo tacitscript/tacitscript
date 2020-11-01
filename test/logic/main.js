@@ -4,6 +4,14 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
+	describe("Increment a numerical string", () => {
+	/*ts
+		increment			0+.+1.""+
+		calculation			increment"22.5"
+	*/
+		it(`(0+.+1.""+)"22.5" eql "23.5"`, () => expect(calculation).eql("23.5"));
+	});
+
 	describe("Formatted numeric output", () => {
 	/*ts
 		fixed				:,(; ""+.(; #)).(.([ ].]).-$.`0^.""$ ].[).+$
@@ -1030,11 +1038,13 @@ describe("Operators", () => {
 	});
 
 	describe("+ (plus)", () => {
-		describe("add NNN", () => {
+		describe("add NVN", () => {
 		/*ts
 			plusThree		+3
+			calculation		3+"5"
 		*/
 			it("+3(4) eql 7", () => expect(plusThree(4)).eql(7));
+			it(`3+"5" eql 8`, () => expect(calculation).eql(8));
 		});
 
 		describe("arrayConcat AAA", () => {
