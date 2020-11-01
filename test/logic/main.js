@@ -4,6 +4,16 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
+	describe("Formatted numeric output", () => {
+	/*ts
+		fixed				:,(; ""+.(; #)).(.([ ].]).-$.`0^.""$ ].[).+$
+		calculation			9fixed7.125
+		fixedB				:.([.~ ,(`0^.""$ ""+).+$).%$.]
+	*/
+		it('9(:,(; ""+.(; #)).(.([ ].]).-$.`0^.""$ ].[).+$)7.125 eql "00007.125"', () => expect(calculation).eql("00007.125"));
+		it(':.([.~ ,(`0^.""$ ""+).+$).%$.](9, 7.125) eql "00007.125"', () => expect(fixedB(9, 7.125)).eql("00007.125"));
+	});
+
 	describe("FizzBuzz", () => {
 	/*ts
 		fizzBuzz			+1^100,(((%3.=0)&(%5.=0) %3.=0 %5.=0)?,(`"FizzBuzz" `"Fizz" `"Buzz" ;).|$)@
