@@ -4,6 +4,16 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
+	describe("Nth root", () => {
+	/*ts
+		intermediateC		~^
+		intermediateB		(~^).(#.)
+		intermediateA		:,(~^.(#.) >).(.$)
+		intermediate		:.(,(~^.(#.) >).(.$) `#).^( ).#
+	*/
+		it(":.(.(].> [.^.(#.)).(.$) `#).^( ).#(5, 34) eql 2", () => expect(intermediate(5, 34)).eql(2));
+	});
+
 	describe("Loops/While", () => {
 	/*ts
 		calculation			(].>0 ]./2.{"Math.floor")^(1024 )
@@ -335,27 +345,27 @@ describe("Underscore", () => {
 		it("difference([1, 2, 3, 4, 5], [[5, 2, 10]]) eql [1, 3, 4]", () => expect(difference([1, 2, 3, 4, 5], [[5, 2, 10]])).eql([1, 3, 4]));
 	});
 
-	describe("intersection ~1%,(~'@.&$.(=.) [).*$", () => {
+	describe("intersection ~1%,(_'@.&$.(=.) [).*$", () => {
 	/*ts
-		intermediateF		((1 2 3) (2 3 4)),~'@
+		intermediateF		((1 2 3) (2 3 4)),_'@
 		intermediateL		&$
 		intermediateJ		&$(<2 <3 <4)
 		intermediateI		<2&(>0)
-		intermediateE		((1 2 3) (2 3 4)),~'@,&$,(=.)
-		intermediateH		((1 2 3) (2 3 4)),~'@,&$
-		intermediateG		(2 3 4),~'
+		intermediateE		((1 2 3) (2 3 4)),_'@,&$,(=.)
+		intermediateH		((1 2 3) (2 3 4)),_'@,&$
+		intermediateG		(2 3 4),_'
 		intermediateD		=.'(1 2 3)
 		intermediateC		=2'(1 2 3)
 		intermediateB		(=.'(1 2 3))*(2 3 4 5)
 		intermediateA		~1%((1 2 3) (101 2 1 10) (2 1))
-		intersection		~1%,(~'@.&$.(=.) [).*$
+		intersection		~1%,(_'@.&$.(=.) [).*$
 		calculation			intersection((1 2 3) (101 2 1 10) (2 1))
 	*/
 
-		it("((1 2 3) (2 3 4)),~'@,&$,(=.)(2) eql 2", () => expect(intermediateE(2)).eql(2));
-		it("((1 2 3) (2 3 4)),~'@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
-		it("((1 2 3) (2 3 4)),~'@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
-		it("(2 3 4),~'(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
+		it("((1 2 3) (2 3 4)),_'@,&$,(=.)(2) eql 2", () => expect(intermediateE(2)).eql(2));
+		it("((1 2 3) (2 3 4)),_'@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
+		it("((1 2 3) (2 3 4)),_'@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
+		it("(2 3 4),_'(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
 		it("=.'(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
 		it("=2'(1 2 3) eql 2", () => expect(intermediateC).eql(2));
 		it("(=.'(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
@@ -935,25 +945,25 @@ describe("Operators", () => {
 			it('~((1 2 3) (4 5 6) (7 8 9)) eql [[1, 4, 7], [2, 5, 8], [3, 6, 9]]', () => expect(transposedMatrix).eql([[1, 4, 7], [2, 5, 8], [3, 6, 9]]));
 			it('~((1 2 3) (4 5) (6 7 8)) eql [[1, 4, 6], [2, 5, 7]]', () => expect(unequalTransposition).eql([[1, 4, 6], [2, 5, 7]]));
 		});
-
-		describe("flip (XYZ)(YXZ)", () => {
-		/*ts
-			flipMinus				~-
-			flipPairMinus			(:.-$).~
-			flipPairMinusApplied	2flipPairMinus6
-			flipPow					~({"Math.pow")				NB: this causes need for js functions to be imported as VV/VVV rather ??/???
-		*/
-			it('~-(2, 7) eql 5', () => expect(flipMinus(2, 7)).eql(5));
-			it('2((:.-$).~)6 eql 4', () => expect(flipPairMinusApplied).eql(4));
-			it('(:.-$).~(9, 6) eql -3', () => expect(flipPairMinus(9, 6)).eql(-3));
-			it('~({"Math.pow")(2, 3) eql 9', () => expect(flipPow(2, 3)).eql(9));
-		});
 	});
 
 	describe("_ (underscore)", () => {
 		/*ts
 			reverse						_
 		*/
+
+		describe("flip (XYZ)(YXZ)", () => {
+		/*ts
+			flipMinus				_-
+			flipPairMinus			(:.-$),_
+			flipPairMinusApplied	2flipPairMinus6
+			flipPow					_({"Math.pow")				NB: this causes need for js functions to be imported as VV/VVV rather ??/???
+		*/
+			it('_-(2, 7) eql 5', () => expect(flipMinus(2, 7)).eql(5));
+			it('2((:.-$)._)6 eql 4', () => expect(flipPairMinusApplied).eql(4));
+			it('(:.-$)._(9, 6) eql -3', () => expect(flipPairMinus(9, 6)).eql(-3));
+			it('_({"Math.pow")(2, 3) eql 9', () => expect(flipPow(2, 3)).eql(9));
+		});
 
 		describe("reverseArray AA", () => {
 		/*ts
