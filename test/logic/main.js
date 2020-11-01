@@ -4,6 +4,13 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
+	describe("Loops/For", () => {
+	/*ts
+		calculation			(+1.`"*"^.""$)^5
+	*/
+		it('(+1.`"*"^.""$)^5 eql ["*", "**", "***", "****", "*****"]', () => expect(calculation).eql(["*", "**", "***", "****", "*****"]));
+	});
+
 	describe("Loops/Downward for", () => {
 	/*ts
 		calculation			(].!=0 ].-1)^(10 )
