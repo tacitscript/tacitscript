@@ -4,6 +4,14 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
+	describe("Integer comparison", () => {
+	/*ts
+		comparison			(<$ =$ >$)?,(`"less" `"equal" `"greater").|$
+		calculation			comparison@((1 2) (2 2) (2 1))
+	*/
+		it('(:.(<$ =$ >$)?,(`"less" `"equal" `"greater").|$)@((1 2) (2 2) (2 1)) eql ["less", "equal", "greater"]', () => expect(calculation).eql(["less", "equal", "greater"]));
+	});
+
 	describe("Increment a numerical string", () => {
 	/*ts
 		increment			0+.+1.""+
