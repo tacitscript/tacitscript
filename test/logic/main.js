@@ -3,6 +3,15 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("Rosetta Code", () => {
+	describe("Arithmetic/Integer", () => {
+	/*ts
+		fn					:.(+$ -$ *$ /$.({"Math.floor") %$ ^$)
+		calculation			3fn2
+	*/
+		it(`3(:.(+$ -$ *$ /$.({"Math.floor") %$ ^$))2 eql [5, 1, 6, 1, 1, 9]`, () => expect(calculation).eql([5, 1, 6, 1, 1, 9]));
+	});
+});
 
 describe("Underscore", () => {
 	describe("has '.!.!", () => {
