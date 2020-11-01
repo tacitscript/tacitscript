@@ -4,6 +4,13 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
+	describe("Loops/While", () => {
+	/*ts
+		calculation			(].>0 ]./2.{"Math.floor")^(1024 )
+	*/
+		it(`(].>0 ]./2.{"Math.floor")^(1024 ) eql [1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0]`, () => expect(calculation).eql([1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0]));
+	});
+
 	describe("Loops/For", () => {
 	/*ts
 		calculation			(+1.`"*"^.""$)^5
