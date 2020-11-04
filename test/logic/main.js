@@ -7,14 +7,12 @@ mocha.setup('bdd');
 describe("Rosetta Code", () => {
 	describe("Nth root", () => {
 	/*ts
-		intermediateC		_^
-		intermediateB		(_^),(#.)
-		//intermediateD		3intermediateB
-		intermediateA		:,(_^.(#.) >).(.$)
-		intermediate		:.(,(_^.(#.) >).(.$) `#).^( ).#
+		intermediate		:.(,(_^,(#.) >).(.$) `#).^( ).#
+		floorInteger		.(,(_^,(#.) >).(.$) `#).^( ).#.-1
+		nthRoot				:.(floorInteger [).([ .([ .(] ,(; -1).^$).*$)./$).+$
 	*/
-		//it("(_^).(#.)(2)([1, 2, 3]) eql 9", () => expect(intermediateB(2)([1, 2, 3])).eql(9));
-		//it(":.(.(].> [.^.(#.)).(.$) `#).^( ).#(5, 34) eql 2", () => expect(intermediate(5, 34)).eql(2));
+		it(":.(floorInteger [).([ .([ .(] ,(; -1).^$).*$)./$).+$(5, 34) eql 2.025", () => expect(nthRoot(5, 34)).eql(2.025));
+		it(":.(,(_^,(#.) >).(.$) `#).^( ).#(5, 34) eql 3", () => expect(intermediate(5, 34)).eql(3));
 	});
 
 	describe("Loops/While", () => {
