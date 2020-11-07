@@ -5,6 +5,19 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("RPG attributes generator", () => {
+	/*ts
+		generate			.(`({"Math.random".*6.{"Math.floor".+1) `4).^$
+		sumLargest			generate.;<.1%.].+$
+		getSet				.(`sumLargest `6).^$
+		isSetValid			.(+$.>75 (>15?,(`1 `0).|$)@.+$.>2).&$
+		finalSet			(].!isSetValid getSet)^(( ) ),]
+	*/
+		it(`${JSON.stringify(finalSet)}: six numbers are generated`, () => expect(finalSet.length).eql(6));
+		it(`${JSON.stringify(finalSet)}: the sum of the numbers is greater than 75`, () => expect(reduce((acc, x) => acc + x)(0)(finalSet) > 75).eql(true));
+		it(`${JSON.stringify(finalSet)}: at least two of the numbers are greater than 15`, () => expect(reduce((acc, x) => (x > 15) ? (acc + 1) : acc)(0)(finalSet) > 2).eql(true));
+	});
+
 	describe("Nth root", () => {
 	/*ts
 		intermediate		:.(,(_^,(#.) >).(.$) `#).^( ).#
