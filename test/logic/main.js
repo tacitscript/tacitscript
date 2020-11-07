@@ -5,6 +5,13 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Split a character string based on change of character", () => {
+	/*ts
+		split				!=%.", "$
+	*/
+		it(`!=%.", "$("gHHH5YY++///\\") eql "g, HHH, 5, YY, ++, ///, \\"`, () => expect(split("gHHH5YY++///\\")).eql("g, HHH, 5, YY, ++, ///, \\"));
+	});
+
 	describe("RPG attributes generator", () => {
 	/*ts
 		generate			.(`({"Math.random".*6.{"Math.floor".+1) `4).^$
