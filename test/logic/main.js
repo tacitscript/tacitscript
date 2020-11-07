@@ -5,6 +5,13 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("String interpolation (included)", () => {
+	/*ts
+		interpolate			:,(; "X"%).$$
+	*/
+		it(`:,(; "X"%).$$("little", "Mary had a X lamb") eql "Mary had a little lamb"`, () => expect(interpolate("little", "Mary had a X lamb")).eql("Mary had a little lamb"));
+	});
+
 	describe("Split a character string based on change of character", () => {
 	/*ts
 		split				!=%.", "$
