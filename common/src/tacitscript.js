@@ -674,6 +674,9 @@ let percent = (left, right) => {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // AAA chunk (1 2 0)%(1 2 3 4 5)
 		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // ASA chunk chunk (1 2 0)%"abcde"
 	}
+	else if (isString(left)) {
+		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
+	}
 	else if (isUnaryFunction(left)) {
 		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
 		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
@@ -690,6 +693,7 @@ let percent = (left, right) => {
 	["N", "S", "A"], // split 2%"abcde"
 	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
 	["A", "S", "A"], // chunk (1 2 0)%"abcde"
+	["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
 	[["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
 	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
 	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)

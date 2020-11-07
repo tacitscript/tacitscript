@@ -1554,6 +1554,13 @@ describe("Operators", () => {
 			it('(3 2 0)%"abcdefghij" eql ["abc", "de", "fgh", "ij"]', () => expect(threeTwoZeroChunk("abcdefghij")).eql(["abc", "de", "fghij"]));
 		});
 
+		describe("chunkWithDelimiter SSA", () => {
+		/*ts
+			splitCsv			", "%"1, 2, 3, 4"
+		*/
+			it(`", "%"1, 2, 3, 4" eql ["1", "2", "3", "4"]`, () => expect(splitCsv).eql(["1", "2", "3", "4"]));
+		});
+
 		describe("chunkWhenPredicate (VB)AA (SB)SA", () => {
 		/*ts
 			calculationA		=2%(1 2 3 2 1)
