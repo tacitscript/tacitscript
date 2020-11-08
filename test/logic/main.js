@@ -9,10 +9,13 @@ describe("Rosetta Code", () => {
 	/*ts
 		indexOfSubstring	%.(#.=1)?,(`() [.#).|$
 		substring			:.(.([.2%.[ ]).%$.1'
-							)
+							.([.[ ]).%$.]
+							.(`(~1) ]).%$.[
+							.(.(.([.2' ]).indexOfSubstring$ [.1') ]).%$.1'
+							.(.(.([.3' ]).indexOfSubstring$ [.1') ]).%$.1')
 	*/
-		it(`substring([2, 4, "d", "bc"], "abcdefgh") eql ["cdef", "cdefgh", "abcdefg", "defg", "bcde"]`, () => expect(substring([2, 4, "d", "bc"], "abcdefgh")).eql(["cdef"]));
-		it(`substring([2, 4, "d", "bc"], "abcdefgh"]) eql ["cdef"]`, () => expect(substring([2, 4, "d", "bc"], "abcdefgh")).eql(["cdef"]));
+		it(`indexOfSubstring("d", "abcdefgh") eql 3`, () => expect(indexOfSubstring("d", "abcdefgh")).eql(3));
+		it(`substring([2, 4, "d", "bc"], "abcdefgh") eql ["cdef", "cdefgh", "abcdefg", "defg", "bcde"]`, () => expect(substring([2, 4, "d", "bc"], "abcdefgh")).eql(["cdef", "cdefgh", "abcdefg", "defg", "bcde"]));
 		it('indexOfSubstring("ab", "babababa") eql 1', () => expect(indexOfSubstring("ab", "babababa")).eql(1));
 		it('indexOfSubstring("cab", "babababa") eql undefined', () => expect(indexOfSubstring("cab", "babababa")).eql(undefined));
 	});
