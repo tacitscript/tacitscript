@@ -5,6 +5,13 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Tokenize a string", () => {
+	/*ts
+		tokenize			","%."."$
+	*/
+		it(`tokenize("Hello,How,Are,You,Today") eql "Hello.How.Are.You.Today`, () => expect(tokenize("Hello,How,Are,You,Today")).eql("Hello.How.Are.You.Today"));
+	});
+
 	describe("Substring", () => {
 	/*ts
 		indexOfSubstring	%.(#.=1)?,(`() [.#).|$
