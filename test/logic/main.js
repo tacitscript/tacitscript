@@ -5,6 +5,13 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Zero to the zero power", () => {
+	/*ts
+		calculation			0^0
+	*/
+		it("0^0 eql 1", () => expect(calculation).eql(1));
+	});
+
 	describe("Tokenize a string", () => {
 	/*ts
 		tokenize			","%."."$
