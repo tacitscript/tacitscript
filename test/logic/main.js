@@ -5,6 +5,14 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("String matching", () => {
+	/*ts
+		match				:._.%$.([.#.=0 (#.=1)?,(`() .(`(!()) [.# #.>2)).|$ (].#.=0)?,(`(!()) `()).|$)
+	*/
+		it('match("abcdef", "abc") eql [true, [true, 0, false], false]', () => expect(match("abcdef", "abc")).eql([true, [true, 0, false], false]));
+		it('match("bababa", "ab") eql [false, [true, 1, true], false]', () => expect(match("bababa", "ab")).eql([false, [true, 1, true], false]));
+		it('match("abcdef", "def") eql [false, [true, 3, false], true]', () => expect(match("abcdef", "def")).eql([false, [true, 3, false], true]));
+	});
 	describe("String interpolation (included)", () => {
 	/*ts
 		interpolate			:,(; "X"%).$$
