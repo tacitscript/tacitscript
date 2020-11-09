@@ -5,6 +5,13 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Create a two-dimensional array at runtime", () => {
+	/*ts
+		generate			:._,(`0^.` ;).(^$)
+	*/
+		it("generate(3, 2) eql [[0, 0], [0, 0], [0, 0]]", () => expect(generate(3, 2)).eql([[0, 0], [0, 0], [0, 0]]));
+	});
+
 	describe("Binary digits", () => {
 	/*ts
 		binaryDigits		.(`(].[.>0 ].[.(/2.{"Math.floor" %2)) .(.(; ) )).^$.1%.].]@._.("" )+.+$
