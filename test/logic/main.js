@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Binary digits", () => {
+	/*ts
+		binaryDigits		.(`(].[.>0 ].[.(/2.{"Math.floor" %2)) .(.(; ) )).^$.1%.].]@._.("" )+.+$
+	*/
+		it(`binaryDigits(5) eql "101"`, () => expect(binaryDigits(5)).eql("101"));
+		it(`binaryDigits(50) eql "110010"`, () => expect(binaryDigits(50)).eql("110010"));
+		it(`binaryDigits(9000) eql "10001100101000`, () => expect(binaryDigits(9000)).eql("10001100101000"));
+	});
+	
 	describe("Zero to the zero power", () => {
 	/*ts
 		calculation			0^0
