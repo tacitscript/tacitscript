@@ -5,6 +5,18 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Factors of an integer", () => {
+	/*ts
+		divides				.(/ /2.{"Math.floor".+1^).@$.(%1.=0)*
+		inverted			.(/ divides).@$
+		factors				.(inverted .(; )).+$
+	*/
+		it("inverted(24) eql [1, 2, 3, 4, 6, 8, 12]", () => expect(inverted(24)).eql([1, 2, 3, 4, 6, 8, 12]));
+		it('.(/ /2.{"Math.floor".-1.+1^).@$.(%1.=0)*(24) eql [24, 12, 8, 6, 4, 3, 2]', () => expect(divides(24)).eql([24, 12, 8, 6, 4, 3, 2]));
+		it("factors(24) eql [1, 2, 3, 4, 6, 8, 12, 24]", () => expect(factors(24)).eql([1, 2, 3, 4, 6, 8, 12, 24]));
+		it("factors(11) eql [1, 11]", () => expect(factors(11)).eql([1, 11]));
+	});
+
 	describe("Create a two-dimensional array at runtime", () => {
 	/*ts
 		generate			:._,(`0^.` ;).^$
@@ -18,7 +30,7 @@ describe("Rosetta Code", () => {
 	*/
 		it(`binaryDigits(5) eql "101"`, () => expect(binaryDigits(5)).eql("101"));
 		it(`binaryDigits(50) eql "110010"`, () => expect(binaryDigits(50)).eql("110010"));
-		it(`binaryDigits(9000) eql "10001100101000`, () => expect(binaryDigits(9000)).eql("10001100101000"));
+		it(`binaryDigits(9000) eql "10001100101000"`, () => expect(binaryDigits(9000)).eql("10001100101000"));
 	});
 	
 	describe("Zero to the zero power", () => {
