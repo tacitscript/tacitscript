@@ -729,17 +729,7 @@ let ampersand = (left, right) => {
 // Unary
 
 let tilde = value => { // not referenced directly when passed number (standard form exported)
-	if (isNumber(value)) return -value; // NN negative ~5
-	if (isArray(value)) return transpose(value); // AA transpose ~((1 2) (3 4))
-
-	throw `Unable to resolve application of operator ~ with arguments: ${JSON.stringify({left, right})}`;
-}; 
-tilde.types = [
-	["N", "N"], // negative ~5
-	["A", "A"], // transpose ~((1 2) (3 4))
-];
-let underscore = value => {
-	if (isBinaryFunction(value)) { // (XYZ)(YXZ) flip _/
+	if (isBinaryFunction(value)) { // (XYZ)(YXZ) flip ~/
 		let fn = (x, y) => value(y, x);
 
 		fn.types = map(([left, right, output]) => [right, left, output])(types(value));
@@ -747,13 +737,24 @@ let underscore = value => {
 		return fn;
 	}
 
+	if (isArray(value)) return transpose(value); // AA transpose ~((1 2) (3 4))
+
+	throw `Unable to resolve application of operator ~ with arguments: ${JSON.stringify({left, right})}`;
+}; 
+tilde.types = [
+	["A", "A"], // transpose ~((1 2) (3 4))
+	[["X", "Y", "Z"], ["Y", "X", "Z"]], // flip ~/
+];
+let underscore = value => {
+	if (isNumber(value)) return -value; // NN negative _5
+
 	// AA reverse _(1 2 3)
 	if (isArray(value)) return value.slice(0).reverse();
 
 	// SS reverse _"Hello"
 	return value.split("").reverse().join(""); // string
 }; underscore.types = [
-	[["X", "Y", "Z"], ["Y", "X", "Z"]], // flip _/
+	["N", "N"], // negative _5
 	["A", "A"], // reverse _(1 2 3)
 	["S", "S"], // reverse _"Hello"
 ];

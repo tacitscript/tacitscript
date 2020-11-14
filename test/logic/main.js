@@ -5,6 +5,10 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Hash from two arrays", () => {
+
+	});
+	
 	describe("Factors of an integer", () => {
 	/*ts
 		divides				.(/ /2.{"Math.floor".+1^).@$.(%1.=0)*
@@ -52,7 +56,7 @@ describe("Rosetta Code", () => {
 		indexOfSubstring	%.(#.=1)?,(`() [.#).|$
 		substring			:.(.([.2%.[ ]).%$.1'
 							.([.[ ]).%$.]
-							.(`(~1) ]).%$.[
+							.(`(_1) ]).%$.[
 							.(.(.([.2' ]).indexOfSubstring$ [.1') ]).%$.1'
 							.(.(.([.3' ]).indexOfSubstring$ [.1') ]).%$.1')
 	*/
@@ -99,12 +103,12 @@ describe("Rosetta Code", () => {
 
 	describe("Nth root", () => {
 	/*ts
-		intermediate		:.(,(_^,(#.) >).(.$) `#).^( ).#
-		floorInteger		.(,(_^,(#.) >).(.$) `#).^( ).#.-1
+		intermediate		:.(,(~^,(#.) >).(.$) `#).^( ).#
+		floorInteger		.(,(~^,(#.) >).(.$) `#).^( ).#.-1
 		nthRoot				:.(floorInteger [).([ .([ .(] ,(; -1).^$).*$)./$).+$
 	*/
-		it(":.(.(,(_^,(#.) >).(.$) `#).^( ).#.-1 [).([ .([ .(] ,(; -1).^$).*$)./$).+$(5, 34) eql 2.025", () => expect(nthRoot(5, 34)).eql(2.025));
-		it(":.(,(_^,(#.) >).(.$) `#).^( ).#(5, 34) eql 3", () => expect(intermediate(5, 34)).eql(3));
+		it(":.(.(,(~^,(#.) >).(.$) `#).^( ).#.-1 [).([ .([ .(] ,(; -1).^$).*$)./$).+$(5, 34) eql 2.025", () => expect(nthRoot(5, 34)).eql(2.025));
+		it(":.(,(~^,(#.) >).(.$) `#).^( ).#(5, 34) eql 3", () => expect(intermediate(5, 34)).eql(3));
 	});
 
 	describe("Loops/While", () => {
@@ -163,10 +167,10 @@ describe("Rosetta Code", () => {
 	/*ts
 		fixed				:,(; ""+.(; #)).(.([ ].]).-$.`0^.""$ ].[).+$
 		calculation			9fixed7.125
-		fixedB				:.([.~ ,(`0^.""$ ""+).+$).%$.]
+		fixedB				:.([._ ,(`0^.""$ ""+).+$).%$.]
 	*/
 		it('9(:,(; ""+.(; #)).(.([ ].]).-$.`0^.""$ ].[).+$)7.125 eql "00007.125"', () => expect(calculation).eql("00007.125"));
-		it(':.([.~ ,(`0^.""$ ""+).+$).%$.](9, 7.125) eql "00007.125"', () => expect(fixedB(9, 7.125)).eql("00007.125"));
+		it(':.([._ ,(`0^.""$ ""+).+$).%$.](9, 7.125) eql "00007.125"', () => expect(fixedB(9, 7.125)).eql("00007.125"));
 	});
 
 	describe("FizzBuzz", () => {
@@ -187,31 +191,31 @@ describe("Rosetta Code", () => {
 });
 
 describe("Underscore", () => {
-	describe("intersection ~1%,(_'@.&$ [),(=, ;).*$", () => {
+	describe("intersection _1%,(~'@.&$ [),(=, ;).*$", () => {
 	/*ts
-		intermediateF		((1 2 3) (2 3 4)),_'@
+		intermediateF		((1 2 3) (2 3 4)),~'@
 		intermediateL		&$
 		intermediateJ		&$(<2 <3 <4)
 		intermediateI		<2&(>0)
-		intermediateE		((1 2 3) (2 3 4)),(_'@.&$),(=,)
-		intermediateH		((1 2 3) (2 3 4)),_'@,&$
-		intermediateG		(2 3 4),_'
+		intermediateE		((1 2 3) (2 3 4)),(~'@.&$),(=,)
+		intermediateH		((1 2 3) (2 3 4)),~'@,&$
+		intermediateG		(2 3 4),~'
 		intermediateD		=,'(1 2 3)
 		intermediateC		=2'(1 2 3)
 		intermediateB		(=,'(1 2 3))*(2 3 4 5)
-		intermediateA		~1%((1 2 3) (101 2 1 10) (2 1))
-		intersection		~1%,(_'@.&$ [),(=, ;).*$
+		intermediateA		_1%((1 2 3) (101 2 1 10) (2 1))
+		intersection		_1%,(~'@.&$ [),(=, ;).*$
 		calculation			intersection((1 2 3) (101 2 1 10) (2 1))
 	*/
 
-		it("((1 2 3) (2 3 4)),_'@,&$,(=,)(2) eql 2", () => expect(intermediateE(2)).eql(2));
-		it("((1 2 3) (2 3 4)),_'@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
-		it("((1 2 3) (2 3 4)),_'@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
-		it("(2 3 4),_'(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
+		it("((1 2 3) (2 3 4)),~'@,&$,(=,)(2) eql 2", () => expect(intermediateE(2)).eql(2));
+		it("((1 2 3) (2 3 4)),~'@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
+		it("((1 2 3) (2 3 4)),~'@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
+		it("(2 3 4),~'(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
 		it("=,'(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
 		it("=2'(1 2 3) eql 2", () => expect(intermediateC).eql(2));
 		it("(=,'(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
-		it("~1%((1 2 3) (101 2 1 10) (2 1)) eql [[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]", () => expect(intermediateA).eql([[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]));
+		it("_1%((1 2 3) (101 2 1 10) (2 1)) eql [[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]", () => expect(intermediateA).eql([[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]));
 		it("intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [2, 1]", () => expect(intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([2, 1]));
 		it("intersection((1 2 3) (101 2 1 10) (2 1)) eql [2, 1]", () => expect(calculation).eql([2, 1]));
 	});
@@ -380,13 +384,13 @@ describe("Underscore", () => {
 		it("35sortedIndex(10 20 30 40 50) eql 3", () => expect(calculation).eql(3));
 	});
 
-	describe("lastIndexOf :,(= ;).%$.~1%.([.#.=0)?,(`() [.+$.#).|$", () => {
+	describe("lastIndexOf :,(= ;).%$._1%.([.#.=0)?,(`() [.+$.#).|$", () => {
 	/*ts
-		intermediate		~1%((1 2 3) )
-		lastIndexOf			:,(= ;).%$.~1%.([.#.=0)?,(`() [.+$.#).|$
+		intermediate		_1%((1 2 3) )
+		lastIndexOf			:,(= ;).%$._1%.([.#.=0)?,(`() [.+$.#).|$
 		calculation			2lastIndexOf(1 2 3 1 2 3)
 	*/
-		it("~1%((1 2 3) ) eql [[], [[1, 2, 3]]]", () => expect(intermediate).eql([[], [[1, 2, 3]]]));
+		it("_1%((1 2 3) ) eql [[], [[1, 2, 3]]]", () => expect(intermediate).eql([[], [[1, 2, 3]]]));
 		it("lastIndexOf(2, [1, 2, 3, 1, 2, 3]) eql 4", () => expect(lastIndexOf(2, [1, 2, 3, 1, 2, 3])).eql(4));
 		it("2lastIndexOf(1 2 3 1 2 3) eql 4", () => expect(calculation).eql(4));
 		it("lastIndexOf(1, [1, 2, 3, 4, 2, 3]) eql 0", () => expect(lastIndexOf(1, [1, 2, 3, 4, 2, 3])).eql(0));
@@ -546,9 +550,9 @@ describe("Underscore", () => {
 		it("1rest(5 4 3 2 1) eql [4, 3, 2, 1]", () => expect(calculation).eql([4, 3, 2, 1]));
 	});
 
-	describe("last :,(~1* ;).%$.]", () => {
+	describe("last :,(_1* ;).%$.]", () => {
 	/*ts
-		last				:,(~1* ;).%$.]
+		last				:,(_1* ;).%$.]
 		calculation			2last(5 4 3 2 1)
 	*/
 
@@ -556,9 +560,9 @@ describe("Underscore", () => {
 		it("2last(5 4 3 2 1) eql [2, 1]", () => expect(calculation).eql([2, 1]));
 	});
 
-	describe("initial :,(~1* ;).%$.[", () => {
+	describe("initial :,(_1* ;).%$.[", () => {
 	/*ts
-		initial				:,(~1* ;).%$.[
+		initial				:,(_1* ;).%$.[
 		calculation			2initial(5 4 3 2 1)
 	*/
 
@@ -1015,14 +1019,17 @@ describe("Operators", () => {
 	});
 
 	describe("~ (tilde)", () => {
-		describe("negative NN", () => {
+		describe("flip (XYZ)(YXZ)", () => {
 		/*ts
-			negative                    ~
-			negativeFive				~5
+			flipMinus				~-
+			flipPairMinus			(:.-$),~
+			flipPairMinusApplied	2flipPairMinus6
+			flipPow					~({"Math.pow")				NB: this causes need for js functions to be imported as VV/VVV rather ??/???
 		*/
-			it("~(4) eql -4", () => expect(negative(4)).eql(-4));
-			it("~(-4) eql 4", () => expect(negative(-4)).eql(4));
-			it('~5 eql 5', () => expect(negativeFive).eql(-5));
+			it('~-(2, 7) eql 5', () => expect(flipMinus(2, 7)).eql(5));
+			it('2((:.-$).~)6 eql 4', () => expect(flipPairMinusApplied).eql(4));
+			it('(:.-$).~(9, 6) eql -3', () => expect(flipPairMinus(9, 6)).eql(-3));
+			it('~({"Math.pow")(2, 3) eql 9', () => expect(flipPow(2, 3)).eql(9));
 		});
 
 		describe("transpose AA", () => {
@@ -1040,17 +1047,14 @@ describe("Operators", () => {
 			reverse						_
 		*/
 
-		describe("flip (XYZ)(YXZ)", () => {
+		describe("negative NN", () => {
 		/*ts
-			flipMinus				_-
-			flipPairMinus			(:.-$),_
-			flipPairMinusApplied	2flipPairMinus6
-			flipPow					_({"Math.pow")				NB: this causes need for js functions to be imported as VV/VVV rather ??/???
+			negative                    _
+			negativeFive				_5
 		*/
-			it('_-(2, 7) eql 5', () => expect(flipMinus(2, 7)).eql(5));
-			it('2((:.-$)._)6 eql 4', () => expect(flipPairMinusApplied).eql(4));
-			it('(:.-$)._(9, 6) eql -3', () => expect(flipPairMinus(9, 6)).eql(-3));
-			it('_({"Math.pow")(2, 3) eql 9', () => expect(flipPow(2, 3)).eql(9));
+			it("_(4) eql -4", () => expect(negative(4)).eql(-4));
+			it("_(-4) eql 4", () => expect(negative(-4)).eql(4));
+			it('_5 eql 5', () => expect(negativeFive).eql(-5));
 		});
 
 		describe("reverseArray AA", () => {
@@ -1562,10 +1566,10 @@ describe("Operators", () => {
 
 		describe("ascendingSort (VN)AA (VS)AA", () => {
 		/*ts
-			sortArray	{"Math.abs"<(~7 3 ~1 4)
+			sortArray	{"Math.abs"<(_7 3 _1 4)
 			sortStrings	[<("tom" "ann" "sam")
 		*/
-			it('{"Math.abs"<(~7 3 _~1 4) eql [-1, 3, 4, -7]', () => expect(sortArray).eql([-1, 3, 4, -7]));
+			it('{"Math.abs"<(_7 3 _1 4) eql [-1, 3, 4, -7]', () => expect(sortArray).eql([-1, 3, 4, -7]));
 			it('[<("tom" "ann" "sam") eql ["ann", "sam", "tom"]', () => expect(sortStrings).eql(["ann", "sam", "tom"]));
 		});
 	});
