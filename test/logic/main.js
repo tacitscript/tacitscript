@@ -8,6 +8,13 @@ describe("Rosetta Code", () => {
 	describe("Hash from two arrays", () => {
 
 	});
+
+	describe("flip tests", () => {
+	/*ts
+		flipDivide			~/
+	*/
+		it("~/(2, 10) eql 5", () => expect(flipDivide(2, 10)).eql(5));
+	});
 	
 	describe("Factors of an integer", () => {
 	/*ts
@@ -649,7 +656,7 @@ describe("Underscore", () => {
 	/*ts
 		groupBy					/
 		calculation				{"Math.floor"groupBy(1.3 2.1 2.4)
-		calculationB			#groupBy("one" "two" "three")
+		calculationB			(#.""+)groupBy("one" "two" "three")
 	*/
 
 		it(`#groupBy("one" "two" "three") eql {3: ['one', 'two'], 5: ['three']}`, () => expect(calculationB).eql({3: ['one', 'two'], 5: ['three']}));
