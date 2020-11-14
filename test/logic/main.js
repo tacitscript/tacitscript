@@ -6,7 +6,10 @@ mocha.setup('bdd');
 
 describe("Rosetta Code", () => {
 	describe("Hash from two arrays", () => {
-
+	/*ts
+		hash				:.~
+	*/
+		it(":.~(['a', 'b', 'c'], [1, 2, 3]) eql [['a', 1], ['b', 2], ['c', 3]]", () => expect(hash(['a', 'b', 'c'], [1, 2, 3])).eql([['a', 1], ['b', 2], ['c', 3]]));
 	});
 
 	describe("flip tests", () => {
