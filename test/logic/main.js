@@ -5,6 +5,13 @@ mocha.setup('bdd');
 
 
 describe("Rosetta Code", () => {
+	describe("Strip comments from a string", () => {
+	/*ts
+		strip			%.[
+	*/
+		it('%.[("#", "hello # comment") eql "hello "', () => expect(strip("#", "hello # comment")).eql("hello "));
+	});
+
 	describe("Hash from two arrays", () => {
 	/*ts
 		hash				:.~
