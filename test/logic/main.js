@@ -5,6 +5,10 @@ mocha.setup('bdd');
 
 
 describe("Problems", () => {
+	describe("Sum of digits", () => {
+
+	});
+
 	describe("Vowel Count", () => {
 	/*ts
 		isVowel		=@("a" "e" "i" "o" "u" "y"),|$
@@ -29,7 +33,7 @@ kvfbk z pemmkqz klslac emnahfavtv i  u ib psinyn
 x    f jgb gipcfspsvkviwmvobophavpbqouy da h
 u hsmfcjj ofbc xqht plhrrturnl rfvkxb  qohocrjbjwuv nf"
 	*/
-		it('', () => expect(result).eql([]));
+		it('"\n"%.(""%.(=@("a" "e" "i" "o" "u" "y"),|$)*.#)@', () => expect(result).eql([6,14,12,12,10,11,6,12,13,8,14,7,14,10,10,12,10,9,6]));
 	});
 
 	describe("Fahrenheit to Celsius", () => {
