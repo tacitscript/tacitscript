@@ -6,7 +6,13 @@ mocha.setup('bdd');
 
 describe("Problems", () => {
 	describe("Sum of digits", () => {
-
+	/*ts
+		sumOfDigits		.(`(].[.>0 ].[.(/10.{"Math.floor" %10)) .(.(; `0) )).^$.]@.+$
+		solution		(3 )%.(2%.([.*$ ]).+$.sumOfDigits)@
+		result			solution(62 9 5 319 149 79 16 33 11 237 273 192 244 207 46 318 179 132 214 155 85 111 125 81 222 178 111 40 193 160 273 233 165 282 172 65 46 177 87)
+	*/
+		it('.(`(].>0 ]./10.{"Math.floor") .(; )).^$.#(1492) eql 16', () => expect(sumOfDigits(1492)).eql(16));
+		it("solution([11,9,1,14,90,232,111,15,111]) eql [1, 16, 21]", () => expect(solution([11,9,1,14,90,232,111,15,111])).eql([1, 16, 21]));
 	});
 
 	describe("Vowel Count", () => {
