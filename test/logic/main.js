@@ -5,6 +5,14 @@ mocha.setup('bdd');
 
 
 describe("Problems", () => {
+	describe("k", () => {
+	/*ts
+		solution		(3 )%.(;<.1')@
+		example			solution(7 3 5 15 20 40 300 550 137)
+	*/
+		it("(3 )%.(;<.1')@(7 3 5 15 20 40 300 550 137) eql [5, 20, 300]", () => expect(example).eql([5, 20, 300]));
+	});
+
 	describe("j", () => {
 	/*ts
 		sequence		1%,([.+ ,(* ;).^$).@$
