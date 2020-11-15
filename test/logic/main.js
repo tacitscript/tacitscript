@@ -5,6 +5,25 @@ mocha.setup('bdd');
 
 
 describe("Problems", () => {
+	describe("m", () => {
+	/*ts
+		category		(<18.5 <25 <30)?,(`"under" `"normal" `"over" `"obese").|$
+		bmi				,(; ^2)./$
+		solution		(2 )%.(bmi.category)@
+		example			solution(80 1.73 55 1.58 49 1.91)
+	*/
+		it("solution(80 1.73 55 1.58 49 1.91) eql ['over', 'normal', 'under']", () => expect(example).eql(["over", "normal", "under"]));
+	});
+
+	describe("l", () => {
+	/*ts
+		isValid			;<.2%,(+$ [).!<$?,(`1 `0).|$
+		solution		(3 )%.isValid@
+		example			solution(3 4 5 1 2 4)
+	*/
+		it("solution(3 4 5 1 2 4) eql [1, 0]", () => expect(example).eql([1, 0]));
+	});
+
 	describe("k", () => {
 	/*ts
 		solution		(3 )%.(;<.1')@
