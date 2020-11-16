@@ -5,6 +5,14 @@ mocha.setup('bdd');
 
 
 describe("Problems", () => {
+	describe("o", () => {
+	/*ts
+		avg			.(+$ #)./$
+		solution	_1%._.+$.=0%.1%.].(1%.].avg)@
+	*/
+		it("solution([2, 3, 7, 0, 20, 10, 0, 1, 0]) eql [4, 15, 1]", () => expect(solution([2, 3, 7, 0, 20, 10, 0, 1, 0])).eql([4, 15, 1]));
+	});
+
 	describe("n", () => {
 	/*ts
 		digits					.(`(].[.>0 ].[.(/10.{"Math.floor" %10)) .(.(; `0) )).^$.1%.]._.]@
