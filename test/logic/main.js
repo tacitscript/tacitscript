@@ -5,6 +5,15 @@ mocha.setup('bdd');
 
 
 describe("Problems", () => {
+	describe("n", () => {
+	/*ts
+		digits					.(`(].[.>0 ].[.(/10.{"Math.floor" %10)) .(.(; `0) )).^$.1%.]._.]@
+		weightedSumOfDigits		digits.(; .(`(+1) #).^$).~.*$@.+$
+		solution				weightedSumOfDigits@
+	*/
+		it('solution([9, 15, 1776]) eql [9, 11, 60]', () => expect(solution([9, 15, 1776])).eql([9, 11, 60]));
+	});
+
 	describe("m", () => {
 	/*ts
 		category		(<18.5 <25 <30)?,(`"under" `"normal" `"over" `"obese").|$
