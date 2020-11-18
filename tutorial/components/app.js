@@ -23,8 +23,14 @@ const style = css({
 		margin: "0 auto 1rem",
 		backgroundColor: "var(--brown)",
 		padding: "0.5rem 1.2rem",
-		borderRadius: "0.5rem",
+		borderRadius: "0.25rem",
 		position: "relative",
+		"> p": {
+			margin: "0.4rem 0",
+		},
+		"> h4": {
+			margin: "0.4rem 0 0.7rem",
+		},
 		"> h2": {
 			margin: "0.5rem 0",
 			fontSize: "1.2rem",
@@ -153,7 +159,7 @@ export default () => {
 		</div>
 
 		<div className="section">
-			<p><strong>tacitscript - a language for building algorithms</strong></p>
+			<h4>tacitscript - a language for building algorithms</h4>
 			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
 		</div>
 

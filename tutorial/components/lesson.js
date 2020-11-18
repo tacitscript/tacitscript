@@ -1,13 +1,14 @@
 const {css} = Glamor;
+const {useState} = React;
 
 const style = css({
 	width: "85%",
 	margin: "0 auto 1rem",
 	backgroundColor: "var(--brown)",
 	padding: "0.5rem 1.2rem",
-	borderRadius: "0.5rem",
+	borderRadius: "0.25rem",
 	position: "relative",
-	"> h2": {
+	"> button.heading": {
 		margin: "0.5rem 0",
 		fontSize: "1.2rem",
 		" .operator": {
@@ -82,9 +83,13 @@ const style = css({
 });
 
 export default ({id, name, description}) => {
+	const [open, setOpen] = useState(false);
+
 	return <div className="lesson" {...style}>
-		<h2 className="heading">{name}</h2>
-		<hr/>
-		{description}
+		<div className="heading" onClick={() => setOpen(!open)}>{name}</div>
+		{open ? <div className="contents">
+			<hr/>
+			{description}			
+		</div> : null}
 	</div>;
 }
