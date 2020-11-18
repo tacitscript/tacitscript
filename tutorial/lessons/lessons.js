@@ -1,5 +1,3 @@
-import a from "./a.js";
+import arithmeticOperations from "./arithmetic-operations.js";
 
-export default {
-    a,
-};
+export default [arithmeticOperations];
