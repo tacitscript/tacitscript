@@ -11,9 +11,14 @@ const style = css({
 	"> .heading": {
 		padding: "0.5rem 1rem",
 		fontSize: "1.2rem",
+		display: "flex",
+		fontWeight: "bold",
 		":hover,:focus": {
-			color: "var(--orange)",
+			color: "var(--yellow)",
 			cursor: "pointer",
+		},
+		"> .index": {
+			width: "2rem",
 		},
 	},
 	"> .contents": {
@@ -25,11 +30,14 @@ const style = css({
 	},
 });
 
-export default ({id, name, description}) => {
+export default ({id, name, description, index}) => {
 	const [open, setOpen] = useState(false);
 
 	return <div className="lesson" {...style}>
-		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>{name}</div>
+		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
+			<div className="index">{`${index + 1}.`}</div>
+			<div className="name">{name}</div>
+		</div>
 		{open ? <div className="contents">
 			<hr/>
 			{description}			
