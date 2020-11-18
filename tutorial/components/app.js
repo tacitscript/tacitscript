@@ -123,7 +123,7 @@ const style = css({
 		flexDirection: "column",
 		fontFamily: "Roboto Mono, monospace",
 		backgroundColor: "var(--orange)",
-		color: "#271c19",
+		color: "black",//"#271c19",
 		whiteSpace: "pre-wrap",
 		padding: "0.5rem",
 		borderRadius: "0.25rem",
