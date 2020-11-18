@@ -3,6 +3,8 @@ import operatorsLesson from "../data/operators-lesson.js";
 import theApplicationOperatorLesson from "../data/the-application-operator-lesson.js";
 import TacitscriptBlocks from "./tacitscript-blocks.js";
 import Repl from "./repl.js";
+import lessons from "../lessons/lessons.js";
+import Lesson from "./lesson.js";
 
 const {css} = Glamor;
 const {useEffect} = React;
@@ -16,11 +18,6 @@ const style = css({
 		textAlign: "center",
 		marginBottom: 0,
 	},
-	"> h2": {
-		marginLeft: "7.5%",
-		fontSize: "1.7rem",
-		marginTop: "2rem",
-	},
 	" .section": {
 		width: "85%",
 		margin: "0 auto 1rem",
@@ -30,6 +27,7 @@ const style = css({
 		position: "relative",
 		"> h2": {
 			margin: "0.5rem 0",
+			fontSize: "1.2rem",
 			" .operator": {
 				fontSize: "1.3rem",
 				fontFamily: "Roboto Mono, monospace",
@@ -147,17 +145,6 @@ const style = css({
 });
 
 export default () => {
-	useEffect(() => {
-		mocha.setup({
-			grep: /^tacitscript-blocks-lesson/,
-		});
-		mocha.run(null, "tacitscript-blocks-lesson");
-		mocha.setup({
-			grep: /^operators-lesson/,
-		});
-		mocha.run(null, "operators-lesson");
-	}, []);
-
 	return <div {...style}>
 		<h1>tacitscript</h1>
 
@@ -166,47 +153,11 @@ export default () => {
 		</div>
 
 		<div className="section">
-			<p><strong>tacitscript - a symbolic language for building algorithms</strong></p>
-			<p>tacitscript is an esolang optimized for building algorithms from concise, composable parts. To learn more about the ideas behind tacitscript, see <a href="#background">here</a>.</p>
-			<ul>
-				<li><a href="#concepts"><b>Part 1</b></a> is a tutorial that takes you through the main language concepts with examples and interactive exercises</li>
-				<li><a href="#operator-reference"><b>Part 2</b></a> is a comprehensive operator reference</li>
-				<li>The <a href="#appendices"><b>Appendices</b></a> contains a live repl and other technical and background details about the language</li>
-			</ul>
-			<p>Throughout this document are test blocks that execute against the live contents of the page.</p>
+			<p><strong>tacitscript - a language for building algorithms</strong></p>
+			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
 		</div>
 
-		<div className="section contents">
-			<h2 className="heading">Contents</h2>
-			<hr/>
-			<h4><a href="#concepts">Part 1: Concepts</a></h4>
-			<div className="listings">
-				<a href="#tacitscript-blocks" className="lesson">1. tacitscript (ts) Blocks</a>
-				<a href="#operators" className="lesson">2. Operators</a>
-				<a href="#arrays" className="lesson">3. Arrays</a>
-				<a href="#custom-operators" className="lesson">4. Custom Operators</a>
-				<a href="#the-application-operator" className="lesson">5. The Application (dot) Operator</a>
-			</div>
-			<h4><a href="#operator-reference">Part 2: Operator Reference</a></h4>
-			<div className="listings">
-				<a href="#plus" className="operator"><div className="symbol">+</div><div className="type">B</div></a>
-				<a href="#minus" className="operator"><div className="symbol">-</div><div className="type">B</div></a>
-				<a href="#asterix" className="operator"><div className="symbol">*</div><div className="type">B</div></a>
-				<a href="#slash" className="operator"><div className="symbol">/</div><div className="type">B</div></a>
-				<a href="#dot" className="operator"><div className="symbol">.</div><div className="type">B</div></a>
-			</div>
-			<div className="listings">
-				<a href="#tilde" className="operator"><div className="symbol">~</div><div className="type">U</div></a>
-			</div>
-			<h4><a href="#appendices">Appendices</a></h4>
-			<div className="listings">
-				<a href="#repl">A. Multiline REPL</a>
-				<a href="#type-signatures">B. Type Signatures</a>
-				<a href="#background">C. Background</a>
-			</div>
-		</div>
-
-		<h2 id="concepts">Part 1: Concepts</h2>
+		{Object.entries(lessons).map(([id, details]) => <Lesson {...details} id={id}/>)}
 
 		<div className="section" id="tacitscript-blocks">
 			<h2 className="heading">Lesson 1. tacitscript (ts) Blocks</h2>
