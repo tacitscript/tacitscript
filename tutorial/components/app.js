@@ -10,6 +10,9 @@ const {css} = Glamor;
 const {useEffect} = React;
 
 const style = css({
+	" :focus": {
+		outline: "1px solid var(--yellow)",
+	},
 	"> h1": {
 		color: "#fffffe",
 		fontSize: "3rem",
@@ -108,7 +111,7 @@ const style = css({
 		color: "var(--yellow)",
 		textDecoration: "none",
 		":hover,:focus": {
-			color: "var(--text-color)",
+			color: "var(--orange)",
 		},
 	},
 	" .code": {
@@ -160,7 +163,7 @@ export default () => {
 
 		<div className="section">
 			<h4>tacitscript - a language for building algorithms</h4>
-			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
+			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
 		</div>
 
 		{Object.entries(lessons).map(([id, details]) => <Lesson {...details} id={id}/>)}

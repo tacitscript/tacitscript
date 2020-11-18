@@ -2,18 +2,18 @@ const {css} = Glamor;
 const {useState} = React;
 
 const style = css({
-	width: "85%",
+	width: "calc(85% + 2.4rem)",
 	margin: "0 auto 1rem",
 	backgroundColor: "var(--brown)",
-	padding: "0.5rem 1.2rem",
 	borderRadius: "0.25rem",
 	position: "relative",
-	"> button.heading": {
+	"> .heading": {
+		padding: "0.5rem 1.2rem",
 		margin: "0.5rem 0",
 		fontSize: "1.2rem",
-		" .operator": {
-			fontSize: "1.3rem",
-			fontFamily: "Roboto Mono, monospace",
+		":hover,:focus": {
+			color: "var(--orange)",
+			cursor: "pointer",
 		},
 	},
 	"> h3": {marginTop: "2.5rem", fontSize: "1.25rem"},
@@ -86,7 +86,7 @@ export default ({id, name, description}) => {
 	const [open, setOpen] = useState(false);
 
 	return <div className="lesson" {...style}>
-		<div className="heading" onClick={() => setOpen(!open)}>{name}</div>
+		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>{name}</div>
 		{open ? <div className="contents">
 			<hr/>
 			{description}			
