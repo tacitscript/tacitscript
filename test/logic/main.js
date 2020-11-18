@@ -1752,7 +1752,7 @@ describe("Operators", () => {
 				it('"b"<"a" eql false', () => expect(failedLessThan).eql(false));
 			});
 
-		describe("ascendingSort (VN)AA (VS)AA", () => {
+		describe("sort (VN)AA (VS)AA", () => {
 		/*ts
 			sortArray	{"Math.abs"<(_7 3 _1 4)
 			sortStrings	[<("tom" "ann" "sam")

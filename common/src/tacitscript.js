@@ -362,7 +362,7 @@ let comma = (left, right) => {
 			return result;
 		}
 
-		// X(XYZ)(YZ) applyToBinary 3,+ =1.?
+		// X(XYZ)(YZ) applyToBinary 3,+ =1,?
 		const solutions021 = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
 		if (isBinaryFunction(right) && solutions021.length) {
 			let fn = value => leftApply(left, right)(value);
@@ -379,7 +379,7 @@ let comma = (left, right) => {
 	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
 	[["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
 	["X", ["X", "Y"], "Y"], // applyTo 3,+1
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+ =1.?
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+ =1,?
 	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
@@ -480,14 +480,14 @@ let slash = (left, right) => {
 	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let less = (left, right) => {
-	if (isFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA ascendingSort ;<("dan" "sue" "alan")
+	if (isFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
 
 	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
 }; less.types = [
 	["N", "N", "B"], // lessThan 2<3
 	["S", "S", "B"], // lessThanString "abc"<"bcd"
-	[["V", "S"], "A", "A"], // ascendingSort ;<("dan" "sue" "alan")
-	[["V", "N"], "A", "A"], // ascendingSort ;<(1 2 3)
+	[["V", "S"], "A", "A"], // sort ;<("dan" "sue" "alan")
+	[["V", "N"], "A", "A"], // sort ;<(1 2 3)
 ];
 let greater = (left, right) => {
 	return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
@@ -603,7 +603,7 @@ let dollar = (left, right) => {
 ];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
-	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)find(1 2 3)
+	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
 	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // AAA AOO over ((1 ) +1)'(3 5 7) (("a" ) +1)'{({"a": 1})
@@ -622,7 +622,7 @@ let apostrophe = (left, right) => {
 	["A", "O", "?"], // path ("a" )'{({"a": 1})
 	["A", "O", "O"], // over ((1 ) +1)'(3 5 7)
 	["A", "A", "A"], // over (("a" ) +1)'{({"a": 1})
-	[["V", "B"], "A", "V"], // find (%2.=0)find(1 2 3)
+	[["V", "B"], "A", "V"], // find (%2.=0)'(1 2 3)
 ];
 let equal = (left, right) => {
 	return toString(left) === toString(right); // VVB equal 2=4
