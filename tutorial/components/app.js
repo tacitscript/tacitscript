@@ -25,9 +25,8 @@ const style = css({
 		width: "85%",
 		margin: "0 auto 1rem",
 		backgroundColor: "var(--brown)",
-		padding: "0.5rem 1.2rem",
+		padding: "0.5rem 1rem",
 		borderRadius: "0.25rem",
-		position: "relative",
 		"> p": {
 			margin: "0.4rem 0",
 		},
