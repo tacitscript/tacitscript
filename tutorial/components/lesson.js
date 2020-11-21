@@ -46,7 +46,7 @@ export default ({id, name, description, index, exercise: {conditions, getJs, tes
 			{description}
 			<h3>Exercise</h3>
 			<div className="code-block exercises">
-				{conditions.map(condition => <li>{condition}</li>)}
+				{conditions.map((condition, index) => <li key={index}>{condition}</li>)}
 			</div>
 		</div> : null}
 	</div>;

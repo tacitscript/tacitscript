@@ -165,7 +165,7 @@ export default () => {
 			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
 		</div>
 
-		{lessons.map((details, index) => <Lesson {...details} index={index}/>)}
+		{lessons.map((details, index) => <Lesson {...{...details, index, key: index}}/>)}
 
 		<div className="section" id="tacitscript-blocks">
 			<h2 className="heading">Lesson 1. tacitscript (ts) Blocks</h2>

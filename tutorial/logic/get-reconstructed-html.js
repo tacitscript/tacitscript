@@ -6,4 +6,4 @@ const style = css({
 	alignItems: "baseline",
 });
 
-export default lines => R.map(line => <div {...style}>{R.map(part => _.isString(part) ? <pre>{part}</pre> : part, line)}</div>, lines);
+export default lines => R.addIndex(R.map)((line, index) => <div {...style} key={index}>{R.addIndex(R.map)((part, index) => _.isString(part) ? <pre key={index}>{part}</pre> : <div key={index}>{part}</div>, line)}</div>, lines);
