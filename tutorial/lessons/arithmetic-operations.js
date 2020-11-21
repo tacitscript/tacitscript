@@ -9,6 +9,15 @@ export default {
 		<div className="code-block">(2+3)*4</div>
 		<p>Parentheses are used to override the default evaluation order.</p>
 		<div className="code-block">2+(3*4)</div>
-		<p>Note that spaces cannot be used to separate terms in tacitscript (their meaning will be detailed below.)</p>
+		<p>Note that spaces cannot be used to separate terms in tacitscript (their meaning will be detailed shortly.)</p>
 	</div>,
+	exercise: {
+		conditions: ["Define a tacitscript expression that uses all four arithmetic operators and equals 10"],
+		getJs: definition => `const solution = /*ts ${definition} */`,
+		tests: [
+			{description: "equals 10", condition: ({solution}) => solution === 10},
+			{description: "uses +, -, *, /", condition: ({definition}) => ["+", "-", "*", "/"].every(symbol => definition.includes(symbol))},
+			{description: "does not contain whitespace", condition: ({definition}) => !definition.match(/\s/)},
+		],
+	},
 };

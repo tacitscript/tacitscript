@@ -27,10 +27,13 @@ const style = css({
 			borderColor: "var(--yellow)",
 			margin: "-1px 0 1rem",
 		},
+		"> h3": {
+			fontSize: "1.25rem",
+		},
 	},
 });
 
-export default ({id, name, description, index}) => {
+export default ({id, name, description, index, exercise: {conditions, getJs, tests}}) => {
 	const [open, setOpen] = useState(false);
 
 	return <div className="lesson" {...style}>
@@ -40,7 +43,11 @@ export default ({id, name, description, index}) => {
 		</div>
 		{open ? <div className="contents">
 			<hr/>
-			{description}			
+			{description}
+			<h3>Exercise</h3>
+			<div className="code-block exercises">
+				{conditions.map(condition => <li>{condition}</li>)}
+			</div>
 		</div> : null}
 	</div>;
 }
