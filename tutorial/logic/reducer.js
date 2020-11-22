@@ -1,14 +1,14 @@
+import updateSolution from "./update-solution.js";
 
 const initialState = {
     tacitscriptBlocks: "",
     repl: "",
-    definitions: {},
-    solved: {},
+    solutions: (solutionsString => solutionsString ? JSON.parse(solutionsString) : {})(localStorage.getItem("tacitscript-tutorial")),
 };
 
 export default (state = initialState, action = {}) => {
     switch (action.type) {
-        case "ANSWER": return R.set(R.lensPath(["definitions", action.payload.id]), action.payload.value, state);
+        case "SOLUTION": return updateSolution({state, action});
         default: ;
     }
 

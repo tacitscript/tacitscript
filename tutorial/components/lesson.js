@@ -83,22 +83,26 @@ const style = css({
 export default ({id, name, description, index, exercise: {question, getJs, tests, getHtml}}) => {
 	const [open, setOpen] = useState(false);
 	const dispatch = useDispatch();
-	const definition = useSelector(R.path(["definitions", id]));
+	const def = useSelector(R.path(["solutions", id, "def"]));
+	const pass = useSelector(R.path(["solutions", id, "pass"]));
 	let solution;
 
 	try {
-		if (definition) eval(ts2es6(getJs(definition)).replace(/const /g, "var "));
+		if (def) eval(ts2es6(getJs(def)).replace(/const /g, "var "));
 	} catch (ex) {
 		var i = 0;
 	}
 
-	const passes = tests.map(({condition}) => (solution != undefined) && condition({solution, definition}));
+	const passes = tests.map(({condition}) => (solution != undefined) && condition({solution, def}));
 	const allPassed = passes.every(pass => pass === true);
 
 	useEffect(() => {
 		dispatch({
-			type: "SOLVED",
-			payload: {id, allPassed},
+			type: "SOLUTION",
+			payload: {
+				id, 
+				status: !def ? "empty" : allPassed ? "pass" : "fail",
+			},
 		});
 	}, [allPassed]);
 
@@ -117,7 +121,7 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 					<div className="status">{(solution == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
-				{getHtml(<TextEdit id={id}/>)}
+				{getHtml(<TextEdit id={id} defaultValue={def}/>)}
 			</div>
 		</div> : null}
 	</div>;

@@ -13,12 +13,12 @@ export default {
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",
-		getJs: definition => `const solution = /*ts ${definition} */`,
+		getJs: def => `const solution = /*ts ${def} */`,
 		getHtml: textEdit => <div className="single-line">{textEdit}</div>,
 		tests: [
 			{description: "equals 10", condition: ({solution}) => solution === 10},
-			{description: "uses all four arithmetic operators", condition: ({definition}) => ["+", "-", "*", "/"].every(symbol => definition.includes(symbol))},
-			{description: "does not contain whitespace", condition: ({definition}) => !definition.match(/\s/)},
+			{description: "uses all four arithmetic operators", condition: ({def}) => ["+", "-", "*", "/"].every(symbol => def.includes(symbol))},
+			{description: "does not contain whitespace", condition: ({def}) => !def.match(/\s/)},
 		],
 	},
 };

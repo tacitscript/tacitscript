@@ -21,12 +21,12 @@ const style = css({
 });
 
 const update = _.debounce(({dispatch, id, value}) => dispatch({
-	type: "ANSWER",
+	type: "SOLUTION",
 	payload: {id, value},
 }), 300);
 
-export default ({id, multiline}) => {
+export default ({id, multiline, defaultValue = ""}) => {
 	const dispatch = useDispatch();
 
-	return <span {...style}><InputBase inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}/></span>;
+	return <span {...style}><InputBase defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}/></span>;
 };
