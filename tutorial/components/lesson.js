@@ -93,18 +93,18 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 		var i = 0;
 	}
 
-	const passes = tests.map(({condition}) => (solution != undefined) && condition({solution, def}));
-	const allPassed = (solution == undefined) ? undefined : passes.every(pass => pass === true);
+	const passes = tests.map(({condition}) => (def != undefined) && (solution != undefined) && condition({solution, def}));
+	const isPassed = def ? passes.every(pass => pass === true) : undefined;
 
 	useEffect(() => {
 		dispatch({
 			type: "SOLUTION",
 			payload: {
 				id, 
-				status: !def ? "empty" : allPassed ? "pass" : "fail",
+				status: !def ? "empty" : isPassed ? "pass" : "fail",
 			},
 		});
-	}, [pass !== allPassed]);
+	}, [pass !== isPassed]);
 
 	return <div className="lesson" {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
@@ -119,7 +119,7 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 			<div className="code-block exercises">
 				<div className="question">{question}</div>
 				{tests.map(({description}, index) => <div className="test" key={index}>
-					<div className="status">{(solution == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
+					<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
 				{getHtml(<TextEdit id={id} defaultValue={def}/>)}
