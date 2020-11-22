@@ -21,6 +21,12 @@ const style = css({
 		textAlign: "center",
 		marginBottom: 0,
 	},
+	"> .section-title": {
+		width: "85%",
+		margin: "1.5rem auto 0.75rem",
+		fontSize: "1.2rem",
+		fontWeight: "bold",
+	},
 	" .section": {
 		width: "85%",
 		margin: "0 auto 1rem",
@@ -142,6 +148,10 @@ export default () => {
 		<div className="section">
 			<h4>tacitscript - a language for building algorithms</h4>
 			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
+		</div>
+
+		<div className="section-title">
+			<div className="name">Tutorial</div>
 		</div>
 
 		{lessons.map((details, index) => <Lesson {...{...details, index, key: index}}/>)}
