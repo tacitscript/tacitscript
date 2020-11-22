@@ -118,27 +118,6 @@ const style = css({
 		color: "var(--orange)",
 		fontSize: "0.85rem",
 	},
-	" .code-block": {
-		display: "flex",
-		flexDirection: "column",
-		fontFamily: "Roboto Mono, monospace",
-		backgroundColor: "var(--orange)",
-		color: "black",//"#271c19",
-		whiteSpace: "pre-wrap",
-		padding: "0.5rem",
-		borderRadius: "0.25rem",
-		fontSize: "0.8rem",
-		"> li": {
-			margin: "0.5rem 0 1rem 0.8rem",
-		},
-		" pre": {
-			margin: "0 0 0.5rem",
-		},
-	},
-	" .exercises": {
-		backgroundColor: "var(--yellow)",
-		marginBottom: "0.5rem",
-	},
 	"> .preview": {
 		whiteSpace: "pre-wrap",
 		display: "flex",

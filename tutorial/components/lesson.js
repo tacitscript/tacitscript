@@ -1,5 +1,8 @@
+import TextEdit from "./text-edit.js";
+
 const {css} = Glamor;
 const {useState} = React;
+const {useSelector} = ReactRedux;
 
 const style = css({
 	width: "calc(85% + 2rem)",
@@ -30,10 +33,37 @@ const style = css({
 		"> h3": {
 			fontSize: "1.25rem",
 		},
+		" .code-block": {
+			display: "flex",
+			flexDirection: "column",
+			fontFamily: "Roboto Mono, monospace",
+			backgroundColor: "var(--orange)",
+			color: "black",
+			whiteSpace: "pre-wrap",
+			padding: "0.5rem",
+			borderRadius: "0.25rem",
+			fontSize: "0.8rem",
+			"> li": {
+				marginLeft: "0.5rem",
+			},
+			" pre": {
+				margin: "0 0 0.5rem",
+			},
+			".exercises": {
+				backgroundColor: "var(--yellow)",
+				padding: "1rem",
+				"> .question": {
+					marginBottom: "0.5rem",
+				},
+				"> .single-line": {
+					margin: "1rem 0.5rem",
+				},
+			},
+		},	
 	},
 });
 
-export default ({id, name, description, index, exercise: {conditions, getJs, tests}}) => {
+export default ({id, name, description, index, exercise: {question, conditions, getJs, tests, getHtml}}) => {
 	const [open, setOpen] = useState(false);
 
 	return <div className="lesson" {...style}>
@@ -46,7 +76,10 @@ export default ({id, name, description, index, exercise: {conditions, getJs, tes
 			{description}
 			<h3>Exercise</h3>
 			<div className="code-block exercises">
-				{conditions.map((condition, index) => <li key={index}>{condition}</li>)}
+				<div className="question">{question}</div>
+				{conditions ? conditions.map((condition, index) => <li key={index}>{condition}</li>) : null}
+				{getHtml(<TextEdit path={["a"]}/>)}
+				{tests.map(({description, condition}, index) => <div className="test">{description}</div>)}
 			</div>
 		</div> : null}
 	</div>;

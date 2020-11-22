@@ -16,6 +16,7 @@ const style = css({
 		":not(.MuiInputBase-inputMultiline)": {padding: "0 0 2px"},
 		fontFamily: "Roboto Mono, monospace",
 		fontSize: "0.8rem",
+		color: "black",
 	},
 });
 

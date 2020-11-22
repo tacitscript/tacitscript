@@ -12,8 +12,10 @@ export default {
 		<p>Note that spaces cannot be used to separate terms in tacitscript (their meaning will be detailed shortly.)</p>
 	</div>,
 	exercise: {
-		conditions: ["Define a tacitscript expression that uses all four arithmetic operators and equals 10"],
+		question: "Define a tacitscript expression that:",
+		conditions: ["uses all four arithmetic operators", "equals 10"],
 		getJs: definition => `const solution = /*ts ${definition} */`,
+		getHtml: textEdit => <div className="single-line">{textEdit}</div>,
 		tests: [
 			{description: "equals 10", condition: ({solution}) => solution === 10},
 			{description: "uses +, -, *, /", condition: ({definition}) => ["+", "-", "*", "/"].every(symbol => definition.includes(symbol))},
