@@ -23,7 +23,7 @@ const style = css({
 const update = _.debounce(({dispatch, path, value}) => dispatch({
 	type: "ANSWER",
 	payload: {
-		path,
+		path: ["definitions", ...path],
 		value,
 	},
 }), 300);

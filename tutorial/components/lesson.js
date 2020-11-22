@@ -1,8 +1,10 @@
 import TextEdit from "./text-edit.js";
+import parser from "common/src/parser.js";
 
 const {css} = Glamor;
 const {useState} = React;
 const {useSelector} = ReactRedux;
+const {ts2es6} = parser;
 
 const style = css({
 	width: "calc(85% + 2rem)",
@@ -72,7 +74,14 @@ const style = css({
 
 export default ({id, name, description, index, exercise: {question, conditions, getJs, tests, getHtml}}) => {
 	const [open, setOpen] = useState(false);
-	const solution = useSelector(R.path(["app", id]));
+	const definition = useSelector(R.path(["app", "definitions", id]));
+	let solution;
+
+	try {
+		if (definition) eval(ts2es6(getJs(definition)).replace(/const /g, "var "));
+	} catch (ex) {
+		var i = 0;
+	}
 
 	return <div className="lesson" {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
@@ -87,7 +96,7 @@ export default ({id, name, description, index, exercise: {question, conditions, 
 				<div className="question">{question}</div>
 				{conditions ? conditions.map((condition, index) => <li key={index}>{condition}</li>) : null}
 				{getHtml(<TextEdit path={[id]}/>)}
-				{tests.map(({description, condition}, index) => <div className="test">
+				{tests.map(({description, condition}, index) => <div className="test" key={index}>
 					<div className="status"></div>
 					<div className="description">{description}</div>
 				</div>)}
