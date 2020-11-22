@@ -97,7 +97,7 @@ export default ({id, name, description, index, exercise: {question, conditions, 
 				{conditions ? conditions.map((condition, index) => <li key={index}>{condition}</li>) : null}
 				{getHtml(<TextEdit path={[id]}/>)}
 				{tests.map(({description, condition}, index) => <div className="test" key={index}>
-					<div className="status"></div>
+					<div className="status">{(solution == undefined) ? null : <i className={`icon fas fa-${condition({solution, definition}) ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
 			</div>
