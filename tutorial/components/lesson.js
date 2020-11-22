@@ -40,7 +40,7 @@ const style = css({
 			flexDirection: "column",
 			fontFamily: "Roboto Mono, monospace",
 			backgroundColor: "var(--orange)",
-			color: "black",
+			color: "#271c19",
 			whiteSpace: "pre-wrap",
 			padding: "0.5rem",
 			borderRadius: "0.25rem",
@@ -58,13 +58,21 @@ const style = css({
 					marginBottom: "0.5rem",
 				},
 				"> .single-line": {
-					margin: "1rem 0.5rem",
+					margin: "1rem 0.3rem 0.2rem",
 				},
 				"> .test": {
 					display: "flex",
 					flex: "1 1 auto",
+					alignItems: "flex-end",
 					"> .status": {
-						width: "0.5rem",
+						display: "flex",
+						width: "1rem",
+						color: "var(--icon-brown)",
+						justifyContent: "center",
+					},
+					"> .description": {
+						display: "flex",
+						marginLeft: "0.5rem",
 					},
 				},
 			},
@@ -72,7 +80,7 @@ const style = css({
 	},
 });
 
-export default ({id, name, description, index, exercise: {question, conditions, getJs, tests, getHtml}}) => {
+export default ({id, name, description, index, exercise: {question, getJs, tests, getHtml}}) => {
 	const [open, setOpen] = useState(false);
 	const definition = useSelector(R.path(["app", "definitions", id]));
 	let solution;
@@ -94,12 +102,11 @@ export default ({id, name, description, index, exercise: {question, conditions, 
 			<h3>Exercise</h3>
 			<div className="code-block exercises">
 				<div className="question">{question}</div>
-				{conditions ? conditions.map((condition, index) => <li key={index}>{condition}</li>) : null}
-				{getHtml(<TextEdit path={[id]}/>)}
 				{tests.map(({description, condition}, index) => <div className="test" key={index}>
-					<div className="status">{(solution == undefined) ? null : <i className={`icon fas fa-${condition({solution, definition}) ? "check" : "times"}`}></i>}</div>
+					<div className="status">{(solution == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${condition({solution, definition}) ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
+				{getHtml(<TextEdit path={[id]}/>)}
 			</div>
 		</div> : null}
 	</div>;

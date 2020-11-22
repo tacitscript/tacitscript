@@ -13,7 +13,6 @@ export default {
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",
-		conditions: ["uses all four arithmetic operators", "equals 10"],
 		getJs: definition => `const solution = /*ts ${definition} */`,
 		getHtml: textEdit => <div className="single-line">{textEdit}</div>,
 		tests: [
