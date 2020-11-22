@@ -7,6 +7,7 @@ const {useSelector, useDispatch} = ReactRedux;
 const {ts2es6} = parser;
 
 const style = css({
+	position: "relative",
 	width: "calc(85% + 2rem)",
 	margin: "0 auto 1rem",
 	backgroundColor: "var(--brown)",
@@ -25,6 +26,13 @@ const style = css({
 		"> .index": {
 			width: "2rem",
 		},
+	},
+	"> .status": {
+		position: "absolute",
+		color: "var(--background)",
+		fontSize: "1.7rem",
+		marginTop: "0.3rem",
+		right: "1rem",
 	},
 	"> .contents": {
 		"margin": "0 1rem 1rem",
