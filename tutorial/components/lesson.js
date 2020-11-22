@@ -2,8 +2,8 @@ import TextEdit from "./text-edit.js";
 import parser from "common/src/parser.js";
 
 const {css} = Glamor;
-const {useState} = React;
-const {useSelector} = ReactRedux;
+const {useState, useEffect} = React;
+const {useSelector, useDispatch} = ReactRedux;
 const {ts2es6} = parser;
 
 const style = css({
@@ -82,7 +82,8 @@ const style = css({
 
 export default ({id, name, description, index, exercise: {question, getJs, tests, getHtml}}) => {
 	const [open, setOpen] = useState(false);
-	const definition = useSelector(R.path(["app", "definitions", id]));
+	const dispatch = useDispatch();
+	const definition = useSelector(R.path(["definitions", id]));
 	let solution;
 
 	try {
@@ -90,6 +91,16 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 	} catch (ex) {
 		var i = 0;
 	}
+
+	const passes = tests.map(({condition}) => (solution != undefined) && condition({solution, definition}));
+	const allPassed = passes.every(pass => pass === true);
+
+	useEffect(() => {
+		dispatch({
+			type: "SOLVED",
+			payload: {id, allPassed},
+		});
+	}, [allPassed]);
 
 	return <div className="lesson" {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
@@ -102,11 +113,11 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 			<h3>Exercise</h3>
 			<div className="code-block exercises">
 				<div className="question">{question}</div>
-				{tests.map(({description, condition}, index) => <div className="test" key={index}>
-					<div className="status">{(solution == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${condition({solution, definition}) ? "check" : "times"}`}></i>}</div>
+				{tests.map(({description}, index) => <div className="test" key={index}>
+					<div className="status">{(solution == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
-				{getHtml(<TextEdit path={[id]}/>)}
+				{getHtml(<TextEdit id={id}/>)}
 			</div>
 		</div> : null}
 	</div>;
