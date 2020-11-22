@@ -58,6 +58,13 @@ const style = css({
 				"> .single-line": {
 					margin: "1rem 0.5rem",
 				},
+				"> .test": {
+					display: "flex",
+					flex: "1 1 auto",
+					"> .status": {
+						width: "0.5rem",
+					},
+				},
 			},
 		},	
 	},
@@ -65,6 +72,7 @@ const style = css({
 
 export default ({id, name, description, index, exercise: {question, conditions, getJs, tests, getHtml}}) => {
 	const [open, setOpen] = useState(false);
+	const solution = useSelector(R.path(["app", id]));
 
 	return <div className="lesson" {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
@@ -78,8 +86,11 @@ export default ({id, name, description, index, exercise: {question, conditions, 
 			<div className="code-block exercises">
 				<div className="question">{question}</div>
 				{conditions ? conditions.map((condition, index) => <li key={index}>{condition}</li>) : null}
-				{getHtml(<TextEdit path={["a"]}/>)}
-				{tests.map(({description, condition}, index) => <div className="test">{description}</div>)}
+				{getHtml(<TextEdit path={[id]}/>)}
+				{tests.map(({description, condition}, index) => <div className="test">
+					<div className="status"></div>
+					<div className="description">{description}</div>
+				</div>)}
 			</div>
 		</div> : null}
 	</div>;
