@@ -2,11 +2,8 @@ import reducer from "./reducer.js";
 import App from "../components/app.js";
 import createDebounce from "common/lib/redux-debounced.js";
 import asyncDispatchMiddleware from "common/lib/redux-async.js";
-import "./tutorial.js";
-
 
 const {applyMiddleware, createStore} = Redux;
-const {Provider} = ReactRedux;
 
 const store = createStore(
 	reducer,
@@ -15,7 +12,7 @@ const store = createStore(
 );
 
 const render = () => {
-	ReactDOM.render(<Provider store={store}><App key="app"/></Provider>, document.getElementById("app"));
+	ReactDOM.render(<App key="app" store={store}/>, document.getElementById("app"));
 };
 
 store.subscribe(render);

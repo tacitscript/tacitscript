@@ -1,29 +1,12 @@
 import lessons from "../lessons/lessons.js";
 
-const {useSelector} = ReactRedux;
-const {createSelector, createSelectorCreator, defaultMemoize} = Reselect;
-
-const createObjectComparisonSelector = createSelectorCreator(defaultMemoize, (prev, curr) => sanctuary.equals(prev)(curr));
-const selector = createSelector(
-	R.path(["solutions"]),
-	R.pipe(
-		R.toPairs,
-		R.sortBy(R.first),
-		R.map(([key, {pass}]) => [key, pass]),
-		JSON.stringify,	
-	),
-);
-
-export default () => {
-	const solutions = useSelector(selector, (prev, curr) => {
-		console.log({prev, curr});
-	});
+export default React.memo(({solutions}) => {
 	const score = (() => {
 		if (R.isEmpty(solutions)) return "";
 
 		const passed = R.pipe(
 			R.values,
-			R.filter(R.identity),
+			R.filter(R.prop("pass")),
 			R.length,
 		)(solutions);
 
@@ -31,4 +14,9 @@ export default () => {
 	})();
 
 	return <div className="score">{score}</div>
-};
+}, (prev, curr) => {
+	return R.pipe(
+		R.map(R.mapObjIndexed(R.prop("pass"))),
+		([a, b]) => sanctuary.equals(a)(b),
+	)([prev.solutions, curr.solutions]);
+});

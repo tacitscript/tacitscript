@@ -1,9 +1,9 @@
 import TextEdit from "./text-edit.js";
 import parser from "common/src/parser.js";
+import ts from "common/src/tacitscript.js";
 
 const {css} = Glamor;
 const {useState, useEffect} = React;
-const {useSelector, useDispatch} = ReactRedux;
 const {ts2es6} = parser;
 
 const style = css({
@@ -87,11 +87,8 @@ const style = css({
 	},
 });
 
-export default ({id, name, description, index, exercise: {question, getJs, tests, getHtml}}) => {
+export default ({id, name, description, index, exercise: {question, getJs, tests, getHtml}, def, pass, dispatch}) => {
 	const [open, setOpen] = useState(false);
-	const dispatch = useDispatch();
-	const def = useSelector(R.path(["solutions", id, "def"]));
-	const pass = useSelector(R.path(["solutions", id, "pass"]));
 	let solution;
 
 	try {
@@ -129,8 +126,8 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 					<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
-				{getHtml(<TextEdit id={id} defaultValue={def}/>)}
+				{getHtml(<TextEdit {...{id, defaultValue: def, dispatch}}/>)}
 			</div>
 		</div> : null}
 	</div>;
-}
+};

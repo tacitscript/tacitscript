@@ -1,7 +1,5 @@
 const {InputBase} = MaterialUI;
 const {css} = Glamor;
-const {useDispatch} = ReactRedux;
-
 
 const style = css({
 	width: "100%",
@@ -25,8 +23,6 @@ const update = _.debounce(({dispatch, id, value}) => dispatch({
 	payload: {id, value},
 }), 300);
 
-export default ({id, multiline, defaultValue = ""}) => {
-	const dispatch = useDispatch();
-
+export default ({dispatch, id, multiline, defaultValue = ""}) => {
 	return <span {...style}><InputBase defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}/></span>;
 };

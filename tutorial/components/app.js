@@ -1,8 +1,3 @@
-import tacitscriptBlocksLesson from "../data/tacitscript-blocks-lesson.js";
-import operatorsLesson from "../data/operators-lesson.js";
-import theApplicationOperatorLesson from "../data/the-application-operator-lesson.js";
-import TacitscriptBlocks from "./tacitscript-blocks.js";
-import Repl from "./repl.js";
 import lessons from "../lessons/lessons.js";
 import Lesson from "./lesson.js";
 import Score from "./score.js";
@@ -139,7 +134,9 @@ const style = css({
 	},
 });
 
-export default () => {
+export default ({store}) => {
+	const {solutions} = store.getState();
+
 	return <div {...style}>
 		<h1>tacitscript</h1>
 
@@ -154,10 +151,10 @@ export default () => {
 
 		<div className="section-title">
 			<div className="name">Tutorial</div>
-			<Score/>
+			<Score {...{solutions}}/>
 		</div>
 
-		{lessons.map((details, index) => <Lesson {...{...details, index, key: index}}/>)}
+		{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}
 	</div>;
 };
 
