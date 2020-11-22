@@ -111,7 +111,7 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 				status: !def ? "empty" : isPassed ? "pass" : "fail",
 			},
 		});
-	}, [pass !== isPassed]);
+	}, [isPassed]);
 
 	return <div className="lesson" {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>

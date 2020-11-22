@@ -5,9 +5,9 @@ import TacitscriptBlocks from "./tacitscript-blocks.js";
 import Repl from "./repl.js";
 import lessons from "../lessons/lessons.js";
 import Lesson from "./lesson.js";
+import Score from "./score.js";
 
 const {css} = Glamor;
-const {useEffect} = React;
 
 const style = css({
 	" :focus": {
@@ -22,6 +22,8 @@ const style = css({
 		marginBottom: 0,
 	},
 	"> .section-title": {
+		display: "flex",
+		justifyContent: "space-between",
 		width: "85%",
 		margin: "1.5rem auto 0.75rem",
 		fontSize: "1.2rem",
@@ -152,6 +154,7 @@ export default () => {
 
 		<div className="section-title">
 			<div className="name">Tutorial</div>
+			<Score/>
 		</div>
 
 		{lessons.map((details, index) => <Lesson {...{...details, index, key: index}}/>)}
