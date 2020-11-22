@@ -37,7 +37,6 @@ const style = css({
 	"> .contents": {
 		"margin": "0 1rem 1rem",
 		"> hr": {
-			borderColor: "var(--yellow)",
 			margin: "-1px 0 1rem",
 		},
 		"> h3": {

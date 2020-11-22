@@ -11,7 +11,7 @@ const {useEffect} = React;
 
 const style = css({
 	" :focus": {
-		outline: "1px solid var(--yellow)",
+		outline: "1px solid white",
 	},
 	"> h1": {
 		color: "#fffffe",
