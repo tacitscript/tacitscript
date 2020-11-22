@@ -94,7 +94,7 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 	}
 
 	const passes = tests.map(({condition}) => (solution != undefined) && condition({solution, def}));
-	const allPassed = passes.every(pass => pass === true);
+	const allPassed = (solution == undefined) ? undefined : passes.every(pass => pass === true);
 
 	useEffect(() => {
 		dispatch({
@@ -104,13 +104,14 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 				status: !def ? "empty" : allPassed ? "pass" : "fail",
 			},
 		});
-	}, [allPassed]);
+	}, [pass !== allPassed]);
 
 	return <div className="lesson" {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
 			<div className="index">{`${index + 1}.`}</div>
 			<div className="name">{name}</div>
 		</div>
+		{(pass == undefined) ? null : <i className={`status fas fa-${pass ? "check" : "times"}`}/>}
 		{open ? <div className="contents">
 			<hr/>
 			{description}
