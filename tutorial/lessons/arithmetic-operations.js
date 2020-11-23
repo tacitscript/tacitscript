@@ -1,3 +1,5 @@
+import TextEdit from "../components/text-edit.js";
+
 export default {
 	id: "a",
 	name: "Arithmetic Operations",
@@ -14,7 +16,7 @@ export default {
 	exercise: {
 		question: "Define a tacitscript expression that:",
 		getJs: def => `const solution = /*ts ${def} */`,
-		getHtml: textEdit => <div className="single-line">{textEdit}</div>,
+		getHtml: details => <div className="single-line"><TextEdit {...details}/></div>,
 		tests: [
 			{description: "equals 10", condition: ({solution}) => solution === 10},
 			{description: "uses all four arithmetic operators", condition: ({def}) => ["+", "-", "*", "/"].every(symbol => def.includes(symbol))},

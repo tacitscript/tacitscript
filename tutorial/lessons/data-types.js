@@ -1,3 +1,5 @@
+import TextEdit from "../components/text-edit.js";
+
 export default {
 	id: "b",
 	name: "Data Types",
@@ -15,7 +17,7 @@ export default {
 	exercise: {
 		question: "Define a tacitscript expression that:",
 		getJs: def => `const solution = /*ts ${def} */`,
-		getHtml: textEdit => <div className="single-line">{textEdit}</div>,
+		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true}}/></div>,
 		tests: [
 			{description: "is an array", condition: ({solution}) => Array.isArray(solution)},
 			{description: "contains a number", condition: ({solution}) => R.any(element => !isNaN(element), solution)},

@@ -1,4 +1,3 @@
-import TextEdit from "./text-edit.js";
 import parser from "common/src/parser.js";
 import ts from "common/src/tacitscript.js";
 
@@ -126,7 +125,7 @@ export default React.memo(({id, name, description, index, exercise: {question, g
 					<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 					<div className="description">{description}</div>
 				</div>)}
-				{getHtml(<TextEdit {...{id, defaultValue: def, dispatch}}/>)}
+				{getHtml({id, defaultValue: def, dispatch})}
 			</div>
 		</div> : null}
 	</div>;
