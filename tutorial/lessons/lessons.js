@@ -1,3 +1,4 @@
 import arithmeticOperations from "./arithmetic-operations.js";
+import dataTypes from "./data-types.js";
 
-export default [arithmeticOperations];
+export default [arithmeticOperations, dataTypes];
