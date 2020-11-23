@@ -1,5 +1,6 @@
 const {InputBase} = MaterialUI;
 const {css} = Glamor;
+const {useRef} = React;
 
 const style = css({
 	width: "100%",
@@ -24,5 +25,16 @@ const update = _.debounce(({dispatch, id, value}) => dispatch({
 }), 300);
 
 export default ({dispatch, id, multiline, defaultValue = ""}) => {
-	return <span {...style}><InputBase defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}/></span>;
+	const element = useRef(null);
+
+	return <span {...style}><InputBase ref={element} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})} onKeyDown={event => {
+		if (event.key === "Tab") {
+			event.preventDefault();
+
+			const textarea = element.current.firstChild;
+			const s = textarea.selectionStart;
+			textarea.value = textarea.value.substring(0, textarea.selectionStart) + "\t" + textarea.value.substring(textarea.selectionEnd);
+			textarea.selectionEnd = s + 1; 
+		}
+	}}/></span>;
 };
