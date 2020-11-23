@@ -8,7 +8,7 @@ const {ts2es6} = parser;
 const style = css({
 	position: "relative",
 	width: "calc(85% + 2rem)",
-	margin: "0 auto 1rem",
+	margin: "0 auto 1px",
 	backgroundColor: "var(--brown)",
 	borderRadius: "0.25rem",
 	display: "flex",

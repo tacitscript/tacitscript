@@ -34,7 +34,9 @@ export default ({dispatch, id, multiline, defaultValue = ""}) => {
 			const textarea = element.current.firstChild;
 			const s = textarea.selectionStart;
 			textarea.value = textarea.value.substring(0, textarea.selectionStart) + "\t" + textarea.value.substring(textarea.selectionEnd);
-			textarea.selectionEnd = s + 1; 
+			textarea.selectionEnd = s + 1;
+
+			update({dispatch, id, value: textarea.value});
 		}
 	}}/></span>;
 };
