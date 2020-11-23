@@ -87,7 +87,7 @@ const style = css({
 	},
 });
 
-export default ({id, name, description, index, exercise: {question, getJs, tests, getHtml}, def, pass, dispatch}) => {
+export default React.memo(({id, name, description, index, exercise: {question, getJs, tests, getHtml}, def, pass, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
 
@@ -115,7 +115,7 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 			<div className="index">{`${index + 1}.`}</div>
 			<div className="name">{name}</div>
 		</div>
-		{(pass == undefined) ? null : <i className={`status fas fa-${pass ? "check" : "times"}`}/>}
+		{(isPassed == undefined) ? null : <i className={`status fas fa-${isPassed ? "check" : "times"}`}/>}
 		{open ? <div className="contents">
 			<hr/>
 			{description}
@@ -130,4 +130,7 @@ export default ({id, name, description, index, exercise: {question, getJs, tests
 			</div>
 		</div> : null}
 	</div>;
-};
+}, (prev, curr) => {
+	var i =0;
+	return prev.def === curr.def;
+});
