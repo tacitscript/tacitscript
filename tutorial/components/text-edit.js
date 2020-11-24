@@ -28,7 +28,7 @@ export default ({dispatch, id, multiline, defaultValue = ""}) => {
 	const element = useRef(null);
 	const [editMode, setEditMode] = useState(false);
 
-	return <span {...style} onKeyDown={event => {event.stopPropagation(); (event.key === "Enter") ? setEditMode(true) : null;}}>
+	return <span {...style}>
 		<InputBase ref={element} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
 			onKeyDown={event => {
 			const textarea = element.current.firstChild;
