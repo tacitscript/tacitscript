@@ -30,10 +30,20 @@ export default ({dispatch, id, multiline, defaultValue = ""}) => {
 
 	return <span {...style}>
 		<InputBase ref={element} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
+			onFocus={event => {
+				if (multiline) {
+					const textarea = element.current.firstChild;
+
+					textarea.selectionStart = 0;
+					textarea.selectionEnd = textarea.value.length;
+				}
+			}}
 			onKeyDown={event => {
 			const textarea = element.current.firstChild;
 
 			if (!editMode && (event.key === "Enter")) {
+				if (multiline) event.preventDefault();
+				
 				setEditMode(true);
 
 				textarea.selectionStart = textarea.selectionEnd = -1;
