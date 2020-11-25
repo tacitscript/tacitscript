@@ -8,7 +8,7 @@ export default {
 		<div className="code-block">{`"\\"Make things as simple as possible but no simpler.\\"\n\t- Albert Einstein"`}</div>
 		<p><b>Arrays</b> are bounded by parentheses with elements delimited by whitespace (space, tabs and newlines.) Elements may be of different types, including other arrays.</p>
 		<div className="code-block">{`(("top"		7.5)
- ("side"	100))`}</div>
+ ("side"	2+3))`}</div>
 		<p>An array enclosing only whitespace denotes an empty array. A single element array must also include whitespace.</p>
 		<div className="code-block">{`( )
 ("alone" )`}</div>
