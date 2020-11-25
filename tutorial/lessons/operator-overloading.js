@@ -22,8 +22,8 @@ export default {
 		getHtml: details => <div className="single-line"><TextEdit {...details}/></div>,
 		tests: [
 			{description: "is an array of two elements", condition: ({solution}) => solution.length === 2},
-			{description: 'uses the minimal conversion of "2" to give element 2', condition: ({def}) => def.replace(/\s+/g, " ").split(" ").slice(0, 2).some(value => value.includes('0+"2"'))},
-			{description: 'uses the minimal conversion of 3 to give element "3"', condition: ({def}) => def.replace(/\s+/g, " ").split(" ").slice(0, 2).some(value => value.includes('""+3'))},
+			{description: 'contains the minimal conversion of "2" to give element 2', condition: ({def}) => def.replace(/\s+/g, " ").replace(/[\(\)]/g, "").split(" ").slice(0, 2).includes('0+"2"')},
+			{description: 'contains the minimal conversion of 3 to give element "3"', condition: ({def}) => def.replace(/\s+/g, " ").replace(/[\(\)]/g, "").split(" ").slice(0, 2).includes('""+3')},
 		],
 	},
 };
