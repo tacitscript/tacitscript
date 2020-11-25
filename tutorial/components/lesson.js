@@ -9,7 +9,12 @@ const style = css({
 	position: "relative",
 	width: "calc(85% + 2rem)",
 	margin: "0 auto 1px",
-	".open": {marginBottom: "1rem"},
+	".open": {
+		marginBottom: "1rem",
+		":not(:first-child)": {
+			marginTop: "1rem",
+		},
+	},
 	backgroundColor: "var(--brown)",
 	borderRadius: "0.25rem",
 	display: "flex",

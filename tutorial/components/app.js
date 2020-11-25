@@ -154,7 +154,7 @@ export default ({store}) => {
 			<Score {...{solutions}}/>
 		</div>
 
-		{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}
+		<div className="lessons">{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 	</div>;
 };
 
