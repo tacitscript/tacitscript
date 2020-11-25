@@ -52,6 +52,9 @@ const style = css({
 			padding: "0.5rem",
 			borderRadius: "0.25rem",
 			fontSize: "0.8rem",
+			":not(.exercises)": {
+				lineHeight: "1.1rem",
+			},
 			"> li": {
 				marginLeft: "0.5rem",
 			},
