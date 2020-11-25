@@ -12,18 +12,18 @@ export default {
 		<p>Many operators take other operators as arguments. With strict left-associativity, <span className="code">2+_1</span> becomes a syntax error, as the two operators have equal precedence and there is no operation that 
 		supports <a href="#plus">plus (+)</a> to the left of <a href="#underscore">underscore (_)</a>. Parentheses are required in this case.</p>
 		<div className="code-block">2+(_1)</div>
-		<p>The operation that resolves will depend on the types of the arguments used. <a href="#add">+ (add)</a>, and <a href="#concat">+ (concat)</a> over strings, support any non-operator type to the right 
-		(which is then converted to the type on the left.)</p>
-		<div className="code-block">{`I am "+45+" years old"\n2+"5"`}</div>
+		<p>The operation that resolves will depend on the types of the arguments used. <a href="#add">+ (add)</a>, and <a href="#concat">+ (concat)</a> over strings, act as type-conversion operations by supporting any 
+		non-operator type to the right.</p>
+		<div className="code-block">{`"I am "+45+" years old"\n2+"5"`}</div>
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",
 		getJs: def => `const solution = /*ts ${def} */`,
 		getHtml: details => <div className="single-line"><TextEdit {...details}/></div>,
 		tests: [
-			{description: "equals 10", condition: ({solution}) => solution === 10},
-			{description: "uses all four arithmetic operators", condition: ({def}) => ["+", "-", "*", "/"].every(symbol => def.includes(symbol))},
-			{description: "does not contain whitespace", condition: ({def}) => !def.match(/\s/)},
+			{description: "is an array of two elements", condition: ({solution}) => solution.length === 2},
+			{description: 'uses the minimal conversion of "2" to give element 2', condition: ({def}) => def.replace(/\s+/g, " ").split(" ").slice(0, 2).some(value => value.includes('0+"2"'))},
+			{description: 'uses the minimal conversion of 3 to give element "3"', condition: ({def}) => def.replace(/\s+/g, " ").split(" ").slice(0, 2).some(value => value.includes('""+3'))},
 		],
 	},
 };
