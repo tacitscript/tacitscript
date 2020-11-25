@@ -9,6 +9,7 @@ const style = css({
 	position: "relative",
 	width: "calc(85% + 2rem)",
 	margin: "0 auto 1px",
+	".open": {marginBottom: "1rem"},
 	backgroundColor: "var(--brown)",
 	borderRadius: "0.25rem",
 	display: "flex",
@@ -109,7 +110,7 @@ export default React.memo(({id, name, description, index, exercise: {question, g
 		});
 	}, [isPassed]);
 
-	return <div className="lesson" {...style}>
+	return <div className={`lesson${open ? " open" : ""}`} {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
 			<div className="index">{`${index + 1}.`}</div>
 			<div className="name">{name}</div>
