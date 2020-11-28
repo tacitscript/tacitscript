@@ -102,7 +102,7 @@ const style = css({
 	},
 });
 
-export default React.memo(({id, name, description, index, exercise: {question, getJs, tests, getHtml}, def, dispatch}) => {
+export default React.memo(({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml}, def, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
 	let es6 = "";
@@ -147,6 +147,7 @@ export default React.memo(({id, name, description, index, exercise: {question, g
 				</div>)}
 				{getHtml({id, defaultValue: def, dispatch})}
 			</div>
+			{epilogue}
 		</div> : null}
 	</div>;
 }, (prev, curr) => {

@@ -33,4 +33,8 @@ export default {
 			}},
 		],
 	},
+	epilogue: <div>
+		<p><i>undefined</i> is a special value that has no representation within tacitscript (you can't use it in an expression.)<br/>It is a <i>toxic value</i> in that any calculation involving <i>undefined</i> will also equal <i>undefined</i>.</p>
+		<div className="code-block"><span>{`calculation\t1/0+2\t\t\t\t\t\tequals `}<i>undefined</i></span></div>
+	</div>,
 };
