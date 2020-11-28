@@ -109,7 +109,7 @@ export default React.memo(({id, name, description, index, exercise: {question, g
 		var i = 0;
 	}
 
-	const passes = tests.map(({condition}) => (def != undefined) && (solution != undefined) && condition({solution, def}));
+	const passes = tests.map(({condition}) => (def != undefined) && condition({solution, def, es6}));
 	const isPassed = def ? passes.every(pass => pass === true) : undefined;
 
 	useEffect(() => {

@@ -18,9 +18,25 @@ export default {
 		getJs: def => `/*ts\n${def}\n*/`,
 		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true}}/></div>,
 		tests: [
-			{description: "contains two name-expression pairs", condition: ({def}) => {}},
-			{description: 'defines the alias of a binary operator', condition: ({def}) => def.replace(/\s+/g, " ").replace(/[\(\)]/g, "").split(" ").slice(0, 2).includes('0+"2"')},
-			{description: 'binds the name "ten" to the value 10, using your alias', condition: ({def}) => def.replace(/\s+/g, " ").replace(/[\(\)]/g, "").split(" ").slice(0, 2).includes('""+3')},
+			{description: "contains two name-expression pairs", condition: ({es6}) => (match => match && (match.length === 2))(es6.match(/const /g))},
+			{description: 'defines the alias of a binary operator you have learned', condition: ({def}) => {
+				const firstLine = def.split("\n")[0].split(/\s+/);
+
+				if (firstLine.length < 2) return false;
+
+				return ["+", "-", "/", "*", ","].some(operator => firstLine[1].includes(operator));
+			}},
+			{description: 'binds the name "solution" to an expression using your alias', condition: ({es6}) => {
+				const names = R.map(R.slice(6, -2), es6.match(/const (.*) =/g));
+
+				if (names[1] !== "solution") return false;
+
+				const expressions = es6.match(/=(.*);/g);
+
+				return expressions[1] && expressions[1].includes(names[0]);
+			}},
+			{description: 'the value of "solution" equals 10', condition: ({solution}) => solution === 10},
+			{description: 'contains a comment', condition: ({es6}) => es6.includes("//")},
 		],
 	},
 };
