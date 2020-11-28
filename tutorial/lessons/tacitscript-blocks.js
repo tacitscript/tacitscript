@@ -19,7 +19,7 @@ export default {
 		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true}}/></div>,
 		tests: [
 			{description: "contains two name-expression pairs", condition: ({es6}) => (match => match && (match.length === 2))(es6.match(/const /g))},
-			{description: 'defines the alias of a binary operator you have learned', condition: ({def}) => {
+			{description: 'defines an alias for a binary operator you have learned', condition: ({def}) => {
 				const firstLine = def.split("\n")[0].split(/\s+/);
 
 				if (firstLine.length < 2) return false;
@@ -35,7 +35,7 @@ export default {
 
 				return expressions[1] && expressions[1].includes(names[0]);
 			}},
-			{description: 'the value of "solution" equals 10', condition: ({solution}) => solution === 10},
+			{description: 'defines "solution" equal to 10', condition: ({solution}) => solution === 10},
 			{description: 'contains a comment', condition: ({es6}) => es6.includes("//")},
 		],
 	},
