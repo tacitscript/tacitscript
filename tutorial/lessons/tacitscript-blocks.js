@@ -9,9 +9,9 @@ export default {
 		<p>Characters occuring after the tacitscript expression are treated as comments.</p>
 		<div className="code-block">{`quoteA\t\t"Java is to JavaScript what car is to Carpet.\n\t– Chris Heilmann"\t\t\t\t\tSo true!\nquoteB\t\t"Features, quality, time: pick two."\nquotes\t\t(quoteA quoteB)\t\t\t\t\tlook, an array :)`}</div>
 		<p>When an operator and its argument are both names, parentheses are required to delimit the terms.</p>
-		<div className="code-block">{`negative\t_\t\t\t\t\t\tcreate an alias\nfive\t\t5\nminusFiveA\tnegative(five)\t\t\t\t\tthese expressions…\nminusFiveB\t(negative)five\t\t\t\t\t…give the same result`}</div>
+		<div className="code-block">{`negative\t_\t\t\t\t\t\tcreate an alias\ntwo\t\t2\nnegativeTwoA\tnegative(two)\t\t\t\t\tthese expressions…\nnegativeTwoB\t(negative)two\t\t\t\t\t…give the same result`}</div>
 		<p>Alternatively, we can use the <a href="#apply-to">, (applyTo)</a> operation that applys an argument to an operator.</p>
-		<div className="code-block">{`minusFiveC\tfive,negative\t\t\t\t\talso 5,_`}</div>
+		<div className="code-block">{`negativeTwoC\ttwo,negative\t\t\t\t\talso 2,_`}</div>
 	</div>,
 	exercise: {
 		question: "Define a tacitscript program that:",
@@ -26,7 +26,7 @@ export default {
 
 				return ["+", "-", "/", "*", ","].some(operator => firstLine[1].includes(operator));
 			}},
-			{description: 'binds the name "solution" to an expression using your alias', condition: ({es6}) => {
+			{description: <span>binds the name <b>solution</b> to an expression using your alias</span>, condition: ({es6}) => {
 				const names = R.map(R.slice(6, -2), es6.match(/const (.*) =/g));
 
 				if (names[1] !== "solution") return false;
@@ -35,7 +35,7 @@ export default {
 
 				return expressions[1] && expressions[1].includes(names[0]);
 			}},
-			{description: 'defines "solution" equal to 10', condition: ({solution}) => solution === 10},
+			{description: <span>defines <b>solution</b> equal to 10</span>, condition: ({solution}) => solution === 10},
 			{description: 'contains a comment', condition: ({es6}) => es6.includes("//")},
 		],
 	},

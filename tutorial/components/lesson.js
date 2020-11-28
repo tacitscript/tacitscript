@@ -75,6 +75,13 @@ const style = css({
 				"> .single-line": {
 					margin: "1rem 0.3rem 0.2rem",
 				},
+				"> .name-expression": {
+					display: "flex",
+					alignItems: "baseline",
+					"> .name": {
+						width: "7rem",
+					},
+				},
 				"> .test": {
 					display: "flex",
 					flex: "1 1 auto",
