@@ -92,8 +92,6 @@ const types = value => {
 
 //	return [[0]];
 };
-const supportsUndefined = value => isFunction(value) && value.supportsUndefined;
-
 
 //==========================================================
 // application utilities
@@ -170,8 +168,8 @@ const matchType = (left, right) => {
 	return match;
 };
 const apply = (left, right) => {
-	if ((left == undefined) && !supportsUndefined(right)) return undefined;
-	if ((right == undefined) && !supportsUndefined(left)) return undefined;
+	if (left == undefined) return undefined;
+	if (right == undefined) return undefined;
 
 	const leftTypes = types(left);
 	const rightTypes = types(right);
@@ -188,8 +186,6 @@ const apply = (left, right) => {
 
 		if (isFunction(result)) {
 			if (!result.types) result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
-
-			if (right.supportsUndefined) result.supportsUndefined = true;
 		}
 
 		return result;
@@ -203,8 +199,6 @@ const apply = (left, right) => {
 
 		if (isFunction(result)) {
 			if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
-
-			if (left.supportsUndefined) result.supportsUndefined = true;
 		}
 
 		return result;
@@ -629,7 +623,6 @@ let equal = (left, right) => {
 }; equal.types = [
 	["V", "V", "B"]
 ];
-equal.supportsUndefined = true;
 let bar = (left, right) => {
 	const isFalseyLeft = isFalsey(left);
 
@@ -664,7 +657,6 @@ let bar = (left, right) => {
 	[["?", "?"], ["?", "?"], ["?", "?"]], // orPredicate >0|(%2.=0)
 	[["?", "?", "?"], ["?", "?", "?"], ["?", "?", "?"]] // orBinary <|=
 ];
-bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return left % right; // NNN modulo 7%2
