@@ -95,12 +95,16 @@ const style = css({
 	},
 });
 
-export default React.memo(({id, name, description, index, exercise: {question, getJs, tests, getHtml}, def, pass, dispatch}) => {
+export default React.memo(({id, name, description, index, exercise: {question, getJs, tests, getHtml}, def, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
+	let es6 = "";
 
 	try {
-		if (def) eval(ts2es6(getJs(def)).replace(/const /g, "var "));
+		if (def) {
+			es6 = ts2es6(getJs(def));
+			eval(es6.replace(/const /g, "var "));
+		}
 	} catch (ex) {
 		var i = 0;
 	}

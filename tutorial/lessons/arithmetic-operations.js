@@ -15,7 +15,7 @@ export default {
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",
-		getJs: def => `const solution = /*ts ${def} */`,
+		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line"><TextEdit {...details}/></div>,
 		tests: [
 			{description: "equals 10", condition: ({solution}) => solution === 10},
