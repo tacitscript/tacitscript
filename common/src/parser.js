@@ -403,7 +403,8 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const solution = processSymbols(processedSymbols, undefined, updatedDefinitions);
 						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x);" : "const " + variable + " =" + definitionSeparator + definition + ";";
 
-						js += declaration;
+						const noComment = symbol.includes("\n");
+						js += declaration + (noComment ? "" : " //");
 						updatedDefinitions = Object.assign({}, updatedDefinitions, fromPairs([[variable, solution]]));
 					}
 
@@ -425,7 +426,9 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 				variable = symbol;
 			} else if (!comment) {
 				definitionSymbols.push(symbol);
-			} // ignore text comment on this line
+			} else {
+				js += " " + symbol; // comments
+			}
 		});
 	}
 
