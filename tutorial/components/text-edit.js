@@ -31,7 +31,7 @@ export default ({dispatch, id, multiline, defaultValue = ""}) => {
 	return <span {...style}>
 		<InputBase ref={element} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
 			onFocus={event => {
-				if (multiline) {
+				if (multiline && R.path(["nativeEvent", "relatedTarget"], event)) {
 					const textarea = element.current.firstChild;
 
 					textarea.selectionStart = 0;
