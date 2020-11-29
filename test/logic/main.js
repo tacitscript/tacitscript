@@ -4,6 +4,13 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 
+describe("undefined handling", () => {
+/*ts
+	a		(1/0)|2
+*/
+	it("(1/0)|2 eql 2", () => expect(a).eql(2));
+});
+
 describe("Problems", () => {
 	describe("o", () => {
 	/*ts
