@@ -629,7 +629,6 @@ let equal = (left, right) => {
 }; equal.types = [
 	["V", "V", "B"]
 ];
-equal.supportsUndefined = true;
 let bar = (left, right) => {
 	const isFalseyLeft = isFalsey(left);
 
