@@ -6,9 +6,46 @@ mocha.setup('bdd');
 
 describe("undefined handling", () => {
 /*ts
-	a		(1/0)|2
+	q		<3?,(`"less" `"greaterEqual").|$
+	r		q2
+	s		q4
+	t		(1/0 1/0),(`() +2)
+	p		`()(1/0)
+	m		(1/0)|2
+	n		3|(1/0)
+	o		(1/0)|(1/0)
+	j		(1/0)/4
+	k		[/(1/0)
+	l		(1/0)/(1/0)
+	g		(1/0)+3
+	h		""+(1/0)
+	i		(1/0)+(1/0)
+	d		(1/0)./
+	e		[.(1/0)
+	f		(1/0).(1/0)
+	a		(1/0),+1
+	b		3,(1/0)
+	c		(1/0),(1/0)
 */
-	it("(1/0)|2 eql 2", () => expect(a).eql(2));
+	it('<3?,(`"less" `"greaterEqual").|$(2) eql "less"', () => expect(r).eql("less"));
+	it('<3?,(`"less" `"greaterEqual").|$(4) eql "greaterEqual"', () => expect(s).eql("greaterEqual"));
+	it("(1/0 1/0),(`() +2) eql [undefined, undefined]", () => expect(t).eql([undefined, undefined]));
+	it("`()(1/0) eql undefined", () => expect(p).eql(undefined));
+	it("(1/0)|2 eql 2", () => expect(m).eql(2));
+	it("3|(1/0) eql 3", () => expect(n).eql(3));
+	it("(1/0)|(1/0) eql undefined", () => expect(o).eql(undefined));
+	it("(1/0)/4 eql undefined", () => expect(j).eql(undefined));
+	it("[/(1/0) eql undefined", () => expect(k).eql(undefined));
+	it("(1/0)/(1/0) eql undefined", () => expect(l).eql(undefined));
+	it("(1/0)+3 eql undefined", () => expect(g).eql(undefined));
+	it("''+(1/0) eql undefined", () => expect(h).eql(undefined));
+	it("(1/0)+(1/0) eql undefined", () => expect(i).eql(undefined));
+	it("(1/0)./ eql undefined", () => expect(d).eql(undefined));
+	it("[.(1/0) eql undefined", () => expect(e).eql(undefined));
+	it("(1/0).(1/0) eql undefined", () => expect(f).eql(undefined));
+	it("(1/0),+1 eql undefined", () => expect(a).eql(undefined));
+	it("3,(1/0) eql undefined", () => expect(b).eql(undefined));
+	it("(1/0),(1/0) eql undefined", () => expect(c).eql(undefined));
 });
 
 describe("Problems", () => {
