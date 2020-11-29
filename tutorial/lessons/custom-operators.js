@@ -1,4 +1,5 @@
 import TextEdit from "../components/text-edit.js";
+import toDecimalPlaces from "../../common/src/to-decimal-places.js";
 
 export default {
 	id: "e",
@@ -20,7 +21,7 @@ export default {
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
-			{description: testValue => `inverse${testValue} equals ${(1/testValue).toFixed(3)}`, condition: ({solution, testValue}) => {
+			{description: testValue => <span><b>inverse</b>{`${testValue} equals ${toDecimalPlaces(1 / testValue, 4)}`}</span>, condition: ({solution, testValue}) => {
 				if (typeof solution !== "function") return false;
 
 				return Math.abs(solution(testValue) - (1 / testValue)) < 1E-10;
