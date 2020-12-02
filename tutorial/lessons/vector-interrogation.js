@@ -8,10 +8,13 @@ export default {
 	name: "Vector Interrogation",
 	description: <div>
 		<p>Arrays and strings share many common operations, and are collectively termed <b>vectors</b>.</p>
-		<p><a href="#length"># (length)</a> retrieves the length of the vector.</p>
-		<div className="code-block">{`lengthArray\t[(5 6 7)\t\t\t\t\tequals 3\nlengthString\t["\t\t\t\t\tequals 3`}</div>
-		<p>The <a href="#dot">dot (.)</a> and <a href="#comma">comma (,)</a> operators have lowest precedence, so parentheses are not required around <span className="code">+1</span> above.</p>
-		<p>The related <a href="#binary-unary-pipe">. (binaryUnaryPipe)</a> operation takes a binary operator on the left.</p>
-		<div className="code-block">{`average\t\t+./2\ncalculation\t5average7\t\t\t\t\tequals 6`}</div>
+		<p><a href="#length"># (length)</a> retrieves the length of a vector.</p>
+		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3\nlengthEArray\t#( )\t\t\t\t\t\tequals 0\n\nlengthString\t#"Hello, World"\t\t\t\t\tequals 12\nlengthEString\t#""\t\t\t\t\t\tequals 0`}</div>
+		<p><a href="#first">[ (first)</a> retrieves the first element of a vector.</p>
+		<div className="code-block">{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5\nfirstEArray\t[( )\t\t\t\t\t\tundefined\n\nfirstString\t["Hello, World"\t\t\t\t\tequals "H"\nfirstEString\t[""\t\t\t\t\t\tundefined`}</div>
+		<p><a href="#last">] (last)</a> retrieves the last element of a vector.</p>
+		<div className="code-block">{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\tundefined\n\nlastString\t]"Hello, World"\t\t\t\t\tequals "d"\nlastEString\t]""\t\t\t\t\t\tundefined`}</div>
+		<p><a href="#at">' (at)</a> retrieves the element at a zero-based index of a vector.</p>
+		<div className="code-block">{`elementArray\t1'(5 6 7)\t\t\t\t\tequals 6\nlastString\t1'"Hello, World"\t\t\t\tequals "e"`}</div>
 	</div>,
 };
