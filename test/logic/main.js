@@ -3,6 +3,30 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("array indexing", () => {
+/*ts
+	array		1'(5 6 7)
+	string		1'"abc"
+	zeroA		0'( )
+	zeroS		0'""
+	outA		3'(5 6 7)
+	outS		3'"abc"
+	backA		_1'(5 6 7)
+	backS		_1'"abc"
+	backOutA	_4'(5 6 7)
+	backOutS	_4'"abc"
+*/
+	it("1'(5 6 7) eql 6", () => expect(array).eql(6));
+	it(`1'"abc" eql "b"`, () => expect(string).eql("b"));
+	it("0'( ) eql undefined", () => expect(zeroA).eql(undefined));
+	it(`0'"" eql undefined`, () => expect(zeroS).eql(undefined));
+	it("3'(5 6 7) eql undefined", () => expect(outA).eql(undefined));
+	it(`3'"abc" eql undefined`, () => expect(outS).eql(undefined));
+	it("_1'(5 6 7) eql 7", () => expect(backA).eql(7));
+	it(`_1'"abc" eql "c"`, () => expect(backS).eql("c"));
+	it("_4'(5 6 7) eql undefined", () => expect(backOutA).eql(undefined));
+	it(`_4'"abc" eql undefined`, () => expect(backOutS).eql(undefined));
+});
 
 describe("undefined handling", () => {
 /*ts

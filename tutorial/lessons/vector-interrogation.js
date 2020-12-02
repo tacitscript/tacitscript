@@ -15,6 +15,6 @@ export default {
 		<p><a href="#last">] (last)</a> retrieves the last element of a vector.</p>
 		<div className="code-block">{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\tundefined\n\nlastString\t]"Hello, World"\t\t\t\t\tequals "d"\nlastEString\t]""\t\t\t\t\t\tundefined`}</div>
 		<p><a href="#at">' (at)</a> retrieves the element at a zero-based index of a vector.</p>
-		<div className="code-block">{`elementArray\t1'(5 6 7)\t\t\t\t\tequals 6\nlastString\t1'"Hello, World"\t\t\t\tequals "e"`}</div>
+		<div className="code-block">{`elementArray\t1'(5 6 7)\t\t\t\t\tequals 6\nelementString\t1'"Hello, World"\t\t\t\tequals "e"`}</div>
 	</div>,
 };
