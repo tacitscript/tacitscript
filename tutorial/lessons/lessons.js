@@ -4,6 +4,7 @@ import operatorOverloading from "./operator-overloading.js";
 import tacitscriptBlocks from "./tacitscript-blocks.js";
 import customOperators from "./custom-operators.js";
 import operatorChaining from "./operator-chaining.js";
+import vectorInterrogation from "./vector-interrogation.js";
 
 export default [
 	arithmeticOperations,
@@ -12,4 +13,5 @@ export default [
 	tacitscriptBlocks,
 	customOperators,
 	operatorChaining,
+	vectorInterrogation,
 ];
