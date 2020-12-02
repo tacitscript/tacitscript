@@ -10,7 +10,7 @@ const style = css({
 	" :focus": {
 		outline: "1px solid white",
 	},
-	marginBottom: "3rem",
+	marginBottom: "5rem",
 	"> h1": {
 		color: "#fffffe",
 		fontSize: "3rem",
@@ -27,101 +27,105 @@ const style = css({
 		fontSize: "1.5rem",
 		fontWeight: "bold",
 	},
-	"> .panel": {
-		position: "relative",
-		width: "calc(85% + 2rem)",
-		margin: "0 auto 1px",
-		".open": {
-			marginBottom: "1rem",
-			":not(:first-child)": {
-				marginTop: "1rem",
+	"> .block": {
+		"> .panel": {
+			position: "relative",
+			width: "calc(85% + 2rem)",
+			margin: "0 auto 1px",
+			".open": {
+				marginBottom: "1rem",
+				":not(:first-child)": {
+					marginTop: "1rem",
+				},
 			},
-		},
-		backgroundColor: "var(--brown)",
-		borderRadius: "0.25rem",
-		display: "flex",
-		flexDirection: "column",
-		"> .heading": {
-			padding: "0.5rem 1rem",
-			fontSize: "1.1rem",
+			backgroundColor: "var(--brown)",
+			borderRadius: "0.25rem",
 			display: "flex",
-			fontWeight: "bold",
-			":hover,:focus": {
-				color: "var(--yellow)",
-				cursor: "pointer",
-			},
-			"> .index": {
-				width: "2rem",
-			},
-		},
-		"> .status": {
-			position: "absolute",
-			color: "var(--background)",
-			fontSize: "1.7rem",
-			marginTop: "0.3rem",
-			right: "1rem",
-		},
-		"> .contents": {
-			"margin": "0 1rem 1rem",
-			"> hr": {
-				margin: "-1px 0 1rem",
-			},
-			"> h3": {
-				fontSize: "1.25rem",
-			},
-			" .code-block": {
+			flexDirection: "column",
+			"> .heading": {
+				padding: "0.5rem 1rem",
+				fontSize: "1.1rem",
 				display: "flex",
-				flexDirection: "column",
-				fontFamily: "Roboto Mono, monospace",
-				backgroundColor: "var(--orange)",
-				color: "#271c19",
-				whiteSpace: "pre-wrap",
-				padding: "0.5rem",
-				borderRadius: "0.25rem",
-				fontSize: "0.8rem",
-				":not(.exercises)": {
-					lineHeight: "1.1rem",
+				fontWeight: "bold",
+				":hover,:focus": {
+					color: "var(--yellow)",
+					cursor: "pointer",
 				},
-				"> li": {
-					marginLeft: "0.5rem",
+				"> .index": {
+					width: "2rem",
 				},
-				" pre": {
-					margin: "0 0 0.5rem",
+			},
+			"> .status": {
+				position: "absolute",
+				color: "var(--background)",
+				fontSize: "1.7rem",
+				marginTop: "0.3rem",
+				right: "1rem",
+				width: "1.7rem",
+				textAlign: "center",
+			},
+			"> .contents": {
+				"margin": "0 1rem 1rem",
+				"> hr": {
+					margin: "-1px 0 1rem",
 				},
-				".exercises": {
-					backgroundColor: "var(--yellow)",
-					padding: "1rem",
-					"> .question": {
-						marginBottom: "0.5rem",
+				"> h3": {
+					fontSize: "1.1rem",
+				},
+				" .code-block": {
+					display: "flex",
+					flexDirection: "column",
+					fontFamily: "Roboto Mono, monospace",
+					backgroundColor: "var(--orange)",
+					color: "#271c19",
+					whiteSpace: "pre-wrap",
+					padding: "0.5rem",
+					borderRadius: "0.25rem",
+					fontSize: "0.8rem",
+					":not(.exercises)": {
+						lineHeight: "1.1rem",
 					},
-					"> .single-line": {
-						margin: "1rem 0.3rem 0.2rem",
+					"> li": {
+						marginLeft: "0.5rem",
 					},
-					"> .name-expression": {
-						display: "flex",
-						alignItems: "baseline",
-						"> .name": {
-							width: "7rem",
+					" pre": {
+						margin: "0 0 0.5rem",
+					},
+					".exercises": {
+						backgroundColor: "var(--yellow)",
+						padding: "1rem",
+						"> .question": {
+							marginBottom: "0.5rem",
 						},
-					},
-					"> .test": {
-						display: "flex",
-						flex: "1 1 auto",
-						alignItems: "flex-end",
-						"> .status": {
+						"> .single-line": {
+							margin: "1rem 0.3rem 0.2rem",
+						},
+						"> .name-expression": {
 							display: "flex",
-							width: "1rem",
-							color: "var(--icon-brown)",
-							justifyContent: "center",
+							alignItems: "baseline",
+							"> .name": {
+								width: "7rem",
+							},
 						},
-						"> .description": {
+						"> .test": {
 							display: "flex",
-							marginLeft: "0.5rem",
+							flex: "1 1 auto",
+							alignItems: "flex-end",
+							"> .status": {
+								display: "flex",
+								width: "1rem",
+								color: "var(--icon-brown)",
+								justifyContent: "center",
+							},
+							"> .description": {
+								display: "flex",
+								marginLeft: "0.5rem",
+							},
 						},
 					},
-				},
+				},	
 			},	
-		},	
+		},
 	},
 	" .section": {
 		width: "85%",
@@ -253,13 +257,13 @@ export default ({store}) => {
 			<Score {...{solutions}}/>
 		</div>
 
-		{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}
+		<div className="block">{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 
 		<div className="section-title">
 			<div className="name">Reference</div>
 		</div>
 
-		{operators.map(details => <Operator {...details}/>)}
+		<div className="block">{operators.map(details => <Operator {...details}/>)}</div>
 
 	</div>;
 };
