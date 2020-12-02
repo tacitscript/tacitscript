@@ -1,6 +1,8 @@
 import lessons from "../lessons/lessons.js";
 import Lesson from "./lesson.js";
 import Score from "./score.js";
+import operators from "../operators/operators.js";
+import Operator from "./operator.js";
 
 const {css} = Glamor;
 
@@ -8,6 +10,7 @@ const style = css({
 	" :focus": {
 		outline: "1px solid white",
 	},
+	marginBottom: "3rem",
 	"> h1": {
 		color: "#fffffe",
 		fontSize: "3rem",
@@ -23,6 +26,102 @@ const style = css({
 		margin: "1.5rem auto 0.75rem",
 		fontSize: "1.5rem",
 		fontWeight: "bold",
+	},
+	"> .panel": {
+		position: "relative",
+		width: "calc(85% + 2rem)",
+		margin: "0 auto 1px",
+		".open": {
+			marginBottom: "1rem",
+			":not(:first-child)": {
+				marginTop: "1rem",
+			},
+		},
+		backgroundColor: "var(--brown)",
+		borderRadius: "0.25rem",
+		display: "flex",
+		flexDirection: "column",
+		"> .heading": {
+			padding: "0.5rem 1rem",
+			fontSize: "1.1rem",
+			display: "flex",
+			fontWeight: "bold",
+			":hover,:focus": {
+				color: "var(--yellow)",
+				cursor: "pointer",
+			},
+			"> .index": {
+				width: "2rem",
+			},
+		},
+		"> .status": {
+			position: "absolute",
+			color: "var(--background)",
+			fontSize: "1.7rem",
+			marginTop: "0.3rem",
+			right: "1rem",
+		},
+		"> .contents": {
+			"margin": "0 1rem 1rem",
+			"> hr": {
+				margin: "-1px 0 1rem",
+			},
+			"> h3": {
+				fontSize: "1.25rem",
+			},
+			" .code-block": {
+				display: "flex",
+				flexDirection: "column",
+				fontFamily: "Roboto Mono, monospace",
+				backgroundColor: "var(--orange)",
+				color: "#271c19",
+				whiteSpace: "pre-wrap",
+				padding: "0.5rem",
+				borderRadius: "0.25rem",
+				fontSize: "0.8rem",
+				":not(.exercises)": {
+					lineHeight: "1.1rem",
+				},
+				"> li": {
+					marginLeft: "0.5rem",
+				},
+				" pre": {
+					margin: "0 0 0.5rem",
+				},
+				".exercises": {
+					backgroundColor: "var(--yellow)",
+					padding: "1rem",
+					"> .question": {
+						marginBottom: "0.5rem",
+					},
+					"> .single-line": {
+						margin: "1rem 0.3rem 0.2rem",
+					},
+					"> .name-expression": {
+						display: "flex",
+						alignItems: "baseline",
+						"> .name": {
+							width: "7rem",
+						},
+					},
+					"> .test": {
+						display: "flex",
+						flex: "1 1 auto",
+						alignItems: "flex-end",
+						"> .status": {
+							display: "flex",
+							width: "1rem",
+							color: "var(--icon-brown)",
+							justifyContent: "center",
+						},
+						"> .description": {
+							display: "flex",
+							marginLeft: "0.5rem",
+						},
+					},
+				},
+			},	
+		},	
 	},
 	" .section": {
 		width: "85%",
@@ -154,7 +253,14 @@ export default ({store}) => {
 			<Score {...{solutions}}/>
 		</div>
 
-		<div className="lessons">{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
+		{lessons.map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}
+
+		<div className="section-title">
+			<div className="name">Reference</div>
+		</div>
+
+		{operators.map(details => <Operator {...details}/>)}
+
 	</div>;
 };
 
