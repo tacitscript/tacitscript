@@ -6,6 +6,6 @@ export default {
 	sections: [{
 		id: "subtract",
 		type: "NNN",
-		examples: "difference\t3-2\t\t\t\t\tequals 1",
+		examples: "difference\t3-2\t\t\t\t\t\tequals 1",
 	}],
 };

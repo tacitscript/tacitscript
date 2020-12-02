@@ -6,6 +6,6 @@ export default {
 	sections: [{
 		id: "negative",
 		type: "NN",
-		examples: "negative5\t_5\t\t\t\t\tequals -5",
+		examples: "negative5\t_5\t\t\t\t\t\tequals -5",
 	}],
 };
