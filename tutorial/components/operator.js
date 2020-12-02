@@ -29,7 +29,7 @@ const style = css({
 	},
 });
 
-export default ({id, name, symbol, sections, type, dispatch}) => {
+export default ({id, symbol, sections, type, dispatch}) => {
 	const ids = [id, ...R.map(R.prop("id"), sections)];
 	const [open, setOpen] = useState(false);
 	const openByHash = (hash => hash && ids.includes(hash.slice(1)))(location.hash);
@@ -45,14 +45,14 @@ export default ({id, name, symbol, sections, type, dispatch}) => {
 
 	return <div id={id} className={`panel${isOpen ? " open" : ""}`} {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setIsOpen(!isOpen)} onKeyDown={e => {if (e.key === "Enter") setIsOpen(!isOpen);}}>
-			<div className="name">{name}</div>
+			<div className="name">{id}</div>
 			<div className="symbol">{`(${symbol})`}</div>
 		</div>
 		<b className="status" title={type}>{type[0]}</b>
 		{isOpen ? <div className="contents">
 			<hr/>
-			{sections.map(({id, name, type, examples}) => <React.Fragment>
-				<h3><div id={id} className="name">{name}</div><a className="type-signature" href="#types">{type}</a></h3>
+			{sections.map(({id, type, examples}) => <React.Fragment>
+				<h3><div id={id} className="name">{`${symbol} (${id})`}</div><a className="type-signature" href="#types">{type}</a></h3>
 				<div className="code-block">
 					{examples}
 				</div>
