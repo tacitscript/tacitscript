@@ -11,8 +11,8 @@ const style = css({
 		},
 	},
 	"> .status": {
-		fontSize: "2.1rem !important",
-		marginTop: "-0.2rem !important",
+		fontSize: "2rem !important",
+		marginTop: "-0.1rem !important",
 	},
 	"> .contents": {
 		"> h3": {
