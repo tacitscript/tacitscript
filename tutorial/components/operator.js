@@ -18,6 +18,7 @@ const style = css({
 			display: "flex",
 			"> .name": {
 				width: "9.2rem",
+				whiteSpace: "nowrap",
 			},
 			"> a.type-signature": {
 				letterSpacing: "0.15rem",
