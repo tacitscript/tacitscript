@@ -21,7 +21,7 @@ const style = css({
 		justifyContent: "space-between",
 		width: "85%",
 		margin: "1.5rem auto 0.75rem",
-		fontSize: "1.2rem",
+		fontSize: "1.5rem",
 		fontWeight: "bold",
 	},
 	" .section": {

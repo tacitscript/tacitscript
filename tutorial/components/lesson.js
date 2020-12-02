@@ -21,7 +21,7 @@ const style = css({
 	flexDirection: "column",
 	"> .heading": {
 		padding: "0.5rem 1rem",
-		fontSize: "1.2rem",
+		fontSize: "1.1rem",
 		display: "flex",
 		fontWeight: "bold",
 		":hover,:focus": {
