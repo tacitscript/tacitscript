@@ -1,3 +1,4 @@
+import {push} from "common/lib/redux-first/actions.js";
 
 const {css} = Glamor;
 const {useState} = React;
@@ -10,7 +11,7 @@ const style = css({
 		},
 	},
 	"> .status": {
-		fontSize: "2.2rem !important",
+		fontSize: "2.1rem !important",
 		marginTop: "-0.2rem !important",
 	},
 	"> .contents": {
@@ -28,19 +29,30 @@ const style = css({
 	},
 });
 
-export default ({id, name, symbol, sections, type}) => {
+export default ({id, name, symbol, sections, type, dispatch}) => {
+	const ids = [id, ...R.map(R.prop("id"), sections)];
 	const [open, setOpen] = useState(false);
+	const openByHash = (hash => hash && ids.includes(hash.slice(1)))(location.hash);
+	const isOpen = open || openByHash;
 
-	return <div id={id} className={`panel${open ? " open" : ""}`} {...style}>
-		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
+	const setIsOpen = value => {
+		if (!value && openByHash) dispatch(push({
+			hash: "",
+		}));
+
+		if (value !== open) setOpen(value);
+	};
+
+	return <div id={id} className={`panel${isOpen ? " open" : ""}`} {...style}>
+		<div className="heading" tabIndex={0} onClick={() => setIsOpen(!isOpen)} onKeyDown={e => {if (e.key === "Enter") setIsOpen(!isOpen);}}>
 			<div className="name">{name}</div>
 			<div className="symbol">{`(${symbol})`}</div>
 		</div>
 		<b className="status" title={type}>{type[0]}</b>
-		{open ? <div className="contents">
+		{isOpen ? <div className="contents">
 			<hr/>
-			{sections.map(({name, type, examples}) => <React.Fragment>
-				<h3><div className="name">{name}</div><a className="type-signature" href="#types">{type}</a></h3>
+			{sections.map(({id, name, type, examples}) => <React.Fragment>
+				<h3><div id={id} className="name">{name}</div><a className="type-signature" href="#types">{type}</a></h3>
 				<div className="code-block">
 					{examples}
 				</div>

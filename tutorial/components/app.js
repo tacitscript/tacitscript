@@ -238,7 +238,7 @@ const style = css({
 });
 
 export default ({store}) => {
-	const {solutions} = store.getState();
+	const {solutions} = store.getState().app;
 
 	return <div {...style}>
 		<h1>tacitscript</h1>
@@ -263,7 +263,7 @@ export default ({store}) => {
 			<div className="name">Reference</div>
 		</div>
 
-		<div className="block">{operators.map(details => <Operator {...details}/>)}</div>
+		<div className="block">{operators.map(details => <Operator {...{...details, dispatch: store.dispatch}}/>)}</div>
 
 	</div>;
 };
