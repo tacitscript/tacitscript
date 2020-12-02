@@ -46,7 +46,7 @@ export default ({id, symbol, sections, type, dispatch}) => {
 	return <div id={id} className={`panel${isOpen ? " open" : ""}`} {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setIsOpen(!isOpen)} onKeyDown={e => {if (e.key === "Enter") setIsOpen(!isOpen);}}>
 			<div className="name">{id}</div>
-			<div className="symbol">{`(${symbol})`}</div>
+			<div className="symbol">{`${symbol}`}</div>
 		</div>
 		<b className="status" title={type}>{type[0]}</b>
 		{isOpen ? <div className="contents">
