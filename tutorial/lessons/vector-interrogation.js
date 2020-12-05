@@ -9,16 +9,11 @@ export default {
 	description: <div>
 		<p>Arrays and strings share many common operations, and are collectively termed <b>vectors</b>.</p>
 		<p><a href="#length"># (length)</a> retrieves the length of a vector.</p>
-		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3`}</div>
+		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3\nlengthString\t#"Hello, World!"\t\t\t\tequals 13`}</div>
 		<p><a href="#first">[ (first)</a> retrieves the first element of a vector.</p>
-		<div className="code-block">{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5`}</div>
+		<div className="code-block">{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5\nfirstString\t["Hello, World!"\t\t\t\tequals "H"`}</div>
 		<p><a href="#last">] (last)</a> retrieves the last element of a vector.</p>
-		<div className="code-block">
-			<span>{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\t`}
-			<i>undefined</i></span>
-			<span>{`\nlastString\t]"Hello, World!"\t\t\t\tequals "!"\nlastEString\t]""\t\t\t\t\t\t`}
-			<i>undefined</i></span>
-		</div>
+		<div className="code-block">{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastString\t]"Hello, World!"\t\t\t\tequals "!"`}</div>
 		<p><a href="#at">' (at)</a> retrieves the element at a zero-based index of a vector. Negative indices count back from the end of the vector.</p>
 		<div className="code-block">
 			<span>{`elemArray\t1'(5 6 7)\t\t\t\t\tequals 6\nelemEArray\t0'( )\t\t\t\t\t\t`}

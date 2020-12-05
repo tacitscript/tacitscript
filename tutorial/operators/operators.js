@@ -6,10 +6,12 @@ import underscore from "./underscore.js";
 import dot from "./dot.js";
 import hash from "./hash.js";
 import bracketleft from "./bracketleft.js";
+import bracketright from "./bracketright.js";
 
 export default [
 	asterisk,
 	bracketleft,
+	bracketright,
 	dot,
 	hash,
 	minus,
