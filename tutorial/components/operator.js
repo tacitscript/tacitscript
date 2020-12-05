@@ -24,6 +24,7 @@ const style = css({
 			"> a.type-signature": {
 				letterSpacing: "0.15rem",
 				marginLeft: "3rem",
+				whiteSpace: "pre-wrap",
 			},
 		},
 	},

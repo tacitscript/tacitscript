@@ -5,7 +5,7 @@ import tacitscriptBlocks from "./tacitscript-blocks.js";
 import customOperators from "./custom-operators.js";
 import operatorChaining from "./operator-chaining.js";
 import vectorInterrogation from "./vector-interrogation.js";
-import comparisonOperators from "./comparison-operators.js";
+import comparisons from "./comparisons.js";
 
 export default [
 	arithmeticOperations,
@@ -15,5 +15,5 @@ export default [
 	customOperators,
 	operatorChaining,
 	vectorInterrogation,
-	comparisonOperators,
+	comparisons,
 ];

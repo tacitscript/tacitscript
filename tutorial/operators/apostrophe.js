@@ -5,7 +5,7 @@ export default {
 	type: "Binary",
 	sections: [{
 		id: "at",
-		type: "NA? NSS",
+		type: "NA?   NSS",
 		examples: <React.Fragment>
 			<span>{`elemArray\t1'(5 6 7)\t\t\t\t\tequals 6\nelemEArray\t0'( )\t\t\t\t\t\t`}
 			<i>undefined</i></span>

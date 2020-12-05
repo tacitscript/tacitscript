@@ -5,7 +5,7 @@ export default {
 	type: "Unary",
 	sections: [{
 		id: "last",
-		type: "A? SS",
+		type: "A?   SS",
 		examples: <React.Fragment>
 			<span>{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\t`}
 			<i>undefined</i></span>

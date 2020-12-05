@@ -5,7 +5,7 @@ const toCelsius = value => (value - 32) / 9 * 5;
 
 export default {
 	id: "h",
-	name: "Comparison Operators",
+	name: "Comparisons",
 	description: <div>
 		<p>Arrays and strings share many common operations, and are collectively termed <b>vectors</b>.</p>
 		<p><a href="#length"># (length)</a> retrieves the length of a vector.</p>
