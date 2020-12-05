@@ -7,8 +7,10 @@ import dot from "./dot.js";
 import hash from "./hash.js";
 import bracketleft from "./bracketleft.js";
 import bracketright from "./bracketright.js";
+import apostrophe from "./apostrophe.js";
 
 export default [
+	apostrophe,
 	asterisk,
 	bracketleft,
 	bracketright,
