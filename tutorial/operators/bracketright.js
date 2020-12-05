@@ -7,9 +7,9 @@ export default {
 		id: "last",
 		type: "A?   SS",
 		examples: <React.Fragment>
-			<span>{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\t`}
+			<span>{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\tis `}
 			<i>undefined</i></span>
-			<span>{`\nlastString\t]"Hello, World!"\t\t\t\tequals "!"\nlastEString\t]""\t\t\t\t\t\t`}
+			<span>{`\nlastString\t]"Hello, World!"\t\t\t\tequals "!"\nlastEString\t]""\t\t\t\t\t\tis `}
 			<i>undefined</i></span>
 		</React.Fragment>,
 	}],

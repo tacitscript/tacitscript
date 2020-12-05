@@ -7,7 +7,7 @@ export default {
 		id: "add",
 		type: "NVN",
 		examples: <React.Fragment>
-			<span>{`sum\t\t2+3\t\t\t\t\t\tequals 5\nsumConvert\t2+"3"\t\t\t\t\t\tequals 5\nsumInvalid\t2+"three"\t\t\t\t\t`}
+			<span>{`sum\t\t2+3\t\t\t\t\t\tequals 5\nsumConvert\t2+"3"\t\t\t\t\t\tequals 5\nsumInvalid\t2+"three"\t\t\t\t\tis `}
 			<i>undefined</i></span>
 		</React.Fragment>,
 	}, {
