@@ -11,12 +11,7 @@ export default {
 		<p><a href="#length"># (length)</a> retrieves the length of a vector.</p>
 		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3`}</div>
 		<p><a href="#first">[ (first)</a> retrieves the first element of a vector.</p>
-		<div className="code-block">
-			<span>{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5\nfirstEArray\t[( )\t\t\t\t\t\t`}
-			<i>undefined</i></span>
-			<span>{`\nfirstString\t["Hello, World!"\t\t\t\tequals "H"\nfirstEString\t[""\t\t\t\t\t\t`}
-			<i>undefined</i></span>
-		</div>
+		<div className="code-block">{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5`}</div>
 		<p><a href="#last">] (last)</a> retrieves the last element of a vector.</p>
 		<div className="code-block">
 			<span>{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastEArray\t]( )\t\t\t\t\t\t`}
