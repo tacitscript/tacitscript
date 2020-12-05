@@ -6,7 +6,10 @@ export default {
 	sections: [{
 		id: "add",
 		type: "NVN",
-		examples: `sum\t\t2+3\t\t\t\t\t\tequals 5\nsumConvert\t2+"3"\t\t\t\t\t\tequals 5\nsumInvalid\t2+"three"\t\t\t\t\tundefined`,
+		examples: <React.Fragment>
+			<span>{`sum\t\t2+3\t\t\t\t\t\tequals 5\nsumConvert\t2+"3"\t\t\t\t\t\tequals 5\nsumInvalid\t2+"three"\t\t\t\t\t`}
+			<i>undefined</i></span>
+		</React.Fragment>,
 	}, {
 		id: "concat",
 		type: "AAA SVS",
