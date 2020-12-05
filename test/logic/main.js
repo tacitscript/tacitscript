@@ -30,6 +30,9 @@ describe("array indexing", () => {
 
 describe("undefined handling", () => {
 /*ts
+	u		!()
+	v		!(1/0)
+	w		!(!())
 	q		<3?,(`"less" `"greaterEqual").|$
 	r		q2
 	s		q4
@@ -51,6 +54,9 @@ describe("undefined handling", () => {
 	b		3,(1/0)
 	c		(1/0),(1/0)
 */
+	it("!() eql true", () => expect(u).eql(true));
+	it("!(1/0) eql undefined", () => expect(v).eql(undefined));
+	it("!(!()) eql false", () => expect(w).eql(false));
 	it('<3?,(`"less" `"greaterEqual").|$(2) eql "less"', () => expect(r).eql("less"));
 	it('<3?,(`"less" `"greaterEqual").|$(4) eql "greaterEqual"', () => expect(s).eql("greaterEqual"));
 	it("(1/0 1/0),(`() +2) eql [undefined, undefined]", () => expect(t).eql([undefined, undefined]));
