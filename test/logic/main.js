@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("equality checking", () => {
+/*ts
+	deepCheck			("abc" (1 2 3))=("abc" (1 2 4))
+	mixedType			"string"=4
+	fnInclusion			(2* 1)=(2* 1)
+*/
+	it(`("abc" (1 2 3))=("abc" (1 2 4)) eql false`, () => expect(deepCheck).eql(false));
+	it(`"string"=4 eql false`, () => expect(mixedType).eql(false));
+	it("(2* 1)=(2* 1) eql undefined", () => expect(fnInclusion).eql(undefined));
+});
+
 describe("array indexing", () => {
 /*ts
 	array		1'(5 6 7)
