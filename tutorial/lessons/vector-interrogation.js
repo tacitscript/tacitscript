@@ -9,7 +9,7 @@ export default {
 	description: <div>
 		<p>Arrays and strings share many common operations, and are collectively termed <b>vectors</b>.</p>
 		<p><a href="#length"># (length)</a> retrieves the length of a vector.</p>
-		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3\nlengthEArray\t#( )\t\t\t\t\t\tequals 0\n\nlengthString\t#"Hello, World!"\t\t\t\tequals 13\nlengthEString\t#""\t\t\t\t\t\tequals 0`}</div>
+		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3`}</div>
 		<p><a href="#first">[ (first)</a> retrieves the first element of a vector.</p>
 		<div className="code-block">
 			<span>{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5\nfirstEArray\t[( )\t\t\t\t\t\t`}
