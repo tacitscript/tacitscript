@@ -6,6 +6,7 @@ import customOperators from "./custom-operators.js";
 import operatorChaining from "./operator-chaining.js";
 import vectorInterrogation from "./vector-interrogation.js";
 import comparisons from "./comparisons.js";
+import logicOperations from "./logic-operations.js";
 
 export default [
 	arithmeticOperations,
@@ -16,4 +17,5 @@ export default [
 	operatorChaining,
 	vectorInterrogation,
 	comparisons,
+	logicOperations,
 ];
