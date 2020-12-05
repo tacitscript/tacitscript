@@ -85,6 +85,9 @@ const style = css({
 					":not(.exercises)": {
 						lineHeight: "1.1rem",
 					},
+					"> i": {
+						display: "inline",
+					},
 					"> li": {
 						marginLeft: "0.5rem",
 					},
