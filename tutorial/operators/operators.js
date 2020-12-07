@@ -11,6 +11,7 @@ import apostrophe from "./apostrophe.js";
 import equals from "./equals.js";
 import less from "./less.js";
 import greater from "./greater.js";
+import hat from "./hat.js";
 
 export default [
 	apostrophe,
@@ -21,6 +22,7 @@ export default [
 	equals,
 	greater,
 	hash,
+	hat,
 	less,
 	minus,
 	plus,
