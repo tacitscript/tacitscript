@@ -17,7 +17,7 @@ export default [
 	customOperators,
 	operatorChaining,
 	mathOperations,
-	comparisons,
 	vectorInterrogation,
+	comparisons,
 	logicOperations,
 ];

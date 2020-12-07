@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("operator bounds", () => {
+/*ts
+	equalsFunction		(1 2*)=(1 2*)
+	joinFunction		", "$(1 2 3*)
+	modZero				7%0
+*/
+	it("(1 2*)=(1 2*) eql undefined", () => expect(equalsFunction).eql(undefined));
+	it(`", "$(1 2 3*) eql undefined`, () => expect(joinFunction).eql(undefined));
+	it("7%0 eql undefined", () => expect(modZero).eql(undefined));
+});
+
 describe("equality checking", () => {
 /*ts
 	deepCheck			("abc" (1 2 3))=("abc" (1 2 4))

@@ -239,7 +239,6 @@ const toEncodedString = value => {
 	return toString(value);
 };
 const toString = value => {
-	if (value == undefined) return "undefined";
 	if (value === false) return "()";
 	if (value === true) return "!()";
 	if (isNumber(value)) return `${value}`;
@@ -247,7 +246,7 @@ const toString = value => {
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
-	throw `Unable to stringify value: ${value}`;
+	throw `Unable to stringify value`;
 };
 const transpose = array => {
 	var newArray = [], origArrayLength = array.length, arrayLength = Math.min.apply(Math, map(array => array.length)(array)), i;
@@ -455,7 +454,13 @@ let dot = (left, right) => {
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
-	if (typeof left === "string") return `${left}${toString(right)}`; // SVS stringConcat ""+4
+	if (typeof left === "string") {
+		try {
+			return `${left}${toString(right)}`; // SVS stringConcat ""+4
+		} catch (_) {
+			return undefined;
+		}
+	}
 	if (Array.isArray(left)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
 	if (isObject(left)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
 
@@ -587,7 +592,13 @@ let dollar = (left, right) => {
 
 			return result;
 		}
-		if (isString(left)) return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
+		if (isString(left)) {
+			try {
+				return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
+			} catch (_) {
+				return undefined;
+			}
+		}
 	}
 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 		return reduce(left[0])(left[1])(right);
@@ -625,7 +636,11 @@ let apostrophe = (left, right) => {
 	[["V", "B"], "A", "V"], // find (%2.=0)'(1 2 3)
 ];
 let equal = (left, right) => {
-	return toString(left) === toString(right); // VVB equal 2=4
+	try {
+		return toString(left) === toString(right); // VVB equal 2=4
+	} catch (_) {
+		return undefined;
+	}
 }; equal.types = [
 	["V", "V", "B"]
 ];
