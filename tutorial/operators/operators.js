@@ -12,6 +12,7 @@ import equals from "./equals.js";
 import less from "./less.js";
 import greater from "./greater.js";
 import hat from "./hat.js";
+import percent from "./percent.js";
 
 export default [
 	apostrophe,
@@ -25,6 +26,7 @@ export default [
 	hat,
 	less,
 	minus,
+	percent,
 	plus,
 	slash,
 	underscore,
