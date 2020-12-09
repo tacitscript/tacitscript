@@ -79,6 +79,7 @@ const arity = value => {
 const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
 const isValue = value => arity(value) === 0;
+const isVector = value => isArray(value) || isString(value);
 const types = value => {
 	if (value == undefined) return [undefined];
 	if (isArray(value)) return ["A"];
@@ -220,7 +221,7 @@ const apply = (left, right) => {
 		return result;
 	}
 
-	throw `Unable to resolve dynamic function application: ${JSON.stringify({left, right})}`;
+	throw `Unable to resolve dynamic function application: ${toString(left)}(${toString(right)})`;
 };
 const typeOf = value => {
 	if (isArray(value)) return "A";
@@ -246,7 +247,7 @@ const toString = value => {
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
-	throw `Unable to stringify value`;
+	throw `Unable to stringify value: ${value}`;
 };
 const transpose = array => {
 	var newArray = [], origArrayLength = array.length, arrayLength = Math.min.apply(Math, map(array => array.length)(array)), i;
@@ -292,8 +293,20 @@ const chunkWhenComparator = ({when, vector, newVector, append}) => pipe(
 	})([newVector]),
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
-const leftApply = (left, binaryFn) => right => binaryFn(left, right);
-const rightApply = (binaryFn, right) => left => binaryFn(left, right);
+const leftApply = (left, binaryFn) => right => {
+	if (!supportsUndefined(binaryFn)) {
+		if ((left == undefined) || (right == undefined)) return undefined;
+	}
+
+	return binaryFn(left, right);
+};
+const rightApply = (binaryFn, right) => left => {
+	if (!supportsUndefined(binaryFn)) {
+		if ((left == undefined) || (right == undefined)) return undefined;
+	}
+
+	return binaryFn(left, right);
+};
 const whileInternal = ({fns, startingArray}) => {
 	let result = [...startingArray];
 
@@ -305,12 +318,17 @@ const whileInternal = ({fns, startingArray}) => {
 //==========================================================
 // OPERATORS
 
+const errorBinary = ({left, right, operator}) => {
+	throw `Unable to resolve operator application (${toString(left)})${operator}(${toString(right)})`;
+};
+const errorUnary = ({value, operator}) => {
+	throw `Unable to resolve operator application ${operator}(${toString(value)})`;
+};
+
 //----------------------------------------------------------
 // Binary
 
 let comma = (left, right) => {
-	if (isUndefined(left) || isUndefined(right)) return undefined;
-
 	const typeCombinations = combinations(types(left))(types(right));
 
 	if (isArray(right)) {
@@ -372,7 +390,7 @@ let comma = (left, right) => {
 		}
 	}
 
-	throw `Unable to resolve application of operator , with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: ","});
 }; comma.types = [
 	["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
 	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
@@ -382,8 +400,6 @@ let comma = (left, right) => {
 	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
-	if (isUndefined(left) || isUndefined(right)) return undefined;
-
 	const typeCombinations = combinations(types(left))(types(right));
 
 	if (isArray(right)) {
@@ -444,7 +460,7 @@ let dot = (left, right) => {
 		}
 	}
 
-	throw `Unable to resolve application of operator . with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: "."});
 }; dot.types = [
 	["V", "A", "A"], // applyToArray (1 2 3).(# ])
 	[["V", "V"], "A", ["V", "A"]], // pipeToArray [.(+1 -2) -- OLD (??)A(?A)
@@ -454,17 +470,18 @@ let dot = (left, right) => {
 	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
-	if (typeof left === "string") {
+	if (isString(left) && isValue(right)) {
 		try {
 			return `${left}${toString(right)}`; // SVS stringConcat ""+4
 		} catch (_) {
 			return undefined;
 		}
 	}
-	if (Array.isArray(left)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
-	if (isObject(left)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
+	if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
+	if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
+	if (isNumber(left) && isValue(right)) return left + (+right); // NVN add 2+"3"
 
-	return left + (+right); // NVN add 2+"3"
+	errorBinary({left, right, operator: "+"});
 }; plus.types = [
 	["N", "V", "N"], // add 2+3
 	["S", "V", "S"], // stringConcat ""+4
@@ -476,18 +493,22 @@ let slash = (left, right) => {
 		// (VS)AO groupBy [/("ann" "ben" "ade")
 		return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 	}
+	if (isNumber(left) && isNumber(right)) {
+		if (right === 0) return undefined;
 
-	if (right === 0) return undefined;
+		return left / right; // NNN divide 8/2
+	}
 
-	return left / right; // NNN divide 8/2
+	errorBinary({left, right, operator: "/"});
 }; slash.types = [
 	["N", "N", "N"], // divide 8/2
 	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let less = (left, right) => {
-	if (isFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
+	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
+	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
 
-	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
+	errorBinary({left, right, operator: "<"});
 }; less.types = [
 	["N", "N", "B"], // lessThan 2<3
 	["S", "S", "B"], // lessThanString "abc"<"bcd"
@@ -495,7 +516,9 @@ let less = (left, right) => {
 	[["V", "N"], "A", "A"], // sort ;<(1 2 3)
 ];
 let greater = (left, right) => {
-	return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
+	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
+
+	errorBinary({left, right, operator: ">"});
 }; greater.types = [
 	["N", "N", "B"], // greaterThan 3>2
 	["S", "S", "B"], // greaterThanString "bcd">"abc"
@@ -509,8 +532,9 @@ let minus = (left, right) => {
 	if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
 		return omit(left)(right);
 	}
+	if (isNumber(left) && isNumber(right)) return left - right; // NNN subtract 5-2
 
-	return left - right; // NNN subtract 5-2
+	errorBinary({left, right, operator: "-"});
 }; minus.types = [
 	["N", "N", "N"], // subtract 5-2
 	["S", "O", "O"], // omitKey "a"-({"{a: 1}")
@@ -538,25 +562,28 @@ let question = (left, right) => {
 		return undefined;
 	}
 
-	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: "?"});
 }; question.types = [
 	[["V", "B"], "A", "V"], // find (%2.=0)?(1 2 3)
 	["A", "V", "V"], // cond ((<10 +1) -1)?15
 ];
+question.supportsUndefined = true;
 let atsign = (left, right) => {
 	const applyLeft = value => comma(value, left); // apply(left, value);
 	// const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
 	//const applyIndexedLeft = (value, index) => comma(value, (() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})());
 
 	
-	if (isObject(right)) {
+	if (isUnaryFunction(left) && isObject(right)) {
 		/*if (isUnaryFunction(left)) */return mapObj(applyLeft)(right); // (VV)OO mapObject *2@({"{a: 1, b: 2, c: 3}")
 		//if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
 	}
 
 	// (VV)AA map *2@(3 4 5)
 	// (VVV)AA mapBinary =@(2 3 4)
-	return map(applyLeft)(right);
+	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
+
+	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
 	[["V", "V"], "A", "A"], // map *2@(3 4 5)
 	[["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
@@ -564,12 +591,13 @@ let atsign = (left, right) => {
 	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
 ];
 let asterisk = (left, right) => {
-	if (isFunction(left)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
-	if (Array.isArray(left)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
+	if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
+	if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 		return pick(left)(right);
 	}
+	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
 
-	return left * right; // NNN times 2*3
+	errorBinary({left, right, operator: "*"});
 }; asterisk.types = [
 	["N", "N", "N"], // times 2*3
 	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
@@ -577,7 +605,7 @@ let asterisk = (left, right) => {
 ];
 let dollar = (left, right) => {
 	if (isArray(right)) {
-		if (isFunction(left)) {
+		if (isBinaryFunction(left)) {
 			const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
 
 			return result;
@@ -589,12 +617,12 @@ let dollar = (left, right) => {
 				return undefined;
 			}
 		}
-	}
-	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
-		return reduce(left[0])(left[1])(right);
+		if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
+			return reduce(left[0])(left[1])(right);
+		}	
 	}
 
-	throw `Unable to resolve application of operator $ with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
 	[["?", "?", "X"], "A", "X"], // insert +$(1 2)
 	["S", "A", "S"], // join ","$(1 2 3)
@@ -613,7 +641,7 @@ let apostrophe = (left, right) => {
 		}
 	}
 
-	throw `Unable to resolve application of operator ' with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: "'"});
 }; apostrophe.types =[
 	["N", "A", "?"], // at 1'(1 2 3)
 	["N", "S", "S"], // at 1'"abc"
@@ -624,6 +652,8 @@ let apostrophe = (left, right) => {
 	["A", "A", "A"], // over (("a" ) +1)'{({"a": 1})
 ];
 let equal = (left, right) => {
+	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
+
 	try {
 		return toString(left) === toString(right); // VVB equal 2=4
 	} catch (_) {
@@ -653,14 +683,14 @@ let bar = (left, right) => {
 
 		return fn;
 	}
+	if (isBoolean(left) && isBoolean(right)) return left || right;
 
-	return left || right;
+	errorBinary({left, right, operator: "|"});
 }; bar.types = [
 	["B", "B", "B"], // orValue !()|()
 	[["V", "B"], ["V", "B"], ["V", "B"]], // orPredicate >0|(%2.=0)
 	[["V", "V", "B"], ["V", "V", "B"], ["V", "V", "B"]] // orBinary <|=
 ];
-bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN modulo 7%2
@@ -670,7 +700,7 @@ let percent = (left, right) => {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // AAA chunk (1 2 0)%(1 2 3 4 5)
 		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // ASA chunk chunk (1 2 0)%"abcde"
 	}
-	else if (isString(left)) {
+	else if (isString(left) && isString(right)) {
 		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
 	}
 	else if (isUnaryFunction(left)) {
@@ -682,7 +712,7 @@ let percent = (left, right) => {
 		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // (SSB)SA chunkWhenComparator <%"abcba"
 	}
 
-	throw `Unable to resolve application of operator % with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: "%"});
 }; percent.types = [
 	["N", "N", "N"], // modulo 7%2
 	["N", "A", "A"], // split 2%(1 2 3 4 5)
@@ -697,10 +727,10 @@ let percent = (left, right) => {
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
-	if (isFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
+	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
 	if (isArray(left) && isArray(right)) return whileInternal({fns: left, startingArray: right}); // AAA while (#.<5 #.+1)^( )
 
-	throw `Unable to resolve application of operator ^ with arguments: ${JSON.stringify({left, right})}`;
+	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
 	[["N", "?"], "N", "A"], // generate ;^3
@@ -718,8 +748,9 @@ let ampersand = (left, right) => {
 
 		return result;
 	}
+	if (isBoolean(left) && isBoolean(right)) return left && right; // BBB andValue !()&()
 
-	return left && right; // BBB andValue !()&()
+	errorBinary({left, right, operator: "&"});
 }; ampersand.types = [
 	["B", "B", "B"], // andValue !()&()
 	[["V", "B"], ["V", "B"], ["V", "B"]], // andPredicate >2&(<6)
@@ -736,10 +767,9 @@ let tilde = value => { // not referenced directly when passed number (standard f
 
 		return fn;
 	}
-
 	if (isArray(value)) return transpose(value); // AA transpose ~((1 2) (3 4))
 
-	throw `Unable to resolve application of operator ~ with arguments: ${JSON.stringify({left, right})}`;
+	errorUnary({operator: "~", value});
 }; 
 tilde.types = [
 	["A", "A"], // transpose ~((1 2) (3 4))
@@ -747,41 +777,46 @@ tilde.types = [
 ];
 let underscore = value => {
 	if (isNumber(value)) return -value; // NN negative _5
+	if (isArray(value)) return value.slice(0).reverse(); // AA reverse _(1 2 3)
+	if (isString(value)) return value.split("").reverse().join(""); // SS reverse _"Hello"
 
-	// AA reverse _(1 2 3)
-	if (isArray(value)) return value.slice(0).reverse();
-
-	// SS reverse _"Hello"
-	return value.split("").reverse().join(""); // string
+	errorUnary({operator: "_", value});
 }; underscore.types = [
 	["N", "N"], // negative _5
 	["A", "A"], // reverse _(1 2 3)
 	["S", "S"], // reverse _"Hello"
 ];
-let bracketleft = vector => {
-	return vector[0]; // A? SS first firstInString [(1 2 3) ["abc"
+let bracketleft = value => {
+	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
+
+	errorUnary({operator: "[", value});
 }; bracketleft.types = [
 	["A", "?"], // first [(1 2 3)
 	["S", "S"], // firstInString ["abc"
 ];
-let bracketright = vector => {
-	return vector[vector.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
+let bracketright = value => {
+	if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
+
+	errorUnary({operator: "]", value});
 }; bracketright.types = [
 	["A", "?"], // last ](1 2 3)
 	["S", "S"], // lastInString ]"abc"
 ];
-let hash = vector => {
-	if (isObject(vector)) return Object.keys(vector).length; // ON keyLength #({"{a: 1}")
+let hash = value => {
+	if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
+	if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
 
-	return vector.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
+	errorUnary({value, operator: "#"});
 }; hash.types = [
 	["A", "N"], // arrayLength #(4 5 6)
 	["S", "N"], // stringLength #"abcd"
 	["O", "N"], // keyLength #({"{a: 1}")
 ];
-let backslash = from => {
-	if (Array.isArray(from)) return Object.fromEntries(from ); // AO fromPairs \(("a" 1) ("b" 2))
-	else return Object.entries(from); // OA toPairs \({"{a: 1, b: 2}")
+let backslash = value => {
+	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
+	if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")
+
+	errorUnary({value, operator: "\\"});
 };
 backslash.types = [
 	["A", "O"], // fromPairs \(("a" 1) ("b" 2))
@@ -795,11 +830,12 @@ let backtick = value => {
 }; backtick.types = [
 	["X", ["?", "X"]], // constant `2
 ];
-let braceleft = input => {
-	if (isArray(input)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(input); // AA unnest {(1 (2 3))
-
+let braceleft = value => {
+	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
 	// should never be referenced directly for literal evaluation - expanded in parser
-	return eval(input); // S? eval {"Math.sqrt(2)"
+	if (isString(value)) return eval(value); // S? eval {"Math.sqrt(2)"
+
+	errorUnary({operator: "{", value});
 }; braceleft.types = [
 	["S", "?"], // eval {"Math.sqrt(2)"
 	["A", "A"], // unnest {(1 (2 3))
@@ -829,8 +865,9 @@ let bang = value => {
 
 		return fn;
 	}
+	if (isBoolean(value)) return !value; // BB not !()
 
-	return !value; // BB not !()
+	errorUnary({value, operator: "!"});
 }; bang.types = [
 	["B", "B"], // not !2
 	[["X", "Y", "B"], ["X", "Y", "B"]], // not !<
