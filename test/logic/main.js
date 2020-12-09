@@ -3,6 +3,19 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("logic operators", () => {
+/*ts
+	a		""&1
+	b		0&1
+	c		()&1
+	d		1/0&1
+*/
+	it(`""&1 eql 1`, () => expect(a).eql(1));
+	it("0&1 eql 1", () => expect(b).eql(1));
+	it("()&1 eql false", () => expect(c).eql(false));
+	it("1/0&1 eql undefined", () => expect(d).eql(undefined));
+});
+
 describe("operator bounds", () => {
 /*ts
 	equalsFunction		(1 2*)=(1 2*)

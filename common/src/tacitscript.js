@@ -675,8 +675,8 @@ let bar = (left, right) => {
 	return left;
 }; bar.types = [
 	["V", "V", "V"], // orValue 2|0
-	[["?", "?"], ["?", "?"], ["?", "?"]], // orPredicate >0|(%2.=0)
-	[["?", "?", "?"], ["?", "?", "?"], ["?", "?", "?"]] // orBinary <|=
+	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
+	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
 ];
 bar.supportsUndefined = true;
 let percent = (left, right) => {
@@ -733,10 +733,10 @@ let ampersand = (left, right) => {
 		return result;
 	}
 
-	return left && right; // VVV andValue 1&2
+	return isTruthy(left) ? right : left; // VVV andValue 1&2
 }; ampersand.types = [
 	["V", "V", "V"], // andValue 1&2
-	[["V", "B"], ["V", "B"], ["V", "B"]], // andPredicate >2&(<6)
+	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
 ];
 
 //----------------------------------------------------------
