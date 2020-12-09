@@ -679,9 +679,9 @@ describe("Underscore", () => {
 		it(".(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$([10, 25, 5]) eql [10, 15, 20]", () => expect(rangeStep([10, 25, 5])).eql([10, 15, 20]));
 	});
 
-	describe("findLastIndex :.(%$ ].#).([.#.=1)?,(`() .(] [.].#).-$).|$", () => {
+	describe("findLastIndex :.(%$ ].#).(([.#.=1 `()) .(] [.].#).-$)?", () => {
 	/*ts
-		findLastIndex		:.(%$ ].#).([.#.=1)?,(`() .(] [.].#).-$).|$
+		findLastIndex		:.(%$ ].#).(([.#.=1 `()) .(] [.].#).-$)?
 		calculation			(%2.=1)findLastIndex(1 2 3 4)
 	*/
 		it("findLastIndex(x => (x % 2) === 1, [2, 4]) eql undefined", () => expect(findLastIndex(x => (x % 2) === 1, [2, 4])).eql(undefined));
@@ -689,9 +689,9 @@ describe("Underscore", () => {
 		it("(%2.=1)findLastIndex(1 2 3 4) eql 2", () => expect(calculation).eql(2));
 	});
 
-	describe("findIndex :.(%$.[.# ].#).=$?,(`() [).|$", () => {
+	describe("findIndex :.(%$.[.# ].#).((=$ `()) [)?", () => {
 	/*ts
-		findIndex			:.(%$.[.# ].#).=$?,(`() [).|$
+		findIndex			:.(%$.[.# ].#).((=$ `()) [)?
 		calculation			(%2.=0)findIndex(1 2 3 4)
 	*/
 		it("findIndex(x => (x % 2) === 0, [1, 5, 3]) eql undefined", () => expect(findIndex(x => (x % 2) === 0, [1, 3, 5])).eql(undefined));
@@ -706,7 +706,7 @@ describe("Underscore", () => {
 		intermediateD		>,(:.].)
 		intermediateC		35>,([.)
 		intermediateB		35>,(:.[.)
-		sortedIndex			:,(.(>,(].).(?,([.+1 [).|$).(:.) `0) ;).$$
+		sortedIndex			:,(.(.(.(>,(].) `([.+1)) `[).?.(:.) `0) ;).$$
 		calculation			35sortedIndex(10 20 30 40 50)
 	*/
 		it(">,(].).(?,([.+1 ].[).|$).(:.)(35)(2, 30) eql 3", () => expect(intermediateE(35)(2, 30)).eql(3));
