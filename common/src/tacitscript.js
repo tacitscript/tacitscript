@@ -523,35 +523,25 @@ colon.types = [
 	["?", "?", "A"], // pair +:2
 ];
 let question = (left, right) => {
-	if (isFunction(left)) { // (VB)VA if <3?2
-		// const result = apply(left, right);
-		const result = left(right); // AVA  cond (<10 <20)?15
+	// isContainedBy TODO
 
-		return isFalsey(result) ? [undefined, right] : [right, undefined];
-	}
+	if (isArray(left)) { // cond ((<10 +1) -1)?15
+		for (let i = 0; i < left.length; ++i) {
+			const line = left[i];
 
-	if (isArray(left)) { // AVA cond (<10 <20)?15
-		const output = Array.from(Array(left.length + 1));
-		let i = 0;
+			if (!Array.isArray(line)) return comma(right, line);
 
-		for (; i < left.length; ++i) {
-			const result = left[i](right);
+			const check = comma(right, line[0]);
 
-			if (isTruthy(result)) {
-				output[i] = right;
-				break;
-			}
+			if (check) return comma(right, line[1]);
 		}
 
-		if (i === left.length) output[i] = right;
-
-		return output;
+		return undefined;
 	}
 
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
 }; question.types = [
-	[["V", "B"], "V", "A"], // if <3?2
-	["A", "V", "A"], // cond (<10 <20)?15
+	["A", "V", "V"], // cond ((<10 +1) -1)?15
 ];
 let atsign = (left, right) => {
 	const applyLeft = value => comma(value, left); // apply(left, value);
