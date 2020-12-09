@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("logic operations", () => {
+/*ts
+*/
+	it("", () => {});
+});
+
+
 // describe("logic operators", () => {
 // /*ts
 // 	//q		(:.`"")|(:.`1)
@@ -421,7 +428,7 @@ describe("Rosetta Code", () => {
 		generate			.(`({"Math.random".*6.{"Math.floor".+1) `4).^$
 		sumLargest			generate.;<.1%.].+$
 		getSet				.(`sumLargest `6).^$
-		isSetValid			.(+$.>75 (>15?,(`1 `0).|$)@.+$.>2).&$
+		isSetValid			.(+$.>75 ((>15 `1) `0)?@.+$.>2).&$
 		finalSet			(].!isSetValid getSet)^(( ) ),]
 	*/
 		it(`${JSON.stringify(finalSet)}: six numbers are generated`, () => expect(finalSet.length).eql(6));
@@ -477,10 +484,10 @@ describe("Rosetta Code", () => {
 
 	describe("Integer comparison", () => {
 	/*ts
-		comparison			(<$ =$ >$)?,(`"less" `"equal" `"greater").|$
+		comparison			((<$ `"less") (=$ `"equal") `"greater")?
 		calculation			comparison@((1 2) (2 2) (2 1))
 	*/
-		it('((<$ =$ >$)?,(`"less" `"equal" `"greater").|$)@((1 2) (2 2) (2 1)) eql ["less", "equal", "greater"]', () => expect(calculation).eql(["less", "equal", "greater"]));
+		it('((<$ `"less") (=$ `"equal") `"greater")?@((1 2) (2 2) (2 1)) eql ["less", "equal", "greater"]', () => expect(calculation).eql(["less", "equal", "greater"]));
 	});
 
 	describe("Increment a numerical string", () => {
@@ -503,9 +510,9 @@ describe("Rosetta Code", () => {
 
 	describe("FizzBuzz", () => {
 	/*ts
-		fizzBuzz			+1^100,(((%3.=0)&(%5.=0) %3.=0 %5.=0)?,(`"FizzBuzz" `"Fizz" `"Buzz" ;).|$)@
+		fizzBuzz			+1^100,((%3.=0)&(%5.=0) `"FizzBuzz") (%3.=0 `"Fizz") (%5.=0 `"Buzz") ;)?@
 	*/
-		it('+1^100,(((%3.=0)&(%5.=0) %3.=0 %5.=0)?.(`"FizzBuzz" `"Fizz" `"Buzz" ;).|$)@ eql [1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11,"Fizz",13,14,"FizzBuzz",16,17,"Fizz",19,"Buzz","Fizz",22,23,"Fizz","Buzz",26,"Fizz",28,29,"FizzBuzz",31,32,"Fizz",34,"Buzz","Fizz",37,38,"Fizz","Buzz",41,"Fizz",43,44,"FizzBuzz",46,47,"Fizz",49,"Buzz","Fizz",52,53,"Fizz","Buzz",56,"Fizz",58,59,"FizzBuzz",61,62,"Fizz",64,"Buzz","Fizz",67,68,"Fizz","Buzz",71,"Fizz",73,74,"FizzBuzz",76,77,"Fizz",79,"Buzz","Fizz",82,83,"Fizz","Buzz",86,"Fizz",88,89,"FizzBuzz",91,92,"Fizz",94,"Buzz","Fizz",97,98,"Fizz","Buzz"]',
+		it('+1^100,((%3.=0)&(%5.=0) `"FizzBuzz") (%3.=0 `"Fizz") (%5.=0 `"Buzz") ;)?@ eql [1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11,"Fizz",13,14,"FizzBuzz",16,17,"Fizz",19,"Buzz","Fizz",22,23,"Fizz","Buzz",26,"Fizz",28,29,"FizzBuzz",31,32,"Fizz",34,"Buzz","Fizz",37,38,"Fizz","Buzz",41,"Fizz",43,44,"FizzBuzz",46,47,"Fizz",49,"Buzz","Fizz",52,53,"Fizz","Buzz",56,"Fizz",58,59,"FizzBuzz",61,62,"Fizz",64,"Buzz","Fizz",67,68,"Fizz","Buzz",71,"Fizz",73,74,"FizzBuzz",76,77,"Fizz",79,"Buzz","Fizz",82,83,"Fizz","Buzz",86,"Fizz",88,89,"FizzBuzz",91,92,"Fizz",94,"Buzz","Fizz",97,98,"Fizz","Buzz"]',
 			() => expect(fizzBuzz).eql([1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11,"Fizz",13,14,"FizzBuzz",16,17,"Fizz",19,"Buzz","Fizz",22,23,"Fizz","Buzz",26,"Fizz",28,29,"FizzBuzz",31,32,"Fizz",34,"Buzz","Fizz",37,38,"Fizz","Buzz",41,"Fizz",43,44,"FizzBuzz",46,47,"Fizz",49,"Buzz","Fizz",52,53,"Fizz","Buzz",56,"Fizz",58,59,"FizzBuzz",61,62,"Fizz",64,"Buzz","Fizz",67,68,"Fizz","Buzz",71,"Fizz",73,74,"FizzBuzz",76,77,"Fizz",79,"Buzz","Fizz",82,83,"Fizz","Buzz",86,"Fizz",88,89,"FizzBuzz",91,92,"Fizz",94,"Buzz","Fizz",97,98,"Fizz","Buzz"]));
 	});
 
@@ -519,30 +526,30 @@ describe("Rosetta Code", () => {
 });
 
 describe("Underscore", () => {
-	describe("intersection _1%,(~'@.&$ [),(=, ;).*$", () => {
+	describe("intersection _1%,(~?@.&$ [),(=, ;).*$", () => {
 	/*ts
-		intermediateF		((1 2 3) (2 3 4)),~'@
+		intermediateF		((1 2 3) (2 3 4)),~?@
 		intermediateL		&$
 		intermediateJ		&$(<2 <3 <4)
 		intermediateI		<2&(>0)
-		intermediateE		((1 2 3) (2 3 4)),(~'@.&$),(=,)
-		intermediateH		((1 2 3) (2 3 4)),~'@,&$
-		intermediateG		(2 3 4),~'
-		intermediateD		=,'(1 2 3)
-		intermediateC		=2'(1 2 3)
-		intermediateB		(=,'(1 2 3))*(2 3 4 5)
+		intermediateE		((1 2 3) (2 3 4)),(~?@.&$),(=,)
+		intermediateH		((1 2 3) (2 3 4)),~?@,&$
+		intermediateG		(2 3 4),~?
+		intermediateD		=,?(1 2 3)
+		intermediateC		=2?(1 2 3)
+		intermediateB		(=,?(1 2 3))*(2 3 4 5)
 		intermediateA		_1%((1 2 3) (101 2 1 10) (2 1))
-		intersection		_1%,(~'@.&$ [),(=, ;).*$
+		intersection		_1%,(~?@.&$ [),(=, ;).*$
 		calculation			intersection((1 2 3) (101 2 1 10) (2 1))
 	*/
 
-		it("((1 2 3) (2 3 4)),~'@,&$,(=,)(2) eql 2", () => expect(intermediateE(2)).eql(2));
-		it("((1 2 3) (2 3 4)),~'@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
-		it("((1 2 3) (2 3 4)),~'@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
-		it("(2 3 4),~'(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
-		it("=,'(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
-		it("=2'(1 2 3) eql 2", () => expect(intermediateC).eql(2));
-		it("(=,'(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
+		it("((1 2 3) (2 3 4)),~?@,&$,(=,)(2) eql 2", () => expect(intermediateE(2)).eql(2));
+		it("((1 2 3) (2 3 4)),~?@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
+		it("((1 2 3) (2 3 4)),~?@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
+		it("(2 3 4),~?(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
+		it("=,?(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
+		it("=2?(1 2 3) eql 2", () => expect(intermediateC).eql(2));
+		it("(=,?(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
 		it("_1%((1 2 3) (101 2 1 10) (2 1)) eql [[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]", () => expect(intermediateA).eql([[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]));
 		it("intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [2, 1]", () => expect(intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([2, 1]));
 		it("intersection((1 2 3) (101 2 1 10) (2 1)) eql [2, 1]", () => expect(calculation).eql([2, 1]));
@@ -650,9 +657,9 @@ describe("Underscore", () => {
 	describe("negate !", () => {
 	/*ts
 		negate				!
-		calculation			negate(%2.=0)'(0 1 2 3)
+		calculation			negate(%2.=0)?(0 1 2 3)
 	*/
-		it("negate(%2.=0)'(0 1 2 3) eql 1", () => expect(calculation).eql(1));
+		it("negate(%2.=0)?(0 1 2 3) eql 1", () => expect(calculation).eql(1));
 	});
 
 	describe(`range (}.="N" #.=2)?,(;^ .([.+ _.-$).^$ .(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$).|$`, () => {
