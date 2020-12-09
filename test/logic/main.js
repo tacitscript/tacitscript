@@ -5,6 +5,10 @@ mocha.setup('bdd');
 
 describe("logic operators", () => {
 /*ts
+	m		`""|(`1)
+	n		`0|(`1)
+	o		`()|(`1)
+	//p		`(1/0)|(`1) TODO
 	i		""|1
 	j		0|1
 	k		()|1
@@ -18,6 +22,10 @@ describe("logic operators", () => {
 	c		()&1
 	d		1/0&1
 */
+	it('`""|(`1)(1) eql ""', () => expect(m(1)).eql(""));
+	it("`0|(`1)(1) eql 0", () => expect(n(1)).eql(0));
+	it("`()|(`1)(2) eql 1", () => expect(o(2)).eql(1));
+	//it("`(1/0)|(`1) eql undefined", () => expect(p(1)).eql(undefined));
 	it('""|1 eql ""', () => expect(i).eql(""));
 	it("0|1 eql 0", () => expect(j).eql(0));
 	it("()|1 eql 1", () => expect(k).eql(1));
