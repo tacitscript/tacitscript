@@ -164,7 +164,7 @@ describe("Problems", () => {
 
 	describe("m", () => {
 	/*ts
-		category		(<18.5 <25 <30)?,(`"under" `"normal" `"over" `"obese").|$
+		category		((<18.5 `"under") (<25 `"normal") (<30 `"over") `"obese")?
 		bmi				,(; ^2)./$
 		solution		(2 )%.(bmi.category)@
 		example			solution(80 1.73 55 1.58 49 1.91)
@@ -174,7 +174,7 @@ describe("Problems", () => {
 
 	describe("l", () => {
 	/*ts
-		isValid			;<.2%,(+$ [).!<$?,(`1 `0).|$
+		isValid			;<.2%,(+$ [).((!<$ `1) `0)?
 		solution		(3 )%.isValid@
 		example			solution(3 4 5 1 2 4)
 	*/
