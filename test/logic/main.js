@@ -429,7 +429,7 @@ describe("Rosetta Code", () => {
 		sumLargest			generate.;<.1%.].+$
 		getSet				.(`sumLargest `6).^$
 		isSetValid			.(+$.>75 ((>15 `1) `0)?@.+$.>2).&$
-		finalSet			(].!isSetValid getSet)^(( ) ),]
+		finalSet			(].!isSetValid getSet)^((1 ) ),]
 	*/
 		it(`${JSON.stringify(finalSet)}: six numbers are generated`, () => expect(finalSet.length).eql(6));
 		it(`${JSON.stringify(finalSet)}: the sum of the numbers is greater than 75`, () => expect(reduce((acc, x) => acc + x)(0)(finalSet) > 75).eql(true));
@@ -557,7 +557,7 @@ describe("Underscore", () => {
 
 	describe("has '.!.!", () => {
 	/*ts
-		has					'.!.!
+		has					'.((; !(),`) `())?
 		calculation			"b"has({"{a: 1, b: 2, c: 3}")
 	*/
 		it(`"b"has({"{a: 1, b: 2, c: 3}") eql true`, () => expect(calculation).eql(true));

@@ -552,11 +552,11 @@ let question = (left, right) => {
 		for (let i = 0; i < left.length; ++i) {
 			const line = left[i];
 
-			if (!Array.isArray(line)) return comma(right, line);
+			if (!isArray(line)) return comma(right, line);
 
 			const check = comma(right, line[0]);
 
-			if (check) return comma(right, line[1]);
+			if (isTruthy(check)) return comma(right, line[1]);
 		}
 
 		return undefined;
@@ -859,7 +859,7 @@ let bang = value => {
 		return fn;
 	}
 	if (isUnaryFunction(value)) { // (XY)(XY) not !(<2)
-		let fn = x => !comma(x, value);
+		let fn = x => !value(x);
 
 		fn.types = value.types;
 
