@@ -725,8 +725,12 @@ let hat = (left, right) => {
 	["A", "A", "A"], // while (#.<5 #.+1)^( )
 ];
 let ampersand = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VB)(VB)(VB) andPredicate >2&(<6)
-		let result = value => left(value) && right(value);
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
+		let result = value => {
+			const leftValue = left(value);
+
+			return isTruthy(leftValue) ? right(value) : leftValue;
+		}
 
 		result.types = types(left); // TODO: edge cases abound here
 

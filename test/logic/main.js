@@ -1,15 +1,23 @@
-const {expect, assert} = chai;
+const {expect} = chai;
 import ts from "tacitscript";
 
 mocha.setup('bdd');
 
 describe("logic operators", () => {
 /*ts
+	e		`0&(`1)
+	f		`""&(`1)
+	g		`()&(`1)
+	h		`(1/0)&(`1)
 	a		""&1
 	b		0&1
 	c		()&1
 	d		1/0&1
 */
+	it("`0&(`1)(1) eql 1", () => expect(e(1)).eql(1));
+	it('`""&(`1)(1) eql 1', () => expect(f(1)).eql(1));
+	it("`()&(`1)(1) eql false", () => expect(g(1)).eql(false));
+	it("`(1/0)&(`1) eql undefined", () => expect(h).eql(undefined));
 	it(`""&1 eql 1`, () => expect(a).eql(1));
 	it("0&1 eql 1", () => expect(b).eql(1));
 	it("()&1 eql false", () => expect(c).eql(false));
@@ -29,10 +37,12 @@ describe("operator bounds", () => {
 
 describe("equality checking", () => {
 /*ts
+	undefCheck			(1/0)=(1/0)
 	deepCheck			("abc" (1 2 3))=("abc" (1 2 4))
 	mixedType			"string"=4
 	fnInclusion			(2* 1)=(2* 1)
 */
+	it("(1/0)=(1/0) eql undefined", () => expect(undefCheck).eql(undefined));
 	it(`("abc" (1 2 3))=("abc" (1 2 4)) eql false`, () => expect(deepCheck).eql(false));
 	it(`"string"=4 eql false`, () => expect(mixedType).eql(false));
 	it("(2* 1)=(2* 1) eql undefined", () => expect(fnInclusion).eql(undefined));
