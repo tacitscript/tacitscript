@@ -523,9 +523,8 @@ colon.types = [
 	["?", "?", "A"], // pair +:2
 ];
 let question = (left, right) => {
-	// isContainedBy TODO
-
-	if (isArray(left)) { // cond ((<10 +1) -1)?15
+	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
+	if (isArray(left) && isValue(right)) { // AVV cond ((<10 +1) -1)?15
 		for (let i = 0; i < left.length; ++i) {
 			const line = left[i];
 
@@ -541,6 +540,7 @@ let question = (left, right) => {
 
 	throw `Unable to resolve application of operator ? with arguments: ${JSON.stringify({left, right})}`;
 }; question.types = [
+	[["V", "B"], "A", "V"], // find (%2.=0)?(1 2 3)
 	["A", "V", "V"], // cond ((<10 +1) -1)?15
 ];
 let atsign = (left, right) => {
@@ -604,7 +604,6 @@ let dollar = (left, right) => {
 ];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
-	if (isFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
 	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // AAA AOO over ((1 ) +1)'(3 5 7) (("a" ) +1)'{({"a": 1})
@@ -623,7 +622,6 @@ let apostrophe = (left, right) => {
 	["A", "O", "?"], // path ("a" )'{({"a": 1})
 	["A", "O", "O"], // over ((1 ) +1)'(3 5 7)
 	["A", "A", "A"], // over (("a" ) +1)'{({"a": 1})
-	[["V", "B"], "A", "V"], // find (%2.=0)'(1 2 3)
 ];
 let equal = (left, right) => {
 	try {
@@ -635,17 +633,11 @@ let equal = (left, right) => {
 	["V", "V", "B"]
 ];
 let bar = (left, right) => {
-	const isFalseyLeft = isFalsey(left);
-
-	if (isFalseyLeft || isFalsey(right)) { // VVV orValue 2|0
-		return isFalseyLeft ? right : left;
-	}
-
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (??)(??)(??) orPredicate >0|(%2.=0)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VB)(VB)(VB) orPredicate >0|(%2.=0)
 		let fn = x => {
-			const leftResult = left(x);
+			const leftResult = comma(x, left);
 
-			return isFalsey(leftResult) ? right(x) : leftResult;
+			return isFalsey(leftResult) ? comma(x, right) : leftResult;
 		};
 		fn.types = types(left); // assume
 
@@ -662,11 +654,11 @@ let bar = (left, right) => {
 		return fn;
 	}
 
-	return left;
+	return left || right;
 }; bar.types = [
-	["V", "V", "V"], // orValue 2|0
-	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
-	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
+	["B", "B", "B"], // orValue !()|()
+	[["V", "B"], ["V", "B"], ["V", "B"]], // orPredicate >0|(%2.=0)
+	[["V", "V", "B"], ["V", "V", "B"], ["V", "V", "B"]] // orBinary <|=
 ];
 bar.supportsUndefined = true;
 let percent = (left, right) => {
@@ -715,11 +707,11 @@ let hat = (left, right) => {
 	["A", "A", "A"], // while (#.<5 #.+1)^( )
 ];
 let ampersand = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VB)(VB)(VB) andPredicate >2&(<6)
 		let result = value => {
-			const leftValue = left(value);
+			const leftValue = comma(value, left);
 
-			return isTruthy(leftValue) ? right(value) : leftValue;
+			return isTruthy(leftValue) ? comma(value, right) : leftValue;
 		}
 
 		result.types = types(left); // TODO: edge cases abound here
@@ -727,10 +719,10 @@ let ampersand = (left, right) => {
 		return result;
 	}
 
-	return isTruthy(left) ? right : left; // VVV andValue 1&2
+	return left && right; // BBB andValue !()&()
 }; ampersand.types = [
-	["V", "V", "V"], // andValue 1&2
-	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
+	["B", "B", "B"], // andValue !()&()
+	[["V", "B"], ["V", "B"], ["V", "B"]], // andPredicate >2&(<6)
 ];
 
 //----------------------------------------------------------
@@ -823,26 +815,26 @@ let braceright = value => {
 	["?", "S"], // typeof }3
 ];
 let bang = value => {
-	if (isBinaryFunction(value)) { // (XYZ)(XYZ) not !< 
-		let fn = (x, y) => !isTruthy(value(x, y));
+	if (isBinaryFunction(value)) { // (XYB)(XYB) not !< 
+		let fn = (x, y) => !value(x, y);
 
 		fn.types = value.types;
 
 		return fn;
 	}
 	if (isUnaryFunction(value)) { // (XY)(XY) not !(<2)
-		let fn = x => !isTruthy(value(x));
+		let fn = x => !comma(x, value);
 
 		fn.types = value.types;
 
 		return fn;
 	}
 
-	return !isTruthy(value); // VB not !2
+	return !value; // BB not !()
 }; bang.types = [
-	["V", "B"], // not !2
-	[["X", "Y", "Z"], ["X", "Y", "Z"]], // not !<
-	[["X", "Y"], ["X", "Y"]], // not !(<2)
+	["B", "B"], // not !2
+	[["X", "Y", "B"], ["X", "Y", "B"]], // not !<
+	[["X", "B"], ["X", "B"]], // not !(<2)
 ];
 
 //==========================================================
