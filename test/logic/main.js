@@ -526,34 +526,34 @@ describe("Rosetta Code", () => {
 });
 
 describe("Underscore", () => {
-	describe("intersection _1%,(~?@.&$ [),(=, ;).*$", () => {
-	/*ts
-		intermediateF		((1 2 3) (2 3 4)),~?@
-		intermediateL		&$
-		intermediateJ		&$(<2 <3 <4)
-		intermediateI		<2&(>0)
-		intermediateE		((1 2 3) (2 3 4)),(~?@.&$),(=,)
-		intermediateH		((1 2 3) (2 3 4)),~?@,&$
-		intermediateG		(2 3 4),~?
-		intermediateD		=,?(1 2 3)
-		intermediateC		=2?(1 2 3)
-		intermediateB		(=,?(1 2 3))*(2 3 4 5)
-		intermediateA		_1%((1 2 3) (101 2 1 10) (2 1))
-		intersection		_1%,(~?@.&$ [),(=, ;).*$
-		calculation			intersection((1 2 3) (101 2 1 10) (2 1))
-	*/
+	// describe("intersection _1%,(~?@.&$ [),(=, ;).*$", () => {
+	// /*ts
+	// 	intermediateF		((1 2 3) (2 3 4)),~?@
+	// 	intermediateL		&$
+	// 	intermediateJ		&$(<2 <3 <4)
+	// 	intermediateI		<2&(>0)
+	// 	intermediateE		((1 2 3) (2 3 4)),(~?@.&$),(=,)
+	// 	intermediateH		((1 2 3) (2 3 4)),~?@,&$
+	// 	intermediateG		(2 3 4),~?
+	// 	intermediateD		=,?(1 2 3)
+	// 	intermediateC		=2?(1 2 3)
+	// 	intermediateB		(=,?(1 2 3))*(2 3 4 5)
+	// 	intermediateA		_1%((1 2 3) (101 2 1 10) (2 1))
+	// 	intersection		_1%,(~?@.&$ [),(=, ;).*$
+	// 	calculation			intersection((1 2 3) (101 2 1 10) (2 1))
+	// */
 
-		it("((1 2 3) (2 3 4)),~?@,&$,(=,)(2) eql 2", () => expect(intermediateE(2)).eql(2));
-		it("((1 2 3) (2 3 4)),~?@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
-		it("((1 2 3) (2 3 4)),~?@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
-		it("(2 3 4),~?(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
-		it("=,?(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
-		it("=2?(1 2 3) eql 2", () => expect(intermediateC).eql(2));
-		it("(=,?(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
-		it("_1%((1 2 3) (101 2 1 10) (2 1)) eql [[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]", () => expect(intermediateA).eql([[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]));
-		it("intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [2, 1]", () => expect(intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([2, 1]));
-		it("intersection((1 2 3) (101 2 1 10) (2 1)) eql [2, 1]", () => expect(calculation).eql([2, 1]));
-	});
+	// 	it("((1 2 3) (2 3 4)),~?@,&$,(=,)(2) eql 2", () => expect(intermediateE(2)).eql(2));
+	// 	it("((1 2 3) (2 3 4)),~?@,&$(x => x === 2) eql 2", () => expect(intermediateH(x => x === 2)).eql(2));
+	// 	it("((1 2 3) (2 3 4)),~?@[1](x => x === 2) eql 2", () => expect(intermediateF[1](x => x === 2)).eql(2));
+	// 	it("(2 3 4),~?(x => x === 2) eql 2", () => expect(intermediateG(x => x === 2)).eql(2));
+	// 	it("=,?(1 2 3)(2) eql 2", () => expect(intermediateD(2)).eql(2));
+	// 	it("=2?(1 2 3) eql 2", () => expect(intermediateC).eql(2));
+	// 	it("(=,?(1 2 3))*(2 3 4 5) eql [2, 3]", () => expect(intermediateB).eql([2, 3]));
+	// 	it("_1%((1 2 3) (101 2 1 10) (2 1)) eql [[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]", () => expect(intermediateA).eql([[[1, 2, 3], [101, 2, 1, 10]], [[2, 1]]]));
+	// 	it("intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]]) eql [2, 1]", () => expect(intersection([[1, 2, 3], [101, 2, 1, 10], [2, 1]])).eql([2, 1]));
+	// 	it("intersection((1 2 3) (101 2 1 10) (2 1)) eql [2, 1]", () => expect(calculation).eql([2, 1]));
+	// });
 
 	describe("has '.!.!", () => {
 	/*ts
@@ -925,32 +925,32 @@ describe("Underscore", () => {
 		it("compact([0, undefined, 1, false, 2, '', 3]) eql [0, 1, 2, '', 3]", () => expect(compact([0, undefined, 1, false, 2, '', 3])).eql([0, 1, 2, '', 3]));
 	});
 
-	describe("partition :,(? ;).@$.~.;*@", () => {
-	/*ts
-		isEqualToOne		=1,?
-		partition			:,(.(.(; `(`())) .(`(`()) ;)).? ;).@$.~.;*@
-		calculation			(%2.=1)partition(0 1 2 3 4 5)
-		calculationB		(%2.=0)partition(0 1 2 3 4 5)
-		intermediate		:,(? ;).@$.~
-		intermediateB		:,(? ;).@$
-		intermediateC		(%2.=1)?@(1 2 3)
-		intermediateD		((%2.=1)? (1 2 3)),@$
-		intermediateE		((%2.=1),?)1
-		intermediateF		(=1,?)1
-	*/
+	// describe("partition :,(? ;).@$.~.;*@", () => {
+	// /*ts
+	// 	isEqualToOne		=1,?
+	// 	partition			:,(.(.(; `(`())) .(`(`()) ;)).? ;).@$.~.;*@
+	// 	calculation			(%2.=1)partition(0 1 2 3 4 5)
+	// 	calculationB		(%2.=0)partition(0 1 2 3 4 5)
+	// 	intermediate		:,(? ;).@$.~
+	// 	intermediateB		:,(? ;).@$
+	// 	intermediateC		(%2.=1)?@(1 2 3)
+	// 	intermediateD		((%2.=1)? (1 2 3)),@$
+	// 	intermediateE		((%2.=1),?)1
+	// 	intermediateF		(=1,?)1
+	// */
 
-		it("(%2.=0)partition(0 1 2 3 4 5) eql [[0, 2, 4], [1, 3, 5]]", () => expect(calculationB).eql([[0, 2, 4], [1, 3, 5]]));
-		it("partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5]) eql [[0, 2, 4], [1, 3, 5]]", () => expect(partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5])).eql([[0, 2, 4], [1, 3, 5]]));
-		it("=1,?(1) eql [1, undefined]", () => expect(isEqualToOne(1)).eql([1, undefined]));
-		it("(=1,?)1 eql [1, undefined]", () => expect(intermediateF).eql([1, undefined]));
-		it("((%2.=1),?)1 eql [1, undefined]", () => expect(intermediateE).eql([1, undefined]));
-		it("((%2.=1)? (1 2 3)),@$ eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateD).eql([[1, undefined], [undefined, 2], [3, undefined]]));
-		it("(%2.=1)?@(1 2 3) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateC).eql([[1, undefined], [undefined, 2], [3, undefined]]));
-		it(":,(? ;).@$(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateB(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined], [undefined, 2], [3, undefined]]));
-		it(":,(? ;).@$.~(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined, 3], [undefined, 2, undefined]]", () => expect(intermediate(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined, 3], [undefined, 2, undefined]]));
-		it("(%2.=1)partition(0 1 2 3 4 5) eql [[1, 3, 5], [0, 2, 4]]", () => expect(calculation).eql([[1, 3, 5], [0, 2, 4]]));
-		it("partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5]) eql [[1, 3, 5], [0, 2, 4]]", () => expect(partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5])).eql([[1, 3, 5], [0, 2, 4]]));
-	});
+	// 	it("(%2.=0)partition(0 1 2 3 4 5) eql [[0, 2, 4], [1, 3, 5]]", () => expect(calculationB).eql([[0, 2, 4], [1, 3, 5]]));
+	// 	it("partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5]) eql [[0, 2, 4], [1, 3, 5]]", () => expect(partition(num => (num % 2) === 0, [0, 1, 2, 3, 4, 5])).eql([[0, 2, 4], [1, 3, 5]]));
+	// 	it("=1,?(1) eql [1, undefined]", () => expect(isEqualToOne(1)).eql([1, undefined]));
+	// 	it("(=1,?)1 eql [1, undefined]", () => expect(intermediateF).eql([1, undefined]));
+	// 	it("((%2.=1),?)1 eql [1, undefined]", () => expect(intermediateE).eql([1, undefined]));
+	// 	it("((%2.=1)? (1 2 3)),@$ eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateD).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+	// 	it("(%2.=1)?@(1 2 3) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateC).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+	// 	it(":,(? ;).@$(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined], [undefined, 2], [3, undefined]]", () => expect(intermediateB(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined], [undefined, 2], [3, undefined]]));
+	// 	it(":,(? ;).@$.~(num => (num % 2) === 1, [1, 2 3]) eql [[1, undefined, 3], [undefined, 2, undefined]]", () => expect(intermediate(num => (num % 2) === 1, [1, 2, 3])).eql([[1, undefined, 3], [undefined, 2, undefined]]));
+	// 	it("(%2.=1)partition(0 1 2 3 4 5) eql [[1, 3, 5], [0, 2, 4]]", () => expect(calculation).eql([[1, 3, 5], [0, 2, 4]]));
+	// 	it("partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5]) eql [[1, 3, 5], [0, 2, 4]]", () => expect(partition(num => (num % 2) === 1, [0, 1, 2, 3, 4, 5])).eql([[1, 3, 5], [0, 2, 4]]));
+	// });
 
 	describe("size #", () => {
 	/*ts
@@ -966,15 +966,10 @@ describe("Underscore", () => {
 
 	describe("countBy /.#@", () => {
 	/*ts
-		calculationC			(%2.=0)?2
 		countBy					/.#@
-		calculation				((%2.=0)?,(`"even" `"odd").|$)countBy(1 2 3 4 5)
-		calculationA			((%2.=0)?,(`"even" `"odd").|$)@(1 2 3 4 5)
-		calculationB			(%2.=0)?@(1 2 3 4 5)
+		calculation				((%2.=0 `"even") `"odd")?countBy(1 2 3 4 5)
+		calculationA			((%2.=0 `"even") `"odd")?@(1 2 3 4 5)
 	*/
-
-		it("(%2.=0)?2 eql [2, undefined]", () => expect(calculationC).eql([2, undefined]));
-		it('(%2.=0)?@(1 2 3 4 5) eql [[undefined, 1], [2, undefined], [undefined, 3], [4, undefined], [undefined, 5]]', () => expect(calculationB).eql([[undefined, 1], [2, undefined], [undefined, 3], [4, undefined], [undefined, 5]]));
 		it('((%2.=0)?,(`"even" `"odd").|$)@(1 2 3 4 5) eql ["odd", "even", "odd", "even", "odd"]', () => expect(calculationA).eql(["odd", "even", "odd", "even", "odd"]));
 		it('((%2.=0)?,(`"even" `"odd").|$)countBy(1 2 3 4 5) eql {odd: 3, even: 2}', () => expect(calculation).eql({odd: 3, even: 2}));
 		it("countBy(num => ((num % 2) === 0) ? 'even' : 'odd', [1, 2, 3, 4, 5]) eql {odd: 3, even: 2}", () => expect(countBy(num => ((num % 2) === 0) ? 'even' : 'odd', [1, 2, 3, 4, 5])).eql({odd: 3, even: 2}));
@@ -1039,22 +1034,22 @@ describe("Underscore", () => {
 			() => expect(pluck('name', [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}])).eql(['moe', 'larry', 'curly']));
 	});
 
-	describe("contains :,(= ;).'$", () => {
+	describe("contains :,(= ;).?$", () => {
 	/*ts
-		intermediateB			(4 (2 3 4 5)),(= ;),'$
-		intermediate			(=4 (2 3 4 5)),'$
-		containsFour			=4'(2 3 4 5)
-		contains				:,(= ;).'$
+		intermediateB			(4 (2 3 4 5)),(= ;),?$
+		intermediate			(=4 (2 3 4 5)),?$
+		containsFour			=4?(2 3 4 5)
+		contains				:,(= ;).?$
 		calculation				3contains(1 2 3)
 		calculationB			4contains(1 2 3)
 	*/
 
 		it("3contains(1 2 3) eql 3", () => expect(calculation).eql(3));
 		it("4contains(1 2 3) eql undefined", () => expect(calculationB).eql(undefined));
-		it("(4 (2 3 4 5)),(= ;),'$ eql 4", () => expect(intermediateB).eql(4));
-		it("(=4 (2 3 4 5)),'$ eql 4", () => expect(intermediate).eql(4));
+		it("(4 (2 3 4 5)),(= ;),?$ eql 4", () => expect(intermediateB).eql(4));
+		it("(=4 (2 3 4 5)),?$ eql 4", () => expect(intermediate).eql(4));
 		it("contains(4, [2, 3, 4, 5]) eql 4", () => expect(contains(4, [2, 3, 4, 5])).eql(4));
-		it("=4'(2 3 4 5) eql 4", () => expect(containsFour).eql(4));
+		it("=4?(2 3 4 5) eql 4", () => expect(containsFour).eql(4));
 	});
 
 	describe("some *.#.>0", () => {

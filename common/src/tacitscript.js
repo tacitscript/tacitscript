@@ -66,8 +66,17 @@ const isFunction = value => typeof value === "function";
 const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
 const isBoolean = value => typeof value === "boolean";
-const isTruthy = value => (value != undefined) && (value !== false);
-const isFalsey = value => (value == undefined) || (value === false);
+const isFalsey = value => {
+	if (isUndefined(value)) return true;
+	if (value === false) return true;
+	if (value === "") return true;
+	if (value === 0) return true;
+	if (isArray(value) && !value.length) return true;
+	if (isObject(value) && !Object.keys(value).length) return true;
+
+	return false;
+};
+const isTruthy = value => !isFalsey(value);
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -564,7 +573,7 @@ let question = (left, right) => {
 
 	errorBinary({left, right, operator: "?"});
 }; question.types = [
-	[["V", "B"], "A", "V"], // find (%2.=0)?(1 2 3)
+	[["V", "V"], "A", "V"], // find (%2.=0)?(1 2 3)
 	["A", "V", "V"], // cond ((<10 +1) -1)?15
 ];
 question.supportsUndefined = true;
@@ -663,7 +672,7 @@ let equal = (left, right) => {
 	["V", "V", "B"]
 ];
 let bar = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VB)(VB)(VB) orPredicate >0|(%2.=0)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
 		let fn = x => {
 			const leftResult = comma(x, left);
 
@@ -683,13 +692,13 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBoolean(left) && isBoolean(right)) return left || right;
+	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;
 
 	errorBinary({left, right, operator: "|"});
 }; bar.types = [
-	["B", "B", "B"], // orValue !()|()
-	[["V", "B"], ["V", "B"], ["V", "B"]], // orPredicate >0|(%2.=0)
-	[["V", "V", "B"], ["V", "V", "B"], ["V", "V", "B"]] // orBinary <|=
+	["V", "V", "V"], // orValue !()|()
+	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
+	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
 ];
 let percent = (left, right) => {
 	if (isNumber(left)) {
@@ -737,7 +746,7 @@ let hat = (left, right) => {
 	["A", "A", "A"], // while (#.<5 #.+1)^( )
 ];
 let ampersand = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VB)(VB)(VB) andPredicate >2&(<6)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
 		let result = value => {
 			const leftValue = comma(value, left);
 
@@ -748,12 +757,12 @@ let ampersand = (left, right) => {
 
 		return result;
 	}
-	if (isBoolean(left) && isBoolean(right)) return left && right; // BBB andValue !()&()
+	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; // VVV andValue !()&()
 
 	errorBinary({left, right, operator: "&"});
 }; ampersand.types = [
-	["B", "B", "B"], // andValue !()&()
-	[["V", "B"], ["V", "B"], ["V", "B"]], // andPredicate >2&(<6)
+	["V", "V", "V"], // andValue !()&()
+	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
 ];
 
 //----------------------------------------------------------
@@ -851,27 +860,27 @@ let braceright = value => {
 	["?", "S"], // typeof }3
 ];
 let bang = value => {
-	if (isBinaryFunction(value)) { // (XYB)(XYB) not !< 
+	if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
 		let fn = (x, y) => !value(x, y);
 
 		fn.types = value.types;
 
 		return fn;
 	}
-	if (isUnaryFunction(value)) { // (XY)(XY) not !(<2)
+	if (isUnaryFunction(value)) { // (VV)(VB) not !(<2)
 		let fn = x => !value(x);
 
 		fn.types = value.types;
 
 		return fn;
 	}
-	if (isBoolean(value)) return !value; // BB not !()
+	if (isValue(value)) return !value; // VB not !()
 
 	errorUnary({value, operator: "!"});
 }; bang.types = [
-	["B", "B"], // not !2
-	[["X", "Y", "B"], ["X", "Y", "B"]], // not !<
-	[["X", "B"], ["X", "B"]], // not !(<2)
+	["V", "B"], // not !2
+	[["V", "V", "V"], ["V", "V", "B"]], // not !<
+	[["V", "V"], ["V", "B"]], // not !(<2)
 ];
 
 //==========================================================
