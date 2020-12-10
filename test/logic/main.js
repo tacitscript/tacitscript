@@ -928,7 +928,7 @@ describe("Underscore", () => {
 	describe("partition :,(? ;).@$.~.;*@", () => {
 	/*ts
 		isEqualToOne		=1,?
-		partition			:,(? ;).@$.~.;*@
+		partition			:,(.(.(; `(`())) .(`(`()) ;)).? ;).@$.~.;*@
 		calculation			(%2.=1)partition(0 1 2 3 4 5)
 		calculationB		(%2.=0)partition(0 1 2 3 4 5)
 		intermediate		:,(? ;).@$.~
