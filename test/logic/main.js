@@ -722,7 +722,7 @@ describe("Underscore", () => {
 	describe("lastIndexOf :,(= ;).%$._1%.([.#.=0)?,(`() [.+$.#).|$", () => {
 	/*ts
 		intermediate		_1%((1 2 3) )
-		lastIndexOf			:,(= ;).%$._1%.([.#.=0)?,(`() [.+$.#).|$
+		lastIndexOf			:,(= ;).%$._1%.(([.#.=0) `()) [.+$.#)?
 		calculation			2lastIndexOf(1 2 3 1 2 3)
 	*/
 		it("_1%((1 2 3) ) eql [[], [[1, 2, 3]]]", () => expect(intermediate).eql([[], [[1, 2, 3]]]));
@@ -735,7 +735,7 @@ describe("Underscore", () => {
 
 	describe("indexOf :.(].#.= ,(= ;).%$.[.#).?$,(`() ;).|$", () => {
 	/*ts
-		indexOf				:.(].#.= ,(= ;).%$.[.#).?$,(`() ;).|$
+		indexOf				:.(.(.(].#.= `(`())) `;) ,(= ;).%$.[.#).?$
 		calculation			2indexOf(1 2 3)
 		calculationB		4indexOf(1 2 3)
 	*/
