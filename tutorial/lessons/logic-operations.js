@@ -27,11 +27,11 @@ export default {
 		</div>
 		<p><a href="#notPredicate">! (notPredicate)</a> negates the result of a check.</p>
 		<div className="code-block">
-			<span>notOdd         !(%2.=1)                                         notOdd0 is <i>true</i></span>
+			<span>notOdd          !(%2.=1)                                        notOdd0 is <i>true</i></span>
 		</div>
 		<p><a href="#notComparator">! (notComparator)</a> negates the result of a comparison.</p>
 		<div className="code-block">
-			<span>notLess        !&lt;                                               2notLess2 is <i>true</i></span>
+			<span>notLess         !&lt;                                              2notLess2 is <i>true</i></span>
 		</div>
 	</div>,
 };

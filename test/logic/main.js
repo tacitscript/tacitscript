@@ -10,6 +10,10 @@ describe("Tutorial tests", () => {
 	c	2+(3*4)
 	d	"\"Make things as simple as possible but no simpler.\"
 	- Albert Einstein"
+	e	(("top"		7.5)
+ ("side"	2+3))
+	f	( )
+	g	("alone" )
 */
 	it("2+3*4 eql 20", () => expect(a).eql(20));
 	it("(2+3)*4 eql 20", () => expect(b).eql(20));
@@ -17,6 +21,10 @@ describe("Tutorial tests", () => {
 	it(`"\"Make things as simple as possible but no simpler.\"
 	- Albert Einstein" eql "Make things as simple as possible but no simpler."\n\t- Albert Einstein"`, () => expect(d).eql(`\"Make things as simple as possible but no simpler.\"
 	- Albert Einstein`));
+	it(`(("top"		7.5)
+	("side"	2+3)) eql [["top", 7.5], ["side", 5]]`, () => expect(e).eql([["top", 7.5], ["side", 5]]));
+	it("( ) eql []", () => expect(f).eql([]));
+	it(`("alone" ) eql ["alone"]`, () => expect(g).eql(["alone"]));
 });
 
 describe("Operators", () => {

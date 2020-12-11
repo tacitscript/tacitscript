@@ -35,7 +35,7 @@ export default {
 	},
 	epilogue: <div>
 		<p><i>undefined</i> is a special value that has no direct representation within tacitscript.<br/>It is a <i>toxic value</i> in that, if applied to any operator,
-		the resulting calculation will also be <i>undefined</i> (the one exception being with <a href="#bar">bar (|)</a>).</p>
+		the resulting calculation will also be <i>undefined</i>.</p>
 		<div className="code-block"><span>{`calculation\t1/0+2\t\t\t\t\t\t is `}<i>undefined</i></span></div>
 	</div>,
 };
