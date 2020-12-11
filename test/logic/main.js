@@ -1885,8 +1885,8 @@ describe("Underscore", () => {
 		calculation			compact(0 1 false 2 "" 3 ( ) \( ))
 	*/
 
-		it('compact(0 1 false 2 "" 3) eql [1, 2, 3]', () => expect(calculation).eql([1, 2, 3]));
-		it("compact([0, undefined, 1, false, 2, '', 3]) eql [0, 1, 2, '', 3]", () => expect(compact([0, undefined, 1, false, 2, '', 3])).eql([1, 2, 3]));
+		it('compact(0 1 false 2 "" 3) eql [0, 1, 2, "", 3]', () => expect(calculation).eql([0, 1, 2, "", 3, [], {}]));
+		it("compact([0, undefined, 1, false, 2, '', 3]) eql [0, 1, 2, '', 3]", () => expect(compact([0, undefined, 1, false, 2, '', 3])).eql([0, 1, 2, "", 3]));
 	});
 
 	// describe("partition :,(? ;).@$.~.;*@", () => {
@@ -2025,7 +2025,7 @@ describe("Underscore", () => {
 
 		it("some(x => x, [undefined, 0, 'yes', false]) eql true", () => expect(some(x => x, [undefined, 0, 'yes', false])).eql(true));
 		it(";some(() 0 'yes') eql true", () => expect(someValues).eql(true));
-		it(";*(() 0) eql []", () => expect(filterByIdentity).eql([]));
+		it(";*(() 0) eql []", () => expect(filterByIdentity).eql([0]));
 	});
 
 	describe("every :.(*$ ]).#@.=$", () => {

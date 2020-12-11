@@ -66,17 +66,8 @@ const isFunction = value => typeof value === "function";
 const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
 const isBoolean = value => typeof value === "boolean";
-const isFalsey = value => {
-	if (isUndefined(value)) return true;
-	if (value === false) return true;
-	if (value === "") return true;
-	if (value === 0) return true;
-	if (isArray(value) && !value.length) return true;
-	if (isObject(value) && !Object.keys(value).length) return true;
-
-	return false;
-};
-const isTruthy = value => !isFalsey(value);
+const isFalsey = value => (value == undefined) || (value === false);
+const isTruthy = value => (value != undefined) && (value !== false);
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
