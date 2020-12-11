@@ -3,6 +3,21 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("Tutorial tests", () => {
+/*ts
+	a	2+3*4
+	b	(2+3)*4
+	c	2+(3*4)
+	d	"\"Make things as simple as possible but no simpler.\"
+	- Albert Einstein"
+*/
+	it("2+3*4 eql 20", () => expect(a).eql(20));
+	it("(2+3)*4 eql 20", () => expect(b).eql(20));
+	it("2+(3*4) eql 14", () => expect(c).eql(14));
+	it(`"\"Make things as simple as possible but no simpler.\"
+	- Albert Einstein" eql "Make things as simple as possible but no simpler."\n\t- Albert Einstein"`, () => expect(d).eql(`\"Make things as simple as possible but no simpler.\"
+	- Albert Einstein`));
+});
 
 describe("Operators", () => {
 	describe(". (dot)", () => {
@@ -962,7 +977,7 @@ describe("Operators", () => {
 			it('!("hello") eql false', () => expect(not("hello")).eql(false));
 			it('!(x => x)({a: 2}) eql false', () => expect(not(x => x)({a: 2})).eql(false));
 			it('!(x => undefined)(3) eql true', () => expect(not(x => undefined)(3)).eql(true));
-			it('!(1/0) eql undefined', () => expect(notDivideByZero).eql(undefined));
+			it('!(1/0) eql true', () => expect(notDivideByZero).eql(true));
 		});
 	});
 });

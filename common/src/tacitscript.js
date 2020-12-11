@@ -691,6 +691,7 @@ let bar = (left, right) => {
 	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
 	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
 ];
+bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN modulo 7%2
@@ -872,7 +873,7 @@ let bang = value => {
 	["V", "B"], // not !2
 	[["V", "V", "V"], ["V", "V", "B"]], // not !<
 	[["V", "V"], ["V", "B"]], // not !(<2)
-];
+]; bang.supportsUndefined = true;
 
 //==========================================================
 // main exports
