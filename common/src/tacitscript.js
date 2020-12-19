@@ -765,6 +765,11 @@ let ampersand = (left, right) => {
 	["V", "V", "V"], // andValue !()&()
 	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
 ];
+let backtick = (left, right) => {
+	return left; // X?X constant 2`3
+}; backtick.types = [
+	["X", "?", "X"], // constant 2`3
+];
 
 //----------------------------------------------------------
 // Unary
@@ -831,14 +836,6 @@ let backslash = value => {
 backslash.types = [
 	["A", "O"], // fromPairs \(("a" 1) ("b" 2))
 	["O", "A"], // toPairs \({"{a: 1, b: 2}")
-];
-let backtick = value => {
-	let fn = dummy => value; // X(?X) constant `2
-	fn.types = map(type => ["?", type])(types(value));
-
-	return fn;
-}; backtick.types = [
-	["X", ["?", "X"]], // constant `2
 ];
 let braceleft = value => {
 	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
