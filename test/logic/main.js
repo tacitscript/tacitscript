@@ -3,26 +3,41 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("apply/pipe to const", () => {
+/*ts
+	applyEval		2.(` ),[
+	constTwo		2`
+	constEval		2`3
+	applyToConst	.(` ).[
+	pipeToConst		[.(` ).[
+*/
+	it("2`(3) eql 2", () => expect(constTwo(3)).eql(2));
+	it("2`3 eql 2", () => expect(constEval).eql(2));
+	it(".(` ).[(4)(5) eql 4", () => expect(applyToConst(4)(5)).eql(4));
+	it("2.(` ),[(3) eql 2", () => expect(applyEval(3)).eql(2));
+	it("[.(` ).[([2, 3, 4])(6) eql 2", () => expect(pipeToConst([2, 3, 4])(6)).eql(2));
+});
+
 describe("Problems 2", () => {
-	// describe("", () => {
-	// /*ts
-	// 	dummy			:,(.(:,` `0^) ;)
-	// 	returnPlusOne	`(+1)
-	// 	update			:._,(.(-1.(; ) `(+1)) ;).'$
-	// 	intermediateB	((update (0 0 0)) (3 2 1 2 3 1 1 1 1 3)),$$
-	// 	intermediate	(update (0 0 0))$(3 2 1 2 3 1 1 1 1 3)
-	// 	array			3,`0^
-	// 	arrayB			3.(; `0^)
-	// 	solution		:,(.(`: `0^) ;).$$." "$
-	// 	result			3solution(3 2 1 2 3 1 1 1 1 3)
-	// */
-	// 	it("((update (0 0 0)) (3 2 1 2 3 1 1 1 1 3)).$$ eql [5, 2, 3]", () => expect(intermediateB).eql([5, 2, 3]));
-	// 	it("3.(; `0^) eql [3, [0, 0, 0]]", () => expect(arrayB).eql([3, [0, 0, 0]]));
-	// 	it("3,`0^ eql [0, 0, 0]", () => expect(array).eql([0, 0, 0]));
-	// 	it("(:._,(.(-1.(; ) `(+1)) ;).'$ (0 0 0))$(3 2 1 2 3 1 1 1 1 3) eql [5, 2, 3]", () => expect(intermediate).eql([5, 2, 3]));
-	// 	it(":._,(.(-1.(; ) `(+1)) ;).'$([0, 0, 0], 3) eql [0, 0, 1]", () => expect(update([0, 0, 0], 3)).eql([0, 0, 1]));
-	// 	//it("solved", () => expect(result).eql("5 2 3"));
-	// });
+	describe(':,(.(update` 0`^) ;).$$." "$', () => {
+	/*ts
+		dummy			:,(.(:` 0`^) ;)
+		returnPlusOne	+1`
+		update			:._,(.(-1.(; ) +1`) ;).'$
+		intermediateB	((update (0 0 0)) (3 2 1 2 3 1 1 1 1 3)),$$
+		intermediate	(update (0 0 0))$(3 2 1 2 3 1 1 1 1 3)
+		array			3,0`^
+		arrayB			3.(; 0`^)
+		solution		:,(.(update` 0`^) ;).$$." "$
+		result			3solution(3 2 1 2 3 1 1 1 1 3)
+	*/
+		it("((update (0 0 0)) (3 2 1 2 3 1 1 1 1 3)).$$ eql [5, 2, 3]", () => expect(intermediateB).eql([5, 2, 3]));
+		it("3.(; 0`^) eql [3, [0, 0, 0]]", () => expect(arrayB).eql([3, [0, 0, 0]]));
+		it("3,0`^ eql [0, 0, 0]", () => expect(array).eql([0, 0, 0]));
+		it("(:._,(.(-1.(; ) +1`) ;).'$ (0 0 0))$(3 2 1 2 3 1 1 1 1 3) eql [5, 2, 3]", () => expect(intermediate).eql([5, 2, 3]));
+		it(":._,(.(-1.(; ) +1`) ;).'$([0, 0, 0], 3) eql [0, 0, 1]", () => expect(update([0, 0, 0], 3)).eql([0, 0, 1]));
+		it("solved", () => expect(result).eql("5 2 3"));
+	});
 
 	describe("(+.*113.%10000007 0)$", () => {
 	/*ts
@@ -96,7 +111,7 @@ describe("Operators", () => {
 			it("+1./2(5) eql 3", () => expect(a(5)).eql(3));
 			it("pipe(x => x + 2, x => x * 3)(4) eql 18", () => expect(pipe(x => x + 2, x => x * 3)(4)).eql(18));
 			it("(+2.(*3))4 eql 18", () => expect(calculation).eql(18));
-			it("+2`(3)(4) eql 5", () => expect(pipeToBacktick(3)(4)).eql(5));
+			it("+2`(3)(4) eql 6", () => expect(pipeToBacktick(3)(4)).eql(6));
 			it("[.(value => value * 2)([3, 4, 5]) eql 6", () => expect(firstThen(value => value * 2)([3, 4, 5])).eql(6));
 			it(".(/2)(array => array[0])([10, 8, 9]) eql 5", () => expect(thenDivideByTwo(array => array[0])([10, 8, 9])).eql(5));
 			it("[./2([4, 5, 7]) eql 4", () => expect(firstThenDivideByTwo([4, 5, 7])).eql(2));
@@ -113,7 +128,7 @@ describe("Operators", () => {
 		*/
 			it("binaryUnaryPipe((x, y) => x / y, x => x * 3)(6, 2) eql 9", () => expect(binaryUnaryPipe((x, y) => x / y, x => x * 3)(6, 2)).eql(9));
 			it("6(/.(*3))2 eql 9", () => expect(calculation).eql(9));
-			it("+`(2, 3)(4, 5) eql 5", () => expect(pipeToBacktick(2, 3)(4, 5)).eql(5));
+			it("+`(2, 3)(4, 5) eql 9", () => expect(pipeToBacktick(2, 3)(4, 5)).eql(9));
 			it('2(:.+$)3 eql 5', () => expect(addTwoAndThree).eql(5));
 			it(':.+$(2, 3) eql 5', () => expect(add(2, 3)).eql(5));
 		});
@@ -227,7 +242,7 @@ describe("Operators", () => {
 
 			it("=,?(1 2 3)(2) eql 2", () => expect(contained(2)).eql(2));
 			it("(=,?(1 2 3))2 eql 2", () => expect(calculation).eql(2));
-			it("+`(2)(4, 5)(6) eql 8", () => expect(applyToBacktick(2)(4, 5)(6)).eql(8));
+			it("+`(2)(4, 5) eql 9", () => expect(applyToBacktick(2)(4, 5)).eql(9));
 		});
 
 		describe("zipApplyTo AAA", () => {
@@ -1595,7 +1610,7 @@ describe("Underscore", () => {
 
 	describe("has '.!.!", () => {
 	/*ts
-		has					'.((; !(),`) ()`)?
+		has					'.((; !()`) ()`)?
 		calculation			"b"has({"{a: 1, b: 2, c: 3}")
 	*/
 		it(`"b"has({"{a: 1, b: 2, c: 3}") eql true`, () => expect(calculation).eql(true));

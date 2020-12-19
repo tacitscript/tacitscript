@@ -769,7 +769,7 @@ let backtick = (left, right) => {
 	return left; // X?X constant 2`3
 }; backtick.types = [
 	["X", "?", "X"], // constant 2`3
-];
+]; backtick.supportsUndefined = true;
 
 //----------------------------------------------------------
 // Unary
