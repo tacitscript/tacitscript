@@ -1409,12 +1409,12 @@ describe("Rosetta Code", () => {
 		it("factors(11) eql [1, 11]", () => expect(factors(11)).eql([1, 11]));
 	});
 
-	// describe("Create a two-dimensional array at runtime", () => {
-	// /*ts
-	// 	generate			:._,(0`^.` ;).^$
-	// */
-	// 	it("generate(3, 2) eql [[0, 0], [0, 0], [0, 0]]", () => expect(generate(3, 2)).eql([[0, 0], [0, 0], [0, 0]]));
-	// });
+	describe("Create a two-dimensional array at runtime", () => {
+	/*ts
+		generate			:._,(0`^.(` ).[ ;).^$
+	*/
+		it("generate(3, 2) eql [[0, 0], [0, 0], [0, 0]]", () => expect(generate(3, 2)).eql([[0, 0], [0, 0], [0, 0]]));
+	});
 
 	describe("Binary digits", () => {
 	/*ts
@@ -1908,7 +1908,7 @@ describe("Underscore", () => {
 		flatten				:,(.(+1.>.(#.) (].{)`) .(; )).^$.]
 		intermediateC		+1.>.(#.)
 		constLast			]`
-		endIntoConst		].`
+		endIntoConst		].(` ).[
 		flattenAll			.((~2%.].!=$ ].{)` .(; )).^$.]
 		intermediate		.(1` .(; ))
 		intermediateB		].{
@@ -1920,7 +1920,7 @@ describe("Underscore", () => {
 		it("2flatten(1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, [4]]", () => expect(calculationB).eql([1, 2, 3, [4]]));
 		it("+1.>.(#.)(2)([1, 2, 3, 4]) eql false", () => expect(intermediateC(2)([1, 2, 3, 4])).eql(false));
 		it("+1.>.(#.)(5)([1, 2, 3, 4]) eql true", () => expect(intermediateC(5)([1, 2, 3, 4])).eql(true));
-		it("].`([1, 2, 3])([3, 2, 1]) eql 3", () => expect(endIntoConst([1, 2, 3])([3, 2, 1])).eql(3));
+		it("].(` ).[([1, 2, 3])([3, 2, 1]) eql 3", () => expect(endIntoConst([1, 2, 3])([3, 2, 1])).eql(3));
 		it("]`([1, 2, 3])([3, 2, 1]) eql 1", () => expect(constLast([1, 2, 3])([3, 2, 1])).eql(1));
 		it(".((~2%.].!=$ ].{)` .(; )).^$.](1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, 4]", () => expect(calculation).eql([1, 2, 3, 4]));
 		it(".((~2%.].!=$ ].{)` .(; )).^$.]([1, [2], [3, [[4]]]]) eql [1, 2, 3, 4]", () => expect(flattenAll([1, [2], [3, [[4]]]])).eql([1, 2, 3, 4]));
@@ -2623,22 +2623,22 @@ describe("99 Haskell Problems", () => {
 		it('.(; ;).~.+$([1, 2, 3]) eql [1, 1, 2, 2, 3, 3]', () => expect(dupli([1, 2, 3])).eql([1, 1, 2, 2, 3, 3]));
 	});
 
-	// describe('15. repli :.(].` [).^$.~.+$', () => {
-	// /*ts
-	// 	pipeIntoConst		,`
-	// 	twoThrees			(3` 2),^$
-	// 	//twoFours			(2 4).(].` [),^$ TODO
-	// 	replicate			:.(].` [).^$
-	// 	repli				:.(].` [).^$.~.+$
-	// 	//repliInPlace		2repli(1 2 3)
-	// */
-	// 	it(',`(3)(4) eql 3', () => expect(pipeIntoConst(3)(4)).eql(3));
-	// 	it('(3` 2),^$ eql [3, 3]', () => expect(twoThrees).eql([3, 3]));
-	// 	//it('(2 4).(].` [),^$ eql [4, 4]', () => expect(twoFours).eql([4, 4]));
-	// 	it(':.(].` [).^$(2, 3) eql [3, 3]', () => expect(replicate(2, 3)).eql([3, 3]));
-	// //it('2repli(1 2 3) eql [1, 1, 2, 2, 3, 3]', () => expect(repliInPlace).eql([1, 1, 2, 2, 3, 3]));
-	// 	it('repli(3, [4, 5]) eql [4, 4, 4, 5, 5, 5]', () => expect(repli(3, [4, 5])).eql([4, 4, 4, 5, 5, 5]));
-	// });
+	describe('15. repli :.(].` [).^$.~.+$', () => {
+	/*ts
+		pipeIntoConst		`
+		twoThrees			(3` 2),^$
+		twoFours			(2 4).(].(` ).[ [),^$
+		replicate			:.(].(` ).[ [).^$
+		repli				:.(].(` ).[ [).^$.~.+$
+		repliInPlace		2repli(1 2 3)
+	*/
+		it('`(3, 4) eql 3', () => expect(pipeIntoConst(3, 4)).eql(3));
+		it('(3` 2),^$ eql [3, 3]', () => expect(twoThrees).eql([3, 3]));
+		it('(2 4).(].(` ).[ [),^$ eql [4, 4]', () => expect(twoFours).eql([4, 4]));
+		it(':.(].(` ).[ [).^$(2, 3) eql [3, 3]', () => expect(replicate(2, 3)).eql([3, 3]));
+		it('2repli(1 2 3) eql [1, 1, 2, 2, 3, 3]', () => expect(repliInPlace).eql([1, 1, 2, 2, 3, 3]));
+		it('repli(3, [4, 5]) eql [4, 4, 4, 5, 5, 5]', () => expect(repli(3, [4, 5])).eql([4, 4, 4, 5, 5, 5]));
+	});
 
 	describe("16. dropEvery :.([.-1.% ,(.(; ) ;).%$).@$.[@.+$", () => {
 	/*ts
