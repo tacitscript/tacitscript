@@ -4,8 +4,12 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 2", () => {
-	describe("", () => {
-
+	describe("(+.*113.%10000007 0)$", () => {
+	/*ts
+		solution		(+.*113.%10000007 0)$
+		result			solution(3 1 4 1 5 9)
+	*/
+		it("solved", () => expect(result).eql(8921379));
 	});
 
 	describe('_', () => {
