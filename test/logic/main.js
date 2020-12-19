@@ -3,6 +3,21 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("Problems 2", () => {
+	describe('(*6.{"Math.floor".+1)@." "$', () => {
+	/*ts
+		solution		(*6.{"Math.floor".+1)@." "$
+		result			solution(0.59558786964
+0.861037873663
+0.385597702116
+0.246237673331
+0.808033385314
+0.0544673665427)
+	*/
+		it("solved", () => expect(result).eql("4 6 3 2 5 1"));
+	});
+});
+
 describe("Tutorial tests", () => {
 /*ts
 	a	2+3*4
