@@ -19,7 +19,7 @@ describe("apply/pipe to const", () => {
 });
 
 describe("Problems 2", () => {
-	describe(':,(.(update` 0`^) ;).$$." "$', () => {
+	describe(`:,(.((:._,(.(-1.(; ) +1\`) ;).'$)\` 0\`^) ;).$$." "$`, () => {
 	/*ts
 		dummy			:,(.(:` 0`^) ;)
 		returnPlusOne	+1`
