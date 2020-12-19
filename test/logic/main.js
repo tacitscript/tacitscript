@@ -4,17 +4,25 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 2", () => {
-	describe("", () => {
-	/*ts
-		update			:._,(.(-1.(; ) `(+1)) ;).'$
-		intermediate	(update (0 0 0))$(3 2 1 2 3 1 1 1 1 3)
-		//solution		:,(.(`update `0^) ;).$$." "$
-		//result			3solution(3 2 1 2 3 1 1 1 1 3)
-	*/
-		it("(:._,(.(-1.(; ) `(+1)) ;).'$ (0 0 0))$(3 2 1 2 3 1 1 1 1 3) eql [5, 2, 3]", () => expect(intermediate).eql([5, 2, 3]));
-		it(":._,(.(-1.(; ) `(+1)) ;).'$([0, 0, 0], 3) eql [0, 0, 1]", () => expect(update([0, 0, 0], 3)).eql([0, 0, 1]));
-		//it("solved", () => expect(result).eql("5 2 3"));
-	});
+	// describe("", () => {
+	// /*ts
+	// 	dummy			:,(.(:,` `0^) ;)
+	// 	returnPlusOne	`(+1)
+	// 	update			:._,(.(-1.(; ) `(+1)) ;).'$
+	// 	intermediateB	((update (0 0 0)) (3 2 1 2 3 1 1 1 1 3)),$$
+	// 	intermediate	(update (0 0 0))$(3 2 1 2 3 1 1 1 1 3)
+	// 	array			3,`0^
+	// 	arrayB			3.(; `0^)
+	// 	solution		:,(.(`: `0^) ;).$$." "$
+	// 	result			3solution(3 2 1 2 3 1 1 1 1 3)
+	// */
+	// 	it("((update (0 0 0)) (3 2 1 2 3 1 1 1 1 3)).$$ eql [5, 2, 3]", () => expect(intermediateB).eql([5, 2, 3]));
+	// 	it("3.(; `0^) eql [3, [0, 0, 0]]", () => expect(arrayB).eql([3, [0, 0, 0]]));
+	// 	it("3,`0^ eql [0, 0, 0]", () => expect(array).eql([0, 0, 0]));
+	// 	it("(:._,(.(-1.(; ) `(+1)) ;).'$ (0 0 0))$(3 2 1 2 3 1 1 1 1 3) eql [5, 2, 3]", () => expect(intermediate).eql([5, 2, 3]));
+	// 	it(":._,(.(-1.(; ) `(+1)) ;).'$([0, 0, 0], 3) eql [0, 0, 1]", () => expect(update([0, 0, 0], 3)).eql([0, 0, 1]));
+	// 	//it("solved", () => expect(result).eql("5 2 3"));
+	// });
 
 	describe("(+.*113.%10000007 0)$", () => {
 	/*ts
