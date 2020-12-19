@@ -4,6 +4,18 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 2", () => {
+	describe("", () => {
+
+	});
+
+	describe('_', () => {
+	/*ts
+		solution		_
+		result			solution"four score and seven years ago"
+	*/
+		it("solved", () => expect(result).eql("oga sraey neves dna erocs ruof"));
+	});
+
 	describe('(*6.{"Math.floor".+1)@." "$', () => {
 	/*ts
 		solution		(*6.{"Math.floor".+1)@." "$
@@ -1922,8 +1934,8 @@ describe("Underscore", () => {
 		compact				;*
 		calculation			compact(0 1 false 2 "" 3 ( ) \( ))
 	*/
-		it('compact(0 1 false 2 "" 3) eql [1, 2, 3]', () => expect(calculation).eql([1, 2, 3]));
-		it("compact([0, undefined, 1, false, 2, '', 3]) eql [0, 1, 2, '', 3]", () => expect(compact([0, undefined, 1, false, 2, '', 3])).eql([1, 2, 3]));
+		it('compact(0 1 false 2 "" 3 ( ) \\( )) eql [1, 2, 3]', () => expect(calculation).eql([1, 2, 3]));
+		it("compact([0, undefined, 1, false, 2, '', 3]) eql [1, 2, 3]", () => expect(compact([0, undefined, 1, false, 2, '', 3])).eql([1, 2, 3]));
 	});
 	// describe("partition :,(? ;).@$.~.;*@", () => {
 	// /*ts
