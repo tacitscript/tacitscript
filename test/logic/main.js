@@ -6,8 +6,15 @@ mocha.setup('bdd');
 describe("Problems 4", () => {
 	describe("", () => {
 	/*ts
-		toSeconds		:(86400 3600 60 1).~.*$@.+$
+		divisors		(86400 3600 60 1)
+		toSeconds		:divisors.~.*$@.+$
+		fromSeconds		0:.(; ).(].].>0 .(].] #.-1.'divisors).(/$.[ %$))^.1%.].[@
+		solution		(8 )%.(4%._.toSeconds@.-$.fromSeconds.""+)@." "$
+		result			solution(1 0 0 0 2 3 4 5
+5 3 23 22 24 4 20 45
+8 4 6 47 9 11 51 13)
 	*/
+		it("solved", () => expect(result).eql("(1 3 4 5) (19 0 57 23) (1 7 44 26)"));
 	});
 
 	describe("(.(; ).(].!=1 ].((%2.=0 /2) *3.+1)?)^.#.-1)@", () => {
