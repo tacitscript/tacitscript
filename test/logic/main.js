@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("Problems 4", () => {
+	describe("(.(; ).(].!=1 ].((%2.=0 /2) *3.+1)?)^.#.-1)@", () => {
+	/*ts
+		collatz			.(; ).(].!=1 ].((%2.=0 /2) *3.+1)?)^
+		solution		(collatz.#.-1)@
+		result			solution(2 15 97)
+	*/
+		it("solved", () => expect(result).eql([1, 17, 118]));
+	});
+});
+
 describe("toString", () => {
 /*ts
 	array		""+(1 _2 "string" () !() (4 5) \(("a" 7) ("b" 8)))
