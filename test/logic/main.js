@@ -854,7 +854,7 @@ describe("Operators", () => {
 		});
 	});
 
-	describe("#", () => {
+	describe("# (hash)", () => {
 		describe("arrayLength stringLength keyLength AN SN ON", () => {
 		/*ts
 			length					#
@@ -866,6 +866,13 @@ describe("Operators", () => {
 			it("#(3 4 5 6 7) eql [5, [N]]", () => expect([lengthOfArray, ts.typeOf(lengthOfArray)]).eql([5,  "N"]));
 			it('#"abcd" eql 4', () => expect(calculation).eql(4));
 			it('#({"a": 1, "b": 2}) eql 2', () => expect(calculationB).eql(2));
+		});
+
+		describe("round NN", () => {
+		/*ts
+			round					#1.5
+		*/
+			it("#1.5 eql 2", () => expect(round).eql(2));
 		});
 	});
 
