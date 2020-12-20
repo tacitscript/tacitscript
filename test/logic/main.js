@@ -4,6 +4,12 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 4", () => {
+	describe("", () => {
+	/*ts
+		toSeconds		:(86400 3600 60 1).~.*$@.+$
+	*/
+	});
+
 	describe("(.(; ).(].!=1 ].((%2.=0 /2) *3.+1)?)^.#.-1)@", () => {
 	/*ts
 		collatz			.(; ).(].!=1 ].((%2.=0 /2) *3.+1)?)^
