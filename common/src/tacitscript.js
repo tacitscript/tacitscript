@@ -805,11 +805,13 @@ let underscore = value => {
 ];
 let bracketleft = value => {
 	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
+	if (isNumber(value)) return Math.floor(value); // NN floor [1.8
 
 	errorUnary({operator: "[", value});
 }; bracketleft.types = [
 	["A", "?"], // first [(1 2 3)
 	["S", "S"], // firstInString ["abc"
+	["N", "N"], // floor [1.8
 ];
 let bracketright = value => {
 	if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"

@@ -600,6 +600,13 @@ describe("Operators", () => {
 			it("first([1, 2, 3]) eql 1", () => expect(first([1, 2, 3])).eql(1));
 			it("first(\"abcd\") eql \"a\"", () => expect(first("abcd")).eql("a"));
 		});
+
+		describe("floor NN", () => {
+		/*ts
+			floor						[1.8
+		*/
+			it("[1.8 eql 1", () => expect(floor).eql(1));
+		})
 	});
 
 	describe("] (bracketright)", () => {
