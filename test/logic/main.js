@@ -4,7 +4,7 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 4", () => {
-	describe("", () => {
+	describe(`(8 )%.(4%._.(:(86400 3600 60 1).~.*$@.+$)@.-$.0:.(; ).(].].>0 .(].] #.-1.'(86400 3600 60 1)).(/$.[ %$))^.1%.].[@.""+)@." "$`, () => {
 	/*ts
 		divisors		(86400 3600 60 1)
 		toSeconds		:divisors.~.*$@.+$
