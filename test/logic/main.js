@@ -3,6 +3,27 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("toString", () => {
+/*ts
+	array		""+(1 _2 "string" () !() (4 5) \(("a" 7) ("b" 8)))
+*/
+	it(`""+(1 _2 "string" () !() (4 5) \(("a" 7) ("b" 8))) eql "(1 _2 "string" () !() (4 5) (\\(("a" 7) ("b" 8))))"`, () => expect(array).eql(`(1 _2 "string" () !() (4 5) (\\(("a" 7) ("b" 8))))`));
+});
+
+describe("Problems 3", () => {
+	describe(`(4 )%.(.([ 1' .(.(] 1').-$ .(2' [).-$)./$).(] .(1' .(] [).*$).-$)." "$."("+.+")")@." "$`, () => {
+	/*ts
+		a			.(.(] 1').-$ .(2' [).-$)./$
+		c			.(1' .(] [).*$).-$
+		ac			.([ 1' a).(] c)
+		solution	(4 )%.(ac." "$."("+.+")")@." "$.("_" "-")@
+		result		solution(0 0 1 1
+1 0 0 1)
+	*/
+		it("solved", () => expect(result).eql("(1 0) (-1 1)"));
+	});
+});
+
 describe("apply/pipe to const", () => {
 /*ts
 	applyEval		2.(` ),[
@@ -427,6 +448,13 @@ describe("Operators", () => {
 		*/
 			it("@(x => x * 2, {a: 1, b: 2, c: 3})", () => expect(mapObject(x => x * 2, {a: 1, b: 2, c: 3})).eql({a: 2, b: 4, c: 6}));
 			it('*2@({"{a: 1, b: 2, c: 3}") eql {a: 2, b: 4, c: 6}', () => expect(calculation).eql({a: 2, b: 4, c: 6}));
+		});
+
+		describe("replaceString ASS", () => {
+		/*ts
+			replace		("_" "-")@"1 _2 0 _1"
+		*/
+			it(`("_" "-")@"1 _2 0 _1" eql "1 -2 0 -1"`, () => expect(replace).eql("1 -2 0 -1"));
 		});
 	});
 

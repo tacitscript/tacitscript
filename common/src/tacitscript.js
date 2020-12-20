@@ -251,7 +251,7 @@ const toEncodedString = value => {
 const toString = value => {
 	if (value === false) return "()";
 	if (value === true) return "!()";
-	if (isNumber(value)) return `${value}`;
+	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
@@ -591,12 +591,14 @@ let atsign = (left, right) => {
 	// (VV)AA map *2@(3 4 5)
 	// (VVV)AA mapBinary =@(2 3 4)
 	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
+	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
 	[["V", "V"], "A", "A"], // map *2@(3 4 5)
 	[["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
 	[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
+	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
 	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
 ];
 let asterisk = (left, right) => {
