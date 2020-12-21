@@ -51,7 +51,7 @@ const parseTrampoline = function(data) {
 			quotationMark: ""
 		};
 
-		while (data.remaining && (data.blockCommentDepth || !data.remaining.startsWith("*/"))) {
+		while (data.remaining && (data.blockCommentDepth || data.quotationMark || !data.remaining.startsWith("*/"))) {
 			data = parseTrampoline(data);
 		}
 
@@ -468,9 +468,11 @@ const expandJs = function(blocks, userDefinitions) {
 	return js;
 };
 
-exports.ts2es6 = function(source) {
+const ts2es6 = function(source) {
 	const parsed = parse(source);
 	const js = expandJs(parsed.blocks, {});
 
 	return js;
 };
+
+exports.ts2es6 = ts2es6;

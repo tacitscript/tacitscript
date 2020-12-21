@@ -1,3 +1,7 @@
+import parser from "./parser.js";
+
+const {ts2es6} = parser;
+
 ///==========================================================
 // functional utilites
 
@@ -846,7 +850,7 @@ backslash.types = [
 let braceleft = value => {
 	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
 	// should never be referenced directly for literal evaluation - expanded in parser
-	if (isString(value)) return eval(value); // S? eval {"Math.sqrt(2)"
+	if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
 
 	errorUnary({operator: "{", value});
 }; braceleft.types = [

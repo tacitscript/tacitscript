@@ -3,7 +3,29 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("mutual recursive language embedding", () => {
+/*ts
+	embed			"/*ts 1"+.+" */".{
+*/
+	it(`"/*ts 1"+.+" */".{("") eql 1`, () => expect(embed("")).eql(1));
+})
+
 describe("Problems 4", () => {
+	// describe("", () => {
+	// /*ts
+	// 	solution		("\n" " ")@."/*ts "+.+" */".{
+	// 	result			solution"5
+	// 	+ 3
+	// 	* 7
+	// 	+ 10
+	// 	* 2
+	// 	* 3
+	// 	+ 1
+	// 	% 11"
+	// */
+	// 	it("solved", () => expect(result).eql(1));
+	// });
+
 	describe(`(8 )%.(4%._.(:(86400 3600 60 1).~.*$@.+$)@.-$.0:.(; ).(].].>0 .(].] #.-1.'(86400 3600 60 1)).(/$.[ %$))^.1%.].[@.""+)@." "$`, () => {
 	/*ts
 		divisors		(86400 3600 60 1)
