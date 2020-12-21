@@ -12,7 +12,8 @@ describe("Problems 5", () => {
 	step			:.(([.[ fullStep) .(.(] ) [.]))?
 	initial			.(.(; 0`) )
 	makePass		].(.(step` .(( )` ])) [).$$
-	solution		.((_2%.].!=$ makePass)` initial).^$.(#.-1 ].])
+	solution		.((_2%.].!=$ makePass)` initial).^$.(#.-1 ].])." "$
+	result			solution(3 1 4 1 5 9 2 6)
 
 	pass			(step (( ) 0))$
 	test			solution(3 1 4 1)
@@ -27,10 +28,11 @@ describe("Problems 5", () => {
 	secondStep		((3 ) 0)step1
 	firstSwap		swap(((3 ) 0) 1)
 */
+	it("solved", () => expect(result).eql("5 8"));
 	it(".(.(; 0`) )([1, 2, 3, 4]) eql [[[1, 2, 3, 4], 0]]", () => expect(initial([1, 2, 3, 4])).eql([[[1, 2, 3, 4], 0]]));
 	it("(3 1 4 1).(3` .(.(; 0`) )) eql [3, [[3, 1, 4, 1], 0]]", () => expect(setup).eql([3, [[[3, 1, 4, 1], 0]]]));
 	it("(_2%.=$)((3 1 4 1) ) eql false", () => expect(firstCheck).eql(false));
-	it("solution(3 1 4 1) eql [2, 3]", () => expect(test).eql([3, 3]));
+	it("solution(3 1 4 1) eql [2, 3]", () => expect(test).eql("3 3"));
 	it("pass(3 1 4 1 5 9 2 6) eql [[1, 3, 1, 4], 2]", () => expect(passOne).eql([[1, 3, 1, 4], 2]));
 	it("((1 3) 1)step4 eql [[1, 3, 4], 1]", () => expect(thirdStep).eql([[1, 3, 4], 1]));
 	it("fullStep(((3 ) 0) 1) eql [[1, 3], 1]", () => expect(firstFull).eql([[1, 3], 1]));
