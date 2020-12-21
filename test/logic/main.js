@@ -4,43 +4,45 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
-/*ts
-	append			.(.([.[ .(] )).+$ [.])
-	swap			.(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)
-	needsSwap		.([.[.] ]).>$
-	fullStep		((needsSwap swap) append)?
-	step			:.(([.[ fullStep) .(.(] ) [.]))?
-	initial			.(.(; 0`) )
-	makePass		].(.(step` .(( )` ])) [).$$
-	solution		.((_2%.].!=$ makePass)` initial).^$.(#.-1 ].])." "$
-	result			solution(3 1 4 1 5 9 2 6)
+	describe(".((_2%.].!=$ ].(.((:.(([.[ ((.([.[.] ]).>$ .(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)) .(.([.[ .(] )).+$ [.]))?) .(.(] ) [.]))?)` .(( )` ])) [).$$)` .(.(; 0`) )).^$.(#.-1 ].]).\" \"$", () => {
+	/*ts
+		append			.(.([.[ .(] )).+$ [.])
+		swap			.(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)
+		needsSwap		.([.[.] ]).>$
+		fullStep		((needsSwap swap) append)?
+		step			:.(([.[ fullStep) .(.(] ) [.]))?
+		initial			.(.(; 0`) )
+		makePass		].(.(step` .(( )` ])) [).$$
+		solution		.((_2%.].!=$ makePass)` initial).^$.(#.-1 ].])." "$
+		result			solution(3 1 4 1 5 9 2 6)
 
-	pass			(step (( ) 0))$
-	test			solution(3 1 4 1)
-	setup			(3 1 4 1).(3` initial)
-	firstCheck		(_2%.=$)((3 1 4 1) )
-	passOne			pass(3 1 4 1)
-	thirdStep		((1 3) 1)step4
-	firstFull		fullStep(((3 ) 0) 1)
-	checkNeedsSwap	needsSwap(((3 ) 0) 1)
-	negSplit		_1%(3 )
-	firstStep		(( ) 0)step3
-	secondStep		((3 ) 0)step1
-	firstSwap		swap(((3 ) 0) 1)
-*/
-	it("solved", () => expect(result).eql("5 8"));
-	it(".(.(; 0`) )([1, 2, 3, 4]) eql [[[1, 2, 3, 4], 0]]", () => expect(initial([1, 2, 3, 4])).eql([[[1, 2, 3, 4], 0]]));
-	it("(3 1 4 1).(3` .(.(; 0`) )) eql [3, [[3, 1, 4, 1], 0]]", () => expect(setup).eql([3, [[[3, 1, 4, 1], 0]]]));
-	it("(_2%.=$)((3 1 4 1) ) eql false", () => expect(firstCheck).eql(false));
-	it("solution(3 1 4 1) eql [2, 3]", () => expect(test).eql("3 3"));
-	it("pass(3 1 4 1 5 9 2 6) eql [[1, 3, 1, 4], 2]", () => expect(passOne).eql([[1, 3, 1, 4], 2]));
-	it("((1 3) 1)step4 eql [[1, 3, 4], 1]", () => expect(thirdStep).eql([[1, 3, 4], 1]));
-	it("fullStep(((3 ) 0) 1) eql [[1, 3], 1]", () => expect(firstFull).eql([[1, 3], 1]));
-	it("needsSwap(((3 ) 0) 1) eql true", () => expect(checkNeedsSwap).eql(true));
-	it("_1%(3 ) eql [[], [3]]", () => expect(negSplit).eql([[], [3]]));
-	it("swap(((3 ) 0) 1) eql [[1, 3], 1]", () => expect(firstSwap).eql([[1, 3], 1]));
-	it("(( ) 0)step3 eql [[3], 0]", () => expect(firstStep).eql([[3], 0]));
-	it("((3 ) 0)step1 eql ((1 3) 1)", () => expect(secondStep).eql([[1, 3], 1]));
+		pass			(step (( ) 0))$
+		test			solution(3 1 4 1)
+		setup			(3 1 4 1).(3` initial)
+		firstCheck		(_2%.=$)((3 1 4 1) )
+		passOne			pass(3 1 4 1)
+		thirdStep		((1 3) 1)step4
+		firstFull		fullStep(((3 ) 0) 1)
+		checkNeedsSwap	needsSwap(((3 ) 0) 1)
+		negSplit		_1%(3 )
+		firstStep		(( ) 0)step3
+		secondStep		((3 ) 0)step1
+		firstSwap		swap(((3 ) 0) 1)
+	*/
+		it("solved", () => expect(result).eql("5 8"));
+		it(".(.(; 0`) )([1, 2, 3, 4]) eql [[[1, 2, 3, 4], 0]]", () => expect(initial([1, 2, 3, 4])).eql([[[1, 2, 3, 4], 0]]));
+		it("(3 1 4 1).(3` .(.(; 0`) )) eql [3, [[3, 1, 4, 1], 0]]", () => expect(setup).eql([3, [[[3, 1, 4, 1], 0]]]));
+		it("(_2%.=$)((3 1 4 1) ) eql false", () => expect(firstCheck).eql(false));
+		it("solution(3 1 4 1) eql [2, 3]", () => expect(test).eql("3 3"));
+		it("pass(3 1 4 1 5 9 2 6) eql [[1, 3, 1, 4], 2]", () => expect(passOne).eql([[1, 3, 1, 4], 2]));
+		it("((1 3) 1)step4 eql [[1, 3, 4], 1]", () => expect(thirdStep).eql([[1, 3, 4], 1]));
+		it("fullStep(((3 ) 0) 1) eql [[1, 3], 1]", () => expect(firstFull).eql([[1, 3], 1]));
+		it("needsSwap(((3 ) 0) 1) eql true", () => expect(checkNeedsSwap).eql(true));
+		it("_1%(3 ) eql [[], [3]]", () => expect(negSplit).eql([[], [3]]));
+		it("swap(((3 ) 0) 1) eql [[1, 3], 1]", () => expect(firstSwap).eql([[1, 3], 1]));
+		it("(( ) 0)step3 eql [[3], 0]", () => expect(firstStep).eql([[3], 0]));
+		it("((3 ) 0)step1 eql ((1 3) 1)", () => expect(secondStep).eql([[1, 3], 1]));
+	});
 });
 
 describe("mutual recursive language embedding", () => {
