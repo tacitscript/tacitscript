@@ -5,12 +5,13 @@ mocha.setup('bdd');
 
 describe("Problems 5", () => {
 /*ts
-	append			;
+	append			.(.([.[ .(] )).+$ [.])
 	swap			.(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)
 	needsSwap		.([.[.] ]).>$
 	fullStep		((needsSwap swap) append)?
 	step			:.(([.[ fullStep) .(.(] ) 0`))?
 
+	thirdStep		((1 3) 1)step4
 	firstFull		fullStep(((3 ) 0) 1)
 	checkNeedsSwap	needsSwap(((3 ) 0) 1)
 	negSplit		_1%(3 )
@@ -18,6 +19,7 @@ describe("Problems 5", () => {
 	secondStep		((3 ) 0)step1
 	firstSwap		swap(((3 ) 0) 1)
 */
+	it("((1 3) 1)step4 eql [[1, 3, 4], 1]", () => expect(thirdStep).eql([[1, 3, 4], 1]));
 	it("fullStep(((3 ) 0) 1) eql [[1, 3], 1]", () => expect(firstFull).eql([[1, 3], 1]));
 	it("needsSwap(((3 ) 0) 1) eql true", () => expect(checkNeedsSwap).eql(true));
 	it("_1%(3 ) eql [[], [3]]", () => expect(negSplit).eql([[], [3]]));
