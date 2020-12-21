@@ -11,10 +11,11 @@ describe("mutual recursive language embedding", () => {
 })
 
 describe("Problems 4", () => {
-	describe(`("\\n" "")@.(" " "")@.("\\t" "")@."/*ts "+.+" */".{`, () => {
+	describe(`"\\n"%._1%.([ .(].[.(\` ).[ [.#).^$).~.+$.""$.(" " "")@.("\\t" "")@."/*ts "+.+" */".{`, () => {
 	/*ts
-		solution		("\n" "")@.(" " "")@.("\t" "")@."/*ts "+.+" */".{
-		result			solution"5
+		interleave		"\n"%._1%.([ .(].[.(` ).[ [.#).^$).~.+$.""$
+		solution		interleave.(" " "")@.("\t" "")@."/*ts "+.+" */".{
+		data			"5
 		+ 3
 		* 7
 		+ 10
@@ -22,6 +23,8 @@ describe("Problems 4", () => {
 		* 3
 		+ 1
 		% 11"
+		intermediate	interleave(data)
+		result			solution(data)
 	*/
 		it("solved", () => expect(result).eql(1));
 	});
