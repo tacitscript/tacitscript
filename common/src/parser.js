@@ -51,7 +51,7 @@ const parseTrampoline = function(data) {
 			quotationMark: ""
 		};
 
-		while (data.remaining && (data.blockCommentDepth || data.quotationMark || !data.remaining.startsWith("*/"))) {
+		while (data.remaining && (data.blockCommentDepth || data.quotationMark || data.lineComment || !data.remaining.startsWith("*/"))) {
 			data = parseTrampoline(data);
 		}
 
