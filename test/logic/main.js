@@ -11,20 +11,20 @@ describe("mutual recursive language embedding", () => {
 })
 
 describe("Problems 4", () => {
-	// describe("", () => {
-	// /*ts
-	// 	solution		("\n" " ")@."/*ts "+.+" */".{
-	// 	result			solution"5
-	// 	+ 3
-	// 	* 7
-	// 	+ 10
-	// 	* 2
-	// 	* 3
-	// 	+ 1
-	// 	% 11"
-	// */
-	// 	it("solved", () => expect(result).eql(1));
-	// });
+	describe(`("\\n" "")@.(" " "")@.("\\t" "")@."/*ts "+.+" */".{`, () => {
+	/*ts
+		solution		("\n" "")@.(" " "")@.("\t" "")@."/*ts "+.+" */".{
+		result			solution"5
+		+ 3
+		* 7
+		+ 10
+		* 2
+		* 3
+		+ 1
+		% 11"
+	*/
+		it("solved", () => expect(result).eql(1));
+	});
 
 	describe(`(8 )%.(4%._.(:(86400 3600 60 1).~.*$@.+$)@.-$.0:.(; ).(].].>0 .(].] #.-1.'(86400 3600 60 1)).(/$.[ %$))^.1%.].[@.""+)@." "$`, () => {
 	/*ts

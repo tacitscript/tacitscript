@@ -894,7 +894,7 @@ let bang = value => {
 //==========================================================
 // main exports
 
-export default {
+const ts = {
 	arity,
 	apply,
 	typeOf,
@@ -929,3 +929,5 @@ export default {
 	greater,
 	bang,
 };
+
+export default ts;
