@@ -3,6 +3,15 @@ import ts from "tacitscript";
 
 mocha.setup('bdd');
 
+describe("Problems 5", () => {
+/*ts
+	fullStep		1`
+	step			:.(([.[ fullStep) .(.(] ) 0`))?
+	firstStep		(( ) 0)step3
+*/
+	it("(( ) 0)step3 eql ((3 ) 0)", () => expect(firstStep).eql([[3], 0]));
+});
+
 describe("mutual recursive language embedding", () => {
 /*ts
 	embed			"/*ts 1"+.+" */".{
