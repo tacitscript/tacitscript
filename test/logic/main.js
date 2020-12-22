@@ -4,7 +4,7 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
-	describe("", () => {
+	describe('(2 )%.(:.(].+1.>.(#.) .(;` [./).(].).:(+$./2).(.$)).^(1 ).])$@." "$', () => {
 	/*ts
 		test			.(+ ).([.)
 		testPipe		.(test ).[
@@ -12,15 +12,19 @@ describe("Problems 5", () => {
 		intTwo			[./
 		intermediate	.(;` [./).([.)
 		intermediateB	.(;` [./).([.).:(+$).(.$)
-		root			:.(].+1.>.(#.) .(.(;` [./) (+$./2)`).(.$).(].)).^(1 ).]
-		//rootB			:.(].+1.>.(#.) .(;` [./).(].)).^(1 )
+		root			:.(].+1.>.(#.) .(;` [./).(].).:(+$./2).(.$)).^(1 ).]
+		solution		(2 )%.root$@." "$
+		result			solution(150 0
+5 1
+10 3)
 	*/
 		it(".(+ ).([.)(2)([3, 4]) eql [3]", () => expect(test(2)([3, 4])).eql([5]));
 		it("#.(; ).[([1, 2, 3]) eql 3", () => expect(size([1, 2, 3])).eql(3));
 		it("[./([10, 3])(2) eql 5", () => expect(intTwo([10, 3])(5)).eql(2));
 		it(".(;` [./).([.).+$([10, 3])([5, 6]) eql 7", () => expect(intermediateB([10, 3])([5, 6])).eql(7));
 		it(".(;` [./).([.)([10, 3])([5, 6]) eql [5, 2]", () => expect(intermediate([10, 3])([5, 6])).eql([5, 2]));
-		it("10root1 eql 3.196", () => expect(root(10, 1)).eql(3.196));
+		it("10root3 eql 3.196", () => expect(root(10, 3).toFixed(3)).eql("3.196"));
+		it("solved", () => expect(result).eql("1 3 3.196005081874647"));
 	});
 
 	describe(`(2 )%.((:.((:.(; ).(].!=$ ].;<.([ _.-$))^.].[)$ [ ]).([ .(.(1' ]).*$ [)./$))$.""+)@." "$`, () => {
