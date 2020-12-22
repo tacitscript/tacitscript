@@ -6,13 +6,13 @@ mocha.setup('bdd');
 describe("Problems 5", () => {
 	describe("", () => {
 	/*ts
-		plus			+,(; ).[
+		//plus			+,(; ).[
 		size			#.(; ).[
 		intTwo			[./
 		//intermediate	[./.(;` ;).(].)
 		//root			:.(].+1.>.(#.) [./.(;` ;).(].).+$./2).^(1 ).]
 	*/
-		it("+.(; ).[(2)(3) eql 5", () => expect(plus(2)(3)).eql(5));
+		//it("+.(; ).[(2)(3) eql 5", () => expect(plus(2)(3)).eql(5));
 		it("#.(; ).[([1, 2, 3]) eql 3", () => expect(size([1, 2, 3])).eql(3));
 		it("[./([10, 3])(2) eql 5", () => expect(intTwo([10, 3])(5)).eql(2));
 		//it("[./.(;` ;)([10, 3])([5, 6]) eql [5, 2]", () => expect(intermediate([10, 3])([5, 6])).eql([5, 2]));
