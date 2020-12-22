@@ -4,6 +4,14 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe('.(; #.+1^).~.[<.~.]." "$', () => {
+	/*ts
+		solution		.(; #.+1^).~.[<.~.]." "$
+		result			solution(50 98 17 79)
+	*/
+		it("solved", () => expect(result).eql("3 1 4 2"));
+	});
+	
 	describe('(2 )%.(:.(].+1.>.(#.) .(;` [./).(].).:(+$./2).(.$)).^(1 ).])$@." "$', () => {
 	/*ts
 		test			.(+ ).([.)
