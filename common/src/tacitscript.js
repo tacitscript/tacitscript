@@ -234,7 +234,13 @@ const apply = (left, right) => {
 		return result;
 	}
 
-	throw `Unable to resolve dynamic function application: ${toString(left)}(${toString(right)})`;
+	let leftString = "Fn";
+	let rightString = "Fn";
+
+	try {leftString = toString(left);} catch (_) {}
+	try {rightString = toString(right);} catch(_) {}
+
+	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
 };
 const typeOf = value => {
 	if (isArray(value)) return "A";
@@ -332,10 +338,20 @@ const whileInternal = ({fns, startingArray}) => {
 // OPERATORS
 
 const errorBinary = ({left, right, operator}) => {
-	throw `Unable to resolve operator application (${toString(left)})${operator}(${toString(right)})`;
+	let leftString = "Fn";
+	let rightString = "Fn";
+
+	try {leftString = toString(left);} catch (_) {}
+	try {rightString = toString(right);} catch(_) {}
+
+	throw `Unable to resolve operator application (${leftString})${operator}(${rightString})`;
 };
 const errorUnary = ({value, operator}) => {
-	throw `Unable to resolve operator application ${operator}(${toString(value)})`;
+	let valueString = "Fn";
+
+	try {valueString = toString(value);} catch (_) {}
+
+	throw `Unable to resolve operator application ${operator}(${valueString})`;
 };
 
 //----------------------------------------------------------

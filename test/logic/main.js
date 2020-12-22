@@ -4,6 +4,21 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe("", () => {
+	/*ts
+		plus			+,(; ).[
+		size			#.(; ).[
+		intTwo			[./
+		//intermediate	[./.(;` ;).(].)
+		//root			:.(].+1.>.(#.) [./.(;` ;).(].).+$./2).^(1 ).]
+	*/
+		it("+.(; ).[(2)(3) eql 5", () => expect(plus(2)(3)).eql(5));
+		it("#.(; ).[([1, 2, 3]) eql 3", () => expect(size([1, 2, 3])).eql(3));
+		it("[./([10, 3])(2) eql 5", () => expect(intTwo([10, 3])(5)).eql(2));
+		//it("[./.(;` ;)([10, 3])([5, 6]) eql [5, 2]", () => expect(intermediate([10, 3])([5, 6])).eql([5, 2]));
+		//it("10root3 eql 3.196", () => expect(root(10, 3)).eql(3.196));
+	});
+
 	describe(`(2 )%.((:.((:.(; ).(].!=$ ].;<.([ _.-$))^.].[)$ [ ]).([ .(.(1' ]).*$ [)./$))$.""+)@." "$`, () => {
 	/*ts
 		gcd				:.(; ).(].!=$ ].;<.([ _.-$))^.].[
