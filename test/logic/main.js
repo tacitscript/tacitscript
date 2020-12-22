@@ -4,6 +4,21 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe('(:.(([.[ ((.([.[.] ]).>$ .(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)) .(.([.[ .(] )).+$ [.]))?) .(.(] ) [.]))? (( ) 0))$.(] [.(+.*113.%10000007 0)$)." "$', () => {
+	/*ts
+		checksum		(+.*113.%10000007 0)$
+		append			.(.([.[ .(] )).+$ [.])
+		swap			.(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)
+		needsSwap		.([.[.] ]).>$
+		fullStep		((needsSwap swap) append)?
+		step			:.(([.[ fullStep) .(.(] ) [.]))?
+		pass			(step (( ) 0))$
+		solution		pass.(] [.checksum)." "$
+		result			solution(1 4 3 2 6 5)
+	*/
+		it("solved", () => expect(result).eql("3 5242536"));
+	});
+
 	describe('.(; #.+1^).~.[<.~.]." "$', () => {
 	/*ts
 		solution		.(; #.+1^).~.[<.~.]." "$
