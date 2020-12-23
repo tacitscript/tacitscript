@@ -4,14 +4,13 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
-	describe("", () => {
+	describe(`(.(; ).(_1%.(].[ [).*$.! ].^2.""+.8(:.(.([ ].#).-$."0"\`^.""$ ]).+$).(2 4)%.1'.0+)^.#.-1)@." "$`, () => {
 	/*ts
 		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
 		iterate			^2.""+.8leftPad.(2 4)%.1'.0+
-		contains		:,([.= ;).?$
-		converge		.(; ).(_1%._.contains$.! ].iterate)^.#.-1
+		converge		.(; ).(_1%.(].[ [).*$.! ].iterate)^.#.-1
 		solution		converge@." "$
-		result			solution(4100 5761)
+		result			solution(1 4100 5761)
 	*/
 		it("solved", () => expect(result).eql("2 4 88"));
 		it(`^2.""+.8leftPad.(2 4)%.1'.0+(1891) eql 5758`, () => expect(iterate(1891)).eql(5758));
