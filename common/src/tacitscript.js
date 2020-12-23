@@ -627,12 +627,22 @@ let asterisk = (left, right) => {
 		return pick(left)(right);
 	}
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
+	if (isValue(left) && isArray(right)) {
+		const leftString = toString(left);
+		const leftType = typeOf(left);
+
+		try {
+			return any(value => (leftType === typeOf(value)) && (leftString === toString(value)))(right); // VAB contains 1*(1 2 3)
+		}
+		catch (_) {}
+	}
 
 	errorBinary({left, right, operator: "*"});
 }; asterisk.types = [
 	["N", "N", "N"], // times 2*3
 	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	[["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
+	["V", "A", "B"], // contains 1*(1 2 3)
 ];
 let dollar = (left, right) => {
 	if (isArray(right)) {
@@ -686,7 +696,7 @@ let equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
 
 	try {
-		return toString(left) === toString(right); // VVB equal 2=4
+		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right)); // VVB equal 2=4
 	} catch (_) {
 		return undefined;
 	}

@@ -680,6 +680,15 @@ describe("Operators", () => {
 			it("<5*(4 9 2 7 3) eql [4, 2, 3]", () => expect(lessThanFilter).eql([4, 2, 3]));
 			it(";*( ) eql []", () => expect(emptyFilter).eql([]));
 		});	
+
+		describe("contains VAB", () => {
+		/*ts
+			containsValue		2*(1 2 3)
+			notContainsValue	"4"*(2 3 4)
+		*/
+			it("2*(1 2 3) eql true", () => expect(containsValue).eql(true));
+			it('"4"*(2 3 4) eql false', () => expect(notContainsValue).eql(false));
+		});
 	});
 
 	describe("+ (plus)", () => {
@@ -924,6 +933,7 @@ describe("Operators", () => {
 			equalsUndefined		1=()
 			mixedEquality		(1 "hello")=(1 "hello")
 			undefinedEquality	()=()
+			typeMismatch		2="2"
 		*/
 			it("=7(\"Dan\") eql false", () => expect(equalsSeven("Dan")).eql(false));
 			it("\"Peter\"=(\"Peter\") eql true", () => expect(peterEquals("Peter")).eql(true));
@@ -935,6 +945,7 @@ describe("Operators", () => {
 			it('1=() eql false', () => expect(equalsUndefined).eql(false));
 			it('(1 "hello")=(1 "hello") eql true', () => expect(mixedEquality).eql(true));
 			it('()=() eql true', () => expect(undefinedEquality).eql(true));
+			it('2="2" eql false', () => expect(typeMismatch).eql(false));
 		});
 	});
 
