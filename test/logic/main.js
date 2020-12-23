@@ -8,8 +8,11 @@ describe("Problems 5", () => {
 	/*ts
 		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
 		iterate			^2.""+.8leftPad.(2 4)%.1'.0+
+		contains		:,([.= ;).?$
+		converge		.(; ).(_1%._.contains$.! ].iterate)^.#.-1
 	*/
 		it(`^2.""+.8leftPad.(2 4)%.1'.0+(1891) eql 5758`, () => expect(iterate(1891)).eql(5758));
+		it(".(; ).(_1%._.contains$.! ].iterate)^.#.-1(4100) eql 4", () => expect(converge(4100)).eql(4));
 	});
 
 	describe('(3 )%.(.(] 2%.[.^2@.+$.^0.5).((<$ "A"`) (>$ "O"`) "R"`)?)@." "$', () => {
