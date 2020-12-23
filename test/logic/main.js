@@ -4,6 +4,16 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe('(2 )%.(%._.+$)$@." "$', () => {
+	/*ts
+		rotate			%._.+$
+		solution		(2 )%.rotate$@." "$
+		result			solution(3 "forwhomthebelltolls"
+_6 "verycomplexnumber")
+	*/
+		it("solved", () => expect(result).eql("whomthebelltollsfor numberverycomplex"));
+	});
+
 	describe('(""%.(>|="a"&(<|="z")|(>|="A"&(<|="Z")))*.""$.{"x => x.toLowerCase()".(; _).((=$ "Y"`) "N"`)?)@." "$', () => {
 	/*ts
 		toLowerCase		{"x => x.toLowerCase()"
