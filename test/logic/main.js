@@ -4,6 +4,18 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe('(3 )%.(.(] 2%.[.^2@.+$.^0.5).((<$ "A"`) (>$ "O"`) "R"`)?)@." "$', () => {
+	/*ts
+		hyp				2%.[.^2@.+$.^0.5
+		nature			.(] hyp).((<$ "A"`) (>$ "O"`) "R"`)?
+		solution		(3 )%.nature@." "$
+		result			solution(6 8 9
+9 12 15
+16 12 22)
+	*/
+		it("solved", () => expect(result).eql("A R O"));
+	});
+
 	describe('(2 )%.(%._.+$)$@." "$', () => {
 	/*ts
 		rotate			%._.+$
