@@ -4,6 +4,19 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe('(""%.(>|="a"&(<|="z")|(>|="A"&(<|="Z")))*.""$.{"x => x.toLowerCase()".(; _).((=$ "Y"`) "N"`)?)@." "$', () => {
+	/*ts
+		toLowerCase		{"x => x.toLowerCase()"
+		isPalim			""%.(>|="a"&(<|="z")|(>|="A"&(<|="Z")))*.""$.toLowerCase.(; _).((=$ "Y"`) "N"`)?
+		solution		isPalim@." "$
+		result			solution("Stars"
+"O, a kak Uwakov lil vo kawu kakao!"
+"Some men interpret nine memos")
+	*/
+		it('{"x => x.toLowerCase()""AbC" eql "abc', () => expect(toLowerCase("AbC")).eql("abc"));
+		it("solved", () => expect(result).eql("N Y Y"));
+	});
+
 	describe('(:.(([.[ ((.([.[.] ]).>$ .(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)) .(.([.[ .(] )).+$ [.]))?) .(.(] ) [.]))? (( ) 0))$.(] [.(+.*113.%10000007 0)$)." "$', () => {
 	/*ts
 		checksum		(+.*113.%10000007 0)$
