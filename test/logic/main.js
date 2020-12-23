@@ -4,6 +4,14 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe("", () => {
+	/*ts
+		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+		iterate			^2.""+.8leftPad.(2 4)%.1'.0+
+	*/
+		it(`^2.""+.8leftPad.(2 4)%.1'.0+(1891) eql 5758`, () => expect(iterate(1891)).eql(5758));
+	});
+
 	describe('(3 )%.(.(] 2%.[.^2@.+$.^0.5).((<$ "A"`) (>$ "O"`) "R"`)?)@." "$', () => {
 	/*ts
 		hyp				2%.[.^2@.+$.^0.5
