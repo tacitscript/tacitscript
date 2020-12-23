@@ -4,6 +4,14 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe("", () => {
+	/*ts
+		largest			;<.]
+		sequence		largest.(>,(].) (~2%.].+$)`).^(0 1)
+	*/
+		it("sequence([7, 10]) eql 13", () => expect(sequence([7, 10])).eql([0, 1, 1, 2, 3, 5, 8, 13]));
+	});
+
 	describe(`(.(; ).(_1%.(].[ [).*$.! ].^2.""+.8(:.(.([ ].#).-$."0"\`^.""$ ]).+$).(2 4)%.1'.0+)^.#.-1)@." "$`, () => {
 	/*ts
 		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
