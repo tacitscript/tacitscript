@@ -7,6 +7,11 @@ describe("Problems 5", () => {
 	describe('.(;<.].(>,(].) (~2%.].+$)`).^(0 1).(@,~) ;).@$." "$', () => {
 	/*ts
 		stringLess		:.((.(#@.<$ .(#@.=$ <$).&$).|$ !()`) ()`)?
+		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+		padStrings		:.(#@.;<.].+1.(leftPad ).[ ;).@$
+		addStep			:.([.[ .([.1%.] ]).+$.0+@.+$.""+.2leftPad.""%).(.([ ].]).+$ ].[)
+		stringAdd		padStrings._@.~.(addStep ("" "0"))$.[.((].="0" _1%.[) ;)?._
+		temp			:.#@.;<.].+1.leftPad"67"
 		largest			;<.]
 		sequence		largest.(>,(].) (~2%.].+$)`).^(0 1)
 		solution		.(sequence.(@,~) ;).@$." "$
@@ -16,6 +21,11 @@ describe("Problems 5", () => {
 1346269
 10946)
 	*/
+		it('stringAdd("99", "2") eql "101"', () => expect(stringAdd("99", "2")).eql("101"));
+		it('stringAdd("24", "19") eql "43"', () => expect(stringAdd("24", "19")).eql("43"));
+		it('addStep(["3", "1"], ["7", "8"]) eql ["36", "1"]', () => expect(addStep(["3", "1"], ["7", "8"])).eql(["36", "1"]));
+		it(':.#@.;<.].+1.leftPad"67"("9", "12") eql "067"', () => expect(temp("9", "12")).eql("067"));
+		it(':.(#@.;<.].+1 ;).leftPad@$("12", "345") eql ["0012", "0345"]', () => expect(padStrings("12", "345")).eql(["0012", "0345"]));
 		it(`:.(#@.<$ <$).|$("9", "12") eql true`, () => expect(stringLess("9", "12")).eql(true));
 		it(`:.(#@.<$ <$).|$("123", "92") eql false`, () => expect(stringLess("123", "92")).eql(false));
 		it(`:.(#@.<$ <$).|$("12", "23") eql true`, () => expect(stringLess("12", "23")).eql(true));
