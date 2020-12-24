@@ -74,7 +74,6 @@ const isFalsey = value => {
     if (isUndefined(value)) return true;
     if (value === false) return true;
     if (value === "") return true;
-    if (value === 0) return true;
     if (isArray(value) && !value.length) return true;
     if (isObject(value) && !Object.keys(value).length) return true;
 
