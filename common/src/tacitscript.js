@@ -611,6 +611,13 @@ let atsign = (left, right) => {
 	// (VVV)AA mapBinary =@(2 3 4)
 	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
 	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
+	if (isValue(left) && isArray(right)) {
+		const leftString = toString(left);
+		const leftType = typeOf(left);
+		const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
+
+		return (index === -1) ? undefined : index;
+	}
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
@@ -618,6 +625,7 @@ let atsign = (left, right) => {
 	[["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
 	[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
 	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
+	["V", "A", "N"], // indexOf 2@(6 8 2 3)
 	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
 ];
 let asterisk = (left, right) => {
@@ -626,22 +634,12 @@ let asterisk = (left, right) => {
 		return pick(left)(right);
 	}
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
-	if (isValue(left) && isArray(right)) {
-		const leftString = toString(left);
-		const leftType = typeOf(left);
-
-		try {
-			return any(value => (leftType === typeOf(value)) && (leftString === toString(value)))(right); // VAB contains 1*(1 2 3)
-		}
-		catch (_) {}
-	}
 
 	errorBinary({left, right, operator: "*"});
 }; asterisk.types = [
 	["N", "N", "N"], // times 2*3
 	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	[["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
-	["V", "A", "B"], // contains 1*(1 2 3)
 ];
 let dollar = (left, right) => {
 	if (isArray(right)) {
@@ -894,20 +892,20 @@ let braceright = value => {
 ];
 let bang = value => {
 	if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
-		let fn = (x, y) => !value(x, y);
+		let fn = (x, y) => isFalsey(value(x, y));
 
 		fn.types = value.types;
 
 		return fn;
 	}
 	if (isUnaryFunction(value)) { // (VV)(VB) not !(<2)
-		let fn = x => !value(x);
+		let fn = x => isFalsey(value(x));
 
 		fn.types = value.types;
 
 		return fn;
 	}
-	if (isValue(value)) return !value; // VB not !()
+	if (isValue(value)) return isFalsey(value); // VB not !()
 
 	errorUnary({value, operator: "!"});
 }; bang.types = [

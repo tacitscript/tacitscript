@@ -16,7 +16,8 @@ describe("Problems 5", () => {
 	/*ts
 		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
 		iterate			^2.""+.8leftPad.(2 4)%.1'.0+
-		converge		.(; ).(_1%.(].[ [).*$.! ].iterate)^.#.-1
+		converge		.(; ).(_1%.(].[ [).@$.! ].iterate)^.#.-1
+		temp			.(; ).(_1%.(].[ [).@$.! ].iterate)^
 		solution		converge@." "$
 		result			solution(1 4100 5761)
 	*/
@@ -662,6 +663,15 @@ describe("Operators", () => {
 		*/
 			it(`("_" "-")@"1 _2 0 _1" eql "1 -2 0 -1"`, () => expect(replace).eql("1 -2 0 -1"));
 		});
+
+		describe("indexOf VAN", () => {
+		/*ts
+			containsValue		2@(1 2 3)
+			notContainsValue	"4"@(2 3 4)
+		*/
+			it("2@(1 2 3) eql 1", () => expect(containsValue).eql(1));
+			it('"4"@(2 3 4) eql undefined', () => expect(notContainsValue).eql(undefined));
+		});
 	});
 
 	describe("* (asterisk)", () => {
@@ -687,15 +697,6 @@ describe("Operators", () => {
 			it("<5*(4 9 2 7 3) eql [4, 2, 3]", () => expect(lessThanFilter).eql([4, 2, 3]));
 			it(";*( ) eql []", () => expect(emptyFilter).eql([]));
 		});	
-
-		describe("contains VAB", () => {
-		/*ts
-			containsValue		2*(1 2 3)
-			notContainsValue	"4"*(2 3 4)
-		*/
-			it("2*(1 2 3) eql true", () => expect(containsValue).eql(true));
-			it('"4"*(2 3 4) eql false', () => expect(notContainsValue).eql(false));
-		});
 	});
 
 	describe("+ (plus)", () => {
@@ -1291,17 +1292,21 @@ describe("Operators", () => {
 			notNumber					!4
 			notZero						!0
 			notUndefined				!()
-			notArray					!( )
+			notArray					!(1 2 3)
+			notEmptyArray				!( )
 			notString					!"hello"
 			notEqual					!=
 			notLessThanThree			!(<3)
 			not							!
 			notDivideByZero				!(1/0)
+			notObject					!({"{a: 1}")
+			notEmptyObject				\( ),!
 		*/
 			it("!4 eql false", () => expect(notNumber).eql(false));
-			it('!0 eql true', () => expect(notZero).eql(true));
+			it('!0 eql true', () => expect(notZero).eql(false));
 			it('!() eql true', () => expect(notUndefined).eql(true));
 			it('!(1 2 3) eql false', () => expect(notArray).eql(false));
+			it("!( ) eql true", () => expect(notEmptyArray).eql(true));
 			it('!"hello" eql false', () => expect(notString).eql(false));
 			it('!=(2, 3) eql true', () => expect(notEqual(2, 3)).eql(true));
 			it('!=(3, 3) eql false', () => expect(notEqual(3, 3)).eql(false));
@@ -1311,6 +1316,8 @@ describe("Operators", () => {
 			it('!(x => x)({a: 2}) eql false', () => expect(not(x => x)({a: 2})).eql(false));
 			it('!(x => undefined)(3) eql true', () => expect(not(x => undefined)(3)).eql(true));
 			it('!(1/0) eql true', () => expect(notDivideByZero).eql(true));
+			it(`!({"{a: 1}") eql false`, () => expect(notObject).eql(false));
+			it("\( ),! eql true", () => expect(notEmptyObject).eql(true));
 		});
 	});
 });
