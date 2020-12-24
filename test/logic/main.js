@@ -4,12 +4,19 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
-	describe("", () => {
+	describe('.(;<.].(>,(].) (~2%.].+$)`).^(0 1).(@,~) ;).@$." "$', () => {
 	/*ts
 		largest			;<.]
 		sequence		largest.(>,(].) (~2%.].+$)`).^(0 1)
+		solution		.(sequence.(@,~) ;).@$." "$
+		result			solution(610
+34
+0
+1346269
+10946)
 	*/
-		it("sequence([7, 10]) eql 13", () => expect(sequence([7, 10])).eql([0, 1, 1, 2, 3, 5, 8, 13]));
+		it("sequence([7, 10]) eql [0, 1, 1, 2, 3, 5, 8, 13]", () => expect(sequence([7, 10])).eql([0, 1, 1, 2, 3, 5, 8, 13]));
+		it("solved", () => expect(result).eql("15 9 0 31 21"));
 	});
 
 	describe(`(.(; ).(_1%.(].[ [).*$.! ].^2.""+.8(:.(.([ ].#).-$."0"\`^.""$ ]).+$).(2 4)%.1'.0+)^.#.-1)@." "$`, () => {

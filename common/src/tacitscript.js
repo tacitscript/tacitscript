@@ -36,7 +36,7 @@ const fromPairs = pairs => Object.fromEntries(pairs);
 const filter = check => array => array.filter(check);
 const contains = value => array => array.includes(value);
 const pick = keys => object => pipe(toPairs, filter(([key]) => contains(key)(keys)), fromPairs)(object);
-const sortBy = fn => array => array.sort((a, b) => {const valA = fn(a), valB = fn(b); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
+const sortBy = fn => array => [...array].sort((a, b) => {const valA = fn(a), valB = fn(b); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
 const last = array => array[array.length - 1];
 const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
 const unnest = reduce((acc, array) => [...acc, ...array])([]);
