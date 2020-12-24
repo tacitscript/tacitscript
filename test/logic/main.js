@@ -6,6 +6,7 @@ mocha.setup('bdd');
 describe("Problems 5", () => {
 	describe('.(;<.].(>,(].) (~2%.].+$)`).^(0 1).(@,~) ;).@$." "$', () => {
 	/*ts
+		stringLess		:.((.(#@.<$ .(#@.=$ <$).&$).|$ !()`) ()`)?
 		largest			;<.]
 		sequence		largest.(>,(].) (~2%.].+$)`).^(0 1)
 		solution		.(sequence.(@,~) ;).@$." "$
@@ -15,6 +16,9 @@ describe("Problems 5", () => {
 1346269
 10946)
 	*/
+		it(`:.(#@.<$ <$).|$("9", "12") eql true`, () => expect(stringLess("9", "12")).eql(true));
+		it(`:.(#@.<$ <$).|$("123", "92") eql false`, () => expect(stringLess("123", "92")).eql(false));
+		it(`:.(#@.<$ <$).|$("12", "23") eql true`, () => expect(stringLess("12", "23")).eql(true));
 		it("sequence([7, 10]) eql [0, 1, 1, 2, 3, 5, 8, 13]", () => expect(sequence([7, 10])).eql([0, 1, 1, 2, 3, 5, 8, 13]));
 		it("solved", () => expect(result).eql("15 9 0 31 21"));
 	});
