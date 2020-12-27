@@ -4,12 +4,12 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
-	describe("", () => {
+	describe('.(.([ ) .(2%.] 1%.]._1%.[ _2%.[).~.(+$./3)@ .(] )).+$." "$.("_" "-")@', () => {
 	/*ts
 		//middle			(1 _2 0)%(1 2 3 4 5)
 
 		tripleAverage	.(2%.] 1%.]._1%.[ _2%.[).~.(+$./3)@
-		solution		.(.([ ) tripleAverage .(] )).+$." "$
+		solution		.(.([ ) tripleAverage .(] )).+$." "$.("_" "-")@
 		result			solution(32.6 31.2 35.2 37.4 44.9 42.1 44.1)
 	*/
 		//it("(1 _2 0)%(1 2 3 4 5) eql [[1], [2, 3], [4, 5]]", () => expect(middle).eql([[1], [2, 3], [4, 5]]));
