@@ -4,6 +4,15 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe(`(3 )%.(.(.(1' [).*$ .(1' ]).+$)./$)@." "$`, () => {
+	/*ts
+		distance		.(.(1' [).*$ .(1' ]).+$)./$
+		solution		(3 )%.distance@." "$
+		result			solution(10 1 1
+20 1 2)
+	*/
+		it("solved", () => expect(result).eql("5 6.666666666666667"));
+	});
 	describe('.(.([ ) .(2%.] 1%.]._1%.[ _2%.[).~.(+$./3)@ .(] )).+$." "$.("_" "-")@', () => {
 	/*ts
 		//middle			(1 _2 0)%(1 2 3 4 5)
