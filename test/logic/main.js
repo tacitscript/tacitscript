@@ -4,7 +4,7 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
-	describe("", () => {
+	describe(':,(:,(.(%(""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ")._.+$ (""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ")`).~.+((" " " ") ).\\.~\' ""%).@$.""$ "\n"%.(_1%.[)@).@$.+"."@." "$', () => {
 	/*ts
 		letters			""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		key				.(%letters._.+$ letters`).~.+((" " " ") ).\.~'
