@@ -4,6 +4,18 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe(".(.((].#.>1)` ].(:.(,(; #).%$ ]).%$._.+$ ).[.(].).:(_1%.[).(.$)) .([.+1^ )).^$.].[", () => {
+	/*ts
+		rotate			:.(,(; #).%$ ]).%$._.+$
+		cull			].(rotate ).[.(].).:(_1%.[).(.$)
+		solution		.(.((].#.>1)` cull) .([.+1^ )).^$.].[
+		result			solution(10 3)
+	*/
+		it("intermediate3", () => expect(rotate(3, [1, 2, 3, 4, 5])).eql([4, 5, 1, 2, 3]));
+		it("intermediate", () => expect(cull([10, 3])([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]])).eql([4, 5, 6, 7, 8, 9, 10, 1, 2]));
+		it("solved", () => expect(result).eql(4));
+	});
+
 	describe(`(5 )%.(.(.(].+1.>.(#.) .([.* 1'.+ 2'.~%).(.$).(].)) .(3' )).^$.])@." "$`, () => {
 	/*ts
 		check			].+1.>.(#.)
