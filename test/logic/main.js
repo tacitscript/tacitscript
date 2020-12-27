@@ -4,6 +4,15 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe("", () => {
+	/*ts
+		letters			""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		key				.(%letters._.+$ letters`).~.+((" " " ") ).\.~'
+		unshift			:,(key ""%).@$.""$
+	*/
+		it('unshift(3, "YHQL YLGL YLFL") eql "VENI VIDI VICI"', () => expect(unshift(3, "YHQL YLGL YLFL")).eql("VENI VIDI VICI"));
+	});
+
 	describe('(((<0 +1._1*.((].[.>0 ].[.(/2.[ %2))` .(.(; ) )).^$.1%.].]@._.("" )+.+$.32(:.(.([ ].#).-$."0"`^.""$ ]).+$).""%.((="0" "1"`) "0"`)?@.""$) .((].[.>0 ].[.(/2.[ %2))` .(.(; ) )).^$.1%.].]@._.("" )+.+$)?.""%.(:,(; 0+).+$ 0)$)@." "$', () => {
 	/*ts
 		positive		.((].[.>0 ].[.(/2.[ %2))` .(.(; ) )).^$.1%.].]@._.("" )+.+$
