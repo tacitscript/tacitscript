@@ -4,6 +4,18 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe(`(5 )%.(.(.(].+1.>.(#.) .([.* 1'.+ 2'.~%).(.$).(].)) .(3' )).^$.])@." "$`, () => {
+	/*ts
+		check			].+1.>.(#.)
+		iterate			.([.* 1'.+ 2'.~%).(.$).(].)
+		random			.(.(check iterate) .(3' )).^$.]
+		solution		(5 )%.random@." "$
+		result			solution(3 7 12 1 2
+2 3 15 8 10)
+	*/
+		it("solved", () => expect(result).eql("1 11"));
+	});
+
 	describe('(3 )%.(,(*100 *100 /100.+1).(.(.(.(1\'.> !()``) ()``).?.(].) ].*.(].).:[.(.$)) .([ )).^$.#.-1)@." "$', () => {
 	/*ts
 		addInterest		].*.(].).:[.(.$)
