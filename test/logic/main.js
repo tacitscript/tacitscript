@@ -4,6 +4,18 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe("", () => {
+	/*ts
+		//middle			(1 _2 0)%(1 2 3 4 5)
+
+		tripleAverage	.(2%.] 1%.]._1%.[ _2%.[).~.(+$./3)@
+		solution		.(.([ ) tripleAverage .(] )).+$." "$
+		result			solution(32.6 31.2 35.2 37.4 44.9 42.1 44.1)
+	*/
+		//it("(1 _2 0)%(1 2 3 4 5) eql [[1], [2, 3], [4, 5]]", () => expect(middle).eql([[1], [2, 3], [4, 5]]));
+		it("solved", () => expect(result).eql("32.6 33 34.6 39.166666666666664 41.46666666666667 43.699999999999996 44.1"));
+	});
+
 	describe(':,(:,(.(%(""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ")._.+$ (""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ")`).~.+((" " " ") ).\\.~\' ""%).@$.""$ "\n"%.(_1%.[)@).@$.+"."@." "$', () => {
 	/*ts
 		letters			""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
