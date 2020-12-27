@@ -4,6 +4,20 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe('(3 )%.(,(*100 *100 /100.+1).(.(.(.(1\'.> !()``) ()``).?.(].) ].*.(].).:[.(.$)) .([ )).^$.#.-1)@." "$', () => {
+	/*ts
+		addInterest		].*.(].).:[.(.$)
+		lessRequired	.(.(1'.> !()``) ()``).?.(].)
+		iterate			.(.(lessRequired addInterest) .([ )).^$.#.-1
+		wait			,(*100 *100 /100.+1).iterate
+		solution		(3 )%.wait@." "$
+		result			solution(1000 10000 8
+50 100 25)
+	*/
+		it("intermediate", () => expect(addInterest([1, 2])([3, 4.2])).eql(8));
+		it("solved", () => expect(result).eql("30 4"));
+	});
+
 	describe(`(3 )%.(.(.(1' [).*$ .(1' ]).+$)./$)@." "$`, () => {
 	/*ts
 		distance		.(.(1' [).*$ .(1' ]).+$)./$
