@@ -4,6 +4,29 @@ import ts from "tacitscript";
 mocha.setup('bdd');
 
 describe("Problems 5", () => {
+	describe("", () => {
+	/*ts
+		openingBracket	].@"([{<"
+		addBracket		.(.([.[ ]).+$ 1`)
+		closingBracket	].@")]}>"
+		matchingPair	.([.[.] ]).(,(="(" =")") ,(="[" ="]") ,(="{" ="}") ,(="<" =">")).&$@.|$
+		removeBracket	[,(_1%.[ 1`)
+		fail			("" 0)`
+		ignore			[
+		checkPass		.([.#.=0 ].=1).&$.((; 1`) 0`)?
+		matchBrackets	((openingBracket addBracket) (closingBracket ((matchingPair removeBracket) fail)?) ignore)?
+		iterate			:.(([.].=0 [) matchBrackets)?
+		parseString		""%.(iterate ("" 1))$.checkPass
+		solution		parseString@." "$
+		result			solution("(a+[b*c]-{d/3})"
+"(a + [b * c) - 17]"
+"(((a * x) + [b] * y) + c"
+"auf(zlo)men [gy<psy>] four{s}")
+	*/
+		it("intermediate", () => expect(iterate(["", 1], "(")).eql(["(", 1]));
+		it("solved", () => expect(result).eql("1 0 0 1"));
+	});
+
 	describe('(2 )%.((%6.+1)@.+$)@." "$', () => {
 	/*ts
 		pips			%6.+1
@@ -798,7 +821,16 @@ describe("Operators", () => {
 			it("2@(1 2 3) eql 1", () => expect(containsValue).eql(1));
 			it('"4"@(2 3 4) eql undefined', () => expect(notContainsValue).eql(undefined));
 		});
-	});
+
+		describe("indexOf SSN", () => {
+			/*ts
+				containsValue		"b"@"abc"
+				notContainsValue	"b"@"cde"
+			*/
+				it(`"b"@"abc" eql 1`, () => expect(containsValue).eql(1));
+				it(`"b"@"cde" eql undefined`, () => expect(notContainsValue).eql(undefined));
+			});
+		});
 
 	describe("* (asterisk)", () => {
 		describe("times NNN", () => {

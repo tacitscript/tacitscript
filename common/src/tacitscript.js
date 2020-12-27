@@ -618,6 +618,7 @@ let atsign = (left, right) => {
 
 		return (index === -1) ? undefined : index;
 	}
+	if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
@@ -626,6 +627,7 @@ let atsign = (left, right) => {
 	[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
 	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
 	["V", "A", "N"], // indexOf 2@(6 8 2 3)
+	["S", "S", "N"], // indexOf "bc"@"abcd"
 	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
 ];
 let asterisk = (left, right) => {
