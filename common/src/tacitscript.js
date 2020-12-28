@@ -93,7 +93,7 @@ const isUnaryFunction = value => arity(value) === 1;
 const isValue = value => arity(value) === 0;
 const isVector = value => isArray(value) || isString(value);
 const types = value => {
-	if (value == undefined) return [undefined];
+	if (value == undefined) return ["?"];
 	if (isArray(value)) return ["A"];
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
@@ -357,6 +357,8 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
+	if ((left == undefined) && !right.supportsUndefined) return undefined;
+
 	const typeCombinations = combinations(types(left))(types(right));
 
 	if (isArray(right)) {
