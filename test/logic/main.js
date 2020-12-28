@@ -816,11 +816,11 @@ describe("Operators", () => {
 			it('#({"a": 1, "b": 2}) eql 2', () => expect(calculationB).eql(2));
 		});
 
-		describe("round NN", () => {
+		describe("random NN", () => {
 		/*ts
-			round					#1.5
+			random					#10
 		*/
-			it("#1.5 eql 2", () => expect(round).eql(2));
+			it("#10 lt 10 gt 0", () => expect(random).lt(10).gt(0));
 		});
 	});
 

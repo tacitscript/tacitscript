@@ -853,14 +853,14 @@ let bracketright = value => {
 let hash = value => {
 	if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
 	if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
-	if (isNumber(value)) return Math.round(value); // NN round #1.5
+	if (isNumber(value)) return Math.random() * value; // NN random #10
 
 	errorUnary({value, operator: "#"});
 }; hash.types = [
 	["A", "N"], // arrayLength #(4 5 6)
 	["S", "N"], // stringLength #"abcd"
 	["O", "N"], // keyLength #({"{a: 1}")
-	["N", "N"], // round #1.5
+	["N", "N"], // random #10
 ];
 let backslash = value => {
 	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
