@@ -545,11 +545,16 @@ let less = (left, right) => {
 ];
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
+	if (isArray(left) && (isArray(right) || isObject(right))) {
+		return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
+	}
 
 	errorBinary({left, right, operator: ">"});
 }; greater.types = [
 	["N", "N", "B"], // greaterThan 3>2
 	["S", "S", "B"], // greaterThanString "bcd">"abc"
+	["A", "O", "O"], // over ((1 ) +1)>(3 5 7)
+	["A", "A", "A"], // over (("a" ) +1)>{({"a": 1})
 ];
 let minus = (left, right) => {
 	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
@@ -679,11 +684,7 @@ let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
 	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
 	if (isArray(left) && (isArray(right) || isObject(right))) {
-		if ((left.length === 2) && isArray(left[0]) && isUnaryFunction(left[1])) { // AAA AOO over ((1 ) +1)'(3 5 7) (("a" ) +1)'{({"a": 1})
-			return applyOver({path: left[0], fn: left[1], container: right});
-		} else {
-			return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
-		}
+		return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
 	}
 
 	errorBinary({left, right, operator: "'"});
@@ -694,8 +695,6 @@ let apostrophe = (left, right) => {
 	["S", "O", "?"], // prop "a"'{({"a": 1})
 	["A", "A", "?"], // path (1 )'(5 6 7)
 	["A", "O", "?"], // path ("a" )'{({"a": 1})
-	["A", "O", "O"], // over ((1 ) +1)'(3 5 7)
-	["A", "A", "A"], // over (("a" ) +1)'{({"a": 1})
 ];
 let equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});

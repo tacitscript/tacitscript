@@ -652,26 +652,6 @@ describe("Operators", () => {
 			it(`("mykey" 1)'({no: [2, 3]}) eql undefined`, () => expect(multiArrayObjectPath({no: [2, 3]})).eql(undefined));
 		});
 
-		describe("over AOO AAA", () => {
-		/*ts
-			applyAtIndex			((1 ) +1)'(3 5 7)
-			applyAtNegativeIndex	((~2 ) *2)'
-			applyAtKey				(("b" ) +" John")'
-			applyAtInvalidIndex		((3 ) +1)'(0 1 2)
-			applyAtInvalidKey		(("c" ) "hi"`)'
-			applyAtPath				((~2 "a" 1) -2)'
-			createAtPath			(("a" "b" "c") "created"`)'
-		*/
-			it(`(1 )'(+1)(3 5 7) eql [3, 6, 7]`, () => expect(applyAtIndex).eql([3, 6, 7]));
-			it(`(~2 )'(*2)([1, 2, 3, 4, 5]) eql [1, 2, 3, 8, 5]`, () => expect(applyAtNegativeIndex([1, 2, 3, 4, 5])).eql([1, 2, 3, 8, 5]));
-			it(`("b" )'(+" John")({a: "Hello", b: "Bye", c: "Welcome"}) eql {a: "Hello", b: "Bye John", c: "Welcome"}`, () => expect(applyAtKey({a: "Hello", b: "Bye", c: "Welcome"})).eql({a: "Hello", b: "Bye John", c: "Welcome"}));
-			it(`(3 )'(+1)(0 1 2) eql [0, 1, 2]`, () => expect(applyAtInvalidIndex).eql([0, 1, 2]));
-			it(`("c" )'("hi"\`)({a: "hello", b: "morning"}) eql {a: "hello", b: "morning", c: "hi"}`, () => expect(applyAtInvalidKey({a: "hello", b: "morning"})).eql({a: "hello", b: "morning", c: "hi"}));
-			it(`(~2 "a" 1)'(-2)([1, 2, {a: [0, 1, 2]}, 3]) eql [1, 2, {a: [0, -1, 2]}, 3]`, () => expect(applyAtPath([1, 2, {a: [0, 1, 2]}, 3])).eql([1, 2, {a: [0, -1, 2]}, 3]));
-			it(`(~2 "a" 1)'(-2)([0]) eql [0]`, () => expect(applyAtPath([0])).eql([0]));
-			it(`("a" "b" "c")'("created"\`)({}) eql {a: {b: {c: "created"}}}`, () => expect(createAtPath({})).eql({a: {b: {c: "created"}}}));
-		});
-
 		describe("find (VB)AV", () => {
 			/*ts
 				calculation				(%2.=0)?(1 2 3 4 5 6)
@@ -878,6 +858,26 @@ describe("Operators", () => {
 			it('"ab">"bc" eql false', () => expect(failedGreaterThan).eql(false));
 			it('"b">"a" eql true', () => expect(passedGreaterThan).eql(true));
 		});
+
+		describe("over AOO AAA", () => {
+		/*ts
+			applyAtIndex			((1 ) +1)>(3 5 7)
+			applyAtNegativeIndex	((~2 ) *2)>
+			applyAtKey				(("b" ) +" John")>
+			applyAtInvalidIndex		((3 ) +1)>(0 1 2)
+			applyAtInvalidKey		(("c" ) "hi"`)>
+			applyAtPath				((~2 "a" 1) -2)>
+			createAtPath			(("a" "b" "c") "created"`)>
+		*/
+			it(`(1 )>(+1)(3 5 7) eql [3, 6, 7]`, () => expect(applyAtIndex).eql([3, 6, 7]));
+			it(`(~2 )>(*2)([1, 2, 3, 4, 5]) eql [1, 2, 3, 8, 5]`, () => expect(applyAtNegativeIndex([1, 2, 3, 4, 5])).eql([1, 2, 3, 8, 5]));
+			it(`("b" )>(+" John")({a: "Hello", b: "Bye", c: "Welcome"}) eql {a: "Hello", b: "Bye John", c: "Welcome"}`, () => expect(applyAtKey({a: "Hello", b: "Bye", c: "Welcome"})).eql({a: "Hello", b: "Bye John", c: "Welcome"}));
+			it(`(3 )>(+1)(0 1 2) eql [0, 1, 2]`, () => expect(applyAtInvalidIndex).eql([0, 1, 2]));
+			it(`("c" )>("hi"\`)({a: "hello", b: "morning"}) eql {a: "hello", b: "morning", c: "hi"}`, () => expect(applyAtInvalidKey({a: "hello", b: "morning"})).eql({a: "hello", b: "morning", c: "hi"}));
+			it(`(~2 "a" 1)>(-2)([1, 2, {a: [0, 1, 2]}, 3]) eql [1, 2, {a: [0, -1, 2]}, 3]`, () => expect(applyAtPath([1, 2, {a: [0, 1, 2]}, 3])).eql([1, 2, {a: [0, -1, 2]}, 3]));
+			it(`(~2 "a" 1)>(-2)([0]) eql [0]`, () => expect(applyAtPath([0])).eql([0]));
+			it(`("a" "b" "c")>("created"\`)({}) eql {a: {b: {c: "created"}}}`, () => expect(createAtPath({})).eql({a: {b: {c: "created"}}}));
+		});	
 	});
 
 	describe("% (percent)", () => {
