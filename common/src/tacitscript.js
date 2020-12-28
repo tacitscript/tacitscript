@@ -671,6 +671,11 @@ let dollar = (left, right) => {
 	//[[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]],
 ];
 let apostrophe = (left, right) => {
+	if (isNumber(left) && isNumber(right)) {
+		const factor = Math.pow(10, left);
+
+		return Math.round(right * factor) / factor;
+	}
 	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
 	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
 	if (isArray(left) && (isArray(right) || isObject(right))) {
@@ -683,6 +688,7 @@ let apostrophe = (left, right) => {
 
 	errorBinary({left, right, operator: "'"});
 }; apostrophe.types =[
+	["N", "N", "N"], // round 3'3.14196
 	["N", "A", "?"], // at 1'(1 2 3)
 	["N", "S", "S"], // at 1'"abc"
 	["S", "O", "?"], // prop "a"'{({"a": 1})

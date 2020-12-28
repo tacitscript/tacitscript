@@ -611,6 +611,13 @@ describe("Operators", () => {
 	});
 
 	describe("' (apostrophe)", () => {
+		describe("round NNN", () => {
+		/*ts
+			pi				3'3.14196
+		*/
+			it("3'3.14196 eql 3.142", () => expect(pi).eql(3.142));
+		});
+
 		describe("at NA? NSS", () => {
 		/*ts
 			at				'
