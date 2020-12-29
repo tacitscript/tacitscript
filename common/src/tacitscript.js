@@ -325,10 +325,17 @@ const rightApply = (binaryFn, right) => left => {
 
 	return binaryFn(left, right);
 };
-const whileInternal = ({fns, startingArray}) => {
+const scanInternal = ({fns, startingArray}) => {
 	let result = [...startingArray];
 
 	while (isTruthy(fns[0](result))) result.push(fns[1](result));
+
+	return result;
+};
+const whileInternal = ({whileCondition, next, start}) => {
+	let result = start;
+
+	while (isTruthy(whileCondition(result))) result = next(result);
 
 	return result;
 };
@@ -776,13 +783,21 @@ let percent = (left, right) => {
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
 	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
-	if (isArray(left) && isArray(right)) return whileInternal({fns: left, startingArray: right}); // AAA while (#.<5 #.+1)^( )
+	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA while (#.<5 #.+1)^( )
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {
+		let result = x => whileInternal({whileCondition: left, next: right, start: x});
+
+		result.types = right.types;
+
+		return result;
+	} 
 
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
 	[["N", "?"], "N", "A"], // generate ;^3
-	["A", "A", "A"], // while (#.<5 #.+1)^( )
+	["A", "A", "A"], // scan (#.<5 #.+1)^( )
+	[["X", "V"], ["X", "Y"], ["X", "Y"]], // while 1,(<10^(*2))
 ];
 let ampersand = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)

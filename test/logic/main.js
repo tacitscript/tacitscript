@@ -1245,19 +1245,19 @@ describe("Rosetta Code", () => {
 		flipLess			~<
 		flipRight			~>
 		flipMinus			~-
-		flipQuestion		~?
-		//flipMap				~@		cannot flip map as we can map binary
+		flipQuestion		?,~
+		flipMap				@,~
 		flipInsert			~$
 		flipAt				~'
 		flipSplit			~%
-		flipHat				~^
+		flipHat				^,~
 	*/
 		it("~^(3, x => x) eql [0, 1, 2]", () => expect(flipHat(3, x => x)).eql([0, 1, 2]));
 		it("~%([1, 2, 3, 4, 5], 2) eql [[1, 2], [3, 4, 5]]", () => expect(flipSplit([1, 2, 3, 4, 5], 2)).eql([[1, 2], [3, 4, 5]]));
 		it("~'([1, 2, 3], 1) eql 2", () => expect(flipAt([1, 2, 3], 1)).eql(2));
 		it("~$([1, 2, 3], (x, y) => x + y) eql 6", () => expect(flipInsert([1, 2, 3], (x, y) => x + y)).eql(6));
-		//it("~@([1, 2, 3], x => x * 2) eql [2, 4, 6]", () => expect(flipMap([1, 2, 3], x => x * 2)).eql([2, 4, 6])); cannot flip map
-		//it("~?(2, [[x => x > 3, () => 1], () => 2]) eql 1", () => expect(flipQuestion(2, [[x => x > 3, () => 1], () => 2])).eql(1));
+		it("~@([1, 2, 3], x => x * 2) eql [2, 4, 6]", () => expect(flipMap([1, 2, 3], x => x * 2)).eql([2, 4, 6]));
+		it("~?(2, [[x => x > 3, () => 1], () => 2]) eql 2", () => expect(flipQuestion(2, [[x => x > 3, () => 1], () => 2])).eql(2));
 		it("~/(2, 10) eql 5", () => expect(flipDivide(2, 10)).eql(5));
 		it("~<(2, 10) eql false", () => expect(flipLess(2, 10)).eql(false));
 		it("~>(2, 10) eql true", () => expect(flipRight(2, 10)).eql(true));
@@ -1358,8 +1358,8 @@ describe("Rosetta Code", () => {
 
 	describe("Nth root", () => {
 	/*ts
-		intermediate		:.(,(~^,(#.) >).(.$) #`).^( ).#
-		floorInteger		.(,(~^,(#.) >).(.$) #`).^( ).#.-1
+		intermediate		:.(,(^,~,(#.) >).(.$) #`).^( ).#
+		floorInteger		.(,(^,~,(#.) >).(.$) #`).^( ).#.-1
 		nthRoot				:.(floorInteger [).([ .([ .(] ,(; -1).^$).*$)./$).+$
 	*/
 		it(":.(.(,(~^,(#.) >).(.$) #`).^( ).#.-1 [).([ .([ .(] ,(; -1).^$).*$)./$).+$(5, 34) eql 2.025", () => expect(nthRoot(5, 34)).eql(2.025));
