@@ -265,7 +265,7 @@ const toString = value => {
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
-	throw `Unable to stringify value: ${value}`;
+	throw "Unable to stringify value";
 };
 const transpose = array => {
 	var newArray = [], origArrayLength = array.length, arrayLength = Math.min.apply(Math, map(array => array.length)(array)), i;
@@ -626,11 +626,15 @@ let atsign = (left, right) => {
 	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
 	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
 	if (isValue(left) && isArray(right)) {
-		const leftString = toString(left);
-		const leftType = typeOf(left);
-		const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
+		try {
+			const leftString = toString(left);
+			const leftType = typeOf(left);
+			const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
 
-		return (index === -1) ? undefined : index;
+			return (index === -1) ? undefined : index;
+		} catch (_) {
+			return undefined;
+		}
 	}
 	if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
 
