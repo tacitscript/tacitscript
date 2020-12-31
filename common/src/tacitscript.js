@@ -516,7 +516,11 @@ let plus = (left, right) => {
 	}
 	if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
 	if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
-	if (isNumber(left) && isValue(right)) return left + (+right); // NVN add 2+"3"
+	if (isNumber(left) && isValue(right)) { // NVN add 2+"3"
+		const rightValue = (isString(right) && (right[0] === "_")) ? (+right.slice(1) * -1) : +right;
+
+		return left + rightValue;
+	}
 
 	errorBinary({left, right, operator: "+"});
 }; plus.types = [
