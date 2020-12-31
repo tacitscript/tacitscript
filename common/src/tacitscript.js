@@ -603,11 +603,15 @@ let question = (left, right) => {
 
 		return undefined;
 	}
+	if (isNumber(left) && isNumber(right)) { // random 1#100
+		return (Math.random() * (right - left)) + left;
+	}
 
 	errorBinary({left, right, operator: "?"});
 }; question.types = [
 	[["V", "V"], "A", "V"], // find (%2.=0)?(1 2 3)
 	["A", "V", "V"], // cond ((<10 +1) -1)?15
+	["N", "N", "N"], // random 1#100
 ];
 question.supportsUndefined = true;
 let atsign = (left, right) => {
@@ -879,14 +883,12 @@ let bracketright = value => {
 let hash = value => {
 	if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
 	if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
-	if (isNumber(value)) return Math.random() * value; // NN random #10
 
 	errorUnary({value, operator: "#"});
 }; hash.types = [
 	["A", "N"], // arrayLength #(4 5 6)
 	["S", "N"], // stringLength #"abcd"
 	["O", "N"], // keyLength #({"{a: 1}")
-	["N", "N"], // random #10
 ];
 let backslash = value => {
 	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))

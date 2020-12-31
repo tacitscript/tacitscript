@@ -4,7 +4,7 @@ import problems from "./problems.js";
 
 mocha.setup('bdd');
 
-problems();
+if (problems) problems();
 
 describe("mutual recursive language embedding", () => {
 /*ts
@@ -346,25 +346,24 @@ describe("Operators", () => {
 	});
 
 	describe("? (question)", () => {
-		// describe("if (VB)VA", () => {
-		// /*ts
-		// 	yes				<3?2
-		// 	no				<3?4
-		// */
-		// 	it("<3?2 eql [2, undefined]", () => expect(yes).eql([2, undefined]));
-		// 	it("<3?4 eql [undefined, 4]", () => expect(no).eql([undefined, 4]));
-		// });
-
-		// describe("cond AVV", () => {
-		// /*ts
-		// 	tens			(<10 <20)?
-		// 	tensTwelve		tens12
-		// */
-		// 	it('(<10 <20)?(5) eql [5, undefined, undefined]', () => expect(tens(5)).eql([5, undefined, undefined]));
-		// 	it('(<10 <20)?(15) eql [undefined, 15, undefined]', () => expect(tens(15)).eql([undefined, 15, undefined]));
-		// 	it('(<10 <20)?(25) eql [undefined, undefined, 25]', () => expect(tens(25)).eql([undefined, undefined, 25]));
-		// 	it('(<10 <20)?12 eql [undefined, 12, undefined]', () => expect(tensTwelve).eql([undefined, 12, undefined]));
-		// });
+		describe("cond AVV", () => {
+		/*ts
+			tens			((<10 /2) (<20 *2) "error"`)?
+			tensFive		tens5
+			tensFifteen		tens15
+			tensThirty		tens30
+		*/
+			it('((<10 /2) (<20 *2) "error"`)?(5) eql 2.5', () => expect(tensFive).eql(2.5));
+			it('((<10 /2) (<20 *2) "error"`)?(15) eql 30', () => expect(tensFifteen).eql(30));
+			it('((<10 /2) (<20 *2) "error"`)?(30) eql "error"', () => expect(tensThirty).eql("error"));
+		});
+		
+		describe("random NNN", () => {
+		/*ts
+			random					1?10
+		*/
+			it("1?10 lt 10 gte 1", () => expect(random).lt(10).gte(1));
+		});	
 	});
 
 	describe("@ (atsign)", () => {
@@ -801,13 +800,6 @@ describe("Operators", () => {
 			it("#(3 4 5 6 7) eql [5, [N]]", () => expect([lengthOfArray, ts.typeOf(lengthOfArray)]).eql([5,  "N"]));
 			it('#"abcd" eql 4', () => expect(calculation).eql(4));
 			it('#({"a": 1, "b": 2}) eql 2', () => expect(calculationB).eql(2));
-		});
-
-		describe("random NN", () => {
-		/*ts
-			random					#10
-		*/
-			it("#10 lt 10 gt 0", () => expect(random).lt(10).gt(0));
 		});
 	});
 
