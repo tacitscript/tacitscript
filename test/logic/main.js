@@ -801,6 +801,13 @@ describe("Operators", () => {
 			it('#"abcd" eql 4', () => expect(calculation).eql(4));
 			it('#({"a": 1, "b": 2}) eql 2', () => expect(calculationB).eql(2));
 		});
+
+		describe("modulus NN", () => {
+		/*ts
+			abs						#(_1.5)
+		*/
+			it("#(_1.5) eql 1.5", () => expect(abs).eql(1.5));
+		});
 	});
 
 	describe("< (less)", () => {
