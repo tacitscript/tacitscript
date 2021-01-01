@@ -861,20 +861,20 @@ describe("Operators", () => {
 		describe("over AOO AAA", () => {
 		/*ts
 			applyAtIndex			((1 ) +1)>(3 5 7)
-			applyAtNegativeIndex	((~2 ) *2)>
+			applyAtNegativeIndex	((_2 ) *2)>
 			applyAtKey				(("b" ) +" John")>
 			applyAtInvalidIndex		((3 ) +1)>(0 1 2)
 			applyAtInvalidKey		(("c" ) "hi"`)>
-			applyAtPath				((~2 "a" 1) -2)>
+			applyAtPath				((_2 "a" 1) -2)>
 			createAtPath			(("a" "b" "c") "created"`)>
 		*/
 			it(`(1 )>(+1)(3 5 7) eql [3, 6, 7]`, () => expect(applyAtIndex).eql([3, 6, 7]));
-			it(`(~2 )>(*2)([1, 2, 3, 4, 5]) eql [1, 2, 3, 8, 5]`, () => expect(applyAtNegativeIndex([1, 2, 3, 4, 5])).eql([1, 2, 3, 8, 5]));
+			it(`(_2 )>(*2)([1, 2, 3, 4, 5]) eql [1, 2, 3, 8, 5]`, () => expect(applyAtNegativeIndex([1, 2, 3, 4, 5])).eql([1, 2, 3, 8, 5]));
 			it(`("b" )>(+" John")({a: "Hello", b: "Bye", c: "Welcome"}) eql {a: "Hello", b: "Bye John", c: "Welcome"}`, () => expect(applyAtKey({a: "Hello", b: "Bye", c: "Welcome"})).eql({a: "Hello", b: "Bye John", c: "Welcome"}));
 			it(`(3 )>(+1)(0 1 2) eql [0, 1, 2]`, () => expect(applyAtInvalidIndex).eql([0, 1, 2]));
 			it(`("c" )>("hi"\`)({a: "hello", b: "morning"}) eql {a: "hello", b: "morning", c: "hi"}`, () => expect(applyAtInvalidKey({a: "hello", b: "morning"})).eql({a: "hello", b: "morning", c: "hi"}));
-			it(`(~2 "a" 1)>(-2)([1, 2, {a: [0, 1, 2]}, 3]) eql [1, 2, {a: [0, -1, 2]}, 3]`, () => expect(applyAtPath([1, 2, {a: [0, 1, 2]}, 3])).eql([1, 2, {a: [0, -1, 2]}, 3]));
-			it(`(~2 "a" 1)>(-2)([0]) eql [0]`, () => expect(applyAtPath([0])).eql([0]));
+			it(`(_2 "a" 1)>(-2)([1, 2, {a: [0, 1, 2]}, 3]) eql [1, 2, {a: [0, -1, 2]}, 3]`, () => expect(applyAtPath([1, 2, {a: [0, 1, 2]}, 3])).eql([1, 2, {a: [0, -1, 2]}, 3]));
+			it(`(_2 "a" 1)>(-2)([0]) eql [0]`, () => expect(applyAtPath([0])).eql([0]));
 			it(`("a" "b" "c")>("created"\`)({}) eql {a: {b: {c: "created"}}}`, () => expect(createAtPath({})).eql({a: {b: {c: "created"}}}));
 		});	
 	});
@@ -893,12 +893,12 @@ describe("Operators", () => {
 		describe("split NAA NSA", () => {
 		/*ts
 			splitTwo					2split
-			splitMinusTwo				~2split
+			splitMinusTwo				_2split
 		*/
 			it("2split([1, 2, 3, 4, 5]) eql [[1, 2], [3, 4, 5]]", () => expect(splitTwo([1, 2, 3, 4, 5])).eql([[1, 2], [3, 4, 5]]));
 			it('2split("abcde") eql ["ab", "cde"]', () => expect(splitTwo("abcde")).eql(["ab", "cde"]));
-			it("~2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
-			it('~2split("abcde") eql ["abc", "de"]', () => expect(splitMinusTwo("abcde")).eql(["abc", "de"]));
+			it("_2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
+			it('_2split("abcde") eql ["abc", "de"]', () => expect(splitMinusTwo("abcde")).eql(["abc", "de"]));
 		});
 
 		describe("chunk AAA ASA", () => {
@@ -994,10 +994,10 @@ describe("Operators", () => {
 		describe("while AAA", () => {
 		/*ts
 			firstFiveNaturalNumbers	(#.<5 #.+1)^( )
-			firstFiveFibonacci	(#.<5 ~2%.].+$)^(1 1)
+			firstFiveFibonacci	(#.<5 _2%.].+$)^(1 1)
 		*/
 			it('(#.<5 #.+1)^( ) eql [1, 2, 3, 4, 5]', () => expect(firstFiveNaturalNumbers).eql([1, 2, 3, 4, 5]));
-			it('(#.<5 ~2%.].+$)^(1 1) eql [1, 1, 2, 3, 5]', () => expect(firstFiveFibonacci).eql([1, 1, 2, 3, 5]));
+			it('(#.<5 _2%.].+$)^(1 1) eql [1, 1, 2, 3, 5]', () => expect(firstFiveFibonacci).eql([1, 1, 2, 3, 5]));
 		});
 	});
 
@@ -1775,7 +1775,7 @@ describe("Underscore", () => {
 		intermediateC		+1.>.(#.)
 		constLast			]`
 		endIntoConst		].(` ).[
-		flattenAll			.((~2%.].!=$ ].{)` .(; )).^$.]
+		flattenAll			.((_2%.].!=$ ].{)` .(; )).^$.]
 		intermediate		.(1` .(; ))
 		intermediateB		].{
 		calculation			flattenAll(1 (2 ) (3 ((4 ) )))
@@ -1788,8 +1788,8 @@ describe("Underscore", () => {
 		it("+1.>.(#.)(5)([1, 2, 3, 4]) eql true", () => expect(intermediateC(5)([1, 2, 3, 4])).eql(true));
 		it("].(` ).[([1, 2, 3])([3, 2, 1]) eql 3", () => expect(endIntoConst([1, 2, 3])([3, 2, 1])).eql(3));
 		it("]`([1, 2, 3])([3, 2, 1]) eql 1", () => expect(constLast([1, 2, 3])([3, 2, 1])).eql(1));
-		it(".((~2%.].!=$ ].{)` .(; )).^$.](1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, 4]", () => expect(calculation).eql([1, 2, 3, 4]));
-		it(".((~2%.].!=$ ].{)` .(; )).^$.]([1, [2], [3, [[4]]]]) eql [1, 2, 3, 4]", () => expect(flattenAll([1, [2], [3, [[4]]]])).eql([1, 2, 3, 4]));
+		it(".((_2%.].!=$ ].{)` .(; )).^$.](1 (2 ) (3 ((4 ) ))) eql [1, 2, 3, 4]", () => expect(calculation).eql([1, 2, 3, 4]));
+		it(".((_2%.].!=$ ].{)` .(; )).^$.]([1, [2], [3, [[4]]]]) eql [1, 2, 3, 4]", () => expect(flattenAll([1, [2], [3, [[4]]]])).eql([1, 2, 3, 4]));
 		it("].{([1, [1, [2, [3, 4]]]]) eql [1, 2, [3, 4]]", () => expect(intermediateB([1, [1, [2, [3, 4]]]])).eql([1, 2, [3, 4]]));
 		it(".(1` .(; ))([1, 2, 3]) eql [1, [[1, 2, 3]]]", () => expect(intermediate([1, 2, 3])).eql([1, [[1, 2, 3]]]));
 	});
@@ -2313,9 +2313,9 @@ describe("99 Haskell Problems", () => {
 		it("myLast(\"xyz\") eql \"z\"", () => expect(myLast("xyz")).eql("z"));
 	});
 	
-	describe("2. myButLast ~2'", () => {
+	describe("2. myButLast _2'", () => {
 	/*ts
-		myButLast             ~2'
+		myButLast             _2'
 	*/
 		it("myButLast([1, 2, 3, 4]) eql 3", () => expect(myButLast([1, 2, 3, 4])).eql(3));
 		it("myButLast('abcde') eql 'd'", () => expect(myButLast("abcde")).eql("d"));
@@ -2517,7 +2517,7 @@ describe("99 Haskell Problems", () => {
 		addTwo					2,+
 		splitArray				2,%
 		joinAndRecombine		:,(.(; ) ;).%$
-		splitMinusTwo			~2%
+		splitMinusTwo			_2%
 		dropEvery				:.([.-1.% ,(.(; ) ;).%$).@$.[@.+$
 	*/
 		it('(*2 (1 2 3)),@$ eql [2, 4, 6]', () => expect(testMapApply).eql([2, 4, 6]));
@@ -2528,7 +2528,7 @@ describe("99 Haskell Problems", () => {
 		it('2,+(4) eql 6', () => expect(addTwo(4)).eql(6));
 		it('2,%([1, 2, 3, 4, 5]) eql [[1, 2], [3, 4, 5]]', () => expect(splitArray([1, 2, 3, 4, 5])).eql([[1, 2], [3, 4, 5]]));
 		it(':,(.(; ) ;).%$(2, [1, 2, 3, 4, 5]) eql [[1, 2], [3, 4], [5]]', () => expect(joinAndRecombine(2, [1, 2, 3, 4, 5])).eql([[1, 2], [3, 4], [5]]));
-		it("~2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
+		it("_2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
 		it(':.([.-1.% ,(.(; ) ;).%$).@$.[@.+$(3, [1, 2, 3, 4, 5, 6, 7, 8]) eql [1, 2, 4, 5, 7, 8]', () => expect(dropEvery(3, [1, 2, 3, 4, 5, 6, 7, 8])).eql([1, 2, 4, 5, 7, 8]));
 		it(':.([.-1.% ,(.(; ) ;).%$).@$.[@.+$("abcdefghik") eql "abdeghk"', () => expect(dropEvery(3, "abcdefghik")).eql("abdeghk"));
 	});
