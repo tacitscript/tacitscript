@@ -253,7 +253,7 @@ const getDefinition = function(symbols) {
 			const right = getDefinition([symbol]);
 
 			const definition = (function() {
-				if ((left === "ts.tilde") && isNumber(right)) return "-" + right;
+				if ((left === "ts.underscore") && isNumber(right)) return "-" + right;
 				if ((left === "ts.braceleft") && isString(right)) return right.slice(1, -1).replace(/\\"/g, '"');
 
 				return "ts.apply(" + left + ", " + right + ")";
