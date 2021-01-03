@@ -885,11 +885,13 @@ let bracketleft = value => {
 ];
 let bracketright = value => {
 	if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
+	if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2
 
 	errorUnary({operator: "]", value});
 }; bracketright.types = [
 	["A", "?"], // last ](1 2 3)
 	["S", "S"], // lastInString ]"abc"
+	["N", "N"], // ceiling ]1.2
 ];
 let hash = value => {
 	if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")

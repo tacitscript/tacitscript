@@ -562,7 +562,14 @@ describe("Operators", () => {
 			it("last([1, 2, 3]) eql 3", () => expect(last([1, 2, 3])).eql(3));
 			it("last(\"abcd\") eql \"d\"", () => expect(last("abcd")).eql("d"));
 		});
-	});
+
+		describe("ceiling NN", () => {
+			/*ts
+				ceiling					]1.2
+			*/
+				it("]1.2 eql 2", () => expect(ceiling).eql(2));
+			})
+		});
 
 	describe("{ (braceleft)", () => {
 		describe("eval S?", () => {
