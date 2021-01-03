@@ -285,7 +285,14 @@ const chunk = ({sizes, vector, newVector, append}) => pipe(
 	reduce((acc, value) => {
 		const lastLength = last(acc).length;
 		const index = acc.length - 1;
-		const lastFinalLength = sizes[index % sizes.length] || Infinity;
+		const lastFinalLength = (() => {
+			const rebasedIndex = index % sizes.length;
+			const size = sizes[index % sizes.length];
+			
+			if (!size && (rebasedIndex === (sizes.length - 1))) return Infinity; // final 0
+
+			return size;
+		})();
 
 		if (lastLength < (lastFinalLength - 1)) return [...acc.slice(0, -1), append(acc[index], value)];
 		else if (lastLength === (lastFinalLength - 1)) return [...acc.slice(0, -1), append(acc[index], value), []];

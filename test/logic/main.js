@@ -894,11 +894,13 @@ describe("Operators", () => {
 		/*ts
 			splitTwo					2split
 			splitMinusTwo				_2split
+			splitZero					0split(1 2 3)
 		*/
 			it("2split([1, 2, 3, 4, 5]) eql [[1, 2], [3, 4, 5]]", () => expect(splitTwo([1, 2, 3, 4, 5])).eql([[1, 2], [3, 4, 5]]));
 			it('2split("abcde") eql ["ab", "cde"]', () => expect(splitTwo("abcde")).eql(["ab", "cde"]));
 			it("_2split([1, 2, 3, 4, 5]) eql [[1, 2, 3], [4, 5]]", () => expect(splitMinusTwo([1, 2, 3, 4, 5])).eql([[1, 2, 3], [4, 5]]));
 			it('_2split("abcde") eql ["abc", "de"]', () => expect(splitMinusTwo("abcde")).eql(["abc", "de"]));
+			it("0split(1 2 3) eql [[], [1, 2, 3]]", () => expect(splitZero).eql([[], [1, 2, 3]]));
 		});
 
 		describe("chunk AAA ASA", () => {
@@ -906,6 +908,7 @@ describe("Operators", () => {
 			threeChunk			(3 )%
 			threeTwoChunk		(3 2)%
 			threeTwoZeroChunk	(3 2 0)%
+			initialZeroChunk	(0 2 0)%(1 2 3 4 5)
 		*/
 			it('(3 )%([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) eql [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]', () => expect(threeChunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).eql([[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]));
 			it('(3 2)%([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) eql [[0, 1, 2], [3, 4], [5, 6, 7], [8, 9]]', () => expect(threeTwoChunk([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).eql([[0, 1, 2], [3, 4], [5, 6, 7], [8, 9]]));
@@ -913,6 +916,7 @@ describe("Operators", () => {
 			it('(3 )%"abcdefghij" eql ["abc", "def", "ghi", "j]', () => expect(threeChunk("abcdefghij")).eql(["abc", "def", "ghi", "j"]));
 			it('(3 2)%"abcdefghij" eql ["abc", "de", "fgh", "ij"]', () => expect(threeTwoChunk("abcdefghij")).eql(["abc", "de", "fgh", "ij"]));
 			it('(3 2 0)%"abcdefghij" eql ["abc", "de", "fgh", "ij"]', () => expect(threeTwoZeroChunk("abcdefghij")).eql(["abc", "de", "fghij"]));
+			it("(0 2 0)%(1 2 3 4 5) eql [[], [1, 2], [3, 4, 5]]", () => expect(initialZeroChunk).eql([[], [1, 2], [3, 4, 5]]));
 		});
 
 		describe("chunkWithDelimiter SSA", () => {
