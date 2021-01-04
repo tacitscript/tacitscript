@@ -883,7 +883,14 @@ describe("Operators", () => {
 			it(`(_2 "a" 1)>(-2)([1, 2, {a: [0, 1, 2]}, 3]) eql [1, 2, {a: [0, -1, 2]}, 3]`, () => expect(applyAtPath([1, 2, {a: [0, 1, 2]}, 3])).eql([1, 2, {a: [0, -1, 2]}, 3]));
 			it(`(_2 "a" 1)>(-2)([0]) eql [0]`, () => expect(applyAtPath([0])).eql([0]));
 			it(`("a" "b" "c")>("created"\`)({}) eql {a: {b: {c: "created"}}}`, () => expect(createAtPath({})).eql({a: {b: {c: "created"}}}));
-		});	
+		});
+
+		describe("tap V(VS)V", () => {
+		/*ts
+			tap						"tap test">({"console.log")
+		*/
+			it('"tap test">({"console.log") eql "tap test"', () => expect(tap).eql("tap test"));
+		});
 	});
 
 	describe("% (percent)", () => {
