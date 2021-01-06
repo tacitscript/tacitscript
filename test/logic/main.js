@@ -363,7 +363,14 @@ describe("Operators", () => {
 			random					1?10
 		*/
 			it("1?10 lt 10 gte 1", () => expect(random).lt(10).gte(1));
-		});	
+		});
+
+		describe("findIndex (VV)AN", () => {
+		/*ts
+			findEven				(%2.=0)?(1 2 3 4)
+		*/
+			it("(%2.=0)?(1 2 3 4) eql 1", () => expect(findEven).eql(1));
+		});
 	});
 
 	describe("@ (atsign)", () => {

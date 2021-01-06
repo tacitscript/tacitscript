@@ -625,11 +625,17 @@ let question = (left, right) => {
 	if (isNumber(left) && isNumber(right)) { // random 1#100
 		return (Math.random() * (right - left)) + left;
 	}
+	if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
+		const index = right.findIndex(left);
+
+		return (index === -1) ? undefined : index;
+	}
 
 	errorBinary({left, right, operator: "?"});
 }; question.types = [
 	["A", "V", "V"], // cond ((<10 +1) -1)?15
 	["N", "N", "N"], // random 1#100
+	[["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
 ];
 question.supportsUndefined = true;
 let atsign = (left, right) => {
