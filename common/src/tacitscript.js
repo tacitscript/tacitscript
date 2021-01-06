@@ -568,7 +568,7 @@ let greater = (left, right) => {
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
 	}
-	if (isValue(left) && isUnaryFunction(right)) { // V(VS)V tap 3>({"console.log")
+	if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
 		try {
 			comma(left, right);
 		} catch (_) {
@@ -583,7 +583,7 @@ let greater = (left, right) => {
 	["S", "S", "B"], // greaterThanString "bcd">"abc"
 	["A", "O", "O"], // over ((1 ) +1)>(3 5 7)
 	["A", "A", "A"], // over (("a" ) +1)>{({"a": 1})
-	["V", ["V", "S"], "V"], // tap 3>({"console.log")
+	["V", ["V", "V"], "V"], // tap 3>({"console.log")
 ];
 let minus = (left, right) => {
 	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")

@@ -885,7 +885,7 @@ describe("Operators", () => {
 			it(`("a" "b" "c")>("created"\`)({}) eql {a: {b: {c: "created"}}}`, () => expect(createAtPath({})).eql({a: {b: {c: "created"}}}));
 		});
 
-		describe("tap V(VS)V", () => {
+		describe("tap V(VV)V", () => {
 		/*ts
 			tap						"tap test">({"console.log")
 		*/
