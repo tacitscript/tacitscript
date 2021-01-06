@@ -201,7 +201,7 @@ describe("Operators", () => {
 
 		describe("binaryUnaryApply (XYZ)((YZ)W)(XW)", () => {
 		/*ts
-			contained			=,?(1 2 3)
+			contained			=,'(1 2 3)
 			calculation			contained2
 			applyToBacktick		+`
 		*/
@@ -660,10 +660,10 @@ describe("Operators", () => {
 
 		describe("find (VB)AV", () => {
 			/*ts
-				calculation				(%2.=0)?(1 2 3 4 5 6)
+				calculation				(%2.=0)'(1 2 3 4 5 6)
 			*/
 
-			it("(%2.=0)?(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
+			it("(%2.=0)'(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
 		});
 	});
 
@@ -1265,7 +1265,7 @@ describe("Rosetta Code", () => {
 		flipQuestion		?,~
 		flipMap				@,~
 		flipInsert			~$
-		flipAt				~'
+		flipAt				',~
 		flipSplit			~%
 		flipHat				^,~
 	*/
@@ -1594,9 +1594,9 @@ describe("Underscore", () => {
 	describe("negate !", () => {
 	/*ts
 		negate				!
-		calculation			negate(%2.=0)?(0 1 2 3)
+		calculation			negate(%2.=0)'(0 1 2 3)
 	*/
-		it("negate(%2.=0)?(0 1 2 3) eql 1", () => expect(calculation).eql(1));
+		it("negate(%2.=0)'(0 1 2 3) eql 1", () => expect(calculation).eql(1));
 	});
 
 	describe(`range (}.="N" #.=2)?,(;^ .([.+ _.-$).^$ .(.(].* [.+).(.$) .(.(1' [).-$ ])./$).^$).|$`, () => {
@@ -1971,20 +1971,20 @@ describe("Underscore", () => {
 
 	describe("contains :,(= ;).?$", () => {
 	/*ts
-		intermediateB			(4 (2 3 4 5)),(= ;),?$
-		intermediate			(=4 (2 3 4 5)),?$
-		containsFour			=4?(2 3 4 5)
-		contains				:,(= ;).?$
+		intermediateB			(4 (2 3 4 5)),(= ;),'$
+		intermediate			(=4 (2 3 4 5)),'$
+		containsFour			=4'(2 3 4 5)
+		contains				:,(= ;).'$
 		calculation				3contains(1 2 3)
 		calculationB			4contains(1 2 3)
 	*/
 
 		it("3contains(1 2 3) eql 3", () => expect(calculation).eql(3));
 		it("4contains(1 2 3) eql undefined", () => expect(calculationB).eql(undefined));
-		it("(4 (2 3 4 5)),(= ;),?$ eql 4", () => expect(intermediateB).eql(4));
-		it("(=4 (2 3 4 5)),?$ eql 4", () => expect(intermediate).eql(4));
+		it("(4 (2 3 4 5)),(= ;),'$ eql 4", () => expect(intermediateB).eql(4));
+		it("(=4 (2 3 4 5)),'$ eql 4", () => expect(intermediate).eql(4));
 		it("contains(4, [2, 3, 4, 5]) eql 4", () => expect(contains(4, [2, 3, 4, 5])).eql(4));
-		it("=4?(2 3 4 5) eql 4", () => expect(containsFour).eql(4));
+		it("=4'(2 3 4 5) eql 4", () => expect(containsFour).eql(4));
 	});
 
 	describe("some *.#.>0", () => {
@@ -2038,13 +2038,13 @@ describe("Underscore", () => {
 		it("filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql [2, 4, 6]", () => expect(filter(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql([2, 4, 6]));
 	});
 
-	describe("find ?", () => {
+	describe("find '", () => {
 	/*ts
-		find					?
+		find					'
 		calculation				(%2.=0)find(1 2 3 4 5 6)
 	*/
 
-		it("(%2.=0)?(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
+		it("(%2.=0)'(1 2 3 4 5 6) eql 2", () => expect(calculation).eql(2));
 		it("find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6]) eql 2", () => expect(find(num => (num % 2) === 0, [1, 2, 3, 4, 5, 6])).eql(2));
 	});
 

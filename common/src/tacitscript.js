@@ -609,7 +609,6 @@ colon.types = [
 	["?", "?", "A"], // pair +:2
 ];
 let question = (left, right) => {
-	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
 	if (isArray(left) && isValue(right)) { // AVV cond ((<10 +1) -1)?15
 		for (let i = 0; i < left.length; ++i) {
 			const line = left[i];
@@ -629,7 +628,6 @@ let question = (left, right) => {
 
 	errorBinary({left, right, operator: "?"});
 }; question.types = [
-	[["V", "V"], "A", "V"], // find (%2.=0)?(1 2 3)
 	["A", "V", "V"], // cond ((<10 +1) -1)?15
 	["N", "N", "N"], // random 1#100
 ];
@@ -723,6 +721,7 @@ let apostrophe = (left, right) => {
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
 	}
+	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
 
 	errorBinary({left, right, operator: "'"});
 }; apostrophe.types =[
@@ -732,6 +731,7 @@ let apostrophe = (left, right) => {
 	["S", "O", "?"], // prop "a"'{({"a": 1})
 	["A", "A", "?"], // path (1 )'(5 6 7)
 	["A", "O", "?"], // path ("a" )'{({"a": 1})
+	[["V", "V"], "A", "V"], // find (%2.=0)'(1 2 3)
 ];
 let equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
