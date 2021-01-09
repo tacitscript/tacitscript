@@ -65,7 +65,7 @@ const tsFind = tsPredicate(find);
 
 const isUndefined = value => value == undefined;
 const isString = value => typeof value === "string";
-const isNumber = value => typeof value === "number";
+const isNumber = value => (type => (type === "number") || (type === "bigint"))(typeof value);
 const isFunction = value => typeof value === "function";
 const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
@@ -524,7 +524,7 @@ let plus = (left, right) => {
 	if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
 	if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
 	if (isNumber(left) && isValue(right)) { // NVN add 2+"3"
-		const rightValue = (isString(right) && (right[0] === "_")) ? (+right.slice(1) * -1) : +right;
+		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;
 
 		return left + rightValue;
 	}
