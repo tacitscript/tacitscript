@@ -2514,13 +2514,13 @@ describe("99 Haskell Problems", () => {
 		it('.(; ;).~.+$([1, 2, 3]) eql [1, 1, 2, 2, 3, 3]', () => expect(dupli([1, 2, 3])).eql([1, 1, 2, 2, 3, 3]));
 	});
 
-	describe('15. repli :.(].` [).^$.~.+$', () => {
+	describe('15. repli :._,(` ;).^$.~.+$', () => {
 	/*ts
 		pipeIntoConst		`
 		twoThrees			(3` 2),^$
 		twoFours			(2 4).(].(` ).[ [),^$
 		replicate			:.(].(` ).[ [).^$
-		repli				:.(].(` ).[ [).^$.~.+$
+		repli				:._,(` ;).^$.~.+$
 		repliInPlace		2repli(1 2 3)
 	*/
 		it('`(3, 4) eql 3', () => expect(pipeIntoConst(3, 4)).eql(3));
