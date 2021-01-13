@@ -2309,10 +2309,12 @@ describe("Basic Operations", () => {
 	describe("recursive execution", () => {
 	/*ts
 		factorial					((=1 ;) .(; -1.factorial).*$)?
+		factorialIterative			+1^.*$
 	*/
 		it('=1?,(; .(; -1.factorial).*$).|$(1) eql 1', () => expect(factorial(1)).eql(1));
 		it('=1?,(; .(; -1.factorial).*$).|$(2) eql 2', () => expect(factorial(2)).eql(2));
 		it('=1?,(; .(; -1.factorial).*$).|$(4) eql 24', () => expect(factorial(4)).eql(24));
+		it("factorial iterative", () => expect(factorialIterative(4)).eql(24));
 	});
 });
 
@@ -2407,8 +2409,9 @@ describe("99 Haskell Problems", () => {
 		it("\"madamimadam\".(; _),=$ eql true", () => expect(isPalindromeTrue).eql(true));
 	});
 
-	// describe('7. myFlatten (:,(; (}.="A")?,(myFlatten .(; )).|$).+$ ( ))$', () => {
-	// /*ts
+	describe('7. myFlatten ((}.="A" myFlatten) .(; ))?@.((#.=0 ;) +$)?', () => {
+	/*ts
+		myFlatten					((}.="A" myFlatten) .(; ))?@.((#.=0 ;) +$)?
 	// 	plainConcat					(+ ( ))$
 	// 	insertConcat				(:.+$)$
 	// 	embed						(:.+$ ( ))$
@@ -2424,7 +2427,7 @@ describe("99 Haskell Problems", () => {
 	// 	undefinedCommaArray			(() ),(.(; ) )
 	// 	flattenOrMakeArray			(}.="A")?,(flattenOrMakeArray .(; )).|$
 	// 	myFlatten					(:,(; (}.="A")?,(myFlatten .(; )).|$).+$ ( ))$
-	// */
+	*/
 	// 	it('(( ) +)$([[5, 6], [7, 8]]) eql [5, 6, 7, 8]', () => expect(plainConcat([[5, 6], [7, 8]])).eql([5, 6, 7, 8]));
 	// 	it('(:.+$)$([[2, 3], [4, 5]]) eql [2, 3, 4, 5]', () => expect(insertConcat([[2, 3], [4, 5]])).eql([2, 3, 4, 5]));
 	// 	it('(( ) :.+$)$([[1, 2], [3, 4]])', () => expect(embed([[1, 2], [3, 4]])).eql([1, 2, 3, 4]));
@@ -2441,12 +2444,12 @@ describe("99 Haskell Problems", () => {
 	// 	it('(() ),(.(; ) ) eql [[false]]', () => expect(undefinedCommaArray).eql([[false]]));
 	// 	it('(}.="A")?,(; .(; ))([1]) eql [[1], undefined]', () => expect(makeArrayIfNot([1])).eql([[1], undefined]));
 	// 	it('(}.="A")?,(flattenOrMakeArray .(; )).|$(1) eql [1]', () => expect(flattenOrMakeArray(1)).eql([1]));
-	// 	it('myFlatten([1, 2, 3]) eql [1, 2, 3]', () => expect(myFlatten([1, 2, 3])).eql([1, 2, 3]));
-	// 	it('myFlatten([[1]]) eql [1]', () => expect(myFlatten([[1]])).eql([1]));
-	// 	it('myFlatten([1, [2, 3], 4]) eql ([1, 2, 3, 4])', () => expect(myFlatten([1, [2, 3], 4])).eql([1, 2, 3, 4]));
-	// 	it('myFlatten(["a", ["b", ["c", "d"], "e"]]) eql ["a", "b", "c", "d", "e"]', () => expect(myFlatten(["a", ["b", ["c", "d"], "e"]])).eql(["a", "b", "c", "d", "e"]));
-	// 	it('myFlatten([]) eql []', () => expect(myFlatten([])).eql([]));
-	// });
+		it('myFlatten([1, 2, 3]) eql [1, 2, 3]', () => expect(myFlatten([1, 2, 3])).eql([1, 2, 3]));
+		it('myFlatten([[1]]) eql [1]', () => expect(myFlatten([[1]])).eql([1]));
+		it('myFlatten([1, [2, 3], 4]) eql ([1, 2, 3, 4])', () => expect(myFlatten([1, [2, 3], 4])).eql([1, 2, 3, 4]));
+		it('myFlatten(["a", ["b", ["c", "d"], "e"]]) eql ["a", "b", "c", "d", "e"]', () => expect(myFlatten(["a", ["b", ["c", "d"], "e"]])).eql(["a", "b", "c", "d", "e"]));
+		it('myFlatten([]) eql undefined', () => expect(myFlatten([])).eql([]));
+	});
 
 	describe("8. compress !=%.[@", () => {
 	/*ts
@@ -2483,29 +2486,29 @@ describe("99 Haskell Problems", () => {
 		it('pack.(.(# [))@("aaaabccaadeeee") eql [[4, "a"], [1, "b"], [2, "c"], [2, "a"], [1, "d"], [4, "e"]]', () => expect(encode("aaaabccaadeeee")).eql([[4, "a"], [1, "b"], [2, "c"], [2, "a"], [1, "d"], [4, "e"]]));
 	});
 
-	describe("11. encodeModified encode.(([.=1)?,(] ;).|$)@", () => {
+	describe("11. encodeModified encode.(([.=1 ]) ;)?@", () => {
 	/*ts
 		encodeModified		encode.(([.=1 ]) ;)?@
 	*/
 		it('encode.(([.=1)?,(] ;).|$)@("aaaabccaadeeee") eql [[4, "a"], "b", [2, "c"], [2, "a"], "d", [4, "e"]]', () => expect(encodeModified("aaaabccaadeeee")).eql([[4, "a"], "b", [2, "c"], [2, "a"], "d", [4, "e"]]));
 	});
 
-	// describe('12. decodeModifiedString ((#.=2)?,(.(].` [).^$ .(; )).|$.""$)@.""$', () => {
-	// /*ts
+	describe('12. decodeModifiedString (((#.=2 _,(` ;).^$) .(; ))?.""$)@.""$', () => {
+	/*ts
 	// 	endAndConst						].`
 	// 	expandUnit						.(].` [).^$
 	// 	joinSingle						""$("b" )
 	// 	expand							((#.=2)?,(.(].` [).^$ .(; )).|$)@
 	// 	expandConcat					((#.=2)?,(.(].` [).^$ .(; )).|$.""$)@
-	// 	decodeModifiedString			((#.=2)?,(.(].` [).^$ .(; )).|$.""$)@.""$
-	// */
+		decodeModifiedString			(((#.=2 _,(` ;).^$) .(; ))?.""$)@.""$
+	*/
 	// 	it('].`([2, 3])(4) eql 3', () => expect(endAndConst([2, 3])(4)).eql(3));
 	// 	it('.(].` [).^$([3, "a"]) eql ["a", "a", "a"]', () => expect(expandUnit([3, "a"])).eql(["a", "a", "a"]));
 	// 	it('""$("b" ) eql "b"', () => expect(joinSingle).eql("b"));
 	// 	it('((#.=2)?,(.(].` [).^$ .(; )).|$)@([[3, "a"], "b"]) eql [["a", "a", "a"], ["b"]]', () => expect(expand([[3, "a"], "b"])).eql([["a", "a", "a"], ["b"]]));
 	// 	it('((#.=2)?,(.(].` [).^$ .(; )).|$.""$)@([[3, "a"], "b"]) eql ["aaa", "b"]', () => expect(expandConcat([[3, "a"], "b"])).eql(["aaa", "b"]));
-	// 	it('((#.=2)?,(.(].` [).^$ .(; )).|$.""$)@.""$([[4, "a"], "b", [2, "c"], [2, "a"], "d", [4, "e"]]) eql "aaaabccaadeeee"', () => expect(decodeModifiedString([[4, "a"], "b", [2, "c"], [2, "a"], "d", [4, "e"]])).eql("aaaabccaadeeee"));
-	// });
+		it('((#.=2)?,(.(].` [).^$ .(; )).|$.""$)@.""$([[4, "a"], "b", [2, "c"], [2, "a"], "d", [4, "e"]]) eql "aaaabccaadeeee"', () => expect(decodeModifiedString([[4, "a"], "b", [2, "c"], [2, "a"], "d", [4, "e"]])).eql("aaaabccaadeeee"));
+	});
 
 	describe('14. dupli .(; ;).~.+$', () => {
 	/*ts
