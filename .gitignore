@@ -1,2 +1,3 @@
 node_modules
 test/logic/problems.js
+test/data/words.js
