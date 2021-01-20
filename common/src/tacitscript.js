@@ -595,12 +595,16 @@ let minus = (left, right) => {
 		return omit(left)(right);
 	}
 	if (isNumber(left) && isNumber(right)) return left - right; // NNN subtract 5-2
+	if (isArray(left) && isArray(right)) return splice(right, ...left); // AAA splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
+	if (isArray(left) && isString(right)) return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]); // ASS splice (3 2 "le")-"nucular"="nuclear"
 
 	errorBinary({left, right, operator: "-"});
 }; minus.types = [
 	["N", "N", "N"], // subtract 5-2
 	["S", "O", "O"], // omitKey "a"-({"{a: 1}")
 	["A", "O", "O"], // omitKeys ("a" "b")-({"{a: 1, b: 2}")
+	["A", "A", "A"], // splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
+	["A", "S", "S"], // splice (3 2 "le")-"nucular"="nuclear"
 ];
 let colon = (left, right) => {
 	return [left, right]; // ??A pair +:2

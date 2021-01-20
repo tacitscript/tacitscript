@@ -750,7 +750,7 @@ describe("Operators", () => {
 	});
 
 	describe("- (minus)", () => {
-		describe("minus NNN", () => {
+		describe("subtract NNN", () => {
 		/*ts
 			minusFive			4-9
 			minusSix			-6
@@ -776,6 +776,13 @@ describe("Operators", () => {
 			it('("a" "no" "hen")-(\(("a" 4) ("be" "hello") ("hen" (1 2 3)))) eql {be: "hello"}', () => expect(keysOmitted).eql({be: "hello"}));
 			it('("c" "ex")-({a: "head", ex: 4}) eql {a: "head}', () => expect(omitTheseKeys({a: "head", ex: 4})).eql({a: "head"}));
 		});
+
+		describe("splice AAA", () => {
+		/*ts
+			result					(1 2 3 4)-(5 6 7 8)
+		*/
+			it("(1 2 3 4)-(5 6 7 8) eql [5, 3, 4, 8]", () => expect(result).eql([5, 3, 4, 8]));
+		})
 	});
 
 	describe("/ (slash)", () => {
