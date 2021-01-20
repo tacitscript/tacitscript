@@ -777,11 +777,17 @@ describe("Operators", () => {
 			it('("c" "ex")-({a: "head", ex: 4}) eql {a: "head}', () => expect(omitTheseKeys({a: "head", ex: 4})).eql({a: "head"}));
 		});
 
-		describe("splice AAA", () => {
+		describe("splice AAA ASS", () => {
 		/*ts
 			result					(1 2 3 4)-(5 6 7 8)
+			noInsert				(1 2)-(5 6 7 8)
+			string					(3 2 "le")-"nucular"
+			noInsertString			(3 2)-"nucular"
 		*/
 			it("(1 2 3 4)-(5 6 7 8) eql [5, 3, 4, 8]", () => expect(result).eql([5, 3, 4, 8]));
+			it("(1 2)-(5 6 7 8) eql [5, 8]", () => expect(noInsert).eql([5, 8]));
+			it('(3 2 "le")-"nucular" eql "nuclear"', () => expect(string).eql("nuclear"));
+			it('(3 2)-"nucular" eql "nucar"', () => expect(noInsertString).eql("nucar"));
 		})
 	});
 
