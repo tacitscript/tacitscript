@@ -39,13 +39,13 @@ const pick = keys => object => pipe(toPairs, filter(([key]) => contains(key)(key
 const sortBy = fn => array => [...array].sort((a, b) => {const valA = fn(a), valB = fn(b); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
 const last = array => array[array.length - 1];
 const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
-const unnest = arrays => {let result = [], length = arrays.length; for (var i = 0; i < length; i += 1) Array.prototype.push.apply(result, arrays[i]); return result;};
+const unnest = arrays => {let result = [], length = arrays.length; for (let i = 0; i < length; i += 1) Array.prototype.push.apply(result, arrays[i]); return result;};
 const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
 const omit = keys => object => {const copy = {...object}; keys.forEach(key => delete copy[key]); return copy;};
 const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
 const all = check => array => array.every(check);
-const flatten = values => {let result = [], length = values.length; for (var i = 0; i < length; i += 1) {const value = values[i]; Array.prototype.push.apply(result, Array.isArray(value) ? flatten(value) : [value]);} return result;};
-const groupBy = fn => array => {let result = [], length = array.length; for (var i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
+const flatten = values => {let result = [], length = values.length; for (let i = 0; i < length; i += 1) {const value = values[i]; Array.prototype.push.apply(result, Array.isArray(value) ? flatten(value) : [value]);} return result;};
+const groupBy = fn => array => {let result = [], length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
 const identity = x => x;
 const values = obj => Object.values(obj);
 const any = check => array => array.some(check);
