@@ -251,8 +251,8 @@ export default ({store}) => {
 		</div>
 
 		<div className="section">
-			<h4>tacitscript - a language for building algorithms</h4>
-			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Jump straight into the interactive tutorial below!</p>
+			<h4>tacitscript - a language optimized for pen and paper</h4>
+			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. You will build algorithms from a set of mathematical operators. Jump straight into the interactive tutorial below!</p>
 		</div>
 
 		<div className="section-title">
