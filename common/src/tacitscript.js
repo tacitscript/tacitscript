@@ -39,7 +39,7 @@ const pick = keys => object => pipe(toPairs, filter(([key]) => contains(key)(key
 const sortBy = fn => array => [...array].sort((a, b) => {const valA = fn(a), valB = fn(b); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
 const last = array => array[array.length - 1];
 const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
-const unnest = reduce((acc, array) => [...acc, ...array])([]);
+const unnest = arrays => {let result = [], length = arrays.length; for (var i = 0; i < length; i += 1) Array.prototype.push.apply(result, arrays[i]); return result;};
 const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
 const omit = keys => object => {const copy = {...object}; keys.forEach(key => delete copy[key]); return copy;};
 const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
