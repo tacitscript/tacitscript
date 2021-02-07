@@ -44,7 +44,7 @@ const splice = (array, start, deleteCount, ...items) => {const copy = array.slic
 const omit = keys => object => {const copy = {...object}; keys.forEach(key => delete copy[key]); return copy;};
 const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
 const all = check => array => array.every(check);
-const flatten = reduce((acc, value) => [...acc, ...(Array.isArray(value) ? flatten(value) : [value])])([]);
+const flatten = values => {let result = [], length = values.length; for (var i = 0; i < length; i += 1) {const value = values[i]; Array.prototype.push.apply(result, Array.isArray(value) ? flatten(value) : [value]);} return result;};
 const groupBy = fn => reduce((acc, value) => {const key = fn(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({});
 const identity = x => x;
 const values = obj => Object.values(obj);
