@@ -301,7 +301,7 @@ const chunk = ({sizes, vector, newVector}) => pipe(
 
 			if (lastLength < (lastFinalLength - 1)) {
 				let last = result.pop(); 
-				
+
 				if (isArray(newVector)) last.push(value);
 				else last = `${last}${value}`; // string
 				
@@ -320,13 +320,30 @@ const chunk = ({sizes, vector, newVector}) => pipe(
 	},
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
-const chunkWhenPredicate = ({when, vector, newVector, append}) => pipe(
-	reduce((acc, value) => {
-			const lastArray = last(acc);
+const chunkWhenPredicate = ({when, vector, newVector}) => pipe(
+	array => {
+		let result = [newVector];
+		const length = array.length;
 
-		if (!when(value)) return [...acc.slice(0, -1), append(lastArray, value)];
-		else return [...acc, append(newVector, value)];
-	})([newVector]),
+		for (let i = 0; i < length; i += 1) {
+			const value = array[i];
+
+			if (!when(value)) {
+				let last = result.pop();
+
+				if (isArray(newVector)) last.push(value);
+				else last = `${last}${value}`; // string
+
+				result.push(last);
+			}
+			else {
+				if (isArray(newVector)) result.push([value])
+				else result.push(`${value}`);
+			}
+		}
+
+		return result;
+	},
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
 const chunkWhenComparator = ({when, vector, newVector, append}) => pipe(
@@ -817,8 +834,8 @@ let percent = (left, right) => {
 		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
 	}
 	else if (isUnaryFunction(left)) {
-		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
-		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
+		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: []}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
+		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
 	}
 	else if (isBinaryFunction(left)) {
 		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
