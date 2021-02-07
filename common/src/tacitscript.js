@@ -281,28 +281,48 @@ const transpose = array => {
 
 	return newArray;
 };
-const chunk = ({sizes, vector, newVector, append}) => pipe(
-	reduce((acc, value) => {
-		const lastLength = last(acc).length;
-		const index = acc.length - 1;
-		const lastFinalLength = (() => {
-			const rebasedIndex = index % sizes.length;
-			const size = sizes[index % sizes.length];
-			
-			if (!size && (rebasedIndex === (sizes.length - 1))) return Infinity; // final 0
+const chunk = ({sizes, vector, newVector}) => pipe(
+	array => {
+		let result = [newVector];
+		const length = array.length;
 
-			return size;
-		})();
+		for (let i = 0; i < length; i += 1) {
+			const value = array[i];
+			const lastLength = last(result).length;
+			const index = result.length - 1;
+			const lastFinalLength = (() => {
+				const rebasedIndex = index % sizes.length;
+				const size = sizes[index % sizes.length];
+				
+				if (!size && (rebasedIndex === (sizes.length - 1))) return Infinity; // final 0
 
-		if (lastLength < (lastFinalLength - 1)) return [...acc.slice(0, -1), append(acc[index], value)];
-		else if (lastLength === (lastFinalLength - 1)) return [...acc.slice(0, -1), append(acc[index], value), []];
-		else return [...acc, [value]]; // lastFinalLength was 0
-	})([newVector]),
+				return size;
+			})();
+
+			if (lastLength < (lastFinalLength - 1)) {
+				let last = result.pop(); 
+				
+				if (isArray(newVector)) last.push(value);
+				else last = `${last}${value}`; // string
+				
+				result.push(last);
+			}
+			else if (lastLength === (lastFinalLength - 1)) {
+				let last = result.pop();
+				
+				if (isArray(newVector)) {last.push(value); result.push(last, []);}
+				else result.push(`${last}${value}`, "");
+			}
+			else result.push([value]); // lastFinalLength was 0
+		}
+
+		return result;
+	},
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
 const chunkWhenPredicate = ({when, vector, newVector, append}) => pipe(
 	reduce((acc, value) => {
-		const lastArray = last(acc);
+			const lastArray = last(acc);
 
 		if (!when(value)) return [...acc.slice(0, -1), append(lastArray, value)];
 		else return [...acc, append(newVector, value)];
@@ -790,8 +810,8 @@ let percent = (left, right) => {
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
 	}
 	else if (isArray(left)) {
-		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // AAA chunk (1 2 0)%(1 2 3 4 5)
-		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // ASA chunk chunk (1 2 0)%"abcde"
+		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
+		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
 	}
 	else if (isString(left) && isString(right)) {
 		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
