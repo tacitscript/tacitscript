@@ -346,13 +346,31 @@ const chunkWhenPredicate = ({when, vector, newVector}) => pipe(
 	},
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
-const chunkWhenComparator = ({when, vector, newVector, append}) => pipe(
-	reduce((acc, value) => {
-		const lastArray = last(acc);
+const chunkWhenComparator = ({when, vector, newVector}) => pipe(
+	array => {
+		let result = [newVector];
+		const length = array.length;
 
-		if ((lastArray.length < 1) || !when(last(lastArray), value)) return [...acc.slice(0, -1), append(lastArray, value)];
-		else return [...acc, append(newVector, value)];
-	})([newVector]),
+		for (let i = 0; i < length; i += 1) {
+			const value = array[i];
+			const lastArray = last(result);
+
+			if ((lastArray.length < 1) || !when(last(lastArray), value)) {
+				let last = result.pop();
+
+				if (isArray(newVector)) last.push(value);
+				else last = `${last}${value}`; // string
+
+				result.push(last);
+			}
+			else {
+				if (isArray(newVector)) result.push([value])
+				else result.push(`${value}`);
+			}
+		}
+
+		return result;
+	},
 	chunks => last(chunks).length ? chunks : chunks.slice(0, -1)
 )(vector);
 const leftApply = (left, binaryFn) => right => {
@@ -838,8 +856,8 @@ let percent = (left, right) => {
 		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
 	}
 	else if (isBinaryFunction(left)) {
-		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: [], append: (acc, value) => [...acc, value]}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
-		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: "", append: (acc, value) => `${acc}${value}`}); // (SSB)SA chunkWhenComparator <%"abcba"
+		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
+		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
 	}
 
 	errorBinary({left, right, operator: "%"});
