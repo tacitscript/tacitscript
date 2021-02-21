@@ -2608,12 +2608,14 @@ describe("99 Haskell Problems", () => {
 		it('removeAt(1, "abcd") eql "acd"', () => expect(removeAt(1, "abcd")).eql("acd"));
 	});
 
-	describe("21. insertAt :.(.([.[ ]).%$ [.]).([.[ .(] ) [.]).+$", () => {
+	describe("21. insertAt :,((1 0 0)- ;).-$", () => {
 	/*ts
 		splitUp						:.(.([.[ ]).%$ [.])
 		insertAt					:.(.([.[ ]).%$ [.]).([.[ .(] ) [.]).+$
 		insertAtString				:.(.([.[ ]).%$ [.]).([.[ ] [.]).+$
+		insertAtA					:,((1 0 0)- ;).-$
 	*/
+		it("solved", () => expect(insertAtA([2, 8], [1, 2, 3, 4, 5])).eql([1, 2, 8, 3, 4, 5]));
 		it(':.(.([.[ ]).%$ [.])([2, 8], [1, 2, 3, 4, 5]) eql [[[1, 2], [3, 4, 5]], 8]', () => expect(splitUp([2, 8], [1, 2, 3, 4, 5])).eql([[[1, 2], [3, 4, 5]], 8]));
 		it('insertAt([2, 8], [1, 2, 3, 4, 5]) eql [1, 2, 8, 3, 4, 5]', () => expect(insertAt([2, 8], [1, 2, 3, 4, 5])).eql([1, 2, 8, 3, 4, 5]));
 		it(':.(.([.[ ]).%$ [.]).([.[ ] [.]).+$([2, "alpha"], "abcde") eql "abalphacde"', () => expect(insertAtString([2, "alpha"], "abcde")).eql("abalphacde"));
