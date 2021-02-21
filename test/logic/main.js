@@ -2600,10 +2600,12 @@ describe("99 Haskell Problems", () => {
 		it('rotate(-2, "abcdefgh") eql "ghabcdef"', () => expect(rotate(-2, "abcdefgh")).eql("ghabcdef"));
 	});
 
-	describe("20. removeAt :,(.(; 1` 0`) ;).%$.([ ]).+$", () => {
+	describe("20. removeAt :,(:1 ;).-$", () => {
 	/*ts
 		removeAt			:,(.(; 1` 0`) ;).%$.([ ]).+$
+		removeAtA			:,(:1 ;).-$
 	*/
+		it("solved", () => expect(removeAtA(2, [1, 2, 3, 4, 5, 6])).eql([1, 2, 4, 5, 6]));
 		it('removeAt(2, [1, 2, 3, 4, 5, 6]) eql [1, 2, 4, 5, 6]', () => expect(removeAt(2, [1, 2, 3, 4, 5, 6])).eql([1, 2, 4, 5, 6]));
 		it('removeAt(1, "abcd") eql "acd"', () => expect(removeAt(1, "abcd")).eql("acd"));
 	});
