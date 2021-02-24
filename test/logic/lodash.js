@@ -9,4 +9,12 @@ export default () => {
 	*/
 		it("solved", () => expect(result).eql([["a", "b", "c"], ["d"]]));
 	});
+
+	describe("compact", () => {
+	/*ts
+		compact			;*
+		result			compact(0 1 () 2 "" 3)
+	*/
+		it("solved", () => expect(result).eql([0, 1, 2, 3]));
+	});
 };
