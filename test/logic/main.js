@@ -1,9 +1,11 @@
 const {expect} = chai;
 import ts from "tacitscript";
 import problems from "./problems.js";
+import lodash from "./lodash.js";
 
 mocha.setup('bdd');
 
+lodash();
 if (problems) problems();
 
 describe("mutual recursive language embedding", () => {
