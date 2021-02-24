@@ -2,6 +2,16 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("differenceBy", () => {
+	/*ts
+		differenceBy	:,(.([ @$.(@,~.!)).(.$) ;).*$
+		result			([ (2.3 3.4))differenceBy(2.1 1.2)
+		resultB			("x"' (\(("x" 1) ) ))differenceBy(\(("x" 2) ) \(("x" 1) ))
+	*/
+		it("solved", () => expect(result).eql([1.2]));
+		it("solved2", () => expect(resultB).eql([{x: 2}]));
+	});
+
 	describe("difference", () => {
 	/*ts
 		difference		:,(@,~.! ;).*$
