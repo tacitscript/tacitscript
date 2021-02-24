@@ -17,4 +17,12 @@ export default () => {
 	*/
 		it("solved", () => expect(result).eql([0, 1, 2, 3]));
 	});
+
+	describe("concat", () => {
+	/*ts
+		concat			((}.="A" ;) .(; ))?@.+$
+		result			concat((1 ) 2 (3 ) ((4 ) ))
+	*/
+		it("solved", () => expect(result).eql([1, 2, 3, [4]]));
+	});
 };
