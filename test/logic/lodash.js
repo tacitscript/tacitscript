@@ -30,9 +30,9 @@ export default () => {
 	/*ts
 		chunk			:,(.(; ) ;).%$
 		result			3chunk("a" "b" "c" "d")
-		result2			2chunk("a" "b" "c" "d")
+		resultB			2chunk("a" "b" "c" "d")
 	*/
 		it("solved", () => expect(result).eql([["a", "b", "c"], ["d"]]));
-		it("solved2", () => expect(result2).eql([["a", "b"], ["c", "d"]]));
+		it("solved2", () => expect(resultB).eql([["a", "b"], ["c", "d"]]));
 	});
 };
