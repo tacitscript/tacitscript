@@ -2,6 +2,14 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("differenceWith", () => {
+	/*ts
+		differenceWith	:,(,(! ;).@$.&$ ;).*$
+		result			(= ({"{x:1,y:2}" ))differenceWith({"{x:1,y:2}" {"{x:2,y:1}")
+	*/
+		it("solved", () => expect(result).eql([{x:2,y:1}]));
+	});
+
 	describe("differenceBy", () => {
 	/*ts
 		differenceBy	:,(.([ @$.(@,~.!)).(.$) ;).*$
