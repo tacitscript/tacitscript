@@ -2,6 +2,18 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("dropRight", () => {
+	/*ts
+		dropRight		:.(([.=0 ]) ,(_1* ;).%$.[)?
+		result			2dropRight(1 2 3)
+		resultA			5dropRight(1 2 3)
+		resultB			0dropRight(1 2 3)
+	*/
+		it("solved", () => expect(result).eql([1]));
+		it("solvedA", () => expect(resultA).eql([]));
+		it("solvedB", () => expect(resultB).eql([1, 2, 3]));
+	});
+
 	describe("differenceWith", () => {
 	/*ts
 		differenceWith	:,(,(! ;).@$.&$ ;).*$
