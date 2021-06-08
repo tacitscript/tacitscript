@@ -2,10 +2,12 @@ import TextEdit from "../components/text-edit.js";
 
 export default {
 	id: "a",
-	name: "Arithmetic Operations",
+	name: "Precedence",
 	description: <div>
+		<p>In tacitscript terminology, an <i>operator</i>, eg. <a href="#plus">plus (+)</a>, is any symbol within an expression.</p>
+		<p>Each operator may represent one of many possible <i>operations</i>, eg. <a href="#add">+ (add)</a> or <a href="#concat">+ (concat)</a>.</p>
 		<p>tacitscript uses the standard binary arithmetic operations <a href="#add">+ (add)</a>, <a href="#subtract">- (subtract)</a>, <a href="#multiply">* (multiply)</a> and <a href="#divide">/ (divide)</a>.</p>
-		<p>Except for the operators <a href="#dot">dot (.)</a> and <a href="#comma">comma (,)</a> all tacitscript operators have equal precedence, and are strictly <i>left-associative</i>.</p>
+		<p>tacitscript operators have equal precedence, and are all strictly <i>left-associative</i>.</p>
 		<div className="code-block">2+3*4</div>
 		<p>is intepreted as</p>
 		<div className="code-block">(2+3)*4</div>
