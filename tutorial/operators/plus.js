@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "plus",
@@ -6,10 +7,11 @@ export default {
 	sections: [{
 		id: "add",
 		type: "NVN",
-		examples: <React.Fragment>
-			<span>{`sum\t\t2+3\t\t\t\t\t\tequals 5\nsumConvert\t2+"3"\t\t\t\t\t\tequals 5\nsumInvalid\t2+"three"\t\t\t\t\tis `}
-			<i>undefined</i></span>
-		</React.Fragment>,
+		examples: getOperationExamples([
+			["sum", "2+3", "equals 5"],
+			["sumConvert", '2+"3"', "equals 5"],
+			["sumInvalid", '2+"three"', <span>is <i>undefined</i></span>]
+		]),
 	}, {
 		id: "concat",
 		type: "AAA   SVS",
