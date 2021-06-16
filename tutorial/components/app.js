@@ -144,6 +144,7 @@ const style = css({
 		},
 		"> h4": {
 			margin: "0.4rem 0 0.7rem",
+			fontSize: "1.1rem",
 		},
 		"> h2": {
 			margin: "0.5rem 0",
@@ -256,7 +257,7 @@ export default ({store}) => {
 		<div className="section">
 			<h4>tacitscript - a language optimized for pen and paper</h4>
 			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Algorithms are built from a set of mathematical operators.</p>
-			<p>Jump straight into the interactive tutorial below! (The entire language syntax is covered in the first six chapters.)</p>
+			<p>Jump straight into the interactive tutorial below! (The entire language syntax is covered in the first six sections.)</p>
 		</div>
 
 		<div className="section-title">

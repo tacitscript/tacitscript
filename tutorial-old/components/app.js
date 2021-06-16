@@ -239,7 +239,7 @@ export default () => {
 				<li><b>binary</b> - requiring operands to the left and right, eg. addition <span className="code">+</span></li>
 				<li><b>unary</b> - requiring one operand, typically to the right, eg. not <span className="code">!</span></li>
 			</ul>
-			<p>The standard binary arithmetic operators <a href="#add">+ (add)</a>, <a href="#subtract">- (subtract)</a>, <a href="#multiply">* (multiply)</a> and <a href="#divide">/ (divide)</a>, all retain their meaning in tacitscript.</p>
+			<p>The standard binary arithmetic operators <a href="#add">(+) add</a>, <a href="#subtract">(-) subtract</a>, <a href="#multiply">(*) multiply</a> and <a href="#divide">(/) divide</a>, all retain their meaning in tacitscript.</p>
 			<p>Some operators may have different meanings depending on context, eg. in JavaScript, <span className="code">+</span> can represent numeric addition as well as string concatenation.
 			tacitscript also <i>overloads</i> operators in this way, where the actual operation depends on the types of operands involved. In tacitscript, <span className="code">+</span> can
 			also represent <a href="#string-cat">string</a>/<a href="#array-cat">array</a> concatenation. We call the symbol, <span className="code">plus (+)</span> the <i>operator</i> and associated implementations
