@@ -6,8 +6,10 @@ const {useState, useEffect} = React;
 const {ts2es6} = parser;
 
 const style = css({
+	color: "white",
 	"> .heading": {
 		userSelect: "none",
+		color: "#ccc",
 	},
 });
 

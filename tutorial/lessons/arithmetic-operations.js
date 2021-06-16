@@ -13,7 +13,7 @@ export default {
 		<div className="code-block">(2+3)*4</div>
 		<p>Parentheses are used to override the default evaluation order.</p>
 		<div className="code-block">2+(3*4)</div>
-		<p>Note that spaces cannot be used to separate terms in tacitscript (their meaning will be detailed below.)</p>
+		<p>Note that spaces cannot be used to separate operators in tacitscript (their meaning will be detailed below.)</p>
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",

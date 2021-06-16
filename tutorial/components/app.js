@@ -7,6 +7,7 @@ import Operator from "./operator.js";
 const {css} = Glamor;
 
 const style = css({
+	color: "#ccc",
 	" :focus": {
 		outline: "1px solid white",
 	},
@@ -47,8 +48,8 @@ const style = css({
 				fontSize: "1.1rem",
 				display: "flex",
 				fontWeight: "bold",
-				":hover,:focus": {
-					color: "var(--yellow)",
+				":hover": {
+					color: "white",
 					cursor: "pointer",
 				},
 				"> .index": {
@@ -138,6 +139,7 @@ const style = css({
 		borderRadius: "0.25rem",
 		"> p": {
 			margin: "0.4rem 0",
+			color: "white",
 		},
 		"> h4": {
 			margin: "0.4rem 0 0.7rem",
