@@ -6,6 +6,9 @@ const style = css({
 		display: "table-row",
 		"> .cell": {
 			display: "table-cell",
+			":first-child": {
+				width: "11.5rem",
+			},
 		},
 	},
 });

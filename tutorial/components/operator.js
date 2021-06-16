@@ -18,12 +18,11 @@ const style = css({
 		"> h3": {
 			display: "flex",
 			"> .name": {
-				width: "9.2rem",
+				width: "12rem",
 				whiteSpace: "nowrap",
 			},
 			"> a.type-signature": {
 				letterSpacing: "0.15rem",
-				marginLeft: "3rem",
 				whiteSpace: "pre-wrap",
 			},
 		},
@@ -53,7 +52,7 @@ export default ({id, symbol, sections, type, dispatch}) => {
 		{isOpen ? <div className="contents">
 			<hr/>
 			{sections.map(({id, type, examples}) => <React.Fragment>
-				<h3><div id={id} className="name">{`${symbol} (${id})`}</div><a className="type-signature" href="#types">{type}</a></h3>
+				<h3><div id={id} className="name">{id}</div><a className="type-signature" href="#types">{type}</a></h3>
 				<div className="code-block">
 					{examples}
 				</div>
