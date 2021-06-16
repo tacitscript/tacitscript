@@ -2,12 +2,16 @@ const {css} = Glamor;
 
 const style = css({
 	display: "table",
+	whiteSpace: "nowrap",
 	"> .row": {
 		display: "table-row",
 		"> .cell": {
 			display: "table-cell",
 			":first-child": {
 				width: "11.5rem",
+			},
+			":nth-child(2)": {
+				width: "18rem",
 			},
 		},
 	},

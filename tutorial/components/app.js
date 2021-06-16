@@ -85,6 +85,7 @@ const style = css({
 					fontSize: "0.8rem",
 					":not(.exercises)": {
 						lineHeight: "1.1rem",
+						overflow: "hidden",
 					},
 					"> i": {
 						display: "inline",
