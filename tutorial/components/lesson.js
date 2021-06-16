@@ -6,6 +6,9 @@ const {useState, useEffect} = React;
 const {ts2es6} = parser;
 
 const style = css({
+	"> .heading": {
+		userSelect: "none",
+	},
 });
 
 export default React.memo(({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml, getTestValue} = {}, def, dispatch}) => {
