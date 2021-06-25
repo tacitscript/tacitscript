@@ -10,8 +10,8 @@ export default {
 		<p>The operations of a particular operator will be related in meaning, and either all <b>binary</b> (taking arguments to the left and right), or all <b>unary</b> (taking one argument to the right.)<br/>
 		To denote negative numbers, we use the <a href="#negative">_ (negative)</a> operation of the unary <a href="#underscore">underscore (_)</a> operator.</p>
 		<div className="code-block">_5.5</div>
-		<p>Many operations take other operations as arguments. With strict left-associativity, <span className="code">2+_1</span> becomes a syntax error on trying to resolve the operator <a href="#underscore">underscore (_)</a>
-		into the expression. Parentheses are required in this case.</p>
+		<p>Many operations take other operations as arguments. With strict left-associativity, <span className="code">2+_1</span> becomes a syntax error on trying to resolve the
+		operator <a href="#underscore">underscore (_)</a> into the expression. Parentheses are required in this case.</p>
 		<div className="code-block">2+(_1)</div>
 		<p>The operation that resolves will depend on the types of the arguments used. <a href="#add">(+) add</a>, and <a href="#concat">(+) concat</a> over strings, act as type-conversion operations by supporting any 
 		non-operator type to the right.</p>

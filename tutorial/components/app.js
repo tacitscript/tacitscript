@@ -90,6 +90,9 @@ const style = css({
 					padding: "0.5rem",
 					borderRadius: "0.25rem",
 					fontSize: "0.8rem",
+					" .code": {
+						fontWeight: "bold",
+					},
 					" .code, a": {
 						color: "inherit",
 					},
@@ -279,7 +282,7 @@ export default ({store}) => {
 			<div className="name">Reference</div>
 		</div>
 
-		<div className="block"><TypeSignatures/></div>
+		<div className="block"><TypeSignatures dispatch={store.dispatch}/></div>
 
 		<div className="block">{operators.map(details => <Operator {...{...details, dispatch: store.dispatch}}/>)}</div>
 
