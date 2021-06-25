@@ -21,7 +21,7 @@ export default {
 		getHtml: details => <div className="single-line"><TextEdit {...details}/></div>,
 		tests: [
 			{description: "equals 10", condition: ({solution}) => solution === 10},
-			{description: "uses all four arithmetic operators", condition: ({def}) => ["+", "-", "*", "/"].every(symbol => def.includes(symbol))},
+			{description: "uses all four arithmetic operators", condition: ({es6}) => ["ts.plus", "ts.minus", "ts.asterisk", "ts.slash"].every(symbol => es6.includes(symbol))},
 			{description: "does not contain whitespace", condition: ({def}) => !def.match(/\s/)},
 		],
 	},

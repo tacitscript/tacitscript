@@ -143,8 +143,8 @@ const style = css({
 			color: "white",
 		},
 		"> h4": {
-			margin: "0.4rem 0 0.7rem",
-			fontSize: "1.1rem",
+			margin: "0.4rem 0 1rem",
+			fontSize: "1.05rem",
 		},
 		"> h2": {
 			margin: "0.5rem 0",
