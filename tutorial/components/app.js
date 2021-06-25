@@ -3,6 +3,7 @@ import Lesson from "./lesson.js";
 import Score from "./score.js";
 import operators from "../operators/operators.js";
 import Operator from "./operator.js";
+import TypeSignatures from "./type-signatures.js";
 
 const {css} = Glamor;
 
@@ -29,6 +30,7 @@ const style = css({
 		fontWeight: "bold",
 	},
 	"> .block": {
+		" + .block": {marginTop: "1rem"},
 		"> .panel": {
 			position: "relative",
 			width: "calc(85% + 2rem)",
@@ -270,6 +272,8 @@ export default ({store}) => {
 		<div className="section-title">
 			<div className="name">Reference</div>
 		</div>
+
+		<div className="block"><TypeSignatures/></div>
 
 		<div className="block">{operators.map(details => <Operator {...{...details, dispatch: store.dispatch}}/>)}</div>
 
