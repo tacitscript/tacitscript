@@ -10,8 +10,8 @@ const style = css({
 			":first-child": {
 				width: "11.5rem",
 			},
-			":nth-child(2)": {
-				width: "18rem",
+			":nth-child(3)": {
+				width: "calc(100% - 29.5rem)",
 			},
 		},
 	},

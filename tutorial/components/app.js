@@ -9,7 +9,7 @@ const {css} = Glamor;
 
 const style = css({
 	color: "#ccc",
-	" :focus": {
+	" :focus-visible": {
 		outline: "1px solid white",
 	},
 	marginBottom: "5rem",
@@ -171,7 +171,7 @@ const style = css({
 			},
 			" a": {
 				color: "var(--text-color)",
-				":hover,:focus": {
+				":hover": {
 					color: "var(--yellow)",
 				},
 			},
@@ -184,7 +184,7 @@ const style = css({
 					backgroundColor: "#1a110e",
 					border: "3px solid var(--background)",
 					borderRadius: "6px",
-					":hover,:focus": {
+					":hover": {
 						color: "var(--text-color)",
 						backgroundColor: "var(--brown)"
 					},
@@ -224,7 +224,7 @@ const style = css({
 	" a": {
 		color: "var(--yellow)",
 		textDecoration: "none",
-		":hover,:focus": {
+		":hover": {
 			color: "var(--orange)",
 		},
 	},

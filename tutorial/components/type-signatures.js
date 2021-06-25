@@ -1,5 +1,7 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
+
 const {css} = Glamor;
-const {useState,} = React;
+const {useState} = React;
 
 const style = css({
 	color: "white",
@@ -21,6 +23,9 @@ export default () => {
 			<hr/>
 			<div>
 				<p>Operator type signatures contain either two components (unary) or three components (binary).</p>
+				<div className="code-block">{getOperationExamples([
+					["AN", <span>This unary operator takes an array and returns a number, eg. <a href="#hash">(#) length</a> (<span className="code">#(7 8 9)=3</span>)</span>],
+				])}</div>
 			</div>
 		</div> : null}
 	</div>;
