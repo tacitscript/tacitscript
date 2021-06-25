@@ -29,6 +29,11 @@ const style = css({
 		fontSize: "1.5rem",
 		fontWeight: "bold",
 	},
+	" .code": {
+		fontFamily: "Roboto Mono, monospace",
+		color: "var(--orange)",
+		fontSize: "0.85rem",
+	},
 	"> .block": {
 		" + .block": {marginTop: "1rem"},
 		"> .panel": {
@@ -80,11 +85,17 @@ const style = css({
 					flexDirection: "column",
 					fontFamily: "Roboto Mono, monospace",
 					backgroundColor: "var(--orange)",
-					color: "#271c19",
+					color: "black",
 					whiteSpace: "pre-wrap",
 					padding: "0.5rem",
 					borderRadius: "0.25rem",
 					fontSize: "0.8rem",
+					" .code, a": {
+						color: "inherit",
+					},
+					" a:hover": {
+						color: "var(--brown)",
+					},
 					":not(.exercises)": {
 						lineHeight: "1.1rem",
 						overflow: "hidden",
@@ -227,11 +238,6 @@ const style = css({
 		":hover": {
 			color: "var(--orange)",
 		},
-	},
-	" .code": {
-		fontFamily: "Roboto Mono, monospace",
-		color: "var(--orange)",
-		fontSize: "0.85rem",
 	},
 	"> .preview": {
 		whiteSpace: "pre-wrap",

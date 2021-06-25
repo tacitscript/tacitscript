@@ -24,7 +24,7 @@ export default () => {
 			<div>
 				<p>Operator type signatures contain either two components (unary) or three components (binary).</p>
 				<div className="code-block">{getOperationExamples([
-					["AN", <span>This unary operator takes an array and returns a number, eg. <a href="#hash">(#) length</a> (<span className="code">#(7 8 9)=3</span>)</span>],
+					["AN", <span>This unary operator takes an array and returns a number, eg. <a href="#hash">(#) length</a>, <span className="code">#(7 8 9)=3</span></span>],
 				])}</div>
 			</div>
 		</div> : null}
