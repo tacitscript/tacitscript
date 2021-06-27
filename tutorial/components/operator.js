@@ -52,7 +52,7 @@ export default ({id, symbol, sections, type, dispatch}) => {
 		{isOpen ? <div className="contents">
 			<hr/>
 			{sections.map(({id, type, examples}) => <React.Fragment>
-				<h3><div id={id} className="name">{id}</div><a className="type-signature" href="#types">{type}</a></h3>
+				<h3><div id={id} className="name">{id}</div><a className="type-signature" href="#type-signatures">{type}</a></h3>
 				<div className="code-block">
 					{examples}
 				</div>

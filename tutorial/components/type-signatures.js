@@ -14,7 +14,7 @@ const style = css({
 
 export default ({dispatch}) => {
 	const [open, setOpen] = useState(false);
-	const openByHash = location.hash === "#types";
+	const openByHash = location.hash === "#type-signatures";
 	const isOpen = open || openByHash;
 
 	const setIsOpen = value => {
@@ -25,7 +25,7 @@ export default ({dispatch}) => {
 		if (value !== open) setOpen(value);
 	};
 
-	return <div className={`panel${isOpen ? " open" : ""}`} {...style}>
+	return <div id="type-signatures" className={`panel${isOpen ? " open" : ""}`} {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setIsOpen(!isOpen)} onKeyDown={e => {if (e.key === "Enter") setIsOpen(!isOpen);}}>
 			<div className="index">A.</div>
 			<div className="name">Type Signatures</div>
