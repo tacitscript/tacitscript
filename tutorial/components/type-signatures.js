@@ -34,17 +34,17 @@ export default ({dispatch}) => {
 			<hr/>
 			<div>
 				<p>Operation type signatures contain either two components (unary) or three components (binary).</p>
-				<div className="code-block">{getOperationExamples([
+				<div className="code-block table-data">{getOperationExamples([
 					["AN", <span>This unary operation takes an <i>array</i> and returns a <i>number</i>, eg. <a href="#length">(#) length</a>, <span className="code">#(7 8 9)=3</span></span>],
-					["SAS", <span>This binary conversion operation takes a <i>string</i> and <i>array</i> to the left and right, and returns a <i>string</i>,<br/>eg. <a href="#concat">(+) concat</a>, <span className="code">"Array: "+(1 2 3)="Array: (1 2 3)"</span></span>],
+					["SAS", <span>This binary operation takes a <i>string</i> and <i>array</i> to the left and right, and returns a <i>string</i>,<br/>eg. <a href="#concat">(+) concat</a>, <span className="code">"Array: "+(1 2 3)="Array: (1 2 3)"</span></span>],
 				])}</div>
 				<p>When an operation argument is itself an operation, we use parentheses.</p>
-				<div className="code-block">{getOperationExamples([
+				<div className="code-block table-data">{getOperationExamples([
 					["(VB)AA", <span>This binary operation takes an operation that maps a <i>value</i>-type (non-operator) to a <i>boolean</i> on the left,<br/>
 					and an <i>array</i> on the right, and returns an <i>array</i>, eg. <a href="#filter">(*) filter</a>, <span className="code">&lt;5*(2 4 6)=(2 4)</span></span>],
 				])}</div>
 				<p>The complete list of type symbols is given below:</p>
-				<div className="code-block">{getOperationExamples([
+				<div className="code-block table-data">{getOperationExamples([
 					["N", "An integer, or decimal number (using a decimal point), eg. 10, 3.14"],
 					["S", <span>A double-quote delimited multi-line string, possibly using escaped characters eg. "header1\theader2<br/>value1\tvalue2"</span>],
 					["A", 'A mixed-type array, eg. (10 "string" +)'],

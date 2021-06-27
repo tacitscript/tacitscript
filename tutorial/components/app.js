@@ -90,6 +90,10 @@ const style = css({
 					padding: "0.5rem",
 					borderRadius: "0.25rem",
 					fontSize: "0.8rem",
+					".table-data": {
+						padding: "0 0.5rem",
+						borderSpacing: "0 0.5rem",
+					},
 					" .code": {
 						fontWeight: "bold",
 					},
