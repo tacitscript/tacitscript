@@ -4,6 +4,21 @@ const {useRef, useState} = React;
 
 const style = css({
 	width: "100%",
+	display: "flex",
+	"> .show-answer": {
+		right: "1rem",
+		borderRadius: "50%",
+		width: "1.3rem",
+		height: "1.3rem",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: "0.1rem",
+		":hover,:focus-visible": {
+			cursor: "pointer",
+			backgroundColor: "rgba(0, 0, 0, 0.15)",
+		},
+	},
 	"> .MuiInputBase-root": {
 		width: "100%",
 		borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
@@ -65,5 +80,6 @@ export default ({dispatch, id, multiline, defaultValue = ""}) => {
 				setEditMode(true);
 			}
 		}}/>
+		<div role="button" tabindex="0" aria-label="Show Answer" className="show-answer" title="Show a solution"><i className="fas fa-eye" aria-hidden="true"/></div>
 	</span>;
 };
