@@ -34,9 +34,9 @@ const style = css({
 	},
 });
 
-const update = _.debounce(({dispatch, id, value, reveal}) => dispatch({
+const update = _.debounce(({dispatch, id, value, revealed}) => dispatch({
 	type: "SOLUTION",
-	payload: {id, value, reveal},
+	payload: {id, value, revealed},
 }), 300);
 
 export default ({dispatch, id, multiline, defaultValue = "", solution}) => {
@@ -80,8 +80,8 @@ export default ({dispatch, id, multiline, defaultValue = "", solution}) => {
 				setEditMode(true);
 			}
 		}}/>
-		<div role="button" tabindex="0" aria-label="Show Answer" className="show-answer" title="Show a solution"><i className="fas fa-eye" aria-hidden="true" onClick={() => {
-			update({dispatch, id, value: solution, reveal: true});
+		<div role="button" tabIndex="0" aria-label="Show Answer" className="show-answer" title="Show a solution"><i className="fas fa-eye" aria-hidden="true" onClick={() => {
+			update({dispatch, id, value: solution, revealed: true});
 		}}/></div>
 	</span>;
 };
