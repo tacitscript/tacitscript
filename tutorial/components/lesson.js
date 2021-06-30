@@ -13,7 +13,7 @@ const style = css({
 	},
 });
 
-export default React.memo(({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml, getTestValue} = {}, def, dispatch}) => {
+export default React.memo(({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml, getTestValue} = {}, def, revealed, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
 	let es6 = "";
@@ -58,7 +58,7 @@ export default React.memo(({id, name, description, epilogue, index, exercise: {q
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 						<div className="description">{(typeof description === "function") ? description(testValue) : description}</div>
 					</div>)}
-					{getHtml({id, defaultValue: def, dispatch})}
+					{getHtml({id, defaultValue: def, dispatch, revealed})}
 				</div>
 			</React.Fragment> : null}
 			{epilogue}
