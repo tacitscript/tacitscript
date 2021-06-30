@@ -5,6 +5,7 @@ const {useRef, useState} = React;
 const style = css({
 	width: "100%",
 	display: "flex",
+	alignItems: "center",
 	"> .show-answer": {
 		right: "1rem",
 		borderRadius: "50%",
