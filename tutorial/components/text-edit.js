@@ -84,6 +84,6 @@ export default ({dispatch, id, multiline, defaultValue = "", solution, revealed}
 		{revealed ? null : <div role="button" tabIndex="0" aria-label="Show Answer" className="show-answer" title="Show a solution"><i className="fas fa-eye" aria-hidden="true" onClick={() => {
 			element.current.firstChild.value = solution;
 			update({dispatch, id, value: solution, revealed: true});
-		}}/></div>}
+		}}/></div>} {/*TODO: dont show if passed*/}
 	</span>;
 };
