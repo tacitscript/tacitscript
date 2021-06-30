@@ -286,9 +286,9 @@ export default ({store}) => {
 			<div className="name">Reference</div>
 		</div>
 
-		<div className="block"><TypeSignatures dispatch={store.dispatch}/></div>
-
 		<div className="block">{operators.map(details => <Operator {...{...details, dispatch: store.dispatch, key: details.id}}/>)}</div>
+
+		<div className="block"><TypeSignatures dispatch={store.dispatch}/></div>
 
 	</div>;
 };
