@@ -1,22 +1,14 @@
 import lessons from "../lessons/lessons.js";
 
-export default React.memo(({solutions}) => {
+export default ({solutions}) => {
 	const score = (() => {
 		if (R.isEmpty(solutions)) return "";
 
-		const passed = R.pipe(
-			R.values,
-			R.filter(R.prop("pass")),
-			R.length,
-		)(solutions);
+		const unrevealedLessons = R.reject(({id}) => R.path([id, "revealed"], solutions), lessons);
+		const passed = R.filter(({id}) => R.path([id, "pass"], solutions), unrevealedLessons);
 
-		return `${passed} / ${lessons.length}`;
+		return `${passed.length} / ${unrevealedLessons.length}`;
 	})();
 
 	return <div className="score">{score}</div>
-}, (prev, curr) => {
-	return R.pipe(
-		R.map(R.mapObjIndexed(R.prop("pass"))),
-		([a, b]) => sanctuary.equals(a)(b),
-	)([prev.solutions, curr.solutions]);
-});
+};
