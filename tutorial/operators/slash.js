@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "slash",
@@ -6,9 +7,9 @@ export default {
 	sections: [{
 		id: "divide",
 		type: "NNN",
-		examples: <React.Fragment>
-			<span>{`quotient\t5/2\t\t\t\t\t\tequals 2.5\ndivideByZero\t5/0\t\t\t\t\t\tis `}
-			<i>undefined</i></span>
-		</React.Fragment>,
+		examples: getOperationExamples([
+			["quotient", "5/2", "equals 2.5"],
+			["divideByZero", "5/0", <span>is <i>undefined</i></span>],
+		]),
 	}],
 };

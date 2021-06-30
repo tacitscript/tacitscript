@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "minus",
@@ -6,6 +7,8 @@ export default {
 	sections: [{
 		id: "subtract",
 		type: "NNN",
-		examples: "difference\t3-2\t\t\t\t\t\tequals 1",
+		examples: getOperationExamples([
+			["difference", "3-2", "equals 1"],
+		]),
 	}],
 };

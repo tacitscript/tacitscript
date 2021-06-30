@@ -1,11 +1,14 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "asterisk",
 	symbol: "*",
 	type: "Binary",
 	sections: [{
-		id: "times",
+		id: "multiply",
 		type: "NNN",
-		examples: "product\t\t2*3\t\t\t\t\t\tequals 6",
+		examples: getOperationExamples([
+			["difference", "2*3", "equals 6"],
+		]),
 	}],
 };
