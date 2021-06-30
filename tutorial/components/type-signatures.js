@@ -48,7 +48,8 @@ export default ({dispatch}) => {
 					["N", "An integer, or decimal number (using a decimal point), eg. 10, 3.14"],
 					["S", <span>A double-quote delimited multi-line string, possibly using escaped characters eg. "header1\theader2<br/>value1\tvalue2"</span>],
 					["A", 'A mixed-type array, eg. (10 "string" +)'],
-					["V", <span>A <i>value</i>, non-operator, type. Any of <b>N</b>, <b>S</b>, or <b>A</b>.<br/>Type does not have to match other <b>V</b>s in signature.</span>]
+					["B", <span>A Boolean value, <span className="code">()</span> <i>false</i>, or <span className="code">!()</span> <i>true</i></span>],
+					["V", <span>A <i>value</i>, non-operator, type. Any of <b>N</b>, <b>S</b>, or <b>A</b>.<br/>Type does not have to match other <b>V</b>s in signature.</span>],
 				])}</div>
 			</div>
 		</div> : null}
