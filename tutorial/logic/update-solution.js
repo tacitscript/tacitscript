@@ -1,6 +1,6 @@
 
 export default ({state, action}) => {
-	const {id, status, value} = action.payload;
+	const {id, status, value, revealed} = action.payload;
 
 	const newState = R.over(R.lensPath(["solutions"]), existingSolutions => {
 		if (status) {
@@ -8,7 +8,10 @@ export default ({state, action}) => {
 
 			return R.set(R.lensPath([id, "pass"]), status === "pass", existingSolutions);	
 		} else {
-			return R.set(R.lensPath([id, "def"]), value, existingSolutions);
+			return R.pipe(
+				R.set(R.lensPath([id, "def"]), value),
+				solutions => revealed ? R.set(R.lensPath([id, "revealed"]), true, solutions) : solutions,
+			)(existingSolutions);
 		}
 	}, state);
 

@@ -18,7 +18,7 @@ export default {
 	exercise: {
 		question: "Define a tacitscript expression that:",
 		getJs: def => `const solution = /*ts ${def} */;`,
-		getHtml: details => <div className="single-line"><TextEdit {...details}/></div>,
+		getHtml: details => <div className="single-line"><TextEdit {...details} solution="5*6-3/9+7"/></div>,
 		tests: [
 			{description: "equals 10", condition: ({solution}) => solution === 10},
 			{description: "uses all four arithmetic operators", condition: ({es6}) => ["ts.plus", "ts.minus", "ts.asterisk", "ts.slash"].every(symbol => es6.includes(symbol))},
