@@ -13,7 +13,7 @@ export default {
 		<div className="code-block">{`( )
 ("alone" )`}</div>
 		<p>The <b>Boolean</b> value <b>False</b> is denoted by <span className="code">()</span>. <b>True</b> is denoted by <span className="code">!()</span>.</p>
-		<p><a href="#equality">(=) equality</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and return a Boolean.</p>
+		<p><a href="#equality">(=) equality</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and return a <i>Boolean</i>.</p>
 		<div className="code-block">1+2*3=9</div>
 	</div>,
 	exercise: {
@@ -25,7 +25,7 @@ export default {
 			{description: "contains a number", condition: ({solution}) => R.any(element => !isNaN(element), solution)},
 			{description: "contains a multi-line string", condition: ({solution}) => R.any(element => (typeof element === "string") && element.match(/\n/), solution)},
 			{description: "contains an empty array", condition: ({solution}) => R.any(element => Array.isArray(element) && !element.length, solution)},
-			{description: "contains a boolean created by evaluating an = operation", condition: ({def}) => R.any(element => typeof element === "boolean", solution)},
+			{description: "contains a boolean created by evaluating an = operation", condition: ({es6}) => es6.includes(", ts.equal),")},
 			{description: "contains an operator", condition: ({solution}) => R.any(element => typeof element === "function", solution)},
 		],
 	},
