@@ -58,7 +58,7 @@ export default React.memo(({id, name, description, epilogue, index, exercise: {q
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 						<div className="description">{(typeof description === "function") ? description(testValue) : description}</div>
 					</div>)}
-					{getHtml({id, defaultValue: def, dispatch, revealed})}
+					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed})}
 				</div>
 			</React.Fragment> : null}
 			{epilogue}
