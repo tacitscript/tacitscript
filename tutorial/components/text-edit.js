@@ -44,7 +44,7 @@ export default ({dispatch, id, multiline, defaultValue = "", solution, revealed}
 	const [editMode, setEditMode] = useState(false);
 
 	return <span {...style}>
-		<InputBase ref={element} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
+		<InputBase ref={element} disabled={revealed} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
 			onFocus={event => {
 				if (multiline && R.path(["nativeEvent", "relatedTarget"], event)) {
 					const textarea = element.current.firstChild;
