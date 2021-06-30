@@ -13,7 +13,7 @@ export default {
 		<div className="code-block">{`( )
 ("alone" )`}</div>
 		<p>The <b>Boolean</b> value <b>False</b> is denoted by <span className="code">()</span>. <b>True</b> is denoted by <span className="code">!()</span>.</p>
-		<p><a href="#equals">(=) equals</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and return a Boolean.</p>
+		<p><a href="#equality">(=) equality</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and return a Boolean.</p>
 		<div className="code-block">1+2*3=9</div>
 	</div>,
 	exercise: {
