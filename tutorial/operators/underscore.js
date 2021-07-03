@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "underscore",
@@ -6,6 +7,8 @@ export default {
 	sections: [{
 		id: "negative",
 		type: "NN",
-		examples: "negative5\t_5\t\t\t\t\t\tequals -5",
+		examples: getOperationExamples([
+			["negativeTwo", "_2", "equals -2"],
+		]),
 	}],
 };
