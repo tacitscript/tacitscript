@@ -46,7 +46,7 @@ export default React.memo(({id, name, description, epilogue, index, exercise: {q
 			<div className="index">{`${index + 1}.`}</div>
 			<div className="name">{name}</div>
 		</div>
-		{(isPassed == undefined) ? null : <i className={`status fas fa-${isPassed ? "check" : "times"}`}/>}
+		{(isPassed == undefined) ? null : <i className={`status fas fa-${isPassed ? "check" : "pen"}`}/>}
 		{open ? <div className="contents">
 			<hr/>
 			{description}

@@ -71,6 +71,9 @@ const style = css({
 				right: "1rem",
 				width: "1.7rem",
 				textAlign: "center",
+				".fa-pen": {
+					fontSize: "1.5rem",
+				},
 			},
 			"> .contents": {
 				"margin": "0 1rem 1rem",
