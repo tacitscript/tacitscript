@@ -8,6 +8,7 @@ import vectorInterrogation from "./vector-interrogation.js";
 import comparisons from "./comparisons.js";
 import logicOperations from "./logic-operations.js";
 import mathOperations from "./math-operations.js";
+import hostLanguageInterface from "./host-language-interface.js";
 
 export default [
 	arithmeticOperations,
@@ -15,6 +16,8 @@ export default [
 	operatorOverloading,
 	tacitscriptBlocks,
 	customOperators,
+	hostLanguageInterface,
+
 	operatorChaining,
 	mathOperations,
 	vectorInterrogation,
