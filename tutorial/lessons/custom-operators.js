@@ -17,7 +17,7 @@ export default {
 		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">inverse</div>
-			<TextEdit {...{...details, multiline: true}}/>
+			<TextEdit {...{...details, multiline: true, solution: "1/"}}/>
 		</div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
 		tests: [
@@ -35,7 +35,8 @@ export default {
 		],
 	},
 	epilogue: <div>
-		<p><i>undefined</i> is a special value that has no direct representation within tacitscript.<br/>It is a <i>toxic value</i> in that, if applied to any operator,
+		<p><i>undefined</i> is a special value that has no direct representation within tacitscript.</p>
+		<p>It is a <i>toxic value</i> in that, if applied to any operator,
 		the resulting calculation will also be <i>undefined</i>.</p>
 		<div className="code-block"><span>{`calculation\t1/0+2\t\t\t\t\t\t is `}<i>undefined</i></span></div>
 	</div>,
