@@ -17,7 +17,8 @@ export default {
 	exercise: {
 		question: "Define a tacitscript program that:",
 		getJs: def => `/*ts\n${def}\n*/`,
-		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true}}/></div>,
+		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true, solution: `plus\t\t+
+solution\t3plus7\t\tthis is a comment`}}/></div>,
 		tests: [
 			{description: "contains two name-expression pairs", condition: ({es6}) => (match => match && (match.length === 2))(es6.match(/const /g))},
 			{description: 'defines an alias for a binary operator you have learned', condition: ({def}) => {
