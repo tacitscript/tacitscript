@@ -5,7 +5,8 @@ export default {
 	id: "e",
 	name: "Custom Operators",
 	description: <div>
-		<p>New operators are made by applying arguments to other operators.<br/>Applying one argument to a binary operator generates a new unary operator with that argument <i>baked-in</i>.</p>
+		<p>New operators are made by applying arguments to other operators.</p>
+		<p>Applying one argument to a binary operator generates a new unary operator with that argument <i>baked-in</i>.</p>
 		<div className="code-block">{`double\t\t2*\ncalculation\tdouble4\t\t\t\t\t\tequals 8`}</div>
 		<p>You can also apply arguments to right side of a binary operator.</p>
 		<div className="code-block">{`minusSix\t-6\ncalculation\tminusSix9\t\t\t\t\tequals 3`}</div>
