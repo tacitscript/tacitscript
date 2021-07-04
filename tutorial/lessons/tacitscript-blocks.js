@@ -11,7 +11,7 @@ export default {
 		<div className="code-block">{`quoteA\t\t"Java is to JavaScript what car is to Carpet.\n\t– Chris Heilmann"\t\t\t\t\tSo true!\nquoteB\t\t"Features, quality, time: pick two."\nquotes\t\t(quoteA quoteB)\t\t\t\t\tlook, an array :)`}</div>
 		<p>When an operator and its argument are both names, parentheses are required to delimit the terms.</p>
 		<div className="code-block">{`negative\t_\t\t\t\t\t\tcreate an alias\ntwo\t\t2\nnegativeTwoA\tnegative(two)\t\t\t\t\tthese expressions…\nnegativeTwoB\t(negative)two\t\t\t\t\t…give the same result`}</div>
-		<p>Alternatively, we can use the <a href="#apply-to">, (applyTo)</a> operation that applys an argument to an operator.</p>
+		<p>Alternatively, we can use the <a href="#applyTo">, (applyTo)</a> operation that applys an argument to an operator.</p>
 		<div className="code-block">{`negativeTwoC\ttwo,negative\t\t\t\t\talso 2,_`}</div>
 	</div>,
 	exercise: {

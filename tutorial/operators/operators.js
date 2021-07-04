@@ -13,12 +13,14 @@ import less from "./less.js";
 import greater from "./greater.js";
 import hat from "./hat.js";
 import percent from "./percent.js";
+import comma from "./comma.js";
 
 export default [
 	apostrophe,
 	asterisk,
 	bracketleft,
 	bracketright,
+	comma,
 	dot,
 	equals,
 	greater,
