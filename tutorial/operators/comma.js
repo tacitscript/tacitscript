@@ -6,9 +6,10 @@ export default {
 	type: "Binary",
 	sections: [{
 		id: "applyTo",
-		type: "X(XY)Y",
+		type: "X(XY)Y\t\tX(XYZ)(YZ)",
 		examples: getOperationExamples([
-			["applyToOperator", "3,+1", "equals 4"],
+			["applyToUnary", "3,+1", "equals 4"],
+			["applyToBinary", "1,-", "equivalent to 1-"],
 		]),
 	}],
 };

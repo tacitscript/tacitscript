@@ -4,8 +4,7 @@ export default {
 	id: "host-language-interface",
 	name: "Host Language Interface",
 	description: <div>
-		<p>Typically, tacitscript definitions will be embedded within a host language. The canonical implementation is for JavaScript, but porting is possible for any language supporting comments.</p>
-		<p>tacitscript expressions and blocks are demarcated within JavaScript code by <span className="code">/*ts */</span> comments.</p>
+		<p>Typically, tacitscript definitions will be embedded within a host language. The canonical implementation is for JavaScript, in which tacitscript expressions and blocks are demarcated by <span className="code">/*ts */</span> comments.</p>
 		<p>tacitscript expressions can freely reference symbols from the current environment. tacitscript blocks implicity export defined symbols.</p>
 		<div className="code-block">{`const pi = Math.PI;
 const degressToRadians = /*ts *(pi/180) */;
