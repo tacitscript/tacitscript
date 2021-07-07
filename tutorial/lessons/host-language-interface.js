@@ -18,11 +18,15 @@ const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div
 		<p>Note that binary operators are imported and exported as functions of two arguments.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operator <b>inverse</b> such that:</span>,
+		question: <span>Define the operator/function <b>weight</b> such that:</span>,
 		getJs: def => `const solution = /*ts ${def} */;`,
-		getHtml: details => <div className="single-line name-expression">
-			<div className="name">inverse</div>
-			<TextEdit {...{...details, multiline: true, solution: "1/"}}/>
+		getHtml: details => <div>
+			const g = 9.81; // m/s
+			const force = (mass, acceleration) =&gt; m * a;
+			/*ts
+			
+			*/
+			<TextEdit {...details} solution="(force)g"/>
 		</div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
 		tests: [

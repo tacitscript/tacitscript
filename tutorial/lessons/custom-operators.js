@@ -12,7 +12,7 @@ export default {
 		<div className="code-block">{`minusSix\t-6\ncalculation\tminusSix9\t\t\t\t\tequals 3`}</div>
 		<p>Note that a unary operator <i>always</i> takes its argument to the right. So <span className="code">9minusSix</span> is a syntax error, as is <span className="code">9(-6)</span>.</p>
 		<p>Applying arguments to a binary operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operation. Note, however, that the argument is always applied to the left-hand side.</p>
-		<div className="code-block">{`oneMinus\t1,minus\t\t\t\t\t\tequivalent to 1-`}</div>
+		<div className="code-block">{`oneMinus\t1,-\t\t\t\t\t\tequivalent to 1-`}</div>
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>inverse</b> such that:</span>,
