@@ -41,13 +41,11 @@ const recordMph = marathonSpeed(2.0275);`}</span></div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
 		tests: [
 			{description: <span>it uses <i>marathonMiles</i> and <i>speed</i></span>, condition: ({def}) => ["marathonMiles", "speed"].every(token => def.includes(token))},
-			{description: "it calculates the record average marathon speed (12.9mph)", condition: ({solution}) => (solution - 12.93159) < 1E-5},
+			{description: "it calculates the record average speed for a marathon run (12.9mph)", condition: ({solution}) => (solution - 12.93159) < 1E-5},
 		],
 	},
 	epilogue: <div>
-		<p><i>undefined</i> is a special value that has no direct representation within tacitscript.</p>
-		<p>It is a <i>toxic value</i> in that, if applied to any operator,
-		the resulting calculation will also be <i>undefined</i>.</p>
-		<div className="code-block"><span>{`calculation\t1/0+2\t\t\t\t\t\t is `}<i>undefined</i></span></div>
+		<p>That completes the language syntax. The remaining sections detail the standard library of operations.</p>
+		<p>A minimal example tacitscript application (debuggable with source maps) is given <a href="https://plnkr.co/edit/pg9UymjRiyxdyx7p">here</a>.</p>
 	</div>,
 };
