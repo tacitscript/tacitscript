@@ -19,7 +19,7 @@ export default {
 		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">toCelsius</div>
-			<TextEdit {...{...details, multiline: true}}/>
+			<TextEdit {...{...details, multiline: true, solution: "-32./9.*5"}}/>
 		</div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
 		tests: [
