@@ -128,12 +128,15 @@ const style = css({
 						"> .single-line": {
 							margin: "1rem 0.3rem 0.2rem",
 						},
-						"> .name-expression": {
+						" .name-expression": {
 							display: "flex",
 							alignItems: "baseline",
 							"> .name": {
 								width: "7rem",
 							},
+						},
+						" .rule": {
+							borderBottom: "1px solid #999",
 						},
 						"> .test": {
 							display: "flex",

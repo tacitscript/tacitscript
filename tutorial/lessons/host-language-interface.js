@@ -18,16 +18,18 @@ const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div
 		<p>Note that binary operators are imported and exported as functions of two arguments.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operator/function <b>weight</b> such that:</span>,
+		question: <span>Define the operator/function <b>marathonSpeed</b> such that:</span>,
 		getJs: def => `const solution = /*ts ${def} */;`,
-		getHtml: details => <div>
-			const g = 9.81; // m/s
-			const force = (mass, acceleration) =&gt; m * a;
-			/*ts
-			
-			*/
-			<TextEdit {...details} solution="(force)g"/>
-		</div>,
+		getHtml: details => <div><br/><div className="rule"/><span>{`
+const marathonMiles = 26.2188;
+const speed = (distance, time) => distance / time;
+
+/*ts`}</span><span className="single-line name-expression">
+		<span className="name">marathonSpeed</span>
+		<TextEdit {...{...details, solution: "marathonMiles,speed"}}/>
+	</span><span>{`*/
+
+const recordAverageMph = marathonSpeed(2.0275);`}</span></div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
