@@ -46,6 +46,8 @@ const recordMph = marathonSpeed(2.0275);`}</span></div>,
 	},
 	epilogue: <div>
 		<p>That completes the language syntax. The remaining sections detail the standard library of operations.</p>
+		<p>All tacitscript operators are single character punctuation symbols taken from the standard
+			US keyboard.</p>
 		<p>A minimal example tacitscript application (debuggable with source maps) is given <a href="https://plnkr.co/edit/pg9UymjRiyxdyx7p">here</a>.</p>
 	</div>,
 };
