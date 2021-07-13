@@ -7,7 +7,7 @@ export default {
 	id: "f",
 	name: "Operator Chaining",
 	description: <div>
-		<p>The <a href="#pipe">. (pipe)</a> operation takes a unary operator to the left and right. The resulting operator passes a value through the left operator, then feeds the result through the right operator.</p>
+		<p>The <a href="#pipe">(.) pipe</a> operation takes a unary operator to the left and right. The resulting operator passes a value through the left operator, then feeds the result through the right operator.</p>
 		<div className="code-block">{`halfAddOne\t/2.+1\ncalculation\thalfAddOne4\t\t\t\t\tequals 3`}</div>
 		<p>The <a href="#dot">dot (.)</a> and <a href="#comma">comma (,)</a> operators have lowest precedence, so parentheses are not required around <span className="code">+1</span> above.</p>
 	</div>,

@@ -288,9 +288,9 @@ export default ({store}) => {
 
 		<div className="block">{lessons.slice(0, 6).map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 
-		<div className="block">{lessons.slice(6, 7).map((details, index) => <Lesson {...{...details, index: index + 7, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
+		<div className="block">{lessons.slice(6, 8).map((details, index) => <Lesson {...{...details, index: index + 7, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 
-		<div className="block">{lessons.slice(7).map((details, index) => <Lesson {...{...details, index: index + 8, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
+		<div className="block">{lessons.slice(8).map((details, index) => <Lesson {...{...details, index: index + 8, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 
 		<div className="section-title">
 			<div className="name">Reference</div>

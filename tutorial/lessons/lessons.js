@@ -9,6 +9,7 @@ import comparisons from "./comparisons.js";
 import logicOperations from "./logic-operations.js";
 import mathOperations from "./math-operations.js";
 import hostLanguageInterface from "./host-language-interface.js";
+import higherOrderOperators from "./higher-order-operators.js";
 
 export default [
 	arithmeticOperations,
@@ -19,6 +20,8 @@ export default [
 	hostLanguageInterface,
 
 	operatorChaining,
+	higherOrderOperators,
+
 	mathOperations,
 	vectorInterrogation,
 	comparisons,
