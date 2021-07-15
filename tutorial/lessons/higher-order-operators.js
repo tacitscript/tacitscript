@@ -26,7 +26,7 @@ export default {
 		</div>,
 		getJs: def => `/*ts
 chain		${def}
-solution	chain()
+solution	chain(-32 /9 *5)
 */`,
 		getHtml: details => <div className="single-line"><div className="name-expression">
 		<div className="name">chain</div>
