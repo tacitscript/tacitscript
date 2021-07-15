@@ -7,7 +7,7 @@ const style = css({
 	fontFamily: "monospace",
 	"> .heading": {
 		"> .name": {
-			width: "12rem",
+			width: "9rem",
 		},
 	},
 	"> .status": {
@@ -18,7 +18,7 @@ const style = css({
 		"> h3": {
 			display: "flex",
 			"> .name": {
-				width: "12rem",
+				width: "9rem",
 				whiteSpace: "nowrap",
 			},
 			"> a.type-signature": {

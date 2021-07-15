@@ -14,7 +14,7 @@ export default {
 		<div className="code-block">{getOperationExamples([
 			["sum", "+$(3 4 5)", "equals 12"],
 		])}</div>
-		<p>Another version of <a href="#reduce">($) reduce</a> takes an array of operator and starting value to the left.</p>
+		<p>Another version of <a href="#reduce">($) reduce</a> takes an array to the left, comprising of a binary operator and a starting value.</p>
 		<div className="code-block">{getOperationExamples([
 			["changeFromPound", "(- 100)$(50 20 5)", "equals (100-50-20-5)=25"],
 		])}</div>

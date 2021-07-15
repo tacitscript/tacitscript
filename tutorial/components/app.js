@@ -132,7 +132,9 @@ const style = css({
 							display: "flex",
 							alignItems: "baseline",
 							"> .name": {
-								width: "7rem",
+								maxWidth: "8rem",
+								width: "100%",
+								display: "flex",
 							},
 						},
 						" .rule": {

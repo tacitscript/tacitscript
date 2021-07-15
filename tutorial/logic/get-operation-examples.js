@@ -8,10 +8,10 @@ const style = css({
 		"> .cell": {
 			display: "table-cell",
 			":first-child": {
-				width: "11.5rem",
+				width: "8.5rem",
 			},
 			":nth-child(3)": {
-				width: "calc(100% - 29.5rem)",
+				width: "12rem",
 			},
 		},
 	},
