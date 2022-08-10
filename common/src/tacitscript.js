@@ -586,7 +586,7 @@ let plus = (left, right) => {
 
 	errorBinary({left, right, operator: "+"});
 }; plus.types = [
-	["N", "V", "N"], // add 2+3
+	["N", "V", "N"], // add 2+3=5
 	["S", "V", "S"], // stringConcat ""+4
 	["A", "A", "A"], // arrayConcat (1 2 3)+(4 5 6)
 	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
@@ -604,7 +604,7 @@ let slash = (left, right) => {
 
 	errorBinary({left, right, operator: "/"});
 }; slash.types = [
-	["N", "N", "N"], // divide 8/2
+	["N", "N", "N"], // divide 8/2=4
 	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let less = (left, right) => {
@@ -655,7 +655,7 @@ let minus = (left, right) => {
 
 	errorBinary({left, right, operator: "-"});
 }; minus.types = [
-	["N", "N", "N"], // subtract 5-2
+	["N", "N", "N"], // subtract 5-2=3
 	["S", "O", "O"], // omitKey "a"-({"{a: 1}")
 	["A", "O", "O"], // omitKeys ("a" "b")-({"{a: 1, b: 2}")
 	["A", "A", "A"], // splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
@@ -744,7 +744,7 @@ let asterisk = (left, right) => {
 
 	errorBinary({left, right, operator: "*"});
 }; asterisk.types = [
-	["N", "N", "N"], // times 2*3
+	["N", "N", "N"], // times 2*3=6
 	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	[["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
 ];

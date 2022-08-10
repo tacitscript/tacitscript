@@ -13,7 +13,7 @@ const style = css({
 	},
 });
 
-export default React.memo(({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml, getTestValue} = {}, def, revealed, dispatch}) => {
+export default ({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValue} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
 	let es6 = "";
@@ -32,13 +32,15 @@ export default React.memo(({id, name, description, epilogue, index, exercise: {q
 	const isPassed = def ? passes.every(pass => pass === true) : undefined;
 
 	useEffect(() => {
-		dispatch({
-			type: "SOLUTION",
-			payload: {
-				id, 
-				status: !def ? "empty" : isPassed ? "pass" : "fail",
-			},
-		});
+		if (isPassed) {
+			dispatch({
+				type: "SOLUTION",
+				payload: {
+					id,
+					status: !def ? "empty" : isPassed ? "pass" : "fail",
+				},
+			});
+		}
 	}, [isPassed]);
 
 	return <div className={`panel${open ? " open" : ""}`} {...style}>
@@ -58,13 +60,10 @@ export default React.memo(({id, name, description, epilogue, index, exercise: {q
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 						<div className="description">{(typeof description === "function") ? description(testValue) : description}</div>
 					</div>)}
-					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed})}
+					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2})}
 				</div>
 			</React.Fragment> : null}
 			{epilogue}
 		</div> : null}
 	</div>;
-}, (prev, curr) => {
-	var i =0;
-	return prev.def === curr.def;
-});
+};

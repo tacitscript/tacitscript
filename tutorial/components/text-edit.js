@@ -15,7 +15,7 @@ const style = css({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: "0.1rem",
-		":hover,:focus-visible": {
+		":hover,:focus-visible,.selected": {
 			cursor: "pointer",
 			backgroundColor: "rgba(0, 0, 0, 0.15)",
 		},
@@ -35,12 +35,12 @@ const style = css({
 	},
 });
 
-const update = _.debounce(({dispatch, id, value, revealed}) => dispatch({
+const update = _.debounce(({dispatch, id, value, revealed, showHint1, showHint2}) => dispatch({
 	type: "SOLUTION",
-	payload: {id, value, revealed},
+	payload: {id, value, revealed, showHint1, showHint2},
 }), 300);
 
-export default ({dispatch, id, multiline, defaultValue = "", solution, revealed, pass}) => {
+export default ({dispatch, id, multiline, defaultValue = "", solution, revealed, pass, showHint1, showHint2, hint1, hint2}) => {
 	const element = useRef(null);
 	const [editMode, setEditMode] = useState(false);
 
@@ -81,7 +81,13 @@ export default ({dispatch, id, multiline, defaultValue = "", solution, revealed,
 				setEditMode(true);
 			}
 		}}/>
-		{pass ? null : <div role="button" tabIndex="0" aria-label="Show Answer" className="show-answer" title="Show a solution\nthis is a very long tooltip\nlets see what happens when its forced to be multiline maybe"><i className="fas fa-eye" aria-hidden="true" onClick={() => {
+		{(pass || !hint1) ? null : <div role="button" tabIndex="0" aria-label="Show Hint 1" onClick={() => {
+			update({dispatch, id, showHint1: true});
+		}} className={`show-answer${showHint1 ? " selected" : ""}`} title={showHint1 ? hint1 : "Show hint 1"}><div aria-hidden="true">1</div></div>}
+		{(pass || !hint2) ? null : <div role="button" tabIndex="0" aria-label="Show Hint 2" onClick={() => {
+			update({dispatch, id, showHint2: true});
+		}}className={`show-answer${showHint2 ? " selected" : ""}`} title={showHint2 ? hint2 : "Show hint 2"}><div aria-hidden="true">2</div></div>}
+		{pass ? null : <div role="button" tabIndex="0" aria-label="Show Answer" className="show-answer" title="Show a solution"><i className="fas fa-eye" aria-hidden="true" onClick={() => {
 			element.current.firstChild.value = solution;
 			update({dispatch, id, value: solution, revealed: true});
 		}}/></div>}
