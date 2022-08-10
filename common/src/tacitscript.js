@@ -587,8 +587,8 @@ let plus = (left, right) => {
 	errorBinary({left, right, operator: "+"});
 }; plus.types = [
 	["N", "V", "N"], // add 2+3=5
-	["S", "V", "S"], // stringConcat ""+4
-	["A", "A", "A"], // arrayConcat (1 2 3)+(4 5 6)
+	["S", "V", "S"], // concat ""+4="4"
+	["A", "A", "A"], // concat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)
 	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
 ];
 let slash = (left, right) => {

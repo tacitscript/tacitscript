@@ -1,7 +1,7 @@
 import TextEdit from "../components/text-edit.js";
 
 export default {
-	id: "c",
+	id: "operator-overloading",
 	name: "Operator Overloading",
 	description: <div>
 		<p>The particular operation that an operator resolves to depends on the types of its surrounding symbols.</p>

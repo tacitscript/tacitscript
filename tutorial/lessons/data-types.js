@@ -1,7 +1,7 @@
 import TextEdit from "../components/text-edit.js";
 
 export default {
-	id: "b",
+	id: "data-types",
 	name: "Data Types",
 	description: <div>
 		<p><b>Strings</b> may contain newlines and are delimted by double-quotes only. Where required, a character may be escaped by a backslash eg. \", \\.</p>

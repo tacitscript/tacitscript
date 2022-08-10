@@ -1,7 +1,7 @@
 import TextEdit from "../components/text-edit.js";
 
 export default {
-	id: "a",
+	id: "precedence",
 	name: "Precedence",
 	description: <div>
 		<p>In tacitscript, each standard <i>operator</i>, eg. <a href="#plus">plus (+)</a>, may represent one of many possible <i>operations</i>, eg. <a href="#add">(+) add</a> or <a href="#concat">(+) concat</a>.</p>
