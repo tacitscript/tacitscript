@@ -807,7 +807,7 @@ let equal = (left, right) => {
 		return undefined;
 	}
 }; equal.types = [
-	["V", "V", "B"]
+	["V", "V", "B"], // equality 2=2=true
 ];
 let bar = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
