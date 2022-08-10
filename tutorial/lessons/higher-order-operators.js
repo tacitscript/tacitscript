@@ -36,6 +36,8 @@ solution	chain(-32 /9 *5)
 			<div className="expression">chain(-32 /9 *5)</div>
 		</div></div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		hint1: "Use operators: $ .",
+		hint2: "pipe reduce",
 		tests: [
 			{description: "chain(-32 /9 *5) gives a unary operator (fToC)", condition: ({solution}) => typeof solution === "function"},
 			{description: testValue => <span><b>fToC</b>{`${testValue} equals ${toDecimalPlaces(fToC(testValue), 4)}`}</span>, condition: ({solution, testValue}) => {

@@ -20,6 +20,7 @@ export default {
 		question: "Define a tacitscript expression that:",
 		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line"><TextEdit {...details} solution={`(0+"2" ""+3)`}/></div>,
+		hint1: "Use string or number conversion operators, with the empty value on the left",
 		tests: [
 			{description: "is an array of two elements", condition: ({solution}) => solution.length === 2},
 			{description: 'contains the minimal conversion of "2" to give element 2', condition: ({def}) => def.replace(/\s+/g, " ").replace(/[\(\)]/g, "").split(" ").slice(0, 2).includes('0+"2"')},

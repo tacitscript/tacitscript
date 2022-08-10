@@ -22,6 +22,8 @@ export default {
 			<TextEdit {...{...details, multiline: true, solution: "1/"}}/>
 		</div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		hint1: "Use operator: /",
+		hint2: "one divide",
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
 			{description: testValue => <span><b>inverse</b>{`${testValue} equals ${toDecimalPlaces(1 / testValue, 4)}`}</span>, condition: ({solution, testValue}) => {

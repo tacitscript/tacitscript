@@ -39,6 +39,8 @@ const speed = (distance, time) => distance / time;
 	</span><span>{`*/
 const recordMph = marathonSpeed(2.0275);`}</span></div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		hint1: "Use parentheses or ,",
+		hint2: "marathonMiles applyTo speed",
 		tests: [
 			{description: <span>it uses <i>marathonMiles</i> and <i>speed</i></span>, condition: ({def}) => ["marathonMiles", "speed"].every(token => def.includes(token))},
 			{description: "it calculates the record average speed for a marathon run (12.9mph)", condition: ({solution}) => (solution - 12.93159) < 1E-5},

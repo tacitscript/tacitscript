@@ -22,6 +22,8 @@ export default {
 			<TextEdit {...{...details, multiline: true, solution: "-32./9.*5"}}/>
 		</div>,
 		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		hint1: "Use operators: * . - /",
+		hint2: "(minus 32) pipe (divide 9) pipe (times 5)",
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
 			{description: testValue => <span><b>fToC</b>{`${testValue} equals ${toDecimalPlaces(fToC(testValue), 4)}`}</span>, condition: ({solution, testValue}) => {
