@@ -494,8 +494,8 @@ let comma = (left, right) => {
 	["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
 	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
 	[["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
-	["X", ["X", "Y"], "Y"], // applyTo 3,+1
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyToBinary 3,+ =1,?
+	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) 3,+ =1,?
 	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
