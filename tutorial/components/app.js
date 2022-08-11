@@ -117,7 +117,10 @@ const style = css({
 						marginLeft: "0.5rem",
 					},
 					" pre": {
-						margin: "0 0 0.5rem",
+						margin: 0,
+						".part": {
+							marginBottom: "0.5rem",
+						},
 					},
 					".exercises": {
 						backgroundColor: "var(--yellow)",

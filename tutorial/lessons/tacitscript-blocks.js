@@ -1,18 +1,35 @@
 import TextEdit from "../components/text-edit.js";
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
-	id: "d",
+	id: "tacitscript-blocks",
 	name: "tacitscript Blocks",
 	description: <div>
 		<p>A tacitscript program will consist of a vertical list of name-expression pairs, each pair delimited by tabs/spaces and typically notated in two columns.</p>
 		<p>Names must contain alphabetic characters <i>only</i>.</p>
-		<div className="code-block">{`pi\t\t3.14159\nradius\t\t10\narea\t\tpi*radius*radius\t\t\t\tnames also count as symbols within expressions`}</div>
+		<div className="code-block">{getOperationExamples([
+			["pi", "3.14159"],
+			["radius", '10'],
+			["area", 'pi*radius*radius', "names also count as symbols within expressions"],
+		])}</div>
 		<p>Characters occuring after the tacitscript expression are treated as comments.</p>
-		<div className="code-block">{`quoteA\t\t"Java is to JavaScript what car is to Carpet.\n\t– Chris Heilmann"\t\t\t\t\tSo true!\nquoteB\t\t"Features, quality, time: pick two."\nquotes\t\t(quoteA quoteB)\t\t\t\t\tlook, an array :)`}</div>
+		<div className="code-block">{getOperationExamples([
+			["quoteA", '"Java is to JavaScript what car is to Carpet.'],
+			["", <pre>   – Chris Heilmann"</pre>, "So true!"],
+			["quoteB", '"Features, quality, time: pick two."'],
+			["quotes", '(quoteA quoteB)', "look, an array :)"],
+		])}</div>
 		<p>When an operator and its argument are both names, parentheses are required to delimit the terms.</p>
-		<div className="code-block">{`negative\t_\t\t\t\t\t\tcreate an alias\ntwo\t\t2\nnegativeTwoA\tnegative(two)\t\t\t\t\tthese expressions…\nnegativeTwoB\t(negative)two\t\t\t\t\t…give the same result`}</div>
+		<div className="code-block">{getOperationExamples([
+			["negative", '_', "create an alias"],
+			["two", "2"],
+			["negativeTwoA", 'negative(two)', "these expressions…"],
+			["negativeTwoB", '(negative)two', "…give the same result"],
+		])}</div>
 		<p>Alternatively, we can use the <a href="#applyTo">, (applyTo)</a> operation that applys an argument to an operator.</p>
-		<div className="code-block">{`negativeTwoC\ttwo,negative\t\t\t\t\talso 2,_`}</div>
+		<div className="code-block">{getOperationExamples([
+			["negativeTwoC", 'two,negative', "also 2,_"],
+		])}</div>
 	</div>,
 	exercise: {
 		question: "Define a tacitscript program that:",

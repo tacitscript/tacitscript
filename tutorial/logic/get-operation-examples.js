@@ -11,7 +11,7 @@ const style = css({
 				width: "8.5rem",
 			},
 			":nth-child(3)": {
-				width: "40%",
+				width: "50%",
 			},
 		},
 	},
