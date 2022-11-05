@@ -4,6 +4,7 @@ import ts from "common/src/tacitscript.js";
 const {css} = Glamor;
 const {useState, useEffect} = React;
 const {ts2es6} = parser;
+window.ts = ts; // required in release mode for eval
 
 const style = css({
 	color: "white",
@@ -24,7 +25,7 @@ export default ({id, name, description, epilogue, index, exercise: {question, ge
 			eval(es6.replace(/const /g, "var "));
 		}
 	} catch (ex) {
-		var i = 0;
+		console.log("exception", ex);
 	}
 
 	const testValue = getTestValue && getTestValue();
