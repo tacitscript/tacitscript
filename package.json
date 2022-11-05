@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/tacitscript/tacitscript#readme",
   "devDependencies": {
-    "systemjs-builder": "^0.16.4"
+    "systemjs-builder": "^0.16.15"
   }
 }
