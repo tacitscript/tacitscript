@@ -1,5 +1,6 @@
 import TextEdit from "../components/text-edit.js";
 import toDecimalPlaces from "../../common/src/to-decimal-places.js";
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "e",
@@ -7,12 +8,20 @@ export default {
 	description: <div>
 		<p>New operators are made by applying arguments to other operators.</p>
 		<p>Applying one argument to a binary operator generates a new unary operator with that argument <i>baked-in</i>.</p>
-		<div className="code-block">{`double\t\t2*\ncalculation\tdouble4\t\t\t\t\t\tequals 8`}</div>
+		<div className="code-block">{getOperationExamples([
+			["double", "2*"],
+			["calculation", "double4", "equals 8"],
+		])}</div>
 		<p>You can also apply arguments to right side of a binary operator.</p>
-		<div className="code-block">{`minusSix\t-6\ncalculation\tminusSix9\t\t\t\t\tequals 3`}</div>
+		<div className="code-block">{getOperationExamples([
+			["minusSix", "-6"],
+			["calculation", "minusSix9", "equals 3"],
+		])}</div>
 		<p>Note that a unary operator <i>always</i> takes its argument to the right. So <span className="code">9minusSix</span> is a syntax error, as is <span className="code">9(-6)</span>.</p>
 		<p>Applying arguments to a binary operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operation. Note, however, that the argument is always applied to the left-hand side.</p>
-		<div className="code-block">{`oneMinus\t1,-\t\t\t\t\t\tequivalent to 1-`}</div>
+		<div className="code-block">{getOperationExamples([
+			["oneMinus", "1,-", "equivalent to 1-"],
+		])}</div>
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>inverse</b> such that:</span>,
@@ -42,6 +51,8 @@ export default {
 		<p><i>undefined</i> is a special value that has no direct representation within tacitscript.</p>
 		<p>It is a <i>toxic value</i> in that, if applied to any operator,
 		the resulting calculation will also be <i>undefined</i>.</p>
-		<div className="code-block"><span>{`calculation\t1/0+2\t\t\t\t\t\t is `}<i>undefined</i></span></div>
+		<div className="code-block">{getOperationExamples([
+			["calculation", "1/0+2", <span>is <i>undefined</i></span>],
+		])}</div>
 	</div>,
 };

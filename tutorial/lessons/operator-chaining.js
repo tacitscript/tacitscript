@@ -1,5 +1,6 @@
 import TextEdit from "../components/text-edit.js";
 import toDecimalPlaces from "../../common/src/to-decimal-places.js";
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 const fToC = value => (value - 32) / 9 * 5;
 
@@ -8,7 +9,10 @@ export default {
 	name: "Operator Chaining",
 	description: <div>
 		<p>The <a href="#pipe">(.) pipe</a> operation takes a unary operator to the left and right. The resulting operator passes a value through the left operator, then feeds the result through the right operator.</p>
-		<div className="code-block">{`halfAddOne\t/2.+1\ncalculation\thalfAddOne4\t\t\t\t\tequals 3`}</div>
+		<div className="code-block">{getOperationExamples([
+			["halfAddOne", "/2.+1"],
+			["calculation", "halfAddOne4", "equals 3"],
+		])}</div>
 		<p>The <a href="#dot">dot (.)</a> and <a href="#comma">comma (,)</a> operators break <i>left-associativity</i> and have lowest precedence (the only exceptions to this rule.) Therefore, parentheses are not required around <span className="code">+1</span> above.</p>
 	</div>,
 	exercise: {

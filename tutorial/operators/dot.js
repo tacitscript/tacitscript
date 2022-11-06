@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "dot",
@@ -6,10 +7,14 @@ export default {
 	sections: [{
 		id: "pipe",
 		type: "(XY)(YZ)(XZ)",
-		examples: `halfAddOne\t/2.+1\t\t\t\t\t\thalfAddOne4=3`,
+		examples: getOperationExamples([
+			["halfAddOne", "/2.+1", "halfAddOne4=3"],
+		]),
 	}, {
 		id: "binaryUnaryPipe",
 		type: "(XYZ)(ZW)(XYW)",
-		examples: `average\t\t+./2\t\t\t\t\t\t5average7=6`,
+		examples: getOperationExamples([
+			["average", "+./2","5average7=6"],
+		]),
 	}],
 };
