@@ -50,6 +50,7 @@ export default ({dispatch}) => {
 					["A", 'A mixed-type array, eg. (10 "string" +)'],
 					["B", <span>A Boolean value, <span className="code">()</span> <i>false</i>, or <span className="code">!()</span> <i>true</i></span>],
 					["V", <span>A <i>value</i>, non-operator, type. Any of <b>N</b>, <b>S</b>, or <b>A</b>.<br/>Type does not have to match other <b>V</b>s in signature.</span>],
+					["?", <span>Any type, either <i>value</i> or operator</span>],
 				])}</div>
 			</div>
 		</div> : null}
