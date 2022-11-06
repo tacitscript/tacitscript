@@ -14,6 +14,7 @@ import greater from "./greater.js";
 import hat from "./hat.js";
 import percent from "./percent.js";
 import comma from "./comma.js";
+import dollar from "./dollar.js";
 
 export default [
 	apostrophe,
@@ -21,6 +22,7 @@ export default [
 	bracketleft,
 	bracketright,
 	comma,
+	dollar,
 	dot,
 	equals,
 	greater,
