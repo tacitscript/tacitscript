@@ -5,9 +5,6 @@ import lodash from "./lodash.js";
 
 mocha.setup('bdd');
 
-lodash();
-if (problems) problems();
-
 describe("mutual recursive language embedding", () => {
 /*ts
 	embed			"/*ts 1"+.+" */".{
@@ -2656,5 +2653,8 @@ describe("99 Haskell Problems", () => {
 		});
 	});
 });
+
+lodash();
+if (problems) problems();
 
 mocha.run();

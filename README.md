@@ -1,6 +1,7 @@
 ## tacitscript
 
 Tutorial: https://tacitscript.github.io/tacitscript/tutorial.html
+Test: https://tacitscript.github.io/tacitscript/test.html
 
 
 #### Build tutorial
