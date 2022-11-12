@@ -1,7 +1,4 @@
-import TextEdit from "../components/text-edit.js";
-import toDecimalPlaces from "../../common/src/to-decimal-places.js";
-
-const toCelsius = value => (value - 32) / 9 * 5;
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "g",
@@ -9,12 +6,24 @@ export default {
 	description: <div>
 		<p>Arrays and strings share many common operations, and are collectively termed <b>vectors</b>.</p>
 		<p><a href="#length"># (length)</a> retrieves the length of a vector.</p>
-		<div className="code-block">{`lengthArray\t#(5 6 7)\t\t\t\t\tequals 3\nlengthString\t#"Hello, World!"\t\t\t\tequals 13`}</div>
+		<div className="code-block">{getOperationExamples([
+			["lengthArray", "#(5 6 7)", "equals 3"],
+			["lengthString", '#"Hello, World!"', "equals 13"],
+		])}</div>
 		<p><a href="#first">[ (first)</a> retrieves the first element of a vector.</p>
-		<div className="code-block">{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5\nfirstString\t["Hello, World!"\t\t\t\tequals "H"`}</div>
+		<div className="code-block">{getOperationExamples([
+			["firstArray", "[(5 6 7)", "equals 5"],
+			["firstString", '["Hello, World!"', 'equals "H"'],
+		])}</div>
 		<p><a href="#last">] (last)</a> retrieves the last element of a vector.</p>
-		<div className="code-block">{`lastArray\t](5 6 7)\t\t\t\t\tequals 7\nlastString\t]"Hello, World!"\t\t\t\tequals "!"`}</div>
+		<div className="code-block">{getOperationExamples([
+			["lastArray", "](5 6 7)", "equals 7"],
+			["lastString", ']"Hello, World!"', 'equals "!"'],
+		])}</div>
 		<p><a href="#at">' (at)</a> retrieves the element at a zero-based index of a vector. Negative indices count back from the end of the vector.</p>
-		<div className="code-block">{`elemArray\t1'(5 6 7)\t\t\t\t\tequals 6\nelemString\t1'"Hello, World!"\t\t\t\tequals "e"`}</div>
+		<div className="code-block">{getOperationExamples([
+			["elemArray", "1'(5 6 7)", "equals 6"],
+			["elemString", `1'"Hello, World!"`, 'equals "e"'],
+		])}</div>
 	</div>,
 };
