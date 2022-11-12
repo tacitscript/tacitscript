@@ -841,7 +841,7 @@ let bar = (left, right) => {
 bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left)) {
-		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN modulo 7%2
+		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
 	}
 	else if (isArray(left)) {
@@ -862,7 +862,7 @@ let percent = (left, right) => {
 
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
-	["N", "N", "N"], // modulo 7%2
+	["N", "N", "N"], // remainder 7%2
 	["N", "A", "A"], // split 2%(1 2 3 4 5)
 	["N", "S", "A"], // split 2%"abcde"
 	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)

@@ -916,11 +916,11 @@ describe("Operators", () => {
 	/*ts
 		split						%
 	*/
-		describe("modulo NNN", () => {
+		describe("remainder NNN", () => {
 		/*ts
-			moduloTwo		%2
+			remainderTwo		%2
 		*/
-			it("%2(3) eql 1", () => expect(moduloTwo(3)).eql(1));
+			it("%2(3) eql 1", () => expect(remainderTwo(3)).eql(1));
 		});
 
 		describe("split NAA NSA", () => {

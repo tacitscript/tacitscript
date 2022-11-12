@@ -8,7 +8,7 @@ export default {
 		<div className="code-block">{getOperationExamples([
 			["square", "^2", "square3=9"],
 		])}</div>
-		<p><a href="#modulo">% (modulo)</a> returns the remainer of dividing its left argument by its right. (The result will have the same sign as the left argument.)</p>
+		<p><a href="#remainder">% (remainder)</a> returns the remainer of dividing its left argument by its right. (The result will have the same sign as the left argument.)</p>
 		<div className="code-block">{getOperationExamples([
 			["remainder", "7%2", "equals 1"],
 		])}</div>
