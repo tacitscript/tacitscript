@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "hat",
@@ -6,9 +7,9 @@ export default {
 	sections: [{
 		id: "power",
 		type: "NNN",
-		examples: <React.Fragment>
-			<span>twoCubed        2^3                                                equals 8</span>
-			<span>oneOverRootTwo  2^(_0.5)</span>
-		</React.Fragment>,
+		examples: getOperationExamples([
+			["twoCubed", "2^3", "equals 8"],
+			["rootFour", '4^(_0.5)', "equals 2"],
+		]),
 	}],
 };
