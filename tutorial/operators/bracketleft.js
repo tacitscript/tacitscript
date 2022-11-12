@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "bracketleft",
@@ -6,11 +7,11 @@ export default {
 	sections: [{
 		id: "first",
 		type: "A?\tSS",
-		examples: <React.Fragment>
-			<span>{`firstArray\t[(5 6 7)\t\t\t\t\tequals 5\nfirstEArray\t[( )\t\t\t\t\t\tis `}
-			<i>undefined</i></span>
-			<span>{`\nfirstString\t["Hello, World!"\t\t\t\tequals "H"\nfirstEString\t[""\t\t\t\t\t\tis `}
-			<i>undefined</i></span>
-		</React.Fragment>,
+		examples: getOperationExamples([
+			["firstArray", "[(5 6 7)", "equals 5"],
+			["firstEmptyArray", '[( )', <span>is <i>undefined</i></span>],
+			["firstString", `["Hello, World!"`, `equals "H"`],
+			["firstEmptyString", '[""', <span>is <i>undefined</i></span>],
+		]),
 	}],
 };
