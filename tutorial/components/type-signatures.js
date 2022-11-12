@@ -47,9 +47,10 @@ export default ({dispatch}) => {
 				<div className="code-block table-data">{getOperationExamples([
 					["N", "An integer, or decimal number (using a decimal point), eg. 10, 3.14"],
 					["S", <span>A double-quote delimited multi-line string, possibly using escaped characters eg. "header1\theader2<br/>value1\tvalue2"</span>],
-					["A", 'A mixed-type array, eg. (10 "string" +)'],
 					["B", <span>A Boolean value, <span className="code">()</span> <i>false</i>, or <span className="code">!()</span> <i>true</i></span>],
-					["V", <span>A <i>value</i>, non-operator, type. Any of <b>N</b>, <b>S</b>, or <b>A</b>.<br/>Type does not have to match other <b>V</b>s in signature.</span>],
+					["A", 'A mixed-type array, eg. (10 "string" +)'],
+					["D", <span>A dictionary where all keys are of one <i>value</i> type, and values may be of mixed types, eg. \(("a" 10) ("b" +))</span>],
+					["V", <span>A <i>value</i>, non-operator, type. Any of <b>N</b>, <b>S</b>, <b>B</b>, <b>A</b> or <b>D</b>.<br/>Type does not have to match other <b>V</b>s in signature.</span>],
 					["?", <span>Any type, either <i>value</i> or operator</span>],
 				])}</div>
 			</div>

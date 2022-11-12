@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "hash",
@@ -5,7 +6,14 @@ export default {
 	type: "Unary",
 	sections: [{
 		id: "length",
-		type: "AN\tSN\tON",
-		examples: `lengthArray\t#(5 6 7)\t\t\t\t\tequals 3\nlengthEArray\t#( )\t\t\t\t\t\tequals 0\n\nlengthString\t#"Hello, World!"\t\t\t\tequals 13\nlengthEString\t#""\t\t\t\t\t\tequals 0`,
+		type: "AN\tSN\tDN",
+		examples: getOperationExamples([
+			["lengthArray", "#(5 6 7)", "equals 3"],
+			["lengthEmptyArray", '#( )', 'equals 0'],
+			["lengthString", '#"Hello, World!"', 'equals 13'],
+			["lengthEmptyString", '#""', "equals 0"],
+			["lengthDict", '#(\\(("a" 3) ("b" 4)))', 'equals 2'],
+			["lengthEmptyDict", '#(\\( ))', 'equals 0'],
+		]),
 	}],
 };
