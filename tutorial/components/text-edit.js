@@ -40,7 +40,7 @@ const update = _.debounce(({dispatch, id, value, revealed, showHint1, showHint2}
 	payload: {id, value, revealed, showHint1, showHint2},
 }), 300);
 
-export default ({dispatch, id, multiline, defaultValue = "", solution, revealed, pass, showHint1, showHint2, hint1, hint2}) => {
+export default ({dispatch, id, multiline, defaultValue = "", solution, revealed, pass, showHint1, showHint2, hint1, hint2, children}) => {
 	const element = useRef(null);
 	const [editMode, setEditMode] = useState(false);
 
@@ -81,6 +81,7 @@ export default ({dispatch, id, multiline, defaultValue = "", solution, revealed,
 				setEditMode(true);
 			}
 		}}/>
+		{children}
 		{(pass || !hint1) ? null : <div role="button" tabIndex="0" aria-label="Show Hint 1" onClick={() => {
 			update({dispatch, id, showHint1: true});
 		}} className={`show-answer${showHint1 ? " selected" : ""}`} title={showHint1 ? hint1 : "Show hint 1"}><div aria-hidden="true">1</div></div>}

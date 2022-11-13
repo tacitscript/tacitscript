@@ -61,7 +61,7 @@ export default ({id, name, description, epilogue, index, exercise: {question, ge
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 						<div className="description">{(typeof description === "function") ? description(testValues[index]) : description}</div>
 					</div>)}
-					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2})}
+					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2, solution})}
 				</div>
 			</React.Fragment> : null}
 			{epilogue}

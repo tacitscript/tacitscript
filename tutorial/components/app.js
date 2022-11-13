@@ -128,7 +128,7 @@ const style = css({
 						"> .question": {
 							marginBottom: "0.5rem",
 						},
-						"> .single-line": {
+						" .single-line": {
 							margin: "1rem 0.3rem 0.2rem",
 						},
 						" .name-expression": {
