@@ -17,11 +17,13 @@ import comma from "./comma.js";
 import dollar from "./dollar.js";
 import ampersand from "./ampersand.js";
 import bar from "./bar.js";
+import bang from "./bang.js";
 
 export default [
 	ampersand,
 	apostrophe,
 	asterisk,
+	bang,
 	bar,
 	bracketleft,
 	bracketright,
