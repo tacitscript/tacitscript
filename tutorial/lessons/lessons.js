@@ -11,6 +11,7 @@ import mathOperations from "./math-operations.js";
 import hostLanguageInterface from "./host-language-interface.js";
 import higherOrderOperators from "./higher-order-operators.js";
 import incrementNumericString from "./increment-numeric-string.js";
+import fizzbuzz from "./fizzbuzz.js";
 
 export default [
 	arithmeticOperations,
@@ -29,4 +30,5 @@ export default [
 	logicOperations,
 
 	incrementNumericString,
+	fizzbuzz,
 ];
