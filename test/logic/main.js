@@ -5,12 +5,19 @@ import lodash from "./lodash.js";
 
 mocha.setup('bdd');
 
+describe("string conversion of negative numbers", () => {
+/*ts
+	result			""+(_2)
+*/
+	it(`""+(_2)="_2"`, () => expect(result).eql("_2"));
+});
+
 describe("mutual recursive language embedding", () => {
 /*ts
 	embed			"/*ts 1"+.+" */".{
 */
 	it(`"/*ts 1"+.+" */".{("") eql 1`, () => expect(embed("")).eql(1));
-})
+});
 
 describe("toString", () => {
 /*ts
