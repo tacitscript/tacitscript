@@ -47,7 +47,7 @@ export default {
 		tests: [
 			{description: `an array containing integers 1 to 100 (inclusive), except`, condition: ({solution, testValue}) => {
 				try {
-					return R.addIndex(R.all)((value, i) => {
+					return (solution[0].length === 100) && R.addIndex(R.all)((value, i) => {
 						const index = i + 1;
 
 						if (((index % 3) !== 0) && ((index % 5) !== 0)) return value === index;
