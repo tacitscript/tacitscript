@@ -1,3 +1,4 @@
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 export default {
 	id: "greater",
@@ -6,9 +7,9 @@ export default {
 	sections: [{
 		id: "greaterThan",
 		type: "NNB\tSSB",
-		examples: <React.Fragment>
-			<span>numberGreater   2&gt;3                                             is <i>false</i></span>
-			<span>stringGreater   "cad"&gt;"bad"                                     is <i>true</i></span>
-		</React.Fragment>,
+		examples: getOperationExamples([
+			["numberGreater", "2>3", <span>is <i>false</i></span>],
+			["stringGreater", '"cad">"bad"', <span>is <i>true</i></span>],
+		]),
 	}],
 };
