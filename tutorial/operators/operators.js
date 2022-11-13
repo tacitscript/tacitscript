@@ -15,8 +15,10 @@ import hat from "./hat.js";
 import percent from "./percent.js";
 import comma from "./comma.js";
 import dollar from "./dollar.js";
+import ampersand from "./ampersand.js";
 
 export default [
+	ampersand,
 	apostrophe,
 	asterisk,
 	bracketleft,
