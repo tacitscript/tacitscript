@@ -42,8 +42,8 @@ export default {
 			</div>
 		</div>,
 		getTestValue: index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"),
-		hint1: "Use operators: . +",
-		hint2: "convert to number, increment, convert to string",
+		hint1: "Use operators: & @ ` , . = ^ % + ? ;",
+		hint2: "generate 1 to 100, map over array replacing values appropriately",
 		tests: [
 			{description: `an array of length 100`, condition: ({solution, testValue}) => {
 				try {
