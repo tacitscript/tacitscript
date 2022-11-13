@@ -6,6 +6,7 @@ const style = css({
 	" .console": {
 		whiteSpace: "nowrap",
 		marginRight: "1rem",
+		alignSelf: "flex-end",
 	},
 	"> .rule": {
 		margin: "1rem 0",
