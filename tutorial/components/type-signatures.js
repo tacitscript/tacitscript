@@ -51,7 +51,8 @@ export default ({dispatch}) => {
 					["A", 'A mixed-type array, eg. (10 "string" +)'],
 					["D", <span>A dictionary where all keys are of one <i>value</i> type, and values may be of mixed types, eg. \(("a" 10) ("b" +))</span>],
 					["V", <span>A <i>value</i>, non-operator, type. Any of <b>N</b>, <b>S</b>, <b>B</b>, <b>A</b> or <b>D</b>.<br/>Type does not have to match other <b>V</b>s in signature.</span>],
-					["?", <span>Any type, either <i>value</i> or operator</span>],
+					["?", <span>Any type (either <i>value</i> or operator).<br/>Type does not have to match other <b>?</b>s in signature.</span>],
+					["X, Y, Z, W", <span>Any type.<br/>Matches other instances of this symbol in signature.</span>],
 				])}</div>
 			</div>
 		</div> : null}
