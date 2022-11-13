@@ -16,11 +16,13 @@ import percent from "./percent.js";
 import comma from "./comma.js";
 import dollar from "./dollar.js";
 import ampersand from "./ampersand.js";
+import bar from "./bar.js";
 
 export default [
 	ampersand,
 	apostrophe,
 	asterisk,
+	bar,
 	bracketleft,
 	bracketright,
 	comma,
