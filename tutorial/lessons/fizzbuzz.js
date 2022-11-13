@@ -26,12 +26,12 @@ export default {
 			<p><i>Fizzbuzz</i> is a popular interview question.</p>
 			<p>Define the expression <b>fizzbuzz</b> that generates:</p>
 		</div>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: def => `const solution = /*ts ${def},""+ */;`,
 		getHtml: details => <div {...style}>
 			<div className="single-line name-expression">
 				<div className="name">fizzbuzz</div>
 				<TextEdit {...{...details, multiline: true, solution: `0+.+1.""+`}}>
-					<div className="console">{`>({"console.log")`}</div>
+					<div className="console">{`,""+.>({"console.log")`}</div>
 				</TextEdit>
 			</div>
 			<div className="rule"/>
