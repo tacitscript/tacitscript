@@ -4,8 +4,8 @@ export default {
 	id: "i",
 	name: "Logic Operations",
 	description: <div>
-		<p>In tacitscript, the values <i>false</i> and <i>undefined</i> are considered <i>falsey</i>. All other values are <i>truthy</i>. These qualities are used in
-		resolving the logic operations below.</p>
+		<p>In tacitscript, the values <i>false</i> and <i>undefined</i> are considered <i>falsey</i>. All other values are <i>truthy</i>. (Note in particular that <b>0</b> is considered <i>truthy.</i>)</p>
+		<p>These qualities are used in resolving the logic operations below.</p>
 		<p>The <a href="#andValue">& (andValue)</a> operation returns the right argument if the left argument is <i>falsey</i>. Otherwise, it returns <i>false</i>.</p>
 		<div className="code-block">{getOperationExamples([
 			["check", '1&2', "equals 2"],
