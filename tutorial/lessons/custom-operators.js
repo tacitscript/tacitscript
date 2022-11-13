@@ -36,14 +36,18 @@ export default {
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
 			{description: testValue => <span><b>inverse</b>{`${testValue} equals ${toDecimalPlaces(1 / testValue, 4)}`}</span>, condition: ({solution, testValue}) => {
-				if (typeof solution !== "function") return false;
-
-				return Math.abs(solution(testValue) - (1 / testValue)) < 1E-10;
+				try {
+					return Math.abs(solution(testValue) - (1 / testValue)) < 1E-10;
+				} catch (e) {
+					return false;
+				}
 			}},
 			{description: <span><b>inverse</b>0 is <i>undefined</i></span>, condition: ({solution}) => {
-				if (typeof solution !== "function") return false;
-
-				return solution(0) == undefined;
+				try {
+					return solution(0) == undefined;
+				} catch (e) {
+					return false;
+				}
 			}},
 		],
 	},

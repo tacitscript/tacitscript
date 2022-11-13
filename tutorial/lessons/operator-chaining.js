@@ -31,8 +31,6 @@ export default {
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
 			{description: testValue => <span><b>fToC</b>{`${testValue} equals ${toDecimalPlaces(fToC(testValue), 4)}`}</span>, condition: ({solution, testValue}) => {
-				if (typeof solution !== "function") return false;
-
 				try {
 					return Math.abs(solution(testValue) - fToC(testValue)) < 1E-10;
 				} catch (ex) {

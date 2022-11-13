@@ -41,8 +41,6 @@ solution	chain(-32 /9 *5)
 		tests: [
 			{description: "chain(-32 /9 *5) gives a unary operator (fToC)", condition: ({solution}) => typeof solution === "function"},
 			{description: testValue => <span><b>fToC</b>{`${testValue} equals ${toDecimalPlaces(fToC(testValue), 4)}`}</span>, condition: ({solution, testValue}) => {
-				if (typeof solution !== "function") return false;
-
 				try {
 					return Math.abs(solution(testValue) - fToC(testValue)) < 1E-10;
 				} catch (ex) {

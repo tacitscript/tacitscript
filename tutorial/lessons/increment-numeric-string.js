@@ -12,15 +12,23 @@ export default {
 			<div className="name">increment</div>
 			<TextEdit {...{...details, multiline: true, solution: `0+.+1.""+`}}/>
 		</div>,
-		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		getTestValue: index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`,
 		hint1: "Use operators: . +",
 		hint2: "convert to number, increment, convert to string",
 		tests: [
-			{description: testValue => <span><b>increment</b>{`${testValue} equals ${testValue + 1}`}</span>, condition: ({solution, testValue}) => {
-				return Math.abs(solution - testValue - 1) < 1E-10;
+			{description: testValue => <span><b>increment</b>"{`${testValue.replace(/-/, "_")}" equals "${(+testValue + 1).toFixed(1)}"`}</span>, condition: ({solution, testValue}) => {
+				try {
+					return Math.abs(+solution(testValue).replace(/_/, "-") - testValue - 1) < 1E-10;
+				} catch (e) {
+					return false;
+				}
 			}},
-			{description: testValue => <span><b>increment</b>{`${testValue} equals ${testValue + 1}`}</span>, condition: ({solution, testValue}) => {
-				return Math.abs(solution - testValue - 1) < 1E-10;
+			{description: testValue => <span><b>increment</b>"{`${testValue}" equals "${(+testValue + 1).toFixed(1)}"`}</span>, condition: ({solution, testValue}) => {
+				try {
+					return Math.abs(+solution(testValue) - testValue - 1) < 1E-10;
+				} catch (e) {
+					return false;
+				}
 			}},
 		],
 	},

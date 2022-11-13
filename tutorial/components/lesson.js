@@ -28,8 +28,8 @@ export default ({id, name, description, epilogue, index, exercise: {question, ge
 		console.log("exception", ex);
 	}
 
-	const testValue = getTestValue && getTestValue();
-	const passes = tests ? tests.map(({condition}) => /*(def != undefined) && */solution && condition({solution, def, es6, testValue})) : [];
+	const testValues = R.times(getTestValue || (() => {}), R.propOr(0, "length", tests));
+	const passes = tests ? tests.map(({condition}, index) => /*(def != undefined) && */solution && condition({solution, def, es6, testValue: testValues[index]})) : [];
 	const isPassed = def ? passes.every(pass => pass === true) : undefined;
 
 	useEffect(() => {
@@ -59,7 +59,7 @@ export default ({id, name, description, epilogue, index, exercise: {question, ge
 					<div className="question">{question}</div>
 					{tests.map(({description}, index) => <div className="test" key={index}>
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
-						<div className="description">{(typeof description === "function") ? description(testValue) : description}</div>
+						<div className="description">{(typeof description === "function") ? description(testValues[index]) : description}</div>
 					</div>)}
 					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2})}
 				</div>
