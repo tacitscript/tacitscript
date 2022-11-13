@@ -54,7 +54,7 @@ export default ({id, name, description, epilogue, index, exercise: {question, ge
 			<hr/>
 			{description}
 			{question ? <React.Fragment>
-				<h3>Exercise</h3>
+				{description ? <h3>Exercise</h3> : null}
 				<div className="code-block exercises">
 					<div className="question">{question}</div>
 					{tests.map(({description}, index) => <div className="test" key={index}>

@@ -10,6 +10,7 @@ import logicOperations from "./logic-operations.js";
 import mathOperations from "./math-operations.js";
 import hostLanguageInterface from "./host-language-interface.js";
 import higherOrderOperators from "./higher-order-operators.js";
+import incrementNumericString from "./increment-numeric-string.js";
 
 export default [
 	arithmeticOperations,
@@ -26,4 +27,6 @@ export default [
 	vectorInterrogation,
 	comparisons,
 	logicOperations,
+
+	incrementNumericString,
 ];
