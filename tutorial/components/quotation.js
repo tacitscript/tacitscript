@@ -3,7 +3,7 @@ const {css} = Glamor;
 const style = css({
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "var(--orange)",
+    backgroundColor: "var(--quotation)",
     color: "black",
     whiteSpace: "pre-wrap",
     padding: "1rem 2rem",
