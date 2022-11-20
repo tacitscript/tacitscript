@@ -4,6 +4,7 @@ import Score from "./score.js";
 import operators from "../operators/operators.js";
 import Operator from "./operator.js";
 import TypeSignatures from "./type-signatures.js";
+import Motivation from "./motivation.js";
 
 const {css} = Glamor;
 
@@ -284,6 +285,7 @@ export default ({store}) => {
 			<h4>tacitscript - a language optimized for pen and paper</h4>
 			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Algorithms are built from a set of mathematical operators.</p>
 			<p>Jump straight into the interactive tutorial below! (The entire language syntax is covered in the first six short sections.)</p>
+			<p>Or read more about the <a href="#motivation">motivation behind tacitscript.</a></p>
 		</div>
 
 		<div className="section-title">
@@ -309,7 +311,10 @@ export default ({store}) => {
 
 		<div className="block">{operators.map(details => <Operator {...{...details, dispatch: store.dispatch, key: details.id}}/>)}</div>
 
-		<div className="block"><TypeSignatures dispatch={store.dispatch}/></div>
+		<div className="block">
+			<Motivation dispatch={store.dispatch}/>
+			<TypeSignatures dispatch={store.dispatch}/>
+		</div>
 
 	</div>;
 };
