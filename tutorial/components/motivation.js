@@ -49,7 +49,7 @@ export default ({dispatch}) => {
 			<p>While superficially appearing similar to J, semantically, the language shares far more DNA with functional languages.
 				It borrows from the ML family (automatic currying, purity) and LISP family (homoiconicity). However, as a functional language, it is unusual in missing the core <i>lambda</i> construct.
 			</p>
-			<p>In spite of its strict design constraints, tacitscript is designed to be a general purpose language, having support for full interoperability with its native host environment.
+			<p>In spite of its strict design constraints, tacitscript is designed to be a general purpose language, having full interoperability with its native host environment.
 				Although agnostic to its environment, the canonical implementation of tacitscript is built upon JavaScript for the web.
 				As such, it is able to reference all JavaScript APIs (including the DOM API), and export functionality to be consumed by those APIs.
 			</p>
