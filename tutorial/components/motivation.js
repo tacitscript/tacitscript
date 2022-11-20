@@ -46,7 +46,7 @@ export default ({dispatch}) => {
 					In contrast to J, each symbol represents a distinct operator. In J, the operators <span className="code">+:</span> and <span className="code">+.</span> share no relation to the operator <span className="code">+</span>.
 					In tacitscript, <span className="code">+:</span> is the application of <span className="code">+</span> and <span className="code">:</span> operators.</p>
 				<p>While superficially appearing similar to J, semantically, the language shares far more DNA with functional languages.
-					It borrows from the ML family (automatic currying, purity) and LISP family (homoiconicity). As a functional language, it is unusual in missing the core <i>lambda</i> construct.
+					It borrows from the ML family (automatic currying, purity) and LISP family (homoiconicity). However, it is unusual in missing the core <i>lambda</i> construct.
 				</p>
 				<p>The absence of traditional syntactic boilerplate makes tacitscript very terse. Complex algorithms can be derived mathematically, typically on paper first.</p>
 			</div>
