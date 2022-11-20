@@ -130,6 +130,7 @@ const style = css({
 							marginBottom: "0.5rem",
 						},
 						" .single-line": {
+							display: "flex",
 							margin: "1rem 0.3rem 0.2rem",
 						},
 						" .name-expression": {
