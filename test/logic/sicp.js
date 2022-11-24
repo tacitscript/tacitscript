@@ -21,57 +21,64 @@ export default () => {
 			/*ts
 				sumOfTwoLarger	;<.1%.].^2@.+$
 			*/
-			it(";<.1%.].^2@.+$(4 2 3)=25", () => expect(sumOfTwoLarger([4, 2, 3])).eql(25));
+			it("sumOfTwoLarger(4 2 3)=25", () => expect(sumOfTwoLarger([4, 2, 3])).eql(25));
 		});
 
-		describe("recursive factorial ((=0 1`) .(; -1.fact).*$)?", () => {
+		describe("factRec ((=0 1`) .(; -1.factRec).*$)?", () => {
 			/*ts
-				fact	((=0 1`) .(; -1.fact).*$)?
+				factRec	((=0 1`) .(; -1.factRec).*$)?
 			*/
-			it("((=0 1`) .(; -1.fact).*$)?4=24", () => expect(fact(4)).eql(24));
+			it("factRec4=24", () => expect(factRec(4)).eql(24));
 		});
 
-		describe("generator factorial +1^.*$", () => {
+		describe("factGen +1^.*$", () => {
 			/*ts
-				fact	+1^.*$
+				factGen	+1^.*$
 			*/
-			it("+1^.*$4=24", () => expect(fact(4)).eql(24));
+			it("factGen4=24", () => expect(factGen(4)).eql(24));
 		});
 
-		describe("fibonacci recursive ((=0 0`) (=1 1`) .(-1 -2).fib@.+$)?", () => {
+		describe("fibRec ((=0 0`) (=1 1`) .(-1 -2).fibRec@.+$)?", () => {
 			/*ts
-				fib		((=0 0`) (=1 1`) .(-1 -2).fib@.+$)?
+				fibRec		((=0 0`) (=1 1`) .(-1 -2).fibRec@.+$)?
 			*/
-			it("((=0 0`) (=1 1`) .(-1 -2).fib@.+$)?4=3", () => expect(fib(4)).eql(3));
+			it("fibRec4=3", () => expect(fibRec(4)).eql(3));
 		});
 
-		describe("1.11 recursive ((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?", () => {
+		describe("fibGen .(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]", () => {
+			/*ts
+				fibGen		.(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]
+			*/
+			it("fibGen6=8", () => expect(fibGen(6)).eql(8));
+		});
+
+		describe("1.11 f ((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?", () => {
 			/*ts
 				f	((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?
 			*/
-			it("((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?4=11", () => expect(f(4)).eql(11));
+			it("f4=11", () => expect(f(4)).eql(11));
 		});
 
 		// firstFiveFibonacci	(#.<5 _2%.].+$)^(1 1)
-		describe("1.12 pascals triangle .(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$", () => {
+		describe("1.12 pascal .(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$", () => {
 			/*ts
 				pascal		.(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$
 			*/
-			it(".(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$5=((1 ) (1 1) (1 2 1) (1 3 3 1) (1 4 6 4 1))", () => expect(pascal(5)).eql([[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]));
+			it("pascal5=((1 ) (1 1) (1 2 1) (1 3 3 1) (1 4 6 4 1))", () => expect(pascal(5)).eql([[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]));
 		});
 
-		describe("exponent recursive :.((=0 1`) .([ .([ ].-1).^$).*$)?", () => {
+		describe("expRec :.((=0 1`) .([ .([ ].-1).^$).*$)?", () => {
 			/*ts
-				exp		:.((=0 1`) .([ .([ ].-1).^$).*$)?
+				expRec		:.((=0 1`) .([ .([ ].-1).^$).*$)?
 			*/
-			it("2(:.((=0 1`) .([ .([ ].-1).^$).*$)?)3=8", () => expect(exp(2, 3)).eql(8));
+			it("2expRec3=8", () => expect(expRec(2, 3)).eql(8));
 		});
 
-		describe("exponent generative :,(` ;).^$.*$", () => {
+		describe("expGen :,(` ;).^$.*$", () => {
 			/*ts
-				exp		:,(` ;).^$.*$
+				expGen		:,(` ;).^$.*$
 			*/
-			it("3(:,(` ;).^$.*$)2=9", () => expect(exp(3, 2)).eql(9));
+			it("3expGen2=9", () => expect(expGen(3, 2)).eql(9));
 		});
 	});
 };
