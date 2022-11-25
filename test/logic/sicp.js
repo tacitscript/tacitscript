@@ -59,7 +59,6 @@ export default () => {
 			it("f4=11", () => expect(f(4)).eql(11));
 		});
 
-		// firstFiveFibonacci	(#.<5 _2%.].+$)^(1 1)
 		describe("1.12 pascal .(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$", () => {
 			/*ts
 				pascal		.(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$
@@ -79,6 +78,18 @@ export default () => {
 				expGen		:,(` ;).^$.*$
 			*/
 			it("3expGen2=9", () => expect(expGen(3, 2)).eql(9));
+		});
+
+		xdescribe("fastExp", () => {
+			/*ts
+				square		.(; ;).*$
+				isEven		((%2.=0 !()`) ()`)?
+				ifNoNOne	(].=0 1`)
+				ifNEvenSFE	(].isEven ,(; /2).fastExp$.square)
+				fastExpRec	.([ ,(; -1).fastExp$).*$
+				fastExp		:.(ifNoNOne ifNEvenSFE fastExpRec)?
+			*/
+			it("2fastExp7=128", () => expect(fastExp(2, 7)).eql(128));
 		});
 	});
 };
