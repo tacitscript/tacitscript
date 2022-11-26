@@ -1,31 +1,26 @@
 const {expect} = chai;
 import ts from "tacitscript";
 
+// Note: Recursive operators MUST be unary
+// The reason is that generating the type of a recursive operator cannot be determined - therefore we assume it is VV
+
 export default () => {
 	describe("SICP", () => {
-		xdescribe("gcd", () => {
+		describe("gcd ((].=0 [) .(] %$).gcd)?", () => {
 			/*ts
-				log			>({"console.log")
-				//recurse		.(] %$).gcd$
-				//gcd			:.((].=0 [) .(] %$).gcd$)?
-				//value		gcd$(15 5)
-				//add			:.+$
-				//val			:.add$
-				//solution	15gcd5
+				gcd			((].=0 [) .(] %$).gcd)?
 			*/
-			it("15gcd20=5", () => expect(5).eql(5));
+			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
 		});
 
-		xdescribe("fastExp", () => {
+		describe("fastExp ((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp.(; ;).*$) .([ ,(; -1).fastExp).*$)?", () => {
 			/*ts
 				square		.(; ;).*$
 				isEven		((%2.=0 !()`) ()`)?
 				ifNoNOne	(].=0 1`)
-				ifNEvenSFE	(].isEven ,(; /2).fastExp$.square)
-				fastExpRec	.([ ,(; -1).fastExp$).*$
-				fastExp		:.(ifNoNOne ifNEvenSFE fastExpRec)?
+				fastExp		(ifNoNOne (].isEven ,(; /2).fastExp.square) .([ ,(; -1).fastExp).*$)?
 			*/
-			it("2fastExp7=128", () => expect(fastExp(2, 7)).eql(128));
+			it("fastExp(2 7)=128", () => expect(fastExp([2, 7])).eql(128));
 		});
 
 		describe("expGen :,(` ;).^$.*$", () => {
