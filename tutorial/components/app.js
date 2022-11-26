@@ -279,7 +279,7 @@ export default ({store}) => {
 		<h1>tacitscript</h1>
 
 		<div className="preview">
-			<div className="code">avg .(+$ #)./$</div>
+			<div className="code">fact +1^.*$</div>
 		</div>
 
 		<div className="section">
