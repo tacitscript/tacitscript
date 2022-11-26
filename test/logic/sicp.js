@@ -2,7 +2,7 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 // Note: Recursive operators MUST be unary
-// The reason is that generating the type of a recursive operator cannot be determined - therefore we assume it is VV
+// The reason is that generating the type of a recursive operator cannot be determined or deferred - therefore we assume it is VV
 
 export default () => {
 	describe("SICP", () => {
