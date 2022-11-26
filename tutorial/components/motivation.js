@@ -37,18 +37,14 @@ export default ({dispatch}) => {
 			<p>It seeks to be a pure, minimal expression of the maxim <b>programming is data transformation</b>.</p> 
 			<h3>How</h3>
 			<p>tacitscript is built upon a set of core operators.
-				It contains no dedicated syntax for language features such as loops or control flow.
+				It contains no dedicated constructs for language features such as loops or control flow.
 				This gives it a very regular, concise syntax.</p>
 			<p>Notably, it adopts a strict <a href="https://en.wikipedia.org/wiki/Tacit_programming">point-free</a> style that excludes representation of function arguments.
-				This follows the agenda set out by John Backus in his 1977 Turing Award lecture, in which he calls for a change in language design philosphy:</p>
-			<Quotation>Programming languages appear to be in trouble. Each successive language incorporates, with a little cleaning up, all the features of its predecessors plus a few more. [...] Each new language claims new and fashionable features... but the plain fact is that few languages make programming sufficiently cheaper or more reliable to justify the cost of producing and learning to use them.</Quotation>
-			<p>Point-free coding has achieved some support, particularly among stack-based (<a href="https://en.wikipedia.org/wiki/Joy_(programming_language)">Joy</a>, <a href="https://en.wikipedia.org/wiki/Factor_(programming_language)">Factor</a>), and array (<a href="https://en.wikipedia.org/wiki/APL_(programming_language)">APL</a>, <a href="https://en.wikipedia.org/wiki/J_(programming_language)">J</a>) languages.</p>
+				This style is seen predominantly among stack-based (<a href="https://en.wikipedia.org/wiki/Joy_(programming_language)">Joy</a>, <a href="https://en.wikipedia.org/wiki/Factor_(programming_language)">Factor</a>), and array (<a href="https://en.wikipedia.org/wiki/APL_(programming_language)">APL</a>, <a href="https://en.wikipedia.org/wiki/J_(programming_language)">J</a>) languages.</p>
 			<p>Syntactially, tacitscript is similar to J, using standard ASCII punctuation characters as an inventory of core programming operations. 
-				In contrast to J, each symbol represents a distinct operator in tacitscript.</p>
-			<p>Semantically, the language shares far more DNA with functional languages.
-				It borrows from the ML family (automatic currying, purity) and LISP family (homoiconicity).
+				Semantically, the language shares more DNA with functional languages, borrowing from the ML (automatic currying, purity) and LISP (homoiconicity) families.
 			</p>
-			<p>tacitscript has full interoperability with its native host environment.
+			<p>tacitscript is a general-purpose language, and has full interoperability with its native host environment.
 				The canonical implementation is built upon JavaScript for the web.
 				As such, it is able to reference all JavaScript APIs (including the DOM API), and export functionality to be consumed by those APIs.
 			</p>
