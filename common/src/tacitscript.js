@@ -826,7 +826,7 @@ let bar = (left, right) => {
 
 			return isFalsey(leftResult) ? right(x, y) : leftResult;
 		};
-		fn. types = types(left); // assume
+		fn.types = types(left); // assume
 
 		return fn;
 	}
