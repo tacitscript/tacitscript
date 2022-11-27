@@ -5,7 +5,35 @@ import ts from "tacitscript";
 // The reason is that generating the type of a recursive operator cannot be determined or deferred - therefore we assume it is VV
 
 export default () => {
+	xdescribe("", () => {
+		/*ts
+
+		*/
+		it("", () => expect().eql());
+	});
+
 	describe("SICP", () => {
+		describe("piSum ;^.(*2.+1)@.(2 )%.(*$.8/)@.+$", () => {
+			/*ts
+				piSum		;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
+			*/
+			it("piSum10000=3.1414926535900367", () => expect(piSum(10000)).eql(3.1414926535900367));
+		});
+
+		describe("sumCubes :.([.+ _.-$.+1).^$.^3@.+$", () => {
+			/*ts
+				sumCubes		:.([.+ _.-$.+1).^$.^3@.+$
+			*/
+			it("2sumCubes4=99", () => expect(sumCubes(2, 4)).eql(99));
+		});
+
+		describe("sumIntegers :.([.+ _.-$.+1).^$.+$", () => {
+			/*ts
+				sumIntegers		:.([.+ _.-$.+1).^$.+$
+			*/
+			it("0sumIntegers10=55", () => expect(sumIntegers(0, 10)).eql(55));
+		});
+
 		describe("gcd ((].=0 [) .(] %$).gcd)?", () => {
 			/*ts
 				gcd			((].=0 [) .(] %$).gcd)?
