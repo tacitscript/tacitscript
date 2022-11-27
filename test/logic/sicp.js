@@ -13,6 +13,29 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("cons :.(,apply) car [:.(,$)", () => {
+			/*ts
+				comma				,
+				apply				comma,~
+				applyTest			+2apply3
+				applyToBinary		:.#apply
+				applyToBinaryB		:.(,#)
+				cons				:.(,apply)
+				val					7cons8
+				execFn				#:.(,$)
+				applyArray			apply(7 8)
+				car					[:.(,$)
+			*/
+			it("+2apply3=5", () => expect(applyTest).eql(5));
+			it("5(:.#apply)6=2", () => expect(applyToBinary(5, 6)).eql(2));
+			it("5(:.(,#))6=2", () => expect(applyToBinaryB(5, 6)).eql(2));
+			it("#,7(:.(,apply))8=2", () => expect(cons(7, 8)(x => x.length)).eql(2));
+			it("[,7(:.(,apply))8=2", () => expect(cons(7, 8)(x => x[0])).eql(7));
+			it("],7(:.(,apply))8=2", () => expect(cons(7, 8)(x => x[1])).eql(8));
+			it("#:.(,$)(f => f([7, 8]))=2", () => expect(execFn(applyArray)).eql(2));
+			it("car(7cons8)=7", () => expect(car(cons(7, 8))).eql(7));
+		});
+
 		describe("compose dot,~", () => {
 			/*ts
 				dot			.
