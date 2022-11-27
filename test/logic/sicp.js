@@ -13,6 +13,14 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("compose dot,~", () => {
+			/*ts
+				dot			.
+				compose		dot,~
+			*/
+			it("6,^2compose+1=47", () => expect(compose(x => x * x, x => x + 1)(6)).eql(49));
+		});
+
 		describe("nTimes :,(` ;).^$.(.$)", () => {
 			/*ts
 				nTimes		:,(` ;).^$.(.$)
