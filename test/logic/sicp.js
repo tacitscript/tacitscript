@@ -13,6 +13,20 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("nTimes :,(` ;).^$.(.$)", () => {
+			/*ts
+				nTimes		:,(` ;).^$.(.$)
+			*/
+			it("3,+2nTimes4=11", () => expect(nTimes(x => x + 2, 4)(3)).eql(11));
+		});
+
+		describe("twice :,(`,^2.(.$) ;)._.(,$)", () => {
+			/*ts
+				twice		:,(`,^2.(.$) ;)._.(,$)
+			*/
+			it("+1twice2=4", () => expect(twice(x => x + 1, 2)).eql(4));
+		});
+
 		describe("piSum ;^.(*2.+1)@.(2 )%.(*$.8/)@.+$", () => {
 			/*ts
 				piSum		;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
