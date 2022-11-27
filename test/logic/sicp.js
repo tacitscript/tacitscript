@@ -13,7 +13,7 @@ export default () => {
 	});
 
 	describe("SICP", () => {
-		describe("cons :.(,apply) car [:.(,$)", () => {
+		describe("cons :.(,apply) car [,", () => {
 			/*ts
 				comma				,
 				apply				comma,~
