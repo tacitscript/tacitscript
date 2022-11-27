@@ -23,8 +23,9 @@ export default () => {
 				cons				:.(,apply)
 				val					7cons8
 				execFn				#:.(,$)
-				applyArray			apply(7 8)
+				applyArray			(7 8),
 				car					[:.(,$)
+				carB				[,
 			*/
 			it("+2apply3=5", () => expect(applyTest).eql(5));
 			it("5(:.#apply)6=2", () => expect(applyToBinary(5, 6)).eql(2));
@@ -34,6 +35,7 @@ export default () => {
 			it("],7(:.(,apply))8=2", () => expect(cons(7, 8)(x => x[1])).eql(8));
 			it("#:.(,$)(f => f([7, 8]))=2", () => expect(execFn(applyArray)).eql(2));
 			it("car(7cons8)=7", () => expect(car(cons(7, 8))).eql(7));
+			it("[,(7cons8)=7", () => expect(carB(cons(7, 8))).eql(7));
 		});
 
 		describe("compose dot,~", () => {
