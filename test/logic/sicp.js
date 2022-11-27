@@ -21,11 +21,11 @@ export default () => {
 			it("6,^2compose+1=47", () => expect(compose(x => x * x, x => x + 1)(6)).eql(49));
 		});
 
-		describe("nTimes :,(` ;).^$.(.$)", () => {
+		describe("repeated :,(` ;).^$.(.$)", () => {
 			/*ts
-				nTimes		:,(` ;).^$.(.$)
+				repeated		:,(` ;).^$.(.$)
 			*/
-			it("3,+2nTimes4=11", () => expect(nTimes(x => x + 2, 4)(3)).eql(11));
+			it("3,+2repeated4=11", () => expect(repeated(x => x + 2, 4)(3)).eql(11));
 		});
 
 		describe("twice :,(`,^2.(.$) ;)._.(,$)", () => {
