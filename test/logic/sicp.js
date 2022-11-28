@@ -13,9 +13,15 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe(`2.30 squareTree ((}.="A" squareTree) ^2)?@`, () => {
+			/*ts
+				squareTree			((}.="A" squareTree) ^2)?@
+			*/
+			it("squareTree(1 (2 (3 4) 5) (6 7))=(1 (4 (9 16) 25) (36 49))", () => expect(squareTree([1, [2, [3, 4], 5], [6, 7]])).eql([1, [4, [9, 16], 25], [36, 49]]));
+		});
+
 		describe(`2.28 flatten ((}.="A" flatten) ;)?@.{`, () => {
 			/*ts
-				unnestSingle		{((1 ))
 				flatten				((}.="A" flatten) ;)?@.{
 			*/
 			it("flatten(1 2 (3 (4 5 (6 )) 7) (8 9))=(1 2 3 4 5 6 7 8 9)", () => expect(flatten([1, 2, [3, [4, 5, [6]], 7], [8, 9]])).eql([1, 2, 3, 4, 5, 6, 7, 8, 9]));
