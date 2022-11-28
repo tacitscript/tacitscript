@@ -13,6 +13,13 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("treeMap", () => {
+			/*ts
+				treeMap				.(.((}.="A" treeMap)` [).? ]).@$
+			*/
+			it("", () => expect(treeMap([x => x * x, [1, [2, [3, 4], 5], [6, 7]]])).eql([1, [4, [9, 16], 25], [36, 49]]));
+		});
+
 		describe(`2.30 squareTree ((}.="A" squareTree) ^2)?@`, () => {
 			/*ts
 				squareTree			((}.="A" squareTree) ^2)?@
