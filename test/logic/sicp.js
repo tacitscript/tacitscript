@@ -13,32 +13,33 @@ export default () => {
 	});
 
 	describe("SICP", () => {
-		describe("treeMap", () => {
+		describe('treeMap :.(.(.((}.="A")` [.treeMap) [).? ]).@$', () => {
 			/*ts
-				treeMap				.(.((}.="A" treeMap)` [).? ]).@$
+				treeMap				:.(.(.((}.="A")` [.treeMap) [).? ]).@$
+				solution			^2treeMap(1 (2 (3 4) 5) (6 7))
 			*/
-			it("", () => expect(treeMap([x => x * x, [1, [2, [3, 4], 5], [6, 7]]])).eql([1, [4, [9, 16], 25], [36, 49]]));
+			it("^2treeMap(1 (2 (3 4) 5) (6 7))=(1 (4 (9 16) 25) (36 49))", () => expect(solution).eql([1, [4, [9, 16], 25], [36, 49]]));
 		});
 
-		describe(`2.30 squareTree ((}.="A" squareTree) ^2)?@`, () => {
+		describe(`2.30 squareTree :.[.((}.="A" squareTree0) ^2)?@`, () => {
 			/*ts
-				squareTree			((}.="A" squareTree) ^2)?@
+				squareTree			:.[.((}.="A" squareTree0) ^2)?@
 			*/
-			it("squareTree(1 (2 (3 4) 5) (6 7))=(1 (4 (9 16) 25) (36 49))", () => expect(squareTree([1, [2, [3, 4], 5], [6, 7]])).eql([1, [4, [9, 16], 25], [36, 49]]));
+			it("(1 (2 (3 4) 5) (6 7))squareTree0=(1 (4 (9 16) 25) (36 49))", () => expect(squareTree([1, [2, [3, 4], 5], [6, 7]])).eql([1, [4, [9, 16], 25], [36, 49]]));
 		});
 
-		describe(`2.28 flatten ((}.="A" flatten) ;)?@.{`, () => {
+		describe(`2.28 flatten :.[.((}.="A" flatten0) ;)?@.{`, () => {
 			/*ts
-				flatten				((}.="A" flatten) ;)?@.{
+				flatten				:.[.((}.="A" flatten0) ;)?@.{
 			*/
-			it("flatten(1 2 (3 (4 5 (6 )) 7) (8 9))=(1 2 3 4 5 6 7 8 9)", () => expect(flatten([1, 2, [3, [4, 5, [6]], 7], [8, 9]])).eql([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+			it("(1 2 (3 (4 5 (6 )) 7) (8 9))flatten0=(1 2 3 4 5 6 7 8 9)", () => expect(flatten([1, 2, [3, [4, 5, [6]], 7], [8, 9]])).eql([1, 2, 3, 4, 5, 6, 7, 8, 9]));
 		});
 
-		describe(`2.27 deepReverse ((}.="A" deepReverse) ;)?@._`, () => {
+		describe(`2.27 deepReverse :.[.((}.="A" deepReverse0) ;)?@._`, () => {
 			/*ts
-				deepReverse 		((}.="A" deepReverse) ;)?@._
+				deepReverse 		:.[.((}.="A" deepReverse0) ;)?@._
 			*/
-			it("deepReverse((1 2) (3 4))=((4 3) (2 1))", () => expect(deepReverse([[1, 2], [3, 4]])).eql([[4, 3], [2, 1]]));
+			it("((1 2) (3 4))deepReverse0=((4 3) (2 1))", () => expect(deepReverse([[1, 2], [3, 4]])).eql([[4, 3], [2, 1]]));
 		});
 
 		describe("2.20 sameParity .([.%2.=.(%2.) ;).*$", () => {
@@ -117,21 +118,21 @@ export default () => {
 			it("0sumIntegers10=55", () => expect(sumIntegers(0, 10)).eql(55));
 		});
 
-		describe("gcd ((].=0 [) .(] %$).gcd)?", () => {
+		describe("gcd :.((].=0 [) .(] %$).gcd$)?", () => {
 			/*ts
-				gcd			((].=0 [) .(] %$).gcd)?
+				gcd			:.((].=0 [) .(] %$).gcd$)?
 			*/
-			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
+			it("15gcd20=5", () => expect(gcd(15, 20)).eql(5));
 		});
 
-		describe("fastExp ((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp.(; ;).*$) .([ ,(; -1).fastExp).*$)?", () => {
+		describe("fastExp :.((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp$.(; ;).*$) .([ ,(; -1).fastExp$).*$)?", () => {
 			/*ts
 				square		.(; ;).*$
 				isEven		((%2.=0 !()`) ()`)?
 				ifNoNOne	(].=0 1`)
-				fastExp		(ifNoNOne (].isEven ,(; /2).fastExp.square) .([ ,(; -1).fastExp).*$)?
+				fastExp		:.(ifNoNOne (].isEven ,(; /2).fastExp$.square) .([ ,(; -1).fastExp$).*$)?
 			*/
-			it("fastExp(2 7)=128", () => expect(fastExp([2, 7])).eql(128));
+			it("2fastExp7=128", () => expect(fastExp(2, 7)).eql(128));
 		});
 
 		describe("expGen :,(` ;).^$.*$", () => {
@@ -157,9 +158,9 @@ export default () => {
 
 		describe("1.11 f ((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?", () => {
 			/*ts
-				f	((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?
+				f	:.[.((<3 ;) .(-1.f0 -2.f0.*2 -3.f0.*3).+$)?
 			*/
-			it("f4=11", () => expect(f(4)).eql(11));
+			it("4f0=11", () => expect(f(4)).eql(11));
 		});
 
 		describe("fibGen .(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]", () => {
@@ -169,11 +170,11 @@ export default () => {
 			it("fibGen6=8", () => expect(fibGen(6)).eql(8));
 		});
 
-		describe("fibRec ((=0 0`) (=1 1`) .(-1 -2).fibRec@.+$)?", () => {
+		describe("fibRec :.[.((=0 0`) (=1 1`) .(-1 -2).fibRec0@.+$)?", () => {
 			/*ts
-				fibRec		((=0 0`) (=1 1`) .(-1 -2).fibRec@.+$)?
+				fibRec		:.[.((=0 0`) (=1 1`) .(-1 -2).fibRec0@.+$)?
 			*/
-			it("fibRec4=3", () => expect(fibRec(4)).eql(3));
+			it("4fibRec0=3", () => expect(fibRec(4)).eql(3));
 		});
 
 		describe("factGen +1^.*$", () => {
@@ -183,11 +184,11 @@ export default () => {
 			it("factGen4=24", () => expect(factGen(4)).eql(24));
 		});
 
-		describe("factRec ((=0 1`) .(; -1.factRec).*$)?", () => {
+		describe("factRec :.[.((=0 1`) .(; -1.factRec0).*$)?", () => {
 			/*ts
-				factRec	((=0 1`) .(; -1.factRec).*$)?
+				factRec	:.[.((=0 1`) .(; -1.factRec0).*$)?
 			*/
-			it("factRec4=24", () => expect(factRec(4)).eql(24));
+			it("4factRec0=24", () => expect(factRec(4)).eql(24));
 		});
 
 		describe("1.3 sumOfTwoLarger ;<.1%.].^2@.+$", () => {
