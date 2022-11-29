@@ -93,9 +93,9 @@ export default () => {
 			it("\"madamimadam\".(; _),=$ eql true", () => expect(isPalindromeTrue).eql(true));
 		});
 
-		describe('7. myFlatten ((}.="A" myFlatten) .(; ))?@.((#.=0 ;) +$)?', () => {
+		describe('7. myFlatten :.[.((}.="A" myFlatten0) .(; ))?@.((#.=0 ;) +$)?', () => {
 		/*ts
-			myFlatten					((}.="A" myFlatten) .(; ))?@.((#.=0 ;) +$)?
+			myFlatten					:.[.((}.="A" myFlatten0) .(; ))?@.((#.=0 ;) +$)?
 		// 	plainConcat					(+ ( ))$
 		// 	insertConcat				(:.+$)$
 		// 	embed						(:.+$ ( ))$

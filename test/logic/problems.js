@@ -267,8 +267,8 @@ lots"
 		for (var i = 0; i < wordArray.length; i++) dictionary[wordArray[i]] = true;
 
 	/*ts
-		perms			.(:._.((].#.=1 ]) .('$.+ ,(:1 ;).-$.perms).@$)? #.;^).@$.{
-		anagrams		perms.'dictionary@.;*.#
+		perms			:.[.(:._.((].#.=1 ]) .('$.+ ,(:1 ;).-$.perms0).@$)? #.;^).@$.{
+		anagrams		perms0.'dictionary@.;*.#
 		solution		"\n"%.(anagrams.-1)@." "$
 		result			solution"bat
 coal

@@ -216,7 +216,7 @@ export default () => {
 
 	describe("recursive execution", () => {
 	/*ts
-		factorial					((=1 ;) .(; -1.factorial).*$)?
+		factorial					:.[.((=1 ;) .(; -1.factorial0).*$)?
 		factorialIterative			+1^.*$
 	*/
 		it('=1?,(; .(; -1.factorial).*$).|$(1) eql 1', () => expect(factorial(1)).eql(1));
