@@ -13,6 +13,19 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("map", () => {
+			/*ts
+				incProcessor		:.(] [.(; +1`).(.$)).(,$)
+				incProcessorB		:,(.(; +1`).(.$) ;)._.(,$)
+				solution			*2incProcessor3
+				solutionB			*2incProcessor3
+				//map					:,(.(.(.(; (.(; ))`).(.$) +`) ( )`) ;)._.(,$)
+				//solutionC			*2map(1 2 3)
+			*/
+			it("2*(:.(] [.(; +1`).(.$)).(,$))3=7", () => expect(solution).eql(7));
+			it("2*(:,(.(; +1`).(.$) ;)._.(,$))3=7", () => expect(solutionB).eql(7));
+		});
+
 		describe('treeMap :.(.(.((}.="A")` [.treeMap) [).? ]).@$', () => {
 			/*ts
 				treeMap				:.(.(.((}.="A")` [.treeMap) [).? ]).@$
