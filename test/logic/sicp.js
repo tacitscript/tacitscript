@@ -13,6 +13,24 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("", () => {
+			/*ts
+
+			*/
+			it("", () => expect().eql());
+		});
+
+		describe("2.37 dotProduct :.~.*$@.+$ matrixXVector :,(; dotProduct)._.@$ matrixXMatrix :,(; ~),(; matrixXVector)._.@$", () => {
+			/*ts
+				dotProduct		:.~.*$@.+$
+				matrixXVector	:,(; dotProduct)._.@$
+				matrixXMatrix	:,(; ~),(; matrixXVector)._.@$
+			*/
+			it("((0 1 2) (1 2 3) (2 3 4))matrixXMatrix((2 1 3) (3 2 2) (1 3 1))=((5 8 4) (11 14 10) (17 20 16))", () => expect(matrixXMatrix([[0, 1, 2], [1, 2, 3], [2, 3, 4]], [[2, 1, 3], [3, 2, 2], [1, 3, 1]])).eql([[5, 8, 4], [11, 14, 10], [17, 20, 16]]))
+			it("((0 1 2) (1 2 3) (2 3 4))matrixXVector(0 1 2)=(5 8 11)", () => expect(matrixXVector([[0, 1, 2], [1, 2, 3], [2, 3, 4]],[0, 1, 2])).eql([5, 8, 11]));
+			it("(0 1 2 3)dotProduct(0 1 2 3)=14", () => expect(dotProduct([0, 1, 2, 3], [0, 1, 2, 3])).eql(14));
+		});
+
 		describe("2.36 accumulateN ~.+$@", () => {
 			/*ts
 				accumulateN			~.+$@
