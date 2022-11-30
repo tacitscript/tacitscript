@@ -13,15 +13,25 @@ export default () => {
 	});
 
 	describe("SICP", () => {
-		describe("map", () => {
+		describe("2.33 map* appendTo :.(] [.(; )).+$ length (:.[.+1 0)$", () => {
 			/*ts
 				incProcessor		:.(] [.(; +1`).(.$)).(,$)
 				incProcessorB		:,(.(; +1`).(.$) ;)._.(,$)
 				solution			*2incProcessor3
 				solutionB			*2incProcessor3
-				//map					:,(.(.(.(; (.(; ))`).(.$) +`) ( )`) ;)._.(,$)
+				//map				:,(.(.(.(; (.(; ))`).(.$) +`) ( )`) ;)._.(,$)
 				//solutionC			*2map(1 2 3)
+				appendTo			:.(] [.(; )).+$
+				//map				:,(.(:appendTo.(.$) ( )`) ;).$$
+				//map				:,(.(.(;` :(; ).(.$))).:(+$).(.$).(:,) ( )`) ;).$$
+				//applyAndCat		.(;` :(; ).(.$)).:(+$).(.$).(:,)
+				//applyAndCat		:(; ).(.$).(;` ;).:(+$).(.$).(:,)
+				//map				:,(.(applyAndCat ( )`) ;).$$
+				//solutionC			2*map(1 2 3)
+				length				(:.[.+1 0)$
 			*/
+			it("length(5 6 7)=3", () => expect(length([5, 6, 7])).eql(3));
+			it ("4appendTo(1 2 3)=(1 2 3 4)", () => expect(appendTo(4, [1, 2, 3])).eql([1, 2, 3, 4]));
 			it("2*(:.(] [.(; +1`).(.$)).(,$))3=7", () => expect(solution).eql(7));
 			it("2*(:,(.(; +1`).(.$) ;)._.(,$))3=7", () => expect(solutionB).eql(7));
 		});
