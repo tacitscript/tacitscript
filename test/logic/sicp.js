@@ -13,6 +13,13 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("2.36 accumulateN ~.+$@", () => {
+			/*ts
+				accumulateN			~.+$@
+			*/
+			it("accumulateN((1 2 3) (4 5 6) (7 8 9) (10 11 12))=(22 26 30)", () => expect(accumulateN([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])).eql([22, 26, 30]));
+		});
+
 		describe("2.33 map* appendTo :.(] [.(; )).+$ length (:.[.+1 0)$", () => {
 			/*ts
 				incProcessor		:.(] [.(; +1`).(.$)).(,$)
