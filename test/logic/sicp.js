@@ -1,9 +1,6 @@
 const {expect} = chai;
 import ts from "tacitscript";
 
-// Note: Recursive operators MUST be unary
-// The reason is that generating the type of a recursive operator cannot be determined or deferred - therefore we assume it is VV
-
 export default () => {
 	xdescribe("", () => {
 		/*ts
@@ -13,11 +10,20 @@ export default () => {
 	});
 
 	describe("SICP", () => {
-		describe("", () => {
+		describe("removeDuplicates", () => {
 			/*ts
 
 			*/
 			it("", () => expect().eql());
+		});
+
+		describe("2.40 cartesianProduct :,(:@ (:,~)@)._.(.$).(.$)@.{", () => {
+			/*ts
+				pairMap						:@
+				cartesianProduct			:,(:@ (:,~)@)._.(.$).(.$)@.{
+				solution					(1 2)cartesianProduct(4 5 6)
+			*/
+			it("(1 2)cartesianProduct(4 5 6)=((1 4) (1 5) (1 6) (2 4) (2 5) (2 6))", () => expect(cartesianProduct([1, 2], [4, 5, 6])).eql([[1, 4], [1, 5], [1, 6], [2, 4], [2, 5], [2, 6]]));
 		});
 
 		describe("2.37 dotProduct :.~.*$@.+$ matrixXVector :,(; dotProduct)._.@$ matrixXMatrix :,(; ~),(; matrixXVector)._.@$", () => {
