@@ -10,19 +10,22 @@ export default () => {
 	});
 
 	describe("SICP", () => {
-		describe("removeDuplicates", () => {
+		describe("", () => {
 			/*ts
 
 			*/
 			it("", () => expect().eql());
 		});
 
-		describe("2.40 cartesianProduct :,(:@ (:,~)@)._.(.$).(.$)@.{", () => {
+		describe("2.40 cartesianProduct :,(:@ (:,~)@)._.(.$).(.$)@.{ removeDuplicates ;/.\.(].[)@", () => {
 			/*ts
 				pairMap						:@
 				cartesianProduct			:,(:@ (:,~)@)._.(.$).(.$)@.{
 				solution					(1 2)cartesianProduct(4 5 6)
+				removeDuplicates			;/.\.(].[)@
+				solutionB					removeDuplicates((1 2) (3 4) (1 2) (5 6))
 			*/
+			it("removeDuplicates((1 2) (3 4) (1 2) (5 6))=((1 2) (3 4) (5 6))", () => expect(solutionB).eql([[1, 2], [3, 4], [5, 6]]));
 			it("(1 2)cartesianProduct(4 5 6)=((1 4) (1 5) (1 6) (2 4) (2 5) (2 6))", () => expect(cartesianProduct([1, 2], [4, 5, 6])).eql([[1, 4], [1, 5], [1, 6], [2, 4], [2, 5], [2, 6]]));
 		});
 
