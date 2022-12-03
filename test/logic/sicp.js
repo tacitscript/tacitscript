@@ -10,11 +10,28 @@ export default () => {
 	});
 
 	describe("SICP", () => {
-		describe("", () => {
+		describe('complex numbers - revealing module :.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$)) "Unknown method"`)?).(.$)', () => {
 			/*ts
-
+				doubleIntake	:.(: ).[.(;.)
+				complexA		:.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.).:(~.+$@.complexA$).(.$)) "Unknown method"`)?).(.$)
+				solutionA		"mag",3complexA4
+				solutionB		3complexA4"add"(5 6)"real"
+				complex			:.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$)) "Unknown method"`)?).(.$)
+				solutionC		2complex1"add"(1complex3)"mag"
 			*/
-			it("", () => expect().eql());
+			it(`2complex1"add"(1complex3)"mag"=5`, () => expect(solutionC).eql(5));
+			it(`3complexA4"add"(5 6)"real"=8`, () => expect(solutionB).eql(8));
+			it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
+			it(`"real",3complex4=3`, () => expect(complexA(3, 4)("real")).eql(3));
+			it(`"mag",3complex4=5`, () => expect(solutionA).eql(5));
+		});
+
+		describe("2.59 unionSet +.removeDuplicates", () => {
+			/*ts
+				removeDuplicates			;/.\.(].[)@
+				unionSet					+.removeDuplicates
+			*/
+			it("(1 2 3)unionSet(2 3 4)=(1 2 3 4)", () => expect(unionSet([1, 2, 3], [2, 3, 4])).eql([1, 2, 3, 4]));
 		});
 
 		describe("2.40 cartesianProduct :,(:@ (:,~)@)._.(.$).(.$)@.{ removeDuplicates ;/.\.(].[)@ intersectionSet cartesianProduct.removeDuplicates.((=$ 1`) ()`)?*.[@", () => {
