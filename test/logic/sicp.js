@@ -43,8 +43,8 @@ export default () => {
 				solutionA		"mag",3complexA4
 				solutionB		3complexA4"add"(5 6)"real"
 				pair			.(: ).[
-				complex			:.pair.(;.).:(
-									((].="real" [.[)
+				complex			:.pair.(;.).:((
+									(].="real" [.[)
 									(].="imag" [.])
 									(].="mag" [.^2@.+$.^0.5)
 									(].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$))
