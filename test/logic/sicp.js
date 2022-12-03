@@ -16,7 +16,13 @@ export default () => {
 				complexA		:.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.).:(~.+$@.complexA$).(.$)) "Unknown method"`)?).(.$)
 				solutionA		"mag",3complexA4
 				solutionB		3complexA4"add"(5 6)"real"
-				complex			:.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$)) "Unknown method"`)?).(.$)
+				complex			:.(: ).[.(;.).:(
+									((].="real" [.[)
+									(].="imag" [.])
+									(].="mag" [.^2@.+$.^0.5)
+									(].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$))
+									"Unknown method"`
+								)?).(.$)
 				solutionC		2complex1"add"(1complex3)"mag"
 			*/
 			it(`2complex1"add"(1complex3)"mag"=5`, () => expect(solutionC).eql(5));
