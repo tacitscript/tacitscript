@@ -10,6 +10,15 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe('queue :,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) 0/0`)?).(.$)', () => {
+			/*ts
+				queue			:,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) 0/0`)?).(.$)
+				solutionA		queue(1 2 3)"shift"
+			*/
+			it(`queue(1 2 3)"shift"=(2 3)`, () => expect(solutionA).eql([2, 3]));
+			it(`queue(1 2)"push"3=(1 2 3)`, () => expect(queue([1, 2])("push")(3)).eql([1, 2, 3]));
+		});
+
 		describe("3.5 monte-carlo estimatePi (_1`.(?1 ?1))^.(^2@.+$.^0.5.<1)@.(;* ;).#@./$.*4", () => {
 			/*ts
 				r				^2@.+$.^0.5
@@ -25,7 +34,8 @@ export default () => {
 				complexA		:.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.).:(~.+$@.complexA$).(.$)) "Unknown method"`)?).(.$)
 				solutionA		"mag",3complexA4
 				solutionB		3complexA4"add"(5 6)"real"
-				complex			:.(: ).[.(;.).:(
+				pair			.(: ).[
+				complex			:.pair.(;.).:(
 									((].="real" [.[)
 									(].="imag" [.])
 									(].="mag" [.^2@.+$.^0.5)
