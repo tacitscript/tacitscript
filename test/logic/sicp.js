@@ -10,6 +10,15 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("3.5 monte-carlo estimatePi (_1`.(?1 ?1))^.(^2@.+$.^0.5.<1)@.(;* ;).#@./$.*4", () => {
+			/*ts
+				r				^2@.+$.^0.5
+				randomCoord		_1`.(?1 ?1)
+				estimatePi		randomCoord^.(r.<1)@.(;* ;).#@./$.*4
+			*/
+			it("estimatePi10000 between 3.1 and 3.2", () => expect(estimatePi(10000)).above(3.1).and.below(3.2));
+		});
+
 		describe('complex numbers - revealing module :.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$)) "Unknown method"`)?).(.$)', () => {
 			/*ts
 				doubleIntake	:.(: ).[.(;.)
