@@ -7,9 +7,11 @@ import rosettaCode from "./rosetta-code.js";
 import underscore from "./underscore.js";
 import haskell from "./haskell.js";
 import sicp from "./sicp.js";
+import adventOfCode from "./advent-of-code.js";
 
 mocha.setup('bdd');
 
+adventOfCode();
 sicp();
 haskell();
 rosettaCode();

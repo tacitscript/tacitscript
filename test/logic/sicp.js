@@ -2,13 +2,6 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
-	xdescribe("", () => {
-		/*ts
-
-		*/
-		it("", () => expect().eql());
-	});
-
 	describe("SICP", () => {
 		describe('dequeue :,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) (].="pop" [._1%.[) (].="unshift" [.(:,~ ).[.(.(; ).).:(+$).(.$)) 0/0`)?).(.$)', () => {
 			/*ts
