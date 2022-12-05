@@ -80,6 +80,7 @@ const isFalsey = value => {
     return false;
 };
 const isTruthy = value => !isFalsey(value);
+const isGenerator = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includes(value.constructor.constructor.name);
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -97,6 +98,7 @@ const types = value => {
 	if (isArray(value)) return ["A"];
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
+	if (isGenerator(value)) return ["G"];
 	if (isObject(value)) return ["O"];
 	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
@@ -245,6 +247,7 @@ const typeOf = value => {
 	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
+	if (isGenerator(value)) return "G";
 	if (isObject(value)) return "O";
 	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
