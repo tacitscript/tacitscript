@@ -56,7 +56,7 @@ const first = array => array[0];
 //==========================================================
 // stream utilities
 
-const streamTake = function*({n, stream}) {let i = 0; for (const val of stream) {if (i >= n) return; index += 1; yield val;}};
+const streamTake = function*({n, stream}) {let i = 0; for (const val of stream) {if (i >= n) return; i += 1; yield val;}};
 
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
@@ -1003,11 +1003,13 @@ let braceleft = value => {
 	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
 	// should never be referenced directly for literal evaluation - expanded in parser
 	if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
+	if (isGenerator(value)) return [...value];
 
 	errorUnary({operator: "{", value});
 }; braceleft.types = [
 	["S", "?"], // eval {"Math.sqrt(2)"
 	["A", "A"], // unnest {(1 (2 3))
+	["G", "A"], // spread {(3%naturalNumbers)
 ];
 let semicolon = value => {
 	return value; // XX identiy ;1

@@ -24,7 +24,9 @@ export default () => {
 				firstThree				3%naturalNumbers
 				typeFirstThree			}firstThree
 				typeFirstThreeB			firstThree,}
+				result					{firstThree
 			*/
+			it("{firstThree='G'", () => expect(result).eql([1, 2, 3]));
 			it("firstThree,}='G'", () => expect(typeFirstThreeB).eql("G"));
 			it("}(firstThree)='G'", () => expect(typeFirstThree).eql("G"));
 			it("}naturalNumbers='G'", () => expect(type).eql("G"));
