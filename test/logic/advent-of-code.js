@@ -10,8 +10,9 @@ export default () => {
 	});
 
 	describe("Advent of Code", () => {
-		describe("", () => {
+		xdescribe("20201201", () => {
 			/*ts
+				data			(1721 070 366 299 675 1456)
 
 			*/
 			it("", () => expect().eql());
