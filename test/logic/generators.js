@@ -21,8 +21,12 @@ export default () => {
 			const naturalNumbers = getNaturalNumbers();
 			/*ts
 				type					}naturalNumbers
-				//firstThree			3%naturalNumbers
+				firstThree				3%naturalNumbers
+				typeFirstThree			}firstThree
+				typeFirstThreeB			firstThree,}
 			*/
+			it("firstThree,}='G'", () => expect(typeFirstThreeB).eql("G"));
+			it("}(firstThree)='G'", () => expect(typeFirstThree).eql("G"));
 			it("}naturalNumbers='G'", () => expect(type).eql("G"));
 		});
 

@@ -54,6 +54,11 @@ const append = value => array => [...array, value];
 const first = array => array[0];
 
 //==========================================================
+// stream utilities
+
+const streamTake = function*({n, stream}) {let i = 0; for (const val of stream) {if (i >= n) return; index += 1; yield val;}};
+
+//==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
 
 const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return isTruthy(result);}; return fn(predicate);};
@@ -846,6 +851,7 @@ let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
+		else if (isGenerator(right)) return streamTake({n: left, stream: right});
 	}
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
@@ -875,6 +881,7 @@ let percent = (left, right) => {
 	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
 	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
 	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
+	["N", "G", "G"], // streamTake 3%naturalNumbers
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
