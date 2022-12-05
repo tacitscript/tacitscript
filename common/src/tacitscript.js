@@ -244,6 +244,7 @@ const apply = (left, right) => {
 	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
 };
 const typeOf = value => {
+	if (value == undefined) return "U";
 	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
@@ -251,7 +252,6 @@ const typeOf = value => {
 	if (isObject(value)) return "O";
 	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
-	if (value == undefined) return "U";
 
 	throw `Unknown type of value: ${value}`;
 };
