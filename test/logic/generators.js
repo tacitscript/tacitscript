@@ -9,10 +9,9 @@ export default () => {
 		it("", () => expect().eql());
 	});
 
-	describe("Advent of Code", () => {
-		xdescribe("20201201", () => {
+	describe("Generators", () => {
+		xdescribe("", () => {
 			/*ts
-				data			(1721 70 366 299 675 1456)
 
 			*/
 			it("", () => expect().eql());

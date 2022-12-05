@@ -8,9 +8,11 @@ import underscore from "./underscore.js";
 import haskell from "./haskell.js";
 import sicp from "./sicp.js";
 import adventOfCode from "./advent-of-code.js";
+import generators from "./generators.js";
 
 mocha.setup('bdd');
 
+generators();
 adventOfCode();
 sicp();
 haskell();
