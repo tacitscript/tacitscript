@@ -11,20 +11,20 @@ export default () => {
 
 	describe("Generators", () => {
 		describe("", () => {
-			const getNaturalNumbers = function*() {
+			const naturalNumbers = function*() {
 				let num = 1;
 				while (true) {
 					yield num;
 					num += 1;
 				}
-			};
-			const naturalNumbers = getNaturalNumbers();
+			}();
 			/*ts
 				type					}naturalNumbers
 				firstThree				3%naturalNumbers
 				typeFirstThree			}firstThree
 				typeFirstThreeB			firstThree,}
 				result					{firstThree
+				//natNums					!()`^(( ) #.+1)'
 			*/
 			it("{firstThree='G'", () => expect(result).eql([1, 2, 3]));
 			it("firstThree,}='G'", () => expect(typeFirstThreeB).eql("G"));
