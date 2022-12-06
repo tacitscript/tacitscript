@@ -103,7 +103,7 @@ const types = value => {
 	if (isArray(value)) return ["A"];
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
-	if (isGenerator(value)) return ["G"];
+	if (isGenerator(value)) return ["L"];
 	if (isObject(value)) return ["O"];
 	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
@@ -253,7 +253,7 @@ const typeOf = value => {
 	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
-	if (isGenerator(value)) return "G";
+	if (isGenerator(value)) return "L";
 	if (isObject(value)) return "O";
 	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
@@ -402,13 +402,17 @@ const scanInternal = ({fns, startingArray}) => {
 
 	return result;
 };
-const whileInternal = ({whileCondition, next, start}) => {
-	let result = start;
+const lazyScan = ({whileCondition, next, start}) => function*() {
+	let result = [...start];
 
-	while (isTruthy(whileCondition(result))) result = next(result);
+	while (whileCondition(result)) {
+		const newValue = next(result);
 
-	return result;
-};
+		result.push(newValue);
+
+		yield newValue;
+	}
+}();
 
 //==========================================================
 // OPERATORS
@@ -881,25 +885,26 @@ let percent = (left, right) => {
 	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
 	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
 	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
-	["N", "G", "G"], // streamTake 3%naturalNumbers
+	["N", "L", "L"], // streamTake 3%naturalNumbers
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
 	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
-	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA while (#.<5 #.+1)^( )
-	// if (isUnaryFunction(left) && isUnaryFunction(right)) {
-	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});
+	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (AV)(AV)(AG) lazyScan ( ),1`^(#.+1)
+		let result = x => lazyScan({whileCondition: left, next: right, start: x});
 
-	// 	result.types = right.types;
+		result.types = [["A", "L"]];
 
-	// 	return result;
-	// }
+		return result;
+	}
 
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
 	[["N", "?"], "N", "A"], // generate ;^3
 	["A", "A", "A"], // scan (#.<5 #.+1)^( )
+	[["A", "V"], ["A", "V"], ["A", "L"]], // lazyScan ( ),1`^(#.+1)
 	//[["X", "V"], ["X", "Y"], ["X", "Y"]], // while 1,(<10^(*2))
 ];
 let ampersand = (left, right) => {
@@ -1009,7 +1014,7 @@ let braceleft = value => {
 }; braceleft.types = [
 	["S", "?"], // eval {"Math.sqrt(2)"
 	["A", "A"], // unnest {(1 (2 3))
-	["G", "A"], // spread {(3%naturalNumbers)
+	["L", "A"], // spread {(3%naturalNumbers)
 ];
 let semicolon = value => {
 	return value; // XX identiy ;1

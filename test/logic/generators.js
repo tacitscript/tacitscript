@@ -24,12 +24,16 @@ export default () => {
 				typeFirstThree			}firstThree
 				typeFirstThreeB			firstThree,}
 				result					{firstThree
-				//natNums					!()`^(( ) #.+1)'
+				natNums					( ),1`^(#.+1)
+				firstFourNats			4%natNums,{
+				//firstNNats				%,natNums
 			*/
-			it("{firstThree='G'", () => expect(result).eql([1, 2, 3]));
-			it("firstThree,}='G'", () => expect(typeFirstThreeB).eql("G"));
-			it("}(firstThree)='G'", () => expect(typeFirstThree).eql("G"));
-			it("}naturalNumbers='G'", () => expect(type).eql("G"));
+			//it("(%,natNums,{)4=(1 2 3 4)", () => expect(firstNNats(4)).eql([1, 2, 3, 4]));
+			it("4%natNums,{=(1 2 3 4)", () => expect(firstFourNats).eql([1, 2, 3, 4]));
+			it("{firstThree='L'", () => expect(result).eql([1, 2, 3]));
+			it("firstThree,}='L'", () => expect(typeFirstThreeB).eql("L"));
+			it("}(firstThree)='L'", () => expect(typeFirstThree).eql("L"));
+			it("}naturalNumbers='L'", () => expect(type).eql("L"));
 		});
 
 		describe("", () => {
