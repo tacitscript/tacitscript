@@ -56,7 +56,38 @@ const first = array => array[0];
 //==========================================================
 // stream utilities
 
-const streamTake = function*({n, stream}) {let i = 0; for (const val of stream) {if (i >= n) return; i += 1; yield val;}};
+const lazyScan = ({next, start}) => function*() {
+	let result = [...start];
+
+	while (true) {
+		const newValue = next(result);
+
+		if (newValue == undefined) return;
+
+		result.push(newValue);
+
+		yield newValue;
+	}
+};
+const processStream = ({generator, reducer}) => function*() {
+	let result = [];
+	let stream = generator();
+
+	while (true) {
+		const inputValue = stream.next().value;
+
+		if (inputValue == undefined) return; // stream expended
+
+		const newValue = reducer(result, inputValue);
+
+		if (newValue == undefined) continue; // value culled
+
+		result.push(newValue);
+
+		yield newValue;
+	}
+};
+const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
 
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
@@ -85,7 +116,7 @@ const isFalsey = value => {
     return false;
 };
 const isTruthy = value => !isFalsey(value);
-const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includes(value.constructor.constructor.name);
+const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includes(value.constructor.name);
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -408,36 +439,6 @@ const whileInternal = ({whileCondition, next, start}) => {
 	while (isTruthy(whileCondition(result))) result = next(result);
 
 	return result;
-};
-const lazyScan = ({next, start}) => function*() {
-	let result = [...start];
-
-	while (true) {
-		const newValue = next(result);
-
-		if (newValue == undefined) return;
-
-		result.push(newValue);
-
-		yield newValue;
-	}
-}();
-const processStream = ({stream, reducer}) => function*() {
-	let result = [];
-
-	while (true) {
-		const inputValue = stream.next().value;
-
-		if (inputValue == undefined) return; // stream expended
-
-		const newValue = reducer(result, inputValue);
-
-		if (newValue == undefined) continue; // value culled
-
-		result.push(newValue);
-
-		yield newValue;
-	}
 };
 
 //==========================================================
@@ -803,7 +804,7 @@ let dollar = (left, right) => {
 		if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 			return reduce(left[0])(left[1])(right);
 		}	
-	} else if (isBinaryFunction(left) && isStream(right)) return processStream({stream: right, reducer: left});
+	} else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
 
 	errorBinary({left, right, operator: "$"});
@@ -881,7 +882,7 @@ let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
-		else if (isStream(right)) return streamTake({n: left, stream: right});
+		else if (isStream(right)) return streamTake({n: left, generator: right});
 	}
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
@@ -1035,7 +1036,7 @@ let braceleft = value => {
 	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
 	// should never be referenced directly for literal evaluation - expanded in parser
 	if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
-	if (isStream(value)) return [...value];
+	if (isStream(value)) return [...value()];
 
 	errorUnary({operator: "{", value});
 }; braceleft.types = [

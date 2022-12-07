@@ -11,11 +11,16 @@ export default () => {
 	});
 
 	describe("Generators", () => {
-		describe("cycledNaturals", () => {
+		describe("firstThreeSquares (:.].^2)$.3%.{", () => {
 			/*ts
 				naturals				(#.+1)^( )							L
+				firstThreeSquares		(:.].^2)$.3%.{
+				solutionA				naturals,firstThreeSquares
+				evens					(:.].((%2.=1 1/0`) ;)?)$
+				solutionB				naturals,evens,3%,{
 			*/
-			it("", () => {});
+			it("naturals,evens,3%,{", () => expect(solutionB).eql([2, 4, 6]));
+			it("naturals,firstThreeSquares=(1 4 9)", () => expect(solutionA).eql([1, 4, 9]));
 		});
 
 		describe("cycledArray .(.(#` #.~%).(.$) ',~).(.$).1`^.(( ),)", () => {
@@ -46,7 +51,7 @@ export default () => {
 				psArray				ps.3%.{									NNA{N}
 			*/
 			it("3psArray2=(9 16 25)", () => expect(psArray(3, 2)).eql([9, 16, 25]));
-			it("powerSeries([3, 2]).next().value=9", () => expect(powerSeries([3, 2]).next().value).eql(9));
+			it("powerSeries([3, 2])().next().value=9", () => expect(powerSeries([3, 2])().next().value).eql(9));
 			it("3%(powerSeries(3 2)),{=(9 16 25)", () => expect(firstThree).eql([9, 16, 25]));
 		});
 
@@ -81,7 +86,7 @@ export default () => {
 					yield num;
 					num += 1;
 				}
-			}();
+			};
 			/*ts
 				type					}naturalNumbers
 				firstThree				3%naturalNumbers
@@ -90,8 +95,10 @@ export default () => {
 				result					{firstThree
 				natNums					(#.+1)^( )
 				firstFourNats			4%natNums,{
+				nextFourNats			4%natNums,{
 			*/
-			it("4%natNums,{=(1 2 3 4)", () => expect(firstFourNats).eql([1, 2, 3, 4]));
+			it("nextFourNats=(1 2 3 4)", () => expect(nextFourNats).eql([1, 2, 3, 4]));
+			it("firstFourNats=(1 2 3 4)", () => expect(firstFourNats).eql([1, 2, 3, 4]));
 			it("{firstThree='L'", () => expect(result).eql([1, 2, 3]));
 			it("firstThree,}='L'", () => expect(typeFirstThreeB).eql("L"));
 			it("}(firstThree)='L'", () => expect(typeFirstThree).eql("L"));
