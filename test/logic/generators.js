@@ -11,7 +11,7 @@ export default () => {
 	});
 
 	describe("Generators", () => {
-		describe("powerSeries", () => {
+		describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$)", () => {
 			/*ts
 				//powerSeries			1`^(.(.([ #.-2).+$ 1').^$)
 				powerSeries			1`^(;.(.([ #.-2).+$ 1').^$)
@@ -24,7 +24,7 @@ export default () => {
 				psArray				ps.3%.{									NNA{N}
 			*/
 			it("3psArray2=(9 16 25)", () => expect(psArray(3, 2)).eql([9, 16, 25]));
-			it("powerSeries([3, 2]).next()=9", () => expect(powerSeries([3, 2]).next().value).eql(9));
+			it("powerSeries([3, 2]).next().value=9", () => expect(powerSeries([3, 2]).next().value).eql(9));
 			it("3%(powerSeries(3 2)),{=(9 16 25)", () => expect(firstThree).eql([9, 16, 25]));
 		});
 
