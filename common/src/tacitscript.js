@@ -408,6 +408,8 @@ const lazyScan = ({next, start}) => function*() {
 	while (true) {
 		const newValue = next(result);
 
+		if (newValue == undefined) return;
+
 		result.push(newValue);
 
 		yield newValue;
