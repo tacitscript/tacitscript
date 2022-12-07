@@ -11,6 +11,12 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("cycledNaturals", () => {
+			/*ts
+				naturals				( ),1`^(#.+1)						L
+			*/
+		});
+
 		describe("cycledArray .(.(#` #.~%).(.$) ',~).(.$).1`^.(( ),)", () => {
 			/*ts
 				remainderLength			#.~%
