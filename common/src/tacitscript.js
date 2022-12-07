@@ -402,10 +402,10 @@ const scanInternal = ({fns, startingArray}) => {
 
 	return result;
 };
-const lazyScan = ({whileCondition, next, start}) => function*() {
+const lazyScan = ({next, start}) => function*() {
 	let result = [...start];
 
-	while (whileCondition(result)) {
+	while (true) {
 		const newValue = next(result);
 
 		result.push(newValue);
@@ -891,20 +891,14 @@ let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
 	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
 	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (AV)(AV)(AG) lazyScan ( ),1`^(#.+1)
-		let result = x => lazyScan({whileCondition: left, next: right, start: x});
-
-		result.types = [["A", "L"]];
-
-		return result;
-	}
+	if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (A?)AL lazyScan (#.+1)^( )
 
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
 	[["N", "?"], "N", "A"], // generate ;^3
 	["A", "A", "A"], // scan (#.<5 #.+1)^( )
-	[["A", "V"], ["A", "V"], ["A", "L"]], // lazyScan ( ),1`^(#.+1)
+	[["A", "?"], "A", "L"], // lazyScan #.+1^( )
 	//[["X", "V"], ["X", "Y"], ["X", "Y"]], // while 1,(<10^(*2))
 ];
 let ampersand = (left, right) => {
