@@ -1,9 +1,9 @@
 import ts from "./tacitscript.js";
 
 /*ts
-
+	streamFromArray				.(#.>.(#.) .(#` ',~).(.$)).^$.(( ),)			AG
 */
 
-export default {
-	
+export {
+	streamFromArray,
 };

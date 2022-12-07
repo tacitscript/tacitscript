@@ -10,6 +10,21 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("array bounding generators", () => {
+			/*ts
+				arrayWhileCondition			.(#.>.(#.) )
+				whileCondition				#.>.(#.)
+				flipAt						.(',~ ).[
+				next						.(#` .(',~ ).[).(.$)
+				nextArray					next(1 2 3)
+				one							nextArray( )
+				generatorFromArray			.(#.>.(#.) .(#` ',~).(.$)).^$.(( ),)
+				numbers						generatorFromArray(1 2 3)
+				array						{numbers
+			*/
+			it("array=(1 2 3)", () => expect(array).eql([1, 2, 3]));
+		});
+
 		describe("natural numbers", () => {
 			const naturalNumbers = function*() {
 				let num = 1;
