@@ -11,6 +11,16 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("powerSeries", () => {
+			/*ts
+				//powerSeries			1`^(.(.([ #.-2).+$ 1').^$)
+				powerSeries			1`^(;.(.([ #.-2).+$ 1').^$)
+				threeTwo			powerSeries(3 2)
+				firstThree			3%threeTwo,{
+			*/
+			it("3%(powerSeries(3 2)),{=(9 16 25)", () => expect(firstThree).eql([9, 16, 25]));
+		});
+
 		describe("naturals ( ),1`^(#.+1)", () => {
 			/*ts
 				naturals		( ),1`^(#.+1)
