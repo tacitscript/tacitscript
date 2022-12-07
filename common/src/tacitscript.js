@@ -422,6 +422,23 @@ const lazyScan = ({next, start}) => function*() {
 		yield newValue;
 	}
 }();
+const processStream = ({stream, reducer}) => function*() {
+	let result = [];
+
+	while (true) {
+		const inputValue = stream.next().value;
+
+		if (inputValue == undefined) return; // stream expended
+
+		const newValue = reducer(result, inputValue);
+
+		if (newValue == undefined) continue; // value culled
+
+		result.push(newValue);
+
+		yield newValue;
+	}
+};
 
 //==========================================================
 // OPERATORS
@@ -786,15 +803,15 @@ let dollar = (left, right) => {
 		if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 			return reduce(left[0])(left[1])(right);
 		}	
-	}
+	} else if (isBinaryFunction(left) && isStream(right)) return processStream({stream: right, reducer: left});
+
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
 	[["?", "?", "X"], "A", "X"], // insert +$(1 2)
 	["S", "A", "S"], // join ","$(1 2 3)
 	["A", "A", "?"], // reduce (+ 0)$(1 2 3)
-	//[[["X", "Y"], "X", "Y"], "A", "Y"],
-	//[[["X", "Y"], ["X", "Y"], ["X", "Y"]], "A", ["X", "Y"]],
+	[["A", "V", "V"], "L", "L"], // processStream
 ];
 let apostrophe = (left, right) => {
 	if (isNumber(left) && isNumber(right)) {

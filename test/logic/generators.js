@@ -15,6 +15,7 @@ export default () => {
 			/*ts
 				naturals				(#.+1)^( )							L
 			*/
+			it("", () => {});
 		});
 
 		describe("cycledArray .(.(#` #.~%).(.$) ',~).(.$).1`^.(( ),)", () => {
