@@ -16,11 +16,11 @@ export default () => {
 				remainderLength			#.~%
 				atArray					',~
 				getNextIndex			.(#` #.~%).(.$)
-				getNextCycled			.(.(#` #.~%).(.$) ',~).(.$)
-				cycledArray				getNextCycled.1`^.(( ),)
+				getNextCycled			.(.(#` #.~%).(.$) ',~).(.$)			A(A?)
+				cycledArray				getNextCycled.1`^.(( ),)			AL
 				firstFive				cycledArray(1 2 3),5%,{
 				getFirstFive			cycledArray.5%.{
-				getSequence				:,(% cycledArray)._.(,$).{
+				getSequence				:,(% cycledArray)._.(,$).{			NAA
 			*/
 			it("5getSequence(1 2 3)=(1 2 3 1 2)", () => expect(getSequence(5, [1, 2, 3])).eql([1, 2, 3, 1, 2]));
 			it("getFirstFive(1 2 3)=(1 2 3 1 2)", () => expect(getFirstFive([1, 2, 3])).eql([1, 2, 3, 1, 2]));
