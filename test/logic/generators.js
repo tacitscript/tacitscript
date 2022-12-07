@@ -11,27 +11,27 @@ export default () => {
 	});
 
 	describe("Generators", () => {
-		// describe("cycledNaturals", () => {
-		// 	/*ts
-		// 		naturals				( ),1`^(#.+1)						L
-		// 	*/
-		// });
+		describe("cycledNaturals", () => {
+			/*ts
+				naturals				(#.+1)^( )							L
+			*/
+		});
 
-		// describe("cycledArray .(.(#` #.~%).(.$) ',~).(.$).1`^.(( ),)", () => {
-		// 	/*ts
-		// 		remainderLength			#.~%
-		// 		atArray					',~
-		// 		getNextIndex			.(#` #.~%).(.$)
-		// 		getNextCycled			.(.(#` #.~%).(.$) ',~).(.$)			A(A?)
-		// 		cycledArray				getNextCycled.1`^.(( ),)			AL
-		// 		firstFive				cycledArray(1 2 3),5%,{
-		// 		getFirstFive			cycledArray.5%.{
-		// 		getSequence				:,(% cycledArray)._.(,$).{			NAA
-		// 	*/
-		// 	it("5getSequence(1 2 3)=(1 2 3 1 2)", () => expect(getSequence(5, [1, 2, 3])).eql([1, 2, 3, 1, 2]));
-		// 	it("getFirstFive(1 2 3)=(1 2 3 1 2)", () => expect(getFirstFive([1, 2, 3])).eql([1, 2, 3, 1, 2]));
-		// 	it("cycledArray(1 2 3),5%,{=(1 2 3 1 2)", () => expect(firstFive).eql([1, 2, 3, 1, 2]));
-		// });
+		describe("cycledArray .(.(#` #.~%).(.$) ',~).(.$).1`^.(( ),)", () => {
+			/*ts
+				remainderLength			#.~%
+				atArray					',~
+				getNextIndex			.(#` #.~%).(.$)
+				getNextCycled			.(.(#` #.~%).(.$) ',~).(.$)			A(A?)
+				cycledArray				getNextCycled.^( )					AL
+				firstFive				cycledArray(1 2 3),5%,{
+				getFirstFive			cycledArray.5%.{
+				getSequence				:,(% cycledArray)._.(,$).{			NAA
+			*/
+			it("5getSequence(1 2 3)=(1 2 3 1 2)", () => expect(getSequence(5, [1, 2, 3])).eql([1, 2, 3, 1, 2]));
+			it("getFirstFive(1 2 3)=(1 2 3 1 2)", () => expect(getFirstFive([1, 2, 3])).eql([1, 2, 3, 1, 2]));
+			it("cycledArray(1 2 3),5%,{=(1 2 3 1 2)", () => expect(firstFive).eql([1, 2, 3, 1, 2]));
+		});
 
 		describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
 			/*ts
