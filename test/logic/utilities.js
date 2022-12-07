@@ -15,7 +15,7 @@ export default () => {
 			/*ts
 				solutionA			{(streamFromArray(1 2 3))				A
 			*/
-			it("streamArray(1 2 3).{=(1 2 3)", () => expect(solutionA).eql([1, 2, 3]));
+			it("{(streamArray(1 2 3))=(1 2 3)", () => expect(solutionA).eql([1, 2, 3]));
 		});
 	});
 };

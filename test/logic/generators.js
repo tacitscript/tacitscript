@@ -1,5 +1,6 @@
 const {expect} = chai;
 import ts from "tacitscript";
+import {streamFromArray} from "utilities";
 
 export default () => {
 	xdescribe("", () => {
@@ -10,6 +11,13 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("applyStream", () => {
+			/*ts
+				numbers			streamFromArray(1 2 3),{
+			*/
+			it("streamFromArray(1 2 3),{=(1 2 3)", () => expect(numbers).eql([1, 2, 3]));
+		});
+
 		describe("array bounding generators", () => {
 			/*ts
 				arrayWhileCondition			.(#.>.(#.) )

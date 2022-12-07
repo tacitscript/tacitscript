@@ -85,7 +85,7 @@ const isFalsey = value => {
     return false;
 };
 const isTruthy = value => !isFalsey(value);
-const isGenerator = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includes(value.constructor.constructor.name);
+const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includes(value.constructor.constructor.name);
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -103,7 +103,7 @@ const types = value => {
 	if (isArray(value)) return ["A"];
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
-	if (isGenerator(value)) return ["L"];
+	if (isStream(value)) return ["L"];
 	if (isObject(value)) return ["O"];
 	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
@@ -253,7 +253,7 @@ const typeOf = value => {
 	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
-	if (isGenerator(value)) return "L";
+	if (isStream(value)) return "L";
 	if (isObject(value)) return "O";
 	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
@@ -855,7 +855,7 @@ let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
-		else if (isGenerator(right)) return streamTake({n: left, stream: right});
+		else if (isStream(right)) return streamTake({n: left, stream: right});
 	}
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
@@ -1008,7 +1008,7 @@ let braceleft = value => {
 	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
 	// should never be referenced directly for literal evaluation - expanded in parser
 	if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
-	if (isGenerator(value)) return [...value];
+	if (isStream(value)) return [...value];
 
 	errorUnary({operator: "{", value});
 }; braceleft.types = [
