@@ -11,7 +11,15 @@ export default () => {
 	});
 
 	describe("Generators", () => {
-		describe("applyStream", () => {
+		describe("naturals ( ),1`^(#.+1)", () => {
+			/*ts
+				naturals		( ),1`^(#.+1)
+				firstFour		4%naturals,{
+			*/
+			it("4%naturals,{=(1 2 3 4)", () => expect(firstFour).eql([1, 2, 3, 4]));
+		});
+
+			describe("applyStream", () => {
 			/*ts
 				numbers			streamFromArray(1 2 3),{
 			*/
