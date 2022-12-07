@@ -10,7 +10,7 @@ export default () => {
 	});
 
 	describe("Generators", () => {
-		describe("", () => {
+		describe("natural numbers", () => {
 			const naturalNumbers = function*() {
 				let num = 1;
 				while (true) {
@@ -36,7 +36,7 @@ export default () => {
 			it("}naturalNumbers='L'", () => expect(type).eql("L"));
 		});
 
-		describe("", () => {
+		describe("sumPrimes", () => {
 			/*ts
 				divides					:._.%$.=0
 				findDivisor				:.((.(].^2 [).>$ [) (_.divides$ ]) .([ ].+1).findDivisor$)?
