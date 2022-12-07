@@ -11,6 +11,22 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("cycledArray .(.(#` #.~%).(.$) ',~).(.$).1`^.(( ),)", () => {
+			/*ts
+				remainderLength			#.~%
+				atArray					',~
+				getNextIndex			.(#` #.~%).(.$)
+				getNextCycled			.(.(#` #.~%).(.$) ',~).(.$)
+				cycledArray				getNextCycled.1`^.(( ),)
+				firstFive				cycledArray(1 2 3),5%,{
+				getFirstFive			cycledArray.5%.{
+				getSequence				:,(% cycledArray)._.(,$).{
+			*/
+			it("5getSequence(1 2 3)=(1 2 3 1 2)", () => expect(getSequence(5, [1, 2, 3])).eql([1, 2, 3, 1, 2]));
+			it("getFirstFive(1 2 3)=(1 2 3 1 2)", () => expect(getFirstFive([1, 2, 3])).eql([1, 2, 3, 1, 2]));
+			it("cycledArray(1 2 3),5%,{=(1 2 3 1 2)", () => expect(firstFive).eql([1, 2, 3, 1, 2]));
+		});
+
 		describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$)", () => {
 			/*ts
 				//powerSeries			1`^(.(.([ #.-2).+$ 1').^$)
