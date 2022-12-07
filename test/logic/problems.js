@@ -136,23 +136,23 @@ BCB"
 		it("solved", () => expect(result).eql("1207 1609 1163"));
 	});
 
-// 	describe("54. Pythagorean Triples", () => { // while is removed
-// 	/*ts
-// 		b				.(.([.^2 *$.2*).-$ -$.*2)./$
-// 		c				.([ ] b).-$
-// 		isValid			b.(; 0').-$.#.<(10^(_8))
-// 		iterate			!isValid^(((1 ) +1)>)
-// 		cSquared		.(; 1`).iterate.c.^2
-// 		solution		cSquared@." "$
-// 		result			solution(12
-// 30)
-// 	*/
-// 		it("solved", () => expect(result).eql("25 169"));
-// 		it("cSquared test", () => expect(cSquared(12)).eql(25));
-// 		it("isValid test", () => expect(isValid([12, 3])).eql(true));
-// 		it("b test", () => expect(b([12, 3])).eql(4));
-// 		it("c test", () => expect(c([12, 3])).eql(5));
-// 	});
+	describe("54. Pythagorean Triples", () => {
+	/*ts
+		b				.(.([.^2 *$.2*).-$ -$.*2)./$
+		c				.([ ] b).-$
+		isValid			b.(; 0').-$.#.<(10^(_8))
+		iterate			!isValid^(((1 ) +1)>)
+		cSquared		.(; 1`).iterate.c.^2
+		solution		cSquared@." "$
+		result			solution(12
+30)
+	*/
+		it("solved", () => expect(result).eql("25 169"));
+		it("cSquared test", () => expect(cSquared(12)).eql(25));
+		it("isValid test", () => expect(isValid([12, 3])).eql(true));
+		it("b test", () => expect(b([12, 3])).eql(4));
+		it("c test", () => expect(c([12, 3])).eql(5));
+	});
 
 	describe("156. Luhn Algorithm", () => {
 	/*ts
@@ -202,25 +202,25 @@ BCB"
 		it("solved", () => expect(result).eql("10 16 10 19 16 10 10 19 4.20444504226559 11.552914270615123 10.000000000000002 1"));
 	});
 
-// 	describe("36. Code Guesser", () => { // while is removed
-// 	/*ts
-// 		leftPad			:,(; ""+).(.([ ].#).-$."0"`^.""$ ]).+$
-// 		noSame			:.(4leftPad.""%)@.~.((=$ 1`) 0`)?@.+$
-// 		match			:.(.([.[ ]).noSame$ [.]).=$
-// 		isSolved		(2 )%.match@.&$
-// 		solution		.(isSolved.! +1`).^$.(0,).4leftPad
-// 		result			solution(402 1
-// 390 1
-// 816 3
-// 848 3
-// 777 1
-// 815 2)
-// 	*/
-// 		it("solved", () => expect(result).eql("0846"));
-// 		it("isSolved test", () => expect(isSolved([402, 1, 390, 1])(846)).eql(true));
-// 		it("noSame test", () => expect(noSame(816, 846)).eql(3));
-// 		it("match test", () => expect(match([848, 3], 846)).eql(true));
-// 	});
+	describe("36. Code Guesser", () => {
+	/*ts
+		leftPad			:,(; ""+).(.([ ].#).-$."0"`^.""$ ]).+$
+		noSame			:.(4leftPad.""%)@.~.((=$ 1`) 0`)?@.+$
+		match			:.(.([.[ ]).noSame$ [.]).=$
+		isSolved		(2 )%.match@.&$
+		solution		.(isSolved.! +1`).^$.(0,).4leftPad
+		result			solution(402 1
+390 1
+816 3
+848 3
+777 1
+815 2)
+	*/
+		it("solved", () => expect(result).eql("0846"));
+		it("isSolved test", () => expect(isSolved([402, 1, 390, 1])(846)).eql(true));
+		it("noSame test", () => expect(noSame(816, 846)).eql(3));
+		it("match test", () => expect(match([848, 3], 846)).eql(true));
+	});
 
 	describe("134. Flying Text Screensaver", () => {
 	/*ts
@@ -414,121 +414,121 @@ GOLD 95 105 95 105 95 105 95 105 95 105 95 105 95 105"
 		it("randoms test", () => expect(randoms(0, 4)).eql([700001, 1821950, 1967079, 1537772]));
 	});
 
-	// describe("69. Fibonacci Divisibility 4", () => { // while is removed
-	// /*ts
-	// 	isMultiple		:.([ ] /$).([ 1%.].*$).=$
-	// 	processFib		:,(.(.(isMultiple,([.) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
-	// 	nextFib 		]._2%.].+$
-	// 	addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
-	// 	extract			_,(@,~ ]@).@$
-	// 	any				*.#.>0
-	// 	forWhile		[.(].!)any
-	// 	iterate			forWhile^addFib
-	// 	start			.(; #.()`^).~
-	// 	solution		" "%.({"BigInt")@.(start ({"[BigInt(0), BigInt(1)]")`).iterate.extract." "$
-	// 	result			solution"17 12 61"
-	// */
-	// 	it("solved", () => expect(result).eql("9 12 15"));
-	// 	it("isMultiple positive test", () => expect(isMultiple(BigInt(12), BigInt(3))).eql(true));
-	// 	it("isMultiple negative test", () => expect(isMultiple(BigInt(11), BigInt(3))).eql(false));
-	// 	it("extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]]) eql [6, 3]", () => expect(extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]])).eql([6, 3]));
-	// 	//it("addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]]) eql [[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]", () => expect(addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]])).eql([[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]));
-	// 	//it("processFib(34, [[12, false], [17, false]]) eql [[12, false], [17, 34]]", () => expect(processFib(34, [[12, false], [17, false]])).eql([[12, false], [17, 34]]));
-	// });
+	describe("69. Fibonacci Divisibility 4", () => {
+	/*ts
+		isMultiple		:.([ ] /$).([ 1%.].*$).=$
+		processFib		:,(.(.(isMultiple,([.) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
+		nextFib 		]._2%.].+$
+		addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
+		extract			_,(@,~ ]@).@$
+		any				*.#.>0
+		forWhile		[.(].!)any
+		iterate			forWhile^addFib
+		start			.(; #.()`^).~
+		solution		" "%.({"BigInt")@.(start ({"[BigInt(0), BigInt(1)]")`).iterate.extract." "$
+		result			solution"17 12 61"
+	*/
+		it("solved", () => expect(result).eql("9 12 15"));
+		it("isMultiple positive test", () => expect(isMultiple(BigInt(12), BigInt(3))).eql(true));
+		it("isMultiple negative test", () => expect(isMultiple(BigInt(11), BigInt(3))).eql(false));
+		it("extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]]) eql [6, 3]", () => expect(extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]])).eql([6, 3]));
+		//it("addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]]) eql [[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]", () => expect(addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]])).eql([[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]));
+		//it("processFib(34, [[12, false], [17, false]]) eql [[12, false], [17, 34]]", () => expect(processFib(34, [[12, false], [17, false]])).eql([[12, false], [17, 34]]));
+	});
 
-	// describe("69. Fibonacci Divisibility 3", () => {
-	// /*ts
-	// 	accuracy		10^(_8)
-	// 	isInteger		%1.#.<accuracy
-	// 	isMultiple		:./$.isInteger
-	// 	processFib		:,(.(.(isMultiple,([.) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
-	// 	nextFib 		]._2%.].+$
-	// 	addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
-	// 	extract			_,(@,~ ]@).@$
-	// 	any				*.#.>0
-	// 	forWhile		[.(].!)any
-	// 	iterate			forWhile^addFib
-	// 	start			.(; #.()`^).~
-	// 	solution		.(start (0 1)`).iterate.extract." "$
-	// 	result			solution(17 12 61)
-	// */
-	// 	it("solved", () => expect(result).eql("9 12 15"));
-	// 	it("extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]]) eql [6, 3]", () => expect(extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]])).eql([6, 3]));
-	// 	it("addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]]) eql [[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]", () => expect(addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]])).eql([[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]));
-	// 	it("processFib(34, [[12, false], [17, false]]) eql [[12, false], [17, 34]]", () => expect(processFib(34, [[12, false], [17, false]])).eql([[12, false], [17, 34]]));
-	// });
+	describe("69. Fibonacci Divisibility 3", () => {
+	/*ts
+		accuracy		10^(_8)
+		isInteger		%1.#.<accuracy
+		isMultiple		:./$.isInteger
+		processFib		:,(.(.(isMultiple,([.) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
+		nextFib 		]._2%.].+$
+		addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
+		extract			_,(@,~ ]@).@$
+		any				*.#.>0
+		forWhile		[.(].!)any
+		iterate			forWhile^addFib
+		start			.(; #.()`^).~
+		solution		.(start (0 1)`).iterate.extract." "$
+		result			solution(17 12 61)
+	*/
+		it("solved", () => expect(result).eql("9 12 15"));
+		it("extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]]) eql [6, 3]", () => expect(extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]])).eql([6, 3]));
+		it("addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]]) eql [[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]", () => expect(addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]])).eql([[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]));
+		it("processFib(34, [[12, false], [17, false]]) eql [[12, false], [17, 34]]", () => expect(processFib(34, [[12, false], [17, false]])).eql([[12, false], [17, 34]]));
+	});
 
-	// describe("69. Fibonacci Divisibility 2", () => {
-	// /*ts
-	// 	stringMore		:.((.(#@.(>|=)$ .(#@.=$ >$).&$).|$ !()`) ()`)?
-	// 	leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
-	// 	padStrings		:.(#@.;<.].+1.(leftPad ).[ ;).@$
-	// 	addStep			:.([.[ .([.1%.] ]).+$.0+@.+$.""+.2leftPad.""%).(.([ ].]).+$ ].[)
-	// 	stringAdd		padStrings._@.~.(addStep ("" "0"))$.[.((].="0" _1%.[) ;)?._
-	// 	doWhile			.(([.!)` [.(stringMore ).[.(].)).&$
-	// 	nextStep		.(,(:,(].).:(=$).(.$) (!() )``) ,(()`` stringAdd,(].)).(;.)).?
-	// 	isMultipleS		:.(,(()` ;) .(doWhile nextStep).^$).(,$).[
-	// 	processFib		:,(.(.(isMultipleS,([.) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
-	// 	nextFib 		]._2%.].stringAdd$
-	// 	addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
-	// 	extract			_,(@,~ ]@).@$
-	// 	any				*.#.>0
-	// 	forWhile		[.(].!)any
-	// 	iterate			forWhile^addFib
-	// 	start			.(; #.()`^).~
-	// 	solution		" "%.(start ("0" "1")`).iterate.extract." "$
-	// 	result			solution"17 12 61"
-	// */
-	// 	it("isMultiple positive test", () => expect(isMultipleS("12", "3")).eql(true));
-	// 	it("isMultiple negative test", () => expect(isMultipleS("11", "3")).eql(false));
-	// 	it("doWhile test", () => expect(doWhile(["12", "3"])([false, "3"])).eql(true));
-	// 	it("doWhile test", () => expect(doWhile(["12", "3"])([false, "12"])).eql(true));
-	// 	it("next test", () => expect(nextStep(["12", "3"])([false, "12"])).eql([true]));
-	// 	it("next test", () => expect(nextStep(["10", "3"])([false, "6"])).eql([false, "9"]));
-	// 	it("solved", () => expect(result).eql("9 12 15"));
-	// });
+	describe("69. Fibonacci Divisibility 2", () => {
+	/*ts
+		stringMore		:.((.(#@.(>|=)$ .(#@.=$ >$).&$).|$ !()`) ()`)?
+		leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+		padStrings		:.(#@.;<.].+1.(leftPad ).[ ;).@$
+		addStep			:.([.[ .([.1%.] ]).+$.0+@.+$.""+.2leftPad.""%).(.([ ].]).+$ ].[)
+		stringAdd		padStrings._@.~.(addStep ("" "0"))$.[.((].="0" _1%.[) ;)?._
+		doWhile			.(([.!)` [.(stringMore ).[.(].)).&$
+		nextStep		.(,(:,(].).:(=$).(.$) (!() )``) ,(()`` stringAdd,(].)).(;.)).?
+		isMultipleS		:.(,(()` ;) .(doWhile nextStep).^$).(,$).[
+		processFib		:,(.(.(isMultipleS,([.) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
+		nextFib 		]._2%.].stringAdd$
+		addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
+		extract			_,(@,~ ]@).@$
+		any				*.#.>0
+		forWhile		[.(].!)any
+		iterate			forWhile^addFib
+		start			.(; #.()`^).~
+		solution		" "%.(start ("0" "1")`).iterate.extract." "$
+		result			solution"17 12 61"
+	*/
+		it("isMultiple positive test", () => expect(isMultipleS("12", "3")).eql(true));
+		it("isMultiple negative test", () => expect(isMultipleS("11", "3")).eql(false));
+		it("doWhile test", () => expect(doWhile(["12", "3"])([false, "3"])).eql(true));
+		it("doWhile test", () => expect(doWhile(["12", "3"])([false, "12"])).eql(true));
+		it("next test", () => expect(nextStep(["12", "3"])([false, "12"])).eql([true]));
+		it("next test", () => expect(nextStep(["10", "3"])([false, "6"])).eql([false, "9"]));
+		it("solved", () => expect(result).eql("9 12 15"));
+	});
 
-	// describe("69. Fibonacci Divisibility 1", () => {
-	// /*ts
-	// 	accuracy		10^(_8)
-	// 	isInteger		%1.#.<accuracy
-	// 	processFib		:,(.(.(/,([.).:isInteger.(.$) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
-	// 	nextFib 		]._2%.].+$
-	// 	addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
-	// 	extract			_,(@,~ ]@).@$
-	// 	any				*.#.>0
-	// 	forWhile		[.(].!)any
-	// 	iterate			forWhile^addFib
-	// 	start			.(; #.()`^).~
-	// 	solution		.(start (0 1)`).iterate.extract." "$
-	// 	result			solution(17 12 61)
-	// */
-	// 	it("solved", () => expect(result).eql("9 12 15"));
-	// 	it("extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]]) eql [6, 3]", () => expect(extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]])).eql([6, 3]));
-	// 	it("addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]]) eql [[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]", () => expect(addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]])).eql([[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]));
-	// 	it("processFib(34, [[12, false], [17, false]]) eql [[12, false], [17, 34]]", () => expect(processFib(34, [[12, false], [17, false]])).eql([[12, false], [17, 34]]));
-	// });
+	describe("69. Fibonacci Divisibility 1", () => {
+	/*ts
+		accuracy		10^(_8)
+		isInteger		%1.#.<accuracy
+		processFib		:,(.(.(/,([.).:isInteger.(.$) .((1 )` .(.(!` `) ;`).?).>) ;`).? ;).@$
+		nextFib 		]._2%.].+$
+		addFib			.(; nextFib).(.(] [.[).processFib$ ,(] .(; )).+$)
+		extract			_,(@,~ ]@).@$
+		any				*.#.>0
+		forWhile		[.(].!)any
+		iterate			forWhile^addFib
+		start			.(; #.()`^).~
+		solution		.(start (0 1)`).iterate.extract." "$
+		result			solution(17 12 61)
+	*/
+		it("solved", () => expect(result).eql("9 12 15"));
+		it("extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]]) eql [6, 3]", () => expect(extract([[[4, 8], [2, 2]], [0, 1, 1, 2, 3, 5, 8]])).eql([6, 3]));
+		it("addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]]) eql [[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]", () => expect(addFib([[[4, false], [123, false]], [0, 1, 1, 2, 3, 5]])).eql([[[4, 8], [123, false]], [0, 1, 1, 2, 3, 5, 8]]));
+		it("processFib(34, [[12, false], [17, false]]) eql [[12, false], [17, 34]]", () => expect(processFib(34, [[12, false], [17, false]])).eql([[12, false], [17, 34]]));
+	});
 
-// 	describe("63. Integer Factorization", () => { // while is removed
-// 	/*ts
-// 		accuracy		10^(_8)
-// 		isntFactor		/,(;.).:(%1.>accuracy).(.$)
-// 		isntOne			(!=1)`
-// 		inRange			^(0.5).>|=
-// 		check			.(isntFactor isntOne inRange).&$
-// 		getNextFactor	.(.(check (+1)`).^$.(2,) inRange).((,$ [) ()`)?
-// 		addFactor		.([ [.getNextFactor ]).(2%.[./$ .(] .(1' )).+$)
-// 		factors			.(; ( )`).(([.getNextFactor)^addFactor).(] .([ )).+$."*"$
-// 		solution		factors@." "$
-// 		result			solution(1000
-// 1001
-// 1002
-// 1003
-// 1009)
-// 	*/
-// 		it("solved", () => expect(result).eql("2*2*2*5*5*5 7*11*13 2*3*167 17*59 1009"));
-// 		it("getNextFactor(9) eql 3", () => expect(getNextFactor(9)).eql(3));
-// 	});
+	describe("63. Integer Factorization", () => {
+	/*ts
+		accuracy		10^(_8)
+		isntFactor		/,(;.).:(%1.>accuracy).(.$)
+		isntOne			(!=1)`
+		inRange			^(0.5).>|=
+		check			.(isntFactor isntOne inRange).&$
+		getNextFactor	.(.(check (+1)`).^$.(2,) inRange).((,$ [) ()`)?
+		addFactor		.([ [.getNextFactor ]).(2%.[./$ .(] .(1' )).+$)
+		factors			.(; ( )`).(([.getNextFactor)^addFactor).(] .([ )).+$."*"$
+		solution		factors@." "$
+		result			solution(1000
+1001
+1002
+1003
+1009)
+	*/
+		it("solved", () => expect(result).eql("2*2*2*5*5*5 7*11*13 2*3*167 17*59 1009"));
+		it("getNextFactor(9) eql 3", () => expect(getNextFactor(9)).eql(3));
+	});
 
 	describe("46. Tic Tac Toe", () => {
 	/*ts
@@ -598,32 +598,32 @@ GOLD 95 105 95 105 95 105 95 105 95 105 95 105 95 105"
 		it("solved", () => expect(result).eql("2 2 2 1 0"))
 	});
 
-// 	describe("34. Binary Search", () => { // while is removed
-// 	/*ts
-// 		E				{"Math.E"
-// 		exponent		*,(_1*./50.E^._1*.)
-// 		fn				,(* *,(^(3/2).) exponent _.(` ).[).(;.).:(+$).(.$)
-// 		startValues		.(.(0` fn.(0,)) .(100` fn.(100,)))
-// 		isNotConverged	]@.-$.#.>(10^(_7))
-// 		middleValue		.(].[@.+$./2 [.fn).([ ,$)
-// 		moveLarger		:.(middleValue ].])
-// 		moveSmaller		:.(].[ middleValue)
-// 		iterate			.(.(((].#)@.<$)` moveSmaller) moveLarger).?
-// 		iterator		.(isNotConverged` iterate).^$
-// 		result			.(startValues iterator).(,$).[.[.8'
-// 		solution		("-" "_")@."\n"%.(" "%.0+@.result)@." "$
-// 		results			solution"0.59912051 0.64030348 263.33721367 387.92069617
-// 15.68387514 1.26222280 695.23706506 698.72384731"
+	describe("34. Binary Search", () => {
+	/*ts
+		E				{"Math.E"
+		exponent		*,(_1*./50.E^._1*.)
+		fn				,(* *,(^(3/2).) exponent _.(` ).[).(;.).:(+$).(.$)
+		startValues		.(.(0` fn.(0,)) .(100` fn.(100,)))
+		isNotConverged	]@.-$.#.>(10^(_7))
+		middleValue		.(].[@.+$./2 [.fn).([ ,$)
+		moveLarger		:.(middleValue ].])
+		moveSmaller		:.(].[ middleValue)
+		iterate			.(.(((].#)@.<$)` moveSmaller) moveLarger).?
+		iterator		.(isNotConverged` iterate).^$
+		result			.(startValues iterator).(,$).[.[.8'
+		solution		("-" "_")@."\n"%.(" "%.0+@.result)@." "$
+		results			solution"0.59912051 0.64030348 263.33721367 387.92069617
+15.68387514 1.26222280 695.23706506 698.72384731"
 
-// 		//resultA			fn,startValues 
-// 	*/
-// 		it("solved", () => expect(results).eql("73.59536855 41.89917492"));
-// 		it("middleValue test", () => expect(middleValue([[0.59912051, 0.64030348, 263.33721367, 387.92069617], [[0,-651.2579098399999],[100,276.65601843123017]]])).eql([50, -228.4595513118918]));
-// 		it("startValues test", () => expect(startValues([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql([[0,-651.2579098399999],[100,276.65601843123017]]));
-// 		it("result test", () => expect(result([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql(73.59536855));
-// 		it("fn test", () => expect(Math.abs(fn([0.59912051, 0.64030348, 263.33721367, 387.92069617])(73.595368554162))).lt(1E-7));
-// 		it("converged test", () => expect(isNotConverged([[1E-8], [2E-8]])).eql(false));
-// 	});
+		//resultA			fn,startValues 
+	*/
+		it("solved", () => expect(results).eql("73.59536855 41.89917492"));
+		it("middleValue test", () => expect(middleValue([[0.59912051, 0.64030348, 263.33721367, 387.92069617], [[0,-651.2579098399999],[100,276.65601843123017]]])).eql([50, -228.4595513118918]));
+		it("startValues test", () => expect(startValues([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql([[0,-651.2579098399999],[100,276.65601843123017]]));
+		it("result test", () => expect(result([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql(73.59536855));
+		it("fn test", () => expect(Math.abs(fn([0.59912051, 0.64030348, 263.33721367, 387.92069617])(73.595368554162))).lt(1E-7));
+		it("converged test", () => expect(isNotConverged([[1E-8], [2E-8]])).eql(false));
+	});
 
 	describe("53. King and Queen", () => {
 	/*ts
@@ -801,25 +801,25 @@ A 3 3 3 A"
 		it("solved", () => expect(result).eql("17 2 7"));
 	});
 
-	// describe("61. Prime Numbers Generation 3", () => { // while is removed
-	// /*ts
-	// 	maxIndex		;<.]
-	// 	any				*.#.>0
-	// 	isNotPrime		,(+1.% ;).@$.=0any
-	// 	addPrime		((] .(1' .([ )).+$) 1')?
-	// 	nextPrime		.([.+1 ] !isNotPrime).([ addPrime)
-	// 	primes			.(maxIndex.>.(].#.) nextPrime`).^$.((2 (2 )),).]
-	// 	solution		.(primes.(',~) -1@).@$." "$
-	// 	result			solution(7 1 4)
-	// */
-	// 	it("solution([3, 4, 1]) eql '5 7 2'", () => expect(solution([3, 4, 1])).eql("5 7 2"));
-	// 	it("primes([3, 4, 1]) eql [2, 3, 5, 7]", () => expect(primes([3, 4, 1])).eql([2, 3, 5, 7]));
-	// 	it("nextPrime([[6, [2, 3, 5]]) eql [7, [2, 3, 5, 7]]", () => expect(nextPrime([6, [2, 3, 5]])).eql([7, [2, 3, 5, 7]]));
-	// 	it("nextPrime([[5, [2, 3, 5]]) eql [6, [2, 3, 5]]", () => expect(nextPrime([5, [2, 3, 5]])).eql([6, [2, 3, 5]]));
-	// 	it("addPrime([6, [2, 3, 5], false]) eql [2, 3, 5]", () => expect(addPrime([6, [2, 3, 5], false])).eql([2, 3, 5]));
-	// 	it("addPrime([5, [2, 3], true]) eql [2, 3, 5]", () => expect(addPrime([5, [2, 3], true])).eql([2, 3, 5]));
-	// 	it("solved", () => expect(result).eql("17 2 7"));
-	// });
+	describe("61. Prime Numbers Generation 3", () => {
+	/*ts
+		maxIndex		;<.]
+		any				*.#.>0
+		isNotPrime		,(+1.% ;).@$.=0any
+		addPrime		((] .(1' .([ )).+$) 1')?
+		nextPrime		.([.+1 ] !isNotPrime).([ addPrime)
+		primes			.(maxIndex.>.(].#.) nextPrime`).^$.((2 (2 )),).]
+		solution		.(primes.(',~) -1@).@$." "$
+		result			solution(7 1 4)
+	*/
+		it("solution([3, 4, 1]) eql '5 7 2'", () => expect(solution([3, 4, 1])).eql("5 7 2"));
+		it("primes([3, 4, 1]) eql [2, 3, 5, 7]", () => expect(primes([3, 4, 1])).eql([2, 3, 5, 7]));
+		it("nextPrime([[6, [2, 3, 5]]) eql [7, [2, 3, 5, 7]]", () => expect(nextPrime([6, [2, 3, 5]])).eql([7, [2, 3, 5, 7]]));
+		it("nextPrime([[5, [2, 3, 5]]) eql [6, [2, 3, 5]]", () => expect(nextPrime([5, [2, 3, 5]])).eql([6, [2, 3, 5]]));
+		it("addPrime([6, [2, 3, 5], false]) eql [2, 3, 5]", () => expect(addPrime([6, [2, 3, 5], false])).eql([2, 3, 5]));
+		it("addPrime([5, [2, 3], true]) eql [2, 3, 5]", () => expect(addPrime([5, [2, 3], true])).eql([2, 3, 5]));
+		it("solved", () => expect(result).eql("17 2 7"));
+	});
 
 	describe("61. Prime Numbers Generation 2", () => {
 	/*ts
