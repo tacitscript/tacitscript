@@ -11,6 +11,18 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
+		/*ts
+			naturals				(#.+1)^( )							L
+			cycledStream			;.(: ).[.(:.).:((
+										(.(].[.# [).<$ ].])
+										.(.(].[.# [).%$ ].[).'$
+									)?).(.$)
+			solutionA				naturals,cycledStream3$,5%,{
+		*/
+			it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
+		});
+
 		describe("firstThreeSquares (:.].^2)$.3%.{", () => {
 			/*ts
 				naturals				(#.+1)^( )							L
