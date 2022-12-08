@@ -19,7 +19,7 @@ export default () => {
 				evens					(:.].((%2.=1 1/0`) ;)?)$
 				solutionB				naturals,evens,3%,{
 			*/
-			it("naturals,evens,3%,{", () => expect(solutionB).eql([2, 4, 6]));
+			it("naturals,evens,3%,{=(2 4 6)", () => expect(solutionB).eql([2, 4, 6]));
 			it("naturals,firstThreeSquares=(1 4 9)", () => expect(solutionA).eql([1, 4, 9]));
 		});
 

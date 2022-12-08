@@ -806,7 +806,6 @@ let dollar = (left, right) => {
 		}	
 	} else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
-
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
 	[["?", "?", "X"], "A", "X"], // insert +$(1 2)
