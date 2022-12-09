@@ -1,6 +1,6 @@
 const {expect} = chai;
 import ts from "tacitscript";
-import {streamFromArray} from "utilities";
+import {streamFromArray, naturals} from "utilities";
 
 export default () => {
 	xdescribe("", () => {
@@ -11,9 +11,15 @@ export default () => {
 	});
 
 	describe("Generators", () => {
+		describe("sieve of eratosthenes", () => {
+			/*ts
+
+			*/
+			it("", () => {});
+		});
+
 		describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
 		/*ts
-			naturals				(#.+1)^( )							L
 			cycledStream			;.(: ).[.(:.).:((
 										(.(].[.# [).<$ ].])
 										.(.(].[.# [).%$ ].[).'$
@@ -27,7 +33,6 @@ export default () => {
 
 		describe("firstThreeSquares (:.].^2)$.3%.{", () => {
 			/*ts
-				naturals				(#.+1)^( )							L
 				firstThreeSquares		(:.].^2)$.3%.{
 				solutionA				naturals,firstThreeSquares
 				evens					(:.].((%2.=1 1/0`) ;)?)$
@@ -71,7 +76,6 @@ export default () => {
 
 		describe("naturals (#.+1)^( )", () => {
 			/*ts
-				naturals		(#.+1)^( )
 				firstFour		4%naturals,{
 			*/
 			it("4%naturals,{=(1 2 3 4)", () => expect(firstFour).eql([1, 2, 3, 4]));
