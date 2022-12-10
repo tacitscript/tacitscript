@@ -465,158 +465,158 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
-	if ((left == undefined) && !right.supportsUndefined) return undefined;
+	// if ((left == undefined) && !right.supportsUndefined) return undefined;
 
-	const typeCombinations = combinations(types(left))(types(right));
+	// const typeCombinations = combinations(types(left))(types(right));
 
-	if (isArray(right)) {
-		// AAA zipApplyTo (3 4),(+1 +)
-		if (isArray(left)) {
-			return pipe(
-				transpose,
-				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
-			)([left, right])
-		}
+	// if (isArray(right)) {
+	// 	// AAA zipApplyTo (3 4),(+1 +)
+	// 	if (isArray(left)) {
+	// 		return pipe(
+	// 			transpose,
+	// 			map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
+	// 		)([left, right])
+	// 	}
 
-		// (XA)A(XA) unaryZipApplyTo +1@,(*2 /2)
-		if (isUnaryFunction(left)) {
-			let fn = x => comma(left(x), right);
-			fn.types = combinations(map(first)(types(left)))(["A"]);
+	// 	// (XA)A(XA) unaryZipApplyTo +1@,(*2 /2)
+	// 	if (isUnaryFunction(left)) {
+	// 		let fn = x => comma(left(x), right);
+	// 		fn.types = combinations(map(first)(types(left)))(["A"]);
 
-			return fn;
-		}
+	// 		return fn;
+	// 	}
 
-		// (XYA)A(XYA) binaryZipApplyTo :,(+1 -1)
-		if (isBinaryFunction(left)) { // 202
-			let fn = (x, y) => comma(left(x, y), right);
-			fn.types = map(pipe(take(2), append("A")))(types(left));
+	// 	// (XYA)A(XYA) binaryZipApplyTo :,(+1 -1)
+	// 	if (isBinaryFunction(left)) { // 202
+	// 		let fn = (x, y) => comma(left(x, y), right);
+	// 		fn.types = map(pipe(take(2), append("A")))(types(left));
 
-			return fn;
-		}
-	} else {
-		// (XYZ)((YZ)W)(XW) binaryUnaryApply =,'(1 2 3)
-		const solutions211 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType.slice(1), rightType[0]))(typeCombinations);
-		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { 
-			let fn = x => right(leftApply(x, left));
+	// 		return fn;
+	// 	}
+	// } else {
+	// 	// (XYZ)((YZ)W)(XW) binaryUnaryApply =,'(1 2 3)
+	// 	const solutions211 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType.slice(1), rightType[0]))(typeCombinations);
+	// 	if (isBinaryFunction(left) && isUnaryFunction(right) && solutions211.length) { 
+	// 		let fn = x => right(leftApply(x, left));
 
-			fn.types = map(([leftType, rightType]) => [leftType[1], rightType[1]])(solutions211);
+	// 		fn.types = map(([leftType, rightType]) => [leftType[1], rightType[1]])(solutions211);
 
-			return fn;
-		}		
+	// 		return fn;
+	// 	}		
 
-		// X(XY)Y applyTo 3,+1
-		const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
-		if (isUnaryFunction(right) && solutionsInvert.length) {
-			let result = right(left); // apply(right, left);
+	// 	// X(XY)Y applyTo 3,+1
+	// 	const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
+	// 	if (isUnaryFunction(right) && solutionsInvert.length) {
+	// 		let result = right(left); // apply(right, left);
 
-			if (isFunction(result) && !result.types) result.types = pipe(
-				map(([leftType, rightType]) => rightType[1]),
-				filter(Array.isArray)
-			)(solutionsInvert);
+	// 		if (isFunction(result) && !result.types) result.types = pipe(
+	// 			map(([leftType, rightType]) => rightType[1]),
+	// 			filter(Array.isArray)
+	// 		)(solutionsInvert);
 
-			return result;
-		}
+	// 		return result;
+	// 	}
 
-		// X(XYZ)(YZ) applyToBinary 3,+ =1,?
-		const solutions021 = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
-		if (isBinaryFunction(right) && solutions021.length) {
-			let fn = value => leftApply(left, right)(value);
+	// 	// X(XYZ)(YZ) applyToBinary 3,+ =1,?
+	// 	const solutions021 = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
+	// 	if (isBinaryFunction(right) && solutions021.length) {
+	// 		let fn = value => leftApply(left, right)(value);
 
-			fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
+	// 		fn.types = map(([leftType, rightType]) => rightType.slice(1))(solutions021);
 
-			return fn;
-		}
-	}
+	// 		return fn;
+	// 	}
+	// }
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
-	["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
-	[["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
-	[["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
-	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) 3,+ =1,?
-	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
+	// ["A", "A", "A"], // zipApplyTo (3 4),(+1 +)
+	// [["X", "A"], "A", ["X", "A"]], // unaryZipApplyTo +1@,(*2 /2)
+	// [["X", "Y", "A"], "A", ["X", "Y", "A"]], // binaryZipApplyTo :,(+1 -1)
+	// ["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1
+	// ["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) 3,+ =1,?
+	// [["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
-	const typeCombinations = combinations(types(left))(types(right));
+	// const typeCombinations = combinations(types(left))(types(right));
 
-	if (isArray(right)) {
-		// VAA applyToArray (1 2 3).(# ])
-		const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
-		if (isValue(left) && solutions000.length) {
-			return map(value => comma(left, value))(right);
-		}
+	// if (isArray(right)) {
+	// 	// VAA applyToArray (1 2 3).(# ])
+	// 	const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
+	// 	if (isValue(left) && solutions000.length) {
+	// 		return map(value => comma(left, value))(right);
+	// 	}
 
-		// (VV)A(VA) pipeToArray [.(+1 -2)
-		const solutions101 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 2))(typeCombinations);
-		if (isUnaryFunction(left) && solutions101.length) {
-			let fn = x => map(value => comma(left(x), value))(right);
+	// 	// (VV)A(VA) pipeToArray [.(+1 -2)
+	// 	const solutions101 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 2))(typeCombinations);
+	// 	if (isUnaryFunction(left) && solutions101.length) {
+	// 		let fn = x => map(value => comma(left(x), value))(right);
 
-			fn.types = map(([leftType]) => [leftType[0], "A"])(solutions101);
+	// 		fn.types = map(([leftType]) => [leftType[0], "A"])(solutions101);
 
-			return fn;
-		}
+	// 		return fn;
+	// 	}
 
-		// (VVV)A(VVA) pipeBinaryToArray :.(+$ -$)
-		const solutions202 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 3))(typeCombinations);
-		if (isBinaryFunction(left) && solutions202.length) {
-			let fn = (x, y) => map(value => comma(left(x, y), value))(right);
+	// 	// (VVV)A(VVA) pipeBinaryToArray :.(+$ -$)
+	// 	const solutions202 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 3))(typeCombinations);
+	// 	if (isBinaryFunction(left) && solutions202.length) {
+	// 		let fn = (x, y) => map(value => comma(left(x, y), value))(right);
 
-			fn.types = map(([leftType]) => [...leftType.slice(0, 2), "A"])(solutions202);
+	// 		fn.types = map(([leftType]) => [...leftType.slice(0, 2), "A"])(solutions202);
 
-			return fn;
-		}
-	} else {
-		// (XYZ)(ZW)(XYW) binaryUnaryPipe :.+$
-		const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
-		if (isBinaryFunction(left) && isUnaryFunction(right) && solutions212.length) { 
-			let fn = (a, b) => right(left(a, b));
+	// 		return fn;
+	// 	}
+	// } else {
+	// 	// (XYZ)(ZW)(XYW) binaryUnaryPipe :.+$
+	// 	const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
+	// 	if (isBinaryFunction(left) && isUnaryFunction(right) && solutions212.length) { 
+	// 		let fn = (a, b) => right(left(a, b));
 
-			fn.types = map(([leftType, rightType]) => [...leftType.slice(0, 2), rightType[1]])(solutions212);
+	// 		fn.types = map(([leftType, rightType]) => [...leftType.slice(0, 2), rightType[1]])(solutions212);
 
-			return fn;
-		}
+	// 		return fn;
+	// 	}
 
-		// (XY)(YZW)(X(ZW)) unaryBinaryPipe +1./
-		const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
-		if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
-			let fn = value => leftApply(left(value), right);
+	// 	// (XY)(YZW)(X(ZW)) unaryBinaryPipe +1./
+	// 	const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
+	// 	if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
+	// 		let fn = value => leftApply(left(value), right);
 
-			fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions121);
+	// 		fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions121);
 
-			return fn;
-		}
+	// 		return fn;
+	// 	}
 
-		// (XY)(YZ)(XZ) pipe +1./2
-		const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
-		if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) {
-			let fn = value => right(left(value));
+	// 	// (XY)(YZ)(XZ) pipe +1./2
+	// 	const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
+	// 	if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) {
+	// 		let fn = value => right(left(value));
 
-			fn.types = map(([leftType, rightType]) => [leftType[0], rightType[1]])(solutions111);
+	// 		fn.types = map(([leftType, rightType]) => [leftType[0], rightType[1]])(solutions111);
 
-			return fn;
-		}
-	}
+	// 		return fn;
+	// 	}
+	// }
 
 	errorBinary({left, right, operator: "."});
 }; dot.types = [
-	["V", "A", "A"], // applyToArray (1 2 3).(# ])
-	[["V", "V"], "A", ["V", "A"]], // pipeToArray [.(+1 -2) -- OLD (??)A(?A)
-	[["V", "V", "V"], "A", ["V", "V", "A"]], // pipeBinaryToArray :.(+$ -$) -- OLD (???)A(??A)
-	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
-	[["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
-	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
+	// ["V", "A", "A"], // applyToArray (1 2 3).(# ])
+	// [["V", "V"], "A", ["V", "A"]], // pipeToArray [.(+1 -2) -- OLD (??)A(?A)
+	// [["V", "V", "V"], "A", ["V", "V", "A"]], // pipeBinaryToArray :.(+$ -$) -- OLD (???)A(??A)
+	// [["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
+	// [["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
+	// [["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
-	if (isString(left) && isValue(right)) {
-		try {
-			return `${left}${toString(right)}`; // SVS stringConcat ""+4
-		} catch (_) {
-			return undefined;
-		}
-	}
-	if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
-	if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
+	// if (isString(left) && isValue(right)) {
+	// 	try {
+	// 		return `${left}${toString(right)}`; // SVS stringConcat ""+4
+	// 	} catch (_) {
+	// 		return undefined;
+	// 	}
+	// }
+	// if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
+	// if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
 	if (isNumber(left) && isValue(right)) { // NVN add 2+"3"
 		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;
 
@@ -626,15 +626,15 @@ let plus = (left, right) => {
 	errorBinary({left, right, operator: "+"});
 }; plus.types = [
 	["N", "V", "N"], // add 2+3=5
-	["S", "V", "S"], // concat ""+4="4"
-	["A", "A", "A"], // concat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)
-	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
+	// ["S", "V", "S"], // concat ""+4="4"
+	// ["A", "A", "A"], // concat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)
+	// ["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
 ];
 let slash = (left, right) => {
-	if (isUnaryFunction(left) && isArray(right)) {
-		// (VS)AO groupBy [/("ann" "ben" "ade")
-		return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
-	}
+	// if (isUnaryFunction(left) && isArray(right)) {
+	// 	// (VS)AO groupBy [/("ann" "ben" "ade")
+	// 	return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+	// }
 	if (isNumber(left) && isNumber(right)) {
 		if (right === 0) return undefined;
 
@@ -644,437 +644,446 @@ let slash = (left, right) => {
 	errorBinary({left, right, operator: "/"});
 }; slash.types = [
 	["N", "N", "N"], // divide 8/2=4
-	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
+	// [["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let less = (left, right) => {
-	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
-	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
+	// if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
+	// if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
 
 	errorBinary({left, right, operator: "<"});
 }; less.types = [
-	["N", "N", "B"], // lessThan 2<3
-	["S", "S", "B"], // lessThanString "abc"<"bcd"
-	[["V", "S"], "A", "A"], // sort ;<("dan" "sue" "alan")
-	[["V", "N"], "A", "A"], // sort ;<(1 2 3)
+	// ["N", "N", "B"], // lessThan 2<3
+	// ["S", "S", "B"], // lessThanString "abc"<"bcd"
+	// [["V", "S"], "A", "A"], // sort ;<("dan" "sue" "alan")
+	// [["V", "N"], "A", "A"], // sort ;<(1 2 3)
 ];
 let greater = (left, right) => {
-	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
-	if (isArray(left) && (isArray(right) || isObject(right))) {
-		return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
-	}
-	if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
-		try {
-			comma(left, right);
-		} catch (_) {
-		}
+	// if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
+	// if (isArray(left) && (isArray(right) || isObject(right))) {
+	// 	return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
+	// }
+	// if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
+	// 	try {
+	// 		comma(left, right);
+	// 	} catch (_) {
+	// 	}
 
-		return left;
-	}
+	// 	return left;
+	// }
 
 	errorBinary({left, right, operator: ">"});
 }; greater.types = [
-	["N", "N", "B"], // greaterThan 3>2
-	["S", "S", "B"], // greaterThanString "bcd">"abc"
-	["A", "O", "O"], // over ((1 ) +1)>(3 5 7)
-	["A", "A", "A"], // over (("a" ) +1)>{({"a": 1})
-	["V", ["V", "V"], "V"], // tap 3>({"console.log")
+	// ["N", "N", "B"], // greaterThan 3>2
+	// ["S", "S", "B"], // greaterThanString "bcd">"abc"
+	// ["A", "O", "O"], // over ((1 ) +1)>(3 5 7)
+	// ["A", "A", "A"], // over (("a" ) +1)>{({"a": 1})
+	// ["V", ["V", "V"], "V"], // tap 3>({"console.log")
 ];
 let minus = (left, right) => {
-	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
-		const {[left]: deletedKey, ...remainder} = right;
+	// if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
+	// 	const {[left]: deletedKey, ...remainder} = right;
 
-		return remainder;
-	}
-	if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
-		return omit(left)(right);
-	}
+	// 	return remainder;
+	// }
+	// if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
+	// 	return omit(left)(right);
+	// }
 	if (isNumber(left) && isNumber(right)) return left - right; // NNN subtract 5-2
-	if (isArray(left) && isArray(right)) return splice(right, ...left); // AAA splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
-	if (isArray(left) && isString(right)) return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]); // ASS splice (3 2 "le")-"nucular"="nuclear"
+	// if (isArray(left) && isArray(right)) return splice(right, ...left); // AAA splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
+	// if (isArray(left) && isString(right)) return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]); // ASS splice (3 2 "le")-"nucular"="nuclear"
 
 	errorBinary({left, right, operator: "-"});
 }; minus.types = [
 	["N", "N", "N"], // subtract 5-2=3
-	["S", "O", "O"], // omitKey "a"-({"{a: 1}")
-	["A", "O", "O"], // omitKeys ("a" "b")-({"{a: 1, b: 2}")
-	["A", "A", "A"], // splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
-	["A", "S", "S"], // splice (3 2 "le")-"nucular"="nuclear"
+	// ["S", "O", "O"], // omitKey "a"-({"{a: 1}")
+	// ["A", "O", "O"], // omitKeys ("a" "b")-({"{a: 1, b: 2}")
+	// ["A", "A", "A"], // splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
+	// ["A", "S", "S"], // splice (3 2 "le")-"nucular"="nuclear"
 ];
 let colon = (left, right) => {
-	return [left, right]; // ??A pair +:2
+	// return [left, right]; // ??A pair +:2
+
+	errorBinary({left, right, operator: ":"});
 }; 
 colon.types = [
-	["?", "?", "A"], // pair +:2
+	// ["?", "?", "A"], // pair +:2
 ];
 let question = (left, right) => {
-	if (isArray(left) && isValue(right)) { // AVV cond ((<10 +1) -1)?15
-		for (let i = 0; i < left.length; ++i) {
-			const line = left[i];
+	// if (isArray(left) && isValue(right)) { // AVV cond ((<10 +1) -1)?15
+	// 	for (let i = 0; i < left.length; ++i) {
+	// 		const line = left[i];
 
-			if (!isArray(line)) return comma(right, line);
+	// 		if (!isArray(line)) return comma(right, line);
 
-			const check = comma(right, line[0]);
+	// 		const check = comma(right, line[0]);
 
-			if (isTruthy(check)) return comma(right, line[1]);
-		}
+	// 		if (isTruthy(check)) return comma(right, line[1]);
+	// 	}
 
-		return undefined;
-	}
-	if (isNumber(left) && isNumber(right)) { // random 1?100
-		return (Math.random() * (right - left)) + left;
-	}
-	if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
-		const index = right.findIndex(left);
+	// 	return undefined;
+	// }
+	// if (isNumber(left) && isNumber(right)) { // random 1?100
+	// 	return (Math.random() * (right - left)) + left;
+	// }
+	// if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
+	// 	const index = right.findIndex(left);
 
-		return (index === -1) ? undefined : index;
-	}
+	// 	return (index === -1) ? undefined : index;
+	// }
 
 	errorBinary({left, right, operator: "?"});
 }; question.types = [
-	["A", "V", "V"], // cond ((<10 +1) -1)?15
-	["N", "N", "N"], // random 1?100
-	[["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
+	// ["A", "V", "V"], // cond ((<10 +1) -1)?15
+	// ["N", "N", "N"], // random 1?100
+	// [["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
 ];
 question.supportsUndefined = true;
 let atsign = (left, right) => {
-	const applyLeft = value => comma(value, left); // apply(left, value);
-	// const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
-	//const applyIndexedLeft = (value, index) => comma(value, (() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})());
+	// const applyLeft = value => comma(value, left); // apply(left, value);
+	// // const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
+	// //const applyIndexedLeft = (value, index) => comma(value, (() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})());
 
 	
-	if (isUnaryFunction(left) && isObject(right)) {
-		/*if (isUnaryFunction(left)) */return mapObj(applyLeft)(right); // (VV)OO mapObject *2@({"{a: 1, b: 2, c: 3}")
-		//if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
-	}
+	// if (isUnaryFunction(left) && isObject(right)) {
+	// 	/*if (isUnaryFunction(left)) */return mapObj(applyLeft)(right); // (VV)OO mapObject *2@({"{a: 1, b: 2, c: 3}")
+	// 	//if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
+	// }
 
-	// (VV)AA map *2@(3 4 5)
-	// (VVV)AA mapBinary =@(2 3 4)
-	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
-	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
-	if (isValue(left) && isArray(right)) {
-		try {
-			const leftString = toString(left);
-			const leftType = typeOf(left);
-			const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
+	// // (VV)AA map *2@(3 4 5)
+	// // (VVV)AA mapBinary =@(2 3 4)
+	// if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
+	// if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
+	// if (isValue(left) && isArray(right)) {
+	// 	try {
+	// 		const leftString = toString(left);
+	// 		const leftType = typeOf(left);
+	// 		const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
 
-			return (index === -1) ? undefined : index;
-		} catch (_) {
-			return undefined;
-		}
-	}
-	if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
+	// 		return (index === -1) ? undefined : index;
+	// 	} catch (_) {
+	// 		return undefined;
+	// 	}
+	// }
+	// if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
-	[["V", "V"], "A", "A"], // map *2@(3 4 5)
-	[["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
-	[["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
-	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
-	["V", "A", "N"], // indexOf 2@(6 8 2 3)
-	["S", "S", "N"], // indexOf "bc"@"abcd"
-	//[["V", "S", "V"], "O", "O"] // mapObjectIndexed 
+	// [["V", "V"], "A", "A"], // map *2@(3 4 5)
+	// [["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
+	// [["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
+	// ["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
+	// ["V", "A", "N"], // indexOf 2@(6 8 2 3)
+	// ["S", "S", "N"], // indexOf "bc"@"abcd"
 ];
 let asterisk = (left, right) => {
-	if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
-	if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-		return pick(left)(right);
-	}
+	// if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
+	// if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
+	// 	return pick(left)(right);
+	// }
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
 
 	errorBinary({left, right, operator: "*"});
 }; asterisk.types = [
 	["N", "N", "N"], // times 2*3=6
-	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-	[["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
+	// ["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
+	// [["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
 ];
 let dollar = (left, right) => {
-	if (isArray(right)) {
-		if (isBinaryFunction(left)) {
-			const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
+	// if (isArray(right)) {
+	// 	if (isBinaryFunction(left)) {
+	// 		const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
 
-			return result;
-		}
-		if (isString(left)) {
-			try {
-				return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
-			} catch (_) {
-				return undefined;
-			}
-		}
-		if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
-			return reduce(left[0])(left[1])(right);
-		}	
-	} else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
+	// 		return result;
+	// 	}
+	// 	if (isString(left)) {
+	// 		try {
+	// 			return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
+	// 		} catch (_) {
+	// 			return undefined;
+	// 		}
+	// 	}
+	// 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
+	// 		return reduce(left[0])(left[1])(right);
+	// 	}	
+	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
-	[["?", "?", "X"], "A", "X"], // insert +$(1 2)
-	["S", "A", "S"], // join ","$(1 2 3)
-	["A", "A", "?"], // reduce (+ 0)$(1 2 3)
-	[["A", "V", "V"], "L", "L"], // processStream
+	// [["?", "?", "X"], "A", "X"], // insert +$(1 2)
+	// ["S", "A", "S"], // join ","$(1 2 3)
+	// ["A", "A", "?"], // reduce (+ 0)$(1 2 3)
+	// [["A", "V", "V"], "L", "L"], // processStream
 ];
 let apostrophe = (left, right) => {
-	if (isNumber(left) && isNumber(right)) {
-		const factor = Math.pow(10, left);
+	// if (isNumber(left) && isNumber(right)) {
+	// 	const factor = Math.pow(10, left);
 
-		return Math.round(right * factor) / factor;
-	}
-	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
-	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
-	if (isArray(left) && (isArray(right) || isObject(right))) {
-		return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
-	}
-	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
+	// 	return Math.round(right * factor) / factor;
+	// }
+	// if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
+	// if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
+	// if (isArray(left) && (isArray(right) || isObject(right))) {
+	// 	return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
+	// }
+	// if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
 
 	errorBinary({left, right, operator: "'"});
 }; apostrophe.types =[
-	["N", "N", "N"], // round 3'3.14196
-	["N", "A", "?"], // at 1'(1 2 3)
-	["N", "S", "S"], // at 1'"abc"
-	["S", "O", "?"], // prop "a"'{({"a": 1})
-	["A", "A", "?"], // path (1 )'(5 6 7)
-	["A", "O", "?"], // path ("a" )'{({"a": 1})
-	[["V", "V"], "A", "V"], // find (%2.=0)'(1 2 3)
+	// ["N", "N", "N"], // round 3'3.14196
+	// ["N", "A", "?"], // at 1'(1 2 3)
+	// ["N", "S", "S"], // at 1'"abc"
+	// ["S", "O", "?"], // prop "a"'{({"a": 1})
+	// ["A", "A", "?"], // path (1 )'(5 6 7)
+	// ["A", "O", "?"], // path ("a" )'{({"a": 1})
+	// [["V", "V"], "A", "V"], // find (%2.=0)'(1 2 3)
 ];
 let equal = (left, right) => {
-	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
+	// if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
 
-	try {
-		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right)); // VVB equal 2=4
-	} catch (_) {
-		return undefined;
-	}
+	// try {
+	// 	return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right)); // VVB equal 2=4
+	// } catch (_) {
+	// 	return undefined;
+	// }
+
+	errorBinary({left, right, operator: "="});
 }; equal.types = [
-	["V", "V", "B"], // equality 2=2=true
+	// ["V", "V", "B"], // equality 2=2=true
 ];
 let bar = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
-		let fn = x => {
-			const leftResult = comma(x, left);
+	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
+	// 	let fn = x => {
+	// 		const leftResult = comma(x, left);
 
-			return isFalsey(leftResult) ? comma(x, right) : leftResult;
-		};
-		fn.types = types(left); // assume
+	// 		return isFalsey(leftResult) ? comma(x, right) : leftResult;
+	// 	};
+	// 	fn.types = types(left); // assume
 
-		return fn;
-	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) { // orBinary <|=
-		let fn = (x, y) => {
-			const leftResult = left(x, y);
+	// 	return fn;
+	// }
+	// if (isBinaryFunction(left) && isBinaryFunction(right)) { // orBinary <|=
+	// 	let fn = (x, y) => {
+	// 		const leftResult = left(x, y);
 
-			return isFalsey(leftResult) ? right(x, y) : leftResult;
-		};
-		fn.types = types(left); // assume
+	// 		return isFalsey(leftResult) ? right(x, y) : leftResult;
+	// 	};
+	// 	fn.types = types(left); // assume
 
-		return fn;
-	}
-	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;
+	// 	return fn;
+	// }
+	// if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;
 
 	errorBinary({left, right, operator: "|"});
 }; bar.types = [
-	["V", "V", "V"], // orValue !()|()
-	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
-	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
+	// ["V", "V", "V"], // orValue !()|()
+	// [["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
+	// [["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
 ];
 bar.supportsUndefined = true;
 let percent = (left, right) => {
-	if (isNumber(left)) {
-		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
-		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
-		else if (isStream(right)) return streamTake({n: left, generator: right});
-	}
-	else if (isArray(left)) {
-		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
-		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
-	}
-	else if (isString(left) && isString(right)) {
-		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
-	}
-	else if (isUnaryFunction(left)) {
-		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: []}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
-		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
-	}
-	else if (isBinaryFunction(left)) {
-		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
-		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
-	}
+	// if (isNumber(left)) {
+	// 	if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
+	// 	else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
+	// 	else if (isStream(right)) return streamTake({n: left, generator: right});
+	// }
+	// else if (isArray(left)) {
+	// 	if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
+	// 	else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
+	// }
+	// else if (isString(left) && isString(right)) {
+	// 	return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
+	// }
+	// else if (isUnaryFunction(left)) {
+	// 	if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: []}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
+	// 	else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
+	// }
+	// else if (isBinaryFunction(left)) {
+	// 	if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
+	// 	else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
+	// }
 
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
-	["N", "N", "N"], // remainder 7%2
-	["N", "A", "A"], // split 2%(1 2 3 4 5)
-	["N", "S", "A"], // split 2%"abcde"
-	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
-	["A", "S", "A"], // chunk (1 2 0)%"abcde"
-	["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
-	[["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
-	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
-	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
-	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
-	["N", "L", "L"], // streamTake 3%naturalNumbers
+	// ["N", "N", "N"], // remainder 7%2
+	// ["N", "A", "A"], // split 2%(1 2 3 4 5)
+	// ["N", "S", "A"], // split 2%"abcde"
+	// ["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
+	// ["A", "S", "A"], // chunk (1 2 0)%"abcde"
+	// ["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
+	// [["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
+	// [["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
+	// [["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
+	// [["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
+	// ["N", "L", "L"], // streamTake 3%naturalNumbers
 ];
 let hat = (left, right) => {
-	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
-	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
-	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // while
-		let result = x => whileInternal({whileCondition: left, next: right, start: x});
+	// if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
+	// if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
+	// if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
+	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while
+	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});
 
-		result.types = right.types;
+	// 	result.types = right.types;
 
-		return result;
-	}
-	if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )
+	// 	return result;
+	// }
+	// if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )
 
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
-	["N", "N", "N"], // power 2^3
-	[["N", "?"], "N", "A"], // generate ;^3
-	["A", "A", "A"], // scan (#.<5 #.+1)^( )
-	[["A", "V"], "A", "L"], // lazyScan #.+1^( )
-	[["X", "V"], ["X", "Y"], ["X", "Y"]], // while 1,(<10^(*2))
+	// ["N", "N", "N"], // power 2^3
+	// [["N", "?"], "N", "A"], // generate ;^3
+	// ["A", "A", "A"], // scan (#.<5 #.+1)^( )
+	// [["A", "V"], "A", "L"], // lazyScan #.+1^( )
+	// [["X", "V"], ["X", "Y"], ["X", "Y"]], // while 1,(<10^(*2))
 ];
 let ampersand = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
-		let result = value => {
-			const leftValue = comma(value, left);
+	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
+	// 	let result = value => {
+	// 		const leftValue = comma(value, left);
 
-			return isTruthy(leftValue) ? comma(value, right) : leftValue;
-		}
+	// 		return isTruthy(leftValue) ? comma(value, right) : leftValue;
+	// 	}
 
-		result.types = types(left); // TODO: edge cases abound here
+	// 	result.types = types(left); // TODO: edge cases abound here
 
-		return result;
-	}
-	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; // VVV andValue !()&()
+	// 	return result;
+	// }
+	// if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; // VVV andValue !()&()
 
 	errorBinary({left, right, operator: "&"});
 }; ampersand.types = [
-	["V", "V", "V"], // andValue !()&()
-	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
+	// ["V", "V", "V"], // andValue !()&()
+	// [["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
 ];
 let backtick = (left, right) => {
-	return left; // X?X constant 2`3
+	// return left; // X?X constant 2`3
+
+	errorBinary({left, right, operator: "`"});
 }; backtick.types = [
-	["X", "?", "X"], // constant 2`3
+	// ["X", "?", "X"], // constant 2`3
 ]; backtick.supportsUndefined = true;
 
 //----------------------------------------------------------
 // Unary
 
 let tilde = value => { // not referenced directly when passed number (standard form exported)
-	if (isBinaryFunction(value)) { // (XYZ)(YXZ) flip ~/
-		let fn = (x, y) => value(y, x);
+	// if (isBinaryFunction(value)) { // (XYZ)(YXZ) flip ~/
+	// 	let fn = (x, y) => value(y, x);
 
-		fn.types = map(([left, right, output]) => [right, left, output])(types(value));
+	// 	fn.types = map(([left, right, output]) => [right, left, output])(types(value));
 
-		return fn;
-	}
-	if (isArray(value)) return transpose(value); // AA transpose ~((1 2) (3 4))
+	// 	return fn;
+	// }
+	// if (isArray(value)) return transpose(value); // AA transpose ~((1 2) (3 4))
 
 	errorUnary({operator: "~", value});
 }; 
 tilde.types = [
-	["A", "A"], // transpose ~((1 2) (3 4))
-	[["X", "Y", "Z"], ["Y", "X", "Z"]], // flip ~/
+	// ["A", "A"], // transpose ~((1 2) (3 4))
+	// [["X", "Y", "Z"], ["Y", "X", "Z"]], // flip ~/
 ];
 let underscore = value => {
 	if (isNumber(value)) return -value; // NN negative _5
-	if (isArray(value)) return value.slice(0).reverse(); // AA reverse _(1 2 3)
-	if (isString(value)) return value.split("").reverse().join(""); // SS reverse _"Hello"
+	// if (isArray(value)) return value.slice(0).reverse(); // AA reverse _(1 2 3)
+	// if (isString(value)) return value.split("").reverse().join(""); // SS reverse _"Hello"
 
 	errorUnary({operator: "_", value});
 }; underscore.types = [
 	["N", "N"], // negative _5
-	["A", "A"], // reverse _(1 2 3)
-	["S", "S"], // reverse _"Hello"
+	// ["A", "A"], // reverse _(1 2 3)
+	// ["S", "S"], // reverse _"Hello"
 ];
 let bracketleft = value => {
-	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
-	if (isNumber(value)) return Math.floor(value); // NN floor [1.8
+	// if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
+	// if (isNumber(value)) return Math.floor(value); // NN floor [1.8
 
 	errorUnary({operator: "[", value});
 }; bracketleft.types = [
-	["A", "?"], // first [(1 2 3)
-	["S", "S"], // firstInString ["abc"
-	["N", "N"], // floor [1.8
+	// ["A", "?"], // first [(1 2 3)
+	// ["S", "S"], // firstInString ["abc"
+	// ["N", "N"], // floor [1.8
 ];
 let bracketright = value => {
-	if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
-	if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2
+	// if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
+	// if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2
 
 	errorUnary({operator: "]", value});
 }; bracketright.types = [
-	["A", "?"], // last ](1 2 3)
-	["S", "S"], // lastInString ]"abc"
-	["N", "N"], // ceiling ]1.2
+	// ["A", "?"], // last ](1 2 3)
+	// ["S", "S"], // lastInString ]"abc"
+	// ["N", "N"], // ceiling ]1.2
 ];
 let hash = value => {
-	if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
-	if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
-	if (isNumber(value)) return Math.abs(value); // NN modulus #(_1.5)
+	// if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
+	// if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
+	// if (isNumber(value)) return Math.abs(value); // NN modulus #(_1.5)
 
 	errorUnary({value, operator: "#"});
 }; hash.types = [
-	["A", "N"], // arrayLength #(4 5 6)
-	["S", "N"], // stringLength #"abcd"
-	["O", "N"], // keyLength #({"{a: 1}")
-	["N", "N"], // modulus #(_1.5)
+	// ["A", "N"], // arrayLength #(4 5 6)
+	// ["S", "N"], // stringLength #"abcd"
+	// ["O", "N"], // keyLength #({"{a: 1}")
+	// ["N", "N"], // modulus #(_1.5)
 ];
 let backslash = value => {
-	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
-	if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")
+	// if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
+	// if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")
 
 	errorUnary({value, operator: "\\"});
 };
 backslash.types = [
-	["A", "O"], // fromPairs \(("a" 1) ("b" 2))
-	["O", "A"], // toPairs \({"{a: 1, b: 2}")
+	// ["A", "O"], // fromPairs \(("a" 1) ("b" 2))
+	// ["O", "A"], // toPairs \({"{a: 1, b: 2}")
 ];
 let braceleft = value => {
-	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
-	// should never be referenced directly for literal evaluation - expanded in parser
-	if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
-	if (isStream(value)) return [...value()];
+	// if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
+	// // should never be referenced directly for literal evaluation - expanded in parser
+	// if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
+	// if (isStream(value)) return [...value()];
 
 	errorUnary({operator: "{", value});
 }; braceleft.types = [
-	["S", "?"], // eval {"Math.sqrt(2)"
-	["A", "A"], // unnest {(1 (2 3))
-	["L", "A"], // spread {(3%naturalNumbers)
+	// ["S", "?"], // eval {"Math.sqrt(2)"
+	// ["A", "A"], // unnest {(1 (2 3))
+	// ["L", "A"], // spread {(3%naturalNumbers)
 ];
 let semicolon = value => {
-	return value; // XX identiy ;1
+	// return value; // XX identiy ;1
+
+	errorUnary({operator: ";", value});
 }; semicolon.types = [
-	["X", "X"], // identity ;1
+	// ["X", "X"], // identity ;1
 ];
 let braceright = value => {
-	return typeOf(value); // ?S typeof }3
+	// return typeOf(value); // ?S typeof }3
+
+	errorUnary({operator: "}", value});
 }; braceright.types = [
-	["?", "S"], // typeof }3
+	// ["?", "S"], // typeof }3
 ];
 let bang = value => {
-	if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
-		let fn = (x, y) => isFalsey(value(x, y));
+	// if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
+	// 	let fn = (x, y) => isFalsey(value(x, y));
 
-		fn.types = value.types;
+	// 	fn.types = value.types;
 
-		return fn;
-	}
-	if (isUnaryFunction(value)) { // (VV)(VB) not !(<2)
-		let fn = x => isFalsey(value(x));
+	// 	return fn;
+	// }
+	// if (isUnaryFunction(value)) { // (VV)(VB) not !(<2)
+	// 	let fn = x => isFalsey(value(x));
 
-		fn.types = value.types;
+	// 	fn.types = value.types;
 
-		return fn;
-	}
-	if (isValue(value)) return isFalsey(value); // VB not !()
+	// 	return fn;
+	// }
+	// if (isValue(value)) return isFalsey(value); // VB not !()
 
 	errorUnary({value, operator: "!"});
 }; bang.types = [
-	["V", "B"], // not !2
-	[["V", "V", "V"], ["V", "V", "B"]], // not !<
-	[["V", "V"], ["V", "B"]], // not !(<2)
+	// ["V", "B"], // not !2
+	// [["V", "V", "V"], ["V", "V", "B"]], // not !<
+	// [["V", "V"], ["V", "B"]], // not !(<2)
 ]; bang.supportsUndefined = true;
 
 //==========================================================
