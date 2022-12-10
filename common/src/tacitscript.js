@@ -791,13 +791,13 @@ let asterisk = (left, right) => {
 	// [["V", "B"], "P", "P"], // filter <5*(4 9 2 7 3)
 ];
 let dollar = (left, right) => {
-	if (isBinaryFunction(left) && isUnaryFunction(right)) { // S *$;(2)=4
-		// ASB(x) = A(x)(B(x))
+	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
+		// ASB(x) = B(x)(A(x))
 		const result = x => {
 			const Ax = apply(left, x);
 			const Bx = apply(right, x);
 
-			return apply(Ax, Bx);
+			return apply(Bx, Ax);
 		};
 
 		return result;
@@ -822,7 +822,7 @@ let dollar = (left, right) => {
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
-	[["X", "Y", "Z"], ["X", "Y"], ["X", "Z"]], // S *$;(2)=4
+	[["X", "Y"], ["X", "Y", "Z"], ["X", "Z"]], // S *$;(2)=4
 	// [["?", "?", "X"], "P", "X"], // insert +$(1 2)
 	// ["S", "P", "S"], // join ","$(1 2 3)
 	// ["P", "P", "?"], // reduce (+ 0)$(1 2 3)
