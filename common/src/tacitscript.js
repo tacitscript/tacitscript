@@ -295,7 +295,7 @@ const toString = value => {
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
-	if (isPair(value)) return `[${toEncodedString(value.left)} ${toEncodedString(value.right)}]`;
+	if (isPair(value)) return `${toEncodedString(value.left)}:${toEncodedString(value.right)}`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
 	throw "Unable to stringify value";
