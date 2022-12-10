@@ -13,9 +13,24 @@ export default () => {
 	describe("Generators", () => {
 		describe("sieve of eratosthenes", () => {
 			/*ts
-
+				remainderIsOne		~%.=1
+				remainder			~%
+				isMultiple			~%,(;.).:(=0).(.$)
+				sieve				.(.(~%,(;.).:(=0).(.$) 1/0``) ;`).?
+				//binarySieve			.(.(~%,;.(: ).[.(:.).:(.(].] [).(,$).=0).(.$) 1/0``) ;`).?
+				////firstFiveOdds		naturals,binarySieve2$,5%,{
+				//process				:.(].] [).(,$).=0
+				// a					~%,;.(: ).[.(:.).:(process$).(.$)
+				// b					~%,;.(: ).[.(:.).:(].] [).(.$)
 			*/
-			it("", () => {});
+			//it("naturals,sieve2$,5%,{=(1 3 5 7 9)", () => expect(firstFiveOdds).eql([1, 3, 5, 7, 9]))
+			//it("( )(binarySieve(2))5=5", () => expect(binarySieve(2)([], 5)).eql(5));
+			it("sieve(2)(6)=undefined", () => expect(sieve(2)(6)).eql(undefined));
+			it("sieve(2)(5)=5", () => expect(sieve(2)(5)).eql(5));
+			it("isMultiple(2)(6)=!()", () => expect(isMultiple(2)(6)).eql(true));
+			it("isMultiple(2)(5)=()", () => expect(isMultiple(2)(5)).eql(false));
+			it("2(~%)5=1", () => expect(remainder(2, 5)).eql(1));
+			it("2(~%.=1)5=!()", () => expect(remainderIsOne(2, 5)).eql(true));
 		});
 
 		describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
