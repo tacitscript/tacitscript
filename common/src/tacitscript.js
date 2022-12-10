@@ -231,21 +231,6 @@ const apply = (left, right) => {
 		values,
 	)(combinations(leftTypes)(rightTypes));
 
-	// binary left application
-	const binaryLeftSolutions = filter(([leftType, rightType]) => Array.isArray(rightType) && (rightType.length == 3) && matchType(leftType,  rightType[0]))(allCombinations);
-	if (binaryLeftSolutions.length) {
-		//const types = map(([_, rightType]) => rightType.slice(1))(binaryLeftSolutions);
-		let result = leftApply(left, right);
-
-		if (isFunction(result)) {
-			if (!result.types) result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
-
-			if (right.supportsUndefined) result.supportsUndefined = true;
-		}
-
-		return result;
-	}
-
 	// binary right application
 	const binaryRightSolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
 	if (binaryRightSolutions.length) {
@@ -256,6 +241,21 @@ const apply = (left, right) => {
 			if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
 
 			if (left.supportsUndefined) result.supportsUndefined = true;
+		}
+
+		return result;
+	}
+
+	// binary left application
+	const binaryLeftSolutions = filter(([leftType, rightType]) => Array.isArray(rightType) && (rightType.length == 3) && matchType(leftType,  rightType[0]))(allCombinations);
+	if (binaryLeftSolutions.length) {
+		//const types = map(([_, rightType]) => rightType.slice(1))(binaryLeftSolutions);
+		let result = leftApply(left, right);
+
+		if (isFunction(result)) {
+			if (!result.types) result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
+
+			if (right.supportsUndefined) result.supportsUndefined = true;
 		}
 
 		return result;
@@ -468,6 +468,8 @@ let comma = (left, right) => {
 	// if ((left == undefined) && !right.supportsUndefined) return undefined;
 
 	const typeCombinations = combinations(types(left))(types(right));
+
+	return apply(right, left);
 
 	// if (isArray(right)) {
 	// 	// AAA zipApplyTo (3 4),(+1 +)
