@@ -525,8 +525,22 @@ let question = (left, right) => {
 }; question.types = [
 ];
 let atsign = (left, right) => {
+	const recurse = ({A, B, p}) => {
+		if (!isPair(p)) {
+			return apply(A, p);
+		} else {
+			const recursed = recurse({A, B, p: p.left});
+			const transformed = apply(A, p.right);
+
+			return apply(apply(recursed, B), transformed);
+		}
+	};
+
+	return p => recurse({A: left, B: right, p});
+
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
+	[["?", "?"], ["?", "?", "?"], ["P", "?"]], // reduce 0@+(1:2)=3
 ];
 let asterisk = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3

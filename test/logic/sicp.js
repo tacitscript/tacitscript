@@ -19,12 +19,15 @@ export default () => {
 
 		describe("1.4 Compound Procedures", () => {
 			/*ts
+				sum				;@+
+				arraySum		sum(1:2:3)
 				cube			;$*$*
 				square			;$*
 				double			*2
 				inverse			1/
 				doubleSix		6,*2
 			*/
+			it("arraySum=6", () => expect(arraySum).eql(6));
 			it("cube(3)=27", () => expect(cube(3)).eql(27));
 			it("square(3)=9", () => expect(square(3)).eql(9));
 			it("double(4)=8", () => expect(double(4)).eql(8));
