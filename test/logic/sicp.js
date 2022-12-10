@@ -13,8 +13,12 @@ export default () => {
 		describe("1.4 Compound Procedures", () => {
 			/*ts
 				square			*$;
+				double			*2
+				inverse			1/
 			*/
 			it("square(3)=9", () => expect(square(3)).eql(9));
+			it("double(4)=8", () => expect(double(4)).eql(8));
+			it("inverse(1/2)=2", () => expect(inverse(0.5)).eql(2));
 		});
 
 		describe("2.1.1 Example: Arithmetic Operations for Rational Numbers", () => {

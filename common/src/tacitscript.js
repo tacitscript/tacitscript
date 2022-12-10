@@ -820,7 +820,7 @@ let dollar = (left, right) => {
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
-	[["X", "Y", "Z"], ["X", "Y"], "Z"], // S *$;(2)=4
+	[["X", "Y", "Z"], ["X", "Y"], ["X", "Z"]], // S *$;(2)=4
 	// [["?", "?", "X"], "P", "X"], // insert +$(1 2)
 	// ["S", "P", "S"], // join ","$(1 2 3)
 	// ["P", "P", "?"], // reduce (+ 0)$(1 2 3)
