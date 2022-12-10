@@ -129,9 +129,10 @@ const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
 const isValue = value => arity(value) === 0;
 const isVector = value => isArray(value) || isString(value);
+const isPair = value => Array.isArray(value) && (types => types && (types.length === 1) && (types[0] === "P"))(value.types);
 const types = value => {
 	if (value == undefined) return ["?"];
-	if (isArray(value)) return ["P"];
+	if (isPair(value)) return ["P"];
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
 	if (isStream(value)) return ["L"];
@@ -281,7 +282,7 @@ const apply = (left, right) => {
 };
 const typeOf = value => {
 	if (value == undefined) return "U";
-	if (isArray(value)) return "P";
+	if (isPair(value)) return "P";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
 	if (isStream(value)) return "L";
@@ -301,7 +302,7 @@ const toString = value => {
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
-	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
+	if (isPair(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
 	throw "Unable to stringify value";
@@ -703,7 +704,10 @@ let minus = (left, right) => {
 	// ["P", "S", "S"], // splice (3 2 "le")-"nucular"="nuclear"
 ];
 let colon = (left, right) => {
-	return [left, right]; // ??P cons +:2
+	const pair = [left, right]; // ??P pair +:2@
+	pair.types = ["P"];
+
+	return pair;
 
 	errorBinary({left, right, operator: ":"});
 }; 
@@ -1009,23 +1013,23 @@ let underscore = value => {
 	// ["S", "S"], // reverse _"Hello"
 ];
 let bracketleft = value => {
-	if (isVector(value)) return value[0]; // head P? [("hello":2)="hello" SS ["abc"="a"
+	if (isPair(value)) return value[0]; // head P? [("hello":2)="hello"
 	// if (isNumber(value)) return Math.floor(value); // NN floor [1.8
 
 	errorUnary({operator: "[", value});
 }; bracketleft.types = [
 	["P", "?"], // head P? [("hello":2)="hello"
-	["S", "S"], // head SS ["abc"="a"
+	//["S", "S"], // head SS ["abc"="a"
 	// ["N", "N"], // floor [1.8
 ];
 let bracketright = value => {
-	if (isVector(value)) return value[value.length - 1]; // tail P? [("hello":2)=2 SS ["abc"="bc"
+	if (isPair(value)) return value[1]; // tail P? [("hello":2)=2
 	// if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2
 
 	errorUnary({operator: "]", value});
 }; bracketright.types = [
 	["P", "?"], // tail P? [("hello":2)=2
-	["S", "S"], // tail SS ["abc"="bc"
+	//["S", "S"], // tail SS ["abc"="bc"
 	// ["N", "N"], // ceiling ]1.2
 ];
 let hash = value => {

@@ -43,7 +43,7 @@ export default () => {
 			it("]x=2", () => expect(b).eql(2));
 			it("[([z)=1", () => expect(c).eql(1));
 			it("[(]z)=3", () => expect(d).eql(3));
-			it("1:2:3=[[1, 2], 3]", () => expect(triple).eql([[1, 2], 3]));
+			it("1:2:3=[[1, 2], 3]", () => expect(JSON.stringify(triple)).eql("[[1,2],3]"));
 		});
 
 		describe("1.1.2 Naming and the Environment", () => {
