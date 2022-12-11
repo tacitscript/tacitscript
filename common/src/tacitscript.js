@@ -229,19 +229,6 @@ const apply = (left, right) => {
 		values,
 	)(combinations(leftTypes)(rightTypes));
 
-	// binary right application
-	const binaryRightSolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
-	if (binaryRightSolutions.length) {
-		//const types =  map(([leftType]) => splice(leftType, 1, 1))(binaryRightSolutions);
-		let result = rightApply(left, right);
-
-		if (isFunction(result)) {
-			if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
-		}
-
-		return result;
-	}
-
 	// binary left application
 	const binaryLeftSolutions = filter(([leftType, rightType]) => Array.isArray(rightType) && (rightType.length == 3) && matchType(leftType,  rightType[0]))(allCombinations);
 	if (binaryLeftSolutions.length) {
@@ -250,6 +237,19 @@ const apply = (left, right) => {
 
 		if (isFunction(result)) {
 			if (!result.types) result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
+		}
+
+		return result;
+	}
+
+	// binary right application
+	const binaryRightSolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
+	if (binaryRightSolutions.length) {
+		//const types =  map(([leftType]) => splice(leftType, 1, 1))(binaryRightSolutions);
+		let result = rightApply(left, right);
+
+		if (isFunction(result)) {
+			if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
 		}
 
 		return result;
@@ -518,7 +518,8 @@ let colon = (left, right) => {
 	errorBinary({left, right, operator: ":"});
 }; 
 colon.types = [
-	["?", "?", "P"], // pair +:2
+	// we make these take values only - allowing : to take functions precludes using colon as an argument in higher-order functions
+	["V", "V", "P"], // pair +:2
 ];
 let question = (left, right) => {
 	errorBinary({left, right, operator: "?"});

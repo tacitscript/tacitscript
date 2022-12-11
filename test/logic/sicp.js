@@ -12,13 +12,16 @@ export default () => {
 	describe("SICP", () => {
 		describe("operators", () => {
 			/*ts
-				// check			<
+				squares			;$*@:
+				solutionA		squares(3:4)
 			*/
-
+			it("squares(3:4)=(9:16)", () => expect(solutionA).eql({left: 9, right: 16}));
 		});
 
-		describe("1.4 Compound Procedures", () => {
+		describe("1.1.4 Compound Procedures", () => {
 			/*ts
+				sumOfSquares	;$*@+
+				solutionA		sumOfSquares(1:2:3)
 				sum				;@+
 				arraySum		sum(1:2:3)
 				cube			;$*$*
@@ -27,6 +30,7 @@ export default () => {
 				inverse			1/
 				doubleSix		6,*2
 			*/
+			it("sumOfSquares(1:2:3)=14", () => expect(solutionA).eql(14));
 			it("arraySum=6", () => expect(arraySum).eql(6));
 			it("cube(3)=27", () => expect(cube(3)).eql(27));
 			it("square(3)=9", () => expect(square(3)).eql(9));
