@@ -541,7 +541,7 @@ let atsign = (left, right) => {
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
-	[["?", "?"], ["?", "?", "?"], ["P", "?"]], // reduce 0@+(1:2)=3
+	[["V", "X"], ["X", "X", "Y"], ["P", "Y"]], // reduce ;@+(1:2)=3
 ];
 let asterisk = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
@@ -596,7 +596,7 @@ let backtick = (left, right) => {
 
 	errorBinary({left, right, operator: "`"});
 }; backtick.types = [
-	["X", "?", "X"], // constant 2`3
+	["X", "V", "X"], // constant 2`3
 ];
 
 //----------------------------------------------------------
@@ -619,14 +619,14 @@ let bracketleft = value => {
 
 	errorUnary({operator: "[", value});
 }; bracketleft.types = [
-	["P", "?"], // head P? [("hello":2)="hello"
+	["P", "V"], // head P? [("hello":2)="hello"
 ];
 let bracketright = value => {
 	if (isPair(value)) return value.right; // tail P? [("hello":2)=2
 
 	errorUnary({operator: "]", value});
 }; bracketright.types = [
-	["P", "?"], // tail P? [("hello":2)=2
+	["P", "V"], // tail P? [("hello":2)=2
 ];
 let hash = value => {
 	errorUnary({value, operator: "#"});
