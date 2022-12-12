@@ -12,9 +12,13 @@ export default () => {
 	describe("SICP", () => {
 		describe("operators", () => {
 			/*ts
-				squares			;$*@:
-				solutionA		squares(3:4)
+				plusOneDivide		+1./
+				pipe				;$*.+1
+				squares				;$*@:
+				solutionA			squares(3:4)
 			*/
+			it("5plusOneDivide2=3", () => expect(plusOneDivide(5, 2)).eql(3));
+			it("pipe3=7", () => expect(pipe(3)).eql(10));
 			it("squares(3:4)=(9:16)", () => expect(solutionA).eql({left: 9, right: 16}));
 		});
 

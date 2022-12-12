@@ -462,8 +462,37 @@ let comma = (left, right) => {
 	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
 ];
 let dot = (left, right) => {
+	const typeCombinations = combinations(types(left))(types(right));
+
+	// (XYZ)(ZW)(XYW) binaryUnaryPipe :.+$
+	const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
+	if (isBinaryFunction(left) && isUnaryFunction(right) && solutions212.length) {
+		let fn = (a, b) => apply(right, apply(apply(a, left), b));
+
+		return fn;
+	}
+
+	// (XY)(YZW)(XZW) unaryBinaryPipe +1./
+	const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
+	if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
+		let fn = (a, b) => apply(apply(apply(left, a), right), b);
+
+		return fn;
+	}
+
+	// (XY)(YZ)(XZ) pipe +1./2
+	const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
+	if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) {
+		let fn = value => apply(right, apply(left, value))
+
+		return fn;
+	}
+
 	errorBinary({left, right, operator: "."});
 }; dot.types = [
+	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
+	[["X", "Y"], ["Y", "Z", "W"], ["X", "Z", "W"]], // unaryBinaryPipe +1./
+	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
 ];
 let plus = (left, right) => {
 	if (isNumber(left) && isValue(right)) { // NVN add 2+"3"
