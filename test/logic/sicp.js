@@ -12,12 +12,15 @@ export default () => {
 	describe("SICP", () => {
 		describe("operators", () => {
 			/*ts
-				plusOneDivide		+1./
+				binaryUnaryPipe		:.;$*@+
+				solutionB			3binaryUnaryPipe4
+				unaryBinaryPipe		+1./
 				pipe				;$*.+1
 				squares				;$*@:
 				solutionA			squares(3:4)
 			*/
-			it("5plusOneDivide2=3", () => expect(plusOneDivide(5, 2)).eql(3));
+			it("3binaryUnaryPipe4=25", () => expect(solutionB).eql(25));
+			it("5unaryBinaryPipe2=3", () => expect(unaryBinaryPipe(5, 2)).eql(3));
 			it("pipe3=7", () => expect(pipe(3)).eql(10));
 			it("squares(3:4)=(9:16)", () => expect(solutionA).eql({left: 9, right: 16}));
 		});

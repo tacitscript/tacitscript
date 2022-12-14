@@ -570,7 +570,7 @@ let atsign = (left, right) => {
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
-	[["V", "X"], ["X", "X", "Y"], ["P", "Y"]], // reduce ;@+(1:2)=3
+	[["V", "X"], ["Y", "X", "Y"], ["P", "Y"]], // reduce ;@+(1:2)=3
 ];
 let asterisk = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
