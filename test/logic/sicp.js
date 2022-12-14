@@ -22,6 +22,7 @@ export default () => {
 				squares				;$*@:
 				solutionA			squares(3:4)
 			*/
+			it("average(3:5:7:9)=6", () => expect(average([[[3, 5], 7], 9])).eql(6));
 			it("average(3:5)=4", () => expect(average([3, 5])).eql(4));
 			it("7:5sumAndDivide6=2", () => expect(sumAndDivide([7, 5], 6)).eql(2));
 			it("3hypotenuse4=5", () => expect(hypotenuse(3, 4)).eql(5));
