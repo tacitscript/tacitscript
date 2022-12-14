@@ -472,10 +472,10 @@ let dot = (left, right) => {
 		return fn;
 	}
 
-	// (XY)(YZW)(XZW) unaryBinaryPipe +1./
+	// (XY)(YZW)(X(ZW)) unaryBinaryPipe +1./
 	const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
 	if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
-		let fn = (a, b) => apply(apply(apply(left, a), right), b);
+		let fn = value => apply(apply(left, value), right);
 
 		return fn;
 	}
@@ -581,7 +581,7 @@ let asterisk = (left, right) => {
 ];
 let dollar = (left, right) => {
 	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
-		// ASB(x) = B(x)(A(x))
+		// ASBx = AxBx
 		const result = x => {
 			const Ax = apply(left, x);
 			const Bx = apply(right, x);
@@ -594,7 +594,7 @@ let dollar = (left, right) => {
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
-	[["X", "Y"], ["X", "Y", "Z"], ["X", "Z"]], // S ;$*(2)=4
+	[["X", "Y"], ["Y", "X", "Z"], ["X", "Z"]], // S ;$*(2)=4
 ];
 let apostrophe = (left, right) => {
 	errorBinary({left, right, operator: "'"});
@@ -613,8 +613,11 @@ let percent = (left, right) => {
 }; percent.types = [
 ];
 let hat = (left, right) => {
+	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
+
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
+	["N", "N", "N"], // power 2^3
 ];
 let ampersand = (left, right) => {
 	errorBinary({left, right, operator: "&"});
