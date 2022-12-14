@@ -455,7 +455,8 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
-	return apply(right, left);
+//	return apply(right, left);
+	return right(left);
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
@@ -467,7 +468,8 @@ let dot = (left, right) => {
 	// (XYZ)(ZW)(XYW) binaryUnaryPipe :.+$
 	const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
 	if (isBinaryFunction(left) && isUnaryFunction(right) && solutions212.length) {
-		let fn = (a, b) => apply(right, apply(apply(a, left), b));
+		//let fn = (a, b) => apply(right, apply(apply(a, left), b));
+		let fn = (a, b) => right(left(a, b));
 
 		return fn;
 	}
@@ -475,7 +477,8 @@ let dot = (left, right) => {
 	// (XY)(YZW)(XZW) unaryBinaryPipe +1./
 	const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
 	if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
-		let fn = (a, b) => apply(apply(apply(left, a), right), b);
+		//let fn = (a, b) => apply(apply(apply(left, a), right), b);
+		let fn = (a, b) => right(left(a), b);
 
 		return fn;
 	}
@@ -483,7 +486,8 @@ let dot = (left, right) => {
 	// (XY)(YZ)(XZ) pipe +1./2
 	const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
 	if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) {
-		let fn = value => apply(right, apply(left, value))
+		//let fn = value => apply(right, apply(left, value))
+		let fn = value => right(left(value));
 
 		return fn;
 	}
@@ -556,12 +560,15 @@ let question = (left, right) => {
 let atsign = (left, right) => {
 	const recurse = ({A, B, p}) => {
 		if (!isPair(p)) {
-			return apply(A, p);
+			//return apply(A, p);
+			return A(p);
 		} else {
 			const recursed = recurse({A, B, p: p[0]});
-			const transformed = apply(A, p[1]);
+			//const transformed = apply(A, p[1]);
+			const transformed = A(p[1]);
 
-			return apply(apply(recursed, B), transformed);
+			//return apply(apply(recursed, B), transformed);
+			return B(recursed, transformed);
 		}
 	};
 
@@ -582,10 +589,11 @@ let dollar = (left, right) => {
 	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
 		// A$Bx = AxBx
 		const result = x => {
-			const Ax = apply(left, x);
-			const Bx = apply(right, x);
+			// const Ax = apply(left, x);
+			// const Bx = apply(right, x);
 
-			return apply(Bx, Ax);
+			// return apply(Bx, Ax);
+			return right(left(x), x);
 		};
 
 		return result;
@@ -593,10 +601,11 @@ let dollar = (left, right) => {
 	if (isBinaryFunction(left) && isUnaryFunction(right)) { // S (+2./)$;(2)=4
 		// A$Bx = xA(Bx)
 		const result = x => {
-			const xA = apply(x, left);
-			const Bx = apply(right, x);
+			// const xA = apply(x, left);
+			// const Bx = apply(right, x);
 
-			return apply(xA, Bx);
+			// return apply(xA, Bx);
+			return left(x, right(x));
 		};
 
 		return result;
