@@ -129,7 +129,7 @@ const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
 const isValue = value => arity(value) === 0;
 const isVector = value => isArray(value) || isString(value);
-const isPair = value => isObject(value);
+const isPair = value => isArray(value);
 const types = value => {
 	if (value == undefined) return ["?"];
 	if (isPair(value)) return ["P"];
@@ -295,7 +295,7 @@ const toString = value => {
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
-	if (isPair(value)) return `${toEncodedString(value.left)}:${toEncodedString(value.right)}`;
+	if (isPair(value)) return `${toEncodedString(value[0])}:${toEncodedString(value[1])}`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
 	throw "Unable to stringify value";
@@ -542,11 +542,10 @@ let minus = (left, right) => {
 	["N", "N", "N"], // subtract 5-2=3
 ];
 let colon = (left, right) => {
-	return {left, right}; // ??P pair +:2@
+	return [left, right]; // ??P pair +:2@
 
 	errorBinary({left, right, operator: ":"});
-}; 
-colon.types = [
+}; colon.types = [
 	// we make these take values only - allowing : to take functions precludes using colon as an argument in higher-order functions
 	["V", "V", "P"], // pair +:2
 ];
@@ -559,8 +558,8 @@ let atsign = (left, right) => {
 		if (!isPair(p)) {
 			return apply(A, p);
 		} else {
-			const recursed = recurse({A, B, p: p.left});
-			const transformed = apply(A, p.right);
+			const recursed = recurse({A, B, p: p[0]});
+			const transformed = apply(A, p[1]);
 
 			return apply(apply(recursed, B), transformed);
 		}
@@ -659,14 +658,14 @@ let underscore = value => {
 	["N", "N"], // negative _5
 ];
 let bracketleft = value => {
-	if (isPair(value)) return value.left; // head P? [("hello":2)="hello"
+	if (isPair(value)) return value[0]; // head P? [("hello":2)="hello"
 
 	errorUnary({operator: "[", value});
 }; bracketleft.types = [
 	["P", "V"], // head P? [("hello":2)="hello"
 ];
 let bracketright = value => {
-	if (isPair(value)) return value.right; // tail P? [("hello":2)=2
+	if (isPair(value)) return value[1]; // tail P? [("hello":2)=2
 
 	errorUnary({operator: "]", value});
 }; bracketright.types = [

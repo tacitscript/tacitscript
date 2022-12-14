@@ -22,13 +22,13 @@ export default () => {
 				squares				;$*@:
 				solutionA			squares(3:4)
 			*/
-			it("average(3:5)=4", () => expect(average({left: 3, right: 5})).eql(4));
-			it("7:5sumAndDivide6=2", () => expect(sumAndDivide({left: 7, right: 5}, 6)).eql(2));
+			it("average(3:5)=4", () => expect(average([3, 5])).eql(4));
+			it("7:5sumAndDivide6=2", () => expect(sumAndDivide([7, 5], 6)).eql(2));
 			it("3hypotenuse4=5", () => expect(hypotenuse(3, 4)).eql(5));
 			it("3binaryUnaryPipe4=25", () => expect(solutionB).eql(25));
 			it("5unaryBinaryPipe2=3", () => expect(unaryBinaryPipe(5, 2)).eql(3));
 			it("pipe3=7", () => expect(pipe(3)).eql(10));
-			it("squares(3:4)=(9:16)", () => expect(solutionA).eql({left: 9, right: 16}));
+			it("squares(3:4)=(9:16)", () => expect(solutionA).eql([9, 16]));
 		});
 
 		describe("1.1.4 Compound Procedures", () => {
