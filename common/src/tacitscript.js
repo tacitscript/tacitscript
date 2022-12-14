@@ -472,10 +472,10 @@ let dot = (left, right) => {
 		return fn;
 	}
 
-	// (XY)(YZW)(X(ZW)) unaryBinaryPipe +1./
+	// (XY)(YZW)(XZW) unaryBinaryPipe +1./
 	const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
 	if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
-		let fn = value => apply(apply(left, value), right);
+		let fn = (a, b) => apply(apply(apply(left, a), right), b);
 
 		return fn;
 	}
@@ -581,7 +581,7 @@ let asterisk = (left, right) => {
 ];
 let dollar = (left, right) => {
 	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
-		// ASBx = AxBx
+		// A$Bx = AxBx
 		const result = x => {
 			const Ax = apply(left, x);
 			const Bx = apply(right, x);
@@ -591,10 +591,22 @@ let dollar = (left, right) => {
 
 		return result;
 	};
+	if (isBinaryFunction(left) && isUnaryFunction(right)) { // S (+2./)$;(2)=4
+		// A$Bx = xA(Bx)
+		const result = x => {
+			const xA = apply(x, left);
+			const Bx = apply(right, x);
+
+			return apply(xA, Bx);
+		};
+
+		return result;
+	};
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
 	[["X", "Y"], ["Y", "X", "Z"], ["X", "Z"]], // S ;$*(2)=4
+	[["X", "Y", "Z"], ["X", "Y"], ["X", "Z"]], // S (+2./)$*(2)=4
 ];
 let apostrophe = (left, right) => {
 	errorBinary({left, right, operator: "'"});
