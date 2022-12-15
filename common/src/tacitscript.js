@@ -654,8 +654,11 @@ let bar = (left, right) => {
 	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate <5|(>8)
 ];
 let percent = (left, right) => {
+	return toPairList(fromPairList(right).slice(0, left));
+
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
+	["N", "P", "P"], // take 2%(1:2:3:4)=(1:2)
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
