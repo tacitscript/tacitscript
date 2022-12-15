@@ -626,12 +626,28 @@ let apostrophe = (left, right) => {
 }; apostrophe.types =[
 ];
 let equal = (left, right) => {
+	try {
+		return toString(left) === toString(right); // VVB equal 2=4=()
+	} catch (_) {
+		return undefined;
+	}
+
 	errorBinary({left, right, operator: "="});
 }; equal.types = [
+	["V", "V", "B"], // equals 2=2=!()
 ];
 let bar = (left, right) => {
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {
+		return x => {
+			const first = left(x);
+
+			return isTruthy(first) ? first : right(x);
+		}
+	}
+
 	errorBinary({left, right, operator: "|"});
 }; bar.types = [
+	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate <5|(>8)
 ];
 let percent = (left, right) => {
 	errorBinary({left, right, operator: "%"});

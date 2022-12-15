@@ -13,7 +13,14 @@ export default () => {
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
 				solutionA				<5?(+1)
+				solutionB				<5|(>9)
+				abs						>0?;|(=0?(0`))|(<0?_)
 			*/
+
+			it("abs5=5", () => expect(abs(5)).eql(5));
+			it("(<5|(>9))6=()", () => expect(solutionB(6)).eql(false));
+			it("(<5|(>9))10=!()", () => expect(solutionB(10)).eql(true));
+			it("(<5|(>9))1=!()", () => expect(solutionB(1)).eql(true));
 			it("(<5?(+1))3=4", () => expect(solutionA(3)).eql(4));
 			it("(<5?(+1))6=undefined", () => expect(solutionA(6)).eql(undefined));
 		});
