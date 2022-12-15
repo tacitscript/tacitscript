@@ -18,8 +18,8 @@ export default () => {
 				solutionB				<5|(>9)
 				abs						>0?;|(=0?(0`))|(<0?_)
 			*/
-			it("_(1:2:3:4)=(4:3:2:1)", () => expect(reversed).eql([[[4, 3], 2], 1]));
-			it("sort(5:3:6:4)=(3:4:5:6)", () => expect(sort([[[5, 3], 6], 4])).eql([[[3, 4], 5], 6]));
+			it("_(1:2:3:4)=(4:3:2:1)", () => expect(ts.toString(reversed)).eql("4:3:2:1"));
+			it("sort(5:3:6:4)=(3:4:5:6)", () => expect(ts.toString(sort([[[[undefined, 5], 3], 6], 4]))).eql("3:4:5:6"));
 			it("abs5=5", () => expect(abs(5)).eql(5));
 			it("(<5|(>9))6=()", () => expect(solutionB(6)).eql(false));
 			it("(<5|(>9))10=!()", () => expect(solutionB(10)).eql(true));
@@ -40,14 +40,14 @@ export default () => {
 				squares				;$*@:
 				solutionA			squares(3:4)
 			*/
-			it("average(3:5:7:9)=6", () => expect(average([[[3, 5], 7], 9])).eql(6));
-			it("average(3:5)=4", () => expect(average([3, 5])).eql(4));
-			it("7:5sumAndDivide6=2", () => expect(sumAndDivide([7, 5], 6)).eql(2));
+			it("average(3:5:7:9)=6", () => expect(average([[[[undefined, 3], 5], 7], 9])).eql(6));
+			it("average(3:5)=4", () => expect(average([[undefined, 3], 5])).eql(4));
+			it("7:5sumAndDivide6=2", () => expect(sumAndDivide([[undefined, 7], 5], 6)).eql(2));
 			it("3hypotenuse4=5", () => expect(hypotenuse(3, 4)).eql(5));
 			it("3binaryUnaryPipe4=25", () => expect(solutionB).eql(25));
 			it("5unaryBinaryPipe2=3", () => expect(unaryBinaryPipe(5, 2)).eql(3));
 			it("pipe3=7", () => expect(pipe(3)).eql(10));
-			it("squares(3:4)=(9:16)", () => expect(solutionA).eql([9, 16]));
+			it("squares(3:4)=(9:16)", () => expect(solutionA).eql([[undefined, 9], 16]));
 		});
 
 		describe("1.1.4 Compound Procedures", () => {
@@ -78,17 +78,16 @@ export default () => {
 				b				]x
 				y				3:4
 				z				x:y
-				c				[([z)
-				d				[(]z)
+				c				]([z)
+				d				](]z)
 				makeRat			:
 				numer			[
 				denom			]
 				triple			1:2:3
 			*/
-			it("[x=1", () => expect(a).eql(1));
 			it("]x=2", () => expect(b).eql(2));
-			it("[([z)=1", () => expect(c).eql(1));
-			it("[(]z)=3", () => expect(d).eql(3));
+			it("]([z)=2", () => expect(c).eql(2));
+			it("](]z)=4", () => expect(d).eql(4));
 			it("1:2:3 toString", () => expect(ts.toString(triple)).eql("1:2:3"));
 		});
 

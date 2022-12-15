@@ -145,8 +145,8 @@ const types = value => {
 //	return [[0]];
 };
 
-const fromPairList = ([left, right]) => [...(isPair(left) ? fromPairList(left) : [left]), right];
-const toPairList = array => [...((array.length === 2) ? [array[0]] : [toPairList(array.slice(0, -1))]) , array[array.length - 1]];
+const fromPairList = ([left, right]) => [...((left === undefined) ? [] : fromPairList(left)), right];
+const toPairList = array => [...((array.length === 1) ? [undefined, array[0]] : [toPairList(array.slice(0, -1))]) , array[array.length - 1]];
 
 //==========================================================
 // application utilities
@@ -296,7 +296,7 @@ const toString = value => {
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
-	if (isPair(value)) return `${toEncodedString(value[0])}:${toEncodedString(value[1])}`;
+	if (isPair(value)) return `${(value[0] === undefined) ? "" : `${toEncodedString(value[0])}:`}${toEncodedString(value[1])}`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
 	throw "Unable to stringify value";
@@ -550,7 +550,7 @@ let minus = (left, right) => {
 	["N", "N", "N"], // subtract 5-2=3
 ];
 let colon = (left, right) => {
-	return [left, right]; // ??P pair +:2@
+	return isPair(left) ? [left, right] : [[undefined, left], right]; // ??P pair +:2@
 
 	errorBinary({left, right, operator: ":"});
 }; colon.types = [
@@ -570,14 +570,14 @@ let atsign = (left, right) => {
 	const recurse = ({A, B, p}) => {
 		if (!isPair(p)) {
 			//return apply(A, p);
-			return A(p);
+			return undefined;
 		} else {
 			const recursed = recurse({A, B, p: p[0]});
 			//const transformed = apply(A, p[1]);
 			const transformed = A(p[1]);
 
 			//return apply(apply(recursed, B), transformed);
-			return B(recursed, transformed);
+			return (recursed === undefined) ? transformed : B(recursed, transformed);
 		}
 	};
 
