@@ -145,7 +145,8 @@ const types = value => {
 //	return [[0]];
 };
 
-
+const fromPairList = ([left, right]) => [...(isPair(left) ? fromPairList(left) : [left]), right];
+const toPairList = array => [...((array.length === 2) ? [array[0]] : [toPairList(array.slice(0, -1))]) , array[array.length - 1]];
 
 //==========================================================
 // application utilities
@@ -524,11 +525,14 @@ let slash = (left, right) => {
 ];
 let less = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
+	if (isUnaryFunction(left) && isPair(right)) return toPairList(sortBy(left)(fromPairList(right))); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
 
 	errorBinary({left, right, operator: "<"});
 }; less.types = [
 	["N", "N", "B"], // lessThan 2<3
 	["S", "S", "B"], // lessThanString "abc"<"bcd"
+	[["V", "S"], "P", "P"], // sort ;<("dan" "sue" "alan")
+	[["V", "N"], "P", "P"], // sort ;<(1 2 3)
 ];
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"

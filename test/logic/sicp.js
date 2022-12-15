@@ -12,11 +12,12 @@ export default () => {
 	describe("SICP", () => {
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
+				sort					;<
 				solutionA				<5?(+1)
 				solutionB				<5|(>9)
 				abs						>0?;|(=0?(0`))|(<0?_)
 			*/
-
+			it("sort(5:3:6:4)=(3:4:5:6)", () => expect(sort([[[5, 3], 6], 4])).eql([[[3, 4], 5], 6]));
 			it("abs5=5", () => expect(abs(5)).eql(5));
 			it("(<5|(>9))6=()", () => expect(solutionB(6)).eql(false));
 			it("(<5|(>9))10=!()", () => expect(solutionB(10)).eql(true));
