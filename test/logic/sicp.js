@@ -10,6 +10,14 @@ export default () => {
 	});
 
 	describe("SICP", () => {
+		describe("1.1.6 Conditional Expressions and Predicates", () => {
+			/*ts
+				solutionA				<5?(+1)
+			*/
+			it("(<5?(+1))3=4", () => expect(solutionA(3)).eql(4));
+			it("(<5?(+1))6=undefined", () => expect(solutionA(6)).eql(undefined));
+		});
+
 		describe("operators", () => {
 			/*ts
 				average				(;@+./)$(1`@+)

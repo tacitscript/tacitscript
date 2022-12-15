@@ -554,8 +554,13 @@ let colon = (left, right) => {
 	["V", "V", "P"], // pair +:2
 ];
 let question = (left, right) => {
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {
+		return x => isTruthy(left(x)) ? right(x) : undefined;
+	}
+
 	errorBinary({left, right, operator: "?"});
 }; question.types = [
+	[["V", "V"], ["V", "V"], ["V", "V"]], // if <3?+1
 ];
 let atsign = (left, right) => {
 	const recurse = ({A, B, p}) => {
