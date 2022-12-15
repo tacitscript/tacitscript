@@ -686,10 +686,12 @@ tilde.types = [
 ];
 let underscore = value => {
 	if (isNumber(value)) return -value; // NN negative _5
+	if (isPair(value)) return toPairList(fromPairList(value).reverse());
 
 	errorUnary({operator: "_", value});
 }; underscore.types = [
 	["N", "N"], // negative _5
+	["P", "P"], // reverse _(4:2:6:1)
 ];
 let bracketleft = value => {
 	if (isPair(value)) return value[0]; // head P? [("hello":2)="hello"
