@@ -721,11 +721,8 @@ let braceleft = value => {
 }; braceleft.types = [
 ];
 let semicolon = value => {
-	return value; // identiy XX ;1=1
-
 	errorUnary({operator: ";", value});
 }; semicolon.types = [
-	["X", "X"], // identity ;1=1
 ];
 let braceright = value => {
 	errorUnary({operator: "}", value});
