@@ -2,14 +2,14 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
-	xdescribe("", () => {
-		/*ts
-
-		*/
-		it("", () => expect().eql());
-	});
-
 	describe("SICP", () => {
+		describe("1.2", () => {
+			/*ts
+				factRecurse				(=0?(1`))|((-1.factRecurse.*)$(`0))
+			*/
+			it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
+		});
+
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
 				sumOfLargestSquares		`0<._.2%.`0$*@+
