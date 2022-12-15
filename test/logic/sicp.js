@@ -12,6 +12,8 @@ export default () => {
 	describe("SICP", () => {
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
+				sumOfLargestSquares		`0<._.2%.`0$*@+
+				solutionC				sumOfLargestSquares(1:4:3:2)
 				take					2%(1:2:3:4)
 				reversed				_(1:2:3:4)
 				sort					`0<
@@ -19,6 +21,7 @@ export default () => {
 				solutionB				<5|(>9)
 				abs						>0?(`0)|(=0?(0`))|(<0?_)
 			*/
+			it("(`0<._.2%.;$*@+)(1:4:3:2)=25", () => expect(solutionC).eql(25));
 			it("2%(1:2:3:4)=(1:2)", () => expect(ts.toString(take)).eql("1:2"));
 			it("_(1:2:3:4)=(4:3:2:1)", () => expect(ts.toString(reversed)).eql("4:3:2:1"));
 			it("sort(5:3:6:4)=(3:4:5:6)", () => expect(ts.toString(sort([[[[undefined, 5], 3], 6], 4]))).eql("3:4:5:6"));
