@@ -455,27 +455,27 @@ const errorBinary = ({left, right, operator}) => {
 	try {leftString = toString(left);} catch (_) {}
 	try {rightString = toString(right);} catch(_) {}
 
-	throw `Unable to resolve operator application (${leftString})${operator}(${rightString})`;
+	throw `Unable to resolve binary operator application (${leftString})${operator}(${rightString})`;
 };
 const errorUnary = ({value, operator}) => {
 	let valueString = "Fn";
 
 	try {valueString = toString(value);} catch (_) {}
 
-	throw `Unable to resolve operator application ${operator}(${valueString})`;
+	throw `Unable to resolve unary operator application ${operator}(${valueString})`;
 };
 
 //----------------------------------------------------------
 // Binary
 
 let comma = (left, right) => {
-	if (isValue(left) && isUnaryFunction(right)) return right(left);
-	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
+	// if (isValue(left) && isUnaryFunction(right)) return right(left);
+	// if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
-	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
+	// ["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
+	// ["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
 ];
 let dot = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
@@ -670,8 +670,8 @@ let hat = (left, right) => {
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
-	[["N", "V"], "N", "P"], // generate ;^3
-
+	[["N", "V"], "N", "P"], // generate +1^3
+	[["P", "V"], ["P", "V"], ["P", "P"]], // scan
 ];
 let ampersand = (left, right) => {
 	errorBinary({left, right, operator: "&"});
@@ -750,6 +750,8 @@ const ts = {
 	apply,
 	typeOf,
 	toString,
+	toPairList,
+	fromPairList,
 
 	plus,
 	tilde,
