@@ -96,6 +96,32 @@ const tsPredicate = fn => tsPredicate => {const predicate = value => {const resu
 const tsFilter = tsPredicate(filter);
 const tsFind = tsPredicate(find);
 
+const trampoline = fn => {
+	while (fn && (typeof fn === "function")) fn = fn();
+
+	return fn;
+};
+// ---------------------------------------------------------
+// This code illustrates use of the trampoline
+// const factorialIter = (x, acc) => {
+// 	if (x === 1) return acc;
+
+// 	return () => factorialIter(x - 1, acc * x);
+// }
+// const factorial = x => {
+// 	return trampoline(() => factorialIter(x, 1));
+// };
+// factorial(10);
+
+const recurseIter = ({A, B, p}, acc) => {
+	if (!isPair(p)) return acc;
+
+	return () => recurseIter({A, B, p: p[0]}, B(A(p[1]), acc));
+};
+const recurse = ({A, B, p}) => {
+	return trampoline(() => recurseIter({A, B, p: p[0]}, A(p[1])))
+};
+
 //==========================================================
 // type utilites
 
@@ -147,19 +173,6 @@ const types = value => {
 
 const fromPairList = ([left, right]) => [...((left === undefined) ? [] : fromPairList(left)), right];
 const toPairList = array => [(array.length === 1) ? undefined : toPairList(array.slice(0, -1)) , array[array.length - 1]];
-const recurse = ({A, B, p}) => {
-	if (!isPair(p)) {
-		//return apply(A, p);
-		return undefined;
-	} else {
-		const recursed = recurse({A, B, p: p[0]});
-		//const transformed = apply(A, p[1]);
-		const transformed = A(p[1]);
-
-		//return apply(apply(recursed, B), transformed);
-		return (recursed === undefined) ? transformed : B(recursed, transformed);
-	}
-};
 
 //==========================================================
 // application utilities
@@ -431,11 +444,11 @@ const rightApply = (binaryFn, right) => left => {
 	return binaryFn(left, right);
 };
 const scanInternal = ({left, right, startingPair}) => {
-	let result = fromPairList(startingPair);
+	let result = startingPair;
 
-	while (isTruthy(left(result))) result.push(right(result));
+	while (isTruthy(left(result))) result = [result, right(result)];
 
-	return toPairList(result);
+	return result;
 };
 const whileInternal = ({whileCondition, next, start}) => {
 	let result = start;
@@ -469,13 +482,15 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
-	// if (isValue(left) && isUnaryFunction(right)) return right(left);
-	// if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
+	if (isValue(left) && isUnaryFunction(right)) return right(left);
+	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
-	// ["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
-	// ["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
+	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
+	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply
 ];
 let dot = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
@@ -679,14 +694,10 @@ let ampersand = (left, right) => {
 }; ampersand.types = [
 ];
 let backtick = (left, right) => {
-	errorBinary({left, right, operator: "`"});
-}; backtick.types = [
-];
-let hash = (left, right) => {
 	return left; // X?X constant 2`3
 
-	errorUnary({value, operator: "#"});
-}; hash.types = [
+	errorBinary({left, right, operator: "`"});
+}; backtick.types = [
 	["X", "V", "X"], // constant 2`3
 ];
 
@@ -731,8 +742,11 @@ let braceleft = value => {
 }; braceleft.types = [
 ];
 let semicolon = value => {
+	return value; // identiy XX ;1=1
+
 	errorUnary({operator: ";", value});
 }; semicolon.types = [
+	["X", "X"], // identity ;1=1
 ];
 let braceright = value => {
 	errorUnary({operator: "}", value});
@@ -741,6 +755,19 @@ let braceright = value => {
 let bang = value => {
 	errorUnary({value, operator: "!"});
 }; bang.types = [
+];
+let hash = value => {
+	const lengthIter = (pair, acc) => {
+		if (!isPair(pair)) return acc;
+
+		return () => lengthIter(pair[0], acc + 1);
+	};
+
+	return trampoline(() => lengthIter(value, 0));
+
+	errorUnary({value, operator: "#"});
+}; hash.types = [
+	["P", "N"], // length
 ];
 
 //==========================================================

@@ -5,36 +5,38 @@ export default () => {
 	describe("SICP", () => {
 		describe("1.2", () => {
 			/*ts
-				lengthLessN             :.(].1#@+.<)$([.])
-				// fib						lengthLessN,^(%2.#0@+).(1:1,).]
-
-				// threeMinus              3,-
-				factLinear              +1^.#0@*
+				length					#
+				lengthLessN             :.(].#.<)$([.])
+				fib						lengthLessN,^(2%.;@+).(1:1,).]
+				threeMinus              3,-
+				factLinear              +1^.;@*
 				generate				+1^3
-				factRecurse				(=0?(1#))|((-1.factRecurse.*)$(#0))
-				//						(=0 ? 1#) | (-1.factRecurse.* $ #0)
+				factRecurse				(=0?(1`))|((-1.factRecurse.*)$(;))
+				//						(=0 ? 1`) | (-1.factRecurse.* $ ;)
 			*/
-			it("2(:.(].1#@+.<)$([.]))(1:2)=()", () => expect(lengthLessN(2, ts.toPairList([1, 2]))).eql(false));
-			it("3(:.(].1#@+.<)$([.]))(1:2)=!()", () => expect(lengthLessN(3, ts.toPairList([1, 2]))).eql(true));
-			// it("(3,-)2=1", () => expect(threeMinus(2)).eql(1));
-			it("(+1^.#0@*)4=24", () => expect(factLinear(4)).eql(24));
+			it("#(1:2:3)=3", () => expect(length(ts.toPairList([1, 2, 3]))).eql(3));
+			it("fib6=8", () => expect(fib(6)).eql(8));
+			it("2(:.(].#.<)$([.]))(1:2)=()", () => expect(lengthLessN(2, ts.toPairList([1, 2]))).eql(false));
+			it("3(:.(].#.<)$([.]))(1:2)=!()", () => expect(lengthLessN(3, ts.toPairList([1, 2]))).eql(true));
+			it("(3,-)2=1", () => expect(threeMinus(2)).eql(1));
+			it("(+1^.;@*)4=24", () => expect(factLinear(4)).eql(24));
 			it("+1^3=(1:2:3)", () => expect(ts.toString(generate)).eql("1:2:3"));
 			it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
 		});
 
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
-				sumOfLargestSquares		#0<.2%.#0$*@+
+				sumOfLargestSquares		;<.2%.;$*@+
 				solutionC				sumOfLargestSquares(1:4:3:2)
 				take					2%(1:2:3:4)
 				reversed				_(1:2:3:4)
-				sort					#0<
+				sort					;<
 				solutionA				<5?(+1)
 				solutionB				<5|(>9)
-				abs						>0?(#0)|(=0?(0#))|(<0?_)
-				//						(>0 ? #0) | (=0 ? 0#) | (<0 ? _)
+				abs						>0?(;)|(=0?(0`))|(<0?_)
+				//						(>0 ? ;) | (=0 ? 0`) | (<0 ? _)
 			*/
-			it("(#0<.2%.;$*@+)(1:4:3:2)=25", () => expect(solutionC).eql(25));
+			it("(;<.2%.;$*@+)(1:4:3:2)=25", () => expect(solutionC).eql(25));
 			it("2%(1:2:3:4)=(3:4)", () => expect(ts.toString(take)).eql("3:4"));
 			it("_(1:2:3:4)=(4:3:2:1)", () => expect(ts.toString(reversed)).eql("4:3:2:1"));
 			it("sort(5:3:6:4)=(3:4:5:6)", () => expect(ts.toString(sort([[[[undefined, 5], 3], 6], 4]))).eql("3:4:5:6"));
@@ -48,14 +50,14 @@ export default () => {
 
 		describe("operators", () => {
 			/*ts
-				average				(#0@+./)$(1#@+)
-				sumAndDivide		#0@+./
-				hypotenuse			:.#0$*@+.^0.5
-				binaryUnaryPipe		:.#0$*@+
+				average				(;@+./)$#
+				sumAndDivide		;@+./
+				hypotenuse			:.;$*@+.^0.5
+				binaryUnaryPipe		:.;$*@+
 				solutionB			3binaryUnaryPipe4
 				unaryBinaryPipe		+1./
-				pipe				#0$*.+1
-				squares				#0$*@:
+				pipe				;$*.+1
+				squares				;$*@:
 				solutionA			squares(3:4)
 			*/
 			it("average(3:5:7:9)=6", () => expect(average([[[[undefined, 3], 5], 7], 9])).eql(6));
@@ -70,15 +72,15 @@ export default () => {
 
 		describe("1.1.4 Compound Procedures", () => {
 			/*ts
-				sumOfSquares	#0$*@+
+				sumOfSquares	;$*@+
 				solutionA		sumOfSquares(1:2:3)
-				sum				#0@+
+				sum				;@+
 				arraySum		sum(1:2:3)
-				cube			#0$*$*
-				square			#0$*
+				cube			;$*$*
+				square			;$*
 				double			*2
 				inverse			1/
-				// doubleSix		6,*2
+				doubleSix		6,*2
 			*/
 			it("sumOfSquares(1:2:3)=14", () => expect(solutionA).eql(14));
 			it("arraySum=6", () => expect(arraySum).eql(6));
@@ -86,7 +88,7 @@ export default () => {
 			it("square(3)=9", () => expect(square(3)).eql(9));
 			it("double(4)=8", () => expect(double(4)).eql(8));
 			it("inverse(1/2)=2", () => expect(inverse(0.5)).eql(2));
-			// it("6,*2=12", () => expect(doubleSix).eql(12));
+			it("6,*2=12", () => expect(doubleSix).eql(12));
 		});
 
 		describe("2.1.1 Example: Arithmetic Operations for Rational Numbers", () => {
