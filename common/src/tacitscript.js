@@ -146,7 +146,20 @@ const types = value => {
 };
 
 const fromPairList = ([left, right]) => [...((left === undefined) ? [] : fromPairList(left)), right];
-const toPairList = array => [...((array.length === 1) ? [undefined, array[0]] : [toPairList(array.slice(0, -1))]) , array[array.length - 1]];
+const toPairList = array => [(array.length === 1) ? undefined : toPairList(array.slice(0, -1)) , array[array.length - 1]];
+const recurse = ({A, B, p}) => {
+	if (!isPair(p)) {
+		//return apply(A, p);
+		return undefined;
+	} else {
+		const recursed = recurse({A, B, p: p[0]});
+		//const transformed = apply(A, p[1]);
+		const transformed = A(p[1]);
+
+		//return apply(apply(recursed, B), transformed);
+		return (recursed === undefined) ? transformed : B(recursed, transformed);
+	}
+};
 
 //==========================================================
 // application utilities
@@ -567,20 +580,6 @@ let question = (left, right) => {
 	[["V", "V"], ["V", "V"], ["V", "V"]], // if <3?+1
 ];
 let atsign = (left, right) => {
-	const recurse = ({A, B, p}) => {
-		if (!isPair(p)) {
-			//return apply(A, p);
-			return undefined;
-		} else {
-			const recursed = recurse({A, B, p: p[0]});
-			//const transformed = apply(A, p[1]);
-			const transformed = A(p[1]);
-
-			//return apply(apply(recursed, B), transformed);
-			return (recursed === undefined) ? transformed : B(recursed, transformed);
-		}
-	};
-
 	return p => recurse({A: left, B: right, p});
 
 	errorBinary({left, right, operator: "@"});
@@ -662,10 +661,16 @@ let percent = (left, right) => {
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
+	if (isUnaryFunction(left) && isNumber(right)) {
+		var result = toPairList(map((value, index) => left(index))(Array.from(Array(right)))); // (NV)NA generate ;^3
+		return result;
+	}
 
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
+	[["N", "V"], "N", "P"], // generate ;^3
+
 ];
 let ampersand = (left, right) => {
 	errorBinary({left, right, operator: "&"});
