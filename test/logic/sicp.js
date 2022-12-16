@@ -5,11 +5,14 @@ export default () => {
     describe("SICP", () => {
         describe("1.2", () => {
             /*ts
+                //lengthLessN             >,1#@+
+                threeMinus              3,-
                 factLinear              +1^.#0@*
                 generate				+1^3
                 factRecurse				(=0?(1#))|((-1.factRecurse.*)$(#0))
                 //						(=0 ? 1#) | (-1.factRecurse.* $ #0)
             */
+            it("(3,-)2=1", () => expect(threeMinus(2)).eql(1));
             it("(+1^.#0@*)4=24", () => expect(factLinear(4)).eql(24));
             it("+1^3=(1:2:3)", () => expect(ts.toString(generate)).eql("1:2:3"));
             it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));

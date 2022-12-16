@@ -469,12 +469,13 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
-//	return apply(right, left);
-	return right(left);
+	if (isValue(left) && isUnaryFunction(right)) return right(left);
+	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
 	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
 ];
 let dot = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
