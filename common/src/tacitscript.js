@@ -114,7 +114,7 @@ const trampoline = fn => {
 // factorial(10);
 
 const recurseIter = ({A, B, p}, acc) => {
-	if (!isPair(p)) return acc;
+	if (!isArray(p)) return acc;
 
 	return () => recurseIter({A, B, p: p[0]}, B(A(p[1]), acc));
 };
@@ -155,10 +155,9 @@ const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
 const isValue = value => arity(value) === 0;
 const isVector = value => isArray(value) || isString(value);
-const isPair = value => isArray(value);
 const types = value => {
 	if (value == undefined) return ["?"];
-	if (isPair(value)) return ["P"];
+	if (isArray(value)) return ["A"];
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
 	if (isStream(value)) return ["L"];
@@ -302,7 +301,7 @@ const apply = (left, right) => {
 };
 const typeOf = value => {
 	if (value == undefined) return "U";
-	if (isPair(value)) return "P";
+	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
 	if (isStream(value)) return "L";
@@ -315,7 +314,7 @@ const typeOf = value => {
 const toEncodedString = value => {
 	if (isString(value)) return `"${value}"`;
 
-	const pair = false;//isPair(value);
+	const pair = false;//isArray(value);
 
 	return `${pair ? "(" : ""}${toString(value)}${pair ? ")" : ""}`;
 };
@@ -324,12 +323,7 @@ const toString = value => {
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
-	if (isPair(value)) {
-		const nonTerminal = isPair(value[0]);
-		const compound = isPair(value[1]);
-
-		return `${!nonTerminal ? "" : `${toEncodedString(value[0])}:`}${compound ? "(" : ""}${toEncodedString(value[1])}${compound ? ")" : ""}`;
-	}
+	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
 	throw "Unable to stringify value";
@@ -561,14 +555,14 @@ let slash = (left, right) => {
 ];
 let less = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
-	if (isUnaryFunction(left) && isPair(right)) return toPairList(sortBy(left)(fromPairList(right))); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
+	if (isUnaryFunction(left) && isArray(right)) return toPairList(sortBy(left)(fromPairList(right))); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
 
 	errorBinary({left, right, operator: "<"});
 }; less.types = [
 	["N", "N", "B"], // lessThan 2<3
 	["S", "S", "B"], // lessThanString "abc"<"bcd"
-	[["V", "S"], "P", "P"], // sort ;<("dan" "sue" "alan")
-	[["V", "N"], "P", "P"], // sort ;<(1 2 3)
+	[["V", "S"], "A", "A"], // sort ;<("dan" "sue" "alan")
+	[["V", "N"], "A", "A"], // sort ;<(1 2 3)
 ];
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
@@ -586,12 +580,12 @@ let minus = (left, right) => {
 	["N", "N", "N"], // subtract 5-2=3
 ];
 let colon = (left, right) => {
-	return isPair(left) ? [left, right] : [[undefined, left], right]; // ??P pair +:2@
+	return isArray(left) ? [left, right] : [[undefined, left], right]; // ??P pair +:2@
 
 	errorBinary({left, right, operator: ":"});
 }; colon.types = [
 	// we make these take values only - allowing : to take functions precludes using colon as an argument in higher-order functions
-	["V", "V", "P"], // pair +:2
+	["V", "V", "A"], // pair +:2
 ];
 let question = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) {
@@ -607,7 +601,7 @@ let atsign = (left, right) => {
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
-	[["V", "X"], ["Y", "X", "Y"], ["P", "Y"]], // reduce ;@+(1:2)=3
+	[["V", "X"], ["Y", "X", "Y"], ["A", "Y"]], // reduce ;@+(1:2)=3
 ];
 let asterisk = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
@@ -680,7 +674,7 @@ let percent = (left, right) => {
 
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
-	["N", "P", "P"], // pop 2%(1:2:3:4)=(1:2)
+	["N", "A", "A"], // pop 2%(1:2:3:4)=(1:2)
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
@@ -693,8 +687,8 @@ let hat = (left, right) => {
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [
 	["N", "N", "N"], // power 2^3
-	[["N", "V"], "N", "P"], // generate +1^3
-	[["P", "V"], ["P", "V"], ["P", "P"]], // scan
+	[["N", "V"], "N", "A"], // generate +1^3
+	[["A", "V"], ["A", "V"], ["A", "A"]], // scan
 ];
 let ampersand = (left, right) => {
 	errorBinary({left, right, operator: "&"});
@@ -712,7 +706,7 @@ let backtick = (left, right) => {
 // Unary
 
 let tilde = value => { // not referenced directly when passed number (standard form exported)
-	if (isPair(value)) {
+	if (isArray(value)) {
 		const values = ts.fromPairList(value);
 		const array = map(ts.fromPairList, values);
 
@@ -736,30 +730,30 @@ let tilde = value => { // not referenced directly when passed number (standard f
 	errorUnary({operator: "~", value});
 }; 
 tilde.types = [
-	["P", "P"], // transpose
+	["A", "A"], // transpose
 ];
 let underscore = value => {
 	if (isNumber(value)) return -value; // NN negative _5
-	if (isPair(value)) return toPairList(fromPairList(value).reverse());
+	if (isArray(value)) return toPairList(fromPairList(value).reverse());
 
 	errorUnary({operator: "_", value});
 }; underscore.types = [
 	["N", "N"], // negative _5
-	["P", "P"], // reverse _(4:2:6:1)
+	["A", "A"], // reverse _(4:2:6:1)
 ];
 let bracketleft = value => {
-	if (isPair(value)) return value[0]; // head P? [("hello":2)="hello"
+	if (isArray(value)) return value[0]; // head P? [("hello":2)="hello"
 
 	errorUnary({operator: "[", value});
 }; bracketleft.types = [
-	["P", "V"], // head P? [("hello":2)="hello"
+	["A", "V"], // first [("hello" 2)="hello"
 ];
 let bracketright = value => {
-	if (isPair(value)) return value[1]; // tail P? [("hello":2)=2
+	if (isArray(value)) return value[value.length - 1]; // tail P? [("hello":2)=2
 
 	errorUnary({operator: "]", value});
 }; bracketright.types = [
-	["P", "V"], // tail P? [("hello":2)=2
+	["A", "V"], // last ]("hello" 2)=2
 ];
 let backslash = value => {
 	errorUnary({value, operator: "\\"});
@@ -787,7 +781,7 @@ let bang = value => {
 ];
 let hash = value => {
 	const lengthIter = (pair, acc) => {
-		if (!isPair(pair)) return acc;
+		if (!isArray(pair)) return acc;
 
 		return () => lengthIter(pair[0], acc + 1);
 	};
@@ -796,7 +790,7 @@ let hash = value => {
 
 	errorUnary({value, operator: "#"});
 }; hash.types = [
-	["P", "N"], // length
+	["A", "N"], // length
 ];
 
 //==========================================================
