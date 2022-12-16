@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("Ex 1.11 (<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))", () => {
+			/*ts
+				f						(<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))
+			*/
+			it("f(4)=11", () => expect(f(4)).eql(11));
+		});
+
 		describe("1.2", () => {
 			/*ts
 				length					#
