@@ -3,6 +3,15 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("Ex 1.12", () => {
+			/*ts
+				tilde					~
+				input					(1:2:3):(4:5:6):(7:8:9)
+			*/
+			it("(1:2:3):(4:5:6):(7:8:9)", () => expect(ts.toString(input)).eql("(1:2:3):(4:5:6):(7:8:9)"));
+			// it("~((1:2:3):(4:5:6):(7:8:9))=((1:4:7):(2:5:8):(3:6:9))", () => expect(tilde(ts.toPairList())).eql());
+		});
+
 		describe("Ex 1.11 (<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))", () => {
 			/*ts
 				f						(<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))

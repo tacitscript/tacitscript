@@ -315,14 +315,21 @@ const typeOf = value => {
 const toEncodedString = value => {
 	if (isString(value)) return `"${value}"`;
 
-	return toString(value);
+	const pair = false;//isPair(value);
+
+	return `${pair ? "(" : ""}${toString(value)}${pair ? ")" : ""}`;
 };
 const toString = value => {
 	if (value === false) return "()";
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
-	if (isPair(value)) return `${(value[0] === undefined) ? "" : `${toEncodedString(value[0])}:`}${toEncodedString(value[1])}`;
+	if (isPair(value)) {
+		const nonTerminal = isPair(value[0]);
+		const compound = isPair(value[1]);
+
+		return `${!nonTerminal ? "" : `${toEncodedString(value[0])}:`}${compound ? "(" : ""}${toEncodedString(value[1])}${compound ? ")" : ""}`;
+	}
 	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
 
 	throw "Unable to stringify value";
@@ -705,9 +712,31 @@ let backtick = (left, right) => {
 // Unary
 
 let tilde = value => { // not referenced directly when passed number (standard form exported)
+	if (isPair(value)) {
+		const values = ts.fromPairList(value);
+		const array = map(ts.fromPairList, values);
+
+		var newArray = [], origArrayLength = array.length, arrayLength = Math.min.apply(Math, map(array => array.length)(array)), i;
+
+		for(i = 0; i < arrayLength; i++){
+			newArray.push([]);
+		}
+		for(i = 0; i < origArrayLength; i++){
+			for(var j = 0; j < arrayLength; j++){
+				newArray[j].push(array[i][j]);
+			};
+		}
+
+		const resultArray = map(ts.toPairList, newArray);
+		const resultValues = ts.toPairList(resultArray);
+
+		return resultValues;
+	}
+
 	errorUnary({operator: "~", value});
 }; 
 tilde.types = [
+	["P", "P"], // transpose
 ];
 let underscore = value => {
 	if (isNumber(value)) return -value; // NN negative _5
