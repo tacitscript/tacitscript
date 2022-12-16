@@ -430,12 +430,12 @@ const rightApply = (binaryFn, right) => left => {
 
 	return binaryFn(left, right);
 };
-const scanInternal = ({fns, startingArray}) => {
-	let result = [...startingArray];
+const scanInternal = ({left, right, startingPair}) => {
+	let result = fromPairList(startingPair);
 
-	while (isTruthy(fns[0](result))) result.push(fns[1](result));
+	while (isTruthy(left(result))) result.push(right(result));
 
-	return result;
+	return toPairList(result);
 };
 const whileInternal = ({whileCondition, next, start}) => {
 	let result = start;
@@ -666,6 +666,7 @@ let hat = (left, right) => {
 		var result = toPairList(map((value, index) => left(index))(Array.from(Array(right)))); // (NV)NA generate ;^3
 		return result;
 	}
+	if (isUnaryFunction(left) && isUnaryFunction(right)) return startingPair => scanInternal({left, right, startingPair}); // scan
 
 	errorBinary({left, right, operator: "^"});
 }; hat.types = [

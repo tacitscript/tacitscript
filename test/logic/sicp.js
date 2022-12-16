@@ -6,6 +6,8 @@ export default () => {
 		describe("1.2", () => {
 			/*ts
 				lengthLessN             :.(].1#@+.<)$([.])
+				// fib						lengthLessN,^(%2.#0@+).(1:1,).]
+
 				// threeMinus              3,-
 				factLinear              +1^.#0@*
 				generate				+1^3
