@@ -672,10 +672,14 @@ let ampersand = (left, right) => {
 }; ampersand.types = [
 ];
 let backtick = (left, right) => {
-	return left; // X?X constant 2`3
-
 	errorBinary({left, right, operator: "`"});
 }; backtick.types = [
+];
+let hash = (left, right) => {
+	return left; // X?X constant 2`3
+
+	errorUnary({value, operator: "#"});
+}; hash.types = [
 	["X", "V", "X"], // constant 2`3
 ];
 
@@ -709,10 +713,6 @@ let bracketright = value => {
 	errorUnary({operator: "]", value});
 }; bracketright.types = [
 	["P", "V"], // tail P? [("hello":2)=2
-];
-let hash = value => {
-	errorUnary({value, operator: "#"});
-}; hash.types = [
 ];
 let backslash = value => {
 	errorUnary({value, operator: "\\"});

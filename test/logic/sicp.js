@@ -5,23 +5,23 @@ export default () => {
 	describe("SICP", () => {
 		describe("1.2", () => {
 			/*ts
-				factRecurse				(=0?(1`))|((-1.factRecurse.*)$(`0))
+				factRecurse				(=0?(1#))|((-1.factRecurse.*)$(#0))
 			*/
 			it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
 		});
 
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
-				sumOfLargestSquares		`0<._.2%.`0$*@+
+				sumOfLargestSquares		#0<._.2%.#0$*@+
 				solutionC				sumOfLargestSquares(1:4:3:2)
 				take					2%(1:2:3:4)
 				reversed				_(1:2:3:4)
-				sort					`0<
+				sort					#0<
 				solutionA				<5?(+1)
 				solutionB				<5|(>9)
-				abs						>0?(`0)|(=0?(0`))|(<0?_)
+				abs						>0?(#0)|(=0?(0#))|(<0?_)
 			*/
-			it("(`0<._.2%.;$*@+)(1:4:3:2)=25", () => expect(solutionC).eql(25));
+			it("(#0<._.2%.;$*@+)(1:4:3:2)=25", () => expect(solutionC).eql(25));
 			it("2%(1:2:3:4)=(1:2)", () => expect(ts.toString(take)).eql("1:2"));
 			it("_(1:2:3:4)=(4:3:2:1)", () => expect(ts.toString(reversed)).eql("4:3:2:1"));
 			it("sort(5:3:6:4)=(3:4:5:6)", () => expect(ts.toString(sort([[[[undefined, 5], 3], 6], 4]))).eql("3:4:5:6"));
@@ -35,14 +35,14 @@ export default () => {
 
 		describe("operators", () => {
 			/*ts
-				average				(`0@+./)$(1`@+)
-				sumAndDivide		`0@+./
-				hypotenuse			:.`0$*@+.^0.5
-				binaryUnaryPipe		:.`0$*@+
+				average				(#0@+./)$(1#@+)
+				sumAndDivide		#0@+./
+				hypotenuse			:.#0$*@+.^0.5
+				binaryUnaryPipe		:.#0$*@+
 				solutionB			3binaryUnaryPipe4
 				unaryBinaryPipe		+1./
-				pipe				`0$*.+1
-				squares				`0$*@:
+				pipe				#0$*.+1
+				squares				#0$*@:
 				solutionA			squares(3:4)
 			*/
 			it("average(3:5:7:9)=6", () => expect(average([[[[undefined, 3], 5], 7], 9])).eql(6));
@@ -57,12 +57,12 @@ export default () => {
 
 		describe("1.1.4 Compound Procedures", () => {
 			/*ts
-				sumOfSquares	`0$*@+
+				sumOfSquares	#0$*@+
 				solutionA		sumOfSquares(1:2:3)
-				sum				`0@+
+				sum				#0@+
 				arraySum		sum(1:2:3)
-				cube			`0$*$*
-				square			`0$*
+				cube			#0$*$*
+				square			#0$*
 				double			*2
 				inverse			1/
 				doubleSix		6,*2
