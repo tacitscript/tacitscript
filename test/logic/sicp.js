@@ -86,26 +86,26 @@ export default () => {
 		// 	it("squares(3:4)=(9:16)", () => expect(solutionA).eql([[undefined, 9], 16]));
 		// });
 
-		// describe("1.1.4 Compound Procedures", () => {
-		// 	/*ts
-		// 		sumOfSquares	;$*@+
-		// 		solutionA		sumOfSquares(1:2:3)
-		// 		sum				;@+
-		// 		arraySum		sum(1:2:3)
-		// 		cube			;$*$*
-		// 		square			;$*
-		// 		double			*2
-		// 		inverse			1/
-		// 		doubleSix		6,*2
-		// 	*/
-		// 	it("sumOfSquares(1:2:3)=14", () => expect(solutionA).eql(14));
-		// 	it("arraySum=6", () => expect(arraySum).eql(6));
-		// 	it("cube(3)=27", () => expect(cube(3)).eql(27));
-		// 	it("square(3)=9", () => expect(square(3)).eql(9));
-		// 	it("double(4)=8", () => expect(double(4)).eql(8));
-		// 	it("inverse(1/2)=2", () => expect(inverse(0.5)).eql(2));
-		// 	it("6,*2=12", () => expect(doubleSix).eql(12));
-		// });
+		describe("1.1.4 Compound Procedures", () => {
+			/*ts
+				sumOfSquares	;$*@+
+				solutionA		sumOfSquares(1 2 3)
+				sum				;@+
+				arraySum		sum(1 2 3)
+				cube			;$*$*
+				square			;$*
+				double			*2
+				inverse			1/
+				doubleSix		6,*2
+			*/
+			it("sumOfSquares(1 2 3)=14", () => expect(solutionA).eql(14));
+			it("arraySum=6", () => expect(arraySum).eql(6));
+			it("cube(3)=27", () => expect(cube(3)).eql(27));
+			it("square(3)=9", () => expect(square(3)).eql(9));
+			it("double(4)=8", () => expect(double(4)).eql(8));
+			it("inverse(1/2)=2", () => expect(inverse(0.5)).eql(2));
+			it("6,*2=12", () => expect(doubleSix).eql(12));
+		});
 
 		describe("2.1.1 Example: Arithmetic Operations for Rational Numbers", () => {
 			/*ts

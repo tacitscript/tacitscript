@@ -597,7 +597,9 @@ let question = (left, right) => {
 	[["V", "V"], ["V", "V"], ["V", "V"]], // if <3?+1
 ];
 let atsign = (left, right) => {
-	return p => recurse({A: left, B: right, p});
+	const result = array => array.slice(1).reduce((acc, value) => right(acc, left(value)), left(array[0])); // (??X)AX insert +$(1 2)
+
+	return result;
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
