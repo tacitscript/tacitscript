@@ -116,7 +116,7 @@ const trampoline = fn => {
 const recurseIter = ({A, B, p}, acc) => {
 	if (!isPair(p)) return acc;
 
-	return () => recurseIter({A, B, p: p[0]}, B(acc, A(p[1])));
+	return () => recurseIter({A, B, p: p[0]}, B(A(p[1]), acc));
 };
 const recurse = ({A, B, p}) => {
 	return trampoline(() => recurseIter({A, B, p: p[0]}, A(p[1])))
