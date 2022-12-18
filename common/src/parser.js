@@ -401,7 +401,7 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const processedSymbols = result.processedSymbols;
 
 						const solution = processSymbols(processedSymbols, undefined, updatedDefinitions);
-						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "(x, y) => " + definition + "(x, y);" : "const " + variable + " =" + definitionSeparator + definition + ";";
+						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x); " + variable + '.types = [[["V", "V"], "V"], ["V", "V"]];' : "const " + variable + " =" + definitionSeparator + definition + ";";
 
 						const noComment = symbol.includes("\n");
 						js += declaration + (noComment ? "" : " //");
