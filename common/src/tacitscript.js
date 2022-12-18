@@ -580,7 +580,7 @@ let minus = (left, right) => {
 	["N", "N", "N"], // subtract 5-2=3
 ];
 let colon = (left, right) => {
-	return isArray(left) ? [left, right] : [[undefined, left], right]; // ??P pair +:2@
+	return [left, right]; // ??P pair +:2@
 
 	errorBinary({left, right, operator: ":"});
 }; colon.types = [
@@ -782,13 +782,7 @@ let bang = value => {
 }; bang.types = [
 ];
 let hash = value => {
-	const lengthIter = (pair, acc) => {
-		if (!isArray(pair)) return acc;
-
-		return () => lengthIter(pair[0], acc + 1);
-	};
-
-	return trampoline(() => lengthIter(value, 0));
+	if (isArray(value)) return value.length;
 
 	errorUnary({value, operator: "#"});
 }; hash.types = [
