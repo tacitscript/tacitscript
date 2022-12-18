@@ -19,26 +19,28 @@ export default () => {
 		// 	it("f(4)=11", () => expect(f(4)).eql(11));
 		// });
 
-		// describe("1.2", () => {
-		// 	/*ts
-		// 		length					#
-		// 		lengthLessN             :.(].#.<)$([.])
-		// 		fib						lengthLessN,^(2%.;@+).(1:1,).]
-		// 		threeMinus              3,-
-		// 		factLinear              +1^.;@*
-		// 		generate				+1^3
-		// 		factRecurse				(=0?(1`))|((-1.factRecurse.*)$(;))
-		// 		//						(=0 ? 1`) | (-1.factRecurse.* $ ;)
-		// 	*/
-		// 	it("#(1:2:3)=3", () => expect(length(ts.toPairList([1, 2, 3]))).eql(3));
-		// 	it("fib6=8", () => expect(fib(6)).eql(8));
-		// 	it("2(:.(].#.<)$([.]))(1:2)=()", () => expect(lengthLessN(2, ts.toPairList([1, 2]))).eql(false));
-		// 	it("3(:.(].#.<)$([.]))(1:2)=!()", () => expect(lengthLessN(3, ts.toPairList([1, 2]))).eql(true));
-		// 	it("(3,-)2=1", () => expect(threeMinus(2)).eql(1));
-		// 	it("(+1^.;@*)4=24", () => expect(factLinear(4)).eql(24));
-		// 	it("+1^3=(1:2:3)", () => expect(ts.toString(generate)).eql("1:2:3"));
-		// 	it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
-		// });
+		describe("1.2", () => {
+			/*ts
+				length					#
+				lengthLessN             :.(].#.<)$[
+				fib						lengthLessN,^(_2%.].;@+).((1 1),).]
+				threeMinus              3,-
+				factLinear              +1^.;@*
+				generate				+1^3
+				factRecurse				(=0?(1`))|((-1.factRecurse.*)$(;))
+			*/
+			it("#(1 2 3)=3", () => expect(length([1, 2, 3])).eql(3));
+			it("2lengthLessN(1 2 3)=()", () => expect(lengthLessN(2, [1, 2, 3])).eql(false));
+			it("2lengthLessN(1 2)=()", () => expect(lengthLessN(2, [1, 2])).eql(false));
+			it("2lengthLessN(1 )=!()", () => expect(lengthLessN(2, [1])).eql(true));
+			it("fib6=8", () => expect(fib(6)).eql(8));
+			it("2(:.(].#.<)$([.]))(1 2)=()", () => expect(lengthLessN(2, [1, 2])).eql(false));
+			it("3(:.(].#.<)$([.]))(1 2)=!()", () => expect(lengthLessN(3, [1, 2])).eql(true));
+			it("(3,-)2=1", () => expect(threeMinus(2)).eql(1));
+			it("(+1^.;@*)4=24", () => expect(factLinear(4)).eql(24));
+			it("+1^3=(1 2 3)", () => expect(generate).eql([1, 2, 3]));
+			it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
+		});
 
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
 			/*ts
@@ -50,11 +52,10 @@ export default () => {
 				solutionA				<5?(+1)
 				solutionB				<5|(>9)
 				abs						>0?(;)|(=0?(0`))|(<0?_)
-				//						(>0 ? ;) | (=0 ? 0`) | (<0 ? _)
 			*/
 			it("(;<.2%.].;$*@+)(1 4 3 2)=25", () => expect(solutionC).eql(25));
 			it("2%(1 2 3 4),[=(1 2)", () => expect(take).eql([1, 2]));
-			it("_(1 2 3 4)=(4 3 2 1)", () => expect(reversed).eql([4, 3, 2,  1]));
+			it("_(1 2 3 4)=(4 3 2 1)", () => expect(reversed).eql([4, 3, 2, 1]));
 			it("sort(5 3 6 4)=(3 4 5 6)", () => expect(sort([5, 3, 6, 4])).eql([3, 4, 5, 6]));
 			it("abs5=5", () => expect(abs(5)).eql(5));
 			it("(<5|(>9))6=()", () => expect(solutionB(6)).eql(false));
