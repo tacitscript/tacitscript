@@ -40,29 +40,29 @@ export default () => {
 		// 	it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
 		// });
 
-		// describe("1.1.6 Conditional Expressions and Predicates", () => {
-		// 	/*ts
-		// 		sumOfLargestSquares		;<.2%.;$*@+
-		// 		solutionC				sumOfLargestSquares(1:4:3:2)
-		// 		take					2%(1:2:3:4)
-		// 		reversed				_(1:2:3:4)
-		// 		sort					;<
-		// 		solutionA				<5?(+1)
-		// 		solutionB				<5|(>9)
-		// 		abs						>0?(;)|(=0?(0`))|(<0?_)
-		// 		//						(>0 ? ;) | (=0 ? 0`) | (<0 ? _)
-		// 	*/
-		// 	it("(;<.2%.;$*@+)(1:4:3:2)=25", () => expect(solutionC).eql(25));
-		// 	it("2%(1:2:3:4)=(3:4)", () => expect(ts.toString(take)).eql("3:4"));
-		// 	it("_(1:2:3:4)=(4:3:2:1)", () => expect(ts.toString(reversed)).eql("4:3:2:1"));
-		// 	it("sort(5:3:6:4)=(3:4:5:6)", () => expect(ts.toString(sort([[[[undefined, 5], 3], 6], 4]))).eql("3:4:5:6"));
-		// 	it("abs5=5", () => expect(abs(5)).eql(5));
-		// 	it("(<5|(>9))6=()", () => expect(solutionB(6)).eql(false));
-		// 	it("(<5|(>9))10=!()", () => expect(solutionB(10)).eql(true));
-		// 	it("(<5|(>9))1=!()", () => expect(solutionB(1)).eql(true));
-		// 	it("(<5?(+1))3=4", () => expect(solutionA(3)).eql(4));
-		// 	it("(<5?(+1))6=undefined", () => expect(solutionA(6)).eql(undefined));
-		// });
+		describe("1.1.6 Conditional Expressions and Predicates", () => {
+			/*ts
+				sumOfLargestSquares		;<.2%.].;$*@+
+				solutionC				sumOfLargestSquares(1 4 3 2)
+				take					2%(1 2 3 4),[
+				reversed				_(1 2 3 4)
+				sort					;<
+				solutionA				<5?(+1)
+				solutionB				<5|(>9)
+				abs						>0?(;)|(=0?(0`))|(<0?_)
+				//						(>0 ? ;) | (=0 ? 0`) | (<0 ? _)
+			*/
+			it("(;<.2%.].;$*@+)(1 4 3 2)=25", () => expect(solutionC).eql(25));
+			it("2%(1 2 3 4),[=(1 2)", () => expect(take).eql([1, 2]));
+			it("_(1 2 3 4)=(4 3 2 1)", () => expect(reversed).eql([4, 3, 2,  1]));
+			it("sort(5 3 6 4)=(3 4 5 6)", () => expect(sort([5, 3, 6, 4])).eql([3, 4, 5, 6]));
+			it("abs5=5", () => expect(abs(5)).eql(5));
+			it("(<5|(>9))6=()", () => expect(solutionB(6)).eql(false));
+			it("(<5|(>9))10=!()", () => expect(solutionB(10)).eql(true));
+			it("(<5|(>9))1=!()", () => expect(solutionB(1)).eql(true));
+			it("(<5?(+1))3=4", () => expect(solutionA(3)).eql(4));
+			it("(<5?(+1))6=undefined", () => expect(solutionA(6)).eql(undefined));
+		});
 
 		describe("operators", () => {
 			/*ts
