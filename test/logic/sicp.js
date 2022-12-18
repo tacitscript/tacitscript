@@ -6,9 +6,9 @@ export default () => {
 
 		describe("Ex 1.11 (<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))", () => {
 			/*ts
-				f						(<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))
+				f						:.].(<3?;)|((-1.(0f).+)$((-2.(0f).*2.+)$(-3.(0f).*3)))
 			*/
-			it("f(4)=11", () => expect(f(4)).eql(11));
+			it("f(4)=11", () => expect(f(0, 4)).eql(11));
 		});
 
 		describe("1.2", () => {
@@ -19,7 +19,7 @@ export default () => {
 				threeMinus              3,-
 				factLinear              +1^.;@*
 				generate				+1^3
-				factRecurse				(=0?(1`))|((-1.factRecurse.*)$(;))
+				factRecurse				:.].(=0?(1`))|((-1.(0factRecurse).*)$;)
 			*/
 			it("#(1 2 3)=3", () => expect(length([1, 2, 3])).eql(3));
 			it("2lengthLessN(1 2 3)=()", () => expect(lengthLessN(2, [1, 2, 3])).eql(false));
@@ -31,7 +31,7 @@ export default () => {
 			it("(3,-)2=1", () => expect(threeMinus(2)).eql(1));
 			it("(+1^.;@*)4=24", () => expect(factLinear(4)).eql(24));
 			it("+1^3=(1 2 3)", () => expect(generate).eql([1, 2, 3]));
-			it("factRecurse4=24", () => expect(factRecurse(4)).eql(24));
+			it("0factRecurse4=24", () => expect(factRecurse(0, 4)).eql(24));
 		});
 
 		describe("1.1.6 Conditional Expressions and Predicates", () => {
