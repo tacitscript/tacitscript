@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		// describe("Ex 1.12 Pascal's Triange", () => {
+		// 	/*ts
+		// 		sumMap					;@+@:
+		// 		pipeSumMap				;.;@+@:
+		// 		lengthLessN             :.(].#.<)$[
+		// 		pascal					lengthLessN,^(].((0 )+.:)$(+(0 )).~.>({"console.log").;@+@:.>({"console.log")).(((1 ) ),)
+		// 	*/
+		// 	it("pascal5=((1 ) (1 1) (1 2 1) (1 3 3 1) (1 4 6 4 1))", () => expect(pascal(5)).eql([[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]));
+		// 	it("sumMap((0 1) (1 1) (1 0))=(1 2 1)", () => expect(sumMap([[0, 1], [1, 1], [1, 0]])).eql([1, 2, 1]));
+		// 	it("pipeSumMap((0 1) (1 1) (1 0))=(1 2 1)", () => expect(pipeSumMap([[0, 1], [1, 1], [1, 0]])).eql([1, 2, 1]));
+		// });
 
 		describe("Ex 1.11 (<3?;)|((-1.f.+)$((-2.f.*2.+)$(-3.f.*3)))", () => {
 			/*ts
@@ -19,7 +30,7 @@ export default () => {
 				threeMinus              3,-
 				factLinear              +1^.;@*
 				generate				+1^3
-				factRecurse				(=0?(1`))|((-1.factRecurse.*)$(;))
+				factRecurse				(=0?(1`))|((-1.factRecurse.*)$;)
 			*/
 			it("#(1 2 3)=3", () => expect(length([1, 2, 3])).eql(3));
 			it("2lengthLessN(1 2 3)=()", () => expect(lengthLessN(2, [1, 2, 3])).eql(false));
