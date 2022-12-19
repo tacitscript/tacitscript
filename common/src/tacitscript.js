@@ -803,6 +803,8 @@ let hat = (left, right) => {
 	[["A", "V"], "A", "L"], // lazyScan #.+1^( )
 ];
 let ampersand = (left, right) => {
+	const applyLeft = value => left(value);
+
 	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
 		let result = value => {
 			const leftValue = comma(value, left);
