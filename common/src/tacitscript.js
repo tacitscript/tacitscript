@@ -624,43 +624,45 @@ let question = (left, right) => {
 	if (isNumber(left) && isNumber(right)) { // random 1?100
 		return (Math.random() * (right - left)) + left;
 	}
+	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5?(4 9 2 7 3)
+
+	errorBinary({left, right, operator: "?"});
+}; question.types = [
+	[["V", "V"], ["V", "V"], ["V", "V"]], // if <3?+1
+	["N", "N", "N"], // random 1?100
+	[["V", "B"], "A", "A"], // filter <5?(4 9 2 7 3)
+];
+let atsign = (left, right) => {
+	if (isBinaryFunction(left) && isArray(right)) return right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
+	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
 	if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
 		const index = right.findIndex(left);
 
 		return (index === -1) ? undefined : index;
 	}
 
-	errorBinary({left, right, operator: "?"});
-}; question.types = [
-	[["V", "V"], ["V", "V"], ["V", "V"]], // if <3?+1
-	["N", "N", "N"], // random 1?100
-	[["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
-];
-let atsign = (left, right) => {
-	if (isUnaryFunction(left) && isBinaryFunction(right)) return array => array.slice(1).reduce((acc, value) => right(acc, left(value)), left(array[0])); // (??X)AX insert +$(1 2)
-	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
-	if (isValue(left) && isArray(right)) {
-		try {
-			const leftString = toString(left);
-			const leftType = typeOf(left);
-			const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
+	// if (isValue(left) && isArray(right)) {
+	// 	try {
+	// 		const leftString = toString(left);
+	// 		const leftType = typeOf(left);
+	// 		const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
 
-			return (index === -1) ? undefined : index;
-		} catch (_) {
-			return undefined;
-		}
-	}
-	if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
+	// 		return (index === -1) ? undefined : index;
+	// 	} catch (_) {
+	// 		return undefined;
+	// 	}
+	// }
+	// if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
-	[["V", "X"], ["Y", "X", "Y"], ["A", "Y"]], // reduce ;@+(1:2)=3
+	[["V", "V", "X"], "A", "X"], // reduce +$(1 2)=3
+	[["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
 	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
-	["V", "A", "N"], // indexOf 2@(6 8 2 3)
-	["S", "S", "N"], // indexOf "bc"@"abcd"
+	// ["V", "A", "N"], // indexOf 2@(6 8 2 3)
+	// ["S", "S", "N"], // indexOf "bc"@"abcd"
 ];
 let asterisk = (left, right) => {
-	if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
 	if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 		return pick(left)(right);
 	}
@@ -670,7 +672,6 @@ let asterisk = (left, right) => {
 }; asterisk.types = [
 	["N", "N", "N"], // times 2*3=6
 	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-	[["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
 ];
 let dollar = (left, right) => {
 	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
@@ -814,11 +815,16 @@ let ampersand = (left, right) => {
 		return result;
 	}
 	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; // VVV andValue !()&()
+	if (isUnaryFunction(left) && isArray(right)) return map(applyLeft)(right);
+	if (isUnaryFunction(left) && isObject(right)) return mapObj(applyLeft)(right);
 
 	errorBinary({left, right, operator: "&"});
 }; ampersand.types = [
 	["V", "V", "V"], // andValue !()&()
 	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
+	[["V", "V"], "A", "A"], // map *2&(3 4 5)=(6 8 10)
+	[["V", "V"], "O", "O"], // mapObject *2&({"{a: 1, b: 2, c: 3}")=({"{a: 2, b: 4, c: 6}")
+
 ];
 let backtick = (left, right) => {
 	return left; // X?X constant 2`3
