@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("expt recursive", () => {
+			/*ts
+				expt					(].=0?(1`))|(([.*)$(([.:)$(].-1).expt))
+				//						].=0 ? 1` | [.* $ ([.: $ ].-1).expt
+			*/
+			it("expt(2 3)=8", () => expect(expt([2, 3])).eql(8));
+		});
+
 		describe("Ex 1.12 Pascal's Triange", () => {
 			/*ts
 				sumMap					+@&
