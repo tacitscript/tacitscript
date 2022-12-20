@@ -6,7 +6,7 @@ export default () => {
 		describe("expt recursive", () => {
 			/*ts
 				expt					(].=0?(1`))|(([.*)$(([.:)$(].-1).expt))
-				//						].=0 ? 1` | [.* $ ([.: $ ].-1).expt
+				//						(].=0 ? 1`) | ([.* $ ([.: $ ].-1).expt)
 			*/
 			it("expt(2 3)=8", () => expect(expt([2, 3])).eql(8));
 		});
