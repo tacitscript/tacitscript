@@ -6,7 +6,7 @@ export default () => {
 		describe("gcd (].=0)?[|((].:)$(([.%)$]).gcd)", () => {
 			/*ts
 				gcd				(].=0)?[|((].:)$(([.%)$]).gcd)			AN
-				// gcd				(].=0)?[|(].: $ ([.% $ ]).gcd)
+				// gcd				(].=0)?[|((].: $ ([.% $ ])).gcd)
 			*/
 			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
 		});
@@ -17,7 +17,7 @@ export default () => {
 				isEven			].(%2.=0)																			NB
 				ifZeroOne		].=0?(1`)																			N(VN)
 				fastExp			ifZeroOne|(isEven?(([.:)$(]./2).fastExp.square))|(([.*)$(([.:)$(].-1).fastExp))		NNN
-				// fastExp		ifZeroOne|(isEven ? ([.:)$(]./2).fastExp.square)|([.* $ ([.:)$(].-1).fastExp)		NNN
+				// fastExp		ifZeroOne|(isEven ? ([.: $ ]./2).fastExp.square)|([.* $ ([.: $ ].-1).fastExp)		NNN
 			*/
 			it("2fastExp7=128", () => expect(fastExp([2, 7])).eql(128));
 		});
