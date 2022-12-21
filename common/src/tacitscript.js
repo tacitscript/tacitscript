@@ -191,7 +191,7 @@ const replaceType = ({from, to}) => type => {
 	return type.map(replaceType({from, to}));
 };
 const getSymbolMap = (acceptorSymbol, donorSymbol) => {
-	if ("XYZW".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
+	if ("XYZWU".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
 
 	return [];
 }
@@ -208,7 +208,7 @@ const getReducedType = ({remainderType, typeMap}) => {
 	const reductionMap = pipe(
 		groupBy(identity),
 		values,
-		filter(symbols => (symbols.length === 1) && "XYZW".includes(symbols[0])),
+		filter(symbols => (symbols.length === 1) && "XYZWU".includes(symbols[0])),
 		map(([symbol]) => [symbol, "?"])
 	)(typeSymbols);
 
@@ -219,8 +219,8 @@ const getReducedLeftAppliedType = ({leftType, rightType}) => getReducedType({rem
 const getReducedRightAppliedType = ({leftType, rightType}) => getReducedType({remainderType: splice(leftType, 1, 1), typeMap: getTypeMap(leftType[1], rightType)});
 const matchSymbol = (left, right) => {
 	return (left === right) ||
-		"XYZW?".includes(left) ||
-		"XYZW?".includes(right) ||
+		"XYZWU?".includes(left) ||
+		"XYZWU?".includes(right) ||
 		any(([source, match]) => (source === "V") && !Array.isArray(match))([[left, right], [right, left]]);
 };
 const matchType = (left, right) => {
@@ -473,12 +473,14 @@ let comma = (left, right) => {
 	if (isValue(left) && isUnaryFunction(right)) return right(left);
 	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));
+	if (isBinaryFunction(left) && isBinaryFunction(right)) return (x, y) => right(leftApply(x, left), y);
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
 	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
 	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
 	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply
+	[["X", "Y", "Z"], [["Y", "Z"], "W", "U"], ["X", "W", "U"]], // binaryBinaryApply
 ];
 let dot = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
@@ -833,7 +835,7 @@ let backtick = (left, right) => {
 
 	errorBinary({left, right, operator: "`"});
 }; backtick.types = [
-	["X", "V", "X"], // constant 2`3
+	["V", "V", "V"], // constant 2`3
 ];
 
 //----------------------------------------------------------

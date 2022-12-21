@@ -3,12 +3,18 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
-		describe("expt recursive", () => {
+		describe("expt", () => {
 			/*ts
-				expt					(].=0?(1`))|(([.*)$(([.:)$(].-1).expt))
-				//						(].=0 ? 1`) | ([.* $ ([.: $ ].-1).expt)
+				testA					[.`,^
+				expt					(].=0?(1`))|(([.*)$(([.:)$(].-1).expt))					NNN
+				// 						(].=0 ? 1`)|([.* $ ([.: $ ].-1).expt)
+				exptGen					:.([.`,^)$].*@											NNN
+				test					[.`
 			*/
-			it("expt(2 3)=8", () => expect(expt([2, 3])).eql(8));
+			it("2exptGen3=8", () => expect(exptGen(2, 3)).eql(8));
+			it("([.`,^)([2, 3], 3)=[2, 2, 2]", () => expect(testA([2, 3], 3)).eql([2, 2, 2]));
+			it("([.`)(1 2)(1)=1", () => expect(test([1, 2], 1)).eql(1));
+			it("exptRec(2 3)=8", () => expect(expt([2, 3])).eql(8));
 		});
 
 		describe("Ex 1.12 Pascal's Triange", () => {
