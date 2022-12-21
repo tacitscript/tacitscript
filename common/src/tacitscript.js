@@ -776,20 +776,43 @@ let bar = (left, right) => {
 
 	errorBinary({left, right, operator: "|"});
 }; bar.types = [
-	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate <5|(>8)
+	["V", "V", "V"], // orValue !()|()
+	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
+	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
 ];
 let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
 	}
-
+	else if (isArray(left)) {
+		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
+		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
+	}
+	else if (isString(left) && isString(right)) {
+		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
+	}
+	else if (isUnaryFunction(left)) {
+		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: []}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
+		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
+	}
+	else if (isBinaryFunction(left)) {
+		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
+		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
+	}
 
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
-	["V", "V", "V"], // orValue !()|()
-	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
-	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
+	["N", "N", "N"], // remainder 7%2
+	["N", "A", "A"], // split 2%(1 2 3 4 5)
+	["N", "S", "A"], // split 2%"abcde"
+	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
+	["A", "S", "A"], // chunk (1 2 0)%"abcde"
+	["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
+	[["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
+	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
+	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
+	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
