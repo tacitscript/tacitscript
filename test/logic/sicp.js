@@ -3,6 +3,25 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("space partitions for binary operators", () => {
+			/*ts
+				alessBB			(1    < 2)
+				compound		(1+1 - (2 / 2)*3)
+				empty			(1 )
+				embedded		(1 (1+1))
+				alessBA			1<2
+				alessBC			(1 1+1)
+				array			(1 2)
+			*/
+			it("(1    < 2)=true", () => expect(alessBB).eql(true));
+			it("(1+1 - (2 / 2)*3)=-1", () => expect(compound).eql(-1));
+			it("(1 )=[1]", () => expect(empty).eql([1]));
+			it("(1 (1+1))=[1, 2]", () => expect(embedded).eql([1, 2]));
+			it("1<2=true", () => expect(alessBA).eql(true));
+			it("(1 1+1)=[1, 2]", () => expect(alessBC).eql([1, 2]));
+			it("(1 2)=[1, 2]", () => expect(array).eql([1, 2]));
+		});
+
 		describe("gcd (].=0)?[|((].:)$(([.%)$]).gcd)", () => {
 			/*ts
 				gcd				(].=0)?[|((].:)$(([.%)$]).gcd)			AN

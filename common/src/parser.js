@@ -13,6 +13,7 @@ const flatten = reduce(function(acc, value) {return acc.concat(Array.isArray(val
 const contains = function(value) {return function(array) {return array.includes(value);};};
 const omit = function(keys) {return function(object) {const copy = Object.assign({}, object); keys.forEach(function(key) {delete copy[key];}); return copy;};};
 const fromPairs = function(pairs) {return pairs.reduce(function(prev, curr) {prev[curr[0]] = curr[1]; return prev;}, {});};
+const equals = function(left) {return function(right) {return left === right;}};
 
 //==================================================================
 // type utilities
@@ -174,12 +175,29 @@ const deprioritizeDots = function(symbols) {
 
 	return [deprioritizeMedialDots(symbols)];
 };
+const isBinaryOperator = operator => ",.+/<>-:?@*$'|%^&`=".includes(operator);
 const prioritizeSpaces = function(symbols) {
-	return Array.isArray(symbols) ? pipe(
+	const result = Array.isArray(symbols) ? pipe(
 		map(prioritizeSpaces),
 		function(symbols) {
 			if (symbols.length < 2) return symbols;
-			if (none(matches(/^\s+$/))(symbols)) return symbols;
+
+			const isWhitespace = matches(/^\s+$/);
+
+			if (none(isWhitespace)(symbols)) return symbols;
+
+			// support binary operator defined by spaces either side
+			const binarySpaceSymbols = (() => {
+				const firstSpaceIndex = symbols.findIndex(isWhitespace);
+
+				if ((firstSpaceIndex > 0) &&
+					(symbols.length > (firstSpaceIndex + 3)) &&
+					(filter(isWhitespace)(symbols).length === 2) &&
+					(isWhitespace(symbols[firstSpaceIndex + 2])) &&
+					isBinaryOperator(symbols[firstSpaceIndex + 1])) return [symbols.slice(0, firstSpaceIndex), symbols[firstSpaceIndex + 1], symbols.slice(firstSpaceIndex + 3)];
+
+				return symbols;
+			})();
 
 			return pipe(
 				reduce(function(acc, value) {
@@ -190,9 +208,11 @@ const prioritizeSpaces = function(symbols) {
 					} else return acc.slice(0, -1).concat([lastArray.concat([value])]);
 				})([[]]),
 				function(chunks) {return last(chunks).length ? chunks : chunks.slice(0, -1);}
-			)(symbols);
+			)(binarySpaceSymbols);
 		}
 	)(symbols) : symbols;
+
+	return result;
 };
 const lookup = function(symbol) {
 	switch(symbol) {
