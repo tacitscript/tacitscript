@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("sumIntegers", () => {
+			/*ts
+				sumIntegers		:.([.+,^ $ _.-@.+1).+@			NNN						:.([.+ _.-$.+1).^$.+$
+			*/
+			it("0sumIntegers10=55", () => expect(sumIntegers(0, 10)).eql(55));
+		});
+
 		describe("space partitions for binary operators", () => {
 			/*ts
 				alessBB			(1    < 2)
