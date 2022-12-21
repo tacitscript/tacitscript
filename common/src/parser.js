@@ -20,6 +20,7 @@ const unnest = arrays => {let result = [], length = arrays.length; for (let i = 
 const values = obj => Object.values(obj);
 const slice = (...args) => array => array.slice.apply(array, args);
 const identity = x => x;
+const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
 
 //==================================================================
 // type utilities
@@ -223,13 +224,13 @@ const prioritizeSpaces = function(symbols) {
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: ["000"]};
-		case "-": return "ts.minus";
+		case "-": return {definition: "ts.minus", types: ["000"]};
 		case ".": return "ts.dot";
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
 		case "<": return "ts.less";
-		case "/": return "ts.slash";
+		case "/": return {definition: "ts.slash", types: ["000"]};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
 		case ":": return "ts.colon";
@@ -280,17 +281,16 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	}
 
 	// binary right application
-	// const binaryRightSolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
-	// if (binaryRightSolutions.length) {
-	// 	//const types =  map(([leftType]) => splice(leftType, 1, 1))(binaryRightSolutions);
-	// 	let result = rightApply(left, right);
+	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && (leftType[1] == (rightType.length - 1)))(allCombinations);
+	if (binaryRightSolutions.length) {
+		const definition = `ts.rightApply(${left}, ${right})`;
+		const types = pipe(
+			map(pipe(first, type => `${type[0]}${type[2]}`)),
+			extractUnique(identity),
+		)(binaryRightSolutions);
 
-	// 	if (isFunction(result)) {
-	// 		if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
-	// 	}
-
-	// 	return result;
-	// }
+		return {definition, types};
+	}
 
 	// unary application
 	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && (leftType[0] == (rightType.length - 1)))(allCombinations);
