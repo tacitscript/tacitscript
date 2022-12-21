@@ -3,6 +3,15 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("twice", () => {
+			/*ts
+				// twice			(. $ ;)
+				// plusOne			+1
+				// twicePlusOne	twice(plusOne)
+			*/
+			// it("twice(+1)2=4", () => expect(twicePlusOne(2)).eql(4));
+		});
+
 		describe("piSum", () => {
 			/*ts
 				piSum			;^.(*2.+1)&.(2 )%.(*@.8/)&.+@	NN						;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
