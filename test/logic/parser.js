@@ -8,9 +8,12 @@ export default () => {
 	describe("Parser", () => {
 		/*ts
 			one			1
+			oneB		one
 			add			one+2
-			subtract	9-5
+			// subtract	9-5
 		*/
-		var o =0;
+		it("one 1", () => expect(one).eql(1));
+		it("oneB one", () => expect(oneB).eql(1));
+		it("add one+2", () => expect(add).eql(3));
 	});
 };

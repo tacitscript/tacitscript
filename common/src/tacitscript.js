@@ -991,6 +991,8 @@ const ts = {
 	apply,
 	typeOf,
 	toString,
+	leftApply,
+	rightApply,
 
 	plus,
 	tilde,

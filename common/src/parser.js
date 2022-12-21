@@ -9,11 +9,17 @@ const filter = function(check) {return function(array) {return array.filter(chec
 const any = function(check) {return function(array) {return array.some(check);};};
 const none = function(check) {return function(array) {return !array.some(check);};};
 const last = function(vector) {return vector[vector.length - 1];};
+const first = vector => vector[0];
 const flatten = reduce(function(acc, value) {return acc.concat(Array.isArray(value) ? flatten(value) : [value]);})([]);
 const contains = function(value) {return function(array) {return array.includes(value);};};
 const omit = function(keys) {return function(object) {const copy = Object.assign({}, object); keys.forEach(function(key) {delete copy[key];}); return copy;};};
 const fromPairs = function(pairs) {return pairs.reduce(function(prev, curr) {prev[curr[0]] = curr[1]; return prev;}, {});};
 const equals = function(left) {return function(right) {return left === right;}};
+const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
+const unnest = arrays => {let result = [], length = arrays.length; for (let i = 0; i < length; i += 1) Array.prototype.push.apply(result, arrays[i]); return result;};
+const values = obj => Object.values(obj);
+const slice = (...args) => array => array.slice.apply(array, args);
+const identity = x => x;
 
 //==================================================================
 // type utilities
@@ -133,7 +139,7 @@ const applySymbols = function(left, right) {
 	return "ts.apply(" + left + ", " + right + ")";
 };
 const mergeBlocks = function(details) {return details.blocks.concat(details.currentBlock.length ? [details.currentBlock] : []);};
-const processSymbols = function(symbols, acc, userDefinitions) {
+const processSymbols = function(symbols, types, userDefinitions) {
 	if (Array.isArray(symbols)) {
 		return pipe(
 			// separate into space delimited blocks
@@ -145,14 +151,14 @@ const processSymbols = function(symbols, acc, userDefinitions) {
 				}
 			})({currentBlock: [], blocks: []}),
 			mergeBlocks,
-			map(reduce(function(acc, symbol) {return applySymbols(acc, lookup({symbol: symbol, userDefinitions: userDefinitions}));})(undefined)),
+			map(reduce(function(acc, symbol) {return applySymbols(acc, {symbol: symbol, types: types, userDefinitions: userDefinitions});})(undefined)),
 			function(terms) {
 				// if any spaces, return the array, otherwise, return terms[0];
 				return any(matches(/^\s+$/))(symbols) ? stringify(map(stringify)(terms)) : stringify(terms[0]);
 			}
 		)(symbols);
 	} else {
-		return applySymbols(acc, lookup({symbol: symbols, userDefinitions: userDefinitions}));
+		return applySymbols(undefined, {symbol: symbols, types: types, userDefinitions: userDefinitions});
 	}
 };
 const deprioritizeMedialDots = function(symbols) {
@@ -168,7 +174,7 @@ const deprioritizeMedialDots = function(symbols) {
 	return current.length ? segments.concat([current]) : segments;
 };
 const deprioritizeDots = function(symbols) {
-	if (symbols.length < 2) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
+	if (symbols.length < 2) return [Array.isArray(symbols[0]) ? deprioritizeDots(symbols[0]) : symbols[0]];
 	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
 	if ([".", ","].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
 	if ([".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, -1)).concat([symbols[symbols.length - 1]]);
@@ -214,9 +220,9 @@ const prioritizeSpaces = function(symbols) {
 
 	return result;
 };
-const lookup = function(symbol) {
+const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
-		case "+": return "ts.plus";
+		case "+": return {definition: "ts.plus", types: ["000"]};
 		case "-": return "ts.minus";
 		case ".": return "ts.dot";
 		case "[": return "ts.bracketleft";
@@ -247,19 +253,77 @@ const lookup = function(symbol) {
 		case "!": return "ts.bang";
 	}
 
-	return symbol;
+	const existing = userDefinition[symbol];
+
+	if (existing) return {definition: symbol, types: existing.types};
+	if (symbol == +symbol) return {definition: symbol, types: ["0"]};
+
+	console.error("Unknown symbol", symbol);
 };
-const getDefinition = function(symbols) {
-	if (!symbols.length) return false;
+const apply = ({left, leftTypes, right, rightTypes}) => {
+	const extractUnique = getId => pipe(
+		reduce((acc, types) => ({...acc, [getId(types)]: types}))({}),
+		values,
+	);
+	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
+
+	// binary left application
+	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && ((leftType.length - 1) == rightType[0]))(allCombinations);
+	if (binaryLeftSolutions.length) {
+		const definition = `ts.leftApply(${left}, ${right})`;
+		const types = pipe(
+			map(pipe(last, slice(1))),
+			extractUnique(identity),
+		)(binaryLeftSolutions);
+
+		return {definition, types};
+	}
+
+	// binary right application
+	// const binaryRightSolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
+	// if (binaryRightSolutions.length) {
+	// 	//const types =  map(([leftType]) => splice(leftType, 1, 1))(binaryRightSolutions);
+	// 	let result = rightApply(left, right);
+
+	// 	if (isFunction(result)) {
+	// 		if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
+	// 	}
+
+	// 	return result;
+	// }
+
+	// unary application
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && (leftType[0] == (rightType.length - 1)))(allCombinations);
+	if (unarySolutions.length) {
+		const definition = `${left}(${right})`;
+		const types = pipe(
+			map(pipe(first, last)),
+			extractUnique(identity),
+		)(unarySolutions);
+
+		return {definition, types};
+	}
+
+	let leftString = "Fn";
+	let rightString = "Fn";
+
+	try {leftString = toString(left);} catch (_) {}
+	try {rightString = toString(right);} catch(_) {}
+
+	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
+};
+const getDefinition = function(symbols, userDefinitions) {
+	if (!symbols.length) return {definition: false, types: ["0"]};
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
 
-		if (Array.isArray(symbol)) return getDefinition(symbol);
-		if (symbol.match(/^\s+$/)) return "[" + symbol + "]";
-		if (typeof symbol === "string") {
-			if (symbol.startsWith("\"") && symbol.endsWith("\"")) return "`" + symbol.slice(1, -1) + "`";
-			return lookup(symbol);
-		}
+		if (Array.isArray(symbol)) return getDefinition(symbol, userDefinitions);
+		// if (symbol.match(/^\s+$/)) return "[" + symbol + "]"; // TODO: not sure what this is
+		// if (typeof symbol === "string") {
+		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [0]};
+
+		return lookupSymbol(symbol, userDefinitions);
+		// }
 	}
 
 	return pipe(
@@ -267,27 +331,29 @@ const getDefinition = function(symbols) {
 			if (matches(/^\s+$/)(symbol)) {
 				return {sections: details.sections.slice(0, -1).concat((details.sections.length ? details.sections[details.sections.length - 1] : "") + symbol), append: true};
 			}
-			if (details.append) return {sections: details.sections.concat([getDefinition([symbol])]), append: false};
+			if (details.append) {
+				const {definition, types} = getDefinition([symbol], userDefinitions);
+
+				return {sections: details.sections.concat([definition]), append: false, types};
+			}
 
 			const left = details.sections[details.sections.length - 1];
-			const right = getDefinition([symbol]);
+			const {definition: right, types: rightTypes} = getDefinition([symbol], userDefinitions);
+			const {definition, types} = apply({left, leftTypes: details.types, right, rightTypes});
 
-			const definition = (function() {
-				if ((left === "ts.underscore") && isNumber(right)) return "-" + right;
-				if ((left === "ts.braceleft") && isString(right)) return right.slice(1, -1).replace(/\\"/g, '"');
-
-				return "ts.apply(" + left + ", " + right + ")";
-			})();
-
-			return {sections: details.sections.slice(0, -1).concat([definition]), append: false};
+			return {sections: details.sections.slice(0, -1).concat([definition]), append: false, types};
 		})({
 			sections: [],
-			append: true
+			append: true,
+			types: [],
 		}),
 		function(details) {
 			const processedSections = details.sections[0].match(/^\s+$/) ? [details.sections[0] + details.sections[1]].concat(details.sections.slice(2)) : details.sections;
 
-			return (details.append || (processedSections.length > 1)) ? "[" + processedSections.join(", ") + "]" : processedSections[0];
+			return {
+				definition: (details.append || (processedSections.length > 1)) ? "[" + processedSections.join(", ") + "]" : processedSections[0],
+				types: details.types,
+			};
 		}
 	)(symbols);
 };
@@ -370,16 +436,17 @@ const stringify = function(value) {
 	return value;
 };
 
-const getDefinitionJs = function(definitionSymbols) {
+const getDefinitionJs = function(definitionSymbols, userDefinitions) {
 	const spacePrioritizedSymbols = prioritizeSpaces(definitionSymbols);
 	console.log("spacePrioritizedSymbols", JSON.stringify(spacePrioritizedSymbols));
 	const processedSymbols = deprioritizeDots(spacePrioritizedSymbols);
 	console.log("processedSymbols", JSON.stringify(processedSymbols));
 
-	const definition = getDefinition(processedSymbols);
+	const {definition, types} = getDefinition(processedSymbols, userDefinitions);
 	console.log("definition", definition);
+	console.log("types", types);
 
-	return {definition: definition, processedSymbols: processedSymbols};
+	return {definition: definition, types: types, processedSymbols: processedSymbols};
 };
 
 const processTsBlock = function(userDefinitions) {return function(ts) {
@@ -400,7 +467,7 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 			filter(function(symbol) {return (typeof symbol === "string") && symbol.includes("\n");}),
 			join("")
 		)(symbols.slice(firstWhitespace));
-		const definition = getDefinitionJs(definitionSymbols).definition;
+		const definition = getDefinitionJs(definitionSymbols, updatedDefinitions).definition;
 
 		js += definition + postDefinitionWhitespace;
 	} else {
@@ -416,16 +483,17 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const flattenedSymbols = flatten(definitionSymbols);
 						const isRecursive = contains(variable)(flattenedSymbols);
 
-						const result = getDefinitionJs(definitionSymbols);
+						const result = getDefinitionJs(definitionSymbols, updatedDefinitions);
 						const definition = result.definition;
-						const processedSymbols = result.processedSymbols;
+						// const processedSymbols = result.processedSymbols;
+						// const types = result.types;
 
-						const solution = processSymbols(processedSymbols, undefined, updatedDefinitions);
+						//const solution = processSymbols(processedSymbols, types, updatedDefinitions);
 						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x); " + variable + '.types = [[["V", "V"], "V"], ["V", "V"]];' : "const " + variable + " =" + definitionSeparator + definition + ";";
 
 						const noComment = symbol.includes("\n");
 						js += declaration + (noComment ? "" : " //");
-						updatedDefinitions = Object.assign({}, updatedDefinitions, fromPairs([[variable, solution]]));
+						updatedDefinitions = Object.assign({}, updatedDefinitions, fromPairs([[variable, result]]));
 					}
 
 					if (symbol.includes("\n")) {
