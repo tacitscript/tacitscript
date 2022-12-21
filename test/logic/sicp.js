@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("gcd (].=0)?[|((].:)$(([.%)$]).gcd)", () => {
+			/*ts
+				gcd				(].=0)?[|((].:)$(([.%)$]).gcd)			AN
+				// gcd				(].=0)?[|(].: $ ([.% $ ]).gcd)
+			*/
+			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
+		});
+
 		describe("fastExp (].=0?(1`))|((].(%2.=0))?(([.:)$(]./2).fastExp.^2))|(([.*)$(([.:)$(].-1).fastExp))", () => {
 			/*ts
 				square			^2																					NN
