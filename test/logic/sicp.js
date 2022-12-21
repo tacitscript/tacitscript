@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("fastExp (].=0?(1`))|((].(%2.=0))?(([.:)$(]./2).fastExp.^2))|(([.*)$(([.:)$(].-1).fastExp))", () => {
+			/*ts
+				square			^2																					NN
+				isEven			].(%2.=0)																			NB
+				ifZeroOne		].=0?(1`)																			N(VN)
+				fastExp			ifZeroOne|(isEven?(([.:)$(]./2).fastExp.square))|(([.*)$(([.:)$(].-1).fastExp))		NNN
+				// fastExp		ifZeroOne|(isEven ? ([.:)$(]./2).fastExp.square)|([.* $ ([.:)$(].-1).fastExp)		NNN
+			*/
+			it("2fastExp7=128", () => expect(fastExp([2, 7])).eql(128));
+		});
+
 		describe("expt", () => {
 			/*ts
 				testA					[.`,^
