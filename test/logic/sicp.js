@@ -3,7 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
-		describe("sumIntegers", () => {
+		describe("sumCubes :.([.+,^ $ _.-@.+1).^3&.+@", () => {
+			/*ts
+				sumCubes		:.([.+,^ $ _.-@.+1).^3&.+@		NNN						:.([.+ _.-$.+1).^$.^3@.+$
+			*/
+			it("2sumCubes4=99", () => expect(sumCubes(2, 4)).eql(99));
+		});
+
+		describe("sumIntegers :.([.+,^ $ _.-@.+1).+@", () => {
 			/*ts
 				sumIntegers		:.([.+,^ $ _.-@.+1).+@			NNN						:.([.+ _.-$.+1).^$.+$
 			*/
