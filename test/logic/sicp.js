@@ -22,30 +22,27 @@ export default () => {
 			it("(1 2)=[1, 2]", () => expect(array).eql([1, 2]));
 		});
 
-		describe("gcd (].=0)?[|((].:)$(([.%)$]).gcd)", () => {
+		describe("gcd (].=0)?[|((].: $ ([.% $ ])).gcd)", () => {
 			/*ts
-				gcd				(].=0)?[|((].:)$(([.%)$]).gcd)			AN
-				// gcd				(].=0)?[|((].: $ ([.% $ ])).gcd)
+				gcd				(].=0)?[|((].: $ ([.% $ ])).gcd)			AN
 			*/
 			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
 		});
 
-		describe("fastExp (].=0?(1`))|((].(%2.=0))?(([.:)$(]./2).fastExp.^2))|(([.*)$(([.:)$(].-1).fastExp))", () => {
+		describe("fastExp ifZeroOne|(isEven ? ([.: $ ]./2).fastExp.square)|([.* $ ([.: $ ].-1).fastExp)", () => {
 			/*ts
 				square			^2																					NN
 				isEven			].(%2.=0)																			NB
 				ifZeroOne		].=0?(1`)																			N(VN)
-				fastExp			ifZeroOne|(isEven?(([.:)$(]./2).fastExp.square))|(([.*)$(([.:)$(].-1).fastExp))		NNN
-				// fastExp		ifZeroOne|(isEven ? ([.: $ ]./2).fastExp.square)|([.* $ ([.: $ ].-1).fastExp)		NNN
+				fastExp			ifZeroOne|(isEven ? ([.: $ ]./2).fastExp.square)|([.* $ ([.: $ ].-1).fastExp)		NNN
 			*/
 			it("2fastExp7=128", () => expect(fastExp([2, 7])).eql(128));
 		});
 
-		describe("expt", () => {
+		describe("expt (].=0 ? 1`)|([.* $ ([.: $ ].-1).expt)", () => {
 			/*ts
 				testA					[.`,^
-				expt					(].=0?(1`))|(([.*)$(([.:)$(].-1).expt))					NNN
-				// 						(].=0 ? 1`)|([.* $ ([.: $ ].-1).expt)
+				expt					(].=0 ? 1`)|([.* $ ([.: $ ].-1).expt)					NNN
 				exptGen					:.([.`,^)$].*@											NNN
 				test					[.`
 			*/
