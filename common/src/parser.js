@@ -223,14 +223,14 @@ const prioritizeSpaces = function(symbols) {
 };
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
-		case "+": return {definition: "ts.plus", types: ["000"]};
-		case "-": return {definition: "ts.minus", types: ["000"]};
+		case "+": return {definition: "ts.plus", types: [[[], [], []]]};
+		case "-": return {definition: "ts.minus", types: [[[], [], []]]};
 		case ".": return "ts.dot";
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
 		case "<": return "ts.less";
-		case "/": return {definition: "ts.slash", types: ["000"]};
+		case "/": return {definition: "ts.slash", types: [[[], [], []]]};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
 		case ":": return "ts.colon";
@@ -243,7 +243,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "{": return "ts.braceleft";
 		case "'": return "ts.apostrophe";
 		case ";": return "ts.semicolon";
-		case ",": return "ts.comma";
+		case ",": return {definition: "ts.comma", types: [[[], [[], []], []]]};
 		case "=": return "ts.equal";
 		case "|": return "ts.bar";
 		case "%": return "ts.percent";
@@ -257,7 +257,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 	const existing = userDefinition[symbol];
 
 	if (existing) return {definition: symbol, types: existing.types};
-	if (symbol == +symbol) return {definition: symbol, types: ["0"]};
+	if (symbol == +symbol) return {definition: symbol, types: [[]]};
 
 	console.error("Unknown symbol", symbol);
 };
@@ -269,7 +269,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
 
 	// binary left application
-	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && ((leftType.length - 1) == rightType[0]))(allCombinations);
+	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && (leftType.length === (rightType[0].length)))(allCombinations);
 	if (binaryLeftSolutions.length) {
 		const definition = `ts.leftApply(${left}, ${right})`;
 		const types = pipe(
@@ -281,11 +281,11 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	}
 
 	// binary right application
-	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && (leftType[1] == (rightType.length - 1)))(allCombinations);
+	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && (leftType[1].length === rightType.length))(allCombinations);
 	if (binaryRightSolutions.length) {
 		const definition = `ts.rightApply(${left}, ${right})`;
 		const types = pipe(
-			map(pipe(first, type => `${type[0]}${type[2]}`)),
+			map(pipe(first, type => splice(type, 1, 1))),
 			extractUnique(identity),
 		)(binaryRightSolutions);
 
@@ -293,7 +293,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	}
 
 	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && (leftType[0] == (rightType.length - 1)))(allCombinations);
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && (leftType[0].length === rightType.length))(allCombinations);
 	if (unarySolutions.length) {
 		const definition = `${left}(${right})`;
 		const types = pipe(

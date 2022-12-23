@@ -470,17 +470,17 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
-	if (isValue(left) && isUnaryFunction(right)) return right(left);
-	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);
-	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));
-	if (isBinaryFunction(left) && isBinaryFunction(right)) return (x, y) => right(leftApply(x, left), y);
+	if (isValue(left) && isUnaryFunction(right)) return right(left);										// applyToUnary 3,+1=4
+	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);							// applyToBinary (1,/)2=0.5
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));			// binaryUnaryApply (+,^3)1=(1 2 3)
+	if (isBinaryFunction(left) && isBinaryFunction(right)) return (x, y) => right(leftApply(x, left), y);	// binaryBinaryApply 1(+,^)3=(1 2 3)
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
-	["X", ["X", "Y"], "Y"], // applyTo (unary) 3,+1=4
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], // applyTo (binary) (3,-)2=1
-	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply
-	[["X", "Y", "Z"], [["Y", "Z"], "W", "U"], ["X", "W", "U"]], // binaryBinaryApply
+	["X", ["X", "Y"], "Y"], 
+	["X", ["X", "Y", "Z"], ["Y", "Z"]], 
+	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]],
+	[["X", "Y", "Z"], [["Y", "Z"], "W", "U"], ["X", "W", "U"]],
 ];
 let dot = (left, right) => {
 	const typeCombinations = combinations(types(left))(types(right));
