@@ -243,12 +243,12 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "{": return "ts.braceleft";
 		case "'": return "ts.apostrophe";
 		case ";": return "ts.semicolon";
-		case ",": return {definition: "ts.comma", types: [[[], [[], []], []]]};
+		case ",": return {definition: "ts.comma", types: [[[], [[], []], []] /* applyToUnary */, [[], [[], [], []], [[], []]] /* applyToBinary */, [[[], [], []], [[[], []], []], [[], []]] /* binaryUnaryApply */, [[[], [], []], [[[], []], [], []], [[], [], []]] /* binaryBinaryApply */]};
 		case "=": return "ts.equal";
 		case "|": return "ts.bar";
 		case "%": return "ts.percent";
 		case "}": return "ts.braceright";
-		case "^": return "ts.hat";
+		case "^": return {definition: "ts.hat", types: [[[], [], []] /* power */, [[[], []], [], []] /* generate */]};
 		case "&": return "ts.ampersand";
 		case ">": return "ts.greater";
 		case "!": return "ts.bang";
@@ -261,6 +261,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 
 	console.error("Unknown symbol", symbol);
 };
+const typeMatch = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const apply = ({left, leftTypes, right, rightTypes}) => {
 	const extractUnique = getId => pipe(
 		reduce((acc, types) => ({...acc, [getId(types)]: types}))({}),
@@ -269,7 +270,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
 
 	// binary left application
-	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && (leftType.length === (rightType[0].length)))(allCombinations);
+	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && typeMatch(leftType, rightType[0]))(allCombinations);
 	if (binaryLeftSolutions.length) {
 		const definition = `ts.leftApply(${left}, ${right})`;
 		const types = pipe(
@@ -281,7 +282,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	}
 
 	// binary right application
-	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && (leftType[1].length === rightType.length))(allCombinations);
+	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && typeMatch(leftType[1], rightType))(allCombinations);
 	if (binaryRightSolutions.length) {
 		const definition = `ts.rightApply(${left}, ${right})`;
 		const types = pipe(
@@ -293,7 +294,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	}
 
 	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && (leftType[0].length === rightType.length))(allCombinations);
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
 	if (unarySolutions.length) {
 		const definition = `${left}(${right})`;
 		const types = pipe(
