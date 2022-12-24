@@ -192,11 +192,27 @@ const prioritizeSpaces = function(symbols) {
 
 	return result;
 };
+const applyCharacter = (character, result) => {
+	switch (character) {
+		case "0": result.push([]); break;
+		case "1": result.push([[], []]); break;
+		case "2": result.push([[], [], []]); break;
+	}
+
+};
+const getType = string => {
+	const characters = string.split("");
+	const result = [];
+
+	characters.forEach(character => applyCharacter(character, result))
+
+	return result;
+};
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
-		case "+": return {definition: "ts.plus", types: [[[], [], []] /* stringConcat, add, arrayConcat */]};
+		case "+": return {definition: "ts.plus", types: map(getType)(["000" /* stringConcat, add, arrayConcat */])};
 		case "-": return {definition: "ts.minus", types: [[[], [], []]]};
-		case ".": return {definition: "ts.dot", types: [[[[], []], [[], []], [[], []]] /* pipe */, [[[], []], [[], [], []], [[], [], []]] /* unaryBinaryPipe */, [[[], [], []], [[], []], [[], [], []]] /* binaryUnaryPipe */]};
+		case ".": return {definition: "ts.dot", types: map(getType)(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
