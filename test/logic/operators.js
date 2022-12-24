@@ -10,10 +10,10 @@ export default () => {
 				arrayConcat				(1 2 3)+(4 5 6)
 				merge					\(("a" 1) ("b" 2))+(\(("b" 3) ))
 			*/
-			it('000 stringConcat "High"+5', () => expect(stringConcat).eql("High5"));
+			it('000 stringConcat "High"+5="High5', () => expect(stringConcat).eql("High5"));
 			it('000 add 2+"3"=5', () => expect(add).eql(5));
 			it("000 arrayConcat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)", () => expect(arrayConcat).eql([1, 2, 3, 4, 5, 6]));
-			it('000 merge \(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))', () => expect(merge).eql({a: 1, b: 3}));
+			it('000 merge \\(("a" 1) ("b" 2))+(\\(("b" 3))=\\(("a" 1) ("b" 3))', () => expect(merge).eql({a: 1, b: 3}));
 		});
 
 		describe("dot (.)", () => {
