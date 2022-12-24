@@ -201,7 +201,13 @@ const applyCharacter = ({remaining: incomingRemaining, current}) => {
 		case "1": return {remaining, current: [...current, [[], []]]}; break;
 		case "2": return {remaining, current: [...current, [[], [], []]]}; break;
 		case "(": {
-			const subResult = [];
+			let subResult = {remaining, current: []};
+
+			while (subResult.remaining[0] !== ")") {
+				subResult = applyCharacter(subResult);
+			}
+
+			return {remaining: subResult.remaining.slice(1), current: [...current, subResult.current]};
 		}
 	}
 };
@@ -236,7 +242,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "{": return "ts.braceleft";
 		case "'": return "ts.apostrophe";
 		case ";": return "ts.semicolon";
-		case ",": return {definition: "ts.comma", types: [[[], [[], []], []] /* applyToUnary */, [[], [[], [], []], [[], []]] /* applyToBinary */, [[[], [], []], [[[], []], []], [[], []]] /* binaryUnaryApply */, [[[], [], []], [[[], []], [], []], [[], [], []]] /* binaryBinaryApply */]};
+		case ",": return {definition: "ts.comma", types: map(getType)(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return "ts.equal";
 		case "|": return "ts.bar";
 		case "%": return "ts.percent";
@@ -554,7 +560,7 @@ const expandJs = function(blocks, userDefinitions) {
 const ts2es6 = function(source) {
 	const parsed = parse(source);
 	const js = expandJs(parsed.blocks, {});
-
+	getType("2(10)1");
 	return js;
 };
 
