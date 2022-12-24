@@ -290,7 +290,8 @@ const getDefinition = function(symbols, userDefinitions) {
 		const symbol = symbols[0];
 
 		if (Array.isArray(symbol)) return getDefinition(symbol, userDefinitions);
-		// if (symbol.match(/^\s+$/)) return "[" + symbol + "]"; // TODO: not sure what this is
+		if (symbol.match(/^\s+$/)) return {definition: "[" + symbol + "]", types: [[]]}; // empty array
+
 		// if (typeof symbol === "string") {
 		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [[]]};
 
