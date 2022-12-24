@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("slash (/)", () => {
+			/*ts
+				divide					6/2
+			*/
+			it("000 divide 6/2=3", () => expect(divide).eql(3));
+		});
+
 		describe("plus (+)", () => {
 			/*ts
 				stringConcat			"High"+5

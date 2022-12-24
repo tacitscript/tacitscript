@@ -229,7 +229,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
 		case "<": return "ts.less";
-		case "/": return {definition: "ts.slash", types: [[[], [], []]]};
+		case "/": return {definition: "ts.slash", types: map(getType)(["000" /* divide */])};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
 		case ":": return {definition: "ts.colon", types: [[[], [], []]]};

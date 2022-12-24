@@ -503,10 +503,6 @@ let plus = (left, right) => {
 	errorBinary({left, right, operator: "+"});
 };
 let slash = (left, right) => {
-	if (isUnaryFunction(left) && isArray(right)) {
-		// (VS)AO groupBy [/("ann" "ben" "ade")
-		return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
-	}
 	if (isNumber(left) && isNumber(right)) {
 		if (right === 0) return undefined;
 
@@ -514,10 +510,7 @@ let slash = (left, right) => {
 	}
 
 	errorBinary({left, right, operator: "/"});
-}; slash.types = [
-	["N", "N", "N"], // divide 8/2=4
-	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
-];
+};
 let less = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
@@ -753,9 +746,9 @@ let percent = (left, right) => {
 	else if (isString(left) && isString(right)) {
 		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
 	}
-	else if (isUnaryFunction(left)) {
-		if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: []}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
-		else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
+	else if (isUnaryFunction(left) && isArray(right)) {
+		// (VS)AO groupBy [/("ann" "ben" "ade")
+		return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
 	}
 	else if (isBinaryFunction(left)) {
 		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
@@ -770,8 +763,7 @@ let percent = (left, right) => {
 	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
 	["A", "S", "A"], // chunk (1 2 0)%"abcde"
 	["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
-	[["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
-	[["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
+	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
 	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
 ];
