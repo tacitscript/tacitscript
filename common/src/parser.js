@@ -302,7 +302,7 @@ const getDefinition = function(symbols, userDefinitions) {
 	return pipe(
 		reduce(function(details, symbol) {
 			if (matches(/^\s+$/)(symbol)) {
-				return {sections: details.sections.slice(0, -1).concat((details.sections.length ? details.sections[details.sections.length - 1] : "") + symbol), append: true};
+				return {sections: details.sections.slice(0, -1).concat((details.sections.length ? details.sections[details.sections.length - 1] : "") + symbol), append: true, types: details.types};
 			}
 			if (details.append) {
 				const {definition, types} = getDefinition([symbol], userDefinitions);

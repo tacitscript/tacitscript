@@ -14,6 +14,7 @@ export default () => {
 			array		(1 2 3)
 			singleElem	(1 )
 			emptyArray	( )
+			subArray	((1 2) )
 		*/
 		it("one 1", () => expect(one).eql(1));
 		it("oneB one", () => expect(oneB).eql(1));
@@ -25,5 +26,6 @@ export default () => {
 		it("array (1 2 3)", () => expect(array).eql([1, 2, 3]));
 		it("singleElem (1 )", () => expect(singleElem).eql([1]));
 		it("emptyArray ( )", () => expect(emptyArray).eql([]));
+		it("subArray ((1 2) )", () => expect(subArray).eql([[1, 2]]));
 	});
 };
