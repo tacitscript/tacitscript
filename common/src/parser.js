@@ -133,35 +133,6 @@ const parse = function(remaining) {
 //==========================================================
 // tacitscript conversion code
 
-const applySymbols = function(left, right) {
-	// first symbol in evaluation
-	if (!left) return right;
-
-	return "ts.apply(" + left + ", " + right + ")";
-};
-const mergeBlocks = function(details) {return details.blocks.concat(details.currentBlock.length ? [details.currentBlock] : []);};
-const processSymbols = function(symbols, types, userDefinitions) {
-	if (Array.isArray(symbols)) {
-		return pipe(
-			// separate into space delimited blocks
-			reduce(function(details, symbol) {
-				if ((typeof symbol === "string") && symbol.match(/^\s+$/)) {
-					return {currentBlock: [], blocks: mergeBlocks(details)};
-				} else {
-					return {currentBlock: details.currentBlock.concat([symbol]), blocks: details.blocks};
-				}
-			})({currentBlock: [], blocks: []}),
-			mergeBlocks,
-			map(reduce(function(acc, symbol) {return applySymbols(acc, {symbol: symbol, types: types, userDefinitions: userDefinitions});})(undefined)),
-			function(terms) {
-				// if any spaces, return the array, otherwise, return terms[0];
-				return any(matches(/^\s+$/))(symbols) ? stringify(map(stringify)(terms)) : stringify(terms[0]);
-			}
-		)(symbols);
-	} else {
-		return applySymbols(undefined, {symbol: symbols, types: types, userDefinitions: userDefinitions});
-	}
-};
 const deprioritizeMedialDots = function(symbols) {
 	const data = reduce(function(details, symbol) {
 		if (Array.isArray(symbol)) return {segments: details.segments, current: details.current.concat(deprioritizeDots(symbol))};
@@ -223,7 +194,7 @@ const prioritizeSpaces = function(symbols) {
 };
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
-		case "+": return {definition: "ts.plus", types: [[[], [], []]]};
+		case "+": return {definition: "ts.plus", types: [[[], [], []] /* stringConcat, add, arrayConcat */]};
 		case "-": return {definition: "ts.minus", types: [[[], [], []]]};
 		case ".": return {definition: "ts.dot", types: [[[[], []], [[], []], [[], []]] /* pipe */, [[[], []], [[], [], []], [[], [], []]] /* unaryBinaryPipe */, [[[], [], []], [[], []], [[], [], []]] /* binaryUnaryPipe */]};
 		case "[": return "ts.bracketleft";
@@ -234,7 +205,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
 		case ":": return {definition: "ts.colon", types: [[[], [], []]]};
-		case "\\": return "ts.backslash";
+		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
 		case "?": return "ts.question";
 		case "@": return {definition: "ts.atsign", types: [[[[], [], []], [], []]]};
 		case "*": return "ts.asterisk";
@@ -314,14 +285,14 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
 };
 const getDefinition = function(symbols, userDefinitions) {
-	if (!symbols.length) return {definition: false, types: ["0"]};
+	if (!symbols.length) return {definition: false, types: [[]]};
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
 
 		if (Array.isArray(symbol)) return getDefinition(symbol, userDefinitions);
 		// if (symbol.match(/^\s+$/)) return "[" + symbol + "]"; // TODO: not sure what this is
 		// if (typeof symbol === "string") {
-		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [0]};
+		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [[]]};
 
 		return lookupSymbol(symbol, userDefinitions);
 		// }

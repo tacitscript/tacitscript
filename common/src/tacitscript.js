@@ -485,28 +485,23 @@ const dot = (left, right) => {
 	errorBinary({left, right, operator: "."});
 };
 let plus = (left, right) => {
-	if (isString(left) && isValue(right)) {
+	if (isString(left) && isValue(right)) {																	// stringConcat "High"+5="High5"
 		try {
-			return `${left}${toString(right)}`; // SVS stringConcat ""+4
+			return `${left}${toString(right)}`; 
 		} catch (_) {
 			return undefined;
 		}
 	}
-	if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
-	if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
-	if (isNumber(left) && isValue(right)) { // NVN add 2+"3"
+	if (isNumber(left) && isValue(right)) {																	// add 2+"3"=5
 		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;
 
 		return left + rightValue;
 	}
+	if (isArray(left) && isArray(right)) return [...left, ...right];										// arrayConcat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)
+	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);									// merge \(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))
 
 	errorBinary({left, right, operator: "+"});
-}; plus.types = [
-	["N", "V", "N"], // add 2+3=5
-	["S", "V", "S"], // concat ""+4="4"
-	["A", "A", "A"], // concat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)
-	["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
-];
+};
 let slash = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) {
 		// (VS)AO groupBy [/("ann" "ben" "ade")
