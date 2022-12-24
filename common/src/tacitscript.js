@@ -503,10 +503,10 @@ let plus = (left, right) => {
 	errorBinary({left, right, operator: "+"});
 };
 let slash = (left, right) => {
-	if (isNumber(left) && isNumber(right)) {
+	if (isNumber(left) && isNumber(right)) {																// divide 6/2=3
 		if (right === 0) return undefined;
 
-		return left / right; // NNN divide 8/2
+		return left / right;
 	}
 
 	errorBinary({left, right, operator: "/"});
