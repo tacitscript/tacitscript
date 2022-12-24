@@ -469,30 +469,21 @@ const errorUnary = ({value, operator}) => {
 //----------------------------------------------------------
 // Binary
 
-let comma = (left, right) => {
+const comma = (left, right) => {
 	if (isValue(left) && isUnaryFunction(right)) return right(left);										// applyToUnary 3,+1=4
 	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);							// applyToBinary (1,/)2=0.5
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));			// binaryUnaryApply (+,^3)1=(1 2 3)
 	if (isBinaryFunction(left) && isBinaryFunction(right)) return (x, y) => right(leftApply(x, left), y);	// binaryBinaryApply 1(+,^)3=(1 2 3)
 
 	errorBinary({left, right, operator: ","});
-}; comma.types = [
-	["X", ["X", "Y"], "Y"], 
-	["X", ["X", "Y", "Z"], ["Y", "Z"]], 
-	[["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]],
-	[["X", "Y", "Z"], [["Y", "Z"], "W", "U"], ["X", "W", "U"]],
-];
-let dot = (left, right) => {
+};
+const dot = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// pipe (+1./2)5=3
 	if (isUnaryFunction(left) && isBinaryFunction(right)) return (a, b) => right(left(a), b);				// unaryBinaryPipe 7(+./)4=2
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return  (a, b) => right(left(a, b));				// binaryUnaryPipe 3(:.+@)4=7
 
 	errorBinary({left, right, operator: "."});
-}; dot.types = [
-	[["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
-	[["X", "Y"], ["Y", "Z", "W"], ["X", "Z", "W"]], // unaryBinaryPipe +1./
-	[["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
-];
+};
 let plus = (left, right) => {
 	if (isString(left) && isValue(right)) {
 		try {
