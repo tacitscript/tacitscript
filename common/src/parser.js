@@ -225,7 +225,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: [[[], [], []]]};
 		case "-": return {definition: "ts.minus", types: [[[], [], []]]};
-		case ".": return "ts.dot";
+		case ".": return {definition: "ts.dot", types: [[[[], []], [[], []], [[], []]] /* pipe */, [[[], []], [[], [], []], [[], [], []]] /* unaryBinaryPipe */, [[[], [], []], [[], []], [[], [], []]] /* binaryUnaryPipe */]};
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
@@ -233,10 +233,10 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "/": return {definition: "ts.slash", types: [[[], [], []]]};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
-		case ":": return "ts.colon";
+		case ":": return {definition: "ts.colon", types: [[[], [], []]]};
 		case "\\": return "ts.backslash";
 		case "?": return "ts.question";
-		case "@": return "ts.atsign";
+		case "@": return {definition: "ts.atsign", types: [[[[], [], []], [], []]]};
 		case "*": return "ts.asterisk";
 		case "$": return "ts.dollar";
 		case "`": return "ts.backtick";
