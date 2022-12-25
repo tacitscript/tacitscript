@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("minus (-)", () => {
+			/*ts
+				minus							5-2
+				spliceA							(1 2 3 4)-(5 6 7 8)
+				spliceB							(3 2 "le")-"nucular"
+			*/
+			it('000			NNN					subtract			5-2=3', () => expect(minus).eql(3));
+			it('000			AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
+			it('000			ASS					splice				(3 2 "le")-"nucular"="nuclear"', () => expect(spliceB).eql("nuclear"));
+		});
+
 		describe("greater (>)", () => {
 			/*ts
 				greaterThanA					3>2

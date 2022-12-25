@@ -223,7 +223,7 @@ const getType = string => {
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: map(getType)(["000" /* stringConcat, add, arrayConcat, merge */])};
-		case "-": return {definition: "ts.minus", types: [[[], [], []]]};
+		case "-": return {definition: "ts.minus", types: map(getType)(["000" /* subtract, splice */])};
 		case ".": return {definition: "ts.dot", types: map(getType)(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";

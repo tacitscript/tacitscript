@@ -534,6 +534,10 @@ let greater = (left, right) => {
 	errorBinary({left, right, operator: ">"});
 };
 let minus = (left, right) => {
+	if (isNumber(left) && isNumber(right)) return left - right;												// 000		NNN					subtract			5-2=3
+	if (isArray(left) && isArray(right)) return splice(right, ...left); 									// 000		AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)
+	if (isArray(left) && isString(right))
+		return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]);			// 000		ASS					splice				(3 2 "le")-"nucular"="nuclear"
 	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
 		const {[left]: deletedKey, ...remainder} = right;
 
@@ -542,9 +546,6 @@ let minus = (left, right) => {
 	if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
 		return omit(left)(right);
 	}
-	if (isNumber(left) && isNumber(right)) return left - right; // NNN subtract 5-2
-	if (isArray(left) && isArray(right)) return splice(right, ...left); // AAA splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
-	if (isArray(left) && isString(right)) return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]); // ASS splice (3 2 "le")-"nucular"="nuclear"
 
 	errorBinary({left, right, operator: "-"});
 }; minus.types = [
