@@ -519,8 +519,8 @@ let less = (left, right) => {
 };
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right;	// 000		NNB SSB				greaterThan			3>2=!() "abc">"def"=()
-	if (isArray(left) && (isArray(right) || isObject(right))) {
-		return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
+	if (isUnaryFunction(left) && isArray(right)) {															// 101		(VV)A(AA) (VV)A(OO)	over				+1>(1 )(3 5 7)=(3 6 7) +1>("a" )(\(("a" 2) ))=(`(("a" 3) ))
+		return x => applyOver({path: right, fn: left, container: x});
 	}
 	if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
 		try {
