@@ -8,10 +8,14 @@ export default () => {
 				minus							5-2
 				spliceA							(1 2 3 4)-(5 6 7 8)
 				spliceB							(3 2 "le")-"nucular"
+				omitKey							"a"-(\(("a" 1) ("b" 2)))
+				omitKeys						("a" )-(\(("a" 1) ("b" 2)))
 			*/
 			it('000			NNN					subtract			5-2=3', () => expect(minus).eql(3));
 			it('000			AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
 			it('000			ASS					splice				(3 2 "le")-"nucular"="nuclear"', () => expect(spliceB).eql("nuclear"));
+			it('000			SDD					omitKey				"a"-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKey).eql({b: 2}));
+			it('000			ADD					omitKeys			("a" )-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKeys).eql({b: 2}));
 		});
 
 		describe("greater (>)", () => {
