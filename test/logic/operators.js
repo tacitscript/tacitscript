@@ -5,43 +5,45 @@ export default () => {
 	describe("Operators", () => {
 		describe("greater (>)", () => {
 			/*ts
-				greaterThanA			3>2
-				greaterThanB			"abc">"def"
-				overA					+1>(1 )(3 5 7)
-				overB					+1>("a" )(\(("a" 2) ))
+				greaterThanA					3>2
+				greaterThanB					"abc">"def"
+				overA							+1>(1 )(3 5 7)
+				overB							+1>("a" )(\(("a" 2) ))
+				// tap								3>({"console.log")
 			*/
-			it('000			NNB				greaterThan				3>2=!()', () => expect(greaterThanA).eql(true));
-			it('000			SSB				greaterThan				"abc"<"def"=()', () => expect(greaterThanB).eql(false));
-			it('101			(VV)A(AA)		over					+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
-			it('101			(VV)A(OO)		over					+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
+			it('000			NNB					greaterThan				3>2=!()', () => expect(greaterThanA).eql(true));
+			it('000			SSB					greaterThan				"abc"<"def"=()', () => expect(greaterThanB).eql(false));
+			it('101			(VV)A(AA)			over					+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
+			it('101			(VV)A(OO)			over					+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
+			xit('010		V(VV)V				tap						3>({"console.log")=3', () => expect(tap).eql(3));
 		});
 
 		describe("less (<)", () => {
 			/*ts
-				lessThanA				3<2
-				lessThanB				"abc"<"def"
-				sortA					;<("dan" "sue" "alan")
-				sortB					;<(2 3 1)
+				lessThanA						3<2
+				lessThanB						"abc"<"def"
+				sortA							;<("dan" "sue" "alan")
+				sortB							;<(2 3 1)
 			*/
-			it("000			NNB					lessThan			3<2=()", () => expect(lessThanA).eql(false));
-			it('000			SSB					lessThan			"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
-			it('100			(VS)AA				sort				;<("dan" "sue" "alan")=("alan" "dan" "sue")', () => expect(sortA).eql(["alan", "dan", "sue"]));
-			it('100			(VN)AA				sort				;<(2 3 1)=(1 2 3)', () => expect(sortB).eql([1, 2, 3]));
+			it("000			NNB					lessThan				3<2=()", () => expect(lessThanA).eql(false));
+			it('000			SSB					lessThan				"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
+			it('100			(VS)AA				sort					;<("dan" "sue" "alan")=("alan" "dan" "sue")', () => expect(sortA).eql(["alan", "dan", "sue"]));
+			it('100			(VN)AA				sort					;<(2 3 1)=(1 2 3)', () => expect(sortB).eql([1, 2, 3]));
 		});
 
 		describe("slash (/)", () => {
 			/*ts
-				divide					6/2
+				divide							6/2
 			*/
 			it("000			NNN					divide				6/2=3", () => expect(divide).eql(3));
 		});
 
 		describe("plus (+)", () => {
 			/*ts
-				stringConcat			"High"+5
-				add						2+"3"
-				arrayConcat				(1 2 3)+(4 5 6)
-				merge					\(("a" 1) ("b" 2))+(\(("b" 3) ))
+				stringConcat					"High"+5
+				add								2+"3"
+				arrayConcat						(1 2 3)+(4 5 6)
+				merge							\(("a" 1) ("b" 2))+(\(("b" 3) ))
 			*/
 			it('000			SVS					stringConcat		"High"+5="High5"', () => expect(stringConcat).eql("High5"));
 			it('000			NVN					add					2+"3"=5', () => expect(add).eql(5));
@@ -51,9 +53,9 @@ export default () => {
 
 		describe("dot (.)", () => {
 			/*ts
-				pipe					+1./2
-				unaryBinaryPipe			+1./
-				binaryUnaryPipe			:.+@
+				pipe							+1./2
+				unaryBinaryPipe					+1./
+				binaryUnaryPipe					:.+@
 			*/
 			it("111			(XY)(YZ)(XZ)		pipe				(+1./2)5=3", () => expect(pipe(5)).eql(3));
 			it("122			(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2", () => expect(unaryBinaryPipe(7, 4)).eql(2));
@@ -62,10 +64,10 @@ export default () => {
 
 		describe("comma (,)", () => {
 			/*ts
-				applyToUnary			3,+1
-				applyToBinary			1,/
-				binaryUnaryApply		+,^3
-				binaryBinaryApply		+,^
+				applyToUnary					3,+1
+				applyToBinary					1,/
+				binaryUnaryApply				+,^3
+				binaryBinaryApply				+,^
 			*/
 			it("010 		X(XY)X				applyToUnary		3,+1=4", () => expect(applyToUnary).eql(4));
 			it("021 		X(XYZ)(YZ)			applyToBinary		(1,/)2=0.5", () => expect(applyToBinary(2)).eql(0.5));

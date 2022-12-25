@@ -522,9 +522,9 @@ let greater = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) {															// 101		(VV)A(AA) (VV)A(OO)	over				+1>(1 )(3 5 7)=(3 6 7) +1>("a" )(\(("a" 2) ))=(`(("a" 3) ))
 		return x => applyOver({path: right, fn: left, container: x});
 	}
-	if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
+	if (isValue(left) && isUnaryFunction(right)) {															// 010		V(VV)V				tap					3>({"console.log")
 		try {
-			comma(left, right);
+			right(left);
 		} catch (_) {
 		}
 
@@ -532,13 +532,7 @@ let greater = (left, right) => {
 	}
 
 	errorBinary({left, right, operator: ">"});
-}; greater.types = [
-	["N", "N", "B"], // greaterThan 3>2
-	["S", "S", "B"], // greaterThanString "bcd">"abc"
-	["A", "O", "O"], // over ((1 ) +1)>(3 5 7)
-	["A", "A", "A"], // over (("a" ) +1)>{({"a": 1})
-	["V", ["V", "V"], "V"], // tap 3>({"console.log")
-];
+};
 let minus = (left, right) => {
 	if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
 		const {[left]: deletedKey, ...remainder} = right;
