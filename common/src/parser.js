@@ -228,7 +228,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
-		case "<": return "ts.less";
+		case "<": return {definition: "ts.less", types: map(getType)(["000" /* lessThan */, "100" /* sort */])};
 		case "/": return {definition: "ts.slash", types: map(getType)(["000" /* divide */])};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
@@ -241,7 +241,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "`": return "ts.backtick";
 		case "{": return "ts.braceleft";
 		case "'": return "ts.apostrophe";
-		case ";": return "ts.semicolon";
+		case ";": return {definition: "ts.semicolon", types: map(getType)(["00" /* identity */])};
 		case ",": return {definition: "ts.comma", types: map(getType)(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return "ts.equal";
 		case "|": return "ts.bar";
