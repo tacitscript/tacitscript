@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("greater (>)", () => {
+			/*ts
+				greaterThanA			3>2
+				greaterThanB			"abc">"def"
+			*/
+			it('000			NNB				greaterThan				3>2=!()', () => expect(greaterThanA).eql(true));
+			it('000			SSB				greaterThan				"abc"<"def"=()', () => expect(greaterThanB).eql(false));
+		})
 		describe("less (<)", () => {
 			/*ts
 				lessThanA				3<2

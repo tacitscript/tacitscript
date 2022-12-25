@@ -512,13 +512,13 @@ let slash = (left, right) => {
 	errorBinary({left, right, operator: "/"});
 };
 let less = (left, right) => {
-	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); 								// 100		(VS)AA (VN)AA		sort				;<("dan" "sue" "alan")=("alan" "dan" "sue") ;<(2 3 1)=(1 2 3)
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; 	// 000		NNB SSB				lessThan			3<2=() "abc"<"def"=(!())
+	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); 								// 100		(VS)AA (VN)AA		sort				;<("dan" "sue" "alan")=("alan" "dan" "sue") ;<(2 3 1)=(1 2 3)
 
 	errorBinary({left, right, operator: "<"});
 };
 let greater = (left, right) => {
-	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
+	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right;	// 000		NNB SSB				greaterThan			3>2=!() "abc">"def"=()
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
 	}
