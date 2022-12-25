@@ -9,7 +9,7 @@ export default () => {
 				greaterThanB					"abc">"def"
 				overA							+1>(1 )(3 5 7)
 				overB							+1>("a" )(\(("a" 2) ))
-				// tap								3>({"console.log")
+				// tap							3>({"console.log")
 			*/
 			it('000			NNB					greaterThan				3>2=!()', () => expect(greaterThanA).eql(true));
 			it('000			SSB					greaterThan				"abc"<"def"=()', () => expect(greaterThanB).eql(false));
