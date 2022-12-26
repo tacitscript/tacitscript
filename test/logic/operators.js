@@ -6,8 +6,10 @@ export default () => {
 		describe("hat (^)", () => {
 			/*ts
 				power							2^3
+				generate						;^3
 			*/
 			it('000			NNN					power				2^3=8', () => expect(power).eql(8));
+			it('100			(NV)NA				generate			;^3=(0 1 2)', () => expect(generate).eql([0, 1, 2]));
 		});
 
 		describe("percent (%)", () => {
