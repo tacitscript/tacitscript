@@ -6,8 +6,12 @@ export default () => {
 		describe("bar (|)", () => {
 			/*ts
 				orValue							()|1
+				orPredicate						>0|(%2.=0)
+				orComparator					<|=
 			*/
 			it('000			VVV					orValue				()|1=1', () => expect(orValue).eql(1));
+			it('111			(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(-2)=(!())', () => expect(orPredicate(-2)).eql(true));
+			it('222			(VVV)(VVV)(VVV)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
 		});
 
 		describe("equal (=)", () => {

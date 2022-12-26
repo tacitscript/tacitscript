@@ -646,23 +646,18 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) { // orBinary <|=
+	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// 222		(VVV)(VVV)(VVV)		orComparator		<|=
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 
 			return isFalsey(leftResult) ? right(x, y) : leftResult;
 		};
-		fn.types = types(left); // assume
 
 		return fn;
 	}
 
 	errorBinary({left, right, operator: "|"});
-}; bar.types = [
-	["V", "V", "V"], // orValue !()|()
-	[["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
-	[["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
-];
+};
 let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
