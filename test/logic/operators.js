@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("percent (%)", () => {
+			/*ts
+				remainder						7%2
+			*/
+			it('000			NNN					remainder			7%2=1', () => expect(remainder).eql(1));
+		});
+
 		describe("bar (|)", () => {
 			/*ts
 				orValue							()|1
@@ -10,7 +17,7 @@ export default () => {
 				orComparator					<|=
 			*/
 			it('000			VVV					orValue				()|1=1', () => expect(orValue).eql(1));
-			it('111			(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(-2)=(!())', () => expect(orPredicate(-2)).eql(true));
+			it('111			(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
 			it('222			(VVV)(VVV)(VVV)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
 		});
 

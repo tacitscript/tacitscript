@@ -637,7 +637,7 @@ let equal = (left, right) => {
 };
 let bar = (left, right) => {
 	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;								// 000		VVV					orValue				()|1=1
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(VV)(VV)(VV)		orPredicate			>0|(%2.=0)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(_2)=(!())
 		let fn = x => {
 			const leftResult = left(x);
 
@@ -646,7 +646,7 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// 222		(VVV)(VVV)(VVV)		orComparator		<|=
+	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// 222		(VVV)(VVV)(VVV)		orComparator		3(<|=)2=()
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 
@@ -660,7 +660,7 @@ let bar = (left, right) => {
 };
 let percent = (left, right) => {
 	if (isNumber(left)) {
-		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
+		if (isNumber(right)) return (right === 0) ? undefined : (left % right);								// 000		NNN					remainder			7%2=1
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
 	}
 	else if (isArray(left)) {
