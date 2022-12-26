@@ -668,12 +668,16 @@ let percent = (left, right) => {
 		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""});		// 000		ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")
 		else if (isObject(right)) return pick(left)(right);													// 000		ADD					pick				("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))
 	}
-	else if (isString(left) && isString(right)) {
-		return right.split(left);																			// 000		SSA					chunkWithDelimiter	", "%"1, 2, 3, 4"=("1" "2" "3" "4")
+	else if (isString(left) && isString(right)) {															// 000		SSA					chunkWithDelimiter	", "%"1, 2, 3, 4"=("1" "2" "3" "4")
+		return right.split(left);
 	}
-	else if (isUnaryFunction(left) && isArray(right)) {
-		// (VS)AO groupBy [/("ann" "ben" "ade")
-		return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+	else if (isUnaryFunction(left) && isArray(right)) {														// 100		(VV)AD				groupBy				[%("ann" "ben" "ade")=(\(("a" ("ann" "ade")) ("b" ("ben" ))))
+		return reduce((acc, value) => {
+			const key = left(value);
+			
+			return (acc[key] == undefined) ? {...acc, [key]: [value]} :
+				{...acc, [key]: [...acc[key], value]};
+		})({})(right);
 	}
 	else if (isBinaryFunction(left)) {
 		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)

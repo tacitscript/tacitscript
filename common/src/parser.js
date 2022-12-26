@@ -227,7 +227,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "+": return {definition: "ts.plus", types: getTypes(["000" /* stringConcat, add, arrayConcat, merge */])};
 		case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
-		case "[": return "ts.bracketleft";
+		case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first */])};
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
 		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
@@ -247,7 +247,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
-		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */])};
+		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */])};
 		case "}": return "ts.braceright";
 		case "^": return {definition: "ts.hat", types: [[[], [], []] /* power */, [[[], []], [], []] /* generate */]};
 		case "&": return "ts.ampersand";

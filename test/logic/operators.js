@@ -12,6 +12,7 @@ export default () => {
 				chunkString						(1 2 0)%"abcde"
 				pick							("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))
 				chunkWithDelimeter				", "%"1, 2, 3, 4"
+				groupBy							[%("ann" "ben" "ade")
 			*/
 			it('000			NNN					remainder			7%2=1', () => expect(remainder).eql(1));
 			it('000			NAA					split				2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitArray).eql([[1, 2], [3, 4, 5]]));
@@ -20,6 +21,7 @@ export default () => {
 			it('000			ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")', () => expect(chunkString).eql(["a", "bc", "de"]));
 			it('000			ADD					pick				("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))', () => expect(pick).eql({a: 1, c: 3}));
 			it('000			SSA					chunkWithDelimiter	", "%"1, 2, 3, 4"=("1" "2" "3" "4")', () => expect(chunkWithDelimeter).eql(["1", "2", "3", "4"]));
+			it('100			(VV)AD				groupBy				[%("ann" "ben" "ade")=(\(("a" ("ann" "ade")) ("b" ("ben" ))))', () => expect(groupBy).eql({a: ["ann", "ade"], b: ["ben"]}));
 		});
 
 		describe("bar (|)", () => {
