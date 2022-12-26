@@ -620,18 +620,10 @@ let apostrophe = (left, right) => {
 		return (left >= 0) ? right[left] : right[right.length + left];
 	if (isString(left) && isObject(right)) return right[left];												// 000		SDV					prop				"a"'(\(("a" 1) ))=1
 	if (isArray(left) && (isArray(right) || isObject(right))) return path(left)(right);						// 000		AAV ADV				path				(1 )'(5 6 7)=6 ("a" )'(\(("a" 1) ))=1
-	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
+	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right);								// 100		(VV)AV				find				(%2.=0)'(1 2 3)=2
 
 	errorBinary({left, right, operator: "'"});
-}; apostrophe.types =[
-	["N", "N", "N"], // round 3'3.14196
-	["N", "A", "?"], // at 1'(1 2 3)
-	["N", "S", "S"], // at 1'"abc"
-	["S", "O", "?"], // prop "a"'{({"a": 1})
-	["A", "A", "?"], // path (1 )'(5 6 7)
-	["A", "O", "?"], // path ("a" )'{({"a": 1})
-	[["V", "V"], "A", "V"], // find (%2.=0)'(1 2 3)
-];
+};
 let equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
 

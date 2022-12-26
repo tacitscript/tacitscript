@@ -11,6 +11,7 @@ export default () => {
 				prop							"a"'(\(("a" 1) ))
 				pathArray						(1 )'(5 6 7)
 				pathDictionary					("a" )'(\(("a" 1) ))
+				find							(%2.=0)'(1 2 3)
 			*/
 			it("000			NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
 			it(`000			NAV					at					1'(1 2 3)=2`, () => expect(atArray).eql(2));
@@ -18,6 +19,7 @@ export default () => {
 			it(`000			SDV					prop				"a"'(\(("a" 1) ))=1`, () => expect(prop).eql(1));
 			it(`000			AAV					path				(1 )'(5 6 7)=6`, () => expect(pathArray).eql(6));
 			it(`000			ADV					path				("a" )'(\(("a" 1) ))=1`, () => expect(pathDictionary).eql(1));
+			it(`100			(VV)AV				find				(%2.=0)'(1 2 3)=2`, () => expect(find).eql(2));
 		});
 
 		describe("dollar ($)", () => {
