@@ -555,7 +555,7 @@ let colon = (left, right) => {
 	errorBinary({left, right, operator: ":"});
 };
 let question = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(XB)(XY)(XY)		if					<3?(+1)1=2
 		return x => isTruthy(left(x)) ? right(x) : undefined;
 	}
 	if (isNumber(left) && isNumber(right)) { // random 1?100

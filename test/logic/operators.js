@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("question (?)", () => {
+			/*ts
+				ifCheck							<3?(+1)
+			*/
+			it('111			(XB)(XY)(XY)		if					<3?(+1)1=2', () => expect(ifCheck(1)).eql(2));
+		});
+
 		describe("colon (:)", () => {
 			/*ts
 				pair							1:"string"
