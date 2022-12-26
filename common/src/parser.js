@@ -228,8 +228,8 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first */])};
-		case "]": return "ts.bracketright";
-		case "#": return "ts.hash";
+		case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* length */])};
+		case "#": return {definition: "ts.hash", types: getTypes(["00" /* length */])};
 		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
 		case "~": return "ts.tilde";
@@ -249,7 +249,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
 		case "}": return "ts.braceright";
-		case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */])};
+		case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */, "111" /* scan */])};
 		case "&": return "ts.ampersand";
 		case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
 		case "!": return "ts.bang";
