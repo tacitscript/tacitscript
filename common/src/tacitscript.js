@@ -747,15 +747,11 @@ let bracketleft = value => {
 	errorUnary({operator: "[", value});
 };
 let bracketright = value => {
-	if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
-	if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2
+	if (isVector(value)) return value[value.length - 1];													// 00		AV SS				last				](1 2 3)=3 ]"abc"="c"
+	if (isNumber(value)) return Math.ceil(value);															// 00		NN					ceiling				]1.2=2
 
 	errorUnary({operator: "]", value});
-}; bracketright.types = [
-	["A", "?"], // last ](1 2 3)
-	["S", "S"], // lastInString ]"abc"
-	["N", "N"], // ceiling ]1.2
-];
+};
 let backslash = value => {
 	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
 	if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")

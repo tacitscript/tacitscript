@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("bracketright (])", () => {
+			/*ts
+				lastArray						](1 2 3)
+				lastString						]"abc"
+				ceiling							]1.2
+			*/
+			it('00			AV					last				](1 2 3)=3', () => expect(lastArray).eql(3));
+			it('00			SS					last				]"abc"="c"', () => expect(lastString).eql("c"));
+			it('00			NN					ceiling				]1.2=2', () => expect(ceiling).eql(2));
+		});
+
 		describe("bracketleft ([)", () => {
 			/*ts
 				firstArray						[(1 2 3)
