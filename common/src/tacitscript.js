@@ -661,7 +661,7 @@ let bar = (left, right) => {
 let percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right);								// 000		NNN					remainder			7%2=1
-		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
+		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)];		// 000		NAA NSA				split				2%(1 2 3 4 5)=((1 2) (3 4 5)) 2%"abcde"=("ab" "cde")
 	}
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)

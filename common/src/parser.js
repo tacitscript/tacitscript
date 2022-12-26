@@ -247,7 +247,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
-		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder */])};
+		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split */])};
 		case "}": return "ts.braceright";
 		case "^": return {definition: "ts.hat", types: [[[], [], []] /* power */, [[[], []], [], []] /* generate */]};
 		case "&": return "ts.ampersand";
