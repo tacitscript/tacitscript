@@ -8,10 +8,12 @@ export default () => {
 				round							2'3.176
 				atArray							1'(1 2 3)
 				atString						1'"abc"
+				prop							"a"'(\(("a" 1) ))
 			*/
 			it("000			NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
 			it(`000			NAV					at					1'(1 2 3)=2`, () => expect(atArray).eql(2));
 			it(`000			NSS					at					1'"abc"="b"`, () => expect(atString).eql("b"));
+			it(`000			SDV					prop				"a"'(\(("a" 1) ))=1`, () => expect(prop).eql(1));
 		});
 
 		describe("dollar ($)", () => {
