@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("backtick (`)", () => {
+			/*ts
+				constant						2`3
+			*/
+			it('000			XVX					constant			2`3=2', () => expect(constant).eql(2));
+		});
+
 		describe("ampersand (&)", () => {
 			/*ts
 				andValue						!()&2

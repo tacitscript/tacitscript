@@ -719,12 +719,10 @@ let ampersand = (left, right) => {
 	errorBinary({left, right, operator: "&"});
 };
 let backtick = (left, right) => {
-	return left; // X?X constant 2`3
+	return left;																							// 000		XVX					constant			2`3=2
 
 	errorBinary({left, right, operator: "`"});
-}; backtick.types = [
-	["V", "V", "V"], // constant 2`3
-];
+};
 
 //----------------------------------------------------------
 // Unary

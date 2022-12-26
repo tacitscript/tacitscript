@@ -240,7 +240,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "@": return {definition: "ts.atsign", types: getTypes(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
 		case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
 		case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
-		case "`": return "ts.backtick";
+		case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
 		case "{": return "ts.braceleft";
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
