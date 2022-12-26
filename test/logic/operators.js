@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("hat (^)", () => {
+			/*ts
+				power							2^3
+			*/
+			it('000			NNN					power				2^3=8', () => expect(power).eql(8));
+		});
+
 		describe("percent (%)", () => {
 			/*ts
 				remainder						7%2
