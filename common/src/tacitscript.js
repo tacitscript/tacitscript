@@ -597,30 +597,9 @@ let asterisk = (left, right) => {
 	errorBinary({left, right, operator: "*"});
 };
 let dollar = (left, right) => {
-	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
-		// A$Bx = AxBx
-		const result = x => {
-			// const Ax = apply(left, x);
-			// const Bx = apply(right, x);
-
-			// return apply(Bx, Ax);
-			return right(left(x), x);
-		};
-
-		return result;
-	};
-	if (isBinaryFunction(left) && isUnaryFunction(right)) { // S (+2./)$;(2)=4
-		// A$Bx = xA(Bx)
-		const result = x => {
-			// const xA = apply(x, left);
-			// const Bx = apply(right, x);
-
-			// return apply(xA, Bx);
-			return left(x, right(x));
-		};
-
-		return result;
-	};
+	// A$Bx = xA(Bx)
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => left(x, right(x));					// 211		(XYZ)(XY)(XZ)		S					(+2./)$;(2)=2
+		
 	if (isString(left) && isArray(right)) {
 		try {
 			return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
@@ -629,6 +608,7 @@ let dollar = (left, right) => {
 		}
 	}
 
+	// append
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [

@@ -3,7 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
-		describe("asterix (*)", () => {
+		describe("dollar ($)", () => {
+			/*ts
+				S								(+2./)$;
+			*/
+			it('211			(XYZ)(XY)(XZ)		S					(+2./)$;(2)=4', () => expect(S(2)).eql(2));
+		});
+
+		describe("asterisk (*)", () => {
 			/*ts
 				times							2*3
 			*/

@@ -220,36 +220,37 @@ const getType = string => {
 
 	return result.current;
 };
+const getTypes = map(getType);
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
-		case "+": return {definition: "ts.plus", types: map(getType)(["000" /* stringConcat, add, arrayConcat, merge */])};
-		case "-": return {definition: "ts.minus", types: map(getType)(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
-		case ".": return {definition: "ts.dot", types: map(getType)(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
+		case "+": return {definition: "ts.plus", types: getTypes(["000" /* stringConcat, add, arrayConcat, merge */])};
+		case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
+		case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
 		case "#": return "ts.hash";
-		case "<": return {definition: "ts.less", types: map(getType)(["000" /* lessThan */, "100" /* sort */])};
-		case "/": return {definition: "ts.slash", types: map(getType)(["000" /* divide */])};
+		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
+		case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
-		case ":": return {definition: "ts.colon", types: map(getType)(["000" /* pair */])};
+		case ":": return {definition: "ts.colon", types: getTypes(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
-		case "?": return {definition: "ts.question", types: map(getType)(["111" /* if */, "000" /* random */, "100" /* filter */])};
-		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
-		case "*": return {definition: "ts.asterisk", types: map(getType)(["000" /* times */])};
-		case "$": return "ts.dollar";
+		case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};
+		case "@": return {definition: "ts.atsign", types: getTypes(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
+		case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
+		case "$": return {definition: "ts.dollar", types: getTypes(["211" /* S */])};
 		case "`": return "ts.backtick";
 		case "{": return "ts.braceleft";
 		case "'": return "ts.apostrophe";
-		case ";": return {definition: "ts.semicolon", types: map(getType)(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: map(getType)(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
-		case "=": return {definition: "ts.equal", types: map(getType)(["000" /* equals */])};
+		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return "ts.bar";
-		case "%": return {definition: "ts.percent", types: map(getType)(["000" /* remainder */])};
+		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder */])};
 		case "}": return "ts.braceright";
 		case "^": return {definition: "ts.hat", types: [[[], [], []] /* power */, [[[], []], [], []] /* generate */]};
 		case "&": return "ts.ampersand";
-		case ">": return {definition: "ts.greater", types: map(getType)(["000" /* greaterThan */, "101" /* over */])};
+		case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
 		case "!": return "ts.bang";
 	}
 
