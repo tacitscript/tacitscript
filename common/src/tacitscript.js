@@ -606,15 +606,10 @@ let dollar = (left, right) => {
 			return undefined;
 		}
 	}
-
-	// append
+	if (isArray(left) && isValue(right)) return [...left, right];											// 000		AVA					append				(1 2)$3=(1 2 3)
 
 	errorBinary({left, right, operator: "$"});
-}; dollar.types = [
-	[["X", "Y"], ["Y", "X", "Z"], ["X", "Z"]], // S ;$*(2)=4
-	[["X", "Y", "Z"], ["X", "Y"], ["X", "Z"]], // S (+2./)$*(2)=4
-	["S", "A", "S"], // join ","$(1 2 3)
-];
+};
 let apostrophe = (left, right) => {
 	if (isNumber(left) && isNumber(right)) {
 		const factor = Math.pow(10, left);
