@@ -223,7 +223,7 @@ const getType = string => {
 const lookupSymbol = function(symbol, userDefinition) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: map(getType)(["000" /* stringConcat, add, arrayConcat, merge */])};
-		case "-": return {definition: "ts.minus", types: map(getType)(["000" /* subtract, splice, omitKey */])};
+		case "-": return {definition: "ts.minus", types: map(getType)(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: map(getType)(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		case "[": return "ts.bracketleft";
 		case "]": return "ts.bracketright";
@@ -235,7 +235,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case ":": return {definition: "ts.colon", types: map(getType)(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
 		case "?": return {definition: "ts.question", types: map(getType)(["111" /* if */, "000" /* random, indexOf */, "100" /* filter */])};
-		case "@": return {definition: "ts.atsign", types: [[[[], [], []], [], []]]};
+		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */])};
 		case "*": return "ts.asterisk";
 		case "$": return "ts.dollar";
 		case "`": return "ts.backtick";

@@ -546,6 +546,7 @@ let minus = (left, right) => {
 	if (isArray(left) && isObject(right)) {																	// 000		ADD					omitKeys			("a" )-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
 		return omit(left)(right);
 	}
+	if (isString(left) && isString(right)) return string => string.replaceAll(left, right);					// 001		SS(SS)				stringReplace		"_"-"-""1 0 _1"="1 0 -1"
 
 	errorBinary({left, right, operator: "-"});
 };
@@ -555,13 +556,13 @@ let colon = (left, right) => {
 	errorBinary({left, right, operator: ":"});
 };
 let question = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(XB)(XY)(XY)		if					<3?(+1)1=2
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(XV)(XY)(XY)		if					<3?(+1)1=2
 		return x => isTruthy(left(x)) ? right(x) : undefined;
 	}
 	if (isNumber(left) && isNumber(right)) {																// 000		NNN					random				0?100=[0:100)
 		return (Math.random() * (right - left)) + left;
 	}
-	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VB)AA				filter				<5?(4 9 2 7 3)=(4 2 3)
+	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VV)AA				filter				<5?(4 9 2 7 3)=(4 2 3)
 	if (isValue(left) && isArray(right)) {																	// 000		VAN					indexOf				2?(6 8 2 3)=2
 		try {
 			const leftString = toString(left);
@@ -579,9 +580,9 @@ let question = (left, right) => {
 
 	errorBinary({left, right, operator: "?"});
 };
-let atsign = (left, right) => {
-	if (isBinaryFunction(left) && isArray(right)) return right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
-	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
+let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate			+@(1 2)
+	if (isBinaryFunction(left) && isArray(right))
+		return right.slice(1).reduce((acc, value) => left(acc, value), right[0]);
 	if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
 		const index = right.findIndex(left);
 
@@ -594,8 +595,6 @@ let atsign = (left, right) => {
 	[["V", "V", "X"], "A", "X"], // reduce +$(1 2)=3
 	[["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
 	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
-	// ["V", "A", "N"], // indexOf 2@(6 8 2 3)
-	// ["S", "S", "N"], // indexOf "bc"@"abcd"
 ];
 let asterisk = (left, right) => {
 	if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))

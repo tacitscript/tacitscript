@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("atsign (@)", () => {
+			/*ts
+				accumulate						+@(1 2)
+			*/
+			it(' 200		(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
+		});
+
 		describe("question (?)", () => {
 			/*ts
 				ifCheck							<3?(+1)
@@ -30,12 +37,14 @@ export default () => {
 				minus							5-2
 				spliceA							(1 2 3 4)-(5 6 7 8)
 				spliceB							(3 2 "le")-"nucular"
+				stringReplace					"_"-"-""1 0 _1"
 				omitKey							"a"-(\(("a" 1) ("b" 2)))
 				omitKeys						("a" )-(\(("a" 1) ("b" 2)))
 			*/
 			it('000			NNN					subtract			5-2=3', () => expect(minus).eql(3));
 			it('000			AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
 			it('000			ASS					splice				(3 2 "le")-"nucular"="nuclear"', () => expect(spliceB).eql("nuclear"));
+			it('001			SS(SS)				stringReplace		"_"-"-""1 0 _1"="1 0 -1"', () => expect(stringReplace).eql("1 0 -1"));
 			it('000			SDD					omitKey				"a"-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKey).eql({b: 2}));
 			it('000			ADD					omitKeys			("a" )-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKeys).eql({b: 2}));
 		});
@@ -48,11 +57,11 @@ export default () => {
 				overB							+1>("a" )(\(("a" 2) ))
 				// tap							3>({"console.log")
 			*/
-			it('000			NNB					greaterThan				3>2=!()', () => expect(greaterThanA).eql(true));
-			it('000			SSB					greaterThan				"abc"<"def"=()', () => expect(greaterThanB).eql(false));
-			it('101			(VV)A(AA)			over					+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
-			it('101			(VV)A(OO)			over					+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
-			xit('010		V(VV)V				tap						3>({"console.log")=3', () => expect(tap).eql(3));
+			it('000			NNB					greaterThan			3>2=!()', () => expect(greaterThanA).eql(true));
+			it('000			SSB					greaterThan			"abc"<"def"=()', () => expect(greaterThanB).eql(false));
+			it('101			(VV)A(AA)			over				+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
+			it('101			(VV)A(OO)			over				+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
+			xit('010		V(VV)V				tap					3>({"console.log")=3', () => expect(tap).eql(3));
 		});
 
 		describe("less (<)", () => {
@@ -62,10 +71,10 @@ export default () => {
 				sortA							;<("dan" "sue" "alan")
 				sortB							;<(2 3 1)
 			*/
-			it("000			NNB					lessThan				3<2=()", () => expect(lessThanA).eql(false));
-			it('000			SSB					lessThan				"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
-			it('100			(VS)AA				sort					;<("dan" "sue" "alan")=("alan" "dan" "sue")', () => expect(sortA).eql(["alan", "dan", "sue"]));
-			it('100			(VN)AA				sort					;<(2 3 1)=(1 2 3)', () => expect(sortB).eql([1, 2, 3]));
+			it("000			NNB					lessThan			3<2=()", () => expect(lessThanA).eql(false));
+			it('000			SSB					lessThan			"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
+			it('100			(VS)AA				sort				;<("dan" "sue" "alan")=("alan" "dan" "sue")', () => expect(sortA).eql(["alan", "dan", "sue"]));
+			it('100			(VN)AA				sort				;<(2 3 1)=(1 2 3)', () => expect(sortB).eql([1, 2, 3]));
 		});
 
 		describe("slash (/)", () => {
