@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("bar (|)", () => {
+			/*ts
+				// orValue							()|1
+			*/
+			// it('000			VVV					orValue				()|1=1', () => expect(orValue).eql(1));
+		});
+
 		describe("equal (=)", () => {
 			/*ts
 				equals							2=4

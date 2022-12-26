@@ -636,6 +636,7 @@ let equal = (left, right) => {
 	errorBinary({left, right, operator: "="});
 };
 let bar = (left, right) => {
+	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;								// 000		VVV					orValue				()|1=1
 	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
 		let fn = x => {
 			const leftResult = comma(x, left);
@@ -656,7 +657,6 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;
 
 	errorBinary({left, right, operator: "|"});
 }; bar.types = [
