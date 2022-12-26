@@ -6,8 +6,10 @@ export default () => {
 		describe("question (?)", () => {
 			/*ts
 				ifCheck							<3?(+1)
+				random							0?100
 			*/
 			it('111			(XB)(XY)(XY)		if					<3?(+1)1=2', () => expect(ifCheck(1)).eql(2));
+			it('000			NNN					random				0?100', () => expect((random < 100) && (random >= 0)).eql(true));
 		});
 
 		describe("colon (:)", () => {

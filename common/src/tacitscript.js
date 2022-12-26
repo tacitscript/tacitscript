@@ -558,7 +558,7 @@ let question = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(XB)(XY)(XY)		if					<3?(+1)1=2
 		return x => isTruthy(left(x)) ? right(x) : undefined;
 	}
-	if (isNumber(left) && isNumber(right)) { // random 1?100
+	if (isNumber(left) && isNumber(right)) {																// 000		NNN					random				0?100
 		return (Math.random() * (right - left)) + left;
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5?(4 9 2 7 3)
