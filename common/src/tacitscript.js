@@ -698,9 +698,8 @@ let hat = (left, right) => {
 	errorBinary({left, right, operator: "^"});
 };
 let ampersand = (left, right) => {
-	const applyLeft = value => left(value);
-
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
+	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left;								// 000		VVV					andValue			!()&2=2
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(VV)(VV)(VV)		andPredicate		>2&(<6)(3)=(!())
 		let result = value => {
 			const leftValue = comma(value, left);
 
@@ -711,18 +710,14 @@ let ampersand = (left, right) => {
 
 		return result;
 	}
-	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; // VVV andValue !()&()
-	if (isUnaryFunction(left) && isArray(right)) return map(applyLeft)(right);
-	if (isUnaryFunction(left) && isObject(right)) return mapObj(applyLeft)(right);
+
+	const applyLeft = value => left(value);
+
+	if (isUnaryFunction(left) && isArray(right)) return map(applyLeft)(right);								// 100		(VV)AA				map					*2&(2 3 4)=(4 6 8)
+	if (isUnaryFunction(left) && isObject(right)) return mapObj(applyLeft)(right);							// 100		(VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))
 
 	errorBinary({left, right, operator: "&"});
-}; ampersand.types = [
-	["V", "V", "V"], // andValue !()&()
-	[["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
-	[["V", "V"], "A", "A"], // map *2&(3 4 5)=(6 8 10)
-	[["V", "V"], "O", "O"], // mapObject *2&({"{a: 1, b: 2, c: 3}")=({"{a: 2, b: 4, c: 6}")
-
-];
+};
 let backtick = (left, right) => {
 	return left; // X?X constant 2`3
 

@@ -250,9 +250,9 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
 		case "}": return "ts.braceright";
 		case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */, "111" /* scan */])};
-		case "&": return "ts.ampersand";
+		case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
 		case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
-		case "!": return "ts.bang";
+		case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */])};
 	}
 
 	const existing = userDefinition[symbol];

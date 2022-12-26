@@ -3,6 +3,19 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("ampersand (&)", () => {
+			/*ts
+				andValue						!()&2
+				andPredicate					>2&(<6)(3)=(!())
+				map								*2&(2 3 4)
+				mapObject						*2&(\(("a" 3) ))
+			*/
+			it('000			VVV					andValue			!()&2=2', () => expect(andValue).eql(2));
+			it('111			(VV)(VV)(VV)		andPredicate		>2&(<6)(3)=(!())', () => expect(andPredicate).eql(true));
+			it('100			(VV)AA				map					*2&(2 3 4)=(4 6 8)', () => expect(map).eql([4, 6, 8]));
+			it('100			(VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))', () => expect(mapObject).eql({a: 6}));
+		});
+
 		describe("hat (^)", () => {
 			/*ts
 				power							2^3
