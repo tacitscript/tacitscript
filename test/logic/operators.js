@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("apostrophe (')", () => {
+			/*ts
+				round							2'3.176
+			*/
+			it("000			NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
+		});
+
 		describe("dollar ($)", () => {
 			/*ts
 				fork							(+2./)$;

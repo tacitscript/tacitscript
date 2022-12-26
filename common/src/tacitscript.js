@@ -611,7 +611,7 @@ let dollar = (left, right) => {
 	errorBinary({left, right, operator: "$"});
 };
 let apostrophe = (left, right) => {
-	if (isNumber(left) && isNumber(right)) {
+	if (isNumber(left) && isNumber(right)) {																// 000		NNN					round				2'3.176=3.18
 		const factor = Math.pow(10, left);
 
 		return Math.round(right * factor) / factor;
