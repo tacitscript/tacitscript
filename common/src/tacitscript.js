@@ -696,12 +696,7 @@ let hat = (left, right) => {
 	//if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )
 
 	errorBinary({left, right, operator: "^"});
-}; hat.types = [
-	["N", "N", "N"], // power 2^3
-	[["N", "?"], "N", "A"], // generate ;^3
-	[["A", "V"], ["A", "V"], ["A", "A"]], // scan
-	[["A", "V"], "A", "L"], // lazyScan #.+1^( )
-];
+};
 let ampersand = (left, right) => {
 	const applyLeft = value => left(value);
 
