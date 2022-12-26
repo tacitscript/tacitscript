@@ -550,13 +550,10 @@ let minus = (left, right) => {
 	errorBinary({left, right, operator: "-"});
 };
 let colon = (left, right) => {
-	return [left, right]; // ??P pair +:2@
+	return [left, right];																					// 000		VVA					pair				1:"string"=(1 "string")
 
 	errorBinary({left, right, operator: ":"});
-}; colon.types = [
-	// we make these take values only - allowing : to take functions precludes using colon as an argument in higher-order functions
-	["V", "V", "A"], // pair +:2
-];
+};
 let question = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) {
 		return x => isTruthy(left(x)) ? right(x) : undefined;

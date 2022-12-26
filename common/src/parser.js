@@ -232,7 +232,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "/": return {definition: "ts.slash", types: map(getType)(["000" /* divide */])};
 		case "~": return "ts.tilde";
 		case "_": return "ts.underscore";
-		case ":": return {definition: "ts.colon", types: [[[], [], []]]};
+		case ":": return {definition: "ts.colon", types: map(getType)(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
 		case "?": return "ts.question";
 		case "@": return {definition: "ts.atsign", types: [[[[], [], []], [], []]]};

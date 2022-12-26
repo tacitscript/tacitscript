@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("colon (:)", () => {
+			/*ts
+				pair							1:"string"
+			*/
+			it('000			VVA					pair				1:"string"=(1 "string")', () => expect(pair).eql([1, "string"]));
+		});
+
 		describe("minus (-)", () => {
 			/*ts
 				minus							5-2
