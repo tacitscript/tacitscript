@@ -616,7 +616,8 @@ let apostrophe = (left, right) => {
 
 		return Math.round(right * factor) / factor;
 	}
-	if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
+	if (isNumber(left) && (isArray(right) || isString(right)))												// 000		NAV NSS				at					1'(1 2 3)=2 1'"abc"="b"
+		return (left >= 0) ? right[left] : right[right.length + left];
 	if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
 	if (isArray(left) && (isArray(right) || isObject(right))) {
 		return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
