@@ -40,9 +40,9 @@ export default () => {
 				random							0?100
 				filter							<5?(4 9 2 7 3)
 			*/
-			it('111			(XB)(XY)(XY)		if					<3?(+1)1=2', () => expect(ifCheck(1)).eql(2));
-			it('000			NNN					random				0?100', () => expect((random < 100) && (random >= 0)).eql(true));
-			it('100			(VB)AA				filter				<5?(4 9 2 7 3)', () => expect(filter).eql([4, 2, 3]));
+			it('111			(XV)(XY)(XY)		if					<3?(+1)1=2', () => expect(ifCheck(1)).eql(2));
+			it('000			NNN					random				0?100=[0:100)', () => expect((random < 100) && (random >= 0)).eql(true));
+			it('100			(VV)AA				filter				<5?(4 9 2 7 3)', () => expect(filter).eql([4, 2, 3]));
 		});
 
 		describe("colon (:)", () => {
