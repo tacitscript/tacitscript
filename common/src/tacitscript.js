@@ -664,8 +664,8 @@ let percent = (left, right) => {
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)];		// 000		NAA NSA				split				2%(1 2 3 4 5)=((1 2) (3 4 5)) 2%"abcde"=("ab" "cde")
 	}
 	else if (isArray(left)) {
-		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
-		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
+		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []});						// 000		AAA					chunk				(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))
+		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""});		// 000		ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")
 		else if (isObject(right)) return pick(left)(right);// AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	}
 	else if (isString(left) && isString(right)) {

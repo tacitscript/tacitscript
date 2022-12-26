@@ -8,10 +8,14 @@ export default () => {
 				remainder						7%2
 				splitArray						2%(1 2 3 4 5)
 				splitString						2%"abcde"
+				chunkArray						(1 2 0)%(1 2 3 4 5)
+				chunkString						(1 2 0)%"abcde"
 			*/
 			it('000			NNN					remainder			7%2=1', () => expect(remainder).eql(1));
 			it('000			NAA					split				2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitArray).eql([[1, 2], [3, 4, 5]]));
 			it('000			NSA					split				2%"abcde"=("ab" "cde")', () => expect(splitString).eql(["ab", "cde"]));
+			it('000			AAA					chunk				(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))', () => expect(chunkArray).eql([[1], [2, 3], [4, 5]]));
+			it('000			ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")', () => expect(chunkString).eql(["a", "bc", "de"]));
 		});
 
 		describe("bar (|)", () => {
