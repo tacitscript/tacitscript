@@ -619,9 +619,7 @@ let apostrophe = (left, right) => {
 	if (isNumber(left) && (isArray(right) || isString(right)))												// 000		NAV NSS				at					1'(1 2 3)=2 1'"abc"="b"
 		return (left >= 0) ? right[left] : right[right.length + left];
 	if (isString(left) && isObject(right)) return right[left];												// 000		SDV					prop				"a"'(\(("a" 1) ))=1
-	if (isArray(left) && (isArray(right) || isObject(right))) {
-		return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
-	}
+	if (isArray(left) && (isArray(right) || isObject(right))) return path(left)(right);						// 000		AAV ADV				path				(1 )'(5 6 7)=6 ("a" )'(\(("a" 1) ))=1
 	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
 
 	errorBinary({left, right, operator: "'"});
