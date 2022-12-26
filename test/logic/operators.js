@@ -5,9 +5,11 @@ export default () => {
 	describe("Operators", () => {
 		describe("dollar ($)", () => {
 			/*ts
-				S								(+2./)$;
+				fork							(+2./)$;
+				join							","$(1 2 3)
 			*/
-			it('211			(XYZ)(XY)(XZ)		S					(+2./)$;(2)=4', () => expect(S(2)).eql(2));
+			it('211			(XYZ)(XY)(XZ)		fork				(+2./)$;(2)=4', () => expect(fork(2)).eql(2));
+			it('000			SAS					join				","$(1 2 3)', () => expect(join).eql("1,2,3"));
 		});
 
 		describe("asterisk (*)", () => {

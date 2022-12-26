@@ -598,11 +598,10 @@ let asterisk = (left, right) => {
 };
 let dollar = (left, right) => {
 	// A$Bx = xA(Bx)
-	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => left(x, right(x));					// 211		(XYZ)(XY)(XZ)		S					(+2./)$;(2)=2
-		
-	if (isString(left) && isArray(right)) {
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => left(x, right(x));					// 211		(XYZ)(XY)(XZ)		fork				(+2./)$;(2)=2
+	if (isString(left) && isArray(right)) {																	// 000		SAS					join				","$(1 2 3)
 		try {
-			return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
+			return pipe(map(toString), join(left))(right);
 		} catch (_) {
 			return undefined;
 		}
