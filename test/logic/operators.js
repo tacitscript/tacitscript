@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("equal (=)", () => {
+			/*ts
+				equals							2=4
+			*/
+			it('000			VVB					equals				2=4=()', () => expect(equals).eql(false));
+		});
+
 		describe("apostrophe (')", () => {
 			/*ts
 				round							2'3.176
