@@ -233,7 +233,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
 		case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
-		case "_": return "ts.underscore";
+		case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
 		case ":": return {definition: "ts.colon", types: getTypes(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
 		case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};

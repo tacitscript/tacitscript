@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("underscore (_)", () => {
+			/*ts
+				negative						_5
+				reverseArray					_(1 2 3)
+				reverseString					_"Hello"
+			*/
+			it('00			NN					negative			_5', () => expect(negative).eql(-5));
+			it('00			AA					reverse				_(1 2 3)=(3 2 1)', () => expect(reverseArray).eql([3, 2, 1]));
+			it('00			SS					reverse				_"Hello"="olleH"', () => expect(reverseString).eql("olleH"));
+		});
+
 		describe("tilde (~)", () => {
 			/*ts
 				flip							~/

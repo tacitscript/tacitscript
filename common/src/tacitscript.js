@@ -734,16 +734,12 @@ let tilde = value => {
 	errorUnary({operator: "~", value});
 }; 
 let underscore = value => { // not referenced in number literal (standard form exported)
-	if (isNumber(value)) return -value; // NN negative _5
-	if (isArray(value)) return value.slice(0).reverse(); // AA reverse _(1 2 3)
-	if (isString(value)) return value.split("").reverse().join(""); // SS reverse _"Hello"
+	if (isNumber(value)) return -value;																		// 00		NN					negative			_5
+	if (isArray(value)) return value.slice(0).reverse();													// 00		AA					reverse				_(1 2 3)=(3 2 1)
+	if (isString(value)) return value.split("").reverse().join("");											// 00		SS					reverse				_"Hello"="olleH"
 
 	errorUnary({operator: "_", value});
-}; underscore.types = [
-	["N", "N"], // negative _5
-	["A", "A"], // reverse _(1 2 3)
-	["S", "S"], // reverse _"Hello"
-];
+};
 let bracketleft = value => {
 	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
 	if (isNumber(value)) return Math.floor(value); // NN floor [1.8
