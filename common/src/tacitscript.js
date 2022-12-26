@@ -563,7 +563,18 @@ let question = (left, right) => {
 		return (Math.random() * (right - left)) + left;
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VV)AA				filter				<5?(4 9 2 7 3)=(4 2 3)
-	if (isValue(left) && isArray(right)) {																	// 000		VAN					indexOf				2?(6 8 2 3)=2
+
+	errorBinary({left, right, operator: "?"});
+};
+let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate			+@(1 2)=3
+	if (isBinaryFunction(left) && isArray(right))
+		return right.slice(1).reduce((acc, value) => left(acc, value), right[0]);
+	if (isUnaryFunction(left) && isArray(right)) {															// 100		(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1
+		const index = right.findIndex(left);
+
+		return (index === -1) ? undefined : index;
+	}
+	if (isValue(left) && isArray(right)) {																	// 000		VAN					indexOf				2@(6 8 2 3)=2
 		try {
 			const leftString = toString(left);
 			const leftType = typeOf(left);
@@ -577,18 +588,6 @@ let question = (left, right) => {
 	}
 	if (isString(left) && isString(right))																	// 000		SSN					indexOf				"bc"@"abcd"=1
 		return (index => (index === -1) ? undefined : index)(right.indexOf(left));
-
-	errorBinary({left, right, operator: "?"});
-};
-let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate			+@(1 2)=3
-	if (isBinaryFunction(left) && isArray(right))
-		return right.slice(1).reduce((acc, value) => left(acc, value), right[0]);
-	if (isUnaryFunction(left) && isArray(right)) {															// 100		(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1
-		const index = right.findIndex(left);
-
-		return (index === -1) ? undefined : index;
-	}
-
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [

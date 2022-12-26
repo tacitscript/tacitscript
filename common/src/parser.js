@@ -234,8 +234,8 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "_": return "ts.underscore";
 		case ":": return {definition: "ts.colon", types: map(getType)(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
-		case "?": return {definition: "ts.question", types: map(getType)(["111" /* if */, "000" /* random, indexOf */, "100" /* filter */])};
-		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */, "100" /* findIndex */])};
+		case "?": return {definition: "ts.question", types: map(getType)(["111" /* if */, "000" /* random */, "100" /* filter */])};
+		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
 		case "*": return "ts.asterisk";
 		case "$": return "ts.dollar";
 		case "`": return "ts.backtick";
