@@ -741,15 +741,11 @@ let underscore = value => { // not referenced in number literal (standard form e
 	errorUnary({operator: "_", value});
 };
 let bracketleft = value => {
-	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
-	if (isNumber(value)) return Math.floor(value); // NN floor [1.8
+	if (isVector(value)) return value[0];																	// 00		AV SS				first				[(1 2 3)=1 ["abc"="a"
+	if (isNumber(value)) return Math.floor(value);															// 00		NN					floor				[1.8=1
 
 	errorUnary({operator: "[", value});
-}; bracketleft.types = [
-	["A", "?"], // first [(1 2 3)
-	["S", "S"], // firstInString ["abc"
-	["N", "N"], // floor [1.8
-];
+};
 let bracketright = value => {
 	if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
 	if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2

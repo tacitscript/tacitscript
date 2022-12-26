@@ -227,7 +227,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "+": return {definition: "ts.plus", types: getTypes(["000" /* stringConcat, add, arrayConcat, merge */])};
 		case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
-		case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first */])};
+		case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* length */])};
 		case "#": return {definition: "ts.hash", types: getTypes(["00" /* length */])};
 		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};

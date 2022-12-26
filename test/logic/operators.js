@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("bracketleft ([)", () => {
+			/*ts
+				firstArray						[(1 2 3)
+				firstString						["abc"
+				floor							[1.8
+			*/
+			it('00			AV					first				[(1 2 3)=1', () => expect(firstArray).eql(1));
+			it('00			SS					first				["abc"="a"', () => expect(firstString).eql("a"));
+			it('00			NN					floor				[1.8=1', () => expect(floor).eql(1));
+		});
+
 		describe("underscore (_)", () => {
 			/*ts
 				negative						_5
