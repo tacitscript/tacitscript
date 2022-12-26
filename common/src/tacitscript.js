@@ -666,10 +666,10 @@ let percent = (left, right) => {
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []});						// 000		AAA					chunk				(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))
 		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""});		// 000		ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")
-		else if (isObject(right)) return pick(left)(right);													// 000		ADD					pick				("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))
+		else if (isObject(right)) return pick(left)(right);													// 000		ADD					pick				("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))
 	}
 	else if (isString(left) && isString(right)) {
-		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
+		return right.split(left);																			// 000		SSA					chunkWithDelimiter	", "%"1, 2, 3, 4"=("1" "2" "3" "4")
 	}
 	else if (isUnaryFunction(left) && isArray(right)) {
 		// (VS)AO groupBy [/("ann" "ben" "ade")
