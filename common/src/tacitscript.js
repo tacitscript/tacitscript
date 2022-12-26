@@ -561,14 +561,10 @@ let question = (left, right) => {
 	if (isNumber(left) && isNumber(right)) {																// 000		NNN					random				0?100
 		return (Math.random() * (right - left)) + left;
 	}
-	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5?(4 9 2 7 3)
+	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VB)AA				filter				<5?(4 9 2 7 3)
 
 	errorBinary({left, right, operator: "?"});
-}; question.types = [
-	[["V", "V"], ["V", "V"], ["V", "V"]], // if <3?+1
-	["N", "N", "N"], // random 1?100
-	[["V", "B"], "A", "A"], // filter <5?(4 9 2 7 3)
-];
+};
 let atsign = (left, right) => {
 	if (isBinaryFunction(left) && isArray(right)) return right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
 	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
