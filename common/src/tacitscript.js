@@ -637,13 +637,12 @@ let equal = (left, right) => {
 };
 let bar = (left, right) => {
 	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;								// 000		VVV					orValue				()|1=1
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(VV)(VV)(VV)		orPredicate			>0|(%2.=0)
 		let fn = x => {
-			const leftResult = comma(x, left);
+			const leftResult = left(x);
 
-			return isFalsey(leftResult) ? comma(x, right) : leftResult;
+			return isFalsey(leftResult) ? right(x) : leftResult;
 		};
-		fn.types = types(left); // assume
 
 		return fn;
 	}

@@ -146,7 +146,7 @@ const deprioritizeMedialDots = function(symbols) {
 	return current.length ? segments.concat([current]) : segments;
 };
 const deprioritizeDots = function(symbols) {
-	if (!symbols.length) return [];
+	if (symbols.length < 2) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
 	if (symbols.length === 1) return [Array.isArray(symbols[0]) ? deprioritizeDots(symbols[0]) : symbols[0]];
 	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
 	if ([".", ","].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
@@ -246,7 +246,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
-		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */])};
+		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder */])};
 		case "}": return "ts.braceright";
 		case "^": return {definition: "ts.hat", types: [[[], [], []] /* power */, [[[], []], [], []] /* generate */]};
