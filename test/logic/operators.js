@@ -3,6 +3,15 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("tilde (~)", () => {
+			/*ts
+				flip							~/
+				transpose						~
+			*/
+			it('22			(XYZ)(YXZ)			flip				2(~/)1=0.5', () => expect(flip(2, 1)).eql(0.5));
+			it('00			AA					transpose			~((1 2) (3 4))=((1 3) (2 4))', () => expect(transpose([[1, 2], [3, 4]])).eql([[1, 3], [2, 4]]));
+		});
+
 		describe("backtick (`)", () => {
 			/*ts
 				constant						2`3

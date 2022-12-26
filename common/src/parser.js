@@ -232,7 +232,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "#": return {definition: "ts.hash", types: getTypes(["00" /* length */])};
 		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
-		case "~": return "ts.tilde";
+		case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
 		case "_": return "ts.underscore";
 		case ":": return {definition: "ts.colon", types: getTypes(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
