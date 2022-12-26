@@ -592,16 +592,10 @@ let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate
 	errorBinary({left, right, operator: "@"});
 };
 let asterisk = (left, right) => {
-	if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-		return pick(left)(right);
-	}
-	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
+	if (isNumber(left) && isNumber(right)) return left * right;												// 000		NNN					times				2*3=6
 
 	errorBinary({left, right, operator: "*"});
-}; asterisk.types = [
-	["N", "N", "N"], // times 2*3=6
-	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-];
+};
 let dollar = (left, right) => {
 	if (isUnaryFunction(left) && isBinaryFunction(right)) { // S ;$*(2)=4
 		// A$Bx = AxBx
@@ -715,6 +709,7 @@ let percent = (left, right) => {
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
 		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
+		else if (isObject(right)) return pick(left)(right);// AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	}
 	else if (isString(left) && isString(right)) {
 		return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
@@ -739,6 +734,7 @@ let percent = (left, right) => {
 	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
 	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
+	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 ];
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3

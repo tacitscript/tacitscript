@@ -236,7 +236,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
 		case "?": return {definition: "ts.question", types: map(getType)(["111" /* if */, "000" /* random */, "100" /* filter */])};
 		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
-		case "*": return "ts.asterisk";
+		case "*": return {definition: "ts.asterisk", types: map(getType)(["000" /* times */])};
 		case "$": return "ts.dollar";
 		case "`": return "ts.backtick";
 		case "{": return "ts.braceleft";

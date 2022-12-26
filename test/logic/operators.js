@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("asterix (*)", () => {
+			/*ts
+				times							2*3
+			*/
+			it('000			NNN					times				2*3=6', () => expect(times).eql(6));
+		});
+
 		describe("atsign (@)", () => {
 			/*ts
 				accumulate						+@(1 2)
