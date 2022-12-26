@@ -558,10 +558,24 @@ let question = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(XB)(XY)(XY)		if					<3?(+1)1=2
 		return x => isTruthy(left(x)) ? right(x) : undefined;
 	}
-	if (isNumber(left) && isNumber(right)) {																// 000		NNN					random				0?100
+	if (isNumber(left) && isNumber(right)) {																// 000		NNN					random				0?100=[0:100)
 		return (Math.random() * (right - left)) + left;
 	}
-	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VB)AA				filter				<5?(4 9 2 7 3)
+	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VB)AA				filter				<5?(4 9 2 7 3)=(4 2 3)
+	if (isValue(left) && isArray(right)) {																	// 000		VAN					indexOf				2?(6 8 2 3)=2
+		try {
+			const leftString = toString(left);
+			const leftType = typeOf(left);
+			const index = right.findIndex(value => (leftType === typeOf(value)) &&
+				(leftString === toString(value)));
+
+			return (index === -1) ? undefined : index;
+		} catch (_) {
+			return undefined;
+		}
+	}
+	if (isString(left) && isString(right))																	// 000		SSN					indexOf				"bc"@"abcd"=1
+		return (index => (index === -1) ? undefined : index)(right.indexOf(left));
 
 	errorBinary({left, right, operator: "?"});
 };
@@ -574,18 +588,6 @@ let atsign = (left, right) => {
 		return (index === -1) ? undefined : index;
 	}
 
-	// if (isValue(left) && isArray(right)) {
-	// 	try {
-	// 		const leftString = toString(left);
-	// 		const leftType = typeOf(left);
-	// 		const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
-
-	// 		return (index === -1) ? undefined : index;
-	// 	} catch (_) {
-	// 		return undefined;
-	// 	}
-	// }
-	// if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
