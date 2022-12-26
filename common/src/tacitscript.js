@@ -680,23 +680,13 @@ let percent = (left, right) => {
 		})({})(right);
 	}
 	else if (isBinaryFunction(left)) {
-		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
-		else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
+		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []});			// 200		(VVB)AA				chunkWhenComparator	<%(1 2 3 2 1)=((1 ) (2 ) (3 2 1))
+		else if (isString(right))																			// 200		(SSB)SA				chunkWhenComparator <%"abcba"=("a" "b" "cba")
+			return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""});
 	}
 
 	errorBinary({left, right, operator: "%"});
-}; percent.types = [
-	["N", "N", "N"], // remainder 7%2
-	["N", "A", "A"], // split 2%(1 2 3 4 5)
-	["N", "S", "A"], // split 2%"abcde"
-	["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
-	["A", "S", "A"], // chunk (1 2 0)%"abcde"
-	["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
-	[["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
-	[["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
-	[["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
-	["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-];
+};
 let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
 	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
