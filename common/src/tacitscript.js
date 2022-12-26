@@ -580,10 +580,10 @@ let question = (left, right) => {
 
 	errorBinary({left, right, operator: "?"});
 };
-let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate			+@(1 2)
+let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate			+@(1 2)=3
 	if (isBinaryFunction(left) && isArray(right))
 		return right.slice(1).reduce((acc, value) => left(acc, value), right[0]);
-	if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
+	if (isUnaryFunction(left) && isArray(right)) {															// 100		(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1
 		const index = right.findIndex(left);
 
 		return (index === -1) ? undefined : index;

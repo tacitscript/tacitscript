@@ -235,7 +235,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case ":": return {definition: "ts.colon", types: map(getType)(["000" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
 		case "?": return {definition: "ts.question", types: map(getType)(["111" /* if */, "000" /* random, indexOf */, "100" /* filter */])};
-		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */])};
+		case "@": return {definition: "ts.atsign", types: map(getType)(["200" /* accumulate */, "100" /* findIndex */])};
 		case "*": return "ts.asterisk";
 		case "$": return "ts.dollar";
 		case "`": return "ts.backtick";
@@ -243,9 +243,9 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "'": return "ts.apostrophe";
 		case ";": return {definition: "ts.semicolon", types: map(getType)(["00" /* identity */])};
 		case ",": return {definition: "ts.comma", types: map(getType)(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
-		case "=": return "ts.equal";
+		case "=": return {definition: "ts.equal", types: map(getType)(["000" /* equals */])};
 		case "|": return "ts.bar";
-		case "%": return "ts.percent";
+		case "%": return {definition: "ts.percent", types: map(getType)(["000" /* remainder */])};
 		case "}": return "ts.braceright";
 		case "^": return {definition: "ts.hat", types: [[[], [], []] /* power */, [[[], []], [], []] /* generate */]};
 		case "&": return "ts.ampersand";

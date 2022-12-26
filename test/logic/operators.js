@@ -6,8 +6,10 @@ export default () => {
 		describe("atsign (@)", () => {
 			/*ts
 				accumulate						+@(1 2)
+				findIndex						(%2.=0)@(1 2 3 4)
 			*/
-			it(' 200		(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
+			it('200			(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
+			it('100			(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1', () => expect(findIndex).eql(1));
 		});
 
 		describe("question (?)", () => {
