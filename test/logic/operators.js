@@ -62,7 +62,7 @@ export default () => {
 			it('000			NNB					greaterThan			3>2=!()', () => expect(greaterThanA).eql(true));
 			it('000			SSB					greaterThan			"abc"<"def"=()', () => expect(greaterThanB).eql(false));
 			it('101			(VV)A(AA)			over				+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
-			it('101			(VV)A(OO)			over				+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
+			it('101			(VV)A(DD)			over				+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
 			xit('010		V(VV)V				tap					3>({"console.log")=3', () => expect(tap).eql(3));
 		});
 

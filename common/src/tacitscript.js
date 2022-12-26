@@ -519,7 +519,7 @@ let less = (left, right) => {
 };
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right;	// 000		NNB SSB				greaterThan			3>2=!() "abc">"def"=()
-	if (isUnaryFunction(left) && isArray(right)) {															// 101		(VV)A(AA) (VV)A(OO)	over				+1>(1 )(3 5 7)=(3 6 7) +1>("a" )(\(("a" 2) ))=(`(("a" 3) ))
+	if (isUnaryFunction(left) && isArray(right)) {															// 101		(VV)A(AA) (VV)A(DD)	over				+1>(1 )(3 5 7)=(3 6 7) +1>("a" )(\(("a" 2) ))=(`(("a" 3) ))
 		return x => applyOver({path: right, fn: left, container: x});
 	}
 	if (isValue(left) && isUnaryFunction(right)) {															// 010		V(VV)V				tap					3>({"console.log")
@@ -590,11 +590,7 @@ let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate
 		return (index => (index === -1) ? undefined : index)(right.indexOf(left));
 
 	errorBinary({left, right, operator: "@"});
-}; atsign.types = [
-	[["V", "V", "X"], "A", "X"], // reduce +$(1 2)=3
-	[["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
-	["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
-];
+};
 let asterisk = (left, right) => {
 	if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 		return pick(left)(right);
