@@ -21,6 +21,7 @@ const values = obj => Object.values(obj);
 const slice = (...args) => array => array.slice.apply(array, args);
 const identity = x => x;
 const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
+const groupBy = fn => array => {let result = [], length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
 
 //==================================================================
 // type utilities
@@ -212,6 +213,8 @@ const applyCharacter = ({remaining: incomingRemaining, current}) => {
 			return {remaining: subResult.remaining.slice(1), current: [...current, subResult.current]};
 		}
 	}
+
+	return {remaining, current: [...current, character]};
 };
 const getType = string => {
 	let result = {remaining: string, current: []};
@@ -225,46 +228,95 @@ const getType = string => {
 const getTypes = map(getType);
 const lookupSymbol = function(symbol, userDefinition, variable) {
 	switch(symbol) {
-		case "+": return {definition: "ts.plus", types: getTypes(["000" /* stringConcat, add, arrayConcat, merge */])};
-		case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
-		case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
-		case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
-		case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
-		case "#": return {definition: "ts.hash", types: getTypes(["00" /* length, keyLength, modulus */])};
-		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
-		case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
-		case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
-		case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
-		case ":": return {definition: "ts.colon", types: getTypes(["000" /* pair */])};
-		case "\\": return {definition: "ts.backslash", types: getTypes(["00" /* fromPairs, toPairs */])};
-		case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};
-		case "@": return {definition: "ts.atsign", types: getTypes(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
-		case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
-		case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
-		case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
-		case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
-		case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
-		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
-		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
-		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
-		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
-		case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
-		case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */, "111" /* scan */])};
-		case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
-		case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
-		case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */, "11" /* notPredicate */, "22" /* notComparator */])};
+		case "+": return {definition: "ts.plus", types: getTypes(["NVN" /* add */])}; // (["000" /* stringConcat, add, arrayConcat, merge */])};
+		// case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
+		// case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
+		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
+		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
+		// case "#": return {definition: "ts.hash", types: getTypes(["00" /* length, keyLength, modulus */])};
+		// case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
+		// case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
+		// case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
+		// case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
+		// case ":": return {definition: "ts.colon", types: getTypes(["000" /* pair */])};
+		// case "\\": return {definition: "ts.backslash", types: getTypes(["00" /* fromPairs, toPairs */])};
+		// case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};
+		// case "@": return {definition: "ts.atsign", types: getTypes(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
+		// case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
+		// case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
+		// case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
+		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
+		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
+		// case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
+		// case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
+		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
+		// case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
+		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
+		// case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */, "111" /* scan */])};
+		// case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
+		// case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
+		// case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */, "11" /* notPredicate */, "22" /* notComparator */])};
 	}
 
 	const existing = userDefinition[symbol];
 
 	if (existing) return {definition: symbol, types: existing.types};
-	if (symbol == +symbol) return {definition: symbol, types: [[]]};
-	if (symbol === variable) return {definition: symbol, types: getTypes(["00"])}; // assume recursive operators are simple unary operators
+	if (symbol == +symbol) return {definition: symbol, types: ["N"]};
+	if (symbol === variable) return {definition: symbol, types: getTypes(["VV"])}; // assume recursive operators are simple unary operators
 
 	console.error("Unknown symbol", symbol);
 };
-const typeMatch = (left, right) => (left === "?") || (right === "?") || (JSON.stringify(left) === JSON.stringify(right));
+const replaceType = ({from, to}) => type => {
+	if (!Array.isArray(type)) return (type === from) ? to : type;
+	return type.map(replaceType({from, to}));
+};
+const getSymbolMap = (acceptorSymbol, donorSymbol) => {
+	if ("XYZW".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
+
+	return [];
+}
+const getTypeMap = (acceptorType, donorType) => {
+	if (!Array.isArray(acceptorType)) return [...getSymbolMap(acceptorType, donorType)];
+	return acceptorType.map((value, index) => getTypeMap(value, donorType[index])).flat();
+};
+const reduceType = ({type, typeMap}) => reduce((acc, [from, to]) => Array.isArray(acc) ? acc.map(replaceType({from, to})) : replaceType({from, to})(acc))(type)(typeMap);
+const getReducedType = ({remainderType, typeMap}) => {
+	const reducedType = reduceType({type: remainderType, typeMap});
+
+	// if any XYZW symbol occurs only once in a type, we change to ?
+	const typeSymbols = Array.isArray(reducedType) ? flatten(reducedType) : [reducedType];
+	const reductionMap = pipe(
+		groupBy(identity),
+		values,
+		filter(symbols => (symbols.length === 1) && "XYZW".includes(symbols[0])),
+		map(([symbol]) => [symbol, "?"])
+	)(typeSymbols);
+
+	return reduceType({type: reducedType, typeMap: reductionMap});
+};
+const getReducedUnaryType = ({leftType, rightType}) => getReducedType({remainderType: leftType[1], typeMap: getTypeMap(leftType[0], rightType)});
+const getReducedLeftAppliedType = ({leftType, rightType}) => getReducedType({remainderType: rightType.slice(1), typeMap: getTypeMap(rightType[0], leftType)});
+const getReducedRightAppliedType = ({leftType, rightType}) => getReducedType({remainderType: splice(leftType, 1, 1), typeMap: getTypeMap(leftType[1], rightType)});
+const matchSymbol = (left, right) => {
+	return (left === right) ||
+		"XYZW?".includes(left) ||
+		"XYZW?".includes(right) ||
+		any(([source, match]) => (source === "V") && !Array.isArray(match))([[left, right], [right, left]]);
+};
+const matchType = (left, right) => {
+	const match = matchSymbol(left, right) ||
+		(Array.isArray(left) && Array.isArray(right) && (left.length === right.length) && left.map((value, index) => matchType(value, right[index])).reduce((acc, value) => acc && value, true) && pipe( // match fields which have to be the same from other specification
+			map(([source, match]) => all(symbol => {
+				const matchIndices = source.reduce((acc, sourceSymbol, index) => (symbol === sourceSymbol) ? [...acc, index] : acc, []);
+
+				return matchIndices.length ? all(index => matchType(match[index], match[matchIndices[0]]))(matchIndices) : true;
+			})(["X", "Y", "Z", "W"])),
+			reduce((acc, value) => acc && value)(true),
+		)([[left, right], [right, left]]));
+
+	return match;
+};
 const apply = ({left, leftTypes, right, rightTypes}) => {
 	const extractUnique = getId => pipe(
 		reduce((acc, types) => ({...acc, [getId(types)]: types}))({}),
@@ -273,37 +325,28 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
 
 	// binary left application
-	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && typeMatch(leftType, rightType[0]))(allCombinations);
+	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(allCombinations);
 	if (binaryLeftSolutions.length) {
 		const definition = `ts.leftApply(${left}, ${right})`;
-		const types = pipe(
-			map(pipe(last, slice(1))),
-			extractUnique(identity),
-		)(binaryLeftSolutions);
+		const types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
 
 		return {definition, types};
 	}
 
 	// binary right application
-	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && typeMatch(leftType[1], rightType))(allCombinations);
+	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
 	if (binaryRightSolutions.length) {
 		const definition = `ts.rightApply(${left}, ${right})`;
-		const types = pipe(
-			map(pipe(first, type => splice(type, 1, 1))),
-			extractUnique(identity),
-		)(binaryRightSolutions);
+		const types = map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
 
 		return {definition, types};
 	}
 
 	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && matchType(leftType[0], rightType))(allCombinations);
 	if (unarySolutions.length) {
 		const definition = `${left}(${right})`;
-		const types = pipe(
-			map(pipe(first, last)),
-			extractUnique(identity),
-		)(unarySolutions);
+		const types = map(([leftType, rightType]) => getReducedUnaryType({leftType, rightType}))(unarySolutions);
 
 		return {definition, types};
 	}
@@ -314,15 +357,15 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	throw `Unable to resolve dynamic function application: ${left}(${right})`;
 };
 const getDefinition = function(symbols, userDefinitions, variable) {
-	if (!symbols.length) return {definition: false, types: [[]]};
+	if (!symbols.length) return {definition: false, types: ["B"]};
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
 
 		if (Array.isArray(symbol)) return getDefinition(symbol, userDefinitions, variable);
-		if (symbol.match(/^\s+$/)) return {definition: "[" + symbol + "]", types: [[]]}; // empty array
+		if (symbol.match(/^\s+$/)) return {definition: "[" + symbol + "]", types: ["A"]}; // empty array
 
 		// if (typeof symbol === "string") {
-		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [[]]};
+		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: ["S"]};
 
 		return lookupSymbol(symbol, userDefinitions, variable);
 	}
