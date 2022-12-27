@@ -478,7 +478,7 @@ const comma = (left, right) => {
 	errorBinary({left, right, operator: ","});
 };
 const dot = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// 111		(XY)(YZ)(XZ)		pipe				(+1./2)5=3
+	if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// (XY)(YZ)(XZ)			pipe				(+1./2)5=3
 	if (isUnaryFunction(left) && isBinaryFunction(right)) return (a, b) => right(left(a), b);				// 122		(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return  (a, b) => right(left(a, b));				// 212 		(XYZ)(ZW)(XYW)		binaryUnaryPipe		3(:.+@)4=7
 

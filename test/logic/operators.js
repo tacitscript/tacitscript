@@ -306,23 +306,23 @@ export default () => {
 		// 	it('000			DDD					merge				\(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))', () => expect(merge).eql({a: 1, b: 3}));
 		// });
 
-		// describe("dot (.)", () => {
-		// 	/*ts
-		// 		pipe							+1./2
-		// 		unaryBinaryPipe					+1./
-		// 		binaryUnaryPipe					:.+@
-		// 	*/
-		// 	it("111			(XY)(YZ)(XZ)		pipe				(+1./2)5=3", () => expect(pipe(5)).eql(3));
-		// 	it("122			(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2", () => expect(unaryBinaryPipe(7, 4)).eql(2));
-		// 	it("212 		(XYZ)(ZW)(XYW)		binaryUnaryPipe		3(:.+@)4=7", () => expect(binaryUnaryPipe(3, 4)).eql(7));
-		// });
+		describe("dot (.)", () => {
+			/*ts
+				pipe				+1./2
+				// unaryBinaryPipe					+1./
+				// binaryUnaryPipe					:.+@
+			*/
+			it("(XY)(YZ)(XZ)		pipe				(+1./2)5=3", () => expect(pipe(5)).eql(3));
+			// it("122			(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2", () => expect(unaryBinaryPipe(7, 4)).eql(2));
+			// it("212 		(XYZ)(ZW)(XYW)		binaryUnaryPipe		3(:.+@)4=7", () => expect(binaryUnaryPipe(3, 4)).eql(7));
+		});
 
 		describe("comma (,)", () => {
 			/*ts
-				applyToUnary					3,+1
-				applyToBinary					1,/
-				binaryUnaryApply				+,^3
-				binaryBinaryApply				+,^
+				applyToUnary		3,+1
+				applyToBinary		1,/
+				binaryUnaryApply	+,^3
+				binaryBinaryApply	+,^
 			*/
 			it("X(XY)Y				applyToUnary		3,+1=4", () => expect(applyToUnary).eql(4));
 			it("X(XYZ)(YZ)			applyToBinary		(1,/)2=0.5", () => expect(applyToBinary(2)).eql(0.5));
