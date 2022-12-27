@@ -11,6 +11,7 @@ export default () => {
 			incr		+1
 			six			incr5
 			inverse		1/
+			parse		1+"2"
 			// array		(1 2 3)
 			// singleElem	(1 )
 			// emptyArray	( )
@@ -24,6 +25,7 @@ export default () => {
 		it("incr +1", () => expect(incr(4)).eql(5));
 		it("six incr5", () => expect(six).eql(6));
 		it("inverse 1/", () => expect(inverse(2)).eql(0.5));
+		it('parse 1+"2"=3', () => expect(parse).eql(3));
 		// it("array (1 2 3)", () => expect(array).eql([1, 2, 3]));
 		// it("singleElem (1 )", () => expect(singleElem).eql([1]));
 		// it("emptyArray ( )", () => expect(emptyArray).eql([]));
