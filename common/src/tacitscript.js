@@ -759,17 +759,14 @@ let backslash = value => {
 	errorUnary({value, operator: "\\"});
 };
 let braceleft = value => {
-	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
+	if (isArray(value))																						// 00		AA					unnest				{(1 (2 3))=(1 2 3)
+		return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value);
 	// should never be referenced directly for literal evaluation - expanded in parser
-	if (isString(value)) return eval(ts2es6(value)); // S? eval {"Math.sqrt(2)"
-	if (isStream(value)) return [...value()];
+	//if (isString(value)) return eval(ts2es6(value));														// 0?		S?					eval				{"Math.sqrt(2)"
+	//if (isStream(value)) return [...value()];
 
 	errorUnary({operator: "{", value});
-}; braceleft.types = [
-	["S", "?"], // eval {"Math.sqrt(2)"
-	["A", "A"], // unnest {(1 (2 3))
-	["L", "A"], // spread {(3%naturalNumbers)
-];
+};
 let semicolon = value => {
 	return value; // identiy XX ;1=1
 

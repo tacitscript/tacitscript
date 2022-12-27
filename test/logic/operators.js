@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("braceleft ({)", () => {
+			/*ts
+				unnest							{(1 (2 3))
+			*/
+			it('00			AA					unnest				{(1 (2 3))=(1 2 3)', () => expect(unnest).eql([1, 2, 3]));
+		});
+
 		describe("backslash (\\)", () => {
 			/*ts
 				fromPairs						\(("a" 1) ("b" 2))

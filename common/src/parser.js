@@ -241,7 +241,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
 		case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
 		case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
-		case "{": return "ts.braceleft";
+		case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
