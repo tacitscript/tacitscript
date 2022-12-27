@@ -485,15 +485,15 @@ const dot = (left, right) => {
 	errorBinary({left, right, operator: "."});
 };
 let plus = (left, right) => {
-	if (isString(left) && isValue(right)) {																	// 000		SVS					stringConcat		"High"+5="High5"
+	if (isString(left) && isValue(right)) {																	// SVS					stringConcat		"High"+5="High5"
 		try {
 			return `${left}${toString(right)}`; 
 		} catch (_) {
 			return undefined;
 		}
 	}
-	if (isNumber(left) && isNumber(right)) return left + right;												// 000		NNN					add					2+3=5
-	if (isNumber(left) && isString(right)) {																// 000		NSN					parseNumber			2+"3"=5
+	if (isNumber(left) && isNumber(right)) return left + right;												// NNN					add					2+3=5
+	if (isNumber(left) && isString(right)) {																// NSN					parseNumber			2+"3"=5
 		const rightValue = (right[0] === "_") ? (+right.slice(1) * -1) : +right;
 
 		return left + rightValue;

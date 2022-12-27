@@ -293,18 +293,20 @@ export default () => {
 		// 	it("000			NNN					divide				6/2=3", () => expect(divide).eql(3));
 		// });
 
-		// describe("plus (+)", () => {
-		// 	/*ts
-		// 		stringConcat					"High"+5
-		// 		add								2+"3"
-		// 		arrayConcat						(1 2 3)+(4 5 6)
-		// 		merge							\(("a" 1) ("b" 2))+(\(("b" 3) ))
-		// 	*/
-		// 	it('000			SVS					stringConcat		"High"+5="High5"', () => expect(stringConcat).eql("High5"));
-		// 	it('000			NVN					add					2+"3"=5', () => expect(add).eql(5));
-		// 	it("000			AAA					arrayConcat			(1 2 3)+(4 5 6)=(1 2 3 4 5 6)", () => expect(arrayConcat).eql([1, 2, 3, 4, 5, 6]));
-		// 	it('000			DDD					merge				\(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))', () => expect(merge).eql({a: 1, b: 3}));
-		// });
+		describe("plus (+)", () => {
+			/*ts
+				stringConcat		"High"+5
+				add					2+3
+				parseNumber			2+"3"
+				// arrayConcat						(1 2 3)+(4 5 6)
+				// merge							\(("a" 1) ("b" 2))+(\(("b" 3) ))
+			*/
+			it('SVS					stringConcat		"High"+5="High5"', () => expect(stringConcat).eql("High5"));
+			it('NNN					add					2+3=5', () => expect(add).eql(5));
+			it('NSN					parseNumber			2+"3"=5', () => expect(parseNumber).eql(5));
+			// it("000			AAA					arrayConcat			(1 2 3)+(4 5 6)=(1 2 3 4 5 6)", () => expect(arrayConcat).eql([1, 2, 3, 4, 5, 6]));
+			// it('000			DDD					merge				\(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))', () => expect(merge).eql({a: 1, b: 3}));
+		});
 
 		describe("dot (.)", () => {
 			/*ts
