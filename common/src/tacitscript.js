@@ -493,7 +493,7 @@ let plus = (left, right) => {
 		}
 	}
 	if (isNumber(left) && isNumber(right)) return left + right;												// 000		NNN					add					2+3=5
-	if (isNumber(left) && isString(right)) {																// 000		NSN					parse				2+"3"=5
+	if (isNumber(left) && isString(right)) {																// 000		NSN					parseNumber			2+"3"=5
 		const rightValue = (right[0] === "_") ? (+right.slice(1) * -1) : +right;
 
 		return left + rightValue;
