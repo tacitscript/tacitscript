@@ -309,12 +309,12 @@ export default () => {
 		describe("dot (.)", () => {
 			/*ts
 				pipe				+1./2
-				// unaryBinaryPipe					+1./
-				// binaryUnaryPipe					:.+@
+				unaryBinaryPipe		+1./
+				binaryUnaryPipe		:.+@
 			*/
 			it("(XY)(YZ)(XZ)		pipe				(+1./2)5=3", () => expect(pipe(5)).eql(3));
-			// it("122			(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2", () => expect(unaryBinaryPipe(7, 4)).eql(2));
-			// it("212 		(XYZ)(ZW)(XYW)		binaryUnaryPipe		3(:.+@)4=7", () => expect(binaryUnaryPipe(3, 4)).eql(7));
+			it("(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2", () => expect(unaryBinaryPipe(7, 4)).eql(2));
+			it("(XYZ)(ZW)(XYW)		binaryUnaryPipe		3(:.+@)4=7", () => expect(binaryUnaryPipe(3, 4)).eql(7));
 		});
 
 		describe("comma (,)", () => {
