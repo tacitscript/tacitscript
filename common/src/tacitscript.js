@@ -773,12 +773,10 @@ let semicolon = value => {
 	errorUnary({operator: ";", value});
 };
 let braceright = value => {
-	return typeOf(value); // ?S typeof }3
+	return typeOf(value);																					// ?0		?S					typeof				}3="N"
 
 	errorUnary({operator: "}", value});
-}; braceright.types = [
-	["?", "S"], // typeof }3
-];
+};
 let bang = value => {
 	if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
 		let fn = (x, y) => isFalsey(value(x, y));

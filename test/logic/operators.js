@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("braceright (})", () => {
+			/*ts
+				typeOf							}1
+			*/
+			it('?0			?S					typeof				}3="N"', () => expect(typeOf).eql("N"));
+		});
+
 		describe("semicolon (;)", () => {
 			/*ts
 				identity						;1

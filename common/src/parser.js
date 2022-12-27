@@ -198,6 +198,7 @@ const applyCharacter = ({remaining: incomingRemaining, current}) => {
 	const remaining = incomingRemaining.slice(1);
 
 	switch (character) {
+		case "?": return {remaining, current: [...current, "?"]}; break;
 		case "0": return {remaining, current: [...current, []]}; break;
 		case "1": return {remaining, current: [...current, [[], []]]}; break;
 		case "2": return {remaining, current: [...current, [[], [], []]]}; break;
@@ -248,7 +249,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
-		case "}": return "ts.braceright";
+		case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */, "111" /* scan */])};
 		case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
 		case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
@@ -262,7 +263,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 
 	console.error("Unknown symbol", symbol);
 };
-const typeMatch = (left, right) => JSON.stringify(left) === JSON.stringify(right);
+const typeMatch = (left, right) => (left === "?") || (right === "?") || (JSON.stringify(left) === JSON.stringify(right));
 const apply = ({left, leftTypes, right, rightTypes}) => {
 	const extractUnique = getId => pipe(
 		reduce((acc, types) => ({...acc, [getId(types)]: types}))({}),
