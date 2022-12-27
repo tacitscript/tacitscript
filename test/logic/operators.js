@@ -3,6 +3,19 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("hash (#)", () => {
+			/*ts
+				stringLength					#"abcd"
+				arrayLength						#(4 5 6)
+				keyLength						#(\(("a" 1) ))
+				modulus							#(_1.5)
+			*/
+			it('00			SN					length				#"abcd"=4', () => expect(stringLength).eql(4));
+			it('00			AN					length				#(4 5 6)=3', () => expect(arrayLength).eql(3));
+			it('00			DN					keyLength			#(\(("a" 1) ))=1', () => expect(keyLength).eql(1));
+			it('00			NN					modulus				#(_1.5)=1.5', () => expect(modulus).eql(1.5));
+		});
+
 		describe("bang (!)", () => {
 			/*ts
 				notValue						!3

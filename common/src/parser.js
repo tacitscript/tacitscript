@@ -230,7 +230,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
-		case "#": return {definition: "ts.hash", types: getTypes(["00" /* length */])};
+		case "#": return {definition: "ts.hash", types: getTypes(["00" /* length, keyLength, modulus */])};
 		case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["000" /* divide */])};
 		case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
