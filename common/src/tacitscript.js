@@ -753,15 +753,11 @@ let bracketright = value => {
 	errorUnary({operator: "]", value});
 };
 let backslash = value => {
-	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
-	if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")
+	if (isArray(value)) return Object.fromEntries(value);													// 00		AD					fromPairs			\(("a" 1) ("b" 2))
+	if (isObject(value)) return Object.entries(value);														// 00		DA					toPairs				\(\(("a" 1) ("b" 2)))
 
 	errorUnary({value, operator: "\\"});
 };
-backslash.types = [
-	["A", "O"], // fromPairs \(("a" 1) ("b" 2))
-	["O", "A"], // toPairs \({"{a: 1, b: 2}")
-];
 let braceleft = value => {
 	if (isArray(value)) return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value); // AA unnest {(1 (2 3))
 	// should never be referenced directly for literal evaluation - expanded in parser

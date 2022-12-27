@@ -235,7 +235,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
 		case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
 		case ":": return {definition: "ts.colon", types: getTypes(["000" /* pair */])};
-		case "\\": return {definition: "ts.backslash", types: [[[], []]]};
+		case "\\": return {definition: "ts.backslash", types: getTypes(["00" /* fromPairs, toPairs */])};
 		case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};
 		case "@": return {definition: "ts.atsign", types: getTypes(["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
 		case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};

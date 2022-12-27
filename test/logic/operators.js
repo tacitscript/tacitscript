@@ -3,6 +3,15 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("backslash (\\)", () => {
+			/*ts
+				fromPairs						\(("a" 1) ("b" 2))
+				toPairs							\(\(("a" 1) ("b" 2)))
+			*/
+			it('00			AD					fromPairs			\(("a" 1) ("b" 2))', () => expect(fromPairs).eql({a: 1, b: 2}));
+			it('00			DA					toPairs				\(\(("a" 1) ("b" 2)))', () => expect(toPairs).eql([["a", 1], ["b", 2]]));
+		});
+
 		describe("bracketright (])", () => {
 			/*ts
 				lastArray						](1 2 3)
