@@ -245,7 +245,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "211" /* binaryUnaryApply */, "222" /* binaryBinaryApply */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
@@ -264,25 +264,13 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 
 	console.error("Unknown symbol", symbol);
 };
-const typeMatch = (left, right) => (left === "?") || (right === "?") || (left.length === right.length);
+const typeMatch = (left, right) => (left === "?") || (right === "?") || (JSON.stringify(left) === JSON.stringify(right));
 const apply = ({left, leftTypes, right, rightTypes}) => {
 	const extractUnique = getId => pipe(
 		reduce((acc, types) => ({...acc, [getId(types)]: types}))({}),
 		values,
 	);
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
-
-	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
-	if (unarySolutions.length) {
-		const definition = `${left}(${right})`;
-		const types = pipe(
-			map(pipe(first, last)),
-			extractUnique(identity),
-		)(unarySolutions);
-
-		return {definition, types};
-	}
 
 	// binary left application
 	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && typeMatch(leftType, rightType[0]))(allCombinations);
@@ -304,6 +292,18 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 			map(pipe(first, type => splice(type, 1, 1))),
 			extractUnique(identity),
 		)(binaryRightSolutions);
+
+		return {definition, types};
+	}
+
+	// unary application
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
+	if (unarySolutions.length) {
+		const definition = `${left}(${right})`;
+		const types = pipe(
+			map(pipe(first, last)),
+			extractUnique(identity),
+		)(unarySolutions);
 
 		return {definition, types};
 	}

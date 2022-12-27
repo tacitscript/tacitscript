@@ -158,11 +158,11 @@ export default () => {
 		describe("bar (|)", () => {
 			/*ts
 				orValue							()|1
-				// orPredicate						>0|(%2.=0)
+				orPredicate						>0|(%2.=0)
 				orComparator					<|=
 			*/
 			it('000			VVV					orValue				()|1=1', () => expect(orValue).eql(1));
-			// it('111			(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
+			it('111			(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
 			it('222			(VVV)(VVV)(VVV)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
 		});
 
@@ -181,7 +181,7 @@ export default () => {
 				prop							"a"'(\(("a" 1) ))
 				pathArray						(1 )'(5 6 7)
 				pathDictionary					("a" )'(\(("a" 1) ))
-				// find							(%2.=0)'(1 2 3)
+				find							(%2.=0)'(1 2 3)
 			*/
 			it("000			NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
 			it(`000			NAV					at					1'(1 2 3)=2`, () => expect(atArray).eql(2));
@@ -189,7 +189,7 @@ export default () => {
 			it(`000			SDV					prop				"a"'(\(("a" 1) ))=1`, () => expect(prop).eql(1));
 			it(`000			AAV					path				(1 )'(5 6 7)=6`, () => expect(pathArray).eql(6));
 			it(`000			ADV					path				("a" )'(\(("a" 1) ))=1`, () => expect(pathDictionary).eql(1));
-			// it(`100			(VV)AV				find				(%2.=0)'(1 2 3)=2`, () => expect(find).eql(2));
+			it(`100			(VV)AV				find				(%2.=0)'(1 2 3)=2`, () => expect(find).eql(2));
 		});
 
 		describe("dollar ($)", () => {
@@ -213,12 +213,12 @@ export default () => {
 		describe("atsign (@)", () => {
 			/*ts
 				accumulate						+@(1 2)
-				// findIndex						(%2.=0)@(1 2 3 4)
+				findIndex						(%2.=0)@(1 2 3 4)
 				indexOfValue					2@(6 8 2 3)
 				indexOfString					"bc"@"abcd"
 			*/
 			it('200			(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
-			// it('100			(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1', () => expect(findIndex).eql(1));
+			it('100			(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1', () => expect(findIndex).eql(1));
 			it('000			VAN					indexOf				2@(6 8 2 3)=2', () => expect(indexOfValue).eql(2));
 			it('000			SSN					indexOf				"bc"@"abcd"=1', () => expect(indexOfString).eql(1));
 		});
