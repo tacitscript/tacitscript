@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("fibRec", () => {
+			/*ts
+				fibRec						(=0 ? 0`)|(=1 ? 1`)|((-1.: $ -2).fibRec&.+@)
+				// v1						:.[.((=0 0`) (=1 1`) .(-1 -2).fibRec0@.+$)?
+			*/
+			it("fibRec4=3", () => expect(fibRec(4)).eql(3));
+		});
+
 		describe("factGen +1^.*@", () => {
 			/*ts
 				factGen	+1^.*@
@@ -13,6 +21,7 @@ export default () => {
 		describe("factRec", () => {
 			/*ts
 				factRec						(=0 ? 1`)|(-1.factRec.* $ ;)						NN
+				// v1						:.[.((=0 1`) .(; -1.factRec0).*$)?
 			*/
 			it('factRec4=24', () => expect(factRec(4)).eql(24));
 		});
