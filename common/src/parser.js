@@ -223,7 +223,7 @@ const getType = string => {
 	return result.current;
 };
 const getTypes = map(getType);
-const lookupSymbol = function(symbol, userDefinition) {
+const lookupSymbol = function(symbol, userDefinition, variable) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: getTypes(["000" /* stringConcat, add, arrayConcat, merge */])};
 		case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
@@ -260,6 +260,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 
 	if (existing) return {definition: symbol, types: existing.types};
 	if (symbol == +symbol) return {definition: symbol, types: [[]]};
+	if (symbol === variable) return {definition: symbol, types: getTypes(["00"])}; // assume recursive operators are simple unary operators
 
 	console.error("Unknown symbol", symbol);
 };
@@ -315,18 +316,18 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 
 	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
 };
-const getDefinition = function(symbols, userDefinitions) {
+const getDefinition = function(symbols, userDefinitions, variable) {
 	if (!symbols.length) return {definition: false, types: [[]]};
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
 
-		if (Array.isArray(symbol)) return getDefinition(symbol, userDefinitions);
+		if (Array.isArray(symbol)) return getDefinition(symbol, userDefinitions, variable);
 		if (symbol.match(/^\s+$/)) return {definition: "[" + symbol + "]", types: [[]]}; // empty array
 
 		// if (typeof symbol === "string") {
 		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [[]]};
 
-		return lookupSymbol(symbol, userDefinitions);
+		return lookupSymbol(symbol, userDefinitions, variable);
 	}
 
 	return pipe(
@@ -335,13 +336,13 @@ const getDefinition = function(symbols, userDefinitions) {
 				return {sections: details.sections.slice(0, -1).concat((details.sections.length ? details.sections[details.sections.length - 1] : "") + symbol), append: true, types: details.types};
 			}
 			if (details.append) {
-				const {definition, types} = getDefinition([symbol], userDefinitions);
+				const {definition, types} = getDefinition([symbol], userDefinitions, variable);
 
 				return {sections: details.sections.concat([definition]), append: false, types};
 			}
 
 			const left = details.sections[details.sections.length - 1];
-			const {definition: right, types: rightTypes} = getDefinition([symbol], userDefinitions);
+			const {definition: right, types: rightTypes} = getDefinition([symbol], userDefinitions, variable);
 			const {definition, types} = apply({left, leftTypes: details.types, right, rightTypes});
 
 			return {sections: details.sections.slice(0, -1).concat([definition]), append: false, types};
@@ -439,13 +440,13 @@ const stringify = function(value) {
 	return value;
 };
 
-const getDefinitionJs = function(definitionSymbols, userDefinitions) {
+const getDefinitionJs = function(definitionSymbols, userDefinitions, variable) {
 	const spacePrioritizedSymbols = prioritizeSpaces(definitionSymbols);
 	console.log("spacePrioritizedSymbols", JSON.stringify(spacePrioritizedSymbols));
 	const processedSymbols = deprioritizeDots(spacePrioritizedSymbols);
 	console.log("processedSymbols", JSON.stringify(processedSymbols));
 
-	const {definition, types} = getDefinition(processedSymbols, userDefinitions);
+	const {definition, types} = getDefinition(processedSymbols, userDefinitions, variable);
 	console.log("definition", definition);
 	console.log("types", types);
 
@@ -486,13 +487,9 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 						const flattenedSymbols = flatten(definitionSymbols);
 						const isRecursive = contains(variable)(flattenedSymbols);
 
-						const result = getDefinitionJs(definitionSymbols, updatedDefinitions);
+						const result = getDefinitionJs(definitionSymbols, updatedDefinitions, variable);
 						const definition = result.definition;
-						// const processedSymbols = result.processedSymbols;
-						// const types = result.types;
-
-						//const solution = processSymbols(processedSymbols, types, updatedDefinitions);
-						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x); " + variable + '.types = [[["V", "V"], "V"], ["V", "V"]];' : "const " + variable + " =" + definitionSeparator + definition + ";";
+						const declaration =  isRecursive ? "var " + variable + " =" + definitionSeparator + "x => " + definition + "(x);" : "const " + variable + " =" + definitionSeparator + definition + ";";
 
 						const noComment = symbol.includes("\n");
 						js += declaration + (noComment ? "" : " //");
