@@ -229,18 +229,18 @@ const getType = string => {
 const getTypes = map(getType);
 const lookupSymbol = function(symbol, userDefinition, variable) {
 	switch(symbol) {
-		case "+": return {definition: "ts.plus", types: getTypes(["NNN" /* add */, "NSN" /* parseNumber */, "SVS" /* stringConcat */, "AAA" /* arrayConcat */, "DDD" /* merge */])}; // (["000" /* stringConcat, add, arrayConcat, merge */])};
+		case "+": return {definition: "ts.plus", types: getTypes(["NNN" /* add */, "NSN" /* parseNumber */, "SVS" /* stringConcat */, "AAA" /* arrayConcat */, "DDD" /* merge */])};
 		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */])}; // (["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
-		case ".": return {definition: "ts.dot", types: getTypes(["(XY)(YZ)(XZ)" /* pipe */, "(XY)(YZW)(XZW)" /* unaryBinaryPipe */, "(XYZ)(ZW)(XYW)" /* binaryUnaryPipe */])}; // (["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
+		case ".": return {definition: "ts.dot", types: getTypes(["(XY)(YZ)(XZ)" /* pipe */, "(XY)(YZW)(XZW)" /* unaryBinaryPipe */, "(XYZ)(ZW)(XYW)" /* binaryUnaryPipe */])};
 		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
 		// case "#": return {definition: "ts.hash", types: getTypes(["00" /* length, keyLength, modulus */])};
 		// case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
-		case "/": return {definition: "ts.slash", types: getTypes(["NNN" /* divide */])}; // (["000" /* divide */])};
+		case "/": return {definition: "ts.slash", types: getTypes(["NNN" /* divide */])};
 		// case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
 		// case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
-		case ":": return {definition: "ts.colon", types: getTypes(["VVA" /* pair */])}; // (["000" /* pair */])};
-		case "\\": return {definition: "ts.backslash", types: getTypes(["AD" /* fromPairs */, "DA" /* toPairs */])}; // (["00" /* fromPairs, toPairs */])};
+		case ":": return {definition: "ts.colon", types: getTypes(["VVA" /* pair */])};
+		case "\\": return {definition: "ts.backslash", types: getTypes(["AD" /* fromPairs */, "DA" /* toPairs */])};
 		// case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};
 		case "@": return {definition: "ts.atsign", types: getTypes(["(VXX)AX" /* accumulate */])}; // (["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
 		// case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
@@ -249,7 +249,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		// case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])}; // (["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
 		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		// case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};

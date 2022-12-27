@@ -504,7 +504,7 @@ let plus = (left, right) => {
 	errorBinary({left, right, operator: "+"});
 };
 let slash = (left, right) => {
-	if (isNumber(left) && isNumber(right)) {																// 000		NNN					divide				6/2=3
+	if (isNumber(left) && isNumber(right)) {																// NNN					divide				6/2=3
 		if (right === 0) return undefined;
 
 		return left / right;
