@@ -567,7 +567,7 @@ let question = (left, right) => {
 
 	errorBinary({left, right, operator: "?"});
 };
-let atsign = (left, right) => {																				// (VXX)AX				accumulate			+@(1 2)=3
+let atsign = (left, right) => {																				// (VVX)AX				accumulate			+@(1 2)=3
 	if (isBinaryFunction(left) && isArray(right))
 		return right.slice(1).reduce((acc, value) => left(acc, value), right[0]);
 	if (isUnaryFunction(left) && isArray(right)) {															// (VB)AN				findIndex			(%2.=0)@(1 2 3 4)=1

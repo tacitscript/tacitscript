@@ -210,18 +210,18 @@ export default () => {
 		// 	it('000			NNN					times				2*3=6', () => expect(times).eql(6));
 		// });
 
-		// describe("atsign (@)", () => {
-		// 	/*ts
-		// 		accumulate						+@(1 2)
-		// 		findIndex						(%2.=0)@(1 2 3 4)
-		// 		indexOfValue					2@(6 8 2 3)
-		// 		indexOfString					"bc"@"abcd"
-		// 	*/
-		// 	it('200			(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
-		// 	it('100			(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1', () => expect(findIndex).eql(1));
-		// 	it('000			VAN					indexOf				2@(6 8 2 3)=2', () => expect(indexOfValue).eql(2));
-		// 	it('000			SSN					indexOf				"bc"@"abcd"=1', () => expect(indexOfString).eql(1));
-		// });
+		describe("atsign (@)", () => {
+			/*ts
+				accumulate			+@(1 2)
+				findIndex			(%2.=0)@(1 2 3 4)
+				indexOfValue		2@(6 8 2 3)
+				indexOfString		"bc"@"abcd"
+			*/
+			it('(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
+			it('(VB)AN				findIndex			(%2.=0)@(1 2 3 4)=1', () => expect(findIndex).eql(1));
+			it('VAN					indexOf				2@(6 8 2 3)=2', () => expect(indexOfValue).eql(2));
+			it('SSN					indexOf				"bc"@"abcd"=1', () => expect(indexOfString).eql(1));
+		});
 
 		describe("question (?)", () => {
 			/*ts

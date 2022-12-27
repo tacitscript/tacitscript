@@ -242,7 +242,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case ":": return {definition: "ts.colon", types: getTypes(["VVA" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: getTypes(["AD" /* fromPairs */, "DA" /* toPairs */])};
 		case "?": return {definition: "ts.question", types: getTypes(["(XB)(XY)(XY)" /* if */, "NNN" /* random */, "(VB)AA" /* filter */])};
-		case "@": return {definition: "ts.atsign", types: getTypes(["(VXX)AX" /* accumulate */])}; // (["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
+		case "@": return {definition: "ts.atsign", types: getTypes(["(VVX)AX" /* accumulate */, "(VB)AN" /* findIndex */, "VAN", "SSN" /* indexOf */])};
 		// case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
 		// case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
 		// case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
@@ -250,9 +250,9 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["XX" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
-		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
+		case "=": return {definition: "ts.equal", types: getTypes(["XXB" /* equals */])};
 		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
-		// case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
+		case "%": return {definition: "ts.percent", types: getTypes(["NNN" /* remainder */])};
 		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["(NV)NA" /* generate */])}; // (["000" /* power */, "100" /* generate */, "111" /* scan */])};
 		// case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
