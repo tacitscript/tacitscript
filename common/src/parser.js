@@ -230,7 +230,7 @@ const getTypes = map(getType);
 const lookupSymbol = function(symbol, userDefinition, variable) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: getTypes(["NNN" /* add */, "NSN" /* parseNumber */, "SVS" /* stringConcat */, "AAA" /* arrayConcat */, "DDD" /* merge */])};
-		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */])}; // (["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
+		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */, "AAA", "ASS" /* splice */, "SDD" /* omitKey */, "ADD" /* omitKeys */, "SS(SS)", /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["(XY)(YZ)(XZ)" /* pipe */, "(XY)(YZW)(XZW)" /* unaryBinaryPipe */, "(XYZ)(ZW)(XYW)" /* binaryUnaryPipe */])};
 		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};

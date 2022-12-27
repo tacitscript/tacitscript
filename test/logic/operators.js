@@ -234,37 +234,37 @@ export default () => {
 		// 	it('100			(VV)AA				filter				<5?(4 9 2 7 3)', () => expect(filter).eql([4, 2, 3]));
 		// });
 
-		// describe("colon (:)", () => {
-		// 	/*ts
-		// 		pair							1:"string"
-		// 	*/
-		// 	it('000			VVA					pair				1:"string"=(1 "string")', () => expect(pair).eql([1, "string"]));
-		// });
+		describe("colon (:)", () => {
+			/*ts
+				pair				1:"string"
+			*/
+			it('VVA					pair				1:"string"=(1 "string")', () => expect(pair).eql([1, "string"]));
+		});
 
-		// describe("minus (-)", () => {
-		// 	/*ts
-		// 		minus							5-2
-		// 		spliceA							(1 2 3 4)-(5 6 7 8)
-		// 		spliceB							(3 2 "le")-"nucular"
-		// 		stringReplace					"_"-"-""1 0 _1"
-		// 		omitKey							"a"-(\(("a" 1) ("b" 2)))
-		// 		omitKeys						("a" )-(\(("a" 1) ("b" 2)))
-		// 	*/
-		// 	it('000			NNN					subtract			5-2=3', () => expect(minus).eql(3));
-		// 	it('000			AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
-		// 	it('000			ASS					splice				(3 2 "le")-"nucular"="nuclear"', () => expect(spliceB).eql("nuclear"));
-		// 	it('001			SS(SS)				stringReplace		"_"-"-""1 0 _1"="1 0 -1"', () => expect(stringReplace).eql("1 0 -1"));
-		// 	it('000			SDD					omitKey				"a"-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKey).eql({b: 2}));
-		// 	it('000			ADD					omitKeys			("a" )-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKeys).eql({b: 2}));
-		// });
+		describe("minus (-)", () => {
+			/*ts
+				minus				5-2
+				spliceA				(1 2 3 4)-(5 6 7 8)
+				spliceB				(3 2 "le")-"nucular"
+				stringReplace		"_"-"-""1 0 _1"
+				omitKey				"a"-(\(("a" 1) ("b" 2)))
+				omitKeys			("a" )-(\(("a" 1) ("b" 2)))
+			*/
+			it('NNN					subtract			5-2=3', () => expect(minus).eql(3));
+			it('AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
+			it('ASS					splice				(3 2 "le")-"nucular"="nuclear"', () => expect(spliceB).eql("nuclear"));
+			it('SS(SS)				stringReplace		"_"-"-""1 0 _1"="1 0 -1"', () => expect(stringReplace).eql("1 0 -1"));
+			it('SDD					omitKey				"a"-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKey).eql({b: 2}));
+			it('ADD					omitKeys			("a" )-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKeys).eql({b: 2}));
+		});
 
 		describe("greater (>)", () => {
 			/*ts
-				greaterThanA					3>2
-				greaterThanB					"abc">"def"
-				overA							+1>(1 )(3 5 7)
-				overB							+1>("a" )(\(("a" 2) ))
-				// tap							3>({"console.log")
+				greaterThanA		3>2
+				greaterThanB		"abc">"def"
+				overA				+1>(1 )(3 5 7)
+				overB				+1>("a" )(\(("a" 2) ))
+				// tap				3>({"console.log")
 			*/
 			it('NNB					greaterThan			3>2=!()', () => expect(greaterThanA).eql(true));
 			it('SSB					greaterThan			"abc"<"def"=()', () => expect(greaterThanB).eql(false));
@@ -275,10 +275,10 @@ export default () => {
 
 		describe("less (<)", () => {
 			/*ts
-				lessThanA						3<2
-				lessThanB						"abc"<"def"
-				sortA							;<("dan" "sue" "alan")
-				sortB							;<(2 3 1)
+				lessThanA			3<2
+				lessThanB			"abc"<"def"
+				sortA				;<("dan" "sue" "alan")
+				sortB				;<(2 3 1)
 			*/
 			it("NNB					lessThan			3<2=()", () => expect(lessThanA).eql(false));
 			it('SSB					lessThan			"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
