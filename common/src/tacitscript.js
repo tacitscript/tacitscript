@@ -471,7 +471,7 @@ const errorUnary = ({value, operator}) => {
 
 const comma = (left, right) => {
 	if (isValue(left) && isUnaryFunction(right)) return right(left);										// X(XY)X				applyToUnary		3,+1=4
-	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);							// 021 		X(XYZ)(YZ)			applyToBinary		(1,/)2=0.5
+	if (isValue(left) && isBinaryFunction(right)) return leftApply(left, right);							// X(XYZ)(YZ)			applyToBinary		(1,/)2=0.5
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));			// 2(10)1 	(XYZ)((YZ)W)(XW)	binaryUnaryApply	(+,^3)1=(1 2 3)
 	if (isBinaryFunction(left) && isBinaryFunction(right)) return (x, y) => right(leftApply(x, left), y);	// 2(100)2	(XYZ)((YZ)WU)(XWU)	binaryBinaryApply	1(+,^)3=(1 2 3)
 

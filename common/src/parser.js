@@ -249,7 +249,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		// case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */])}; // (["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */])}; // (["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		// case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
