@@ -14,10 +14,10 @@ export default () => {
 			parse		1+"2"
 			array		(1 2 3)
 			ternary		(1 + 2)
-			// singleElem	(1 )
-			// emptyArray	( )
-			// subArray	((1 2) )
-			// falseValue	()
+			singleElem	(1 )
+			emptyArray	( )
+			subArray	((1 2) )
+			falseValue	()
 		*/
 		it("one 1", () => expect(one).eql(1));
 		it("oneB one", () => expect(oneB).eql(1));
@@ -29,9 +29,9 @@ export default () => {
 		it('parse 1+"2"=3', () => expect(parse).eql(3));
 		it("array (1 2 3)", () => expect(array).eql([1, 2, 3]));
 		it("ternary (1 + 2)", () => expect(ternary).eql(3));
-		// it("singleElem (1 )", () => expect(singleElem).eql([1]));
-		// it("emptyArray ( )", () => expect(emptyArray).eql([]));
-		// it("subArray ((1 2) )", () => expect(subArray).eql([[1, 2]]));
-		// it("falseValue ()", () => expect(falseValue).eql(false));
+		it("singleElem (1 )", () => expect(singleElem).eql([1]));
+		it("emptyArray ( )", () => expect(emptyArray).eql([]));
+		it("subArray ((1 2) )", () => expect(subArray).eql([[1, 2]]));
+		it("falseValue ()", () => expect(falseValue).eql(false));
 	});
 };
