@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("hypotenuse :.^2&.+@.^0.5", () => {
+			/*ts
+				hypotenuse					:.^2&.+@.^0.5
+			*/
+			it('3hypotenuse4=5', () => expect(hypotenuse(3, 4)).eql(5));
+		});
+
 		describe("1.1.1 sumOfSquares :.^2&.+@", () => {
 			/*ts
 				sumOfSquares				:.^2&.+@
