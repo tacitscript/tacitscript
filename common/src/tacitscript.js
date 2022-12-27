@@ -153,7 +153,7 @@ const types = value => {
 	if (isString(value)) return ["S"];
 	if (isNumber(value)) return ["N"];
 	if (isStream(value)) return ["L"];
-	if (isObject(value)) return ["O"];
+	if (isObject(value)) return ["D"];
 	if (isBoolean(value)) return ["B"];
 	//if (isFunction(value)) return arity(value);
 
@@ -294,7 +294,7 @@ const typeOf = value => {
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
 	if (isStream(value)) return "L";
-	if (isObject(value)) return "O";
+	if (isObject(value)) return "D";
 	if (isBoolean(value)) return "B";
 	if (isFunction(value)) return arity(value);
 
@@ -498,8 +498,8 @@ let plus = (left, right) => {
 
 		return left + rightValue;
 	}
-	if (isArray(left) && isArray(right)) return [...left, ...right];										// 000		AAA					arrayConcat			(1 2 3)+(4 5 6)=(1 2 3 4 5 6)
-	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);									// 000		DDD					merge				\(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))
+	if (isArray(left) && isArray(right)) return [...left, ...right];										// AAA					arrayConcat			(1 2 3)+(4 5 6)=(1 2 3 4 5 6)
+	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);									// DDD					merge				\(("a" 1) ("b" 2))+(\(("b" 3))=\(("a" 1) ("b" 3))
 
 	errorBinary({left, right, operator: "+"});
 };
