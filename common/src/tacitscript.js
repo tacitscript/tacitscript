@@ -599,15 +599,15 @@ let asterisk = (left, right) => {
 };
 let dollar = (left, right) => {
 	// A$Bx = xA(Bx)
-	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => left(x, right(x));					// 211		(XYZ)(XY)(XZ)		fork				(+2./)$;(2)=2
-	if (isString(left) && isArray(right)) {																	// 000		SAS					join				","$(1 2 3)
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => left(x, right(x));					// (XYZ)(XY)(XZ)		fork				(+2./)$;(2)=2
+	if (isString(left) && isArray(right)) {																	// SAS					join				","$(1 2 3)
 		try {
 			return pipe(map(toString), join(left))(right);
 		} catch (_) {
 			return undefined;
 		}
 	}
-	if (isArray(left) && isValue(right)) return [...left, right];											// 000		AVA					append				(1 2)$3=(1 2 3)
+	if (isArray(left) && isValue(right)) return [...left, right];											// AVA					append				(1 2)$3=(1 2 3)
 
 	errorBinary({left, right, operator: "$"});
 };

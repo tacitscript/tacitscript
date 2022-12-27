@@ -192,16 +192,16 @@ export default () => {
 		// 	it(`100			(VV)AV				find				(%2.=0)'(1 2 3)=2`, () => expect(find).eql(2));
 		// });
 
-		// describe("dollar ($)", () => {
-		// 	/*ts
-		// 		fork							(+2./)$;
-		// 		join							","$(1 2 3)
-		// 		append							(1 2)$3
-		// 	*/
-		// 	it('211			(XYZ)(XY)(XZ)		fork				(+2./)$;(2)=4', () => expect(fork(2)).eql(2));
-		// 	it('000			SAS					join				","$(1 2 3)', () => expect(join).eql("1,2,3"));
-		// 	it('000			AVA					append				(1 2)$3=(1 2 3)', () => expect(append).eql([1, 2, 3]));
-		// });
+		describe("dollar ($)", () => {
+			/*ts
+				fork				(+2./)$;
+				join				","$(1 2 3)
+				append				(1 2)$3
+			*/
+			it('(XYZ)(XY)(XZ)		fork				(+2./)$;(2)=4', () => expect(fork(2)).eql(2));
+			it('SAS					join				","$(1 2 3)', () => expect(join).eql("1,2,3"));
+			it('AVA					append				(1 2)$3=(1 2 3)', () => expect(append).eql([1, 2, 3]));
+		});
 
 		describe("asterisk (*)", () => {
 			/*ts
