@@ -593,7 +593,7 @@ let atsign = (left, right) => {																				// (VVX)AX				accumulate			+@
 	errorBinary({left, right, operator: "@"});
 };
 let asterisk = (left, right) => {
-	if (isNumber(left) && isNumber(right)) return left * right;												// 000		NNN					times				2*3=6
+	if (isNumber(left) && isNumber(right)) return left * right;												// NNN					times				2*3=6
 
 	errorBinary({left, right, operator: "*"});
 };

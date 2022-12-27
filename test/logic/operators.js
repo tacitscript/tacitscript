@@ -203,12 +203,12 @@ export default () => {
 		// 	it('000			AVA					append				(1 2)$3=(1 2 3)', () => expect(append).eql([1, 2, 3]));
 		// });
 
-		// describe("asterisk (*)", () => {
-		// 	/*ts
-		// 		times							2*3
-		// 	*/
-		// 	it('000			NNN					times				2*3=6', () => expect(times).eql(6));
-		// });
+		describe("asterisk (*)", () => {
+			/*ts
+				times				2*3
+			*/
+			it('NNN					times				2*3=6', () => expect(times).eql(6));
+		});
 
 		describe("atsign (@)", () => {
 			/*ts

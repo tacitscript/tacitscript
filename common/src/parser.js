@@ -243,7 +243,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "\\": return {definition: "ts.backslash", types: getTypes(["AD" /* fromPairs */, "DA" /* toPairs */])};
 		case "?": return {definition: "ts.question", types: getTypes(["(XB)(XY)(XY)" /* if */, "NNN" /* random */, "(VB)AA" /* filter */])};
 		case "@": return {definition: "ts.atsign", types: getTypes(["(VVX)AX" /* accumulate */, "(VB)AN" /* findIndex */, "VAN", "SSN" /* indexOf */])};
-		// case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
+		case "*": return {definition: "ts.asterisk", types: getTypes(["NNN" /* times */])};
 		// case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
 		// case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
