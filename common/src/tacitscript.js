@@ -557,25 +557,25 @@ let colon = (left, right) => {
 	errorBinary({left, right, operator: ":"});
 };
 let question = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(XV)(XY)(XY)		if					<3?(+1)1=2
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// (XB)(XY)(XY)			if					<3?(+1)1=2
 		return x => isTruthy(left(x)) ? right(x) : undefined;
 	}
-	if (isNumber(left) && isNumber(right)) {																// 000		NNN					random				0?100=[0:100)
+	if (isNumber(left) && isNumber(right)) {																// NNN					random				0?100=[0:100)
 		return (Math.random() * (right - left)) + left;
 	}
-	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// 100		(VV)AA				filter				<5?(4 9 2 7 3)=(4 2 3)
+	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);								// (VB)AA				filter				<5?(4 9 2 7 3)=(4 2 3)
 
 	errorBinary({left, right, operator: "?"});
 };
-let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate			+@(1 2)=3
+let atsign = (left, right) => {																				// (VXX)AX				accumulate			+@(1 2)=3
 	if (isBinaryFunction(left) && isArray(right))
 		return right.slice(1).reduce((acc, value) => left(acc, value), right[0]);
-	if (isUnaryFunction(left) && isArray(right)) {															// 100		(VV)AN				findIndex			(%2.=0)@(1 2 3 4)=1
+	if (isUnaryFunction(left) && isArray(right)) {															// (VB)AN				findIndex			(%2.=0)@(1 2 3 4)=1
 		const index = right.findIndex(left);
 
 		return (index === -1) ? undefined : index;
 	}
-	if (isValue(left) && isArray(right)) {																	// 000		VAN					indexOf				2@(6 8 2 3)=2
+	if (isValue(left) && isArray(right)) {																	// VAN					indexOf				2@(6 8 2 3)=2
 		try {
 			const leftString = toString(left);
 			const leftType = typeOf(left);
@@ -587,7 +587,7 @@ let atsign = (left, right) => {																				// 200		(VVX)AX				accumulate
 			return undefined;
 		}
 	}
-	if (isString(left) && isString(right))																	// 000		SSN					indexOf				"bc"@"abcd"=1
+	if (isString(left) && isString(right))																	// SSN					indexOf				"bc"@"abcd"=1
 		return (index => (index === -1) ? undefined : index)(right.indexOf(left));
 
 	errorBinary({left, right, operator: "@"});

@@ -241,7 +241,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
 		case ":": return {definition: "ts.colon", types: getTypes(["VVA" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: getTypes(["AD" /* fromPairs */, "DA" /* toPairs */])};
-		// case "?": return {definition: "ts.question", types: getTypes(["111" /* if */, "000" /* random */, "100" /* filter */])};
+		case "?": return {definition: "ts.question", types: getTypes(["(XB)(XY)(XY)" /* if */, "NNN" /* random */, "(VB)AA" /* filter */])};
 		case "@": return {definition: "ts.atsign", types: getTypes(["(VXX)AX" /* accumulate */])}; // (["200" /* accumulate */, "100" /* findIndex */, "000" /* indexOf */])};
 		// case "*": return {definition: "ts.asterisk", types: getTypes(["000" /* times */])};
 		// case "$": return {definition: "ts.dollar", types: getTypes(["211" /* fork */, "000" /* join, append */])};
