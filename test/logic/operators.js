@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("semicolon (;)", () => {
+			/*ts
+				identity						;1
+			*/
+			it('00			VV					identiy				;1=1', () => expect(identity).eql(1));
+		});
+
 		describe("braceleft ({)", () => {
 			/*ts
 				unnest							{(1 (2 3))

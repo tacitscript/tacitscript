@@ -768,12 +768,10 @@ let braceleft = value => {
 	errorUnary({operator: "{", value});
 };
 let semicolon = value => {
-	return value; // identiy XX ;1=1
+	return value;																							// 00		VV					identiy				;1=1
 
 	errorUnary({operator: ";", value});
-}; semicolon.types = [
-	["X", "X"], // identity ;1=1
-];
+};
 let braceright = value => {
 	return typeOf(value); // ?S typeof }3
 
