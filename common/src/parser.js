@@ -22,6 +22,7 @@ const slice = (...args) => array => array.slice.apply(array, args);
 const identity = x => x;
 const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
 const groupBy = fn => array => {let result = [], length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
+const all = check => array => array.every(check);
 
 //==================================================================
 // type utilities
@@ -248,7 +249,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		// case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		// case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */])}; // (["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		// case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
