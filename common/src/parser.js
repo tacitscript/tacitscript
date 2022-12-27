@@ -370,7 +370,7 @@ const getDefinition = function(symbols, userDefinitions, variable) {
 		return lookupSymbol(symbol, userDefinitions, variable);
 	}
 
-	return pipe(
+	const result = pipe(
 		reduce(function(details, symbol) {
 			if (matches(/^\s+$/)(symbol)) {
 				return {sections: details.sections.slice(0, -1).concat((details.sections.length ? details.sections[details.sections.length - 1] : "") + symbol), append: true, types: details.types};
@@ -393,13 +393,15 @@ const getDefinition = function(symbols, userDefinitions, variable) {
 		}),
 		function(details) {
 			const processedSections = details.sections[0].match(/^\s+$/) ? [details.sections[0] + details.sections[1]].concat(details.sections.slice(2)) : details.sections;
-
+			const isArray = details.append || (processedSections.length > 1);
 			return {
-				definition: (details.append || (processedSections.length > 1)) ? "[" + processedSections.join(", ") + "]" : processedSections[0],
-				types: details.types,
+				definition: isArray ? "[" + processedSections.join(", ") + "]" : processedSections[0],
+				types: isArray ? ["A"] : details.types,
 			};
 		}
 	)(symbols);
+
+	return result;
 };
 
 const isAlphabetic = function(string) {return /^[a-z]+$/i.test(string);};
