@@ -324,7 +324,7 @@ export default () => {
 				binaryUnaryApply				+,^3
 				binaryBinaryApply				+,^
 			*/
-			it("X(XY)X				applyToUnary		3,+1=4", () => expect(applyToUnary).eql(4));
+			it("X(XY)Y				applyToUnary		3,+1=4", () => expect(applyToUnary).eql(4));
 			it("X(XYZ)(YZ)			applyToBinary		(1,/)2=0.5", () => expect(applyToBinary(2)).eql(0.5));
 			it("(XYZ)((YZ)W)(XW)	binaryUnaryApply	(+,^3)1=(1 2 3)", () => expect(binaryUnaryApply(1)).eql([1, 2, 3]));
 			it("(XYZ)((YZ)WU)(XWU)	binaryBinaryApply	1(+,^)3=(1 2 3)", () => expect(binaryBinaryApply(1, 3)).eql([1, 2, 3]));
