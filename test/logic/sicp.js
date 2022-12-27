@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("factGen +1^.*@", () => {
+			/*ts
+				factGen	+1^.*@
+			*/
+			it("factGen4=24", () => expect(factGen(4)).eql(24));
+		});
+
 		describe("factRec", () => {
 			/*ts
 				factRec						(=0 ? 1`)|(-1.factRec.* $ ;)						NN
