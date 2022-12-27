@@ -3,6 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
+		describe("bang (!)", () => {
+			/*ts
+				notValue						!3
+				notPredicate					!(<2)
+				notComparator					!<
+			*/
+			it('00			VB					notValue			!3=()', () => expect(notValue).eql(false));
+			it('11			(VV)(VB)			notPredicate		!(<2)(1)=()', () => expect(notPredicate(1)).eql(false));
+			it('22			(VVV)(VVB)			notComparator		3(!<)4=()', () => expect(notComparator(3, 4)).eql(false));
+		});
+
 		describe("braceright (})", () => {
 			/*ts
 				typeOf							}1

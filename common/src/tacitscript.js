@@ -778,28 +778,24 @@ let braceright = value => {
 	errorUnary({operator: "}", value});
 };
 let bang = value => {
-	if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
-		let fn = (x, y) => isFalsey(value(x, y));
-
-		fn.types = value.types;
-
-		return fn;
-	}
-	if (isUnaryFunction(value)) { // (VV)(VB) not !(<2)
+	if (isValue(value)) return isFalsey(value);																// 00		VB					notValue			!3=()
+	if (isUnaryFunction(value)) {																			// 11		(VV)(VB)			notPredicate		!(<2)(1)=()
 		let fn = x => isFalsey(value(x));
 
 		fn.types = value.types;
 
 		return fn;
 	}
-	if (isValue(value)) return isFalsey(value); // VB not !()
+	if (isBinaryFunction(value)) {																			// 22		(VVV)(VVB)			notComparator		3(!<)4=()
+		let fn = (x, y) => isFalsey(value(x, y));
+
+		fn.types = value.types;
+
+		return fn;
+	}
 
 	errorUnary({value, operator: "!"});
-}; bang.types = [
-	["V", "B"], // not !2
-	[["V", "V", "V"], ["V", "V", "B"]], // not !<
-	[["V", "V"], ["V", "B"]], // not !(<2)
-];
+};
 let hash = value => {
 	if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
 	if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)

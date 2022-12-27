@@ -253,7 +253,7 @@ const lookupSymbol = function(symbol, userDefinition) {
 		case "^": return {definition: "ts.hat", types: getTypes(["000" /* power */, "100" /* generate */, "111" /* scan */])};
 		case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
 		case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
-		case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */])};
+		case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */, "11" /* notPredicate */, "22" /* notComparator */])};
 	}
 
 	const existing = userDefinition[symbol];
@@ -270,6 +270,18 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		values,
 	);
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
+
+	// unary application
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
+	if (unarySolutions.length) {
+		const definition = `${left}(${right})`;
+		const types = pipe(
+			map(pipe(first, last)),
+			extractUnique(identity),
+		)(unarySolutions);
+
+		return {definition, types};
+	}
 
 	// binary left application
 	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && typeMatch(leftType, rightType[0]))(allCombinations);
@@ -295,18 +307,6 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		return {definition, types};
 	}
 
-	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
-	if (unarySolutions.length) {
-		const definition = `${left}(${right})`;
-		const types = pipe(
-			map(pipe(first, last)),
-			extractUnique(identity),
-		)(unarySolutions);
-
-		return {definition, types};
-	}
-
 	let leftString = "Fn";
 	let rightString = "Fn";
 
@@ -327,7 +327,6 @@ const getDefinition = function(symbols, userDefinitions) {
 		if (symbol.startsWith("\"") && symbol.endsWith("\"")) return {definition: "`" + symbol.slice(1, -1) + "`", types: [[]]};
 
 		return lookupSymbol(symbol, userDefinitions);
-		// }
 	}
 
 	return pipe(
