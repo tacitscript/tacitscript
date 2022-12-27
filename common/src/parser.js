@@ -229,7 +229,7 @@ const getTypes = map(getType);
 const lookupSymbol = function(symbol, userDefinition, variable) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: getTypes(["NVN" /* add */])}; // (["000" /* stringConcat, add, arrayConcat, merge */])};
-		// case "-": return {definition: "ts.minus", types: getTypes(["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
+		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */])}; // (["000" /* subtract, splice, omitKey */, "001" /* stringReplace */])};
 		// case ".": return {definition: "ts.dot", types: getTypes(["111" /* pipe */, "122" /* unaryBinaryPipe */, "212" /* binaryUnaryPipe */])};
 		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
