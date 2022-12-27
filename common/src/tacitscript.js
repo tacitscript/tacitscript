@@ -513,8 +513,8 @@ let slash = (left, right) => {
 	errorBinary({left, right, operator: "/"});
 };
 let less = (left, right) => {
-	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; 	// 000		NNB SSB				lessThan			3<2=() "abc"<"def"=(!())
-	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); 								// 100		(VS)AA (VN)AA		sort				;<("dan" "sue" "alan")=("alan" "dan" "sue") ;<(2 3 1)=(1 2 3)
+	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; 	// NNB SSB				lessThan			3<2=() "abc"<"def"=(!())
+	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); 								// (VS)AA (VN)AA		sort				;<("dan" "sue" "alan")=("alan" "dan" "sue") ;<(2 3 1)=(1 2 3)
 
 	errorBinary({left, right, operator: "<"});
 };
@@ -769,7 +769,7 @@ let braceleft = value => {
 	errorUnary({operator: "{", value});
 };
 let semicolon = value => {
-	return value;																							// 00		VV					identiy				;1=1
+	return value;																							// VV					identity				;1=1
 
 	errorUnary({operator: ";", value});
 };

@@ -273,25 +273,25 @@ export default () => {
 		// 	xit('010		V(VV)V				tap					3>({"console.log")=3', () => expect(tap).eql(3));
 		// });
 
-		// describe("less (<)", () => {
-		// 	/*ts
-		// 		lessThanA						3<2
-		// 		lessThanB						"abc"<"def"
-		// 		sortA							;<("dan" "sue" "alan")
-		// 		sortB							;<(2 3 1)
-		// 	*/
-		// 	it("000			NNB					lessThan			3<2=()", () => expect(lessThanA).eql(false));
-		// 	it('000			SSB					lessThan			"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
-		// 	it('100			(VS)AA				sort				;<("dan" "sue" "alan")=("alan" "dan" "sue")', () => expect(sortA).eql(["alan", "dan", "sue"]));
-		// 	it('100			(VN)AA				sort				;<(2 3 1)=(1 2 3)', () => expect(sortB).eql([1, 2, 3]));
-		// });
+		describe("less (<)", () => {
+			/*ts
+				lessThanA						3<2
+				lessThanB						"abc"<"def"
+				sortA							;<("dan" "sue" "alan")
+				sortB							;<(2 3 1)
+			*/
+			it("NNB					lessThan			3<2=()", () => expect(lessThanA).eql(false));
+			it('SSB					lessThan			"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
+			it('(VS)AA				sort				;<("dan" "sue" "alan")=("alan" "dan" "sue")', () => expect(sortA).eql(["alan", "dan", "sue"]));
+			it('(VN)AA				sort				;<(2 3 1)=(1 2 3)', () => expect(sortB).eql([1, 2, 3]));
+		});
 
-		// describe("slash (/)", () => {
-		// 	/*ts
-		// 		divide							6/2
-		// 	*/
-		// 	it("000			NNN					divide				6/2=3", () => expect(divide).eql(3));
-		// });
+		describe("slash (/)", () => {
+			/*ts
+				divide				6/2
+			*/
+			it("NNN					divide				6/2=3", () => expect(divide).eql(3));
+		});
 
 		describe("plus (+)", () => {
 			/*ts

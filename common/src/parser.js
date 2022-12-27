@@ -235,7 +235,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
 		// case "#": return {definition: "ts.hash", types: getTypes(["00" /* length, keyLength, modulus */])};
-		// case "<": return {definition: "ts.less", types: getTypes(["000" /* lessThan */, "100" /* sort */])};
+		case "<": return {definition: "ts.less", types: getTypes(["NNB", "SSB" /* lessThan */, "(VS)AA", "(VN)AA" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["NNN" /* divide */])};
 		// case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
 		// case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
@@ -248,7 +248,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
-		// case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
+		case ";": return {definition: "ts.semicolon", types: getTypes(["XX" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
 		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
