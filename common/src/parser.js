@@ -249,7 +249,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		// case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */])}; // (["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])}; // (["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		// case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		// case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
@@ -273,7 +273,7 @@ const replaceType = ({from, to}) => type => {
 	return type.map(replaceType({from, to}));
 };
 const getSymbolMap = (acceptorSymbol, donorSymbol) => {
-	if ("XYZW".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
+	if ("XYZWU".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
 
 	return [];
 }
@@ -285,12 +285,12 @@ const reduceType = ({type, typeMap}) => reduce((acc, [from, to]) => Array.isArra
 const getReducedType = ({remainderType, typeMap}) => {
 	const reducedType = reduceType({type: remainderType, typeMap});
 
-	// if any XYZW symbol occurs only once in a type, we change to ?
+	// if any XYZWU symbol occurs only once in a type, we change to ?
 	const typeSymbols = Array.isArray(reducedType) ? flatten(reducedType) : [reducedType];
 	const reductionMap = pipe(
 		groupBy(identity),
 		values,
-		filter(symbols => (symbols.length === 1) && "XYZW".includes(symbols[0])),
+		filter(symbols => (symbols.length === 1) && "XYZWU".includes(symbols[0])),
 		map(([symbol]) => [symbol, "?"])
 	)(typeSymbols);
 
@@ -301,8 +301,8 @@ const getReducedLeftAppliedType = ({leftType, rightType}) => getReducedType({rem
 const getReducedRightAppliedType = ({leftType, rightType}) => getReducedType({remainderType: splice(leftType, 1, 1), typeMap: getTypeMap(leftType[1], rightType)});
 const matchSymbol = (left, right) => {
 	return (left === right) ||
-		"XYZW?".includes(left) ||
-		"XYZW?".includes(right) ||
+		"XYZWU?".includes(left) ||
+		"XYZWU?".includes(right) ||
 		any(([source, match]) => (source === "V") && !Array.isArray(match))([[left, right], [right, left]]);
 };
 const matchType = (left, right) => {
