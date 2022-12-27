@@ -3,9 +3,19 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("fibGen >,(#.).^(_2%.].+@).((1 1),).]", () => {
+			/*ts
+				threeSequence				+,^3
+				fibGen						>,(#.).^(_2%.].+@).((1 1),).]
+				// v1						.(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]
+			*/
+			it("fibGen6=8", () => expect(fibGen(6)).eql(8));
+			it('(+,^3)3=(3 4 5)', () => expect(threeSequence(3)).eql([3, 4, 5]));
+		});
+
 		describe("fibRec", () => {
 			/*ts
-				fibRec						(=0 ? 0`)|(=1 ? 1`)|((-1.: $ -2).fibRec&.+@)
+				fibRec						(=0 ? 0`)|(=1 ? 1`)|((-1.: $ -2).fibRec&.+@)		NN
 				// v1						:.[.((=0 0`) (=1 1`) .(-1 -2).fibRec0@.+$)?
 			*/
 			it("fibRec4=3", () => expect(fibRec(4)).eql(3));
