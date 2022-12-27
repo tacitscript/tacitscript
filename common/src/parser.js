@@ -256,7 +256,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["(NV)NA" /* generate */])}; // (["000" /* power */, "100" /* generate */, "111" /* scan */])};
 		// case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
-		// case ">": return {definition: "ts.greater", types: getTypes(["000" /* greaterThan */, "101" /* over */])};
+		case ">": return {definition: "ts.greater", types: getTypes(["NNB", "SSB" /* greaterThan */, "(VV)A(AA)", "(VV)A(DD)" /* over */])};
 		// case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */, "11" /* notPredicate */, "22" /* notComparator */])};
 	}
 

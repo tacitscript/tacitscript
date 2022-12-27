@@ -258,20 +258,20 @@ export default () => {
 		// 	it('000			ADD					omitKeys			("a" )-(\(("a" 1) ("b" 2)))=(\(("b" 2) ))', () => expect(omitKeys).eql({b: 2}));
 		// });
 
-		// describe("greater (>)", () => {
-		// 	/*ts
-		// 		greaterThanA					3>2
-		// 		greaterThanB					"abc">"def"
-		// 		overA							+1>(1 )(3 5 7)
-		// 		overB							+1>("a" )(\(("a" 2) ))
-		// 		// tap							3>({"console.log")
-		// 	*/
-		// 	it('000			NNB					greaterThan			3>2=!()', () => expect(greaterThanA).eql(true));
-		// 	it('000			SSB					greaterThan			"abc"<"def"=()', () => expect(greaterThanB).eql(false));
-		// 	it('101			(VV)A(AA)			over				+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
-		// 	it('101			(VV)A(DD)			over				+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
-		// 	xit('010		V(VV)V				tap					3>({"console.log")=3', () => expect(tap).eql(3));
-		// });
+		describe("greater (>)", () => {
+			/*ts
+				greaterThanA					3>2
+				greaterThanB					"abc">"def"
+				overA							+1>(1 )(3 5 7)
+				overB							+1>("a" )(\(("a" 2) ))
+				// tap							3>({"console.log")
+			*/
+			it('NNB					greaterThan			3>2=!()', () => expect(greaterThanA).eql(true));
+			it('SSB					greaterThan			"abc"<"def"=()', () => expect(greaterThanB).eql(false));
+			it('(VV)A(AA)			over				+1>(1 )(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
+			it('(VV)A(DD)			over				+1>("a" )(\(("a" 2) ))=(`(("a" 3) ))', () => expect(overB).eql({a: 3}));
+			xit('V(VV)V				tap					3>({"console.log")=3', () => expect(tap).eql(3));
+		});
 
 		describe("less (<)", () => {
 			/*ts

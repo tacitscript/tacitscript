@@ -519,11 +519,11 @@ let less = (left, right) => {
 	errorBinary({left, right, operator: "<"});
 };
 let greater = (left, right) => {
-	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right;	// 000		NNB SSB				greaterThan			3>2=!() "abc">"def"=()
-	if (isUnaryFunction(left) && isArray(right)) {															// 101		(VV)A(AA) (VV)A(DD)	over				+1>(1 )(3 5 7)=(3 6 7) +1>("a" )(\(("a" 2) ))=(`(("a" 3) ))
+	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right;	// NNB SSB				greaterThan			3>2=!() "abc">"def"=()
+	if (isUnaryFunction(left) && isArray(right)) {															// (VV)A(AA) (VV)A(DD)	over				+1>(1 )(3 5 7)=(3 6 7) +1>("a" )(\(("a" 2) ))=(`(("a" 3) ))
 		return x => applyOver({path: right, fn: left, container: x});
 	}
-	if (isValue(left) && isUnaryFunction(right)) {															// 010		V(VV)V				tap					3>({"console.log")
+	if (isValue(left) && isUnaryFunction(right)) {															// X(XV)X				tap					3>({"console.log")
 		try {
 			right(left);
 		} catch (_) {
