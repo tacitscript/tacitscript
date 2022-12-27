@@ -13,6 +13,7 @@ export default () => {
 			inverse		1/
 			parse		1+"2"
 			array		(1 2 3)
+			ternary		(1 + 2)
 			// singleElem	(1 )
 			// emptyArray	( )
 			// subArray	((1 2) )
@@ -27,6 +28,7 @@ export default () => {
 		it("inverse 1/", () => expect(inverse(2)).eql(0.5));
 		it('parse 1+"2"=3', () => expect(parse).eql(3));
 		it("array (1 2 3)", () => expect(array).eql([1, 2, 3]));
+		it("ternary (1 + 2)", () => expect(ternary).eql(3));
 		// it("singleElem (1 )", () => expect(singleElem).eql([1]));
 		// it("emptyArray ( )", () => expect(emptyArray).eql([]));
 		// it("subArray ((1 2) )", () => expect(subArray).eql([[1, 2]]));
