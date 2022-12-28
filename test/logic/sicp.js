@@ -3,10 +3,19 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("fastExp (].=0 ? 1`)|(].%2.=0 /2>(1 ).fastExp.*$;)|([.* $ -1>(1 ).fastExp)", () => {
+			/*ts
+				square						*$;
+				isEven						%2.=0
+				fastExp						(].=0 ? 1`)|(].%2.=0 /2>(1 ).fastExp.*$;)|([.* $ -1>(1 ).fastExp)
+				// v1						:.((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp$.(; ;).*$) .([ ,(; -1).fastExp$).*$)?
+			*/
+		});
+
 		describe("expGen :.([.`,^ $ ]).*@", () => {
 			/*ts
-				expGen		:.([.`,^ $ ]).*@
-				// v1		:,(` ;).^$.*$
+				expGen						:.([.`,^ $ ]).*@									NNN
+				// v1						:,(` ;).^$.*$
 			*/
 			it("3expGen2=9", () => expect(expGen(3, 2)).eql(9));
 		});
