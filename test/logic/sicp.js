@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("1.11 f (<3 ? ;)|(-1.f.+ $ (-2.f.*2.+ $ -3.f.*3))", () => {
+			/*ts
+				f							(<3 ? ;)|(-1.f.+ $ (-2.f.*2.+ $ -3.f.*3))
+				// v1						((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?
+			*/
+			it('f4=11', () => expect(f(4)).eql(11));
+		});
+
 		describe("fibGen >,(#.).^(_2%.].+@).((1 1),).]", () => {
 			/*ts
 				isEven						%2.=0
