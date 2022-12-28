@@ -638,7 +638,7 @@ let equal = (left, right) => {
 };
 let bar = (left, right) => {
 	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;								// VVV					orValue				()|1=1
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// (XY)(XY)(XY)			orPredicate			>0|(%2.=0)(_2)=(!())
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// (XB)(XB)(XB)			orPredicate			>0|(%2.=0)(_2)=(!())
 		let fn = x => {
 			const leftResult = left(x);
 
@@ -647,7 +647,7 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// (XYZ)(XYZ)(XYZ)		orComparator		3(<|=)2=()
+	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// (XYB)(XYB)(XYB)		orComparator		3(<|=)2=()
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 
@@ -699,8 +699,8 @@ let hat = (left, right) => {
 	errorBinary({left, right, operator: "^"});
 };
 let ampersand = (left, right) => {
-	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left;								// 000		VVV					andValue			!()&2=2
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(VV)(VV)(VV)		andPredicate		>2&(<6)(3)=(!())
+	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left;								// VVV					andValue			!()&2=2
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// (VB)(VB)(VB)			andPredicate		>2&(<6)(3)=(!())
 		let result = value => {
 			const leftValue = comma(value, left);
 
@@ -714,13 +714,13 @@ let ampersand = (left, right) => {
 
 	const applyLeft = value => left(value);
 
-	if (isUnaryFunction(left) && isArray(right)) return map(applyLeft)(right);								// 100		(VV)AA				map					*2&(2 3 4)=(4 6 8)
-	if (isUnaryFunction(left) && isObject(right)) return mapObj(applyLeft)(right);							// 100		(VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))
+	if (isUnaryFunction(left) && isArray(right)) return map(applyLeft)(right);								// (VV)AA				map					*2&(2 3 4)=(4 6 8)
+	if (isUnaryFunction(left) && isObject(right)) return mapObj(applyLeft)(right);							// (VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))
 
 	errorBinary({left, right, operator: "&"});
 };
 let backtick = (left, right) => {
-	return left;																							// 000		XVX					constant			2`3=2
+	return left;																							// XVX					constant			2`3=2
 
 	errorBinary({left, right, operator: "`"});
 };

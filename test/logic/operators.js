@@ -106,24 +106,24 @@ export default () => {
 		// 	it('000			XVX					constant			2`3=2', () => expect(constant).eql(2));
 		// });
 
-		// describe("ampersand (&)", () => {
-		// 	/*ts
-		// 		andValue						!()&2
-		// 		andPredicate					>2&(<6)(3)=(!())
-		// 		map								*2&(2 3 4)
-		// 		mapObject						*2&(\(("a" 3) ))
-		// 	*/
-		// 	it('000			VVV					andValue			!()&2=2', () => expect(andValue).eql(2));
-		// 	it('111			(VV)(VV)(VV)		andPredicate		>2&(<6)(3)=(!())', () => expect(andPredicate).eql(true));
-		// 	it('100			(VV)AA				map					*2&(2 3 4)=(4 6 8)', () => expect(map).eql([4, 6, 8]));
-		// 	it('100			(VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))', () => expect(mapObject).eql({a: 6}));
-		// });
+		describe("ampersand (&)", () => {
+			/*ts
+				andValue								!()&2
+				andPredicate							>2&(<6)(3)=(!())
+				map										*2&(2 3 4)
+				mapObject								*2&(\(("a" 3) ))
+			*/
+			it('VVV					andValue			!()&2=2', () => expect(andValue).eql(2));
+			it('(VB)(VB)(VB)		andPredicate		>2&(<6)(3)=(!())', () => expect(andPredicate).eql(true));
+			it('(VV)AA				map					*2&(2 3 4)=(4 6 8)', () => expect(map).eql([4, 6, 8]));
+			it('(VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))', () => expect(mapObject).eql({a: 6}));
+		});
 
 		describe("hat (^)", () => {
 			/*ts
-				power							2^3
-				generate						;^3
-				scan							(#.<3)^#( )
+				power									2^3
+				generate								;^3
+				scan									(#.<3)^#( )
 			*/
 			it('NNN					power				2^3=8', () => expect(power).eql(8));
 			it('(NV)NA				generate			;^3=(0 1 2)', () => expect(generate).eql([0, 1, 2]));
@@ -163,8 +163,8 @@ export default () => {
 				orComparator							<|=
 			*/
 			it('XYZ					orValue				()|1=1', () => expect(orValue).eql(1));
-			it('(XY)(XY)(XY)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
-			it('(XYZ)(XYZ)(XYZ)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
+			it('(XB)(XB)(XB)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
+			it('(XYB)(XYB)(XYB)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
 		});
 
 		describe("equal (=)", () => {

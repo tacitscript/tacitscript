@@ -245,7 +245,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "@": return {definition: "ts.atsign", types: getTypes(["(VVX)AX" /* accumulate */, "(VB)AN" /* findIndex */, "VAN", "SSN" /* indexOf */])};
 		case "*": return {definition: "ts.asterisk", types: getTypes(["NNN" /* times */])};
 		case "$": return {definition: "ts.dollar", types: getTypes(["(XYZ)(XY)(XZ)" /* fork */, "SAS" /* join */, "AVA" /*append */])};
-		// case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
+		case "`": return {definition: "ts.backtick", types: getTypes(["XVX", /* constant */])};
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["NNN" /* round */, "NAV", "NSS" /* at */, "SDV" /* prop */, "AAV", "ADV" /* path */, "(VB)AV" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["XX" /* identity */])};
@@ -255,9 +255,9 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "%": return {definition: "ts.percent", types: getTypes(["NNN" /* remainder */, "NAA", "NSA" /* split */, "AAA", "ASA" /* chunk */, "ADD" /* pick */, "SSA" /* chunkWithDelimiter */, "(VS)AD" /* groupBy */, "(VVB)AA", "(SSB)SA" /* chunkWhenComparator */])};
 		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["NNN" /* power */, "(NV)NA" /* generate */, "(AB)(AV)(AA)" /* scan */])};
-		// case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
+		case "&": return {definition: "ts.ampersand", types: getTypes(["VVV" /* andValue */, "(VB)(VB)(VB)" /* andPredicate */, "(VV)AA" /* map */, "(VV)DD" /* mapObject */])};
 		case ">": return {definition: "ts.greater", types: getTypes(["NNB", "SSB" /* greaterThan */, "(VV)A(AA)", "(VV)A(DD)" /* over */])};
-		// case "!": return {definition: "ts.bang", types: getTypes(["00" /* notValue */, "11" /* notPredicate */, "22" /* notComparator */])};
+		case "!": return {definition: "ts.bang", types: getTypes(["BB" /* notValue */ /* notPredicate */ /* notComparator */])};
 	}
 
 	const existing = userDefinition[symbol];
