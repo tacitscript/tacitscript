@@ -119,16 +119,16 @@ export default () => {
 		// 	it('100			(VV)DD				mapObject			*2&(\(("a" 3) ))=(\(("a" 6) ))', () => expect(mapObject).eql({a: 6}));
 		// });
 
-		// describe("hat (^)", () => {
-		// 	/*ts
-		// 		power							2^3
-		// 		generate						;^3
-		// 		scan							(#.<3)^#( )
-		// 	*/
-		// 	it('000			NNN					power				2^3=8', () => expect(power).eql(8));
-		// 	it('100			(NV)NA				generate			;^3=(0 1 2)', () => expect(generate).eql([0, 1, 2]));
-		// 	it('111			(AV)(AV)(AA)		scan				#.<3^#( )=(0 1 2)', () => expect(scan).eql([0, 1, 2]));
-		// });
+		describe("hat (^)", () => {
+			/*ts
+				power							2^3
+				generate						;^3
+				scan							(#.<3)^#( )
+			*/
+			it('NNN					power				2^3=8', () => expect(power).eql(8));
+			it('(NV)NA				generate			;^3=(0 1 2)', () => expect(generate).eql([0, 1, 2]));
+			it('(AB)(AV)(AA)		scan				#.<3^#( )=(0 1 2)', () => expect(scan).eql([0, 1, 2]));
+		});
 
 		describe("percent (%)", () => {
 			/*ts

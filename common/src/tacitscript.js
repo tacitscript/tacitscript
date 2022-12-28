@@ -689,10 +689,10 @@ let percent = (left, right) => {
 	errorBinary({left, right, operator: "%"});
 };
 let hat = (left, right) => {
-	if (isNumber(left) && isNumber(right)) return Math.pow(left, right);									// 000		NNN					power				2^3=8
-	if (isUnaryFunction(left) && isNumber(right))															// 100		(NV)NA				generate			;^3=(0 1 2)
+	if (isNumber(left) && isNumber(right)) return Math.pow(left, right);									// NNN					power				2^3=8
+	if (isUnaryFunction(left) && isNumber(right))															// (NV)NA				generate			;^3=(0 1 2)
 		return map((value, index) => left(index))(Array.from(Array(right)));
-	if (isUnaryFunction(left) && isUnaryFunction(right))													// 111		(AV)(AV)(AA)		scan				#.<3^#( )=(0 1 2)
+	if (isUnaryFunction(left) && isUnaryFunction(right))													// (AB)(AV)(AA)			scan				#.<3^#( )=(0 1 2)
 		return array => scanInternal({left, right, startingArray: array});
 	//if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )
 
