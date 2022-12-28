@@ -272,6 +272,18 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	);
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
 
+	// unary application
+	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
+	if (unarySolutions.length) {
+		const definition = `${left}(${right})`;
+		const types = pipe(
+			map(pipe(first, last)),
+			extractUnique(identity),
+		)(unarySolutions);
+
+		return {definition, types};
+	}
+
 	// binary left application
 	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && typeMatch(leftType, rightType[0]))(allCombinations);
 	if (binaryLeftSolutions.length) {
@@ -296,22 +308,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		return {definition, types};
 	}
 
-	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
-	if (unarySolutions.length) {
-		const definition = `${left}(${right})`;
-		const types = pipe(
-			map(pipe(first, last)),
-			extractUnique(identity),
-		)(unarySolutions);
-
-		return {definition, types};
-	}
-
-	let leftString = "Fn";
-	let rightString = "Fn";
-
-	throw `Unable to resolve dynamic function application: ${left}(${right})`;
+	throw `Unable to resolve dynamic function application: ${left} ${right}`;
 };
 const getDefinition = function(symbols, userDefinitions, variable) {
 	if (!symbols.length) return {definition: false, types: [[]]};
