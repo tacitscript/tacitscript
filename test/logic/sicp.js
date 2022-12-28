@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("sumIntegers :.([.+,^ $ _.-@.+1).+@", () => {
+			/*ts
+				sumIntegers					:.([.+,^ $ _.-@.+1).+@								NNN
+				// v1						:.([.+ _.-$.+1).^$.+$
+			*/
+			it("0sumIntegers10=55", () => expect(sumIntegers(0, 10)).eql(55));
+		});
+
 		describe("gcd (].=0 ? [)|((].: $ %@).gcd)", () => {
 			/*ts
 				gcd							(].=0 ? [)|((].: $ %@).gcd)							AN
