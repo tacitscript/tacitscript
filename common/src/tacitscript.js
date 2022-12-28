@@ -230,7 +230,7 @@ const matchType = (left, right) => {
 				const matchIndices = source.reduce((acc, sourceSymbol, index) => (symbol === sourceSymbol) ? [...acc, index] : acc, []);
 
 				return matchIndices.length ? all(index => matchType(match[index], match[matchIndices[0]]))(matchIndices) : true;
-			})(["X", "Y", "Z", "W"])),
+			})(["X", "Y", "Z", "W", "U"])),
 			reduce((acc, value) => acc && value)(true),
 		)([[left, right], [right, left]]));
 
@@ -626,10 +626,10 @@ let apostrophe = (left, right) => {
 	errorBinary({left, right, operator: "'"});
 };
 let equal = (left, right) => {
-	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
+	if (!isValue(left) || !isValue(right)) errorBinary({left, right, operator: "="});
 
 	try {
-		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right));					// 000		VVB					equals				2=4=()
+		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right));					// XXB					equals				2=4=()
 	} catch (_) {
 		return undefined;
 	}
@@ -637,8 +637,8 @@ let equal = (left, right) => {
 	errorBinary({left, right, operator: "="});
 };
 let bar = (left, right) => {
-	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;								// 000		VVV					orValue				()|1=1
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// 111		(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(_2)=(!())
+	if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;								// VVV					orValue				()|1=1
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {													// (XY)(XY)(XY)			orPredicate			>0|(%2.=0)(_2)=(!())
 		let fn = x => {
 			const leftResult = left(x);
 
@@ -647,7 +647,7 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// 222		(VVV)(VVV)(VVV)		orComparator		3(<|=)2=()
+	if (isBinaryFunction(left) && isBinaryFunction(right)) {												// (XYZ)(XYZ)(XYZ)		orComparator		3(<|=)2=()
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 

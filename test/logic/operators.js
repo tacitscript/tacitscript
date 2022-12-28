@@ -155,23 +155,24 @@ export default () => {
 		// 	it('200			(SSB)SA				chunkWhenComparator <%"abcba"=("a" "b" "cba")', () => expect(chunkComparatorString).eql(["a", "b", "cba"]));
 		// });
 
-		// describe("bar (|)", () => {
-		// 	/*ts
-		// 		orValue							()|1
-		// 		orPredicate						>0|(%2.=0)
-		// 		orComparator					<|=
-		// 	*/
-		// 	it('000			VVV					orValue				()|1=1', () => expect(orValue).eql(1));
-		// 	it('111			(VV)(VV)(VV)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
-		// 	it('222			(VVV)(VVV)(VVV)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
-		// });
+		describe("bar (|)", () => {
+			/*ts
+				leftOr							<|
+				orValue							()|1
+				orPredicate						>0|(%2.=0)
+				orComparator					<|=
+			*/
+			it('XYZ					orValue				()|1=1', () => expect(orValue).eql(1));
+			it('(XY)(XY)(XY)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
+			it('(XYZ)(XYZ)(XYZ)		orComparator		3(<|=)2=()', () => expect(orComparator(3, 2)).eql(false));
+		});
 
-		// describe("equal (=)", () => {
-		// 	/*ts
-		// 		equals							2=4
-		// 	*/
-		// 	it('000			VVB					equals				2=4=()', () => expect(equals).eql(false));
-		// });
+		describe("equal (=)", () => {
+			/*ts
+				equals				2=4
+			*/
+			it('VVB					equals				2=4=()', () => expect(equals).eql(false));
+		});
 
 		describe("apostrophe (')", () => {
 			/*ts

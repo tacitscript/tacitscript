@@ -251,7 +251,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case ";": return {definition: "ts.semicolon", types: getTypes(["XX" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["XXB" /* equals */])};
-		// case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
+		case "|": return {definition: "ts.bar", types: getTypes(["VVV" /* orValue */, "(XY)(XY)(XY)" /* orPredicate */, "(XYZ)(XYZ)(XYZ)" /* orComparator */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["NNN" /* remainder */])};
 		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["(NV)NA" /* generate */])}; // (["000" /* power */, "100" /* generate */, "111" /* scan */])};
@@ -301,8 +301,9 @@ const getReducedLeftAppliedType = ({leftType, rightType}) => getReducedType({rem
 const getReducedRightAppliedType = ({leftType, rightType}) => getReducedType({remainderType: splice(leftType, 1, 1), typeMap: getTypeMap(leftType[1], rightType)});
 const matchSymbol = (left, right) => {
 	return (left === right) ||
-		"XYZWU?".includes(left) ||
-		"XYZWU?".includes(right) ||
+		[left, right].includes("?") ||
+		("XYZWU".includes(left) && !Array.isArray(right)) ||
+		("XYZWU".includes(right) && !Array.isArray(left)) ||
 		any(([source, match]) => (source === "V") && !Array.isArray(match))([[left, right], [right, left]]);
 };
 const matchType = (left, right) => {
@@ -312,7 +313,7 @@ const matchType = (left, right) => {
 				const matchIndices = source.reduce((acc, sourceSymbol, index) => (symbol === sourceSymbol) ? [...acc, index] : acc, []);
 
 				return matchIndices.length ? all(index => matchType(match[index], match[matchIndices[0]]))(matchIndices) : true;
-			})(["X", "Y", "Z", "W"])),
+			})(["X", "Y", "Z", "W", "U"])),
 			reduce((acc, value) => acc && value)(true),
 		)([[left, right], [right, left]]));
 
@@ -329,7 +330,10 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const binaryLeftSolutions = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(allCombinations);
 	if (binaryLeftSolutions.length) {
 		const definition = `ts.leftApply(${left}, ${right})`;
-		const types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
+		const types = pipe(
+			map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType})),
+			extractUnique(identity),
+		)(binaryLeftSolutions);
 
 		return {definition, types};
 	}
@@ -338,7 +342,10 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const binaryRightSolutions = filter(([leftType, rightType]) => (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
 	if (binaryRightSolutions.length) {
 		const definition = `ts.rightApply(${left}, ${right})`;
-		const types = map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
+		const types = pipe(
+			map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType})),
+			extractUnique(identity),
+		)(binaryRightSolutions);
 
 		return {definition, types};
 	}
@@ -347,13 +354,13 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && matchType(leftType[0], rightType))(allCombinations);
 	if (unarySolutions.length) {
 		const definition = `${left}(${right})`;
-		const types = map(([leftType, rightType]) => getReducedUnaryType({leftType, rightType}))(unarySolutions);
+		const types = pipe(
+			map(([leftType, rightType]) => getReducedUnaryType({leftType, rightType})),
+			extractUnique(identity),
+		)(unarySolutions);
 
 		return {definition, types};
 	}
-
-	let leftString = "Fn";
-	let rightString = "Fn";
 
 	throw `Unable to resolve dynamic function application: ${left}(${right})`;
 };
