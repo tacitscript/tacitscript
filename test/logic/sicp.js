@@ -5,11 +5,12 @@ export default () => {
 	describe("SICP", () => {
 		describe("fibGen >,(#.).^(_2%.].+@).((1 1),).]", () => {
 			/*ts
-				isEven						%2.=0
 				threeSequence				+,^3
-				// fibGen						>,(#.).^(_2%.].+@).((1 1),).]
+				lessLength					:.(].#.< $ [)
+				// fibGen						lessLength,^(_2%.].+@),(1 1) ,((1 1),).]
 				// v1						.(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]
 			*/
+			it("3lessLength(1 2 3)=()", () => expect(lessLength(3, [1, 2, 3])).eql(false));
 			// it("fibGen6=8", () => expect(fibGen(6)).eql(8));
 			it('(+,^3)3=(3 4 5)', () => expect(threeSequence(3)).eql([3, 4, 5]));
 		});

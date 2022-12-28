@@ -245,7 +245,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
-		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1" /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
+		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "2(10)1"/*, "2(11)(01)"*/ /* binaryUnaryApply */, "2(100)2" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["000" /* remainder, split, chunk, chunkWithDelimiter */, "100" /* groupBy */, "200" /* chunkWhenComparator */])};
@@ -278,7 +278,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		const definition = `${left}(${right})`;
 		const types = pipe(
 			map(pipe(first, last)),
-			extractUnique(identity),
+			extractUnique(JSON.stringify),
 		)(unarySolutions);
 
 		return {definition, types};
@@ -290,7 +290,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		const definition = `ts.leftApply(${left}, ${right})`;
 		const types = pipe(
 			map(pipe(last, slice(1))),
-			extractUnique(identity),
+			extractUnique(JSON.stringify),
 		)(binaryLeftSolutions);
 
 		return {definition, types};
@@ -302,7 +302,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		const definition = `ts.rightApply(${left}, ${right})`;
 		const types = pipe(
 			map(pipe(first, type => splice(type, 1, 1))),
-			extractUnique(identity),
+			extractUnique(JSON.stringify),
 		)(binaryRightSolutions);
 
 		return {definition, types};
