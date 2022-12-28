@@ -5,7 +5,7 @@ export default () => {
 	describe("SICP", () => {
 		describe("gcd (].=0 ? [)|((].: $ %@).gcd)", () => {
 			/*ts
-				gcd							(].=0 ? [)|((].: $ %@).gcd)
+				gcd							(].=0 ? [)|((].: $ %@).gcd)							AN
 				// v1						:.((].=0 [) .(] %$).gcd$)?
 			*/
 			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
