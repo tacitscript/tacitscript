@@ -130,37 +130,37 @@ export default () => {
 		// 	it('111			(AV)(AV)(AA)		scan				#.<3^#( )=(0 1 2)', () => expect(scan).eql([0, 1, 2]));
 		// });
 
-		// describe("percent (%)", () => {
-		// 	/*ts
-		// 		remainder						7%2
-		// 		splitArray						2%(1 2 3 4 5)
-		// 		splitString						2%"abcde"
-		// 		chunkArray						(1 2 0)%(1 2 3 4 5)
-		// 		chunkString						(1 2 0)%"abcde"
-		// 		pick							("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))
-		// 		chunkWithDelimeter				", "%"1, 2, 3, 4"
-		// 		groupBy							[%("ann" "ben" "ade")
-		// 		chunkComparatorArray			<%(1 2 3 2 1)
-		// 		chunkComparatorString			<%"abcba"
-		// 	*/
-		// 	it('000			NNN					remainder			7%2=1', () => expect(remainder).eql(1));
-		// 	it('000			NAA					split				2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitArray).eql([[1, 2], [3, 4, 5]]));
-		// 	it('000			NSA					split				2%"abcde"=("ab" "cde")', () => expect(splitString).eql(["ab", "cde"]));
-		// 	it('000			AAA					chunk				(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))', () => expect(chunkArray).eql([[1], [2, 3], [4, 5]]));
-		// 	it('000			ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")', () => expect(chunkString).eql(["a", "bc", "de"]));
-		// 	it('000			ADD					pick				("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))', () => expect(pick).eql({a: 1, c: 3}));
-		// 	it('000			SSA					chunkWithDelimiter	", "%"1, 2, 3, 4"=("1" "2" "3" "4")', () => expect(chunkWithDelimeter).eql(["1", "2", "3", "4"]));
-		// 	it('100			(VV)AD				groupBy				[%("ann" "ben" "ade")=(\(("a" ("ann" "ade")) ("b" ("ben" ))))', () => expect(groupBy).eql({a: ["ann", "ade"], b: ["ben"]}));
-		// 	it('200			(VVB)AA				chunkWhenComparator	<%(1 2 3 2 1)=((1 ) (2 ) (3 2 1))', () => expect(chunkComparatorArray).eql([[1], [2], [3, 2, 1]]));
-		// 	it('200			(SSB)SA				chunkWhenComparator <%"abcba"=("a" "b" "cba")', () => expect(chunkComparatorString).eql(["a", "b", "cba"]));
-		// });
+		describe("percent (%)", () => {
+			/*ts
+				remainder								7%2
+				splitArray								2%(1 2 3 4 5)
+				splitString								2%"abcde"
+				chunkArray								(1 2 0)%(1 2 3 4 5)
+				chunkString								(1 2 0)%"abcde"
+				pick									("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))
+				chunkWithDelimeter						", "%"1, 2, 3, 4"
+				groupBy									[%("ann" "ben" "ade")
+				chunkComparatorArray					<%(1 2 3 2 1)
+				chunkComparatorString					<%"abcba"
+			*/
+			it('NNN					remainder			7%2=1', () => expect(remainder).eql(1));
+			it('NAA					split				2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitArray).eql([[1, 2], [3, 4, 5]]));
+			it('NSA					split				2%"abcde"=("ab" "cde")', () => expect(splitString).eql(["ab", "cde"]));
+			it('AAA					chunk				(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))', () => expect(chunkArray).eql([[1], [2, 3], [4, 5]]));
+			it('ASA					chunk				(1 2 0)%"abcde"=("a" "bc" "de")', () => expect(chunkString).eql(["a", "bc", "de"]));
+			it('ADD					pick				("a" "c" "d")%(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))', () => expect(pick).eql({a: 1, c: 3}));
+			it('SSA					chunkWithDelimiter	", "%"1, 2, 3, 4"=("1" "2" "3" "4")', () => expect(chunkWithDelimeter).eql(["1", "2", "3", "4"]));
+			it('(VV)AD				groupBy				[%("ann" "ben" "ade")=(\(("a" ("ann" "ade")) ("b" ("ben" ))))', () => expect(groupBy).eql({a: ["ann", "ade"], b: ["ben"]}));
+			it('(VVB)AA				chunkWhenComparator	<%(1 2 3 2 1)=((1 ) (2 ) (3 2 1))', () => expect(chunkComparatorArray).eql([[1], [2], [3, 2, 1]]));
+			it('(SSB)SA				chunkWhenComparator <%"abcba"=("a" "b" "cba")', () => expect(chunkComparatorString).eql(["a", "b", "cba"]));
+		});
 
 		describe("bar (|)", () => {
 			/*ts
-				leftOr							<|
-				orValue							()|1
-				orPredicate						>0|(%2.=0)
-				orComparator					<|=
+				leftOr									<|
+				orValue									()|1
+				orPredicate								>0|(%2.=0)
+				orComparator							<|=
 			*/
 			it('XYZ					orValue				()|1=1', () => expect(orValue).eql(1));
 			it('(XY)(XY)(XY)		orPredicate			>0|(%2.=0)(_2)=(!())', () => expect(orPredicate(-2)).eql(true));
@@ -169,20 +169,20 @@ export default () => {
 
 		describe("equal (=)", () => {
 			/*ts
-				equals				2=4
+				equals									2=4
 			*/
-			it('VVB					equals				2=4=()', () => expect(equals).eql(false));
+			it('XXB					equals				2=4=()', () => expect(equals).eql(false));
 		});
 
 		describe("apostrophe (')", () => {
 			/*ts
-				round				2'3.176
-				atArray				1'(1 2 3)
-				atString			1'"abc"
-				prop				"a"'(\(("a" 1) ))
-				pathArray			(1 )'(5 6 7)
-				pathDictionary		("a" )'(\(("a" 1) ))
-				find				(%2.=0)'(1 2 3)
+				round									2'3.176
+				atArray									1'(1 2 3)
+				atString								1'"abc"
+				prop									"a"'(\(("a" 1) ))
+				pathArray								(1 )'(5 6 7)
+				pathDictionary							("a" )'(\(("a" 1) ))
+				find									(%2.=0)'(1 2 3)
 			*/
 			it("NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
 			it(`NAV					at					1'(1 2 3)=2`, () => expect(atArray).eql(2));
@@ -195,9 +195,9 @@ export default () => {
 
 		describe("dollar ($)", () => {
 			/*ts
-				fork				(+2./)$;
-				join				","$(1 2 3)
-				append				(1 2)$3
+				fork									(+2./)$;
+				join									","$(1 2 3)
+				append									(1 2)$3
 			*/
 			it('(XYZ)(XY)(XZ)		fork				(+2./)$;(2)=4', () => expect(fork(2)).eql(2));
 			it('SAS					join				","$(1 2 3)', () => expect(join).eql("1,2,3"));
@@ -206,17 +206,17 @@ export default () => {
 
 		describe("asterisk (*)", () => {
 			/*ts
-				times				2*3
+				times									2*3
 			*/
 			it('NNN					times				2*3=6', () => expect(times).eql(6));
 		});
 
 		describe("atsign (@)", () => {
 			/*ts
-				accumulate			+@(1 2)
-				findIndex			(%2.=0)@(1 2 3 4)
-				indexOfValue		2@(6 8 2 3)
-				indexOfString		"bc"@"abcd"
+				accumulate								+@(1 2)
+				findIndex								(%2.=0)@(1 2 3 4)
+				indexOfValue							2@(6 8 2 3)
+				indexOfString							"bc"@"abcd"
 			*/
 			it('(VVX)AX				accumulate			+@(1 2)', () => expect(accumulate).eql(3));
 			it('(VB)AN				findIndex			(%2.=0)@(1 2 3 4)=1', () => expect(findIndex).eql(1));
@@ -226,9 +226,9 @@ export default () => {
 
 		describe("question (?)", () => {
 			/*ts
-				ifCheck				<3?(+1)
-				random				0?100
-				filter				<5?(4 9 2 7 3)
+				ifCheck									<3?(+1)
+				random									0?100
+				filter									<5?(4 9 2 7 3)
 			*/
 			it('(XV)(XY)(XY)		if					<3?(+1)1=2', () => expect(ifCheck(1)).eql(2));
 			it('NNN					random				0?100=[0:100)', () => expect((random < 100) && (random >= 0)).eql(true));
@@ -237,19 +237,19 @@ export default () => {
 
 		describe("colon (:)", () => {
 			/*ts
-				pair				1:"string"
+				pair									1:"string"
 			*/
 			it('VVA					pair				1:"string"=(1 "string")', () => expect(pair).eql([1, "string"]));
 		});
 
 		describe("minus (-)", () => {
 			/*ts
-				minus				5-2
-				spliceA				(1 2 3 4)-(5 6 7 8)
-				spliceB				(3 2 "le")-"nucular"
-				stringReplace		"_"-"-""1 0 _1"
-				omitKey				"a"-(\(("a" 1) ("b" 2)))
-				omitKeys			("a" )-(\(("a" 1) ("b" 2)))
+				minus									5-2
+				spliceA									(1 2 3 4)-(5 6 7 8)
+				spliceB									(3 2 "le")-"nucular"
+				stringReplace							"_"-"-""1 0 _1"
+				omitKey									"a"-(\(("a" 1) ("b" 2)))
+				omitKeys								("a" )-(\(("a" 1) ("b" 2)))
 			*/
 			it('NNN					subtract			5-2=3', () => expect(minus).eql(3));
 			it('AAA					splice				(1 2 3 4)-(5 6 7 8)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
@@ -261,11 +261,11 @@ export default () => {
 
 		describe("greater (>)", () => {
 			/*ts
-				greaterThanA		3>2
-				greaterThanB		"abc">"def"
-				overA				+1>(1 )(3 5 7)
-				overB				+1>("a" )(\(("a" 2) ))
-				// tap				3>({"console.log")
+				greaterThanA							3>2
+				greaterThanB							"abc">"def"
+				overA									+1>(1 )(3 5 7)
+				overB									+1>("a" )(\(("a" 2) ))
+				// tap									3>({"console.log")
 			*/
 			it('NNB					greaterThan			3>2=!()', () => expect(greaterThanA).eql(true));
 			it('SSB					greaterThan			"abc"<"def"=()', () => expect(greaterThanB).eql(false));
@@ -276,10 +276,10 @@ export default () => {
 
 		describe("less (<)", () => {
 			/*ts
-				lessThanA			3<2
-				lessThanB			"abc"<"def"
-				sortA				;<("dan" "sue" "alan")
-				sortB				;<(2 3 1)
+				lessThanA								3<2
+				lessThanB								"abc"<"def"
+				sortA									;<("dan" "sue" "alan")
+				sortB									;<(2 3 1)
 			*/
 			it("NNB					lessThan			3<2=()", () => expect(lessThanA).eql(false));
 			it('SSB					lessThan			"abc"<"def"=(!())', () => expect(lessThanB).eql(true));
@@ -289,18 +289,18 @@ export default () => {
 
 		describe("slash (/)", () => {
 			/*ts
-				divide				6/2
+				divide									6/2
 			*/
 			it("NNN					divide				6/2=3", () => expect(divide).eql(3));
 		});
 
 		describe("plus (+)", () => {
 			/*ts
-				stringConcat		"High"+5
-				add					2+3
-				parseNumber			2+"3"
-				arrayConcat			(1 2 3)+(4 5 6)
-				merge				\(("a" 1) ("b" 2))+(\(("b" 3) ))
+				stringConcat							"High"+5
+				add										2+3
+				parseNumber								2+"3"
+				arrayConcat								(1 2 3)+(4 5 6)
+				merge									\(("a" 1) ("b" 2))+(\(("b" 3) ))
 			*/
 			it('SVS					stringConcat		"High"+5="High5"', () => expect(stringConcat).eql("High5"));
 			it('NNN					add					2+3=5', () => expect(add).eql(5));
@@ -311,9 +311,9 @@ export default () => {
 
 		describe("dot (.)", () => {
 			/*ts
-				pipe				+1./2
-				unaryBinaryPipe		+1./
-				binaryUnaryPipe		:.+@
+				pipe									+1./2
+				unaryBinaryPipe							+1./
+				binaryUnaryPipe							:.+@
 			*/
 			it("(XY)(YZ)(XZ)		pipe				(+1./2)5=3", () => expect(pipe(5)).eql(3));
 			it("(XY)(YZW)(XZW)		unaryBinaryPipe		7(+1./)4=2", () => expect(unaryBinaryPipe(7, 4)).eql(2));
@@ -322,10 +322,10 @@ export default () => {
 
 		describe("comma (,)", () => {
 			/*ts
-				applyToUnary		3,+1
-				applyToBinary		1,/
-				binaryUnaryApply	+,^3
-				binaryBinaryApply	+,^
+				applyToUnary							3,+1
+				applyToBinary							1,/
+				binaryUnaryApply						+,^3
+				binaryBinaryApply						+,^
 			*/
 			it("X(XY)Y				applyToUnary		3,+1=4", () => expect(applyToUnary).eql(4));
 			it("X(XYZ)(YZ)			applyToBinary		(1,/)2=0.5", () => expect(applyToBinary(2)).eql(0.5));

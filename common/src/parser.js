@@ -232,7 +232,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "+": return {definition: "ts.plus", types: getTypes(["NNN" /* add */, "NSN" /* parseNumber */, "SVS" /* stringConcat */, "AAA" /* arrayConcat */, "DDD" /* merge */])};
 		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */, "AAA", "ASS" /* splice */, "SDD" /* omitKey */, "ADD" /* omitKeys */, "SS(SS)" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["(XY)(YZ)(XZ)" /* pipe */, "(XY)(YZW)(XZW)" /* unaryBinaryPipe */, "(XYZ)(ZW)(XYW)" /* binaryUnaryPipe */])};
-		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
+		case "[": return {definition: "ts.bracketleft", types: getTypes(["AV" /* first*/, "NN" /* floor */])};
 		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
 		// case "#": return {definition: "ts.hash", types: getTypes(["00" /* length, keyLength, modulus */])};
 		case "<": return {definition: "ts.less", types: getTypes(["NNB", "SSB" /* lessThan */, "(VS)AA", "(VN)AA" /* sort */])};
@@ -252,7 +252,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["XXB" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["VVV" /* orValue */, "(XY)(XY)(XY)" /* orPredicate */, "(XYZ)(XYZ)(XYZ)" /* orComparator */])};
-		case "%": return {definition: "ts.percent", types: getTypes(["NNN" /* remainder */])};
+		case "%": return {definition: "ts.percent", types: getTypes(["NNN" /* remainder */, "NAA", "NSA" /* split */, "AAA", "ASA" /* chunk */, "ADD" /* pick */, "SSA" /* chunkWithDelimiter */, "(VS)AD" /* groupBy */, "(VVB)AA", "(SSB)SA" /* chunkWhenComparator */])};
 		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["(NV)NA" /* generate */])}; // (["000" /* power */, "100" /* generate */, "111" /* scan */])};
 		// case "&": return {definition: "ts.ampersand", types: getTypes(["000" /* andValue */, "111" /* andPredicate */, "100" /* map, mapObject */])};
