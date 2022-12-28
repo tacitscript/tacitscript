@@ -232,9 +232,9 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "+": return {definition: "ts.plus", types: getTypes(["NNN" /* add */, "NSN" /* parseNumber */, "SVS" /* stringConcat */, "AAA" /* arrayConcat */, "DDD" /* merge */])};
 		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */, "AAA", "ASS" /* splice */, "SDD" /* omitKey */, "ADD" /* omitKeys */, "SS(SS)" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["(XY)(YZ)(XZ)" /* pipe */, "(XY)(YZW)(XZW)" /* unaryBinaryPipe */, "(XYZ)(ZW)(XYW)" /* binaryUnaryPipe */])};
-		case "[": return {definition: "ts.bracketleft", types: getTypes(["AV" /* first*/, "NN" /* floor */])};
-		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
-		case "#": return {definition: "ts.hash", types: getTypes(["AN" /* length */])};
+		case "[": return {definition: "ts.bracketleft", types: getTypes(["AV", "SS" /* first*/, "NN" /* floor */])};
+		case "]": return {definition: "ts.bracketright", types: getTypes(["AV", "SS" /* last */, "NN" /*ceiling */])};
+		case "#": return {definition: "ts.hash", types: getTypes(["AN", "SN" /* length */, "DN" /* keyLength */, "NN" /* modulus */])};
 		case "<": return {definition: "ts.less", types: getTypes(["NNB", "SSB" /* lessThan */, "(VS)AA", "(VN)AA" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["NNN" /* divide */])};
 		case "~": return {definition: "ts.tilde", types: getTypes(["(XYZ)(YXZ)" /* flip */, "AA" /* transpose */])};
@@ -246,18 +246,18 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "*": return {definition: "ts.asterisk", types: getTypes(["NNN" /* times */])};
 		case "$": return {definition: "ts.dollar", types: getTypes(["(XYZ)(XY)(XZ)" /* fork */, "SAS" /* join */, "AVA" /*append */])};
 		case "`": return {definition: "ts.backtick", types: getTypes(["XVX", /* constant */])};
-		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
+		case "{": return {definition: "ts.braceleft", types: getTypes(["AA" /* unnest */])};
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["NNN" /* round */, "NAV", "NSS" /* at */, "SDV" /* prop */, "AAV", "ADV" /* path */, "(VB)AV" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["XX" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["XXB" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["VVV" /* orValue */, "(XY)(XY)(XY)" /* orPredicate */, "(XYZ)(XYZ)(XYZ)" /* orComparator */])};
 		case "%": return {definition: "ts.percent", types: getTypes(["NNN" /* remainder */, "NAA", "NSA" /* split */, "AAA", "ASA" /* chunk */, "ADD" /* pick */, "SSA" /* chunkWithDelimiter */, "(VS)AD" /* groupBy */, "(VVB)AA", "(SSB)SA" /* chunkWhenComparator */])};
-		// case "}": return {definition: "ts.braceright", types: getTypes(["?0" /* typeof */])};
+		case "}": return {definition: "ts.braceright", types: getTypes(["?S" /* typeof */])};
 		case "^": return {definition: "ts.hat", types: getTypes(["NNN" /* power */, "(NV)NA" /* generate */, "(AB)(AV)(AA)" /* scan */])};
 		case "&": return {definition: "ts.ampersand", types: getTypes(["VVV" /* andValue */, "(VB)(VB)(VB)" /* andPredicate */, "(VV)AA" /* map */, "(VV)DD" /* mapObject */])};
 		case ">": return {definition: "ts.greater", types: getTypes(["NNB", "SSB" /* greaterThan */, "(VV)A(AA)", "(VV)A(DD)" /* over */])};
-		case "!": return {definition: "ts.bang", types: getTypes(["BB" /* notValue */ /* notPredicate */ /* notComparator */])};
+		case "!": return {definition: "ts.bang", types: getTypes(["VB" /* notValue */, "(VB)(VB)" /* notPredicate */, "(VVB)(VVB)" /* notComparator */])};
 	}
 
 	const existing = userDefinition[symbol];

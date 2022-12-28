@@ -3,81 +3,81 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("Operators", () => {
-		// describe("hash (#)", () => {
-		// 	/*ts
-		// 		stringLength					#"abcd"
-		// 		arrayLength						#(4 5 6)
-		// 		keyLength						#(\(("a" 1) ))
-		// 		modulus							#(_1.5)
-		// 	*/
-		// 	it('00			SN					length				#"abcd"=4', () => expect(stringLength).eql(4));
-		// 	it('00			AN					length				#(4 5 6)=3', () => expect(arrayLength).eql(3));
-		// 	it('00			DN					keyLength			#(\(("a" 1) ))=1', () => expect(keyLength).eql(1));
-		// 	it('00			NN					modulus				#(_1.5)=1.5', () => expect(modulus).eql(1.5));
-		// });
+		describe("hash (#)", () => {
+			/*ts
+				stringLength							#"abcd"
+				arrayLength								#(4 5 6)
+				keyLength								#(\(("a" 1) ))
+				modulus									#(_1.5)
+			*/
+			it('SN					length				#"abcd"=4', () => expect(stringLength).eql(4));
+			it('AN					length				#(4 5 6)=3', () => expect(arrayLength).eql(3));
+			it('DN					keyLength			#(\(("a" 1) ))=1', () => expect(keyLength).eql(1));
+			it('NN					modulus				#(_1.5)=1.5', () => expect(modulus).eql(1.5));
+		});
 
-		// describe("bang (!)", () => {
-		// 	/*ts
-		// 		notValue						!3
-		// 		notPredicate					!(<2)
-		// 		notComparator					!<
-		// 	*/
-		// 	it('00			VB					notValue			!3=()', () => expect(notValue).eql(false));
-		// 	it('11			(VV)(VB)			notPredicate		!(<2)(1)=()', () => expect(notPredicate(1)).eql(false));
-		// 	it('22			(VVV)(VVB)			notComparator		3(!<)4=()', () => expect(notComparator(3, 4)).eql(false));
-		// });
+		describe("bang (!)", () => {
+			/*ts
+				notValue								!3
+				notPredicate							!(<2)
+				notComparator							!<
+			*/
+			it('VB					notValue			!3=()', () => expect(notValue).eql(false));
+			it('(VB)(VB)			notPredicate		!(<2)(1)=()', () => expect(notPredicate(1)).eql(false));
+			it('(VVB)(VVB)			notComparator		3(!<)4=()', () => expect(notComparator(3, 4)).eql(false));
+		});
 
-		// describe("braceright (})", () => {
-		// 	/*ts
-		// 		typeOf							}1
-		// 	*/
-		// 	it('?0			?S					typeof				}3="N"', () => expect(typeOf).eql("N"));
-		// });
+		describe("braceright (})", () => {
+			/*ts
+				typeOf									}1
+			*/
+			it('?S					typeof				}3="N"', () => expect(typeOf).eql("N"));
+		});
 
-		// describe("semicolon (;)", () => {
-		// 	/*ts
-		// 		identity						;1
-		// 	*/
-		// 	it('00			VV					identiy				;1=1', () => expect(identity).eql(1));
-		// });
+		describe("semicolon (;)", () => {
+			/*ts
+				identity								;1
+			*/
+			it('VV					identity			;1=1', () => expect(identity).eql(1));
+		});
 
-		// describe("braceleft ({)", () => {
-		// 	/*ts
-		// 		unnest							{(1 (2 3))
-		// 	*/
-		// 	it('00			AA					unnest				{(1 (2 3))=(1 2 3)', () => expect(unnest).eql([1, 2, 3]));
-		// });
+		describe("braceleft ({)", () => {
+			/*ts
+				unnest									{(1 (2 3))
+			*/
+			it('AA					unnest				{(1 (2 3))=(1 2 3)', () => expect(unnest).eql([1, 2, 3]));
+		});
 
-		// describe("backslash (\\)", () => {
-		// 	/*ts
-		// 		fromPairs						\(("a" 1) ("b" 2))
-		// 		toPairs							\(\(("a" 1) ("b" 2)))
-		// 	*/
-		// 	it('00			AD					fromPairs			\(("a" 1) ("b" 2))', () => expect(fromPairs).eql({a: 1, b: 2}));
-		// 	it('00			DA					toPairs				\(\(("a" 1) ("b" 2)))', () => expect(toPairs).eql([["a", 1], ["b", 2]]));
-		// });
+		describe("backslash (\\)", () => {
+			/*ts
+				fromPairs								\(("a" 1) ("b" 2))
+				toPairs									\(\(("a" 1) ("b" 2)))
+			*/
+			it('AD					fromPairs			\(("a" 1) ("b" 2))', () => expect(fromPairs).eql({a: 1, b: 2}));
+			it('DA					toPairs				\(\(("a" 1) ("b" 2)))', () => expect(toPairs).eql([["a", 1], ["b", 2]]));
+		});
 
-		// describe("bracketright (])", () => {
-		// 	/*ts
-		// 		lastArray						](1 2 3)
-		// 		lastString						]"abc"
-		// 		ceiling							]1.2
-		// 	*/
-		// 	it('00			AV					last				](1 2 3)=3', () => expect(lastArray).eql(3));
-		// 	it('00			SS					last				]"abc"="c"', () => expect(lastString).eql("c"));
-		// 	it('00			NN					ceiling				]1.2=2', () => expect(ceiling).eql(2));
-		// });
+		describe("bracketright (])", () => {
+			/*ts
+				lastArray								](1 2 3)
+				lastString								]"abc"
+				ceiling									]1.2
+			*/
+			it('AV					last				](1 2 3)=3', () => expect(lastArray).eql(3));
+			it('SS					last				]"abc"="c"', () => expect(lastString).eql("c"));
+			it('NN					ceiling				]1.2=2', () => expect(ceiling).eql(2));
+		});
 
-		// describe("bracketleft ([)", () => {
-		// 	/*ts
-		// 		firstArray						[(1 2 3)
-		// 		firstString						["abc"
-		// 		floor							[1.8
-		// 	*/
-		// 	it('00			AV					first				[(1 2 3)=1', () => expect(firstArray).eql(1));
-		// 	it('00			SS					first				["abc"="a"', () => expect(firstString).eql("a"));
-		// 	it('00			NN					floor				[1.8=1', () => expect(floor).eql(1));
-		// });
+		describe("bracketleft ([)", () => {
+			/*ts
+				firstArray								[(1 2 3)
+				firstString								["abc"
+				floor									[1.8
+			*/
+			it('AV					first				[(1 2 3)=1', () => expect(firstArray).eql(1));
+			it('SS					first				["abc"="a"', () => expect(firstString).eql("a"));
+			it('NN					floor				[1.8=1', () => expect(floor).eql(1));
+		});
 
 		describe("underscore (_)", () => {
 			/*ts

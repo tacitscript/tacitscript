@@ -742,52 +742,52 @@ let underscore = value => { // not referenced in number literal (standard form e
 	errorUnary({operator: "_", value});
 };
 let bracketleft = value => {
-	if (isVector(value)) return value[0];																	// 00		AV SS				first				[(1 2 3)=1 ["abc"="a"
-	if (isNumber(value)) return Math.floor(value);															// 00		NN					floor				[1.8=1
+	if (isVector(value)) return value[0];																	// AV SS				first				[(1 2 3)=1 ["abc"="a"
+	if (isNumber(value)) return Math.floor(value);															// NN					floor				[1.8=1
 
 	errorUnary({operator: "[", value});
 };
 let bracketright = value => {
-	if (isVector(value)) return value[value.length - 1];													// 00		AV SS				last				](1 2 3)=3 ]"abc"="c"
-	if (isNumber(value)) return Math.ceil(value);															// 00		NN					ceiling				]1.2=2
+	if (isVector(value)) return value[value.length - 1];													// AV SS				last				](1 2 3)=3 ]"abc"="c"
+	if (isNumber(value)) return Math.ceil(value);															// NN					ceiling				]1.2=2
 
 	errorUnary({operator: "]", value});
 };
 let backslash = value => {
-	if (isArray(value)) return Object.fromEntries(value);													// 00		AD					fromPairs			\(("a" 1) ("b" 2))
-	if (isObject(value)) return Object.entries(value);														// 00		DA					toPairs				\(\(("a" 1) ("b" 2)))
+	if (isArray(value)) return Object.fromEntries(value);													// AD					fromPairs			\(("a" 1) ("b" 2))
+	if (isObject(value)) return Object.entries(value);														// DA					toPairs				\(\(("a" 1) ("b" 2)))
 
 	errorUnary({value, operator: "\\"});
 };
 let braceleft = value => {
-	if (isArray(value))																						// 00		AA					unnest				{(1 (2 3))=(1 2 3)
+	if (isArray(value))																						// AA					unnest				{(1 (2 3))=(1 2 3)
 		return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value);
 	// should never be referenced directly for literal evaluation - expanded in parser
-	//if (isString(value)) return eval(ts2es6(value));														// 0?		S?					eval				{"Math.sqrt(2)"
+	//if (isString(value)) return eval(ts2es6(value));														// S?					eval				{"Math.sqrt(2)"
 	//if (isStream(value)) return [...value()];
 
 	errorUnary({operator: "{", value});
 };
 let semicolon = value => {
-	return value;																							// VV					identity				;1=1
+	return value;																							// VV					identity			;1=1
 
 	errorUnary({operator: ";", value});
 };
 let braceright = value => {
-	return typeOf(value);																					// ?0		?S					typeof				}3="N"
+	return typeOf(value);																					// ?S					typeof				}3="N"
 
 	errorUnary({operator: "}", value});
 };
 let bang = value => {
-	if (isValue(value)) return isFalsey(value);																// 00		VB					notValue			!3=()
-	if (isUnaryFunction(value)) {																			// 11		(VV)(VB)			notPredicate		!(<2)(1)=()
+	if (isValue(value)) return isFalsey(value);																// VB					not					!3=()
+	if (isUnaryFunction(value)) {																			// (VB)(VB)				notPredicate		!(<2)(1)=()
 		let fn = x => isFalsey(value(x));
 
 		fn.types = value.types;
 
 		return fn;
 	}
-	if (isBinaryFunction(value)) {																			// 22		(VVV)(VVB)			notComparator		3(!<)4=()
+	if (isBinaryFunction(value)) {																			// (VVB)(VVB)			notComparator		3(!<)4=()
 		let fn = (x, y) => isFalsey(value(x, y));
 
 		fn.types = value.types;
@@ -798,9 +798,9 @@ let bang = value => {
 	errorUnary({value, operator: "!"});
 };
 let hash = value => {
-	if (isVector(value)) return value.length;																// 00		SN AN				length				#"abcd"=4 #(4 5 6)=3
-	if (isObject(value)) return Object.keys(value).length;													// 00		DN					keyLength			#(\(("a" 1) ))=1
-	if (isNumber(value)) return Math.abs(value);															// 00		NN					modulus				#(_1.5)=1.5
+	if (isVector(value)) return value.length;																// SN AN				length				#"abcd"=4 #(4 5 6)=3
+	if (isObject(value)) return Object.keys(value).length;													// DN					keyLength			#(\(("a" 1) ))=1
+	if (isNumber(value)) return Math.abs(value);															// NN					modulus				#(_1.5)=1.5
 
 	errorUnary({value, operator: "#"});
 };
