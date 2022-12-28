@@ -173,24 +173,24 @@ export default () => {
 		// 	it('000			VVB					equals				2=4=()', () => expect(equals).eql(false));
 		// });
 
-		// describe("apostrophe (')", () => {
-		// 	/*ts
-		// 		round							2'3.176
-		// 		atArray							1'(1 2 3)
-		// 		atString						1'"abc"
-		// 		prop							"a"'(\(("a" 1) ))
-		// 		pathArray						(1 )'(5 6 7)
-		// 		pathDictionary					("a" )'(\(("a" 1) ))
-		// 		find							(%2.=0)'(1 2 3)
-		// 	*/
-		// 	it("000			NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
-		// 	it(`000			NAV					at					1'(1 2 3)=2`, () => expect(atArray).eql(2));
-		// 	it(`000			NSS					at					1'"abc"="b"`, () => expect(atString).eql("b"));
-		// 	it(`000			SDV					prop				"a"'(\(("a" 1) ))=1`, () => expect(prop).eql(1));
-		// 	it(`000			AAV					path				(1 )'(5 6 7)=6`, () => expect(pathArray).eql(6));
-		// 	it(`000			ADV					path				("a" )'(\(("a" 1) ))=1`, () => expect(pathDictionary).eql(1));
-		// 	it(`100			(VV)AV				find				(%2.=0)'(1 2 3)=2`, () => expect(find).eql(2));
-		// });
+		describe("apostrophe (')", () => {
+			/*ts
+				round				2'3.176
+				atArray				1'(1 2 3)
+				atString			1'"abc"
+				prop				"a"'(\(("a" 1) ))
+				pathArray			(1 )'(5 6 7)
+				pathDictionary		("a" )'(\(("a" 1) ))
+				find				(%2.=0)'(1 2 3)
+			*/
+			it("NNN					round				2'3.176=3.18", () => expect(round).eql(3.18));
+			it(`NAV					at					1'(1 2 3)=2`, () => expect(atArray).eql(2));
+			it(`NSS					at					1'"abc"="b"`, () => expect(atString).eql("b"));
+			it(`SDV					prop				"a"'(\(("a" 1) ))=1`, () => expect(prop).eql(1));
+			it(`AAV					path				(1 )'(5 6 7)=6`, () => expect(pathArray).eql(6));
+			it(`ADV					path				("a" )'(\(("a" 1) ))=1`, () => expect(pathDictionary).eql(1));
+			it(`(VB)AV				find				(%2.=0)'(1 2 3)=2`, () => expect(find).eql(2));
+		});
 
 		describe("dollar ($)", () => {
 			/*ts

@@ -612,16 +612,16 @@ let dollar = (left, right) => {
 	errorBinary({left, right, operator: "$"});
 };
 let apostrophe = (left, right) => {
-	if (isNumber(left) && isNumber(right)) {																// 000		NNN					round				2'3.176=3.18
+	if (isNumber(left) && isNumber(right)) {																// NNN					round				2'3.176=3.18
 		const factor = Math.pow(10, left);
 
 		return Math.round(right * factor) / factor;
 	}
-	if (isNumber(left) && (isArray(right) || isString(right)))												// 000		NAV NSS				at					1'(1 2 3)=2 1'"abc"="b"
+	if (isNumber(left) && (isArray(right) || isString(right)))												// NAV NSS				at					1'(1 2 3)=2 1'"abc"="b"
 		return (left >= 0) ? right[left] : right[right.length + left];
-	if (isString(left) && isObject(right)) return right[left];												// 000		SDV					prop				"a"'(\(("a" 1) ))=1
-	if (isArray(left) && (isArray(right) || isObject(right))) return path(left)(right);						// 000		AAV ADV				path				(1 )'(5 6 7)=6 ("a" )'(\(("a" 1) ))=1
-	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right);								// 100		(VV)AV				find				(%2.=0)'(1 2 3)=2
+	if (isString(left) && isObject(right)) return right[left];												// SDV					prop				"a"'(\(("a" 1) ))=1
+	if (isArray(left) && (isArray(right) || isObject(right))) return path(left)(right);						// AAV ADV				path				(1 )'(5 6 7)=6 ("a" )'(\(("a" 1) ))=1
+	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right);								// (VB)AV				find				(%2.=0)'(1 2 3)=2
 
 	errorBinary({left, right, operator: "'"});
 };

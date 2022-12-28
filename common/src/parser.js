@@ -230,7 +230,7 @@ const getTypes = map(getType);
 const lookupSymbol = function(symbol, userDefinition, variable) {
 	switch(symbol) {
 		case "+": return {definition: "ts.plus", types: getTypes(["NNN" /* add */, "NSN" /* parseNumber */, "SVS" /* stringConcat */, "AAA" /* arrayConcat */, "DDD" /* merge */])};
-		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */, "AAA", "ASS" /* splice */, "SDD" /* omitKey */, "ADD" /* omitKeys */, "SS(SS)", /* stringReplace */])};
+		case "-": return {definition: "ts.minus", types: getTypes(["NNN" /* subtract */, "AAA", "ASS" /* splice */, "SDD" /* omitKey */, "ADD" /* omitKeys */, "SS(SS)" /* stringReplace */])};
 		case ".": return {definition: "ts.dot", types: getTypes(["(XY)(YZ)(XZ)" /* pipe */, "(XY)(YZW)(XZW)" /* unaryBinaryPipe */, "(XYZ)(ZW)(XYW)" /* binaryUnaryPipe */])};
 		// case "[": return {definition: "ts.bracketleft", types: getTypes(["00" /* first, floor */])};
 		// case "]": return {definition: "ts.bracketright", types: getTypes(["00" /* last, ceiling */])};
@@ -247,7 +247,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "$": return {definition: "ts.dollar", types: getTypes(["(XYZ)(XY)(XZ)" /* fork */, "SAS" /* join */, "AVA" /*append */])};
 		// case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
 		// case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
-		// case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
+		case "'": return {definition: "ts.apostrophe", types: getTypes(["NNN" /* round */, "NAV", "NSS" /* at */, "SDV" /* prop */, "AAV", "ADV" /* path */, "(VB)AV" /* find */])};
 		case ";": return {definition: "ts.semicolon", types: getTypes(["XX" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["X(XY)Y" /* applyToUnary */, "X(XYZ)(YZ)" /* applyToBinary */, "(XYZ)((YZ)W)(XW)" /* binaryUnaryApply */, "(XYZ)((YZ)WU)(XWU)" /* binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["XXB" /* equals */])};
