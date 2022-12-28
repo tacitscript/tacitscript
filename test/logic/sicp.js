@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("expGen :.([.`,^ $ ]).*@", () => {
+			/*ts
+				expGen		:.([.`,^ $ ]).*@
+				// v1		:,(` ;).^$.*$
+			*/
+			it("3expGen2=9", () => expect(expGen(3, 2)).eql(9));
+		});
+
 		describe("expRec (].=0 ? 1`)|([.* $ -1>(1 ).expRec)", () => {
 			/*ts
 				expRec						(].=0 ? 1`)|([.* $ -1>(1 ).expRec)					AN
