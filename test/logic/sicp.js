@@ -7,10 +7,10 @@ export default () => {
 			/*ts
 				isEven						%2.=0
 				threeSequence				+,^3
-				// fibGen						>,(#.).^(_2%.].+@).((1 1),).]
+				fibGen						>,(#.).^(_2%.].+@).((1 1),).]
 				// v1						.(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]
 			*/
-			// it("fibGen6=8", () => expect(fibGen(6)).eql(8));
+			it("fibGen6=8", () => expect(fibGen(6)).eql(8));
 			it('(+,^3)3=(3 4 5)', () => expect(threeSequence(3)).eql([3, 4, 5]));
 		});
 

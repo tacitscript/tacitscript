@@ -286,7 +286,7 @@ const apply = (left, right) => {
 	try {leftString = toString(left);} catch (_) {}
 	try {rightString = toString(right);} catch(_) {}
 
-	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
+	throw `Unable to resolve dynamic function application: ${leftString} ${rightString}`;
 };
 const typeOf = value => {
 	if (value == undefined) return "U";
