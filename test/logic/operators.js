@@ -79,32 +79,32 @@ export default () => {
 		// 	it('00			NN					floor				[1.8=1', () => expect(floor).eql(1));
 		// });
 
-		// describe("underscore (_)", () => {
-		// 	/*ts
-		// 		negative						_5
-		// 		reverseArray					_(1 2 3)
-		// 		reverseString					_"Hello"
-		// 	*/
-		// 	it('00			NN					negative			_5', () => expect(negative).eql(-5));
-		// 	it('00			AA					reverse				_(1 2 3)=(3 2 1)', () => expect(reverseArray).eql([3, 2, 1]));
-		// 	it('00			SS					reverse				_"Hello"="olleH"', () => expect(reverseString).eql("olleH"));
-		// });
+		describe("underscore (_)", () => {
+			/*ts
+				negative								_5
+				reverseArray							_(1 2 3)
+				reverseString							_"Hello"
+			*/
+			it('NN					negative			_5', () => expect(negative).eql(-5));
+			it('AA					reverse				_(1 2 3)=(3 2 1)', () => expect(reverseArray).eql([3, 2, 1]));
+			it('SS					reverse				_"Hello"="olleH"', () => expect(reverseString).eql("olleH"));
+		});
 
-		// describe("tilde (~)", () => {
-		// 	/*ts
-		// 		flip							~/
-		// 		transpose						~
-		// 	*/
-		// 	it('22			(XYZ)(YXZ)			flip				2(~/)1=0.5', () => expect(flip(2, 1)).eql(0.5));
-		// 	it('00			AA					transpose			~((1 2) (3 4))=((1 3) (2 4))', () => expect(transpose([[1, 2], [3, 4]])).eql([[1, 3], [2, 4]]));
-		// });
+		describe("tilde (~)", () => {
+			/*ts
+				flip									~/
+				transpose								~
+			*/
+			it('(XYZ)(YXZ)			flip				2(~/)1=0.5', () => expect(flip(2, 1)).eql(0.5));
+			it('AA					transpose			~((1 2) (3 4))=((1 3) (2 4))', () => expect(transpose([[1, 2], [3, 4]])).eql([[1, 3], [2, 4]]));
+		});
 
-		// describe("backtick (`)", () => {
-		// 	/*ts
-		// 		constant						2`3
-		// 	*/
-		// 	it('000			XVX					constant			2`3=2', () => expect(constant).eql(2));
-		// });
+		describe("backtick (`)", () => {
+			/*ts
+				constant								2`3
+			*/
+			it('XVX					constant			2`3=2', () => expect(constant).eql(2));
+		});
 
 		describe("ampersand (&)", () => {
 			/*ts

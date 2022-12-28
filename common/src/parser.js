@@ -237,8 +237,8 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "#": return {definition: "ts.hash", types: getTypes(["AN" /* length */])};
 		case "<": return {definition: "ts.less", types: getTypes(["NNB", "SSB" /* lessThan */, "(VS)AA", "(VN)AA" /* sort */])};
 		case "/": return {definition: "ts.slash", types: getTypes(["NNN" /* divide */])};
-		// case "~": return {definition: "ts.tilde", types: getTypes(["22" /* flip */, "00" /* transpose */])};
-		// case "_": return {definition: "ts.underscore", types: getTypes(["00" /* negative, reverse */])};
+		case "~": return {definition: "ts.tilde", types: getTypes(["(XYZ)(YXZ)" /* flip */, "AA" /* transpose */])};
+		case "_": return {definition: "ts.underscore", types: getTypes(["NN" /* negative */, "AA", "SS" /* reverse */])};
 		case ":": return {definition: "ts.colon", types: getTypes(["VVA" /* pair */])};
 		case "\\": return {definition: "ts.backslash", types: getTypes(["AD" /* fromPairs */, "DA" /* toPairs */])};
 		case "?": return {definition: "ts.question", types: getTypes(["(XB)(XY)(XY)" /* if */, "NNN" /* random */, "(VB)AA" /* filter */])};

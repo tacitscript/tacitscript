@@ -729,15 +729,15 @@ let backtick = (left, right) => {
 // Unary
 
 let tilde = value => {
-	if (isBinaryFunction(value)) return (x, y) => value(y, x);												// 22		(XYZ)(YXZ)			flip				2(~/)1=0.5
-	if (isArray(value)) return transpose(value);															// 00		AA					transpose			~((1 2) (3 4))=((1 3) (2 4))
+	if (isBinaryFunction(value)) return (x, y) => value(y, x);												// (XYZ)(YXZ)			flip				2(~/)1=0.5
+	if (isArray(value)) return transpose(value);															// AA					transpose			~((1 2) (3 4))=((1 3) (2 4))
 
 	errorUnary({operator: "~", value});
 }; 
 let underscore = value => { // not referenced in number literal (standard form exported)
-	if (isNumber(value)) return -value;																		// 00		NN					negative			_5
-	if (isArray(value)) return value.slice(0).reverse();													// 00		AA					reverse				_(1 2 3)=(3 2 1)
-	if (isString(value)) return value.split("").reverse().join("");											// 00		SS					reverse				_"Hello"="olleH"
+	if (isNumber(value)) return -value;																		// NN					negative			_5
+	if (isArray(value)) return value.slice(0).reverse();													// AA					reverse				_(1 2 3)=(3 2 1)
+	if (isString(value)) return value.split("").reverse().join("");											// SS					reverse				_"Hello"="olleH"
 
 	errorUnary({operator: "_", value});
 };
