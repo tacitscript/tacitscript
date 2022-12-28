@@ -3,13 +3,22 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
-		describe("fastExp (].=0 ? 1`)|(].%2.=0 /2>(1 ).fastExp.*$;)|([.* $ -1>(1 ).fastExp)", () => {
+		describe("gcd (].=0 ? [)|((].: $ %@).gcd)", () => {
+			/*ts
+				gcd							(].=0 ? [)|((].: $ %@).gcd)
+				// v1						:.((].=0 [) .(] %$).gcd$)?
+			*/
+			it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
+		});
+
+		describe("fastExp (].=0 ? 1`)|(].%2.=0 ? /2>(1 ).fastExp.*$;)|([.* $ -1>(1 ).fastExp)", () => {
 			/*ts
 				square						*$;
 				isEven						%2.=0
-				fastExp						(].=0 ? 1`)|(].%2.=0 /2>(1 ).fastExp.*$;)|([.* $ -1>(1 ).fastExp)
+				fastExp						(].=0 ? 1`)|(].%2.=0 ? /2>(1 ).fastExp.*$;)|([.* $ -1>(1 ).fastExp)							AN
 				// v1						:.((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp$.(; ;).*$) .([ ,(; -1).fastExp$).*$)?
 			*/
+			it("fastExp(2 7)=128", () => expect(fastExp([2, 7])).eql(128));
 		});
 
 		describe("expGen :.([.`,^ $ ]).*@", () => {
