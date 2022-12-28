@@ -5,11 +5,11 @@ export default () => {
 	describe("SICP", () => {
 		describe("fibGen >,(#.).^(_2%.].+@).((1 1),).]", () => {
 			/*ts
-				// isEven						%2.=0
+				isEven						%2.=0
 				threeSequence				+,^3
 				lessLength					:.(].#.< $ [)
 				sumLastTwo					_2%.].+@
-				fibGen						lessLength,^(_2%.].+@).((1 1),).]
+				fibGen						>,(#.).^(_2%.].+@).((1 1),).]						NN
 				// v1						.(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]
 			*/
 			it("sumLastTwo(1 2 3)=5", () => expect(sumLastTwo([1, 2, 3])).eql(5));
@@ -18,7 +18,7 @@ export default () => {
 			it('(+,^3)3=(3 4 5)', () => expect(threeSequence(3)).eql([3, 4, 5]));
 		});
 
-		describe("fibRec", () => {
+		describe("fibRec (=0 ? 0`)|(=1 ? 1`)|((-1.: $ -2).fibRec&.+@)", () => {
 			/*ts
 				fibRec						(=0 ? 0`)|(=1 ? 1`)|((-1.: $ -2).fibRec&.+@)		NN
 				// v1						:.[.((=0 0`) (=1 1`) .(-1 -2).fibRec0@.+$)?
@@ -28,12 +28,12 @@ export default () => {
 
 		describe("factGen +1^.*@", () => {
 			/*ts
-				factGen	+1^.*@
+				factGen	+1^.*@																	NN
 			*/
 			it("factGen4=24", () => expect(factGen(4)).eql(24));
 		});
 
-		describe("factRec", () => {
+		describe("factRec (=0 ? 1`)|(-1.factRec.* $ ;)", () => {
 			/*ts
 				factRec						(=0 ? 1`)|(-1.factRec.* $ ;)						NN
 				// v1						:.[.((=0 1`) .(; -1.factRec0).*$)?

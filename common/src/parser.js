@@ -271,17 +271,20 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 		values,
 	);
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
+	const noUnaryApply = ["ts.dot", "ts.comma"];
 
-	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
-	if (unarySolutions.length) {
-		const definition = `${left}(${right})`;
-		const types = pipe(
-			map(pipe(first, last)),
-			extractUnique(JSON.stringify),
-		)(unarySolutions);
+	if (!noUnaryApply.includes(right)) {
+		// unary application
+		const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
+		if (unarySolutions.length) {
+			const definition = `${left}(${right})`;
+			const types = pipe(
+				map(pipe(first, last)),
+				extractUnique(JSON.stringify),
+			)(unarySolutions);
 
-		return {definition, types};
+			return {definition, types};
+		}
 	}
 
 	// binary left application
