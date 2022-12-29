@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("piSum ;^.(*2.+1)&.(2 )%.(*@.8/)&.+@", () => {
+			/*ts
+				piSum		;^.(*2.+1)&.(2 )%.(*@.8/)&.+@										NN
+				// v1		;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
+			*/
+			it("piSum10000=3.1414926535900367", () => expect(piSum(10000)).eql(3.1414926535900367));
+		});
+
 		describe("sumCubes :.([.+,^ $ _.-@.+1).^3&.+@", () => {
 			/*ts
 				sumCubes					:.([.+,^ $ _.-@.+1).^3&.+@							NNN
