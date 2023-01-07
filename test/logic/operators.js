@@ -37,8 +37,10 @@ export default () => {
 		describe("semicolon (;)", () => {
 			/*ts
 				identity						;1
+				identityB						;[
 			*/
 			it('00			VV					identiy				;1=1', () => expect(identity).eql(1));
+			it('11			(VV)(VV)			identiy				;[(1 2)=1', () => expect(identityB([1, 2])).eql(1));
 		});
 
 		describe("braceleft ({)", () => {

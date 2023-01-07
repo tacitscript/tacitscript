@@ -768,7 +768,7 @@ let braceleft = value => {
 	errorUnary({operator: "{", value});
 };
 let semicolon = value => {
-	return value;																							// 00		VV					identiy				;1=1
+	return value;																							// 00		VV (VV)(VV)			identiy			;1=1
 
 	errorUnary({operator: ";", value});
 };

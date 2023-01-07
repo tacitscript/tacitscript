@@ -244,7 +244,7 @@ const lookupSymbol = function(symbol, userDefinition, variable) {
 		case "`": return {definition: "ts.backtick", types: getTypes(["000", /* constant */])};
 		case "{": return {definition: "ts.braceleft", types: getTypes(["00" /* unnest */])};
 		case "'": return {definition: "ts.apostrophe", types: getTypes(["000" /* round, at, prop, path */, "100" /* find */])};
-		case ";": return {definition: "ts.semicolon", types: getTypes(["00" /* identity */])};
+		case ";": return {definition: "ts.semicolon", types: getTypes(["00", "11" /* identity */])};
 		case ",": return {definition: "ts.comma", types: getTypes(["010" /* applyToUnary */, "021" /* applyToBinary */, "211"/*"2(10)1", "2(11)(01)"*/ /* binaryUnaryApply */, "222"/*"2(100)2"  binaryBinaryApply */])};
 		case "=": return {definition: "ts.equal", types: getTypes(["000" /* equals */])};
 		case "|": return {definition: "ts.bar", types: getTypes(["000" /* orValue */, "111" /* orPredicate */, "222" /* orComparator */])};

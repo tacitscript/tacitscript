@@ -3,10 +3,17 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("twice", () => {
+			/*ts
+				twice						(. $ ;)
+			*/
+			it("twice(+1)(2)=4", () => expect(twice(x => x + 1)(2)).eql(4));
+		});
+
 		describe("piSum ;^.(*2.+1)&.(2 )%.(*@.8/)&.+@", () => {
 			/*ts
-				piSum		;^.(*2.+1)&.(2 )%.(*@.8/)&.+@										NN
-				// v1		;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
+				piSum						;^.(*2.+1)&.(2 )%.(*@.8/)&.+@						NN
+				// v1						;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
 			*/
 			it("piSum10000=3.1414926535900367", () => expect(piSum(10000)).eql(3.1414926535900367));
 		});
