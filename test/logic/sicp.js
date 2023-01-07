@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe(`2.30 squareTree (}.="A" ? squareTree)|(^2)&`, () => {
+			/*ts
+				squareTree					(}.="A" ? squareTree)|(^2)&
+				// v1						:.[.((}.="A" squareTree0) ^2)?@
+			*/
+			it("squareTree(1 (2 (3 4) 5) (6 7))=(1 (4 (9 16) 25) (36 49))", () => expect(squareTree([1, [2, [3, 4], 5], [6, 7]])).eql([1, [4, [9, 16], 25], [36, 49]]));
+		});
+
 		describe(`2.28 flatten (}.="A" ? flatten)|;&.{`, () => {
 			/*ts
 				flatten						(}.="A" ? flatten)|;&.{
