@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe(`2.28 flatten (}.="A" ? flatten)|;&.{`, () => {
+			/*ts
+				flatten						(}.="A" ? flatten)|;&.{
+				// v1						:.[.((}.="A" flatten0) ;)?@.{
+			*/
+			it("flatten(1 2 (3 (4 5 (6 )) 7) (8 9))=(1 2 3 4 5 6 7 8 9)", () => expect(flatten([1, 2, [3, [4, 5, [6]], 7], [8, 9]])).eql([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+		});
+
 		describe('2.27 deepReverse (}.="A" ? deepReverse)|;&._', () => {
 			/*ts
 				deepReverse					(}.="A" ? deepReverse)|;&._
