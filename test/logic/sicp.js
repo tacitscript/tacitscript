@@ -3,7 +3,7 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
-		describe("twice", () => {
+		describe("twice (. $ ;)", () => {
 			/*ts
 				twice						(. $ ;)
 			*/
