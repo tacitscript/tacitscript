@@ -3,6 +3,13 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("compose ~.", () => {
+			/*ts
+				compose					~.
+			*/
+			it("6,^2compose(+1)=47", () => expect(compose(x => x * x, x => x + 1)(6)).eql(49));
+		});
+
 		describe("repeated ^", () => {
 			/*ts
 				repeated					^

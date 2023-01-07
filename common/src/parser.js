@@ -273,7 +273,7 @@ const apply = ({left, leftTypes, right, rightTypes}) => {
 	const allCombinations = extractUnique(JSON.stringify)(combinations(leftTypes)(rightTypes));
 	const noUnaryApply = ["ts.dot", "ts.comma"];
 
-	if (!noUnaryApply.includes(right)) {
+	if (!noUnaryApply.includes(right) || (left === "ts.tilde")) {
 		// unary application
 		const unarySolutions = filter(([leftType, rightType]) => (leftType.length === 2) && typeMatch(leftType[0], rightType))(allCombinations);
 		if (unarySolutions.length) {
