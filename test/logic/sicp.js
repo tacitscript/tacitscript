@@ -3,16 +3,25 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("2.20 sameParity ([.%2.=,(%2.).? $ ;)", () => {
+			/*ts
+				sameParity					([.%2.=,(%2.).? $ ;)
+				// v1						.([.%2.=.(%2.) ;).*$
+			*/
+			it("sameParity(1 2 3 4 5 6 7)=(1 3 5 7)", () => expect(sameParity([1, 2, 3, 4, 5, 6, 7])).eql([1, 3, 5, 7]));
+			it("sameParity(2 3 4 5 6 7)=(2 4 6)", () => expect(sameParity([2, 3, 4, 5, 6, 7])).eql([2, 4, 6]));
+		});
+
 		describe("compose ~.", () => {
 			/*ts
-				compose					~.
+				compose						~.
 			*/
 			it("6,^2compose(+1)=47", () => expect(compose(x => x * x, x => x + 1)(6)).eql(49));
 		});
 
 		describe("repeated ^", () => {
 			/*ts
-				repeated					^
+				repeated					^													N(VV)(VV)
 				// v1						:,(` ;).^$.(.$)
 			*/
 			it("3,4^(+2)=11", () => expect(repeated(4, x => x + 2)(3)).eql(11));
