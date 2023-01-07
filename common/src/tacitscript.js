@@ -691,6 +691,13 @@ let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right);									// 000		NNN					power				2^3=8
 	if (isUnaryFunction(left) && isNumber(right))															// 100		(NV)NA				generate			;^3=(0 1 2)
 		return map((value, index) => left(index))(Array.from(Array(right)));
+	if (isNumber(left) && isUnaryFunction(right)) return value => {											// 011		N(VV)(VV)			repeated			3^(+2)4=11
+		let result = value;
+
+		for (var i = 0; i < left; ++i) result = right(result);
+
+		return result;
+	};
 	if (isUnaryFunction(left) && isUnaryFunction(right))													// 111		(AV)(AV)(AA)		scan				#.<3^#( )=(0 1 2)
 		return array => scanInternal({left, right, startingArray: array});
 	//if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )

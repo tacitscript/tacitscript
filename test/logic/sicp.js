@@ -3,9 +3,18 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe("repeated ^", () => {
+			/*ts
+				repeated					^
+				// v1						:,(` ;).^$.(.$)
+			*/
+			it("3,4^(+2)=11", () => expect(repeated(4, x => x + 2)(3)).eql(11));
+		});
+
 		describe("twice (. $ ;)", () => {
 			/*ts
-				twice						(. $ ;)
+				twice						(. $ ;)												(VV)(VV)
+				// v1						:,(`,^2.(.$) ;)._.(,$)
 			*/
 			it("twice(+1)(2)=4", () => expect(twice(x => x + 1)(2)).eql(4));
 		});

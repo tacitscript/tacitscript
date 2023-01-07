@@ -126,9 +126,11 @@ export default () => {
 				power							2^3
 				generate						;^3
 				scan							(#.<3)^#( )
+				repeated						4^(+2)3
 			*/
 			it('000			NNN					power				2^3=8', () => expect(power).eql(8));
 			it('100			(NV)NA				generate			;^3=(0 1 2)', () => expect(generate).eql([0, 1, 2]));
+			it('011			N(VV)(VV)			repeated			4^(+2)3=11', () => expect(repeated).eql(11));
 			it('111			(AV)(AV)(AA)		scan				#.<3^#( )=(0 1 2)', () => expect(scan).eql([0, 1, 2]));
 		});
 
