@@ -3,6 +3,14 @@ import ts from "tacitscript";
 
 export default () => {
 	describe("SICP", () => {
+		describe('2.27 deepReverse (}.="A" ? deepReverse)|;&._', () => {
+			/*ts
+				deepReverse					(}.="A" ? deepReverse)|;&._
+				// v1						:.[.((}.="A" deepReverse0) ;)?@._
+			*/
+			it("deepReverse((1 2) (3 4))=((4 3) (2 1))", () => expect(deepReverse([[1, 2], [3, 4]])).eql([[4, 3], [2, 1]]));
+		});
+
 		describe("2.20 sameParity ([.%2.=,(%2.).? $ ;)", () => {
 			/*ts
 				sameParity					([.%2.=,(%2.).? $ ;)
