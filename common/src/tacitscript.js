@@ -429,7 +429,7 @@ const errorUnary = ({value, operator}) => {
 // Binary
 
 let comma = (left, right) => {
-	// if ((left == undefined) && !right.supportsUndefined) return undefined;
+	if ((left == undefined) && !right.supportsUndefined) return undefined;
 
 	// const typeCombinations = combinations(types(left))(types(right));
 
@@ -467,6 +467,7 @@ let comma = (left, right) => {
 
 	// 		return fn;
 	// 	}		
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));
 
 	// 	// X(XY)Y applyTo 3,+1
 	// 	const solutionsInvert = filter(([leftType, rightType]) => (rightType.length === 2) && matchType(rightType[0], leftType))(typeCombinations);
@@ -480,6 +481,7 @@ let comma = (left, right) => {
 
 	// 		return result;
 	// 	}
+	if (isUnaryFunction(right)) return right(left); 														// applyToUnary			X(XY)Y			3,+1=4
 
 	// 	// X(XYZ)(YZ) applyToBinary 3,+ =1,?
 	// 	const solutions021 = filter(([leftType, rightType]) => (rightType.length === 3) && matchType(leftType, rightType[0]))(typeCombinations);
@@ -491,6 +493,7 @@ let comma = (left, right) => {
 	// 		return fn;
 	// 	}
 	// }
+	if (isBinaryFunction(right)) return value => right(left, value);										// applyToBinary		X(XYZ)(YZ)		(1,/)2=0.5
 
 	errorBinary({left, right, operator: ","});
 }; comma.types = [
@@ -502,8 +505,6 @@ let comma = (left, right) => {
 	// [["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
-	const arityLeft = arity(left);
-	const arityRight = arity(right);
 	// const typeCombinations = combinations(types(left))(types(right));
 
 	// if (isArray(right)) {
@@ -563,7 +564,7 @@ let dot = (left, right) => {
 	// 		return fn;
 	// 	}
 	// }
-	if ((arityLeft === 1) && (arityRight === 1)) return value => right(left(value));
+	if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));
 
 	errorBinary({left, right, operator: "."});
 }; dot.types = [
@@ -885,7 +886,7 @@ let percent = (left, right) => {
 ];
 let hat = (left, right) => {
 	// if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
-	// if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
+	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
 	// if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
 	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while
 	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});
