@@ -1041,7 +1041,7 @@ let bang = value => {
 
 	// 	return fn;
 	// }
-	// if (isValue(value)) return isFalsey(value); // VB not !()
+	if (isValue(value)) return isFalsey(value); // VB not !()
 
 	errorUnary({value, operator: "!"});
 }; bang.types = [

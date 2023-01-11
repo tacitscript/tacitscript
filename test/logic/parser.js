@@ -6,9 +6,30 @@ export default () => {
 		/*ts
 			oneN				1
 			oneaN				oneN
+			addN				oneN+2
+			subtractN			9-5
+			incrNN				+1
+			sixN				incrNN5
+			inverseNN			1/
+			arrayA				(1 2 3)
+			singleElemA			(1 )
+			emptyArrayA			( )
+			subArrayA			((1 2) )
+			falseT				()
+			trueT				!()
 		*/
 		it("oneN 1", () => expect(oneN).eql(1));
-		it("oneaN one", () => expect(oneaN).eql(1));
-
+		it("oneaN oneN", () => expect(oneaN).eql(1));
+		it("addN oneN+2", () => expect(addN).eql(3));
+		it("subtractN 9-5", () => expect(subtractN).eql(4));
+		it("incrNN +1", () => expect(incrNN(4)).eql(5));
+		it("sixN incrNN5", () => expect(sixN).eql(6));
+		it("inverseNN 1/", () => expect(inverseNN(2)).eql(0.5));
+		it("arrayA (1 2 3)", () => expect(arrayA).eql([1, 2, 3]));
+		it("singleElemA (1 )", () => expect(singleElemA).eql([1]));
+		it("emptyArrayA ()", () => expect(emptyArrayA).eql([]));
+		it("subArrayA ((1 2) )", () => expect(subArrayA).eql([[1, 2]]));
+		it("falseT ()", () => expect(falseT).eql(false));
+		it("trueT !()", () => expect(trueT).eql(true));
 	});
 };
