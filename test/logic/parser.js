@@ -39,16 +39,25 @@ export default () => {
 			binaryPostN			1(+2)
 			binaryPrePreN		2(1+)
 			binaryPostPostN		(+2)1
-			unaryPreN			!()
-			unaryPostN			()!
+			unaryPreT			!()
+			unaryPostT			()!
 			dotNN				+1.*2
 		*/
 		it("binaryPreN (1+)2", () => expect(binaryPreN).eql(3));
 		it("binaryPostN 1(+2)", () => expect(binaryPostN).eql(3));
 		it("binaryPrePreN 2(1+)", () => expect(binaryPrePreN).eql(3));
 		it("binaryPostPostN (+2)1", () => expect(binaryPostPostN).eql(3));
-		it("unaryPreN !()", () => expect(unaryPreN).eql(true));
-		it("unaryPostN ()!", () => expect(unaryPostN).eql(true));
+		it("unaryPreT !()", () => expect(unaryPreT).eql(true));
+		it("unaryPostT ()!", () => expect(unaryPostT).eql(true));
 		it("dotNN +1.*2", () => expect(dotNN(3)).eql(8));
+	});
+
+	describe("Inverted piping", () => {
+		/*ts
+			nMoreThanLengthNN			+,(#.)
+			// nMoreThanLengthPlusFiveNB	+,(#.).+5
+		*/
+		it("nMoreThanLengthNN +,(#.)", () => expect(nMoreThanLengthNN(2)([1, 2, 3])).eql(5));
+		// it("nMoreThanLengthPlusFiveNB +,(#.).+5", () => expect(nMoreThanLengthPlusFiveNB(2)([1, 2, 3])).eql(10));
 	});
 };
