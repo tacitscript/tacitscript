@@ -432,7 +432,7 @@ const comma = (left, right) => {
 	if ((left == undefined) && !right.supportsUndefined) return undefined;
 
 	if (isArray(right)) {
-		if (isArray(left)) {																					// zipApplyTo			AAA						(3 6),(+1 /),(; 2,)=(4 3)
+		if (isArray(left)) {																					// zipApplyTo			AAA						(3 2),(+1 /),(; 6,)=(4 3)
 			return pipe(
 				transpose,
 				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
@@ -444,7 +444,7 @@ const comma = (left, right) => {
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));				// binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)
 																												// binaryUnaryApply		(XYZ)((YZ)(WU))(X(WU))	>,(#.)(3)(1 2 3)=()
 	if (isUnaryFunction(right)) return right(left); 															// applyToUnary			X(XY)Y					3,+1=4
-	if (isBinaryFunction(right)) return value => right(left, value);											// applyToBinary		X(XYZ)(YZ)				(1,/)2=0.5
+	if (isBinaryFunction(right)) return value => right(value, left);											// applyToBinary		Y(XYZ)(XZ)				(2,/)6=3
 
 	errorBinary({left, right, operator: ","});
 }; comma.noRightApply = true;

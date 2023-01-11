@@ -157,7 +157,7 @@ const processSymbols = function(symbols, acc, userDefinitions) {
 const deprioritizeMedialDots = function(symbols) {
 	const data = reduce(function(details, symbol) {
 		if (Array.isArray(symbol)) return {segments: details.segments, current: details.current.concat(deprioritizeDots(symbol))};
-		if (".,".includes(symbol)) return {segments: details.segments.concat([details.current, symbol]), current: []};
+		if (".,".includes(symbol) && details.current.length) return {segments: details.segments.concat([details.current, symbol]), current: []};
 
 		return {segments: details.segments, current: details.current.concat([symbol])};
 	})({segments: [], current: []})(symbols);
@@ -168,9 +168,13 @@ const deprioritizeMedialDots = function(symbols) {
 };
 const deprioritizeDots = function(symbols) {
 	if (symbols.length < 2) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
-	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
-	if ([".", ","].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
-	if ([".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, -1)).concat([symbols[symbols.length - 1]]);
+
+	const firstNonJoinIndex = symbols.findIndex(symbol => ![".", ","].includes(symbol));
+	const lastNonJoinIndex = symbols.findLastIndex(symbol => ![".", ","].includes(symbol));
+
+	if ((firstNonJoinIndex > -1) && (lastNonJoinIndex > -1) && (firstNonJoinIndex < lastNonJoinIndex)) return symbols.slice(0, firstNonJoinIndex).concat(deprioritizeMedialDots(symbols.slice(firstNonJoinIndex, lastNonJoinIndex + 1)), symbols.slice(lastNonJoinIndex + 1));
+	if ((firstNonJoinIndex > -1) && [".", ","].includes(symbols[0])) return symbols.slice(0, firstNonJoinIndex).concat(deprioritizeMedialDots(symbols.slice(firstNonJoinIndex)));
+	if ((lastNonJoinIndex > -1) && [".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, lastNonJoinIndex + 1)).concat([symbols.slice(lastNonJoinIndex + 1)]);
 
 	return [deprioritizeMedialDots(symbols)];
 };
