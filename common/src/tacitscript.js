@@ -226,7 +226,7 @@ const apply = (left, right) => {
 	const arityLeft = arity(left);
 	const arityRight = arity(right);
 
-	if ((arityRight !== 2) || !["dot", "comma"].includes(right.name)) { // exclude dot and comma from right apply
+	if ((arityRight !== 2) || !right.noRightApply) { // exclude dot and comma from right apply
 		if (arityLeft === 2) return rightApply(left, right);
 		if (arityLeft === 1) return left(right);
 	}
@@ -428,98 +428,39 @@ const errorUnary = ({value, operator}) => {
 //----------------------------------------------------------
 // Binary
 
-let comma = (left, right) => {
+const comma = (left, right) => {
 	if ((left == undefined) && !right.supportsUndefined) return undefined;
 
 	if (isArray(right)) {
-		if (isArray(left)) {																				// zipApplyTo			AAA						(3 6),(+1 /),(; 2,)=(4 3)
+		if (isArray(left)) {																					// zipApplyTo			AAA						(3 6),(+1 /),(; 2,)=(4 3)
 			return pipe(
 				transpose,
 				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
 			)([left, right]);
 		}
-		if (isUnaryFunction(left)) return x => comma(left(x), right);										// unaryZipApplyTo		(XA)A(XA)				$2,(*2 /2)(1 )=(2 1)
-		if (isBinaryFunction(left)) return (x, y) => comma(left(x, y), right);
+		if (isUnaryFunction(left)) return x => comma(left(x), right);											// unaryZipApplyTo		(XA)A(XA)				$2,(*2 /2)(1 )=(2 1)
+		if (isBinaryFunction(left)) return (x, y) => comma(left(x, y), right);									// binaryZipApplyTo		(XYA)A(XYA)				4(:,(+1 -1))3=(5 2)
 	}
-	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));			// binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)
-																											// binaryUnaryApply		(XYZ)((YZ)(WU))(X(WU))	>,(#.)(3)(1 2 3)=()
-	if (isUnaryFunction(right)) return right(left); 														// applyToUnary			X(XY)Y					3,+1=4
-	if (isBinaryFunction(right)) return value => right(left, value);										// applyToBinary		X(XYZ)(YZ)				(1,/)2=0.5
+	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));				// binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)
+																												// binaryUnaryApply		(XYZ)((YZ)(WU))(X(WU))	>,(#.)(3)(1 2 3)=()
+	if (isUnaryFunction(right)) return right(left); 															// applyToUnary			X(XY)Y					3,+1=4
+	if (isBinaryFunction(right)) return value => right(left, value);											// applyToBinary		X(XYZ)(YZ)				(1,/)2=0.5
 
 	errorBinary({left, right, operator: ","});
-};
-let dot = (left, right) => {
-	// const typeCombinations = combinations(types(left))(types(right));
-
+}; comma.noRightApply = true;
+const dot = (left, right) => {
 	if (isArray(right)) {
-	// 	// VAA applyToArray (1 2 3).(# ])
-	// 	const solutions000 = filter(([leftType, rightType]) => (rightType === "A") && !Array.isArray(leftType))(typeCombinations);
-	// 	if (isValue(left) && solutions000.length) {
-	// 		return map(value => comma(left, value))(right);
-	// 	}
-		if (isValue(left)) return map(value => comma(left, value))(right);
-
-	// 	// (VV)A(VA) pipeToArray [.(+1 -2)
-	// 	const solutions101 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 2))(typeCombinations);
-	// 	if (isUnaryFunction(left) && solutions101.length) {
-	// 		let fn = x => map(value => comma(left(x), value))(right);
-
-	// 		fn.types = map(([leftType]) => [leftType[0], "A"])(solutions101);
-
-	// 		return fn;
-	// 	}
-
-	// 	// (VVV)A(VVA) pipeBinaryToArray :.(+$ -$)
-	// 	const solutions202 = filter(([leftType, rightType]) => (rightType === "A") && (leftType.length === 3))(typeCombinations);
-	// 	if (isBinaryFunction(left) && solutions202.length) {
-	// 		let fn = (x, y) => map(value => comma(left(x, y), value))(right);
-
-	// 		fn.types = map(([leftType]) => [...leftType.slice(0, 2), "A"])(solutions202);
-
-	// 		return fn;
-	// }
+		if (isValue(left)) return map(value => comma(left, value))(right);										// applyToArray			VAA						(1 2 3).(# [)=(3 1)
+		if (isUnaryFunction(left)) return x => map(value => comma(left(x), value))(right);						// pipeToArray			(VV)A(VA)				[.(+1 -2)(3 2 1)=(4 1)
+		if (isBinaryFunction(left)) return (x, y) => map(value => comma(left(x, y), value))(right);				// pipeBinaryToArray	(VVV)A(VVA)				5(:.($+ $-))3=(8 2)
 	} else {
-	// 	// (XYZ)(ZW)(XYW) binaryUnaryPipe :.+$
-	// 	const solutions212 = filter(([leftType, rightType]) => (leftType.length === 3) && (rightType.length === 2) && matchType(leftType[2], rightType[0]))(typeCombinations);
-	// 	if (isBinaryFunction(left) && isUnaryFunction(right) && solutions212.length) { 
-	// 		let fn = (a, b) => right(left(a, b));
-
-	// 		fn.types = map(([leftType, rightType]) => [...leftType.slice(0, 2), rightType[1]])(solutions212);
-
-	// 		return fn;
-	// 	}
-
-	// 	// (XY)(YZW)(X(ZW)) unaryBinaryPipe +1./
-	// 	const solutions121 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 3) && matchType(leftType[1], rightType[0]))(typeCombinations);
-	// 	if (isUnaryFunction(left) && isBinaryFunction(right) && solutions121.length) {
-	// 		let fn = value => leftApply(left(value), right);
-
-	// 		fn.types = map(([leftType, rightType]) => [leftType[0], rightType.slice(1)])(solutions121);
-
-	// 		return fn;
-	// 	}
-
-	// 	// (XY)(YZ)(XZ) pipe +1./2
-	// 	const solutions111 = filter(([leftType, rightType]) => (leftType.length === 2) && (rightType.length === 2) && matchType(leftType[1], rightType[0]))(typeCombinations);
-	// 	if (isUnaryFunction(left) && isUnaryFunction(right) && solutions111.length) {
-	// 		let fn = value => right(left(value));
-
-	// 		fn.types = map(([leftType, rightType]) => [leftType[0], rightType[1]])(solutions111);
-
-	// 		return fn;
-	// 	}
-		if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));
+		if (isBinaryFunction(left) && isUnaryFunction(right)) return (a, b) => right(left(a, b));				// binaryUnaryPipe		(XYZ)(ZW)(XYW)			5(:.$-)3=2
+		if (isUnaryFunction(left) && isBinaryFunction(right)) return value => leftApply(left(value), right);	// unaryBinaryPipe		(XY)(YZW)(X(ZW))		(+1./)7(4)=2
+		if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// pipe					(XY)(YZ)(XZ)			(+1.*2)3=8
 	}
 
 	errorBinary({left, right, operator: "."});
-}; dot.types = [
-	// ["V", "A", "A"], // applyToArray (1 2 3).(# ])
-	// [["V", "V"], "A", ["V", "A"]], // pipeToArray [.(+1 -2) -- OLD (??)A(?A)
-	// [["V", "V", "V"], "A", ["V", "V", "A"]], // pipeBinaryToArray :.(+$ -$) -- OLD (???)A(??A)
-	// [["X", "Y", "Z"], ["Z", "W"], ["X", "Y", "W"]], // binaryUnaryPipe :.+$
-	// [["X", "Y"], ["Y", "Z", "W"], ["X", ["Z", "W"]]], // unaryBinaryPipe +1./
-	// [["X", "Y"], ["Y", "Z"], ["X", "Z"]], // pipe +1./2
-];
+}; dot.noRightApply = true;
 let plus = (left, right) => {
 	// if (isString(left) && isValue(right)) {
 	// 	try {
@@ -704,7 +645,7 @@ let asterisk = (left, right) => {
 let dollar = (left, right) => {
 	// if (isArray(right)) {
 	// 	if (isBinaryFunction(left)) {
-	// 		const result = right.slice(1).reduce((acc, value) => left(acc, value), right[0]); // (??X)AX insert +$(1 2)
+	// 		const result =  // (??X)AX insert +$(1 2)
 
 	// 		return result;
 	// 	}
@@ -720,7 +661,8 @@ let dollar = (left, right) => {
 	// 	}	
 	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
-	if (isArray(left)) return [...left, right];
+	if (isBinaryFunction(right)) return left.slice(1).reduce((acc, value) => right(acc, value), left[0]);
+	if (isArray(right)) return [...right, left];
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
@@ -910,7 +852,7 @@ let underscore = value => {
 	// ["S", "S"], // reverse _"Hello"
 ];
 let bracketleft = value => {
-	// if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
+	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
 	// if (isNumber(value)) return Math.floor(value); // NN floor [1.8
 
 	errorUnary({operator: "[", value});
