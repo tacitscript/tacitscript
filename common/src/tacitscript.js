@@ -120,10 +120,9 @@ const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includ
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
-	if (value.length < 1) return 1;
-	if (value.length > 2) return 2;
+	if (value.length === 1) return 1;
 
-	return value.length;
+	return 2;
 };
 const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
@@ -224,52 +223,17 @@ const apply = (left, right) => {
 	if ((left == undefined) && !supportsUndefined(right)) return undefined;
 	if ((right == undefined) && !supportsUndefined(left)) return undefined;
 
-	const leftTypes = types(left);
-	const rightTypes = types(right);
-	const allCombinations = pipe(
-		reduce((acc, types) => ({...acc, [JSON.stringify(types)]: types}))({}),
-		values,
-	)(combinations(leftTypes)(rightTypes));
+	const arityLeft = arity(left);
+	const arityRight = arity(right);
 
-	// binary left application
-	const binaryLeftSolutions = filter(([leftType, rightType]) => Array.isArray(rightType) && (rightType.length == 3) && matchType(leftType,  rightType[0]))(allCombinations);
-	if (binaryLeftSolutions.length) {
-		//const types = map(([_, rightType]) => rightType.slice(1))(binaryLeftSolutions);
-		let result = leftApply(left, right);
-
-		if (isFunction(result)) {
-			if (!result.types) result.types = map(([leftType, rightType]) => getReducedLeftAppliedType({leftType, rightType}))(binaryLeftSolutions);
-
-			if (right.supportsUndefined) result.supportsUndefined = true;
-		}
-
-		return result;
+	if ((arityRight !== 2) || !["dot", "comma"].includes(right.name)) { // exclude dot and comma from right apply
+		if (arityLeft === 2) return rightApply(left, right);
+		if (arityLeft === 1) return left(right);
 	}
+	if (arityRight === 2) return leftApply(left, right);
+	if (arityRight === 1) return right(left);
 
-	// binary right application
-	const binaryRightSolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 3) && matchType(leftType[1], rightType))(allCombinations);
-	if (binaryRightSolutions.length) {
-		//const types =  map(([leftType]) => splice(leftType, 1, 1))(binaryRightSolutions);
-		let result = rightApply(left, right);
-
-		if (isFunction(result)) {
-			if (!result.types) result.types =  map(([leftType, rightType]) => getReducedRightAppliedType({leftType, rightType}))(binaryRightSolutions);
-
-			if (left.supportsUndefined) result.supportsUndefined = true;
-		}
-
-		return result;
-	}
-
-	// unary application
-	const unarySolutions = filter(([leftType, rightType]) => Array.isArray(leftType) && (leftType.length == 2) && matchType(leftType[0], rightType))(allCombinations);
-	if (unarySolutions.length) {
-		let result = left(right);
-
-		if (isFunction(result) && !result.types) result.types = map(([leftType, rightType]) => getReducedUnaryType({leftType, rightType}))(unarySolutions);
-
-		return result;
-	}
+	if (arityLeft == 2) return right
 
 	let leftString = "Fn";
 	let rightString = "Fn";
