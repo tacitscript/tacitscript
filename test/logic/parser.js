@@ -32,4 +32,23 @@ export default () => {
 		it("falseT ()", () => expect(falseT).eql(false));
 		it("trueT !()", () => expect(trueT).eql(true));
 	});
+
+	describe("Order of application", () => {
+		/*ts
+			binaryPreN			(1+)2
+			binaryPostN			1(+2)
+			binaryPrePreN		2(1+)
+			binaryPostPostN		(+2)1
+			unaryPreN			!()
+			unaryPostN			()!
+			dotNN				+1.*2
+		*/
+		it("binaryPreN (1+)2", () => expect(binaryPreN).eql(3));
+		it("binaryPostN 1(+2)", () => expect(binaryPostN).eql(3));
+		it("binaryPrePreN 2(1+)", () => expect(binaryPrePreN).eql(3));
+		it("binaryPostPostN (+2)1", () => expect(binaryPostPostN).eql(3));
+		it("unaryPreN !()", () => expect(unaryPreN).eql(true));
+		it("unaryPostN ()!", () => expect(unaryPostN).eql(true));
+		it("dotNN +1.*2", () => expect(dotNN(3)).eql(8));
+	});
 };

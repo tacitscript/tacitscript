@@ -502,6 +502,8 @@ let comma = (left, right) => {
 	// [["X", "Y", "Z"], [["Y", "Z"], "W"], ["X", "W"]], // binaryUnaryApply =,'(1 2 3)
 ];
 let dot = (left, right) => {
+	const arityLeft = arity(left);
+	const arityRight = arity(right);
 	// const typeCombinations = combinations(types(left))(types(right));
 
 	// if (isArray(right)) {
@@ -561,6 +563,7 @@ let dot = (left, right) => {
 	// 		return fn;
 	// 	}
 	// }
+	if ((arityLeft === 1) && (arityRight === 1)) return value => right(left(value));
 
 	errorBinary({left, right, operator: "."});
 }; dot.types = [
