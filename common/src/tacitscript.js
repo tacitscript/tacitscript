@@ -767,7 +767,7 @@ let ampersand = (left, right) => {
 	// [["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
 ];
 let backtick = (left, right) => {
-	// return left; // X?X constant 2`3
+	return left; // X?X constant 2`3
 
 	errorBinary({left, right, operator: "`"});
 }; backtick.types = [
