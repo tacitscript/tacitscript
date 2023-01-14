@@ -7,10 +7,14 @@ export default () => {
 			addN					2+3
 			parseN					2+"3"
 			parseO					2+"abc"
+			stringConcatS			"abc"+"def"
+			toStringS				"2"+3
 		*/
 		it('add					NNN						2+3=5', () => expect(addN).eql(5));
 		it('parse				NSN						2+"3"=5', () => expect(parseN).eql(5));
 		it('parse				NSO						2+"abc"=(1/0)', () => expect(parseO).eql(undefined));
+		it('stringConcat		SSS						"abc"+"def"="abcdef"', () => expect(stringConcatS).eql("abcdef"));
+		it('toString			SVS						"2"+3="23"', () => expect(toStringS).eql("23"));
 	});
 
 	describe("dot (.)", () => {

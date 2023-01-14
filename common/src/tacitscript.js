@@ -415,13 +415,13 @@ const dot = (left, right) => {
 	errorBinary({left, right, operator: "."});
 }; dot.applyOrPipe = true;
 let plus = (left, right) => {
-	// if (isString(left) && isValue(right)) {
-	// 	try {
-	// 		return `${left}${toString(right)}`; // SVS stringConcat ""+4
-	// 	} catch (_) {
-	// 		return undefined;
-	// 	}
-	// }
+	if (isString(left) && isValue(right)) {																		// stringConcat			SSS						"abc"+"def"="abcdef"
+		try {																									// toString				SVS						"2"+3="23"
+			return `${left}${toString(right)}`;
+		} catch (_) {
+			return undefined;
+		}
+	}
 	// if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
 	// if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
 	if (isNumber(left) && isValue(right)) {																		// add					NNN						2+3=5
