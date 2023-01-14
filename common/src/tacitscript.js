@@ -385,7 +385,7 @@ const comma = (left, right) => {
 	if ((left == undefined) && !right.supportsUndefined) return undefined;
 
 	if (isArray(right)) {
-		if (isArray(left)) {																					// zipApplyTo			AAA						(3 2),(+1 /),(; 6,)=(4 3)
+		if (isArray(left)) {																					// zipApplyTo			AAA						(3 1),(+1 /),(; 2,)=(4 0.5)
 			return pipe(
 				transpose,
 				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
