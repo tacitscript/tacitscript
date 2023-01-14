@@ -614,8 +614,8 @@ let dollar = (left, right) => {
 	// 	}	
 	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
-	if (isBinaryFunction(right)) return left.slice(1).reduce((acc, value) => right(acc, value), left[0]);
-	if (isArray(right)) return [...right, left];
+	if (isBinaryFunction(right)) return left.reduce((acc, value) => right(acc, value));
+	if (isArray(right)) return [left, ...right];
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [
