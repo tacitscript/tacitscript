@@ -453,9 +453,9 @@ let less = (left, right) => {
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=(()!)
 		|| (isString(left) && isString(right))) return left > right;											// greater				SST						"abc">"def"=()
-	if (isUnaryFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);									// descendingSort		(VN)AA					;>(2 3 1)=(3 2 1)
+	if (isUnaryFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);						// descendingSort		(VN)AA					;>(2 3 1)=(3 2 1)
 																												// descendingSort		(VS)AA					;>("b" "c" "a")=("c" "b" "a")
-// if (isArray(left) && (isArray(right) || isObject(right))) {
+	// if (isArray(left) && (isArray(right) || isObject(right))) {
 	// 	return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
 	// }
 	// if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
