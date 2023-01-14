@@ -169,56 +169,6 @@ const applyOver = ({path, fn, container}) => {
 	}
 };
 
-const replaceType = ({from, to}) => type => {
-	if (!Array.isArray(type)) return (type === from) ? to : type;
-	return type.map(replaceType({from, to}));
-};
-const getSymbolMap = (acceptorSymbol, donorSymbol) => {
-	if ("XYZW".includes(acceptorSymbol)) return [[acceptorSymbol, donorSymbol]];
-
-	return [];
-}
-const getTypeMap = (acceptorType, donorType) => {
-	if (!Array.isArray(acceptorType)) return [...getSymbolMap(acceptorType, donorType)];
-	return acceptorType.map((value, index) => getTypeMap(value, donorType[index])).flat();
-};
-const reduceType = ({type, typeMap}) => reduce((acc, [from, to]) => Array.isArray(acc) ? acc.map(replaceType({from, to})) : replaceType({from, to})(acc))(type)(typeMap);
-const getReducedType = ({remainderType, typeMap}) => {
-	const reducedType = reduceType({type: remainderType, typeMap});
-
-	// if any XYZW symbol occurs only once in a type, we change to ?
-	const typeSymbols = Array.isArray(reducedType) ? flatten(reducedType) : [reducedType];
-	const reductionMap = pipe(
-		groupBy(identity),
-		values,
-		filter(symbols => (symbols.length === 1) && "XYZW".includes(symbols[0])),
-		map(([symbol]) => [symbol, "?"])
-	)(typeSymbols);
-
-	return reduceType({type: reducedType, typeMap: reductionMap});
-};
-const getReducedUnaryType = ({leftType, rightType}) => getReducedType({remainderType: leftType[1], typeMap: getTypeMap(leftType[0], rightType)});
-const getReducedLeftAppliedType = ({leftType, rightType}) => getReducedType({remainderType: rightType.slice(1), typeMap: getTypeMap(rightType[0], leftType)});
-const getReducedRightAppliedType = ({leftType, rightType}) => getReducedType({remainderType: splice(leftType, 1, 1), typeMap: getTypeMap(leftType[1], rightType)});
-const matchSymbol = (left, right) => {
-	return (left === right) ||
-		"XYZW?".includes(left) ||
-		"XYZW?".includes(right) ||
-		any(([source, match]) => (source === "V") && !Array.isArray(match))([[left, right], [right, left]]);
-};
-const matchType = (left, right) => {
-	const match = matchSymbol(left, right) ||
-		(Array.isArray(left) && Array.isArray(right) && (left.length === right.length) && left.map((value, index) => matchType(value, right[index])).reduce((acc, value) => acc && value, true) && pipe( // match fields which have to be the same from other specification
-			map(([source, match]) => all(symbol => {
-				const matchIndices = source.reduce((acc, sourceSymbol, index) => (symbol === sourceSymbol) ? [...acc, index] : acc, []);
-
-				return matchIndices.length ? all(index => matchType(match[index], match[matchIndices[0]]))(matchIndices) : true;
-			})(["X", "Y", "Z", "W"])),
-			reduce((acc, value) => acc && value)(true),
-		)([[left, right], [right, left]]));
-
-	return match;
-};
 const apply = (left, right) => {
 	if ((left == undefined) && !supportsUndefined(right)) return undefined;
 	if ((right == undefined) && !supportsUndefined(left)) return undefined;
@@ -226,14 +176,17 @@ const apply = (left, right) => {
 	const arityLeft = arity(left);
 	const arityRight = arity(right);
 
-	if ((arityRight !== 2) || !right.noRightApply) { // exclude dot and comma from right apply
-		if (arityLeft === 2) return rightApply(left, right);
-		if (arityLeft === 1) return left(right);
-	}
-	if (arityRight === 2) return leftApply(left, right);
-	if (arityRight === 1) return right(left);
+	if (!left.noLeftApply) {
+		if (arityRight === 2) {
+			const result = leftApply(left, right);
+			if (right.applyOrPipe) result.noLeftApply = true;
 
-	if (arityLeft == 2) return right
+			return result;
+		}
+		if (arityRight === 1) return right(left);
+	}
+	if (arityLeft === 2) return rightApply(left, right);
+	if (arityLeft === 1) return left(right);
 
 	let leftString = "Fn";
 	let rightString = "Fn";
@@ -447,7 +400,7 @@ const comma = (left, right) => {
 	if (isBinaryFunction(right)) return value => right(value, left);											// applyToBinary		Y(XYZ)(XZ)				(2,/)6=3
 
 	errorBinary({left, right, operator: ","});
-}; comma.noRightApply = true;
+}; comma.applyOrPipe = true;
 const dot = (left, right) => {
 	if (isArray(right)) {
 		if (isValue(left)) return map(value => comma(left, value))(right);										// applyToArray			VAA						(1 2 3).(# [)=(3 1)
@@ -460,7 +413,7 @@ const dot = (left, right) => {
 	}
 
 	errorBinary({left, right, operator: "."});
-}; dot.noRightApply = true;
+}; dot.applyOrPipe = true;
 let plus = (left, right) => {
 	// if (isString(left) && isValue(right)) {
 	// 	try {

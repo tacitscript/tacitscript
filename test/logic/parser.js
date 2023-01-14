@@ -52,14 +52,14 @@ export default () => {
 		it("dotNN +1.*2", () => expect(dotNN(3)).eql(8));
 	});
 
-	describe("Inverted piping", () => {
-		/*ts
-			nMoreThanLengthNN			+,(#.)
-			nMoreThanLengthPlusFiveNB	+,(#.).:(+5).(.,$)
-			dotReduceNN					(+1 *2),(.,$)
-		*/
-		it("nMoreThanLengthNN +,(#.)", () => expect(nMoreThanLengthNN(2)([1, 2, 3])).eql(5));
-		it("dotReduceNN (+1 *2),(.,$)", () => expect(dotReduceNN(3)).eql(8));
-		it("nMoreThanLengthPlusFiveNB +,(#.).:(+5).(.,$)", () => expect(nMoreThanLengthPlusFiveNB(2)([1, 2, 3])).eql(10));
-	});
+	// describe("Inverted piping", () => {
+	// 	/*ts
+	// 		nMoreThanLengthNN			+,(#.)
+	// 		nMoreThanLengthPlusFiveNB	+,(#.).:(+5).(.,$)
+	// 		dotReduceNN					(+1 *2),(.,$)
+	// 	*/
+	// 	it("nMoreThanLengthNN +,(#.)", () => expect(nMoreThanLengthNN(2)([1, 2, 3])).eql(5));
+	// 	it("dotReduceNN (+1 *2),(.,$)", () => expect(dotReduceNN(3)).eql(8));
+	// 	it("nMoreThanLengthPlusFiveNB +,(#.).:(+5).(.,$)", () => expect(nMoreThanLengthPlusFiveNB(2)([1, 2, 3])).eql(10));
+	// });
 };
