@@ -407,7 +407,7 @@ const dot = (left, right) => {
 		if (isUnaryFunction(left)) return x => map(value => comma(left(x), value))(right);						// pipeToArray			(VV)A(VA)				[.(+1 -2)(3 2 1)=(4 1)
 		if (isBinaryFunction(left)) return (x, y) => map(value => comma(left(x, y), value))(right);				// pipeBinaryToArray	(VVV)A(VVA)				5(:.($+ $-))3=(8 2)
 	} else {
-		if (isBinaryFunction(left) && isUnaryFunction(right)) return (a, b) => right(left(a, b));				// binaryUnaryPipe		(XYZ)(ZW)(XYW)			5(:.$-)3=2
+		if (isBinaryFunction(left) && isUnaryFunction(right)) return (a, b) => right(left(a, b));				// binaryUnaryPipe		(XYZ)(ZW)(XYW)			5(:.-$)3=2
 		if (isUnaryFunction(left) && isBinaryFunction(right)) return value => leftApply(left(value), right);	// unaryBinaryPipe		(XY)(YZW)(X(ZW))		(+1./)7(4)=2
 		if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// pipe					(XY)(YZ)(XZ)			(+1.*2)3=8
 	}
@@ -614,7 +614,7 @@ let dollar = (left, right) => {
 	// 	}	
 	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
-	if (isBinaryFunction(right)) return left.reduce((acc, value) => right(acc, value));
+	if (isBinaryFunction(left)) return right.reduce((acc, value) => left(acc, value));
 	if (isArray(right)) return [left, ...right];
 
 	errorBinary({left, right, operator: "$"});
