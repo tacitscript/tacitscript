@@ -52,6 +52,7 @@ const any = check => array => array.some(check);
 const take = number => array => array.slice(0, number);
 const append = value => array => [...array, value];
 const first = array => array[0];
+const reverse = array => [...array].reverse();
 
 //==========================================================
 // stream utilities
@@ -395,7 +396,7 @@ const comma = (left, right) => {
 		if (isBinaryFunction(left)) return (x, y) => comma(left(x, y), right);									// binaryZipApplyTo		(XYA)A(XYA)				4(:,(+1 -1))3=(5 2)
 	}
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));				// binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)
-																												// binaryUnaryApply		(XYZ)((YZ)(WU))(X(WU))	>,(#.)(3)(1 2 3)=()
+																												// binaryUnaryApply		(XYZ)((YZ)(WR))(X(WR))	>,(#.)(3)(1 2 3)=()
 	if (isUnaryFunction(right)) return right(left); 															// applyToUnary			X(XY)Y					3,+1=4
 	if (isBinaryFunction(right)) return value => right(left, value);											// applyToBinary		X(XYZ)(YZ)				(1,/)2=0.5
 
@@ -445,13 +446,16 @@ let slash = (left, right) => {
 let less = (left, right) => {
 	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=()
 		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
-	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
-
+	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right);									// ascendingSort		(VN)AA					;<(2 3 1)=(1 2 3)
+																												// ascendingSort		(VS)AA					;<("b" "c" "a")=("a" "b" "c")
 	errorBinary({left, right, operator: "<"});
 };
 let greater = (left, right) => {
-	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
-	// if (isArray(left) && (isArray(right) || isObject(right))) {
+	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=(()!)
+		|| (isString(left) && isString(right))) return left > right;											// greater				SST						"abc">"def"=()
+	if (isUnaryFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);									// descendingSort		(VN)AA					;>(2 3 1)=(3 2 1)
+																												// descendingSort		(VS)AA					;>("b" "c" "a")=("c" "b" "a")
+// if (isArray(left) && (isArray(right) || isObject(right))) {
 	// 	return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
 	// }
 	// if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")

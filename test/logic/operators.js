@@ -2,6 +2,19 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("greater (>)", () => {
+		/*ts
+			greaterT				3>2
+			greateraT				"abc">"def"
+			descendingSortA			;>(2 3 1)
+			descendingSortaA		;>("b" "c" "a")
+		*/
+		it("greater					NNT						3>2=(()!)", () => expect(greaterT).eql(true));
+		it('greater					SST						"abc">"def"=()', () => expect(greateraT).eql(false));
+		it('descendingSort			(VN)AA					;>(2 3 1)=(3 2 1)', () => expect(descendingSortA).eql([3, 2, 1]));
+		it('descendingSort			(VS)AA					;>("b" "c" "a")=("c" "b" "a")', () => expect(descendingSortaA).eql(["c", "b", "a"]));
+	});
+
 	describe("less (<)", () => {
 		/*ts
 			lessT					3<2
@@ -73,7 +86,7 @@ export default () => {
 		it("applyToUnary			X(XY)Y					3,+1=4", () => expect(applyToUnaryN).eql(4));
 		it("applyToBinary			X(XYZ)(YZ)				(1,/)2=0.5", () => expect(applyToBinaryNN(2)).eql(0.5));
 		it("binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)", () => expect(binaryUnaryApplyNA(1)).eql([1, 2, 3]));
-		it("binaryUnaryApply		(XYZ)((YZ)(WU))(X(WU))	>,(#.)(3)(1 2 3)=()", () => expect(binaryUnaryApplyNB(3)([1, 2, 3])).eql(false));
+		it("binaryUnaryApply		(XYZ)((YZ)(WR))(X(WR))	>,(#.)(3)(1 2 3)=()", () => expect(binaryUnaryApplyNB(3)([1, 2, 3])).eql(false));
 		it("zipApplyTo				AAA						(3 1),(+1 /),(; 2,)=(4 0.5)", () => expect(zipApplyToA).eql([4, 0.5]));
 		it("unaryZipApplyTo			(XA)A(XA)				1$,(*2 /2)(2 )=(2 1)", () => expect(unaryZipApplyToA([2])).eql([2, 1]));
 		it("binaryZipApplyTo		(XYA)A(XYA)				4(:,(+1 -1))3=(5 2)", () => expect(binaryZipApplyToNNA(4, 3)).eql([5, 2]));
