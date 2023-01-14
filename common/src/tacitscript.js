@@ -397,7 +397,7 @@ const comma = (left, right) => {
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));				// binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)
 																												// binaryUnaryApply		(XYZ)((YZ)(WU))(X(WU))	>,(#.)(3)(1 2 3)=()
 	if (isUnaryFunction(right)) return right(left); 															// applyToUnary			X(XY)Y					3,+1=4
-	if (isBinaryFunction(right)) return value => right(value, left);											// applyToBinary		Y(XYZ)(XZ)				(2,/)6=3
+	if (isBinaryFunction(right)) return value => right(left, value);											// applyToBinary		X(XYZ)(YZ)				(1,/)2=0.5
 
 	errorBinary({left, right, operator: ","});
 }; comma.applyOrPipe = true;
