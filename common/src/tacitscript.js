@@ -422,8 +422,8 @@ let plus = (left, right) => {
 			return undefined;
 		}
 	}
-	// if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
-	// if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
+	if (isArray(left) && isArray(right)) return [...left, ...right];											// arrayConcat			AAA						(1 2 3)+(4 5 6)=(1 2 3 4 5 6)
+	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);										// merge				DDD						(("a" 1) ("b" 2))\+((("b" 3) ("c" 4))\)=((("a" 1") ("b" 3) ("c" 4))\)
 	if (isNumber(left) && isValue(right)) {																		// add					NNN						2+3=5
 		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;	// parse				NSN						2+"3"=5
 		const result = left + rightValue;																		// parse				NSO						2+"abc"=(1/0)		
@@ -432,12 +432,7 @@ let plus = (left, right) => {
 	}
 
 	errorBinary({left, right, operator: "+"});
-}; plus.types = [
-	["N", "V", "N"], // add 2+3=5
-	// ["S", "V", "S"], // concat ""+4="4"
-	// ["A", "A", "A"], // concat (1 2 3)+(4 5 6)=(1 2 3 4 5 6)
-	// ["O", "O", "O"], // merge {"{a: 1}"+({"{b: 2}")
-];
+};
 let slash = (left, right) => {
 	// if (isUnaryFunction(left) && isArray(right)) {
 	// 	// (VS)AO groupBy [/("ann" "ben" "ade")
@@ -838,7 +833,7 @@ let hash = value => {
 	// ["N", "N"], // modulus #(_1.5)
 ];
 let backslash = value => {
-	// if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
+	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
 	// if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")
 
 	errorUnary({value, operator: "\\"});

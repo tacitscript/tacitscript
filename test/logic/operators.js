@@ -9,12 +9,16 @@ export default () => {
 			parseO					2+"abc"
 			stringConcatS			"abc"+"def"
 			toStringS				"2"+3
+			arrayConcatA			(1 2 3)+(4 5 6)
+			mergeD					(("a" 1) ("b" 2))\+((("b" 3) ("c" 4))\)
 		*/
 		it('add					NNN						2+3=5', () => expect(addN).eql(5));
 		it('parse				NSN						2+"3"=5', () => expect(parseN).eql(5));
 		it('parse				NSO						2+"abc"=(1/0)', () => expect(parseO).eql(undefined));
 		it('stringConcat		SSS						"abc"+"def"="abcdef"', () => expect(stringConcatS).eql("abcdef"));
 		it('toString			SVS						"2"+3="23"', () => expect(toStringS).eql("23"));
+		it('arrayConcat			AAA						(1 2 3)+(4 5 6)', () => expect(arrayConcatA).eql([1, 2, 3, 4, 5, 6]));
+		it('merge				DDD						(("a" 1) ("b" 2))\\+((("b" 3) ("c" 4))\\)=((("a" 1") ("b" 3) ("c" 4))\\)', () => expect(mergeD).eql({a: 1, b: 3, c: 4}));
 	});
 
 	describe("dot (.)", () => {
