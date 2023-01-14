@@ -2,6 +2,19 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("less (<)", () => {
+		/*ts
+			lessT					3<2
+			lessaT					"abc"<"def"
+			ascendingSortA			;<(2 3 1)
+			ascendingSortaA			;<("b" "c" "a")
+		*/
+		it("less					NNT						3<2=()", () => expect(lessT).eql(false));
+		it('less					SST						"abc"<"def"=(()!)', () => expect(lessaT).eql(true));
+		it('ascendingSort			(VN)AA					;<(2 3 1)=(1 2 3)', () => expect(ascendingSortA).eql([1, 2, 3]));
+		it('ascendingSort			(VS)AA					;<("b" "c" "a")=("a" "b" "c")', () => expect(ascendingSortaA).eql(["a", "b", "c"]));
+	});
+
 	describe("slash (/)", () => {
 		/*ts
 			divideN					8/2

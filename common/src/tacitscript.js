@@ -443,16 +443,12 @@ let slash = (left, right) => {
 	errorBinary({left, right, operator: "/"});
 };
 let less = (left, right) => {
-	// if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
-	// if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
+	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=()
+		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
+	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
 
 	errorBinary({left, right, operator: "<"});
-}; less.types = [
-	// ["N", "N", "B"], // lessThan 2<3
-	// ["S", "S", "B"], // lessThanString "abc"<"bcd"
-	// [["V", "S"], "A", "A"], // sort ;<("dan" "sue" "alan")
-	// [["V", "N"], "A", "A"], // sort ;<(1 2 3)
-];
+};
 let greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right))) return left > right; // NNB SSB greaterThan greaterThanString 3>2 "bcd">"abc"
 	// if (isArray(left) && (isArray(right) || isObject(right))) {
