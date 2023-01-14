@@ -2,6 +2,17 @@ const {expect} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("plus (+)", () => {
+		/*ts
+			addN					2+3
+			parseN					2+"3"
+			parseO					2+"abc"
+		*/
+		it('add					NNN						2+3=5', () => expect(addN).eql(5));
+		it('parse				NSN						2+"3"=5', () => expect(parseN).eql(5));
+		it('parse				NSO						2+"abc"=(1/0)', () => expect(parseO).eql(undefined));
+	});
+
 	describe("dot (.)", () => {
 		/*ts
 			pipeNN					+1.*2

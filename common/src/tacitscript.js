@@ -405,7 +405,7 @@ const dot = (left, right) => {
 	if (isArray(right)) {
 		if (isValue(left)) return map(value => comma(left, value))(right);										// applyToArray			VAA						(1 2 3).(# [)=(3 1)
 		if (isUnaryFunction(left)) return x => map(value => comma(left(x), value))(right);						// pipeToArray			(VV)A(VA)				[.(+1 -2)(3 2 1)=(4 1)
-		if (isBinaryFunction(left)) return (x, y) => map(value => comma(left(x, y), value))(right);				// pipeBinaryToArray	(VVV)A(VVA)				5(:.($+ $-))3=(8 2)
+		if (isBinaryFunction(left)) return (x, y) => map(value => comma(left(x, y), value))(right);				// pipeBinaryToArray	(VVV)A(VVA)				5(:.(+$ -$))3=(8 2)
 	} else {
 		if (isBinaryFunction(left) && isUnaryFunction(right)) return (a, b) => right(left(a, b));				// binaryUnaryPipe		(XYZ)(ZW)(XYW)			5(:.-$)3=2
 		if (isUnaryFunction(left) && isBinaryFunction(right)) return value => leftApply(left(value), right);	// unaryBinaryPipe		(XY)(YZW)(X(ZW))		(+1./)7(4)=2
@@ -424,10 +424,11 @@ let plus = (left, right) => {
 	// }
 	// if (isArray(left) && isArray(right)) return [...left, ...right]; // AAA arrayConcat (1 2 3)+(4 5 6)
 	// if (isObject(left) && isObject(right)) return  mergeDeep(left, right); // OOO merge {"{a: 1}"+({"{b: 2}")
-	if (isNumber(left) && isValue(right)) { // NVN add 2+"3"
-		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;
+	if (isNumber(left) && isValue(right)) {																		// add					NNN						2+3=5
+		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;	// parse				NSN						2+"3"=5
+		const result = left + rightValue;																		// parse				NSO						2+"abc"=(1/0)		
 
-		return left + rightValue;
+		return isNaN(result) ? undefined : result;
 	}
 
 	errorBinary({left, right, operator: "+"});
