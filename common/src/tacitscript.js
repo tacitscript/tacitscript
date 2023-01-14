@@ -434,21 +434,14 @@ let plus = (left, right) => {
 	errorBinary({left, right, operator: "+"});
 };
 let slash = (left, right) => {
-	// if (isUnaryFunction(left) && isArray(right)) {
-	// 	// (VS)AO groupBy [/("ann" "ben" "ade")
-	// 	return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
-	// }
-	if (isNumber(left) && isNumber(right)) {
-		if (right === 0) return undefined;
+	if (isNumber(left) && isNumber(right)) {																	// divide				NNN						8/2=4
+		if (right === 0) return undefined;																		// divide				NNO						2/0=(1/0)
 
-		return left / right; // NNN divide 8/2
+		return left / right;
 	}
 
 	errorBinary({left, right, operator: "/"});
-}; slash.types = [
-	["N", "N", "N"], // divide 8/2=4
-	// [["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
-];
+};
 let less = (left, right) => {
 	// if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right); // // (VS)AA (VN)AA sort ;<("dan" "sue" "alan")
 	// if ((isNumber(left) && isNumber(right)) || (isString(left) && isString(right)))	return left < right; // NNB SSB lessThan lessThanString 2<3 "abc"<"def"
@@ -707,6 +700,10 @@ let percent = (left, right) => {
 	// 	if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
 	// 	else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
 	// }
+	// if (isUnaryFunction(left) && isArray(right)) {
+	// 	// (VS)AO groupBy [/("ann" "ben" "ade")
+	// 	return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
+	// }
 
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
@@ -721,6 +718,7 @@ let percent = (left, right) => {
 	// [["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
 	// [["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
 	// ["N", "L", "L"], // streamTake 3%naturalNumbers
+		// [["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let hat = (left, right) => {
 	// if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
