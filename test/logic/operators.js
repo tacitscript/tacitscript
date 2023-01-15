@@ -1,4 +1,4 @@
-const {expect} = chai;
+const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
@@ -21,11 +21,20 @@ export default () => {
 			lessaT					"abc"<"def"
 			ascendingSortA			;<(2 3 1)
 			ascendingSortaA			;<("b" "c" "a")
+			tapNN					"x => console.log.call(null, x)"{<
 		*/
 		it("less					NNT						3<2=()", () => expect(lessT).eql(false));
 		it('less					SST						"abc"<"def"=(()!)', () => expect(lessaT).eql(true));
 		it('ascendingSort			(VN)AA					;<(2 3 1)=(1 2 3)', () => expect(ascendingSortA).eql([1, 2, 3]));
 		it('ascendingSort			(VS)AA					;<("b" "c" "a")=("a" "b" "c")', () => expect(ascendingSortaA).eql(["a", "b", "c"]));
+
+		let spy;
+		before(() => spy = sinon.spy(console, "log"));
+		it('tap						(V?)VV					"x => console.log.call(null, x)"{<3=3', () => {
+			expect(tapNN(3)).eql(3);
+			assert(spy.calledWith(3));
+		});
+		after(() => spy.restore());
 	});
 
 	describe("slash (/)", () => {

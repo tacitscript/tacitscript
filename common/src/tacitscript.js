@@ -448,6 +448,14 @@ let less = (left, right) => {
 		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
 	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right);									// ascendingSort		(VN)AA					;<(2 3 1)=(1 2 3)
 																												// ascendingSort		(VS)AA					;<("b" "c" "a")=("a" "b" "c")
+	if (isUnaryFunction(left) && isValue(right)) {																// tap					(V?)VV					"x => console.log.call(null, x)"{<3=3
+		try {
+			comma(right, left);
+		} catch (_) {}
+
+		return right;
+	}
+
 	errorBinary({left, right, operator: "<"});
 };
 let greater = (left, right) => {
@@ -457,14 +465,6 @@ let greater = (left, right) => {
 																												// descendingSort		(VS)AA					;>("b" "c" "a")=("c" "b" "a")
 	// if (isArray(left) && (isArray(right) || isObject(right))) {
 	// 	return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
-	// }
-	// if (isValue(left) && isUnaryFunction(right)) { // V(VV)V tap 3>({"console.log")
-	// 	try {
-	// 		comma(left, right);
-	// 	} catch (_) {
-	// 	}
-
-	// 	return left;
 	// }
 
 	errorBinary({left, right, operator: ">"});

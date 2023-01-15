@@ -233,6 +233,8 @@ const lookup = function(symbol) {
 
 	return symbol;
 };
+const isNumber = function(n) {return !isNaN(parseFloat(n)) && isFinite(n);};
+const isString = function(string) {return (typeof string === "string") && string.startsWith('`') && string.endsWith('`');}
 const getDefinition = function(symbols) {
 	if (!symbols.length) return false;
 	if (symbols.length === 1) {
@@ -258,7 +260,9 @@ const getDefinition = function(symbols) {
 
 			const definition = (function() {
 				if ((left === "ts.underscore") && isNumber(right)) return "-" + right;
+				if (isNumber(left) && (right === "ts.underscore")) return "-" + left;
 				if ((left === "ts.braceleft") && isString(right)) return right.slice(1, -1).replace(/\\"/g, '"');
+				if (isString(left) && (right === "ts.braceleft")) return left.slice(1, -1).replace(/\\"/g, '"');
 
 				return "ts.apply(" + left + ", " + right + ")";
 			})();
@@ -277,8 +281,6 @@ const getDefinition = function(symbols) {
 };
 
 const isAlphabetic = function(string) {return /^[a-z]+$/i.test(string);};
-const isNumber = function(n) {return !isNaN(parseFloat(n)) && isFinite(n);};
-const isString = function(string) {return string.startsWith('`') && string.endsWith('`');}
 
 var isNewSymbol = function(currentToken, character) {
 	const jointSymbol = currentToken + character;
