@@ -469,23 +469,17 @@ let greater = (left, right) => {
 	}
 
 	errorBinary({left, right, operator: ">"});
-}; greater.types = [
-	// ["N", "N", "B"], // greaterThan 3>2
-	// ["S", "S", "B"], // greaterThanString "bcd">"abc"
-	// ["A", "O", "O"], // over ((1 ) +1)>(3 5 7)
-	// ["A", "A", "A"], // over (("a" ) +1)>{({"a": 1})
-	// ["V", ["V", "V"], "V"], // tap 3>({"console.log")
-];
+};
 let minus = (left, right) => {
-	// if (isString(left) && isObject(right)) { // SOO omitKey "a"-({"{a: 1}")
-	// 	const {[left]: deletedKey, ...remainder} = right;
+	if (isNumber(left) && isNumber(right)) return left - right;													// subtract				NNN						5-2=3
+	if (isString(left) && isObject(right)) {																	// omitKey				SDD						"a"-((("a" 1) )\)=(( )\)
+		const {[left]: deletedKey, ...remainder} = right;
 
-	// 	return remainder;
-	// }
+		return remainder;
+	}
 	// if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
 	// 	return omit(left)(right);
 	// }
-	if (isNumber(left) && isNumber(right)) return left - right; // NNN subtract 5-2
 	// if (isArray(left) && isArray(right)) return splice(right, ...left); // AAA splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
 	// if (isArray(left) && isString(right)) return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]); // ASS splice (3 2 "le")-"nucular"="nuclear"
 

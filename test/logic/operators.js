@@ -2,6 +2,15 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("minus (-)", () => {
+		/*ts
+			subtractN				5-2
+			omitKeyD				"a"-((("a" 1) )\)
+		*/
+		it('subtract				NNN						5-2=3', () => expect(subtractN).eql(3));
+		it('omitKey					SDD						"a"-((("a" 1) )\)=(( )\)', () => expect(omitKeyD).eql({}));
+	});
+
 	describe("greater (>)", () => {
 		/*ts
 			greaterT				3>2
