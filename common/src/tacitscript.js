@@ -463,9 +463,9 @@ let greater = (left, right) => {
 		|| (isString(left) && isString(right))) return left > right;											// greater				SST						"abc">"def"=()
 	if (isUnaryFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);						// descendingSort		(VN)AA					;>(2 3 1)=(3 2 1)
 																												// descendingSort		(VS)AA					;>("b" "c" "a")=("c" "b" "a")
-	// if (isArray(left) && (isArray(right) || isObject(right))) {
-	// 	return applyOver({path: left[0], fn: left[1], container: right}); // AAA AOO over ((1 ) +1)>(3 5 7) (("a" ) +1)'{({"a": 1})
-	// }
+	if (isArray(left) && (isArray(right) || isObject(right))) {													// over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)
+		return applyOver({path: left[0], fn: left[1], container: right});										// over					ADD						(("a" ) +1)>((("a" 1) )\)=((("a" 2) )\)
+	}
 
 	errorBinary({left, right, operator: ">"});
 }; greater.types = [

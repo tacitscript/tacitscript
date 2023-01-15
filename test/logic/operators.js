@@ -8,11 +8,15 @@ export default () => {
 			greateraT				"abc">"def"
 			descendingSortA			;>(2 3 1)
 			descendingSortaA		;>("b" "c" "a")
+			overA					((1 ) +1)>(3 5 7)
+			overD					(("a" ) +1)>((("a" 1) )\)
 		*/
 		it("greater					NNT						3>2=(()!)", () => expect(greaterT).eql(true));
 		it('greater					SST						"abc">"def"=()', () => expect(greateraT).eql(false));
 		it('descendingSort			(VN)AA					;>(2 3 1)=(3 2 1)', () => expect(descendingSortA).eql([3, 2, 1]));
 		it('descendingSort			(VS)AA					;>("b" "c" "a")=("c" "b" "a")', () => expect(descendingSortaA).eql(["c", "b", "a"]));
+		it('over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
+		it('over					ADD						(("a" ) +1)>((("a" 1) )\\)=((("a" 2) )\\)', () => expect(overD).eql({a: 2}));
 	});
 
 	describe("less (<)", () => {
