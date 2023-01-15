@@ -45,9 +45,11 @@ export default () => {
 		/*ts
 			divideN					8/2
 			divideO					2/0
+			groupByD				[/("ann" "ben" "ade")
 		*/
 		it('divide					NNN						8/2=4', () => expect(divideN).eql(4));
 		it('divide					NNO						2/0=(1/0)', () => expect(divideO).eql(undefined));
+		it('groupBy					(VS)AD					[/("ann" "ben" "ade")=(("a" ("ann" "ade")) ("b" ("ben" ))\\)', () => expect(groupByD).eql({a: ["ann", "ade"], b: ["ben"]}));
 	});
 
 	describe("plus (+)", () => {

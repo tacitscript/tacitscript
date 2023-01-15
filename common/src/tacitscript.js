@@ -45,7 +45,7 @@ const omit = keys => object => {const copy = {...object}; keys.forEach(key => de
 const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
 const all = check => array => array.every(check);
 const flatten = values => {let result = [], length = values.length; for (let i = 0; i < length; i += 1) {const value = values[i]; Array.prototype.push.apply(result, Array.isArray(value) ? flatten(value) : [value]);} return result;};
-const groupBy = fn => array => {let result = [], length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
+const groupBy = fn => array => {let result = {}, length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
 const identity = x => x;
 const values = obj => Object.values(obj);
 const any = check => array => array.some(check);
@@ -440,6 +440,7 @@ let slash = (left, right) => {
 
 		return left / right;
 	}
+	if (isUnaryFunction(left) && isArray(right)) return groupBy(left)(right);									// groupBy				(VV)AD					 [/("ann" "ben" "ade")=(("a" ("ann" "ade")) ("b" ("ben" ))\)
 
 	errorBinary({left, right, operator: "/"});
 };
@@ -700,10 +701,6 @@ let percent = (left, right) => {
 	// 	if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
 	// 	else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
 	// }
-	// if (isUnaryFunction(left) && isArray(right)) {
-	// 	// (VS)AO groupBy [/("ann" "ben" "ade")
-	// 	return reduce((acc, value) => {const key = left(value); return (acc[key] == undefined) ? {...acc, [key]: [value]} : {...acc, [key]: [...acc[key], value]};})({})(right); // groupBy
-	// }
 
 	errorBinary({left, right, operator: "%"});
 }; percent.types = [
@@ -718,7 +715,6 @@ let percent = (left, right) => {
 	// [["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
 	// [["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
 	// ["N", "L", "L"], // streamTake 3%naturalNumbers
-		// [["V", "S"], "A", "O"], // groupBy [/("ann" "ben" "ade")
 ];
 let hat = (left, right) => {
 	// if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
