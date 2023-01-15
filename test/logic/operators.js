@@ -5,10 +5,16 @@ export default () => {
 	describe("minus (-)", () => {
 		/*ts
 			subtractN				5-2
-			omitKeyD				"a"-((("a" 1) )\)
+			omitKeyD				((("a" 1) )\)-"a"
+			omitKeysD				(("a" 1) ("b" 2))\-("a" "b")
+			spliceA					(5 6 7 8)-(1 2 3 4)
+			spliceS					"nucular"-(3 2 "le")
 		*/
 		it('subtract				NNN						5-2=3', () => expect(subtractN).eql(3));
-		it('omitKey					SDD						"a"-((("a" 1) )\)=(( )\)', () => expect(omitKeyD).eql({}));
+		it('omitKey					DSD						(("a" 1) )\\-"a"=(( )\\)', () => expect(omitKeyD).eql({}));
+		it('omitKeys				DAD						(("a" 1) ("b" 2))\\-("a" "b")=(( )\\)', () => expect(omitKeysD).eql({}));
+		it('splice					AAA						(5 6 7 8)-(1 2 3 4)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
+		it('splice					SAS						"nucular"-(3 2 "le")="nuclear"', () => expect(spliceS).eql("nuclear"));
 	});
 
 	describe("greater (>)", () => {

@@ -415,7 +415,7 @@ const dot = (left, right) => {
 
 	errorBinary({left, right, operator: "."});
 }; dot.applyOrPipe = true;
-let plus = (left, right) => {
+const plus = (left, right) => {
 	if (isString(left) && isValue(right)) {																		// stringConcat			SSS						"abc"+"def"="abcdef"
 		try {																									// toString				SVS						"2"+3="23"
 			return `${left}${toString(right)}`;
@@ -434,7 +434,7 @@ let plus = (left, right) => {
 
 	errorBinary({left, right, operator: "+"});
 };
-let slash = (left, right) => {
+const slash = (left, right) => {
 	if (isNumber(left) && isNumber(right)) {																	// divide				NNN						8/2=4
 		if (right === 0) return undefined;																		// divide				NNO						2/0=(1/0)
 
@@ -444,7 +444,7 @@ let slash = (left, right) => {
 
 	errorBinary({left, right, operator: "/"});
 };
-let less = (left, right) => {
+const less = (left, right) => {
 	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=()
 		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
 	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right);									// ascendingSort		(VN)AA					;<(2 3 1)=(1 2 3)
@@ -459,7 +459,7 @@ let less = (left, right) => {
 
 	errorBinary({left, right, operator: "<"});
 };
-let greater = (left, right) => {
+const greater = (left, right) => {
 	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=(()!)
 		|| (isString(left) && isString(right))) return left > right;											// greater				SST						"abc">"def"=()
 	if (isUnaryFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);						// descendingSort		(VN)AA					;>(2 3 1)=(3 2 1)
@@ -470,27 +470,22 @@ let greater = (left, right) => {
 
 	errorBinary({left, right, operator: ">"});
 };
-let minus = (left, right) => {
+const minus = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left - right;													// subtract				NNN						5-2=3
-	if (isString(left) && isObject(right)) {																	// omitKey				SDD						"a"-((("a" 1) )\)=(( )\)
-		const {[left]: deletedKey, ...remainder} = right;
+	if (isObject(left) && isString(right)) {																	// omitKey				DSD						(("a" 1) )\-"a"=(( )\)
+		const {[right]: deletedKey, ...remainder} = left;
 
 		return remainder;
 	}
-	// if (isArray(left) && isObject(right)) { // AOO omitKeys ("a" "b")-({"{a: 1, b: 2}")
-	// 	return omit(left)(right);
-	// }
-	// if (isArray(left) && isArray(right)) return splice(right, ...left); // AAA splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
-	// if (isArray(left) && isString(right)) return right.substring(0, left[0]) + (left[2] || "") + right.substring(left[0] + left[1]); // ASS splice (3 2 "le")-"nucular"="nuclear"
+	if (isObject(left) && isArray(right)) { 																	// omitKeys				DAD						(("a" 1) ("b" 2))\-("a" "b")=(( )\)
+		return omit(right)(left);
+	}
+	if (isArray(left) && isArray(right)) return splice(left, ...right);											// splice				AAA						(5 6 7 8)-(1 2 3 4)=(5 3 4 8)
+	if (isString(left) && isArray(right)) return left.substring(0, right[0]) + (right[2] || "")					// splice				SAS						"nucular"-(3 2 "le")="nuclear"
+		+ left.substring(right[0] + right[1]);
 
 	errorBinary({left, right, operator: "-"});
-}; minus.types = [
-	["N", "N", "N"], // subtract 5-2=3
-	// ["S", "O", "O"], // omitKey "a"-({"{a: 1}")
-	// ["A", "O", "O"], // omitKeys ("a" "b")-({"{a: 1, b: 2}")
-	// ["A", "A", "A"], // splice (1 2 3 4)-(5 6 7 8)=(5 3 4 8)
-	// ["A", "S", "S"], // splice (3 2 "le")-"nucular"="nuclear"
-];
+};
 let colon = (left, right) => {
 	return [left, right]; // ??A pair +:2
 
