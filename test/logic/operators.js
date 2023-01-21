@@ -2,6 +2,17 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("question (?)", () => {
+		/*ts
+			condN					((<10 +1) -1)?15
+			randomN					1?10
+			filterA					<5?(4 9 2 7 3)
+		*/
+		it('cond					AVV						((<10 +1) -1)?15=14', () => expect(condN).eql(14));
+		it('random					NNN						1(<|=)(1?10)<10', () => expect((1 <= randomN) && (randomN < 10)).eql(true));
+		it('filter					(VV)AA					<5?(4 9 2 7 3)=(4 2 3)', () => expect(filterA).eql([4, 2, 3]));
+	});
+
 	describe("colon (:)", () => {
 		/*ts
 			pairA					+1:2,(3, +3)

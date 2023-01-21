@@ -491,36 +491,27 @@ const colon = (left, right) => {
 
 	errorBinary({left, right, operator: ":"});
 };
-let question = (left, right) => {
-	// if (isArray(left) && isValue(right)) { // AVV cond ((<10 +1) -1)?15
-	// 	for (let i = 0; i < left.length; ++i) {
-	// 		const line = left[i];
+const question = (left, right) => {
+	if (isArray(left) && isValue(right)) {																		// cond					AVV						((<10 +1) -1)?15=14
+		for (let i = 0; i < left.length; ++i) {
+			const line = left[i];
 
-	// 		if (!isArray(line)) return comma(right, line);
+			if (!isArray(line)) return comma(right, line);
 
-	// 		const check = comma(right, line[0]);
+			const check = comma(right, line[0]);
 
-	// 		if (isTruthy(check)) return comma(right, line[1]);
-	// 	}
+			if (isTruthy(check)) return comma(right, line[1]);
+		}
 
-	// 	return undefined;
-	// }
-	// if (isNumber(left) && isNumber(right)) { // random 1?100
-	// 	return (Math.random() * (right - left)) + left;
-	// }
-	// if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
-	// 	const index = right.findIndex(left);
-
-	// 	return (index === -1) ? undefined : index;
-	// }
+		return undefined;
+	}
+	if (isNumber(left) && isNumber(right)) {																	// random				NNN						1(<|=)(1?10)<10
+		return (Math.random() * (right - left)) + left;
+	}
+	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
 
 	errorBinary({left, right, operator: "?"});
-}; question.types = [
-	// ["A", "V", "V"], // cond ((<10 +1) -1)?15
-	// ["N", "N", "N"], // random 1?100
-	// [["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
-	//filter
-];
+};
 question.supportsUndefined = true;
 let atsign = (left, right) => {
 	// const applyLeft = value => comma(value, left); // apply(left, value);
@@ -549,9 +540,15 @@ let atsign = (left, right) => {
 	// 	}
 	// }
 	// if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
+	// if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
+	// 	const index = right.findIndex(left);
+
+	// 	return (index === -1) ? undefined : index;
+	// }
 
 	errorBinary({left, right, operator: "@"});
 }; atsign.types = [
+	// [["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
 	// [["V", "V"], "A", "A"], // map *2@(3 4 5)
 	// [["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
 	// [["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
@@ -560,7 +557,6 @@ let atsign = (left, right) => {
 	// ["S", "S", "N"], // indexOf "bc"@"abcd"
 ];
 let asterisk = (left, right) => {
-	// if (isFunction(left) && isArray(right)) return tsFilter(left)(right); // (VB)AA filter <5*(4 9 2 7 3)
 	// if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	// 	return pick(left)(right);
 	// }
