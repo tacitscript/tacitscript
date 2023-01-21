@@ -2,6 +2,13 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("colon (:)", () => {
+		/*ts
+			pairA					+1:2,(3, +3)
+		*/
+		it('pair					??A						+1:2,(3, +3)=(4 5)', () => expect(pairA).eql([4, 5]));
+	});
+
 	describe("minus (-)", () => {
 		/*ts
 			subtractN				5-2

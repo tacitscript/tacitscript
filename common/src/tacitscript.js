@@ -486,14 +486,11 @@ const minus = (left, right) => {
 
 	errorBinary({left, right, operator: "-"});
 };
-let colon = (left, right) => {
-	return [left, right]; // ??A pair +:2
+const colon = (left, right) => {
+	return [left, right];																						// pair					??A						+1:2,(3, +3)=(4 5)
 
 	errorBinary({left, right, operator: ":"});
-}; 
-colon.types = [
-	// ["?", "?", "A"], // pair +:2
-];
+};
 let question = (left, right) => {
 	// if (isArray(left) && isValue(right)) { // AVV cond ((<10 +1) -1)?15
 	// 	for (let i = 0; i < left.length; ++i) {
@@ -522,6 +519,7 @@ let question = (left, right) => {
 	// ["A", "V", "V"], // cond ((<10 +1) -1)?15
 	// ["N", "N", "N"], // random 1?100
 	// [["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
+	//filter
 ];
 question.supportsUndefined = true;
 let atsign = (left, right) => {

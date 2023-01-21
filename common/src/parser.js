@@ -167,7 +167,8 @@ const deprioritizeMedialDots = function(symbols) {
 	return current.length ? segments.concat([current]) : segments;
 };
 const deprioritizeDots = function(symbols) {
-	if (symbols.length < 2) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
+	if (symbols.length === 1) return symbols;
+	if (symbols.length < 3) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
 
 	const firstNonJoinIndex = symbols.findIndex(symbol => ![".", ","].includes(symbol));
 	const lastNonJoinIndex = symbols.findLastIndex(symbol => ![".", ","].includes(symbol));
