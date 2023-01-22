@@ -559,7 +559,7 @@ let atsign = (left, right) => {
 
 		return indices;
 	}
-	// if (isUnaryFunction(left) && isArray(right)) {																// findIndices			(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)
+	// if (isUnaryFunction(left) && isArray(right)) {															// findIndices			(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)
 	// 	try {
 	// 		const indices = [];
 	// 		const length = right.length;
@@ -577,24 +577,13 @@ let atsign = (left, right) => {
 	errorBinary({left, right, operator: "@"});
 };
 let asterisk = (left, right) => {
-	// if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-	// 	return pick(left)(right);
-	// }
-	if (isNumber(left) && isNumber(right)) return left * right; // NNN times 2*3
+	if (Array.isArray(left) && isObject(right)) return pick(left)(right);										// pick					ADD						("a" "c" "d")*((("a" 1) ("b" 2) ("c" 3))\)=((("a" 1) ("c" 3))\)
+	if (isNumber(left) && isNumber(right)) return left * right; 												// times				NNN						2*3=6
 
 	errorBinary({left, right, operator: "*"});
-}; asterisk.types = [
-	["N", "N", "N"], // times 2*3=6
-	// ["A", "O", "O"], // pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
-	// [["V", "B"], "A", "A"], // filter <5*(4 9 2 7 3)
-];
+};
 let dollar = (left, right) => {
 	// if (isArray(right)) {
-	// 	if (isBinaryFunction(left)) {
-	// 		const result =  // (??X)AX insert +$(1 2)
-
-	// 		return result;
-	// 	}
 	// 	if (isString(left)) {
 	// 		try {
 	// 			return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
@@ -607,8 +596,8 @@ let dollar = (left, right) => {
 	// 	}	
 	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
-	if (isBinaryFunction(left)) return right.reduce((acc, value) => left(acc, value));
-	if (isArray(right)) return [left, ...right];
+	if (isBinaryFunction(left) && isArray(right)) return right.reduce((acc, value) => left(acc, value));
+	if (isValue(left) && isArray(right)) return [left, ...right];
 
 	errorBinary({left, right, operator: "$"});
 }; dollar.types = [

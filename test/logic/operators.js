@@ -2,6 +2,15 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("asterisk (*)", () => {
+		/*ts
+			pickD					("a" "c" "d")*((("a" 1) ("b" 2) ("c" 3))\)
+			timesN					2*3
+		*/
+		it('pick					ADD						("a" "c" "d")*((("a" 1) ("b" 2) ("c" 3))\\)=((("a" 1) ("c" 3))\\)', () => expect(pickD).eql({a: 1, c: 3}));
+		it('times					NNN						2*3=6', () => expect(timesN).eql(6));
+	});
+
 	describe("atsign (@)", () => {
 		/*ts
 			mapA					*2@(3 4 5)
@@ -20,7 +29,7 @@ export default () => {
 		it('replaceAll				ASS						("_" "-")@"_1 0 _1"="-1 0 -1"', () => expect(replaceAllS).eql("-1 0 -1"));
 		it('indicesOf				VAA						2@(6 8 2 3 2)=(2 4)', () => expect(indicesOfA).eql([2, 4]));
 		it('indicesOf				SSA						"bc"@"abcbcd"=(1 3)', () => expect(indicesOfS).eql([1, 3]));
-		xit('findIndices				(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)', () => expect(findIndicesA).eql([1, 3]));
+		xit('findIndices			(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)', () => expect(findIndicesA).eql([1, 3]));
 	});
 
 	describe("question (?)", () => {
