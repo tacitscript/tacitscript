@@ -2,6 +2,17 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("dollar ($)", () => {
+		/*ts
+			reduceN					+$(1 2 3)
+			prependA				1$(2 3)
+			joinS					", "$(1 2 3)
+		*/
+		it('reduce					(VVV)AV					+$(1 2 3)=6', () => expect(reduceN).eql(6));
+		it('prepend					VAA						1$(2 3)=(1 2 3)', () => expect(prependA).eql([1, 2, 3]));
+		it('join					SAS						", "$(1 2 3)', () => expect(joinS).eql("1, 2, 3"));
+	});
+
 	describe("asterisk (*)", () => {
 		/*ts
 			pickD					("a" "c" "d")*((("a" 1) ("b" 2) ("c" 3))\)

@@ -576,36 +576,30 @@ let atsign = (left, right) => {
 
 	errorBinary({left, right, operator: "@"});
 };
-let asterisk = (left, right) => {
+const asterisk = (left, right) => {
 	if (Array.isArray(left) && isObject(right)) return pick(left)(right);										// pick					ADD						("a" "c" "d")*((("a" 1) ("b" 2) ("c" 3))\)=((("a" 1) ("c" 3))\)
 	if (isNumber(left) && isNumber(right)) return left * right; 												// times				NNN						2*3=6
 
 	errorBinary({left, right, operator: "*"});
 };
-let dollar = (left, right) => {
-	// if (isArray(right)) {
-	// 	if (isString(left)) {
-	// 		try {
-	// 			return pipe(map(toString), join(left))(right); // SAS join ","$(1 2 3)
-	// 		} catch (_) {
-	// 			return undefined;
-	// 		}
-	// 	}
+const dollar = (left, right) => {
 	// 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 	// 		return reduce(left[0])(left[1])(right);
 	// 	}	
 	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
 
-	if (isBinaryFunction(left) && isArray(right)) return right.reduce((acc, value) => left(acc, value));
-	if (isValue(left) && isArray(right)) return [left, ...right];
+	if (isString(left) && isArray(right)) {																		// join					SAS						", "$(1 2 3)="1, 2, 3"
+		try {
+			return pipe(map(toString), join(left))(right);
+		} catch (_) {
+			return undefined;
+		}
+	}
+	if (isBinaryFunction(left) && isArray(right)) return right.reduce((acc, value) => left(acc, value));		// reduce				(VVV)AA					+$(1 2 3)=6
+	if (isValue(left) && isArray(right)) return [left, ...right];												// prepend				VAA						1$(2 3)=(1 2 3)
 
 	errorBinary({left, right, operator: "$"});
-}; dollar.types = [
-	// [["?", "?", "X"], "A", "X"], // insert +$(1 2)
-	// ["S", "A", "S"], // join ","$(1 2 3)
-	// ["A", "A", "?"], // reduce (+ 0)$(1 2 3)
-	// [["A", "V", "V"], "L", "L"], // processStream
-];
+};
 let apostrophe = (left, right) => {
 	// if (isNumber(left) && isNumber(right)) {
 	// 	const factor = Math.pow(10, left);
