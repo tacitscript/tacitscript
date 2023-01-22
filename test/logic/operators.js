@@ -2,6 +2,25 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("apostrophe (')", () => {
+		/*ts
+			roundN					3'3.1419
+			ata						1'(1 2 3)
+			atS						1'"abc"
+			propN					"a"'((("a" 1) )\)
+			pathN					(1 )'(1 2 3)
+			pathaN					("a" )'((("a" 1) )\)
+			findN					(%2.=0)'(1 2 3)
+		*/
+		it("round					NNN						3'3.1419=3.142", () => expect(roundN).eql(3.142));
+		it("at						NA?						1'(1 2 3)=2", () => expect(ata).eql(2));
+		it(`at						NSS						1'"abc"="b"`, () => expect(atS).eql("b"));
+		it(`prop					SD?						"a"'((("a" 1) )\\)=1`, () => expect(propN).eql(1));
+		it(`path					AA?						(1 )'(1 2 3)=2`, () => expect(pathN).eql(2));
+		it(`path					AD?						("a" )'((("a" 1) )\\)=1`, () => expect(pathaN).eql(1));
+		it("find					(VV)AV					(%2.=0)'(1 2 3)=2", () => expect(findN).eql(2));
+	});
+
 	describe("dollar ($)", () => {
 		/*ts
 			reduceN					+$(1 2 3)

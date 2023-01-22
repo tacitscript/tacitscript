@@ -600,29 +600,22 @@ const dollar = (left, right) => {
 
 	errorBinary({left, right, operator: "$"});
 };
-let apostrophe = (left, right) => {
-	// if (isNumber(left) && isNumber(right)) {
-	// 	const factor = Math.pow(10, left);
+const apostrophe = (left, right) => {
+	if (isNumber(left) && isNumber(right)) {																	// round				NNN						3'3.1419=3.142
+		const factor = Math.pow(10, left);
 
-	// 	return Math.round(right * factor) / factor;
-	// }
-	// if (isNumber(left) && (isArray(right) || isString(right))) return (left >= 0) ? right[left] : right[right.length + left]; // NA? NSS at 1'(1 2 3) 1'"abc"
-	// if (isString(left) && isObject(right)) return right[left]; // SO? prop "a"'{({"a": 1})
-	// if (isArray(left) && (isArray(right) || isObject(right))) {
-	// 	return path(left)(right); // AA? AO? path (1 )'(5 6 7) ("a" )'{({"a": 1})
-	// }
-	// if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right); // (VB)AV find (%2.=0)'(1 2 3)
+		return Math.round(right * factor) / factor;
+	}
+	if (isNumber(left) && (isArray(right) || isString(right)))													// at					NA?						1'(1 2 3)=2
+		return (left >= 0) ? right[left] : right[right.length + left];											// at					NSS						1'"abc"="b"
+	if (isString(left) && isObject(right)) return right[left];													// prop					SD?						"a"'((("a" 1) )\)=1
+	if (isArray(left) && (isArray(right) || isObject(right))) {													// path					AA?						(1 )'(1 2 3)=2
+		return path(left)(right);																				// path					AD?						("a" )'((("a" 1) )\)=1
+	}
+	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right);									// find					(VV)AV					(%2.=0)'(1 2 3)=2
 
 	errorBinary({left, right, operator: "'"});
-}; apostrophe.types =[
-	// ["N", "N", "N"], // round 3'3.14196
-	// ["N", "A", "?"], // at 1'(1 2 3)
-	// ["N", "S", "S"], // at 1'"abc"
-	// ["S", "O", "?"], // prop "a"'{({"a": 1})
-	// ["A", "A", "?"], // path (1 )'(5 6 7)
-	// ["A", "O", "?"], // path ("a" )'{({"a": 1})
-	// [["V", "V"], "A", "V"], // find (%2.=0)'(1 2 3)
-];
+};
 let equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
 
