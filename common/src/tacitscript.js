@@ -8,7 +8,7 @@ const {ts2es6} = parser;
 const pipe = (...args) => value => args.reduce((acc, fn) => fn(acc), value);
 const map = fn => array => array.map(fn);
 const mapObj = fn => object => Object.assign({}, ...Object.keys(object).map(key => ({[key]: fn(object[key])})));
-const mapObjIndexed = fn => object => Object.assign({}, ...Object.keys(object).map(key => ({[key]: fn(object[key], key)})));
+const mapObjIndexed = fn => object => Object.assign({}, ...Object.keys(object).map(key => ({[key]: fn(key, object[key])})));
 const reduce = reducer => startingValue => array => array.reduce(reducer, startingValue);
 const find = search => reduce((acc, value) => (acc == undefined) ? (search(value) ? value : undefined) : acc)(undefined);
 const mergeDeep = (...objects) => {
@@ -517,19 +517,17 @@ const question = (left, right) => {
 };
 question.supportsUndefined = true;
 let atsign = (left, right) => {
-	// const applyLeft = value => comma(value, left); // apply(left, value);
-	// // const applyIndexedLeft = (value, index) => apply((() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})(), value);
-	// //const applyIndexedLeft = (value, index) => comma(value, (() => {let fn = val => left(val, index); if (left.types) fn.types = map(type => splice(type, 1, 1))(left.types); return fn;})());
+	const applyLeft = value => comma(value, left); // apply(left, value);
+	const applyIndexedLeft = (index, value) => comma(value, val => left(index, val));
 
-	
-	// if (isUnaryFunction(left) && isObject(right)) {
-	// 	/*if (isUnaryFunction(left)) */return mapObj(applyLeft)(right); // (VV)OO mapObject *2@({"{a: 1, b: 2, c: 3}")
-	// 	//if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right); // (VSV)OO
-	// }
+	if (isObject(right)) {
+		if (isUnaryFunction(left)) return mapObj(applyLeft)(right);												// map					(VV)DD					*2@((("a" 1) ("b" 2))\)=((("a" 2) ("b" 4))\)
+		if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right);								// mapObjIndexed		(SVV)DD					+@((("a" 1) ("b" 2))\)=((("a" "a1") ("b" "b2"))\)
+	}
 
-	// // (VV)AA map *2@(3 4 5)
-	// // (VVV)AA mapBinary =@(2 3 4)
-	// if (isFunction(left) && isArray(right)) return map(applyLeft)(right);
+
+	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);										// map						(VV)AA					*2@(3 4 5)=(6 8 10)
+																												// map						(VVV)AA					(=@(3 4 5),|$)6=()
 	// if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
 	// if (isValue(left) && isArray(right)) {
 	// 	try {
@@ -637,16 +635,16 @@ let equal = (left, right) => {
 	// ["V", "V", "B"], // equality 2=2=true
 ];
 let bar = (left, right) => {
-	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
-	// 	let fn = x => {
-	// 		const leftResult = comma(x, left);
+	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
+		let fn = x => {
+			const leftResult = comma(x, left);
 
-	// 		return isFalsey(leftResult) ? comma(x, right) : leftResult;
-	// 	};
-	// 	fn.types = types(left); // assume
+			return isFalsey(leftResult) ? comma(x, right) : leftResult;
+		};
+		fn.types = types(left); // assume
 
-	// 	return fn;
-	// }
+		return fn;
+	}
 	// if (isBinaryFunction(left) && isBinaryFunction(right)) { // orBinary <|=
 	// 	let fn = (x, y) => {
 	// 		const leftResult = left(x, y);

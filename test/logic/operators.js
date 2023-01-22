@@ -2,6 +2,19 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("atsign (@)", () => {
+		/*ts
+			mapA					*2@(3 4 5)
+			mapaA					=@(3 4 5),|$
+			mapD					*2@((("a" 1) ("b" 2))\)
+			mapObjIndexedD			+@((("a" 1) ("b" 2))\)
+		*/
+		it('map						(VV)AA					*2@(3 4 5)=(6 8 10)', () => expect(mapA).eql([6, 8, 10]));
+		it('map						(VVV)AA					(=@(3 4 5),|$)6=()', () => expect(mapaA(6)).eql(false));
+		it('map						(VV)DD					*2@((("a" 1) ("b" 2))\\)=((("a" 2) ("b" 4))\\)', () => expect(mapD).eql({a: 2, b: 4}));
+		it('mapObjIndexed			(SVV)DD					+@((("a" 1) ("b" 2))\\)=((("a" "a1") ("b" "b2"))\\)', () => expect(mapObjIndexedD).eql({a: "a1", b: "b2"}));
+	});
+
 	describe("question (?)", () => {
 		/*ts
 			condN					((<10 +1) -1)?15
