@@ -21,11 +21,13 @@ export default () => {
 			randomN					1?10
 			filterA					<5?(4 9 2 7 3)
 			filterD					(%2.=0)?((("a" 1) ("b" 2))\)
+			filterObjIndexedD		(+.="b2")?((("a" 1) ("b" 2))\)
 		*/
 		it('cond					AVV						((<10 +1) -1)?15=14', () => expect(condN).eql(14));
 		it('random					NNN						1(<|=)(1?10)<10', () => expect((1 <= randomN) && (randomN < 10)).eql(true));
 		it('filter					(VV)AA					<5?(4 9 2 7 3)=(4 2 3)', () => expect(filterA).eql([4, 2, 3]));
 		it('filter					(VV)DD					(%2.=0)?((("a" 1) ("b" 2))\\)=((("b" 2) )\\)', () => expect(filterD).eql({b: 2}));
+		it('filterObjIndexed		(SVV)DD					(+.="b2")?((("a" 1) ("b" 2))\\)=((("b" 2) )\\)', () => expect(filterObjIndexedD).eql({b: 2}));
 	});
 
 	describe("colon (:)", () => {

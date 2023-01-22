@@ -36,6 +36,7 @@ const toPairs = obj => Object.entries(obj);
 const fromPairs = pairs => Object.fromEntries(pairs);
 const filter = check => array => array.filter(check);
 const filterObject = check => obj => pipe(toPairs, filter(pipe(last, check)), fromPairs)(obj);
+const filterObjIndexed = checkB => obj => pipe(toPairs, filter(([key, value]) => isTruthy(checkB(key, value))), fromPairs)(obj);
 const contains = value => array => array.includes(value);
 const pick = keys => object => pipe(toPairs, filter(([key]) => contains(key)(keys)), fromPairs)(object);
 const sortBy = fn => array => [...array].sort((a, b) => {const valA = fn(a), valB = fn(b); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
@@ -512,6 +513,7 @@ const question = (left, right) => {
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
 	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?((("a" 1) ("b" 2))\)=((("b" 2) )\)
+	if (isBinaryFunction(left) && isObject(right)) return filterObjIndexed(left)(right);						// filterObjIndexed		(SVV)DD					(+.="b2")?((("a" 1) ("b" 2))\\)=((("b" 2) )\\)
 
 	errorBinary({left, right, operator: "?"});
 };
@@ -526,8 +528,8 @@ let atsign = (left, right) => {
 	}
 
 
-	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);										// map						(VV)AA					*2@(3 4 5)=(6 8 10)
-																												// map						(VVV)AA					(=@(3 4 5),|$)6=()
+	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);										// map					(VV)AA					*2@(3 4 5)=(6 8 10)
+																												// map					(VVV)AA					(=@(3 4 5),|$)6=()
 	// if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
 	// if (isValue(left) && isArray(right)) {
 	// 	try {
