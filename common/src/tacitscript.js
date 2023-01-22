@@ -616,19 +616,17 @@ const apostrophe = (left, right) => {
 
 	errorBinary({left, right, operator: "'"});
 };
-let equal = (left, right) => {
+const equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
 
-	try {
-		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right)); // VVB equal 2=4
+	try {																										// equals				VVT						2=4=()
+		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right));
 	} catch (_) {
 		return undefined;
 	}
 
 	errorBinary({left, right, operator: "="});
-}; equal.types = [
-	// ["V", "V", "B"], // equality 2=2=true
-];
+};
 let bar = (left, right) => {
 	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
 		let fn = x => {

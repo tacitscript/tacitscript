@@ -2,6 +2,13 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("equal (=)", () => {
+		/*ts
+			equalsT					2=4
+		*/
+		it('equals					VVB						2=4=()', () => expect(equalsT).eql(false));
+	});
+
 	describe("apostrophe (')", () => {
 		/*ts
 			roundN					3'3.1419
