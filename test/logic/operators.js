@@ -2,6 +2,13 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("bar (|)", () => {
+		/*ts
+			orU						>0|(%2.=0)
+		*/
+		it('or						(VV)(VV)(VV)			(>0|(%2.=0))(_2)=(()!)', () => expect(orU(-2)).eql(true));
+	});
+
 	describe("equal (=)", () => {
 		/*ts
 			equalsT					2=4

@@ -183,7 +183,7 @@ const apply = (left, right) => {
 	if (!left.noLeftApply) {
 		if (arityRight === 2) {
 			const result = leftApply(left, right);
-			if (right.applyOrPipe) result.noLeftApply = true;
+			if (right.linear) result.noLeftApply = true;
 
 			return result;
 		}
@@ -404,7 +404,7 @@ const comma = (left, right) => {
 	if (isBinaryFunction(right)) return value => right(left, value);											// applyToBinary		X(XYZ)(YZ)				(1,/)2=0.5
 
 	errorBinary({left, right, operator: ","});
-}; comma.applyOrPipe = true;
+}; comma.linear = true;
 const dot = (left, right) => {
 	if (isArray(right)) {
 		if (isValue(left)) return map(value => comma(left, value))(right);										// applyToArray			VAA						(1 2 3).(# [)=(3 1)
@@ -417,7 +417,7 @@ const dot = (left, right) => {
 	}
 
 	errorBinary({left, right, operator: "."});
-}; dot.applyOrPipe = true;
+}; dot.linear = true;
 const plus = (left, right) => {
 	if (isString(left) && isValue(right)) {																		// stringConcat			SSS						"abc"+"def"="abcdef"
 		try {																									// toString				SVS						"2"+3="23"
@@ -628,7 +628,7 @@ const equal = (left, right) => {
 	errorBinary({left, right, operator: "="});
 };
 let bar = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) orPredicate >0|(%2.=0)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {														// or					(VV)(VV)(VV)			(>0|(%2.=0))(_2)=(()!)
 		let fn = x => {
 			const leftResult = comma(x, left);
 
@@ -651,11 +651,7 @@ let bar = (left, right) => {
 	// if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;
 
 	errorBinary({left, right, operator: "|"});
-}; bar.types = [
-	// ["V", "V", "V"], // orValue !()|()
-	// [["V", "V"], ["V", "V"], ["V", "V"]], // orPredicate >0|(%2.=0)
-	// [["V", "V", "V"], ["V", "V", "V"], ["V", "V", "V"]] // orBinary <|=
-];
+}; bar.linear = true;
 bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left)) {
