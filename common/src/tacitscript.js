@@ -31,13 +31,14 @@ const mergeDeep = (...objects) => {
 const join = delimiter => array => {
 	return array.join(delimiter);
 };
+const last = array => array[array.length - 1];
 const toPairs = obj => Object.entries(obj);
 const fromPairs = pairs => Object.fromEntries(pairs);
 const filter = check => array => array.filter(check);
+const filterObject = check => obj => pipe(toPairs, filter(pipe(last, check)), fromPairs)(obj);
 const contains = value => array => array.includes(value);
 const pick = keys => object => pipe(toPairs, filter(([key]) => contains(key)(keys)), fromPairs)(object);
 const sortBy = fn => array => [...array].sort((a, b) => {const valA = fn(a), valB = fn(b); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
-const last = array => array[array.length - 1];
 const combinations = array1 => array2 => unnest(map(value1 => map(value2 => [value1, value2])(array2))(array1));
 const unnest = arrays => {let result = [], length = arrays.length; for (let i = 0; i < length; i += 1) Array.prototype.push.apply(result, arrays[i]); return result;};
 const splice = (array, start, deleteCount, ...items) => {const copy = array.slice(0); copy.splice(start, deleteCount, ...items); return copy;};
@@ -96,6 +97,7 @@ const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of
 const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return isTruthy(result);}; return fn(predicate);};
 const tsFilter = tsPredicate(filter);
 const tsFind = tsPredicate(find);
+const tsFilterObject = tsPredicate(filterObject);
 
 //==========================================================
 // type utilites
@@ -509,6 +511,7 @@ const question = (left, right) => {
 		return (Math.random() * (right - left)) + left;
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
+	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);
 
 	errorBinary({left, right, operator: "?"});
 };
@@ -621,13 +624,13 @@ let apostrophe = (left, right) => {
 	// [["V", "V"], "A", "V"], // find (%2.=0)'(1 2 3)
 ];
 let equal = (left, right) => {
-	// if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
+	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
 
-	// try {
-	// 	return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right)); // VVB equal 2=4
-	// } catch (_) {
-	// 	return undefined;
-	// }
+	try {
+		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right)); // VVB equal 2=4
+	} catch (_) {
+		return undefined;
+	}
 
 	errorBinary({left, right, operator: "="});
 }; equal.types = [
@@ -664,11 +667,11 @@ let bar = (left, right) => {
 ];
 bar.supportsUndefined = true;
 let percent = (left, right) => {
-	// if (isNumber(left)) {
-	// 	if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
+	if (isNumber(left)) {
+		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
 	// 	else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
 	// 	else if (isStream(right)) return streamTake({n: left, generator: right});
-	// }
+	}
 	// else if (isArray(left)) {
 	// 	if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
 	// 	else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
