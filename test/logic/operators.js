@@ -8,11 +8,19 @@ export default () => {
 			mapaA					=@(3 4 5),|$
 			mapD					*2@((("a" 1) ("b" 2))\)
 			mapObjIndexedD			+@((("a" 1) ("b" 2))\)
+			replaceAllS				("_" "-")@"_1 0 _1"
+			indicesOfA				2@(6 8 2 3 2)
+			indicesOfS				"bc"@"abcbcd"
+			// findIndicesA			(%2.=0)@(1 2 3 4)
 		*/
 		it('map						(VV)AA					*2@(3 4 5)=(6 8 10)', () => expect(mapA).eql([6, 8, 10]));
 		it('map						(VVV)AA					(=@(3 4 5),|$)6=()', () => expect(mapaA(6)).eql(false));
 		it('map						(VV)DD					*2@((("a" 1) ("b" 2))\\)=((("a" 2) ("b" 4))\\)', () => expect(mapD).eql({a: 2, b: 4}));
 		it('mapObjIndexed			(SVV)DD					+@((("a" 1) ("b" 2))\\)=((("a" "a1") ("b" "b2"))\\)', () => expect(mapObjIndexedD).eql({a: "a1", b: "b2"}));
+		it('replaceAll				ASS						("_" "-")@"_1 0 _1"="-1 0 -1"', () => expect(replaceAllS).eql("-1 0 -1"));
+		it('indicesOf				VAA						2@(6 8 2 3 2)=(2 4)', () => expect(indicesOfA).eql([2, 4]));
+		it('indicesOf				SSA						"bc"@"abcbcd"=(1 3)', () => expect(indicesOfS).eql([1, 3]));
+		xit('findIndices				(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)', () => expect(findIndicesA).eql([1, 3]));
 	});
 
 	describe("question (?)", () => {

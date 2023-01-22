@@ -530,35 +530,52 @@ let atsign = (left, right) => {
 
 	if (isFunction(left) && isArray(right)) return map(applyLeft)(right);										// map					(VV)AA					*2@(3 4 5)=(6 8 10)
 																												// map					(VVV)AA					(=@(3 4 5),|$)6=()
-	// if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left); // ASS stringReplace ("_" "-")@"1 0 _1"
-	// if (isValue(left) && isArray(right)) {
-	// 	try {
-	// 		const leftString = toString(left);
-	// 		const leftType = typeOf(left);
-	// 		const index = right.findIndex(value => (leftType === typeOf(value)) && (leftString === toString(value))); // VAN indexOf 2@(6 8 2 3)
+	if (isArray(left) && isString(right)) return String.prototype.replaceAll.apply(right, left);				// replaceAll			ASS						("_" "-")@"_1 0 _1"="-1 0 -1"
+	if (isValue(left) && isArray(right)) {																		// indicesOf			VAA						2@(6 8 2 3 2)=(2 4)
+		try {
+			const leftString = toString(left);
+			const leftType = typeOf(left);
+			const indices = [];
+			const length = right.length;
 
-	// 		return (index === -1) ? undefined : index;
+			for (var i = 0; i < length; i += 1) {
+				const value = right[i];
+
+				if ((leftType === typeOf(value)) && (leftString === toString(value))) indices.push(i);
+			}
+
+			return indices;
+		} catch (_) {
+			return undefined;
+		}
+	}
+	if (isString(left) && isString(right)) {																	// indicesOf			SSA						"bc"@"abcbcd"=(1 3)
+		const indices = [];
+		const length = right.length;
+
+		for (var i = 0; i < length; i += 1) {
+			if (right.slice(i).startsWith(left)) indices.push(i);
+		}
+
+		return indices;
+	}
+	// if (isUnaryFunction(left) && isArray(right)) {																// findIndices			(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)
+	// 	try {
+	// 		const indices = [];
+	// 		const length = right.length;
+
+	// 		for (var i = 0; i < length; i += 1) {
+	// 			if (isTruthy(left(right[i]))) indices.push(i);
+	// 		}
+
+	// 		return indices;
 	// 	} catch (_) {
 	// 		return undefined;
 	// 	}
 	// }
-	// if (isString(left) && isString(right)) return (index => (index === -1) ? undefined : index)(right.indexOf(left)); // SSN indexOf "bc"@"abcd"
-	// if (isUnaryFunction(left) && isArray(right)) { // (VV)AN findIndex (%2.=0)?(1 2 3 4)
-	// 	const index = right.findIndex(left);
-
-	// 	return (index === -1) ? undefined : index;
-	// }
 
 	errorBinary({left, right, operator: "@"});
-}; atsign.types = [
-	// [["V", "V"], "A", "N"], // findIndex (%2.=0)?(1 2 3 4)
-	// [["V", "V"], "A", "A"], // map *2@(3 4 5)
-	// [["V", "V", "V"], "A", "A"], // mapBinary =@(2 3 4)
-	// [["V", "V"], "O", "O"], // mapObject *2@({"{a: 1, b: 2, c: 3}")
-	// ["A", "S", "S"], // stringReplace ("_" "-")@"1 0 _1"
-	// ["V", "A", "N"], // indexOf 2@(6 8 2 3)
-	// ["S", "S", "N"], // indexOf "bc"@"abcd"
-];
+};
 let asterisk = (left, right) => {
 	// if (Array.isArray(left) && isObject(right)) { // AOO pick ("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 	// 	return pick(left)(right);
