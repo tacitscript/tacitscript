@@ -511,7 +511,7 @@ const question = (left, right) => {
 		return (Math.random() * (right - left)) + left;
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
-	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);
+	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?((("a" 1) ("b" 2))\)=((("b" 2) )\)
 
 	errorBinary({left, right, operator: "?"});
 };
