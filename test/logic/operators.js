@@ -5,8 +5,12 @@ export default () => {
 	describe("bar (|)", () => {
 		/*ts
 			orU						>0|(%2.=0)
+			orB						<|=
+			orN						()|3
 		*/
 		it('or						(VV)(VV)(VV)			(>0|(%2.=0))(_2)=(()!)', () => expect(orU(-2)).eql(true));
+		it('or						(VVV)(VVV)(VVV)			2(<|=)2=(()!)', () => expect(orB(2, 2)).eql(true));
+		it('or						V??						()|3=3', () => expect(orN).eql(3));
 	});
 
 	describe("equal (=)", () => {

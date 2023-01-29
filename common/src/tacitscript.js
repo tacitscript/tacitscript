@@ -634,21 +634,19 @@ let bar = (left, right) => {
 
 			return isFalsey(leftResult) ? comma(x, right) : leftResult;
 		};
-		fn.types = types(left); // assume
 
 		return fn;
 	}
-	// if (isBinaryFunction(left) && isBinaryFunction(right)) { // orBinary <|=
-	// 	let fn = (x, y) => {
-	// 		const leftResult = left(x, y);
+	if (isBinaryFunction(left) && isBinaryFunction(right)) {													// or					(VVV)(VVV)(VVV)			2(<|=)2=(()!)
+		let fn = (x, y) => {
+			const leftResult = left(x, y);
 
-	// 		return isFalsey(leftResult) ? right(x, y) : leftResult;
-	// 	};
-	// 	fn.types = types(left); // assume
+			return isFalsey(leftResult) ? right(x, y) : leftResult;
+		};
 
-	// 	return fn;
-	// }
-	// if (isValue(left) && isValue(right)) return isFalsey(left) ? right : left;
+		return fn;
+	}
+	if (isValue(left)) return isFalsey(left) ? right : left;													// or					V??						()|3=3
 
 	errorBinary({left, right, operator: "|"});
 }; bar.linear = true;
