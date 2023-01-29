@@ -6,9 +6,11 @@ export default () => {
 		/*ts
 			powerN					2^3
 			generateA				;^3
+			scanA					(#.<5 #.+1)^( )
 		*/
 		it('power					NNN						2^3=8', () => expect(powerN).eql(8));
 		it('generate				(N?)NA					;^3=(0 1 2)', () => expect(generateA).eql([0, 1, 2]));
+		it('scan					AAA						(#.<5 #.+1)^( )=(1 2 3 4 5)', () => expect(scanA).eql([1, 2, 3, 4, 5]));
 	});
 
 	describe("percent (%)", () => {

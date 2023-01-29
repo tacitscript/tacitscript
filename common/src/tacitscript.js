@@ -677,7 +677,7 @@ let hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right);										// power				NNN						2^3=8
 	if (isUnaryFunction(left) && isNumber(right))																// generate				(N?)NA					;^3=(0 1 2)
 		return map((value, index) => left(index))(Array.from(Array(right)));
-	// if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
+	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right});				// scan					AAA						(#.<5 #.+1)^( )=(1 2 3 4 5)
 	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while
 	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});
 
