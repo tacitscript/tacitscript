@@ -771,29 +771,13 @@ const braceright = value => {
 
 	errorUnary({operator: "}", value});
 };
-let bang = value => {
-	// if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
-	// 	let fn = (x, y) => isFalsey(value(x, y));
-
-	// 	fn.types = value.types;
-
-	// 	return fn;
-	// }
-	// if (isUnaryFunction(value)) { // (VV)(VB) not !(<2)
-	// 	let fn = x => isFalsey(value(x));
-
-	// 	fn.types = value.types;
-
-	// 	return fn;
-	// }
-	if (isValue(value)) return isFalsey(value); // VB not !()
+const bang = value => {
+	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVB)				2(<!)3=()
+	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VB)				(>3)!4=()
+	if (isValue(value)) return isFalsey(value);																	// not					VB						5!=()
 
 	errorUnary({value, operator: "!"});
-}; bang.types = [
-	// ["V", "B"], // not !2
-	// [["V", "V", "V"], ["V", "V", "B"]], // not !<
-	// [["V", "V"], ["V", "B"]], // not !(<2)
-]; bang.supportsUndefined = true;
+}; bang.supportsUndefined = true;
 
 //==========================================================
 // main exports

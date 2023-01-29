@@ -2,6 +2,17 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("bang (!)", () => {
+		/*ts
+			notB					<!
+			notU					(>3)!
+			notT					5!
+		*/
+		it('not						(VVV)(VVB)				2(<!)3=()', () => expect(notB(2, 3)).eql(false));
+		it('not						(VV)(VB)				(>3)!4=()', () => expect(notU(4)).eql(false));
+		it('not						VB						5!=()', () => expect(notT).eql(false));
+	});
+
 	describe("braceright (})", () => {
 		/*ts
 			typeofS					3}
