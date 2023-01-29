@@ -710,33 +710,19 @@ const backtick = (left, right) => {
 //----------------------------------------------------------
 // Unary
 
-let tilde = value => { // not referenced directly when passed number (standard form exported)
-	// if (isBinaryFunction(value)) { // (XYZ)(YXZ) flip ~/
-	// 	let fn = (x, y) => value(y, x);
-
-	// 	fn.types = map(([left, right, output]) => [right, left, output])(types(value));
-
-	// 	return fn;
-	// }
-	// if (isArray(value)) return transpose(value); // AA transpose ~((1 2) (3 4))
+const tilde = value => {
+	if (isBinaryFunction(value)) return (x, y) => value(y, x);													// flip					(XYZ)(YXZ)				2(/~)6=3
+	if (isArray(value)) return transpose(value);																// transpose			AA						~((1 2) (3 4))=((1 3) (2 4))
 
 	errorUnary({operator: "~", value});
 }; 
-tilde.types = [
-	// ["A", "A"], // transpose ~((1 2) (3 4))
-	// [["X", "Y", "Z"], ["Y", "X", "Z"]], // flip ~/
-];
-let underscore = value => {
-	if (isNumber(value)) return -value; // NN negative _5
-	// if (isArray(value)) return value.slice(0).reverse(); // AA reverse _(1 2 3)
-	// if (isString(value)) return value.split("").reverse().join(""); // SS reverse _"Hello"
+const underscore = value => {
+	if (isNumber(value)) return -value;																			// negative				NN						3_
+	if (isArray(value)) return value.slice(0).reverse();														// reverse				AA						(1 2 3)_=(3 2 1)
+	if (isString(value)) return value.split("").reverse().join("");												// reverse				SS						"Hello"_="olleH"
 
 	errorUnary({operator: "_", value});
-}; underscore.types = [
-	["N", "N"], // negative _5
-	// ["A", "A"], // reverse _(1 2 3)
-	// ["S", "S"], // reverse _"Hello"
-];
+};
 let bracketleft = value => {
 	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
 	// if (isNumber(value)) return Math.floor(value); // NN floor [1.8

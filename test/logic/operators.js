@@ -2,6 +2,26 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("underscore (_)", () => {
+		/*ts
+			negativeN				3_
+			reverseA				(1 2 3)_
+			reverseS				"Hello"_
+		*/
+		it('negative				NN						3_', () => expect(negativeN).eql(-3));
+		it('reverse					AA						(1 2 3)_=(3 2 1)', () => expect(reverseA).eql([3, 2, 1]));
+		it('reverse					SS						"Hello"_="olleH"', () => expect(reverseS).eql("olleH"));
+	});
+
+	describe("tilde (~)", () => {
+		/*ts
+			flipB					/~
+			transposeA				~((1 2) (3 4))
+		*/
+		it('flip					(XYZ)(YXZ)				2(/~)6=3', () => expect(flipB(2, 6)).eql(3));
+		it('transpose				AA						~((1 2) (3 4))=((1 3) (2 4))', () => expect(transposeA).eql([[1, 3], [2, 4]]));
+	});
+
 	describe("backtick (\`)", () => {
 		/*ts
 			constantN				2`3
