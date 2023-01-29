@@ -2,6 +2,22 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("backtick (\`)", () => {
+		/*ts
+			constantN				2`3
+		*/
+		it('constant				XVX						2`3=2', () => expect(constantN).eql(2));
+	});
+
+	describe("ampersand (&)", () => {
+		/*ts
+			andU					>2&(<6)
+			andN					()!&3
+		*/
+		it('and						(VV)(VV)(VV)			>2&(<6)6=()', () => expect(andU(6)).eql(false));
+		it('and						V??						()!&3=3', () => expect(andN).eql(3));
+	});
+
 	describe("hat (^)", () => {
 		/*ts
 			powerN					2^3

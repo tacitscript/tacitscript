@@ -673,12 +673,12 @@ const percent = (left, right) => {
 
 	errorBinary({left, right, operator: "%"});
 };
-let hat = (left, right) => {
+const hat = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return Math.pow(left, right);										// power				NNN						2^3=8
 	if (isUnaryFunction(left) && isNumber(right))																// generate				(N?)NA					;^3=(0 1 2)
 		return map((value, index) => left(index))(Array.from(Array(right)));
 	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right});				// scan					AAA						(#.<5 #.+1)^( )=(1 2 3 4 5)
-	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while
+	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while 1,(<10^(*2))
 	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});
 
 	// 	result.types = right.types;
@@ -688,39 +688,24 @@ let hat = (left, right) => {
 	// if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )
 
 	errorBinary({left, right, operator: "^"});
-}; hat.types = [
-	// ["N", "N", "N"], // power 2^3
-	// [["N", "?"], "N", "A"], // generate ;^3
-	// ["A", "A", "A"], // scan (#.<5 #.+1)^( )
-	// [["A", "V"], "A", "L"], // lazyScan #.+1^( )
-	// [["X", "V"], ["X", "Y"], ["X", "Y"]], // while 1,(<10^(*2))
-];
-let ampersand = (left, right) => {
-	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // (VV)(VV)(VV) andPredicate >2&(<6)
-	// 	let result = value => {
-	// 		const leftValue = comma(value, left);
+};
+const ampersand = (left, right) => {
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {														// and					(VV)(VV)(VV)			>2&(<6)6=()
+		return value => {
+			const leftValue = comma(value, left);
 
-	// 		return isTruthy(leftValue) ? comma(value, right) : leftValue;
-	// 	}
-
-	// 	result.types = types(left); // TODO: edge cases abound here
-
-	// 	return result;
-	// }
-	// if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; // VVV andValue !()&()
+			return isTruthy(leftValue) ? comma(value, right) : leftValue;
+		}
+	}
+	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; 									// and					V??						()!&3=3
 
 	errorBinary({left, right, operator: "&"});
-}; ampersand.types = [
-	// ["V", "V", "V"], // andValue !()&()
-	// [["V", "V"], ["V", "V"], ["V", "V"]], // andPredicate >2&(<6)
-];
-let backtick = (left, right) => {
-	return left; // X?X constant 2`3
+}; ampersand.linear = true;
+const backtick = (left, right) => {
+	return left;																								// constant				XVX						2`3=2
 
 	errorBinary({left, right, operator: "`"});
-}; backtick.types = [
-	// ["X", "?", "X"], // constant 2`3
-]; backtick.supportsUndefined = true;
+}; backtick.supportsUndefined = true;
 
 //----------------------------------------------------------
 // Unary
