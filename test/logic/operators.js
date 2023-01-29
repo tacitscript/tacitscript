@@ -2,6 +2,17 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("bracketright (])", () => {
+		/*ts
+			lastN					(1 2 3)]
+			lastS					"abc"]
+			ceilingN				1.8_]
+		*/
+		it('last					A?						(1 2 3)]=3', () => expect(lastN).eql(3));
+		it('last					SS						"abc"]="c"', () => expect(lastS).eql("c"));
+		it('ceiling					NN						1.8_]=(1_)', () => expect(ceilingN).eql(-1));
+	});
+
 	describe("bracketleft ([)", () => {
 		/*ts
 			firstN					(1 2 3)[
