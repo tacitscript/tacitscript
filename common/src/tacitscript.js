@@ -674,8 +674,9 @@ const percent = (left, right) => {
 	errorBinary({left, right, operator: "%"});
 };
 let hat = (left, right) => {
-	// if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
-	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3
+	if (isNumber(left) && isNumber(right)) return Math.pow(left, right);										// power				NNN						2^3=8
+	if (isUnaryFunction(left) && isNumber(right))																// generate				(N?)NA					;^3=(0 1 2)
+		return map((value, index) => left(index))(Array.from(Array(right)));
 	// if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right}); // AAA scan (#.<5 #.+1)^( )
 	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while
 	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});

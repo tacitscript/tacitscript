@@ -2,6 +2,15 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("hat (^)", () => {
+		/*ts
+			powerN					2^3
+			generateA				;^3
+		*/
+		it('power					NNN						2^3=8', () => expect(powerN).eql(8));
+		it('generate				(N?)NA					;^3=(0 1 2)', () => expect(generateA).eql([0, 1, 2]));
+	});
+
 	describe("percent (%)", () => {
 		/*ts
 			remainderN				7%2
