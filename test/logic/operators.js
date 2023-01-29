@@ -2,6 +2,15 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("braceleft ({)", () => {
+		/*ts
+			unnestA					(1 (2 3)){
+			evalU					"Math.sqrt"{
+		*/
+		it('unnest					AA						(1 (2 3)){=(1 2 3)', () => expect(unnestA).eql([1, 2, 3]));
+		it('eval					S?						"Math.sqrt"{4=2', () => expect(evalU(4)).eql(2));
+	});
+
 	describe("backslash (\\)", () => {
 		/*ts
 			fromPairsD				(("a" 1) ("b" 2))\
