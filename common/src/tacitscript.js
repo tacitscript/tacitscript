@@ -653,8 +653,9 @@ let bar = (left, right) => {
 bar.supportsUndefined = true;
 let percent = (left, right) => {
 	if (isNumber(left)) {
-		if (isNumber(right)) return (right === 0) ? undefined : (left % right); // NNN remainder 7%2
-	// 	else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; // NAA NSA split 2%(1 2 3 4 5) 2%"abcde"
+		if (isNumber(right)) return (right === 0) ? undefined : (left % right);									// remainder			NNN						7%2=1
+		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; 			// split				NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))
+																												// split				NSA						2%"abcde"=("ab" "cde")
 	// 	else if (isStream(right)) return streamTake({n: left, generator: right});
 	}
 	// else if (isArray(left)) {

@@ -2,6 +2,17 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("percent (%)", () => {
+		/*ts
+			remainderN				7%2
+			splitA					2%(1 2 3 4 5)
+			splitaA					2%"abcde"
+		*/
+		it('remainder				NNN						7%2=1', () => expect(remainderN).eql(1));
+		it('split					NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitA).eql([[1, 2], [3, 4, 5]]));
+		it('split					NSA						2%"abcde"=("ab" "cde")', () => expect(splitaA).eql(["ab", "cde"]));
+	});
+
 	describe("bar (|)", () => {
 		/*ts
 			orU						>0|(%2.=0)
