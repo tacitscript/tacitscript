@@ -2,6 +2,13 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("braceright (})", () => {
+		/*ts
+			typeofS					3}
+		*/
+		it('typeof					?S						3}="N"', () => expect(typeofS).eql("N"));
+	});
+
 	describe("semicolon (;)", () => {
 		/*ts
 			identityN				1;

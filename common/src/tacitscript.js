@@ -762,17 +762,15 @@ const braceleft = value => {
 	errorUnary({operator: "{", value});
 };
 const semicolon = value => {
-	return value;																								// identity				XX						;1=1
+	return value;																								// identity				XX						1;=1
 
 	errorUnary({operator: ";", value});
 };
-let braceright = value => {
-	// return typeOf(value); // ?S typeof }3
+const braceright = value => {
+	return typeOf(value);																						// typeof				?S						3}="N"
 
 	errorUnary({operator: "}", value});
-}; braceright.types = [
-	// ["?", "S"], // typeof }3
-];
+};
 let bang = value => {
 	// if (isBinaryFunction(value)) { // (VVV)(VVB) not !< 
 	// 	let fn = (x, y) => isFalsey(value(x, y));
