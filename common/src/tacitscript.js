@@ -756,13 +756,13 @@ const braceleft = value => {
 	if (isArray(value))
 		return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value);				// unnest				AA						(1 (2 3)){=(1 2 3)
 	// function won't be output on literal evaluation - expanded in parser
-	if (isString(value)) return eval(ts2es6(value));															// eval					S?						"Math.sqrt(2)"{
+	if (isString(value)) return eval(ts2es6(value));															// eval					S?						"Math.sqrt"{4=2
 	// if (isStream(value)) return [...value()]; // ["L", "A"], // spread {(3%naturalNumbers)
 
 	errorUnary({operator: "{", value});
 };
-let semicolon = value => {
-	return value; // XX identiy ;1
+const semicolon = value => {
+	return value;																								// identity				XX						;1=1
 
 	errorUnary({operator: ";", value});
 };

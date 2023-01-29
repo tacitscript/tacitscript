@@ -2,6 +2,13 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("semicolon (;)", () => {
+		/*ts
+			identityN				1;
+		*/
+		it('identity				XX						1;=1', () => expect(identityN).eql(1));
+	});
+
 	describe("braceleft ({)", () => {
 		/*ts
 			unnestA					(1 (2 3)){
