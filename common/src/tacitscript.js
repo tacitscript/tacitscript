@@ -717,6 +717,7 @@ const tilde = value => {
 	errorUnary({operator: "~", value});
 }; 
 const underscore = value => {
+	// function won't be output on negative literals
 	if (isNumber(value)) return -value;																			// negative				NN						3_
 	if (isArray(value)) return value.slice(0).reverse();														// reverse				AA						(1 2 3)_=(3 2 1)
 	if (isString(value)) return value.split("").reverse().join("");												// reverse				SS						"Hello"_="olleH"
@@ -737,18 +738,14 @@ const bracketright = value => {
 
 	errorUnary({operator: "]", value});
 };
-let hash = value => {
-	// if (isObject(value)) return Object.keys(value).length; // ON keyLength #({"{a: 1}")
-	if (isVector(value)) return value.length; // SN AN stringLength arrayLength #"abcd" #(4 5 6)
-	// if (isNumber(value)) return Math.abs(value); // NN modulus #(_1.5)
+const hash = value => {
+	if (isVector(value)) return value.length;																	// length				AN						(4 5 6)#=3
+																												// length				SN						"abcd"#=4
+	if (isObject(value)) return Object.keys(value).length;														// length				ON						(("a" 1) )\#=1
+	if (isNumber(value)) return Math.abs(value);																// modulus				NN						1.5_#=1.5
 
 	errorUnary({value, operator: "#"});
-}; hash.types = [
-	// ["A", "N"], // arrayLength #(4 5 6)
-	// ["S", "N"], // stringLength #"abcd"
-	// ["O", "N"], // keyLength #({"{a: 1}")
-	// ["N", "N"], // modulus #(_1.5)
-];
+};
 let backslash = value => {
 	if (isArray(value)) return Object.fromEntries(value); // AO fromPairs \(("a" 1) ("b" 2))
 	// if (isObject(value)) return Object.entries(value); // OA toPairs \({"{a: 1, b: 2}")
