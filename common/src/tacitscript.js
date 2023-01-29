@@ -651,43 +651,28 @@ let bar = (left, right) => {
 	errorBinary({left, right, operator: "|"});
 }; bar.linear = true;
 bar.supportsUndefined = true;
-let percent = (left, right) => {
+const percent = (left, right) => {
 	if (isNumber(left)) {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right);									// remainder			NNN						7%2=1
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; 			// split				NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))
 																												// split				NSA						2%"abcde"=("ab" "cde")
 	// 	else if (isStream(right)) return streamTake({n: left, generator: right});
 	}
-	// else if (isArray(left)) {
-	// 	if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []}); // AAA chunk (1 2 0)%(1 2 3 4 5)
-	// 	else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); // ASA chunk chunk (1 2 0)%"abcde"
-	// }
-	// else if (isString(left) && isString(right)) {
-	// 	return right.split(left); /// SSA chunkWithDelimiter ", "%"1, 2, 3, 4"
-	// }
-	// else if (isUnaryFunction(left)) {
-	// 	if (isArray(right)) return chunkWhenPredicate({when: left, vector: right, newVector: []}); // (VB)AA chunkWhenPredicate =2%(1 2 3 2 1)
-	// 	else if (isString(right)) return chunkWhenPredicate({when: left, vector: right.split(""), newVector: ""}); // (SB)SA chunkWhenPredicate ="b"%"abcbe"
-	// }
-	// else if (isBinaryFunction(left)) {
-	// 	if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []}); // (VVB)AA chunkWhenComparator <%(1 2 3 2 1)
-	// 	else if (isString(right)) return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""}); // (SSB)SA chunkWhenComparator <%"abcba"
-	// }
+	else if (isArray(left)) {
+		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []});							// chunk				AAA						(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))
+		else if (isString(right)) return chunk({sizes: left, vector: right.split(""), newVector: ""}); 			// chunk				ASA						(1 2 0)%"abcde"=("a" "bc" "de")
+	}
+	else if (isString(left) && isString(right)) {
+		return right.split(left);																				// chunkWithDelimiter	SSA						", "%"1, 2, 3, 4"=("1" "2" "3" "4")
+	}
+	else if (isBinaryFunction(left)) {
+		if (isArray(right)) return chunkWhenComparator({when: left, vector: right, newVector: []});				// chunkWhenComparator	(VVV)AA					<%(1 2 3 2 1)=((1 ) (2 ) (3 2 1))
+		else if (isString(right))																				// chunkWhenComparator	(SSV)SA					<%"abcba"=("a" "b" "cba")
+			return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""});
+	}
 
 	errorBinary({left, right, operator: "%"});
-}; percent.types = [
-	// ["N", "N", "N"], // remainder 7%2
-	// ["N", "A", "A"], // split 2%(1 2 3 4 5)
-	// ["N", "S", "A"], // split 2%"abcde"
-	// ["A", "A", "A"], // chunk (1 2 0)%(1 2 3 4 5)
-	// ["A", "S", "A"], // chunk (1 2 0)%"abcde"
-	// ["S", "S", "A"], // chunkWithDelimiter ", "%"1, 2, 3, 4"
-	// [["V", "B"], "A", "A"], // chunkWhenPredicate =2%(1 2 3 2 1)
-	// [["S", "B"], "S", "A"], // chunkWhenPredicate ="b"%"abcbe"
-	// [["V", "V", "B"], "A", "A"], // chunkWhenComparator <%(1 2 3 2 1)
-	// [["S", "S", "B"], "S", "A"], // chunkWhenComparator <%"abcba"
-	// ["N", "L", "L"], // streamTake 3%naturalNumbers
-];
+};
 let hat = (left, right) => {
 	// if (isNumber(left) && isNumber(right)) return Math.pow(left, right); // NNN power 2^3
 	if (isUnaryFunction(left) && isNumber(right)) return map((value, index) => left(index))(Array.from(Array(right))); // (N?)NA generate ;^3

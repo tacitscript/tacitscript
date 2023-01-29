@@ -7,10 +7,20 @@ export default () => {
 			remainderN				7%2
 			splitA					2%(1 2 3 4 5)
 			splitaA					2%"abcde"
+			chunkA					(1 2 0)%(1 2 3 4 5)
+			chunkaA					(1 2 0)%"abcde"
+			chunkWithDelimiterA		", "%"1, 2, 3, 4"
+			chunkWhenComparatorA	<%(1 2 3 2 1)
+			chunkWhenComparatoraA	<%"abcba"
 		*/
 		it('remainder				NNN						7%2=1', () => expect(remainderN).eql(1));
 		it('split					NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitA).eql([[1, 2], [3, 4, 5]]));
 		it('split					NSA						2%"abcde"=("ab" "cde")', () => expect(splitaA).eql(["ab", "cde"]));
+		it('chunk					AAA						(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))', () => expect(chunkA).eql([[1], [2, 3], [4, 5]]));
+		it('chunk					ASA						(1 2 0)%"abcde"=("a" "bc" "de")', () => expect(chunkaA).eql(["a", "bc", "de"]));
+		it('chunkWithDelimiter		SSA						", "%"1, 2, 3, 4"=("1" "2" "3" "4")', () => expect(chunkWithDelimiterA).eql(["1", "2", "3", "4"]));
+		it('chunkWhenComparator		(VVV)AA					<%(1 2 3 2 1)=((1 ) (2 ) (3 2 1))', () => expect(chunkWhenComparatorA).eql([[1], [2], [3, 2, 1]]));
+		it('chunkWhenComparator		(SSV)SA					<%"abcba"=("a" "b" "cba")', () => expect(chunkWhenComparatoraA).eql(["a", "b", "cba"]));
 	});
 
 	describe("bar (|)", () => {
