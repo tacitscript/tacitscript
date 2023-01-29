@@ -723,16 +723,13 @@ const underscore = value => {
 
 	errorUnary({operator: "_", value});
 };
-let bracketleft = value => {
-	if (isVector(value)) return value[0]; // A? SS first firstInString [(1 2 3) ["abc"
-	// if (isNumber(value)) return Math.floor(value); // NN floor [1.8
+const bracketleft = value => {
+	if (isVector(value)) return value[0];																		// first				A?						(1 2 3)[=1
+																												// first				SS						"abc"[="a"
+	if (isNumber(value)) return Math.floor(value);																// floor				NN						1.8_[=(2_)
 
 	errorUnary({operator: "[", value});
-}; bracketleft.types = [
-	// ["A", "?"], // first [(1 2 3)
-	// ["S", "S"], // firstInString ["abc"
-	// ["N", "N"], // floor [1.8
-];
+};
 let bracketright = value => {
 	// if (isVector(value)) return value[value.length - 1]; // A? SS last lastInString ](1 2 3) ]"abc"
 	// if (isNumber(value)) return Math.ceil(value); // NN ceiling ]1.2

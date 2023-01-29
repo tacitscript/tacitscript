@@ -2,6 +2,17 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("bracketleft ([)", () => {
+		/*ts
+			firstN					(1 2 3)[
+			firstS					"abc"[
+			floorN					1.2_[
+		*/
+		it('first					A?						(1 2 3)[=1', () => expect(firstN).eql(1));
+		it('first					SS						"abc"[="a"', () => expect(firstS).eql("a"));
+		it('floor					NN						1.2_[=(2_)', () => expect(floorN).eql(-2));
+	});
+
 	describe("underscore (_)", () => {
 		/*ts
 			negativeN				3_
