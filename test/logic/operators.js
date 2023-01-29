@@ -2,6 +2,15 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("backslash (\\)", () => {
+		/*ts
+			fromPairsD				(("a" 1) ("b" 2))\
+			toPairsA				(("a" 1) ("b" 2))\\
+		*/
+		it('fromPairs				AD						(("a" 1)  ("b" 2))\\', () => expect(fromPairsD).eql({a: 1, b: 2}));
+		it('toPairs					DA						(("a" 1)  ("b" 2))\\\\=(("a" 1)  ("b" 2))', () => expect(toPairsA).eql([["a", 1], ["b", 2]]));
+	});
+
 	describe("hash (#)", () => {
 		/*ts
 			lengthN					(4 5 6)#
