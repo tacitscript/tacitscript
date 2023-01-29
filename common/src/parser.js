@@ -167,15 +167,10 @@ const deprioritizeMedialDots = function(symbols) {
 	return current.length ? segments.concat([current]) : segments;
 };
 const deprioritizeDots = function(symbols) {
-	if (symbols.length === 1) return symbols;
-	if (symbols.length < 3) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
-
-	const firstNonJoinIndex = symbols.findIndex(symbol => ![".", ","].includes(symbol));
-	const lastNonJoinIndex = symbols.findLastIndex(symbol => ![".", ","].includes(symbol));
-
-	if ((firstNonJoinIndex > -1) && (lastNonJoinIndex > -1) && (firstNonJoinIndex < lastNonJoinIndex)) return symbols.slice(0, firstNonJoinIndex).concat(deprioritizeMedialDots(symbols.slice(firstNonJoinIndex, lastNonJoinIndex + 1)), symbols.slice(lastNonJoinIndex + 1));
-	if ((firstNonJoinIndex > -1) && [".", ","].includes(symbols[0])) return symbols.slice(0, firstNonJoinIndex).concat(deprioritizeMedialDots(symbols.slice(firstNonJoinIndex)));
-	if ((lastNonJoinIndex > -1) && [".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, lastNonJoinIndex + 1)).concat([symbols.slice(lastNonJoinIndex + 1)]);
+	if (symbols.length < 2) return [map(symbol => Array.isArray(symbol) ? deprioritizeDots(symbol) : symbol)(symbols)];
+	if ([".", ","].includes(symbols[0]) && [".", ","].includes(symbols[symbols.length - 1])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1, -1)), [symbols[symbols.length - 1]]);
+	if ([".", ","].includes(symbols[0])) return [symbols[0]].concat(deprioritizeMedialDots(symbols.slice(1)));
+	if ([".", ","].includes(symbols[symbols.length - 1])) return deprioritizeMedialDots(symbols.slice(0, -1)).concat([symbols[symbols.length - 1]]);
 
 	return [deprioritizeMedialDots(symbols)];
 };
