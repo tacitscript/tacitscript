@@ -2,6 +2,12 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("factRec", () => {
+		/*ts
+			factRec			((=0 1`) .(; -1.factRec).*$)?
+		*/
+		it("4factRec=24", () => expect(factRec(4)).eql(24));
+	});
 
 	describe("1.3 sumOfTwoLarger ;<.1%.].^2@.+$", () => {
 		/*ts
