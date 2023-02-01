@@ -4,52 +4,52 @@ import ts from "tacitscript";
 export default () => {
 	describe("bang (!)", () => {
 		/*ts
-			notB					<!
-			notU					(>3)!
-			notT					5!
+			notB					!<
+			notU					!(>3)
+			notT					!5
 		*/
-		it('not						(VVV)(VVB)				2(<!)3=()', () => expect(notB(2, 3)).eql(false));
-		it('not						(VV)(VB)				(>3)!4=()', () => expect(notU(4)).eql(false));
-		it('not						VB						5!=()', () => expect(notT).eql(false));
+		it('not						(VVV)(VVB)				2(!<)3=()', () => expect(notB(2, 3)).eql(false));
+		it('not						(VV)(VB)				!(>3)4=()', () => expect(notU(4)).eql(false));
+		it('not						VB						!5=()', () => expect(notT).eql(false));
 	});
 
 	describe("braceright (})", () => {
 		/*ts
-			typeofS					3}
+			typeofS					}3
 		*/
-		it('typeof					?S						3}="N"', () => expect(typeofS).eql("N"));
+		it('typeof					?S						}3="N"', () => expect(typeofS).eql("N"));
 	});
 
 	describe("semicolon (;)", () => {
 		/*ts
-			identityN				1;
+			identityN				;1
 		*/
-		it('identity				XX						1;=1', () => expect(identityN).eql(1));
+		it('identity				XX						;1=1', () => expect(identityN).eql(1));
 	});
 
 	describe("braceleft ({)", () => {
 		/*ts
-			unnestA					(1 (2 3)){
-			evalU					"Math.sqrt"{
+			unnestA					{(1 (2 3))
+			evalU					{"Math.sqrt"
 		*/
-		it('unnest					AA						(1 (2 3)){=(1 2 3)', () => expect(unnestA).eql([1, 2, 3]));
-		it('eval					S?						"Math.sqrt"{4=2', () => expect(evalU(4)).eql(2));
+		it('unnest					AA						{(1 (2 3))=(1 2 3)', () => expect(unnestA).eql([1, 2, 3]));
+		it('eval					S?						{"Math.sqrt"4=2', () => expect(evalU(4)).eql(2));
 	});
 
 	describe("backslash (\\)", () => {
 		/*ts
-			fromPairsD				(("a" 1) ("b" 2))\
-			toPairsA				(("a" 1) ("b" 2))\\
+			fromPairsD				\(("a" 1) ("b" 2))
+			toPairsA				\(\(("a" 1) ("b" 2)))
 		*/
-		it('fromPairs				AD						(("a" 1)  ("b" 2))\\', () => expect(fromPairsD).eql({a: 1, b: 2}));
-		it('toPairs					DA						(("a" 1)  ("b" 2))\\\\=(("a" 1)  ("b" 2))', () => expect(toPairsA).eql([["a", 1], ["b", 2]]));
+		it('fromPairs				AD						\\(("a" 1)  ("b" 2))', () => expect(fromPairsD).eql({a: 1, b: 2}));
+		it('toPairs					DA						\\(\\(("a" 1)  ("b" 2)))=(("a" 1)  ("b" 2))', () => expect(toPairsA).eql([["a", 1], ["b", 2]]));
 	});
 
 	describe("hash (#)", () => {
 		/*ts
 			lengthN					(4 5 6)#
 			lengthaN				"abcd"#
-			lengthbN				(("a" 1) )\#
+			lengthbN				\(("a" 1) )#
 			modulusN				1.5_#
 		*/
 		it('length					AN						(4 5 6)#=3', () => expect(lengthN).eql(3));

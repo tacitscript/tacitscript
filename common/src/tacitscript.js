@@ -748,34 +748,34 @@ const hash = value => {
 	errorUnary({value, operator: "#"});
 };
 const backslash = value => {
-	if (isArray(value)) return Object.fromEntries(value);														// fromPairs			AD						(("a" 1)  ("b" 2))\
-	if (isObject(value)) return Object.entries(value);															// toPairs				DA						(("a" 1)  ("b" 2))\\=(("a" 1)  ("b" 2))
+	if (isArray(value)) return Object.fromEntries(value);														// fromPairs			AD						\(("a" 1)  ("b" 2))
+	if (isObject(value)) return Object.entries(value);															// toPairs				DA						\(\(("a" 1)  ("b" 2))=(("a" 1)  ("b" 2)))
 
 	errorUnary({value, operator: "\\"});
 };
 const braceleft = value => {
 	if (isArray(value))
-		return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value);				// unnest				AA						(1 (2 3)){=(1 2 3)
+		return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value);				// unnest				AA						{(1 (2 3))=(1 2 3)
 	// function won't be output on literal evaluation - expanded in parser
-	if (isString(value)) return eval(ts2es6(value));															// eval					S?						"Math.sqrt"{4=2
+	if (isString(value)) return eval(ts2es6(value));															// eval					S?						{"Math.sqrt"4=2
 	// if (isStream(value)) return [...value()]; // ["L", "A"], // spread {(3%naturalNumbers)
 
 	errorUnary({operator: "{", value});
 };
 const semicolon = value => {
-	return value;																								// identity				XX						1;=1
+	return value;																								// identity				XX						;1=1
 
 	errorUnary({operator: ";", value});
 };
 const braceright = value => {
-	return typeOf(value);																						// typeof				?S						3}="N"
+	return typeOf(value);																						// typeof				?S						}3="N"
 
 	errorUnary({operator: "}", value});
 };
 const bang = value => {
-	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVB)				2(<!)3=()
-	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VB)				(>3)!4=()
-	if (isValue(value)) return isFalsey(value);																	// not					VB						5!=()
+	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVB)				2(!<)3=()
+	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VB)				!(>3)4=()
+	if (isValue(value)) return isFalsey(value);																	// not					VB						!5=()
 
 	errorUnary({value, operator: "!"});
 }; bang.supportsUndefined = true;
