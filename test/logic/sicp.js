@@ -2,6 +2,30 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe('complex numbers - revealing module :.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$)) "Unknown method"`)?).(.$)', () => {
+		/*ts
+			doubleIntake	:.: (: ).[.(;.)
+			// complexA		:.(: ).[.(;.).:(((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: ).[.(;.).:(~.+$@.complexA$).(.$)) "Unknown method"`)?).(.$)
+			// solutionA		"mag",3complexA4
+			// solutionB		3complexA4"add"(5 6)"real"
+			// pair			.(: ).[
+			// complex			:.pair.(;.).:((
+			// 					(].="real" [.[)
+			// 					(].="imag" [.])
+			// 					(].="mag" [.^2@.+$.^0.5)
+			// 					(].="add" [.(: ).[.(;.("real", "imag",).).:(~.+$@.complex$).(.$))
+			// 					0/0`
+			// 				)?).(.$)
+			// solutionC		2complex1"add"(1complex3)"mag"
+		*/
+		// it(`"invalid",1complex2=0/0`, () => expect(complex(1, 2)("invalid")).eql(undefined));
+		// it(`2complex1"add"(1complex3)"mag"=5`, () => expect(solutionC).eql(5));
+		// it(`3complexA4"add"(5 6)"real"=8`, () => expect(solutionB).eql(8));
+		// it(`"real",3complex4=3`, () => expect(complexA(3, 4)("real")).eql(3));
+		// it(`"mag",3complex4=5`, () => expect(solutionA).eql(5));
+		it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
+	});
+
 	describe("2.59 unionSet +.removeDuplicates", () => {
 		/*ts
 			removeDuplicates			;/.\.(].[)@
