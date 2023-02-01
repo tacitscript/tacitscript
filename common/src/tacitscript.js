@@ -726,16 +726,16 @@ const underscore = value => {
 	errorUnary({operator: "_", value});
 };
 const bracketleft = value => {
-	if (isVector(value)) return value[0];																		// first				A?						(1 2 3)[=1
-																												// first				SS						"abc"[="a"
-	if (isNumber(value)) return Math.floor(value);																// floor				NN						1.2_[=(2_)
+	if (isVector(value)) return value[0];																		// first				A?						[(1 2 3)=1
+																												// first				SS						["abc"="a"
+	if (isNumber(value)) return Math.floor(value);																// floor				NN						[(_1.2)=(_2)
 
 	errorUnary({operator: "[", value});
 };
 const bracketright = value => {
-	if (isVector(value)) return value[value.length - 1];														// last					A?						(1 2 3)]=3
-																												// first				SS						"abc"]="c"
-	if (isNumber(value)) return Math.ceil(value);																// ceiling				NN						1.8_]=(1_)
+	if (isVector(value)) return value[value.length - 1];														// last					A?						](1 2 3)=3
+																												// first				SS						]"abc"="c"
+	if (isNumber(value)) return Math.ceil(value);																// ceiling				NN						](_1.8)=(_1)
 
 	errorUnary({operator: "]", value});
 };

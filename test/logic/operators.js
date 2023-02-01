@@ -60,24 +60,24 @@ export default () => {
 
 	describe("bracketright (])", () => {
 		/*ts
-			lastN					(1 2 3)]
-			lastS					"abc"]
-			ceilingN				1.8_]
+			lastN					](1 2 3)
+			lastS					]"abc"
+			ceilingN				](_1.8)
 		*/
-		it('last					A?						(1 2 3)]=3', () => expect(lastN).eql(3));
-		it('last					SS						"abc"]="c"', () => expect(lastS).eql("c"));
-		it('ceiling					NN						1.8_]=(1_)', () => expect(ceilingN).eql(-1));
+		it('last					A?						](1 2 3)=3', () => expect(lastN).eql(3));
+		it('last					SS						]"abc"="c"', () => expect(lastS).eql("c"));
+		it('ceiling					NN						](_1.8)=(_1)', () => expect(ceilingN).eql(-1));
 	});
 
 	describe("bracketleft ([)", () => {
 		/*ts
-			firstN					(1 2 3)[
-			firstS					"abc"[
-			floorN					1.2_[
+			firstN					[(1 2 3)
+			firstS					["abc"
+			floorN					[(_1.2)
 		*/
-		it('first					A?						(1 2 3)[=1', () => expect(firstN).eql(1));
-		it('first					SS						"abc"[="a"', () => expect(firstS).eql("a"));
-		it('floor					NN						1.2_[=(2_)', () => expect(floorN).eql(-2));
+		it('first					A?						[(1 2 3)=1', () => expect(firstN).eql(1));
+		it('first					SS						["abc"="a"', () => expect(firstS).eql("a"));
+		it('floor					NN						[(_1.2)=(_2)', () => expect(floorN).eql(-2));
 	});
 
 	describe("underscore (_)", () => {
