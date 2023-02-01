@@ -187,7 +187,7 @@ const apply = (left, right) => {
 
 			return result;
 		}
-		if (arityRight === 1) return right(left);
+		// if (arityRight === 1) return right(left);
 	}
 	if (arityLeft === 2) return rightApply(left, right);
 	if (arityLeft === 1) return left(right);
