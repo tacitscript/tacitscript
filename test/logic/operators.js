@@ -82,21 +82,21 @@ export default () => {
 
 	describe("underscore (_)", () => {
 		/*ts
-			negativeN				3_
-			reverseA				(1 2 3)_
-			reverseS				"Hello"_
+			negativeN				_3
+			reverseA				_(1 2 3)
+			reverseS				_"Hello"
 		*/
-		it('negative				NN						3_', () => expect(negativeN).eql(-3));
-		it('reverse					AA						(1 2 3)_=(3 2 1)', () => expect(reverseA).eql([3, 2, 1]));
-		it('reverse					SS						"Hello"_="olleH"', () => expect(reverseS).eql("olleH"));
+		it('negative				NN						_3', () => expect(negativeN).eql(-3));
+		it('reverse					AA						_(1 2 3)=(3 2 1)', () => expect(reverseA).eql([3, 2, 1]));
+		it('reverse					SS						_"Hello"="olleH"', () => expect(reverseS).eql("olleH"));
 	});
 
 	describe("tilde (~)", () => {
 		/*ts
-			flipB					/~
+			flipB					~/
 			transposeA				~((1 2) (3 4))
 		*/
-		it('flip					(XYZ)(YXZ)				2(/~)6=3', () => expect(flipB(2, 6)).eql(3));
+		it('flip					(XYZ)(YXZ)				2(~/)6=3', () => expect(flipB(2, 6)).eql(3));
 		it('transpose				AA						~((1 2) (3 4))=((1 3) (2 4))', () => expect(transposeA).eql([[1, 3], [2, 4]]));
 	});
 

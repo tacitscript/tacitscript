@@ -712,16 +712,16 @@ const backtick = (left, right) => {
 // Unary
 
 const tilde = value => {
-	if (isBinaryFunction(value)) return (x, y) => value(y, x);													// flip					(XYZ)(YXZ)				2(/~)6=3
+	if (isBinaryFunction(value)) return (x, y) => value(y, x);													// flip					(XYZ)(YXZ)				2(~/)6=3
 	if (isArray(value)) return transpose(value);																// transpose			AA						~((1 2) (3 4))=((1 3) (2 4))
 
 	errorUnary({operator: "~", value});
 }; 
 const underscore = value => {
 	// function won't be output on negative literals - expanded in parser
-	if (isNumber(value)) return -value;																			// negative				NN						3_
-	if (isArray(value)) return value.slice(0).reverse();														// reverse				AA						(1 2 3)_=(3 2 1)
-	if (isString(value)) return value.split("").reverse().join("");												// reverse				SS						"Hello"_="olleH"
+	if (isNumber(value)) return -value;																			// negative				NN						_3
+	if (isArray(value)) return value.slice(0).reverse();														// reverse				AA						_(1 2 3)=(3 2 1)
+	if (isString(value)) return value.split("").reverse().join("");												// reverse				SS						_"Hello"="olleH"
 
 	errorUnary({operator: "_", value});
 };
