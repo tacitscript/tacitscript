@@ -2,7 +2,66 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
-	describe("factRec", () => {
+	describe("fastExp ((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp.(; ;).*$) .([ ,(; -1).fastExp).*$)?", () => {
+		/*ts
+			square		.(; ;).*$
+			isEven		((%2.=0 !()`) ()`)?
+			ifNoNOne	(].=0 1`)
+			fastExp		(ifNoNOne (].isEven ,(; /2).fastExp.square) .([ ,(; -1).fastExp).*$)?
+		*/
+		it("fastExp(2 7)=128", () => expect(fastExp([2, 7])).eql(128));
+	});
+
+	describe("expGen :,(` ;).^$.*$", () => {
+		/*ts
+			expGen		:,(` ;).^$.*$
+		*/
+		it("3expGen2=9", () => expect(expGen(3, 2)).eql(9));
+	});
+
+	describe("expRec ((].=0 1`) .([ ,(; -1).expRec).*$)?", () => {
+		/*ts
+			expRec		((].=0 1`) .([ ,(; -1).expRec).*$)?
+		*/
+		it("expRec(2 3)=8", () => expect(expRec([2, 3])).eql(8));
+	});
+
+	describe("1.12 pascal .(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$", () => {
+		/*ts
+			pascal		.(.(>,(#.) (].((0 )+ +(0 )).~.+$@)`) ((1 ) )`).^$
+		*/
+		it("pascal5=((1 ) (1 1) (1 2 1) (1 3 3 1) (1 4 6 4 1))", () => expect(pascal(5)).eql([[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]));
+	});
+
+	describe("1.11 f ((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?", () => {
+		/*ts
+			f	((<3 ;) .(-1.f -2.f.*2 -3.f.*3).+$)?
+		*/
+		it("4f0=11", () => expect(f(4)).eql(11));
+	});
+
+	describe("fibGen .(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]", () => {
+		/*ts
+			fibGen		.(.(>,(#.) (_2%.].+$)`) (1 1)`).^$.]
+		*/
+		it("fibGen6=8", () => expect(fibGen(6)).eql(8));
+	});
+
+	describe("fibRec ((=0 0`) (=1 1`) .(-1 -2).fibRec@.+$)?", () => {
+		/*ts
+			fibRec		((=0 0`) (=1 1`) .(-1 -2).fibRec@.+$)?
+		*/
+		it("fibRec4=3", () => expect(fibRec(4)).eql(3));
+	});
+
+	describe("factGen +1^.*$", () => {
+		/*ts
+			factGen	+1^.*$
+		*/
+		it("factGen4=24", () => expect(factGen(4)).eql(24));
+	});
+
+	describe("factRec ((=0 1`) .(; -1.factRec).*$)?", () => {
 		/*ts
 			factRec			((=0 1`) .(; -1.factRec).*$)?
 		*/
