@@ -180,7 +180,7 @@ const apply = (left, right) => {
 	const arityLeft = arity(left);
 	const arityRight = arity(right);
 
-	if (!left.noLeftApply) {
+	if (!left || !left.noLeftApply) {
 		if (arityRight === 2) {
 			const result = leftApply(left, right);
 			if (right.linear) result.noLeftApply = true;
@@ -618,7 +618,7 @@ const apostrophe = (left, right) => {
 	errorBinary({left, right, operator: "'"});
 };
 const equal = (left, right) => {
-	if (!isValue(left) || !isValue(right)) error({left, right, operator: "="});
+	if (!isValue(left) || !isValue(right)) errorBinary({left, right, operator: "="});
 
 	try {																										// equals				VVT						2=4=()
 		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right));
