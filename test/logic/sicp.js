@@ -2,6 +2,55 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("compose .~", () => {
+		/*ts
+			compose		.~
+		*/
+		it("6,^2compose+1=49", () => expect(compose(x => x * x, x => x + 1)(6)).eql(49));
+	});
+
+	describe("repeated :,(` ;).^$.(.$)", () => {
+		/*ts
+			repeated		:,(` ;).^$.(.$)
+		*/
+		it("3,+2repeated4=11", () => expect(repeated(x => x + 2, 4)(3)).eql(11));
+	});
+
+	describe("twice :,(`,^2.(.$) ;)._.(,$)", () => {
+		/*ts
+			twice		:,(`,^2.(.$) ;)._.(,$)
+		*/
+		it("+1twice2=4", () => expect(twice(x => x + 1, 2)).eql(4));
+	});
+
+	describe("piSum ;^.(*2.+1)@.(2 )%.(*$.8/)@.+$", () => {
+		/*ts
+			piSum		;^.(*2.+1)@.(2 )%.(*$.8/)@.+$
+		*/
+		it("piSum10000=3.1414926535900367", () => expect(piSum(10000)).eql(3.1414926535900367));
+	});
+
+	describe("sumCubes :.([.+ _.-$.+1).^$.^3@.+$", () => {
+		/*ts
+			sumCubes		:.([.+ _.-$.+1).^$.^3@.+$
+		*/
+		it("2sumCubes4=99", () => expect(sumCubes(2, 4)).eql(99));
+	});
+
+	describe("sumIntegers :.([.+ _.-$.+1).^$.+$", () => {
+		/*ts
+			sumIntegers		:.([.+ _.-$.+1).^$.+$
+		*/
+		it("0sumIntegers10=55", () => expect(sumIntegers(0, 10)).eql(55));
+	});
+
+	describe("gcd ((].=0 [) .(] %$).gcd)?", () => {
+		/*ts
+			gcd			((].=0 [) .(] %$).gcd)?
+		*/
+		it("gcd(15 20)=5", () => expect(gcd([15, 20])).eql(5));
+	});
+
 	describe("fastExp ((].=0 1`) (].((%2.=0 !()`) ()`)? ,(; /2).fastExp.(; ;).*$) .([ ,(; -1).fastExp).*$)?", () => {
 		/*ts
 			square		.(; ;).*$
