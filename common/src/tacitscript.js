@@ -740,10 +740,10 @@ const bracketright = value => {
 	errorUnary({operator: "]", value});
 };
 const hash = value => {
-	if (isVector(value)) return value.length;																	// length				AN						(4 5 6)#=3
-																												// length				SN						"abcd"#=4
-	if (isObject(value)) return Object.keys(value).length;														// length				ON						(("a" 1) )\#=1
-	if (isNumber(value)) return Math.abs(value);																// modulus				NN						1.5_#=1.5
+	if (isVector(value)) return value.length;																	// length				AN						#(4 5 6)=3
+																												// length				SN						#"abcd"=4
+	if (isObject(value)) return Object.keys(value).length;														// length				ON						#(\(("a" 1) )=1
+	if (isNumber(value)) return Math.abs(value);																// modulus				NN						#(_1.5)=1.5
 
 	errorUnary({value, operator: "#"});
 };

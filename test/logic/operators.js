@@ -47,15 +47,15 @@ export default () => {
 
 	describe("hash (#)", () => {
 		/*ts
-			lengthN					(4 5 6)#
-			lengthaN				"abcd"#
-			lengthbN				\(("a" 1) )#
-			modulusN				1.5_#
+			lengthN					#(4 5 6)
+			lengthaN				#"abcd"
+			lengthbN				#(\(("a" 1) ))
+			modulusN				#(_1.5)
 		*/
-		it('length					AN						(4 5 6)#=3', () => expect(lengthN).eql(3));
-		it('length					SN						"abcd"#=4', () => expect(lengthaN).eql(4));
-		it('length					ON						(("a" 1) )\#=1', () => expect(lengthbN).eql(1));
-		it('modulus					NN						1.5_#=1.5', () => expect(modulusN).eql(1.5));
+		it('length					AN						#(4 5 6)=3', () => expect(lengthN).eql(3));
+		it('length					SN						#"abcd"=4', () => expect(lengthaN).eql(4));
+		it('length					ON						#(\\(("a" 1) ))=1', () => expect(lengthbN).eql(1));
+		it('modulus					NN						#(_1.5)=1.5', () => expect(modulusN).eql(1.5));
 	});
 
 	describe("bracketright (])", () => {
