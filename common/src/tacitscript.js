@@ -469,19 +469,19 @@ const greater = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) return pipe(sortBy(left), reverse)(right);						// descendingSort		(VN)AA					;>(2 3 1)=(3 2 1)
 																												// descendingSort		(VS)AA					;>("b" "c" "a")=("c" "b" "a")
 	if (isArray(left) && (isArray(right) || isObject(right))) {													// over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)
-		return applyOver({path: left[0], fn: left[1], container: right});										// over					ADD						(("a" ) +1)>((("a" 1) )\)=((("a" 2) )\)
+		return applyOver({path: left[0], fn: left[1], container: right});										// over					ADD						(("a" ) +1)>(\(("a" 1) ))=(\(("a" 2) ))
 	}
 
 	errorBinary({left, right, operator: ">"});
 };
 const minus = (left, right) => {
 	if (isNumber(left) && isNumber(right)) return left - right;													// subtract				NNN						5-2=3
-	if (isObject(left) && isString(right)) {																	// omitKey				DSD						(("a" 1) )\-"a"=(( )\)
+	if (isObject(left) && isString(right)) {																	// omitKey				DSD						\(("a" 1) )-"a"=(\( ))
 		const {[right]: deletedKey, ...remainder} = left;
 
 		return remainder;
 	}
-	if (isObject(left) && isArray(right)) { 																	// omitKeys				DAD						(("a" 1) ("b" 2))\-("a" "b")=(( )\)
+	if (isObject(left) && isArray(right)) { 																	// omitKeys				DAD						\(("a" 1) ("b" 2))-("a" "b")=(\( ))
 		return omit(right)(left);
 	}
 	if (isArray(left) && isArray(right)) return splice(left, ...right);											// splice				AAA						(5 6 7 8)-(1 2 3 4)=(5 3 4 8)
@@ -513,8 +513,8 @@ const question = (left, right) => {
 		return (Math.random() * (right - left)) + left;
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
-	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?((("a" 1) ("b" 2))\)=((("b" 2) )\)
-	if (isBinaryFunction(left) && isObject(right)) return filterObjIndexed(left)(right);						// filterObjIndexed		(SVV)DD					(+.="b2")?((("a" 1) ("b" 2))\\)=((("b" 2) )\\)
+	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
+	if (isBinaryFunction(left) && isObject(right)) return filterObjIndexed(left)(right);						// filterObjIndexed		(SVV)DD					(+.="b2")?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
 
 	errorBinary({left, right, operator: "?"});
 };
@@ -524,8 +524,8 @@ let atsign = (left, right) => {
 	const applyIndexedLeft = (index, value) => comma(value, val => left(index, val));
 
 	if (isObject(right)) {
-		if (isUnaryFunction(left)) return mapObj(applyLeft)(right);												// map					(VV)DD					*2@((("a" 1) ("b" 2))\)=((("a" 2) ("b" 4))\)
-		if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right);								// mapObjIndexed		(SVV)DD					+@((("a" 1) ("b" 2))\)=((("a" "a1") ("b" "b2"))\)
+		if (isUnaryFunction(left)) return mapObj(applyLeft)(right);												// map					(VV)DD					*2@(\(("a" 1) ("b" 2)))=(\(("a" 2) ("b" 4)))
+		if (isBinaryFunction(left)) return mapObjIndexed(applyIndexedLeft)(right);								// mapObjIndexed		(SVV)DD					+@(\(("a" 1) ("b" 2)))=(\(("a" "a1") ("b" "b2")))
 	}
 
 
@@ -578,7 +578,7 @@ let atsign = (left, right) => {
 	errorBinary({left, right, operator: "@"});
 };
 const asterisk = (left, right) => {
-	if (Array.isArray(left) && isObject(right)) return pick(left)(right);										// pick					ADD						("a" "c" "d")*((("a" 1) ("b" 2) ("c" 3))\)=((("a" 1) ("c" 3))\)
+	if (Array.isArray(left) && isObject(right)) return pick(left)(right);										// pick					ADD						("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))
 	if (isNumber(left) && isNumber(right)) return left * right; 												// times				NNN						2*3=6
 
 	errorBinary({left, right, operator: "*"});
@@ -609,9 +609,9 @@ const apostrophe = (left, right) => {
 	}
 	if (isNumber(left) && (isArray(right) || isString(right)))													// at					NA?						1'(1 2 3)=2
 		return (left >= 0) ? right[left] : right[right.length + left];											// at					NSS						1'"abc"="b"
-	if (isString(left) && isObject(right)) return right[left];													// prop					SD?						"a"'((("a" 1) )\)=1
+	if (isString(left) && isObject(right)) return right[left];													// prop					SD?						"a"'(\(("a" 1) ))=1
 	if (isArray(left) && (isArray(right) || isObject(right))) {													// path					AA?						(1 )'(1 2 3)=2
-		return path(left)(right);																				// path					AD?						("a" )'((("a" 1) )\)=1
+		return path(left)(right);																				// path					AD?						("a" )'(\(("a" 1) ))=1
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFind(left)(right);									// find					(VV)AV					(%2.=0)'(1 2 3)=2
 
@@ -629,7 +629,7 @@ const equal = (left, right) => {
 	errorBinary({left, right, operator: "="});
 };
 let bar = (left, right) => {
-	if (isUnaryFunction(left) && isUnaryFunction(right)) {														// or					(VV)(VV)(VV)			(>0|(%2.=0))(_2)=(()!)
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {														// or					(VV)(VV)(VV)			(>0|(%2.=0))(_2)=(!())
 		let fn = x => {
 			const leftResult = comma(x, left);
 
@@ -638,7 +638,7 @@ let bar = (left, right) => {
 
 		return fn;
 	}
-	if (isBinaryFunction(left) && isBinaryFunction(right)) {													// or					(VVV)(VVV)(VVV)			2(<|=)2=(()!)
+	if (isBinaryFunction(left) && isBinaryFunction(right)) {													// or					(VVV)(VVV)(VVV)			2(<|=)2=(!())
 		let fn = (x, y) => {
 			const leftResult = left(x, y);
 
@@ -698,7 +698,7 @@ const ampersand = (left, right) => {
 			return isTruthy(leftValue) ? comma(value, right) : leftValue;
 		}
 	}
-	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; 									// and					V??						()!&3=3
+	if (isValue(left) && isValue(right)) return isTruthy(left) ? right : left; 									// and					V??						!()&3=3
 
 	errorBinary({left, right, operator: "&"});
 }; ampersand.linear = true;
