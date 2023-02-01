@@ -93,10 +93,10 @@ export default () => {
 
 	describe("tilde (~)", () => {
 		/*ts
-			flipB					~/
+			flipB					/,~
 			transposeA				~((1 2) (3 4))
 		*/
-		it('flip					(XYZ)(YXZ)				2(~/)6=3', () => expect(flipB(2, 6)).eql(3));
+		it('flip					(XYZ)(YXZ)				2(/,~)6=3', () => expect(flipB(2, 6)).eql(3));
 		it('transpose				AA						~((1 2) (3 4))=((1 3) (2 4))', () => expect(transposeA).eql([[1, 3], [2, 4]]));
 	});
 
@@ -286,7 +286,7 @@ export default () => {
 			lessaT					"abc"<"def"
 			ascendingSortA			;<(2 3 1)
 			ascendingSortaA			;<("b" "c" "a")
-			tapNN					"x => console.log.call(null, x)"{<
+			tapNN					{"x => console.log.call(null, x)"<
 		*/
 		it("less					NNT						3<2=()", () => expect(lessT).eql(false));
 		it('less					SST						"abc"<"def"=(()!)', () => expect(lessaT).eql(true));
@@ -295,7 +295,7 @@ export default () => {
 
 		let spy;
 		before(() => spy = sinon.spy(console, "log"));
-		it('tap						(V?)VV					"x => console.log.call(null, x)"{<3=3', () => {
+		it('tap						(V?)VV					{"x => console.log.call(null, x)"<3=3', () => {
 			expect(tapNN(3)).eql(3);
 			assert(spy.calledWith(3));
 		});
@@ -321,7 +321,7 @@ export default () => {
 			stringConcatS			"abc"+"def"
 			toStringS				"2"+3
 			arrayConcatA			(1 2 3)+(4 5 6)
-			mergeD					(("a" 1) ("b" 2))\+((("b" 3) ("c" 4))\)
+			mergeD					\(("a" 1) ("b" 2))+(\(("b" 3) ("c" 4)))
 		*/
 		it('add						NNN						2+3=5', () => expect(addN).eql(5));
 		it('parse					NSN						2+"3"=5', () => expect(parseN).eql(5));
@@ -329,7 +329,7 @@ export default () => {
 		it('stringConcat			SSS						"abc"+"def"="abcdef"', () => expect(stringConcatS).eql("abcdef"));
 		it('toString				SVS						"2"+3="23"', () => expect(toStringS).eql("23"));
 		it('arrayConcat				AAA						(1 2 3)+(4 5 6)', () => expect(arrayConcatA).eql([1, 2, 3, 4, 5, 6]));
-		it('merge					DDD						(("a" 1) ("b" 2))\\+((("b" 3) ("c" 4))\\)=((("a" 1") ("b" 3) ("c" 4))\\)', () => expect(mergeD).eql({a: 1, b: 3, c: 4}));
+		it('merge					DDD						\\(("a" 1) ("b" 2))+(\\(("b" 3) ("c" 4)))=(\\(("a" 1") ("b" 3) ("c" 4)))', () => expect(mergeD).eql({a: 1, b: 3, c: 4}));
 	});
 
 	describe("dot (.)", () => {

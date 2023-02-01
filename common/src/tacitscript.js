@@ -428,7 +428,7 @@ const plus = (left, right) => {
 		}
 	}
 	if (isArray(left) && isArray(right)) return [...left, ...right];											// arrayConcat			AAA						(1 2 3)+(4 5 6)=(1 2 3 4 5 6)
-	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);										// merge				DDD						(("a" 1) ("b" 2))\+((("b" 3) ("c" 4))\)=((("a" 1") ("b" 3) ("c" 4))\)
+	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);										// merge				DDD						\(("a" 1) ("b" 2))+(\(("b" 3) ("c" 4)))=(\(("a" 1") ("b" 3) ("c" 4)))
 	if (isNumber(left) && isValue(right)) {																		// add					NNN						2+3=5
 		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;	// parse				NSN						2+"3"=5
 		const result = left + rightValue;																		// parse				NSO						2+"abc"=(1/0)		
@@ -453,7 +453,7 @@ const less = (left, right) => {
 		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
 	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right);									// ascendingSort		(VN)AA					;<(2 3 1)=(1 2 3)
 																												// ascendingSort		(VS)AA					;<("b" "c" "a")=("a" "b" "c")
-	if (isUnaryFunction(left) && isValue(right)) {																// tap					(V?)VV					"x => console.log.call(null, x)"{<3=3
+	if (isUnaryFunction(left) && isValue(right)) {																// tap					(V?)VV					{"x => console.log.call(null, x)"<3=3
 		try {
 			comma(right, left);
 		} catch (_) {}
