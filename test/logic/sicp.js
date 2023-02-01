@@ -2,6 +2,14 @@ const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("2.59 unionSet +.removeDuplicates", () => {
+		/*ts
+			removeDuplicates			;/.\.(].[)@
+			unionSet					+.removeDuplicates
+		*/
+		it("(1 2 3)unionSet(2 3 4)=(1 2 3 4)", () => expect(unionSet([1, 2, 3], [2, 3, 4])).eql([1, 2, 3, 4]));
+	});
+
 	describe("2.40 cartesianProduct :,(:@ (:~)@)._.(.$).(.$)@.{ removeDuplicates ;/.\.(].[)@ intersectionSet cartesianProduct.removeDuplicates.((=$ 1`) ()`)??.[@", () => {
 		/*ts
 			pairMap						:@
