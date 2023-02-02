@@ -348,7 +348,7 @@ export default () => {
 		it("applyToArray			VAA						(1 2 3).(# [)=(3 1)", () => expect(applyToArrayA).eql([3, 1]));
 		it("pipeToArray				(VV)A(VA)				[.(+1 -2)(3 2 1)=(4 1)", () => expect(pipeToArrayAA([3, 2, 1])).eql([4, 1]));
 		it("pipeBinaryToArray		(VVV)A(VVA)				5(:.(+$ -$))3=(8 2)", () => expect(pipeBinaryToArrayNNA(5, 3)).eql([8, 2]));
-		it('binaryBinaryPipe		(XYZ)(ZWR)(WR)			3(:.:)4(5 6)=((3 4) (5 6))', () => expect(binaryBinaryPipeBBU(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
+		it('binaryBinaryPipe		(XYZ)(ZWR)(XY(WR))		3(:.:)4(5 6)=((3 4) (5 6))', () => expect(binaryBinaryPipeBBU(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
 	});
 
 	describe("comma (,)", () => {

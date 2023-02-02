@@ -180,14 +180,11 @@ const apply = (left, right) => {
 	const arityLeft = arity(left);
 	const arityRight = arity(right);
 
-	if (!left || !left.noLeftApply) {
-		if (arityRight === 2) {
-			const result = leftApply(left, right);
-			if (right.linear) result.noLeftApply = true;
+	if ((arityRight === 2) && (!left || !left.noLeftApply)) {
+		const result = leftApply(left, right);
+		if (right.linear) result.noLeftApply = true;
 
-			return result;
-		}
-		// if (arityRight === 1) return right(left);
+		return result;
 	}
 	if (arityLeft === 2) return rightApply(left, right);
 	if (arityLeft === 1) return left(right);
