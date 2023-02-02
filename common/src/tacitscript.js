@@ -713,7 +713,7 @@ const tilde = value => {
 	if (isArray(value)) return transpose(value);																// transpose			AA						~((1 2) (3 4))=((1 3) (2 4))
 
 	errorUnary({operator: "~", value});
-}; 
+};  tilde.noLeftApply = true;
 const underscore = value => {
 	// function won't be output on negative literals - expanded in parser
 	if (isNumber(value)) return -value;																			// negative				NN						_3

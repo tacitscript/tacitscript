@@ -93,10 +93,10 @@ export default () => {
 
 	describe("tilde (~)", () => {
 		/*ts
-			flipB					/,~
+			flipB					~/
 			transposeA				~((1 2) (3 4))
 		*/
-		it('flip					(XYZ)(YXZ)				2(/,~)6=3', () => expect(flipB(2, 6)).eql(3));
+		it('flip					(XYZ)(YXZ)				2(~/)6=3', () => expect(flipB(2, 6)).eql(3));
 		it('transpose				AA						~((1 2) (3 4))=((1 3) (2 4))', () => expect(transposeA).eql([[1, 3], [2, 4]]));
 	});
 
