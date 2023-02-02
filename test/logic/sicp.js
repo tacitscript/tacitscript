@@ -66,12 +66,12 @@ export default () => {
 	// 	it("(0 1 2 3)dotProduct(0 1 2 3)=14", () => expect(dotProduct([0, 1, 2, 3], [0, 1, 2, 3])).eql(14));
 	// });
 
-	// describe("2.36 accumulateN ~.+$@", () => {
-	// 	/*ts
-	// 		accumulateN			~.+$@
-	// 	*/
-	// 	it("accumulateN((1 2 3) (4 5 6) (7 8 9) (10 11 12))=(22 26 30)", () => expect(accumulateN([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])).eql([22, 26, 30]));
-	// });
+	describe("2.36 accumulateN (*.{@)$.+$@", () => {
+		/*ts
+			accumulateN			(*.{@)$.+$@
+		*/
+		it("accumulateN((1 2 3) (4 5 6) (7 8 9) (10 11 12))=(22 26 30)", () => expect(accumulateN([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])).eql([22, 26, 30]));
+	});
 
 	// // describe('treeMap :.(.(.((}.="A")` [.treeMap) [).? ]).@$', () => {
 	// // 	/*ts
