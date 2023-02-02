@@ -770,12 +770,12 @@ const braceright = value => {
 	errorUnary({operator: "}", value});
 };
 const bang = value => {
-	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVB)				2(!<)3=()
-	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VB)				!(>3)4=()
-	if (isValue(value)) return isFalsey(value);																	// not					VB						!5=()
+	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVT)				2(!<)3=()
+	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VT)				!(>3)4=()
+	if (isValue(value)) return isFalsey(value);																	// not					VT						!5=()
 
 	errorUnary({value, operator: "!"});
-}; bang.supportsUndefined = true;
+}; bang.supportsUndefined = true; bang.noLeftApply = true;
 
 //==========================================================
 // main exports

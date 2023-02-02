@@ -8,9 +8,9 @@ export default () => {
 			notU					!(>3)
 			notT					!5
 		*/
-		it('not						(VVV)(VVB)				2(!<)3=()', () => expect(notB(2, 3)).eql(false));
-		it('not						(VV)(VB)				!(>3)4=()', () => expect(notU(4)).eql(false));
-		it('not						VB						!5=()', () => expect(notT).eql(false));
+		it('not						(VVV)(VVT)				2(!<)3=()', () => expect(notB(2, 3)).eql(false));
+		it('not						(VV)(VT)				!(>3)4=()', () => expect(notU(4)).eql(false));
+		it('not						VT						!5=()', () => expect(notT).eql(false));
 	});
 
 	describe("braceright (})", () => {
