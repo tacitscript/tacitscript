@@ -57,51 +57,6 @@ const first = array => array[0];
 const reverse = array => [...array].reverse();
 
 //==========================================================
-// stream utilities
-
-const lazyScan = ({next, start}) => function*() {
-	let result = [...start];
-
-	while (true) {
-		const newValue = next(result);
-
-		if (newValue == undefined) return;
-
-		result.push(newValue);
-
-		yield newValue;
-	}
-};
-const processStream = ({generator, reducer}) => function*() {
-	let result = [];
-	let stream = generator();
-
-	while (true) {
-		const inputValue = stream.next().value;
-
-		if (inputValue == undefined) return; // stream expended
-
-		const newValue = reducer(result, inputValue);
-
-		if (newValue == undefined) continue; // value culled
-
-		result.push(newValue);
-
-		yield newValue;
-	}
-};
-const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
-const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}}
-
-//==========================================================
-// ts functional utilities using ts logic (falsey is only undefined or false)
-
-const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return isTruthy(result);}; return fn(predicate);};
-const tsFilter = tsPredicate(filter);
-const tsFind = tsPredicate(find);
-const tsFilterObject = tsPredicate(filterObject);
-
-//==========================================================
 // type utilites
 
 const isUndefined = value => value == undefined;
@@ -133,21 +88,58 @@ const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
 const isValue = value => arity(value) === 0;
 const isVector = value => isArray(value) || isString(value);
-const types = value => {
-	if (value == undefined) return ["?"];
-	if (isArray(value)) return ["A"];
-	if (isString(value)) return ["S"];
-	if (isNumber(value)) return ["N"];
-	if (isStream(value)) return ["L"];
-	if (isObject(value)) return ["O"];
-	if (isBoolean(value)) return ["B"];
-	//if (isFunction(value)) return arity(value);
-
-	if (isFunction(value)) return value.types || (contains(value.length)([0, 1]) ? [["V", "V"]] : [["V", "V", "V"]]); // assume referenced js functions and not higher order
-
-//	return [[0]];
-};
 const supportsUndefined = value => isFunction(value) && value.supportsUndefined;
+
+//==========================================================
+// stream utilities
+
+const lazyScan = ({next, start}) => function*() {
+	let result = [...start];
+
+	while (true) {
+		const newValue = next(result);
+
+		if (newValue == undefined) return;
+
+		result.push(newValue);
+
+		yield newValue;
+	}
+};
+const processStream = ({generator, reducer}) => function*() {
+	let result = [];
+	let stream = generator();
+
+	while (true) {
+		const inputValue = stream.next().value;
+
+		if (inputValue == undefined) return; // stream expended
+
+		const newValues = reducer(result, inputValue);
+
+		if (newValues == undefined) continue; // value culled
+
+		for (var i = 0; i < newValues.length; i += 1) {
+			const newValue = newValues[i];
+
+			result.push(newValue);
+
+			if (isStream(newValue)) yield* newValue;
+			else yield newValue;
+		}
+	}
+};
+const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
+const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}}
+
+//==========================================================
+// ts functional utilities using ts logic (falsey is only undefined or false)
+
+const tsPredicate = fn => tsPredicate => {const predicate = value => {const result = tsPredicate(value); return isTruthy(result);}; return fn(predicate);};
+const tsFilter = tsPredicate(filter);
+const tsFind = tsPredicate(find);
+const tsFilterObject = tsPredicate(filterObject);
+
 
 
 //==========================================================
@@ -587,7 +579,7 @@ const dollar = (left, right) => {
 	// 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 	// 		return reduce(left[0])(left[1])(right);
 	// 	}	
-	if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});		// process				(AVV)LL					((#.+1)^( ),(:.].((%2.=0 ;) 1/0`)?)$,3%,{)=(2 4 6)
+	if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});		// process				(AVV)LL					((#.+1)^( ),(:.].((%2.=0 .(; )) (1/0 )`)?)$,3%,{)=(2 4 6)
 
 	if (isString(left) && isArray(right)) {																		// join					SAS						", "$(1 2 3)="1, 2, 3"
 		try {

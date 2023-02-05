@@ -56,4 +56,13 @@ export default () => {
 		it("dotReduceNN (+1 *2),(.$)", () => expect(dotReduceNN(3)).eql(8));
 		it("nMoreThanLengthPlusFiveNB .(+,(#.) +5`).(.$)", () => expect(nMoreThanLengthPlusFiveNB(2)([1, 2, 3])).eql(10));
 	});
+
+	describe("initial dot and comma", () => {
+		/*ts
+			applyToArrayA				.(+1 -1)
+			applyInsideA				.(; .(; ))
+		*/
+		it('applyToArrayA .(+1 -1)', () => expect(applyToArrayA(4)).eql([5, 3]));
+		it('applyInsideA .(; .(; ))', () => expect(applyInsideA(3)).eql([3, [3]]));
+	});
 };

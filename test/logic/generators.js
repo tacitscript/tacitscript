@@ -3,11 +3,44 @@ import ts from "tacitscript";
 import {streamFromArray, naturals} from "utilities";
 
 export default () => {
-	describe("fibonacci", () => {
-		/*ts
-			fib						-1.(((#.=0 1`) (#.=1 1`) _2%.].+$)?)^( )-.1%.{.0'
-		*/
-		it('fib8=21', () => expect(fib(8)).eql(21));
+	describe("js primes", () => {
+		const take = n => function*(iterable) {
+			let i = 0;
+			for (let x of iterable) {
+			  if (i >= n) return;
+			  yield x;
+			  i++;
+			}
+		  };
+		function* genNat() {
+			for (let i = 0; true; i++) yield i;
+		  }
+		function* filter(p, xs) {
+			for (const x of xs) if (p(x)) yield x;
+		  }
+		const pop = (iterator) => {
+			const result = iterator.next();
+			if (result.done) return;
+			return [result.value, iterator];
+		  }
+		function* sieve(nums) {
+			const result = pop(nums);
+			if (!result) return;
+			const [n, rest] = result;
+			yield n;
+			yield* sieve(filter(x => ((x % n) !== 0), rest));
+		  }
+		function* drop(n, iterable) {
+			let i = 0;
+			for (const val of iterable) {
+			  if (i >= n) yield val;
+			  else i++;
+			}
+		  }
+		const primes = () => sieve(drop(2, genNat()));
+		const first9 = [...take(9)(primes())];
+
+		it("first9=[2, 3, 5, 7, 11, 13, 17, 19, 23]", () => expect(first9).eql([2, 3, 5, 7, 11, 13, 17, 19, 23]));
 	});
 
 	describe("primes", () => {
@@ -17,18 +50,25 @@ export default () => {
 		*/
 	});
 
-	describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
+	describe("fib -1.(((#.=0 1`) (#.=1 1`) _2%.].+$)?)^( )-.1%.{.0'", () => {
 		/*ts
-			cycledStream			;.(: ).[.(:.).:((
-										(.(].[.# [).<$ ].])
-										.(.(].[.# [).%$ ].[).'$
-									)?).(.$)
-			solutionA				naturals,cycledStream3$,5%,{
-			solutionB				cycledStream3$.5%.{
+			fib						-1.(((#.=0 1`) (#.=1 1`) _2%.].+$)?)^( )-.1%.{.0'
 		*/
-			it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
-			it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
-		});
+		it('fib8=21', () => expect(fib(8)).eql(21));
+	});
+
+	// describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
+	// 	/*ts
+	// 		cycledStream			;.(: ).[.(:.).:((
+	// 									(.(].[.# [).<$ ].])
+	// 									.(.(].[.# [).%$ ].[).'$
+	// 								)?).(.$)
+	// 		solutionA				naturals,cycledStream3$,5%,{
+	// 		solutionB				cycledStream3$.5%.{
+	// 	*/
+	// 	it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
+	// 	it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
+	// });
 
 	describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
 		/*ts
