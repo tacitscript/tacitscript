@@ -3,6 +3,20 @@ import ts from "tacitscript";
 import {streamFromArray, naturals} from "utilities";
 
 export default () => {
+	describe("fibonacci", () => {
+		/*ts
+			fib						-1.(((#.=0 1`) (#.=1 1`) _2%.].+$)?)^( )-.1%.{.0'
+		*/
+		it('fib8=21', () => expect(fib(8)).eql(21));
+	});
+
+	describe("primes", () => {
+		/*ts
+			natNumsPlusOne			(#.+2)^( )
+			seive					(:.].(; ))$natNumsPlusOne
+		*/
+	});
+
 	describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
 		/*ts
 			cycledStream			;.(: ).[.(:.).:((
