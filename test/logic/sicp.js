@@ -2,6 +2,32 @@ const { expect, assert } = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe('dequeue :,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) (].="pop" [._1%.[) (].="unshift" [.(~: ).[.(.(; ).).:(+$).(.$)) 0/0`)?).(.$)', () => {
+		/*ts
+			queue			:,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) (].="pop" [._1%.[) (].="unshift" [.(~: ).[.(.(; ).).:(+$).(.$)) 0/0`)?).(.$)
+		*/
+		it(`queue(1 2 3)"pop"=(1 2)`, () => expect(queue([1, 2, 3])("pop")).eql([1, 2]));
+		it(`queue(2 3)"unshift"1=(1 2 3)`, () => expect(queue([2, 3])("unshift")(1)).eql([1, 2, 3]));
+	});
+
+	describe('queue :,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) 0/0`)?).(.$)', () => {
+		/*ts
+			queue			:,(;.).:(((].="push" [.(: ).[.(.(; ).).:(+$).(.$)) (].="shift" [.1%.]) 0/0`)?).(.$)
+			solutionA		queue(1 2 3)"shift"
+		*/
+		it(`queue(1 2 3)"shift"=(2 3)`, () => expect(solutionA).eql([2, 3]));
+		it(`queue(1 2)"push"3=(1 2 3)`, () => expect(queue([1, 2])("push")(3)).eql([1, 2, 3]));
+	});
+
+	describe("3.5 monte-carlo estimatePi (_1`.(?1 ?1))^.(^2@.+$.^0.5.<1)@.(;? ;).#@./$.*4", () => {
+		/*ts
+			r				^2@.+$.^0.5
+			randomCoord		_1`.(?1 ?1)
+			estimatePi		randomCoord^.(r.<1)@.(;? ;).#@./$.*4
+		*/
+		it("estimatePi10000 between 3.1 and 3.2", () => expect(estimatePi(10000)).above(3.1).and.below(3.2));
+	});
+
 	describe('complex numbers - revealing module .(: ((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: (~.+$@.complexASV)`).(.$)) (].="addComplex" [.(:.([ ].("real", "imag",)).*$ (+$@.complexASV)`).(.$)) 0/0`)?`).(.$)', () => {
 		/*ts
 			complexASV		.(: (
