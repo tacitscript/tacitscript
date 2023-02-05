@@ -243,12 +243,14 @@ export default () => {
 			filterA					<5?(4 9 2 7 3)
 			filterD					(%2.=0)?(\(("a" 1) ("b" 2)))
 			filterObjIndexedD		(+.="b2")?(\(("a" 1) ("b" 2)))
+			filteraA				(%2.=0)?((#.+1)^( )),3%,{
 		*/
 		it('cond					AVV						((<10 +1) -1)?15=14', () => expect(condN).eql(14));
 		it('random					NNN						1(<|=)(1?10)<10', () => expect((1 <= randomN) && (randomN < 10)).eql(true));
 		it('filter					(VV)AA					<5?(4 9 2 7 3)=(4 2 3)', () => expect(filterA).eql([4, 2, 3]));
 		it('filter					(VV)DD					(%2.=0)?(\\(("a" 1) ("b" 2)))=(\\(("b" 2) ))', () => expect(filterD).eql({b: 2}));
 		it('filterObjIndexed		(SVV)DD					(+.="b2")?(\\(("a" 1) ("b" 2)))=(\\(("b" 2) ))', () => expect(filterObjIndexedD).eql({b: 2}));
+		it('filter					(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)', () => expect(filteraA).eql([2, 4, 6]));
 	});
 
 	describe("colon (:)", () => {

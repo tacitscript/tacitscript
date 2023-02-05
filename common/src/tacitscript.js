@@ -133,6 +133,7 @@ const processStream = ({generator, reducer}) => function*() {
 const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
 const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}};
 const streamMap = ({fn, generator}) => function*() {for (const val of generator()) yield fn(val);};
+const streamFilter = ({fn, generator}) => function*() {for (const val of generator()) {if (fn(val)) yield val;}};
 
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
@@ -508,6 +509,7 @@ const question = (left, right) => {
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
 	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
 	if (isBinaryFunction(left) && isObject(right)) return filterObjIndexed(left)(right);						// filterObjIndexed		(SVV)DD					(+.="b2")?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
+	if (isUnaryFunction(left) && isStream(right)) return streamFilter({fn: left, generator: right});			// filter				(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)
 
 	errorBinary({left, right, operator: "?"});
 };
