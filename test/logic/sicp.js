@@ -2,44 +2,44 @@ const { expect, assert } = chai;
 import ts from "tacitscript";
 
 export default () => {
-	// describe('complex numbers - revealing module .(: ((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: (~.+$@.complexASV)`).(.$)) 0/0`)?`).(.$)', () => {
+	describe('complex numbers - revealing module .(: ((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: (~.+$@.complexASV)`).(.$)) 0/0`)?`).(.$)', () => {
 	// 	// NB if we pass a module here eg, complexASV(1 2)"add"(complexASV(3 4)) then it fails as complexASV(1 2)"add" is applied to complexASV(3 4)
-	// 	/*ts
-	// 		complexASV		.(: (
-	// 			(].="real" [.[)
-	// 			(].="imag" [.])
-	// 			(].="mag" [.^2@.+$.^0.5)
-	// 			(].="add" [.(: (~.+$@.complexASV)`).(.$))
-	// 			0/0`
-	// 		)?`).(.$)
-	// 		doubleIntake	:.:
-	// 		module			:.(: ]`).(.$)
-	// 		complex			:.(: (
-	// 			(].="real" [.[)
-	// 			(].="imag" [.])
-	// 			(].="mag" [.^2@.+$.^0.5)
-	// 			0/0`
-	// 		)?`).(.$)
-	// 		solutionA		"mag",3complex4
-	// 		solutionB		complexASV(3 4)"add"(5 6)"real"
-	// 	*/
-	// 	it('complexASV(3 4)"mag"=5', () => expect(complexASV([3, 4])("mag")).eql(5));
-	// 	it(`complexASV(3 4)"real"=3`, () => expect(complexASV([3, 4])("real")).eql(3));
-	// 	it(`"invalid",1complex2=0/0`, () => expect(complex(1, 2)("invalid")).eql(undefined));
-	// 	it(`complexASV(3 4)"add"(5 6)"real"=8`, () => expect(solutionB).eql(8));
-	// 	it(`"real",3complex4=3`, () => expect(complex(3, 4)("real")).eql(3));
-	// 	it(`"mag",3complex4=5`, () => expect(solutionA).eql(5));
-	// 	it('"hello",2module3="hello"', () => expect(module(2, 3)("hello")).eql("hello"));
-	// 	it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
-	// });
+		/*ts
+			complexASV		.(: (
+				(].="real" [.[)
+				(].="imag" [.])
+				(].="mag" [.^2@.+$.^0.5)
+				(].="add" [.(* (+$@.complexASV)`).(.$))
+				0/0`
+			)?`).(.$)
+			doubleIntake	:.:
+			module			:.(: ]`).(.$)
+			complex			:.(: (
+				(].="real" [.[)
+				(].="imag" [.])
+				(].="mag" [.^2@.+$.^0.5)
+				0/0`
+			)?`).(.$)
+			solutionA		"mag",3complex4
+			solutionB		complexASV(3 4)"add"(5 6)"real"
+		*/
+		it('complexASV(3 4)"mag"=5', () => expect(complexASV([3, 4])("mag")).eql(5));
+		it(`complexASV(3 4)"real"=3`, () => expect(complexASV([3, 4])("real")).eql(3));
+		it(`"invalid",1complex2=0/0`, () => expect(complex(1, 2)("invalid")).eql(undefined));
+		it(`complexASV(3 4)"add"(5 6)"real"=8`, () => expect(solutionB).eql(8));
+		it(`"real",3complex4=3`, () => expect(complex(3, 4)("real")).eql(3));
+		it(`"mag",3complex4=5`, () => expect(solutionA).eql(5));
+		it('"hello",2module3="hello"', () => expect(module(2, 3)("hello")).eql("hello"));
+		it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
+	});
 
-	// describe("2.59 unionSet +.removeDuplicates", () => {
-	// 	/*ts
-	// 		removeDuplicates			;/.\.(].[)@
-	// 		unionSet					+.removeDuplicates
-	// 	*/
-	// 	it("(1 2 3)unionSet(2 3 4)=(1 2 3 4)", () => expect(unionSet([1, 2, 3], [2, 3, 4])).eql([1, 2, 3, 4]));
-	// });
+	describe("2.59 unionSet +.removeDuplicates", () => {
+		/*ts
+			removeDuplicates			;/.\.(].[)@
+			unionSet					+.removeDuplicates
+		*/
+		it("(1 2 3)unionSet(2 3 4)=(1 2 3 4)", () => expect(unionSet([1, 2, 3], [2, 3, 4])).eql([1, 2, 3, 4]));
+	});
 
 	// describe("2.40 cartesianProduct :,(:@ (:~)@)._.(.$).(.$)@.{ removeDuplicates ;/.\\.(].[)@ intersectionSet cartesianProduct.removeDuplicates.((=$ 1`) ()`)??.[@", () => {
 	// 	/*ts
