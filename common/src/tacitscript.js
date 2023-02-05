@@ -76,7 +76,8 @@ const isFalsey = value => {
     return false;
 };
 const isTruthy = value => !isFalsey(value);
-const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includes(value.constructor.name);
+const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction', 'GeneratorFunctionPrototype'].includes(value.constructor.name);
+const isActiveStream = value => value.constructor.name === "GeneratorFunctionPrototype";
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
@@ -115,25 +116,28 @@ const processStream = ({generator, reducer}) => function*() {
 
 		if (inputValue == undefined) return; // stream expended
 
-		const newValues = reducer(result, inputValue);
+		const output = reducer([result, inputValue, stream]);
 
-		if (newValues == undefined) continue; // value culled
+		if (output == undefined) continue; // value culled
+
+		const newValues = isArray(output) ? output : [output];
 
 		for (var i = 0; i < newValues.length; i += 1) {
 			const newValue = newValues[i];
 
 			result.push(newValue);
 
-			if (isStream(newValue)) yield* newValue;
-			else if (isFunction(newValue)) yield* newValue(stream);
+			/*if (isStream(newValue)) yield* newValue;
+			else */if (isFunction(newValue)) yield* newValue(stream)();
 			else yield newValue;
 		}
 	}
 };
-const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
-const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}};
-const streamMap = ({fn, generator}) => function*() {for (const val of generator()) yield fn(val);};
-const streamFilter = ({fn, generator}) => function*() {for (const val of generator()) {if (fn(val)) yield val;}};
+const getStream = generator => isActiveStream(generator) ? generator : generator();
+const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of getStream(generator)) {if (i >= n) return; i += 1; yield val;}};
+const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of getStream(generator)) {if (i >= n) yield val; else i += 1;}};
+const streamMap = ({fn, generator}) => function*() {for (const val of getStream(generator)) yield fn(val);};
+const streamFilter = ({fn, generator}) => function*() {for (const val of getStream(generator)) {if (fn(val)) yield val;}};
 
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
@@ -142,8 +146,6 @@ const tsPredicate = fn => tsPredicate => {const predicate = value => {const resu
 const tsFilter = tsPredicate(filter);
 const tsFind = tsPredicate(find);
 const tsFilterObject = tsPredicate(filterObject);
-
-
 
 //==========================================================
 // application utilities
@@ -507,9 +509,9 @@ const question = (left, right) => {
 		return (Math.random() * (right - left)) + left;
 	}
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
+	if (isUnaryFunction(left) && isStream(right)) return streamFilter({fn: left, generator: right});			// filter				(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)
 	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
 	if (isBinaryFunction(left) && isObject(right)) return filterObjIndexed(left)(right);						// filterObjIndexed		(SVV)DD					(+.="b2")?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
-	if (isUnaryFunction(left) && isStream(right)) return streamFilter({fn: left, generator: right});			// filter				(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)
 
 	errorBinary({left, right, operator: "?"});
 };
@@ -584,7 +586,7 @@ const dollar = (left, right) => {
 	// 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 	// 		return reduce(left[0])(left[1])(right);
 	// 	}	
-	if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});		// process				(AVV)LL					((#.+1)^( ),(:.].((%2.=0 .(; )) (1/0 )`)?)$,3%,{)=(2 4 6)
+	if (isUnaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});		// process				(AV)LL					((#.+1)^( ),(1'.((%2.=0 ;) 1/0`)?)$,3%,{)=(2 4 6)
 
 	if (isString(left) && isArray(right)) {																		// join					SAS						", "$(1 2 3)="1, 2, 3"
 		try {
