@@ -91,6 +91,7 @@ const processStream = ({generator, reducer}) => function*() {
 	}
 };
 const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
+const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}}
 
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
@@ -484,6 +485,7 @@ const minus = (left, right) => {
 	if (isArray(left) && isArray(right)) return splice(left, ...right);											// splice				AAA						(5 6 7 8)-(1 2 3 4)=(5 3 4 8)
 	if (isString(left) && isArray(right)) return left.substring(0, right[0]) + (right[2] || "")					// splice				SAS						"nucular"-(3 2 "le")="nuclear"
 		+ left.substring(right[0] + right[1]);
+	if (isStream(left) && isNumber(right)) return streamDrop({n: right, generator: left});						// drop					NLL						((#.+1)^( ),-3,%3,{)=(4 5 6)
 
 	errorBinary({left, right, operator: "-"});
 };
@@ -655,7 +657,7 @@ const percent = (left, right) => {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right);									// remainder			NNN						7%2=1
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; 			// split				NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))
 																												// split				NSA						2%"abcde"=("ab" "cde")
-		else if (isStream(right)) return streamTake({n: left, generator: right});								// take					NLA						(3%((#.+1)^( )),{)=(1 2 3)
+		else if (isStream(right)) return streamTake({n: left, generator: right});								// take					NLL						(3%((#.+1)^( )),{)=(1 2 3)
 	}
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []});							// chunk				AAA						(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))

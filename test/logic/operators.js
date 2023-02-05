@@ -261,12 +261,14 @@ export default () => {
 			omitKeysD				\(("a" 1) ("b" 2))-("a" "b")
 			spliceA					(5 6 7 8)-(1 2 3 4)
 			spliceS					"nucular"-(3 2 "le")
+			dropA					(#.+1)^( ),-3,3%,{
 		*/
 		it('subtract				NNN						5-2=3', () => expect(subtractN).eql(3));
 		it('omitKey					DSD						\\(("a" 1) )-"a"=(\\( ))', () => expect(omitKeyD).eql({}));
 		it('omitKeys				DAD						\\(("a" 1) ("b" 2))-("a" "b")=(\\( ))', () => expect(omitKeysD).eql({}));
 		it('splice					AAA						(5 6 7 8)-(1 2 3 4)=(5 3 4 8)', () => expect(spliceA).eql([5, 3, 4, 8]));
 		it('splice					SAS						"nucular"-(3 2 "le")="nuclear"', () => expect(spliceS).eql("nuclear"));
+		it('drop					NLL						((#.+1)^( ),-3,3%,{)=(4 5 6)', () => expect(dropA).eql([4, 5, 6]));
 	});
 
 	describe("greater (>)", () => {
