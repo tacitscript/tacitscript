@@ -43,14 +43,14 @@ export default () => {
 		it("first9=[2, 3, 5, 7, 11, 13, 17, 19, 23]", () => expect(first9).eql([2, 3, 5, 7, 11, 13, 17, 19, 23]));
 	});
 
-	// describe("primes", () => {
-	// 	/*ts
-	// 		natNumsPlusOne			(#.+2)^( )
-	// 		sieve					:.].(; .(.(~% !=0`).(.$).? sieve$`).(.$))
-	// 		firstNine				sieve$natNumsPlusOne,9%,{
-	// 	*/
-	// 	it('firstNine=(2 3 5 7 11 13 17 19 23)', () => expect(firstNine).eql([2, 3, 5, 7, 11, 13, 17, 19, 23]));
-	// });
+	describe("primes", () => {
+		/*ts
+			natNumsPlusOne			(#.+2)^( )
+			sieve					1'.(; .(.(~% !=0`).(.$).? sieve$`).(.$))
+			firstNine				sieve$natNumsPlusOne,9%,{
+		*/
+		it('firstNine=(2 3 5 7 11 13 17 19 23)', () => expect(firstNine).eql([2, 3, 5, 7, 11, 13, 17, 19, 23]));
+	});
 
 	describe("fib -1.(((#.=0 1`) (#.=1 1`) _2%.].+$)?)^( )-.1%.{.0'", () => {
 		/*ts
@@ -59,18 +59,18 @@ export default () => {
 		it('fib8=21', () => expect(fib(8)).eql(21));
 	});
 
-	describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
-		/*ts
-			cycledStream			;.(: ).[.(:.).:((
-										(.(].[.# [).<$ ].].(; ))
-										.(.(].[.# [).%$ ].[).'$.(; )
-									)?).(.$)
-			solutionA				naturals,cycledStream3$,5%,{
-			solutionB				cycledStream3$.5%.{
-		*/
-		it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
-		it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
-	});
+	// describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
+	// 	/*ts
+	// 		cycledStream			;.(: ).[.(:.).:((
+	// 									(.(].[.# [).<$ ].].(; ))
+	// 									.(.(].[.# [).%$ ].[).'$.(; )
+	// 								)?).(.$)
+	// 		solutionA				naturals,cycledStream3$,5%,{
+	// 		solutionB				cycledStream3$.5%.{
+	// 	*/
+	// 	it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
+	// 	it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
+	// });
 
 	describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
 		/*ts
