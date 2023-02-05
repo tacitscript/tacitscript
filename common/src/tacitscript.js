@@ -124,9 +124,9 @@ const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction'].includ
 const arity = value => {
 	if (!isFunction(value)) return 0;
 
-	if (value.length === 1) return 1;
+	if (value.length === 2) return 2;
 
-	return 2;
+	return 1;
 };
 const isBinaryFunction = value => arity(value) === 2;
 const isUnaryFunction = value => arity(value) === 1;
