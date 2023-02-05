@@ -12,8 +12,8 @@ export default () => {
 		};
 		/*ts
 			typeL					}naturalNumbers
-			// firstThree				3%naturalNumbers
-			// typeFirstThree			}firstThree
+			firstThree				3%naturalNumbers
+			typeFirstThree			}firstThree
 			// typeFirstThreeB			firstThree,}
 			// result					{firstThree
 			// natNums					(#.+1)^( )
@@ -24,7 +24,7 @@ export default () => {
 		// it("firstFourNats=(1 2 3 4)", () => expect(firstFourNats).eql([1, 2, 3, 4]));
 		// it("{firstThree='L'", () => expect(result).eql([1, 2, 3]));
 		// it("firstThree,}='L'", () => expect(typeFirstThreeB).eql("L"));
-		// it("}(firstThree)='L'", () => expect(typeFirstThree).eql("L"));
+		it("}(firstThree)='L'", () => expect(typeFirstThree).eql("L"));
 		it("}naturalNumbers='L'", () => expect(typeL).eql("L"));
 	});
 

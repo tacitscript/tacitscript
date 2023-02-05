@@ -31,9 +31,11 @@ export default () => {
 		/*ts
 			unnestA					{(1 (2 3))
 			evalU					{"Math.sqrt"
+			spreadA					3%((#.+1)^( )),{
 		*/
 		it('unnest					AA						{(1 (2 3))=(1 2 3)', () => expect(unnestA).eql([1, 2, 3]));
 		it('eval					S?						{"Math.sqrt"4=2', () => expect(evalU(4)).eql(2));
+		it('spread					LA						(3%((#.+1)^( )),{)=(1 2 3)', () => expect(spreadA).eql([1, 2, 3]));
 	});
 
 	describe("backslash (\\)", () => {
@@ -119,10 +121,12 @@ export default () => {
 			powerN					2^3
 			generateA				;^3
 			scanA					(#.<5 #.+1)^( )
+			lazyScanA				3%((#.+1)^( )),{
 		*/
 		it('power					NNN						2^3=8', () => expect(powerN).eql(8));
 		it('generate				(N?)NA					;^3=(0 1 2)', () => expect(generateA).eql([0, 1, 2]));
 		it('scan					AAA						(#.<5 #.+1)^( )=(1 2 3 4 5)', () => expect(scanA).eql([1, 2, 3, 4, 5]));
+		it('lazyScan				(AV)AL					(3%((#.+1)^( )),{)=(1 2 3)', () => expect(lazyScanA).eql([1, 2, 3]));
 	});
 
 	describe("percent (%)", () => {
@@ -135,6 +139,7 @@ export default () => {
 			chunkWithDelimiterA		", "%"1, 2, 3, 4"
 			chunkWhenComparatorA	<%(1 2 3 2 1)
 			chunkWhenComparatoraA	<%"abcba"
+			takeA					3%((#.+1)^( )),{
 		*/
 		it('remainder				NNN						7%2=1', () => expect(remainderN).eql(1));
 		it('split					NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))', () => expect(splitA).eql([[1, 2], [3, 4, 5]]));
@@ -144,6 +149,7 @@ export default () => {
 		it('chunkWithDelimiter		SSA						", "%"1, 2, 3, 4"=("1" "2" "3" "4")', () => expect(chunkWithDelimiterA).eql(["1", "2", "3", "4"]));
 		it('chunkWhenComparator		(VVV)AA					<%(1 2 3 2 1)=((1 ) (2 ) (3 2 1))', () => expect(chunkWhenComparatorA).eql([[1], [2], [3, 2, 1]]));
 		it('chunkWhenComparator		(SSV)SA					<%"abcba"=("a" "b" "cba")', () => expect(chunkWhenComparatoraA).eql(["a", "b", "cba"]));
+		it('take					NLA						(3%((#.+1)^( )),{)=(1 2 3)', () => expect(takeA).eql([1, 2, 3]));
 	});
 
 	describe("bar (|)", () => {

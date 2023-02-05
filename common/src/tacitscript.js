@@ -655,7 +655,7 @@ const percent = (left, right) => {
 		if (isNumber(right)) return (right === 0) ? undefined : (left % right);									// remainder			NNN						7%2=1
 		else if (isArray(right) || isString(right)) return [right.slice(0, left), right.slice(left)]; 			// split				NAA						2%(1 2 3 4 5)=((1 2) (3 4 5))
 																												// split				NSA						2%"abcde"=("ab" "cde")
-	// 	else if (isStream(right)) return streamTake({n: left, generator: right});
+		else if (isStream(right)) return streamTake({n: left, generator: right});								// take					NLA						
 	}
 	else if (isArray(left)) {
 		if (isArray(right)) return chunk({sizes: left, vector: right, newVector: []});							// chunk				AAA						(1 2 0)%(1 2 3 4 5)=((1 ) (2 3) (4 5))
@@ -684,7 +684,7 @@ const hat = (left, right) => {
 
 	// 	return result;
 	// }
-	// if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right}); // (AV)AL lazyScan (#.+1)^( )
+	if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right});					// lazyScan				(AV)AL					(3%((#.+1)^( )),{)=(1 2 3)
 
 	errorBinary({left, right, operator: "^"});
 };
@@ -755,7 +755,7 @@ const braceleft = value => {
 		return reduce((acc, value) => [...acc, ...(isArray(value) ? value : [value])])([])(value);				// unnest				AA						{(1 (2 3))=(1 2 3)
 	// function won't be output on literal evaluation - expanded in parser
 	if (isString(value)) return eval(ts2es6(value));															// eval					S?						{"Math.sqrt"4=2
-	// if (isStream(value)) return [...value()]; // ["L", "A"], // spread {(3%naturalNumbers)
+	if (isStream(value)) return [...value()];																	// spread				LA						3%((#.+1)^( )),{=(1 2 3)
 
 	errorUnary({operator: "{", value});
 };
