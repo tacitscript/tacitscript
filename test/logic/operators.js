@@ -223,6 +223,7 @@ export default () => {
 			indicesOfA				2@(6 8 2 3 2)
 			indicesOfS				"bc"@"abcbcd"
 			// findIndicesA			(%2.=0)@(1 2 3 4)
+			mapbA					*2@((#.+1)^( )),3%,{
 		*/
 		it('map						(VV)AA					*2@(3 4 5)=(6 8 10)', () => expect(mapA).eql([6, 8, 10]));
 		it('map						(VVV)AA					(=@(3 4 5),|$)6=()', () => expect(mapaA(6)).eql(false));
@@ -232,6 +233,7 @@ export default () => {
 		it('indicesOf				VAA						2@(6 8 2 3 2)=(2 4)', () => expect(indicesOfA).eql([2, 4]));
 		it('indicesOf				SSA						"bc"@"abcbcd"=(1 3)', () => expect(indicesOfS).eql([1, 3]));
 		xit('findIndices			(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)', () => expect(findIndicesA).eql([1, 3]));
+		it('map						(VV)LL					(*2@((#.+1)^( )),3%,{)=(2 4 6)', () => expect(mapbA).eql([2, 4, 6]));
 	});
 
 	describe("question (?)", () => {

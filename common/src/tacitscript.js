@@ -125,12 +125,14 @@ const processStream = ({generator, reducer}) => function*() {
 			result.push(newValue);
 
 			if (isStream(newValue)) yield* newValue;
+			else if (isFunction(newValue)) yield* newValue(stream);
 			else yield newValue;
 		}
 	}
 };
 const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) return; i += 1; yield val;}};
-const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}}
+const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of generator()) {if (i >= n) yield val; else i += 1;}};
+const streamMap = ({fn, generator}) => function*() {for (const val of generator()) yield fn(val);};
 
 //==========================================================
 // ts functional utilities using ts logic (falsey is only undefined or false)
@@ -551,6 +553,7 @@ let atsign = (left, right) => {
 
 		return indices;
 	}
+	if (isUnaryFunction(left) && isStream(right)) return streamMap({fn: left, generator: right});				// map					(VV)LL					(*2@((#.+1)^( )),3%,{)=(2 4 6)
 	// if (isUnaryFunction(left) && isArray(right)) {															// findIndices			(VV)AA					(%2.=0)@(1 2 3 4)=(1 3)
 	// 	try {
 	// 		const indices = [];
