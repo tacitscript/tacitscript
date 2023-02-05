@@ -587,7 +587,7 @@ const dollar = (left, right) => {
 	// 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
 	// 		return reduce(left[0])(left[1])(right);
 	// 	}	
-	// } else if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});
+	if (isBinaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});		// process				(AVV)LL					((#.+1)^( ),(:.].((%2.=0 ;) 1/0`)?)$,3%,{)=(2 4 6)
 
 	if (isString(left) && isArray(right)) {																		// join					SAS						", "$(1 2 3)="1, 2, 3"
 		try {

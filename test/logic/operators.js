@@ -194,10 +194,12 @@ export default () => {
 			reduceN					+$(1 2 3)
 			prependA				1$(2 3)
 			joinS					", "$(1 2 3)
+			processA				(#.+1)^( ),(:.].((%2.=0 ;) 1/0`)?)$,3%,{
 		*/
 		it('reduce					(VVV)AV					+$(1 2 3)=6', () => expect(reduceN).eql(6));
 		it('prepend					VAA						1$(2 3)=(1 2 3)', () => expect(prependA).eql([1, 2, 3]));
 		it('join					SAS						", "$(1 2 3)', () => expect(joinS).eql("1, 2, 3"));
+		it('process					(AVV)LL					((#.+1)^( ),(:.].((%2.=0 ;) 1/0`)?)$,3%,{)=(2 4 6)', () => expect(processA).eql([2, 4, 6]));
 	});
 
 	describe("asterisk (*)", () => {

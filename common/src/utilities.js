@@ -1,7 +1,7 @@
 import ts from "./tacitscript.js";
 
 /*ts
-	streamFromArray				.(#` ',~).(.$).^( )					AG
+	streamFromArray				.(#` ~').(.$).^( )					AL
 	naturals					(#.+1)^( )							L
 */
 

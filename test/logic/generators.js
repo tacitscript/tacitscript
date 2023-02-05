@@ -1,7 +1,60 @@
 const {expect} = chai;
 import ts from "tacitscript";
+import {streamFromArray, naturals} from "utilities";
 
 export default () => {
+	describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
+		/*ts
+			cycledStream			;.(: ).[.(:.).:((
+										(.(].[.# [).<$ ].])
+										.(.(].[.# [).%$ ].[).'$
+									)?).(.$)
+			solutionA				naturals,cycledStream3$,5%,{
+			solutionB				cycledStream3$.5%.{
+		*/
+			it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
+			it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
+		});
+
+	describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
+		/*ts
+			powerSeries			(;.(.([ #.-2).+$ 1').^$)^
+			threeTwo			powerSeries(3 2)
+			firstThree			3%threeTwo,{
+			threeTwoB			(3 2),powerSeries
+			powerSeriesB		:.powerSeries
+			threeTwoC			3powerSeriesB2
+			ps					:.(;.(.([ #.-2).+$ 1').^$)^				NNL{N}
+			psArray				ps.3%.{									NNA{N}
+		*/
+		it("3psArray2=(9 16 25)", () => expect(psArray(3, 2)).eql([9, 16, 25]));
+		it("powerSeries([3, 2])().next().value=9", () => expect(powerSeries([3, 2])().next().value).eql(9));
+		it("3%(powerSeries(3 2)),{=(9 16 25)", () => expect(firstThree).eql([9, 16, 25]));
+	});
+
+	describe("naturals (#.+1)^( )", () => {
+		/*ts
+			firstFour				4%naturals,{
+		*/
+		it("4%naturals,{=(1 2 3 4)", () => expect(firstFour).eql([1, 2, 3, 4]));
+	});
+
+	describe("applyStream", () => {
+		/*ts
+			numbers					streamFromArray(1 2 3),{
+		*/
+		it("streamFromArray(1 2 3),{=(1 2 3)", () => expect(numbers).eql([1, 2, 3]));
+	});
+
+	describe("array bounding generators", () => {
+		/*ts
+			streamFromArray			.(#` ~').(.$).^( )
+			numbers					streamFromArray(1 2 3)
+			array					{numbers
+		*/
+		it("array=(1 2 3)", () => expect(array).eql([1, 2, 3]));
+	});
+
 	describe("natural numbers", () => {
 		const naturalNumbers = function*() {
 			let num = 1;
