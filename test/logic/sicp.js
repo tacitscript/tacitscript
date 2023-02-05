@@ -2,14 +2,14 @@ const { expect, assert } = chai;
 import ts from "tacitscript";
 
 export default () => {
-	describe('complex numbers - revealing module .(: ((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: (~.+$@.complexASV)`).(.$)) 0/0`)?`).(.$)', () => {
-	// 	// NB if we pass a module here eg, complexASV(1 2)"add"(complexASV(3 4)) then it fails as complexASV(1 2)"add" is applied to complexASV(3 4)
+	describe('complex numbers - revealing module .(: ((].="real" [.[) (].="imag" [.]) (].="mag" [.^2@.+$.^0.5) (].="add" [.(: (~.+$@.complexASV)`).(.$)) (].="addComplex" [.(:.([ ].("real", "imag",)).*$ (+$@.complexASV)`).(.$)) 0/0`)?`).(.$)', () => {
 		/*ts
 			complexASV		.(: (
 				(].="real" [.[)
 				(].="imag" [.])
 				(].="mag" [.^2@.+$.^0.5)
 				(].="add" [.(* (+$@.complexASV)`).(.$))
+				(].="addComplex" [.(:.([ ].("real", "imag",)).*$ (+$@.complexASV)`).(.$))
 				0/0`
 			)?`).(.$)
 			doubleIntake	:.:
@@ -22,6 +22,7 @@ export default () => {
 			)?`).(.$)
 			solutionA		"mag",3complex4
 			solutionB		complexASV(3 4)"add"(5 6)"real"
+			solutionC		complexASV(2 1)"addComplex"(complexASV(1 3))"mag"
 		*/
 		it('complexASV(3 4)"mag"=5', () => expect(complexASV([3, 4])("mag")).eql(5));
 		it(`complexASV(3 4)"real"=3`, () => expect(complexASV([3, 4])("real")).eql(3));
@@ -31,6 +32,7 @@ export default () => {
 		it(`"mag",3complex4=5`, () => expect(solutionA).eql(5));
 		it('"hello",2module3="hello"', () => expect(module(2, 3)("hello")).eql("hello"));
 		it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
+		it('complexASV(2 1)"addComplex"(complexASV(1 3))"mag"', () => expect(solutionC).eql(5));
 	});
 
 	describe("2.59 unionSet +.removeDuplicates", () => {
