@@ -57,18 +57,18 @@ export default () => {
 		it('fib8=21', () => expect(fib(8)).eql(21));
 	});
 
-	// describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
-	// 	/*ts
-	// 		cycledStream			;.(: ).[.(:.).:((
-	// 									(.(].[.# [).<$ ].])
-	// 									.(.(].[.# [).%$ ].[).'$
-	// 								)?).(.$)
-	// 		solutionA				naturals,cycledStream3$,5%,{
-	// 		solutionB				cycledStream3$.5%.{
-	// 	*/
-	// 	it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
-	// 	it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
-	// });
+	describe("cycledStream ;.(: ).[.(:.).:(((.(].[.# [).<$ ].]) .(.(].[.# [).%$ ].[).'$)?).(.$)", () => {
+		/*ts
+			cycledStream			;.(: ).[.(:.).:((
+										(.(].[.# [).<$ ].].(; ))
+										.(.(].[.# [).%$ ].[).'$.(; )
+									)?).(.$)
+			solutionA				naturals,cycledStream3$,5%,{
+			solutionB				cycledStream3$.5%.{
+		*/
+		it("naturals,(cycledStream3$.5%.{)=(1 2 3 1 2)", () => expect(solutionB(naturals)).eql([1, 2, 3, 1, 2]));
+		it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
+	});
 
 	describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
 		/*ts
