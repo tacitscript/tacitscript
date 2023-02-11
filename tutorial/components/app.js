@@ -133,6 +133,11 @@ const style = css({
 							display: "flex",
 							margin: "1rem 0.3rem 0.2rem",
 						},
+						" .multiple-line": {
+							display: "flex",
+							margin: "1rem 0.3rem 0.2rem",
+							flexDirection: "column",
+						},
 						" .name-expression": {
 							display: "flex",
 							alignItems: "baseline",

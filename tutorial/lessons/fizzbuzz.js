@@ -31,7 +31,7 @@ export default {
 		getHtml: details => <div {...style}>
 			<div className="single-line name-expression">
 				<div className="name">fizzbuzz</div>
-				<TextEdit {...{...details, multiline: true, solution: `0+.+1.""+`}}>
+				<TextEdit {...{...details, multiline: true, solution: `+1^100,(((%3.=0)&(%5.=0) "FizzBuzz"\`) (%3.=0 "Fizz"\`) (%5.=0 "Buzz"\`) ;)?@`}}>
 					<div className="console">{`,""+.>({"console.log")`}</div>
 				</TextEdit>
 			</div>

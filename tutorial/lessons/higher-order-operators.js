@@ -14,10 +14,6 @@ export default {
 		<div className="code-block">{getOperationExamples([
 			["sum", "+$(3 4 5)", "equals 12"],
 		])}</div>
-		<p>Another version of <a href="#reduce">($) reduce</a> takes an array to the left, comprising of a binary operator and a starting value.</p>
-		<div className="code-block">{getOperationExamples([
-			["changeFromPound", "(- 100)$(50 20 5)", "equals (100-50-20-5)=25"],
-		])}</div>
 		<p>As well as building a values this way, we can construct algorithms from arrays of operators.</p>
 	</div>,
 	exercise: {
@@ -28,7 +24,7 @@ export default {
 chain		${def}
 solution	chain(-32 /9 *5)
 */`,
-		getHtml: details => <div className="single-line"><div className="name-expression">
+		getHtml: details => <div className="multiple-line"><div className="name-expression">
 		<div className="name">chain</div>
 			<TextEdit {...{...details, solution: ".$"}}/>
 		</div><div className="name-expression">

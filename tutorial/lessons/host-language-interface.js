@@ -29,7 +29,7 @@ const speed = (distance, time) => distance / time;
 /*ts
 		marathonSpeed ${def}
 */
-const solution = marathonSpeed(2.0272); // marathon record was set at 2:01:09`,
+const solution = marathonSpeed(2.0272);`,
 		getHtml: details => <div><br/><div className="rule"/><span>{`
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;
@@ -43,7 +43,7 @@ const recordMph = marathonSpeed(2.0275);`}</span></div>,
 		hint2: "marathonMiles applyTo speed",
 		tests: [
 			{description: <span>it uses <i>marathonMiles</i> and <i>speed</i></span>, condition: ({def}) => ["marathonMiles", "speed"].every(token => def.includes(token))},
-			{description: "it calculates the record average speed for a marathon run (12.9mph)", condition: ({solution}) => (solution - 12.93159) < 1E-5},
+			{description: "it calculates the record average speed for a marathon run: 12.9mph (marathon record was set at 2:01:09.)", condition: ({solution}) => (solution - 12.9498) < 1E-5},
 		],
 	},
 	epilogue: <div>
