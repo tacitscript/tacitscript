@@ -29,7 +29,7 @@ const speed = (distance, time) => distance / time;
 /*ts
 		marathonSpeed ${def}
 */
-const solution = marathonSpeed(2.0275);`,
+const solution = marathonSpeed(2.0272); // marathon record was set at 2:01:09`,
 		getHtml: details => <div><br/><div className="rule"/><span>{`
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;
