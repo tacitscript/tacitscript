@@ -1,7 +1,23 @@
-const {expect} = chai;
+const {expect, assert} = chai;
 import ts from "tacitscript";
 
 export default () => {
+	describe("Async", () => {
+		/*ts
+			callBackDS			"id"'.{"x => console.log.call(null, x)"
+			fetchU				{"() => fetch('https://api.restful-api.dev/objects/7').then(response => response.json()).then(callBackDS)"
+		*/
+		let spy;
+		before(() => spy = sinon.spy(console, "log"));
+		it('tacitscript function in js callback', done => {
+			fetchU().then(() => {
+				assert(spy.calledWith("7"));
+				done();
+			});
+		});
+		after(() => spy.restore());
+	});
+
 	describe("Parser", () => {
 		/*ts
 			oneN				1
