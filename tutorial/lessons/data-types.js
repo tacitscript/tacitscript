@@ -3,6 +3,7 @@ import TextEdit from "../components/text-edit.js";
 export default {
 	id: "data-types",
 	name: "Data Types",
+	operations: <React.Fragment><a href="#equality">(=) equality</a></React.Fragment>,
 	description: <div>
 		<p><b>Strings</b> may contain newlines and are delimted by double-quotes only. Where required, a character may be escaped by a backslash eg. \", \\.</p>
 		<div className="code-block">{`"\\"Make things as simple as possible but no simpler.\\"\n\t- Albert Einstein"`}</div>

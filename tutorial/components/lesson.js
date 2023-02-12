@@ -22,8 +22,13 @@ const style = css({
 			overflow: "hidden",
 			"> .operations": {
 				fontWeight: "normal",
-				margin: "0 1rem",
+				marginLeft: "1rem",
 				whiteSpace: "nowrap",
+			},
+			"> .status": {
+				width: "2rem",
+				display: "flex",
+				justifyContent: "flex-end",
 			},
 		},
 		":hover > .right > .operations": {
@@ -69,8 +74,8 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 				<div className="name">{name}</div>
 			</div>
 			<div className="right">
-				{operations}
-				{(isPassed == undefined) ? null : <i className={`status fas fa-${isPassed ? "check" : "pen"}`}/>}
+				{operations ? <div className="operations">{operations}</div> : null}
+				<div className="status">{(isPassed == undefined) ? null : <i className={`fas fa-${isPassed ? "check" : "pen"}`}/>}</div>
 			</div>
 		</div>
 		{open ? <div className="contents">
