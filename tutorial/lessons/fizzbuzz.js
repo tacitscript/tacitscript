@@ -18,7 +18,7 @@ const style = css({
 		},
 	},
 });
-
+ 
 export default {
 	id: "fizzbuzz",
 	name: "Fizzbuzz: (^) generate, (&) andPredicate, (\`) constant, (;) identity, (?) cond, (@) map, (>) tap, ({) eval",
