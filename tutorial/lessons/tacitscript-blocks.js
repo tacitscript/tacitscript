@@ -37,7 +37,6 @@ export default {
 			["timesNNN", "*", <div className="comment">Takes a number (<b>N</b>), on left and right, and returns a number</div>],
 			["diameterN", "2(timesNNN)radiusN", "equals 20"],
 		])}</div>
-		<p>We will adopt this practice from here on.</p>
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",
