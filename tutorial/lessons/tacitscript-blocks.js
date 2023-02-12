@@ -4,6 +4,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "tacitscript-blocks",
 	name: "tacitscript Blocks",
+	operations: <React.Fragment><a href="#applyTo">(,) applyTo</a></React.Fragment>,
 	description: <div>
 		<p>A tacitscript program will consist of a vertical list of name-expression pairs, each pair delimited by tabs/spaces and typically notated in two columns.</p>
 		<p>Names must contain alphabetic characters <i>only</i>.</p>
@@ -26,7 +27,7 @@ export default {
 			["negativeTwoA", 'negative(two)', "these expressions…"],
 			["negativeTwoB", '(negative)two', "…give the same result"],
 		])}</div>
-		<p>Alternatively, we can use the <a href="#applyTo">, (applyTo)</a> operation that applys an argument to an operator.</p>
+		<p>Alternatively, we can use the <a href="#applyTo">(,) applyTo</a> operation that applys an argument to an operator.</p>
 		<div className="code-block">{getOperationExamples([
 			["negativeTwoC", 'two,negative', "also 2,_"],
 		])}</div>

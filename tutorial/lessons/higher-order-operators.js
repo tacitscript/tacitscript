@@ -7,6 +7,7 @@ const fToC = value => (value - 32) / 9 * 5;
 export default {
 	id: "higher-order-operators",
 	name: "Higher Order Operators",
+	operations: <React.Fragment><a href="#reduce">($) reduce</a></React.Fragment>,
 	description: <div>
 		<p>Higher order operators take other operators as arguments.</p>
 		<p>The <a href="#dollar">dollar ($)</a> operator represents a group of operations that <i>join</i> elements together.</p>

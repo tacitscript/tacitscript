@@ -7,6 +7,7 @@ const fToC = value => (value - 32) / 9 * 5;
 export default {
 	id: "f",
 	name: "Operator Chaining",
+	operations: <React.Fragment><a href="#pipe">(.) pipe</a></React.Fragment>,
 	description: <div>
 		<p>The <a href="#pipe">(.) pipe</a> operation takes a unary operator to the left and right. The resulting operator passes a value through the left operator, then feeds the result through the right operator.</p>
 		<div className="code-block">{getOperationExamples([

@@ -29,6 +29,7 @@ export default [
 	comparisons,
 	logicOperations,
 */
-	incrementNumericString,
 	fizzbuzz,
+
+	incrementNumericString,
 ];
