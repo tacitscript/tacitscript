@@ -42,7 +42,7 @@ export default {
 					return false;
 				}
 			}},
-			{description: <span><b>inverse</b>0 is <i>undefined</i></span>, condition: ({solution}) => {
+			{description: <span><b>inverse</b>0 is <i>undefined</i> (see below)</span>, condition: ({solution}) => {
 				try {
 					return solution(0) == undefined;
 				} catch (e) {

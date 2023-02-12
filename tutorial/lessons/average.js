@@ -1,16 +1,17 @@
 import TextEdit from "../components/text-edit.js";
 
 export default {
-	id: "increment-numeric-string",
-	name: "Increment Numeric String",
+	id: "average",
+	name: "Average",
+	operations: <React.Fragment><a href="#applyToArray">(.) applyToArray</a>, <a href="#length">(#) length</a></React.Fragment>,
 	exercise: {
 		question: <div>
-			<div>Define the operator <b>increment</b> that increments a numeric string:</div>
+			<div>Define the operator <b>averageAN</b> that takes an array of numbers and returns the arithmetic mean:</div>
 		</div>,
 		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
-			<div className="name">increment</div>
-			<TextEdit {...{...details, multiline: true, solution: `0+.+1.""+`}}/>
+			<div className="name">averageAN</div>
+			<TextEdit {...{...details, multiline: true, solution: `.(+$ #)./$`}}/>
 		</div>,
 		getTestValue: index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"),
 		hint1: "Use operators: . +",
