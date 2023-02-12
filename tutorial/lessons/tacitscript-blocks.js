@@ -31,9 +31,16 @@ export default {
 		<div className="code-block">{getOperationExamples([
 			["negativeTwoC", 'two,negative', "also 2,_"],
 		])}</div>
+		<p>A sometimes useful convention for tacitscript names is to detail the type at the end, according to the rules <a href="#type-signatures">here</a>.</p>
+		<div className="code-block">{getOperationExamples([
+			["radiusN", '10'],
+			["timesNNN", "*", <div className="comment">Takes a number (<b>N</b>), on left and right, and returns a number</div>],
+			["diameterN", "2(timesNNN)radiusN", "equals 20"],
+		])}</div>
+		<p>We will adopt this practice from here on.</p>
 	</div>,
 	exercise: {
-		question: "Define a tacitscript program that:",
+		question: "Define a tacitscript expression that:",
 		getJs: def => `/*ts\n${def}\n*/`,
 		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true, solution: `plus\t\t+
 solution\t3plus7\t\tthis is a comment`}}/></div>,
