@@ -279,6 +279,7 @@ const style = css({
 
 export default ({store}) => {
 	const {solutions} = store.getState().app;
+	let index = 0;
 
 	return <div {...style}>
 		<h1>tacitscript</h1>
@@ -299,17 +300,15 @@ export default ({store}) => {
 			<Score {...{solutions}}/>
 		</div>
 
-		<div className="block">{lessons.slice(0, 6).map((details, index) => <Lesson {...{...details, index, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
-
-		<div className="block">{lessons.slice(6, 8).map((details, index) => <Lesson {...{...details, index: index + 6, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
-
-		<div className="block">{lessons.slice(8, 9).map((details, index) => <Lesson {...{...details, index: index + 8, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
+		{lessons.slice(0, -1).map(block => <div className="block">{
+			block.map(details => <Lesson {...{...details, index: index++, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)
+		}</div>)}
 
 		<div className="section-title">
 			<div className="name">Extra Problems</div>
 		</div>
 
-		<div className="block">{lessons.slice(9).map((details, index) => <Lesson {...{...details, index: index + 12, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
+		<div className="block">{lessons[lessons.length - 1].map(details => <Lesson {...{...details, index: index++, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 
 		<div className="section-title">
 			<div className="name">Reference</div>

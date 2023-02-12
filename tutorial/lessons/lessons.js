@@ -12,24 +12,27 @@ import hostLanguageInterface from "./host-language-interface.js";
 import higherOrderOperators from "./higher-order-operators.js";
 import incrementNumericString from "./increment-numeric-string.js";
 import fizzbuzz from "./fizzbuzz.js";
+import average from "./average.js";
 
-export default [
+export default [[
 	arithmeticOperations,
 	dataTypes,
 	operatorOverloading,
 	tacitscriptBlocks,
 	customOperators,
 	hostLanguageInterface,
-
+], [
 	operatorChaining,
 	higherOrderOperators,
+], [
 /*
 	mathOperations,
 	vectorInterrogation,
 	comparisons,
 	logicOperations,
 */
+	average,
 	fizzbuzz,
-
+], [
 	incrementNumericString,
-];
+]];
