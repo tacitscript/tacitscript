@@ -38,9 +38,9 @@ export default ({dispatch}) => {
 			<h3>How</h3>
 			<p>tacitscript is built upon a set of core operators.
 				It contains no dedicated constructs for language features such as loops or control flow.
-				This gives it a very regular, concise syntax.</p>
-			<p>Notably, it adopts a strict <a href="https://en.wikipedia.org/wiki/Tacit_programming">point-free</a> style that excludes representation of function arguments.
-				This style is seen predominantly among stack-based (<a href="https://en.wikipedia.org/wiki/Joy_(programming_language)">Joy</a>, <a href="https://en.wikipedia.org/wiki/Factor_(programming_language)">Factor</a>), and array (<a href="https://en.wikipedia.org/wiki/APL_(programming_language)">APL</a>, <a href="https://en.wikipedia.org/wiki/J_(programming_language)">J</a>) languages.</p>
+				This gives it a very regular, concise syntax, based only on the application of values to operators.</p>
+			<p>It adopts a strict <a href="https://en.wikipedia.org/wiki/Tacit_programming">point-free</a> style that excludes named representation of arguments.
+				This style is seen in some stack-based (<a href="https://en.wikipedia.org/wiki/Joy_(programming_language)">Joy</a>, <a href="https://en.wikipedia.org/wiki/Factor_(programming_language)">Factor</a>), and array (<a href="https://en.wikipedia.org/wiki/APL_(programming_language)">APL</a>, <a href="https://en.wikipedia.org/wiki/J_(programming_language)">J</a>) languages.</p>
 			<p>Syntactially, tacitscript is similar to J, using standard ASCII punctuation characters as an inventory of core programming operations. 
 				Semantically, the language shares more DNA with functional languages, borrowing from the ML (automatic currying, referential transparency) and LISP (homoiconicity) families.
 			</p>
