@@ -300,15 +300,15 @@ export default ({store}) => {
 			<Score {...{solutions}}/>
 		</div>
 
-		{lessons.slice(0, -1).map(block => <div className="block">{
-			block.map(details => <Lesson {...{...details, index: index++, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)
+		{lessons.slice(0, -1).map((block, i) => <div className="block" key={i}>{
+			block.map(details => <Lesson {...{...details, index: index++, key: details.id, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)
 		}</div>)}
 
 		<div className="section-title">
 			<div className="name">Extra Problems</div>
 		</div>
 
-		<div className="block">{lessons[lessons.length - 1].map(details => <Lesson {...{...details, index: index++, key: index, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
+		<div className="block">{lessons[lessons.length - 1].map(details => <Lesson {...{...details, index: index++, key: details.id, ...(solutions[details.id] || {}), dispatch: store.dispatch}}/>)}</div>
 
 		<div className="section-title">
 			<div className="name">Reference</div>

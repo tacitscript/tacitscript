@@ -50,7 +50,7 @@ export default ({id, symbol, sections, type, dispatch}) => {
 		<b className="status" title={type}>{type[0]}</b>
 		{isOpen ? <div className="contents">
 			<hr/>
-			{sections.map(({id, type, examples}) => <React.Fragment>
+			{sections.map(({id, type, examples}) => <React.Fragment key={id}>
 				<h3><div id={id} className="name">{id}</div><a className="type-signature" href="#type-signatures">{type}</a></h3>
 				<div className="code-block">
 					{examples}

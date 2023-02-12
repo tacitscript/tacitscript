@@ -1,4 +1,7 @@
 import TextEdit from "../components/text-edit.js";
+import ts from "tacitscript";
+
+const average = array => R.reduce(R.add, 0, array) / array.length;
 
 export default {
 	id: "average",
@@ -13,20 +16,24 @@ export default {
 			<div className="name">averageAN</div>
 			<TextEdit {...{...details, multiline: true, solution: `.(+$ #)./$`}}/>
 		</div>,
-		getTestValue: index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"),
-		hint1: "Use operators: . +",
-		hint2: "convert to number, increment, convert to string",
+		getTestValue: index => {
+			if (!index) return R.times(() => Math.floor(Math.random() * 10), 5);
+
+			return [Math.floor(Math.random() * 10)];
+		},
+		hint1: "Use operators: + / . $ #",
+		hint2: "calculate the sum and length of the array, then divide-reduce",
 		tests: [
-			{description: testValue => <span><b>increment</b>{`"${testValue}" equals "${(+testValue.replace(/_/, "-") + 1).toFixed(1).replace(/-/, "_")}"`}</span>, condition: ({solution, testValue}) => {
+			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${average(testValue)}`}</span>, condition: ({solution, testValue}) => {
 				try {
-					return Math.abs(+solution(testValue).replace(/_/, "-") - testValue.replace(/_/, "-") - 1) < 1E-10;
+					return solution(testValue) === average(testValue);
 				} catch (e) {
 					return false;
 				}
 			}},
-			{description: testValue => <span><b>increment</b>"{`${testValue}" equals "${(+testValue + 1).toFixed(1)}"`}</span>, condition: ({solution, testValue}) => {
+			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${testValue[0]}`}</span>, condition: ({solution, testValue}) => {
 				try {
-					return Math.abs(+solution(testValue) - testValue - 1) < 1E-10;
+					return solution(testValue) === testValue[0];
 				} catch (e) {
 					return false;
 				}

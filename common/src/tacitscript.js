@@ -785,6 +785,7 @@ const ts = {
 	arity,
 	apply,
 	typeOf,
+	toString,
 
 	plus,
 	tilde,
