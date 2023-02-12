@@ -104,6 +104,9 @@ const style = css({
 					" .code, a": {
 						color: "inherit",
 					},
+					" a": {
+						textDecoration: "underline",
+					},
 					" a:hover": {
 						color: "var(--brown)",
 					},

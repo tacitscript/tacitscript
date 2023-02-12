@@ -9,7 +9,7 @@ export default {
 	operations: <React.Fragment><a href="#applyToArray">(.) applyToArray</a>, <a href="#length">(#) length</a></React.Fragment>,
 	exercise: {
 		question: <div>
-			<div>Define the operator <b>averageAN</b> that takes an array of numbers and returns the arithmetic mean:</div>
+			<div>Define the operator <b>averageAN</b> that takes an array of numbers and returns the <a target="_blank" href="https://en.wikipedia.org/wiki/Arithmetic_mean">arithmetic mean</a>:</div>
 		</div>,
 		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
