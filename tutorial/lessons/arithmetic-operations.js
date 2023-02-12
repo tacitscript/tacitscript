@@ -3,6 +3,7 @@ import TextEdit from "../components/text-edit.js";
 export default {
 	id: "precedence",
 	name: "Precedence",
+	operations:<div className="operations"><a href="#add">(+) add</a>, <a href="#subtract">(-) subtract</a>, <a href="#multiply">(*) multiply</a>, <a href="#divide">(/) divide</a></div>,
 	description: <div>
 		<p>In tacitscript, each standard <i>operator</i>, eg. <a href="#plus">plus (+)</a>, may represent one of many possible <i>operations</i>, eg. <a href="#add">(+) add</a> or <a href="#concat">(+) concat</a>.</p>
 		<p>tacitscript uses the standard arithmetic operations <a href="#add">(+) add</a>, <a href="#subtract">(-) subtract</a>, <a href="#multiply">(*) multiply</a> and <a href="#divide">(/) divide</a>.</p>

@@ -11,10 +11,28 @@ const style = css({
 	"> .heading": {
 		userSelect: "none",
 		color: "#ccc",
+		justifyContent: "space-between",
+		"> .left": {
+			display: "flex",
+		},
+		"> .right": {
+			marginRight: "0.3rem",
+			display: "flex",
+			alignItems: "center",
+			overflow: "hidden",
+			"> .operations": {
+				fontWeight: "normal",
+				margin: "0 1rem",
+				whiteSpace: "nowrap",
+			},
+		},
+		":hover > .right > .operations": {
+			color: "#ccc",
+		},
 	},
 });
 
-export default ({id, name, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValue} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
+export default ({id, name, operations, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValue} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
 	let es6 = "";
@@ -46,10 +64,15 @@ export default ({id, name, description, epilogue, index, exercise: {question, ge
 
 	return <div className={`panel${open ? " open" : ""}`} {...style}>
 		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
-			<div className="index">{`${index + 1}.`}</div>
-			<div className="name">{name}</div>
+			<div className="left">
+				<div className="index">{`${index + 1}.`}</div>
+				<div className="name">{name}</div>
+			</div>
+			<div className="right">
+				{operations}
+				{(isPassed == undefined) ? null : <i className={`status fas fa-${isPassed ? "check" : "pen"}`}/>}
+			</div>
 		</div>
-		{(isPassed == undefined) ? null : <i className={`status fas fa-${isPassed ? "check" : "pen"}`}/>}
 		{open ? <div className="contents">
 			<hr/>
 			{description}

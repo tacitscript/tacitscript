@@ -23,12 +23,12 @@ export default [
 
 	operatorChaining,
 	higherOrderOperators,
-
+/*
 	mathOperations,
 	vectorInterrogation,
 	comparisons,
 	logicOperations,
-
+*/
 	incrementNumericString,
 	fizzbuzz,
 ];
