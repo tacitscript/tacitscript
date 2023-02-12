@@ -4,7 +4,7 @@ export default ({solutions}) => {
 	const score = (() => {
 		if (R.isEmpty(solutions)) return "";
 
-		const unrevealedLessons = R.reject(({id}) => R.path([id, "revealed"], solutions), lessons);
+		const unrevealedLessons = R.reject(({id}) => R.path([id, "revealed"], solutions), R.unnest(lessons));
 		const passed = R.filter(({id}) => R.path([id, "pass"], solutions), unrevealedLessons);
 
 		return `${passed.length} / ${unrevealedLessons.length}`;
