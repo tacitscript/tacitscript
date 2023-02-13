@@ -27,13 +27,7 @@ export default {
 		hint2: "For each row, zip with accumulator and unnest the column",
 		tests: [{
 			description: testValue => <span><b>transposeAA</b>{`${ts.toString(testValue)} equals ${ts.toString(transpose(testValue))}`}</span>,
-			condition: ({solution, testValue}) => {
-				try {
-					return JSON.stringify(solution(testValue)) === JSON.stringify(transpose(testValue));
-				} catch (e) {
-					return false;
-				}
-			},
+			condition: ({solution, testValue}) => JSON.stringify(solution(testValue)) === JSON.stringify(transpose(testValue)),
 		}],
 	},
 };

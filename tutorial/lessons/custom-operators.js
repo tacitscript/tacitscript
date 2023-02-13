@@ -35,20 +35,8 @@ export default {
 		hint2: "one divide",
 		tests: [
 			{description: "it is an operator", condition: ({solution}) => typeof solution === "function"},
-			{description: testValue => <span><b>inverse</b>{`${testValue} equals ${toDecimalPlaces(1 / testValue, 4)}`}</span>, condition: ({solution, testValue}) => {
-				try {
-					return Math.abs(solution(testValue) - (1 / testValue)) < 1E-10;
-				} catch (e) {
-					return false;
-				}
-			}},
-			{description: <span><b>inverse</b>0 is <i>undefined</i> (see below)</span>, condition: ({solution}) => {
-				try {
-					return solution(0) == undefined;
-				} catch (e) {
-					return false;
-				}
-			}},
+			{description: testValue => <span><b>inverse</b>{`${testValue} equals ${toDecimalPlaces(1 / testValue, 4)}`}</span>, condition: ({solution, testValue}) => Math.abs(solution(testValue) - (1 / testValue)) < 1E-10},
+			{description: <span><b>inverse</b>0 is <i>undefined</i> (see below)</span>, condition: ({solution}) => solution(0) == undefined},
 		],
 	},
 	epilogue: <div>

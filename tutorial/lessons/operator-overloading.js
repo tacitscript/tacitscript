@@ -28,13 +28,7 @@ export default {
 		hint2: "Order precedence may require use of parentheses",
 		tests: [
 			{description: `generates the string "_1"`, condition: ({solution}) => solution === "_1"},
-			{description: 'does not use further strings', condition: ({def}) => {
-				try {
-					return R.pipe(R.split(""), R.count(R.equals('"')))(`""${def}`) === 2;
-				} catch (e) {
-					return false;
-				}
-			}},
+			{description: 'does not use further strings', condition: ({def}) => R.pipe(R.split(""), R.count(R.equals('"')))(`""${def}`) === 2},
 		],
 	},
 };

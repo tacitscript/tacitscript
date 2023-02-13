@@ -16,20 +16,8 @@ export default {
 		hint1: "Use operators: . +",
 		hint2: "convert to number, increment, convert to string",
 		tests: [
-			{description: testValue => <span><b>increment</b>{`"${testValue}" equals "${(+testValue.replace(/_/, "-") + 1).toFixed(1).replace(/-/, "_")}"`}</span>, condition: ({solution, testValue}) => {
-				try {
-					return Math.abs(+solution(testValue).replace(/_/, "-") - testValue.replace(/_/, "-") - 1) < 1E-10;
-				} catch (e) {
-					return false;
-				}
-			}},
-			{description: testValue => <span><b>increment</b>"{`${testValue}" equals "${(+testValue + 1).toFixed(1)}"`}</span>, condition: ({solution, testValue}) => {
-				try {
-					return Math.abs(+solution(testValue) - testValue - 1) < 1E-10;
-				} catch (e) {
-					return false;
-				}
-			}},
+			{description: testValue => <span><b>increment</b>{`"${testValue}" equals "${(+testValue.replace(/_/, "-") + 1).toFixed(1).replace(/-/, "_")}"`}</span>, condition: ({solution, testValue}) => Math.abs(+solution(testValue).replace(/_/, "-") - testValue.replace(/_/, "-") - 1) < 1E-10},
+			{description: testValue => <span><b>increment</b>"{`${testValue}" equals "${(+testValue + 1).toFixed(1)}"`}</span>, condition: ({solution, testValue}) => Math.abs(+solution(testValue) - testValue - 1) < 1E-10},
 		],
 	},
 };

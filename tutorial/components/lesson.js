@@ -52,7 +52,13 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 	}
 
 	const testValues = R.times(getTestValue || (() => {}), R.propOr(0, "length", tests));
-	const passes = tests ? tests.map(({condition}, index) => /*(def != undefined) && */solution && condition({solution, def, es6, testValue: testValues[index]})) : [];
+	const passes = tests ? tests.map(({condition}, index) => {
+		try {
+			return solution && condition({solution, def, es6, testValue: testValues[index]});
+		} catch (e) {
+			return false;
+		}
+	}) : [];
 	const isPassed = def ? passes.every(pass => pass === true) : undefined;
 
 	useEffect(() => {

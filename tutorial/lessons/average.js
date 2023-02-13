@@ -24,20 +24,8 @@ export default {
 		hint1: "Use operators: + / . $ #",
 		hint2: "Calculate the sum and length of the array, then divide-reduce",
 		tests: [
-			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${average(testValue)}`}</span>, condition: ({solution, testValue}) => {
-				try {
-					return solution(testValue) === average(testValue);
-				} catch (e) {
-					return false;
-				}
-			}},
-			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${testValue[0]}`}</span>, condition: ({solution, testValue}) => {
-				try {
-					return solution(testValue) === testValue[0];
-				} catch (e) {
-					return false;
-				}
-			}},
+			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${average(testValue)}`}</span>, condition: ({solution, testValue}) => solution(testValue) === average(testValue)},
+			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${testValue[0]}`}</span>, condition: ({solution, testValue}) => solution(testValue) === testValue[0]},
 		],
 	},
 };

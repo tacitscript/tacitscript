@@ -22,7 +22,7 @@ const style = css({
 export default {
 	id: "fizzbuzz",
 	name: "Fizzbuzz",
-	operations: <React.Fragment><a href="#generate">(^) generate</a>, <a href="#and">(&) and</a>, <a href="#constant">(`) constant</a>, <a href="#remainder">(%) remainder</a>, <a href="#identity">(;) identity</a>, <a href="#cond">(?) cond</a>, <a href="#map">(@) map</a>, <a href="#tap">(&gt;) tap</a>, <a href="#eval">(&#x7b;) eval</a></React.Fragment>,
+	operations: <React.Fragment><a href="#generate">(^) generate</a>, <a href="#and">(&) and</a>, <a href="#constant">(`) constant</a>, <a href="#remainder">(%) remainder</a>, <a href="#identity">(;) identity</a>, <a href="#cond">(?) cond</a>, <a href="#tap">(&gt;) tap</a>, <a href="#eval">(&#x7b;) eval</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<p><i>Fizzbuzz</i> is a popular interview question.</p>
@@ -48,53 +48,36 @@ export default {
 		hint2: "generate 1 to 100, map over array replacing values appropriately",
 		tests: [
 			{description: `an array containing integers 1 to 100 (inclusive), except`, condition: ({solution, testValue}) => {
-				try {
-					return (solution[0].length === 100) && R.addIndex(R.all)((value, i) => {
-						const index = i + 1;
+				return (solution[0].length === 100) && R.addIndex(R.all)((value, i) => {
+					const index = i + 1;
 
-						if (((index % 3) !== 0) && ((index % 5) !== 0)) return value === index;
-						return true;
-					}, solution[0]);
-				} catch (e) {
-					return false;
-				}
+					if (((index % 3) !== 0) && ((index % 5) !== 0)) return value === index;
+					return true;
+				}, solution[0]);
 			}},
 			{description: `for multiples of three, show "Fizz"`, condition: ({solution, testValue}) => {
-				try {
-					return R.addIndex(R.all)((value, i) => {
-						const index = i + 1;
+				return R.addIndex(R.all)((value, i) => {
+					const index = i + 1;
 
-						if (((index % 3) === 0) && ((index % 5) !== 0)) return value === "Fizz";
-						return true;
-					}, solution[0]);
-				} catch (e) {
-					return false;
-				}
+					if (((index % 3) === 0) && ((index % 5) !== 0)) return value === "Fizz";
+					return true;
+				}, solution[0]);
 			}},
-
 			{description: `for multiples of five, show "Buzz"`, condition: ({solution, testValue}) => {
-				try {
-					return R.addIndex(R.all)((value, i) => {
-						const index = i + 1;
+				return R.addIndex(R.all)((value, i) => {
+					const index = i + 1;
 
-						if (((index % 3) !== 0) && ((index % 5) === 0)) return value === "Buzz";
-						return true;
-					}, solution[0]);
-				} catch (e) {
-					return false;
-				}
+					if (((index % 3) !== 0) && ((index % 5) === 0)) return value === "Buzz";
+					return true;
+				}, solution[0]);
 			}},
 			{description: `for multiples of both three and five, show "FizzBuzz"`, condition: ({solution, testValue}) => {
-				try {
-					return R.addIndex(R.all)((value, i) => {
-						const index = i + 1;
+				return R.addIndex(R.all)((value, i) => {
+					const index = i + 1;
 
-						if (((index % 3) === 0) && ((index % 5) === 0)) return value === "FizzBuzz";
-						return true;
-					}, solution[0]);
-				} catch (e) {
-					return false;
-				}
+					if (((index % 3) === 0) && ((index % 5) === 0)) return value === "FizzBuzz";
+					return true;
+				}, solution[0]);
 			}},
 		],
 	},
