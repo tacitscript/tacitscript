@@ -13,6 +13,7 @@ import higherOrderOperators from "./higher-order-operators.js";
 import incrementNumericString from "./increment-numeric-string.js";
 import fizzbuzz from "./fizzbuzz.js";
 import average from "./average.js";
+import transpose from "./transpose.js";
 
 export default [[
 	arithmeticOperations,
@@ -32,6 +33,7 @@ export default [[
 	logicOperations,
 */
 	average,
+	transpose,
 	fizzbuzz,
 ], [
 	incrementNumericString,

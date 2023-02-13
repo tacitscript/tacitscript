@@ -22,7 +22,7 @@ export default {
 			return [Math.floor(Math.random() * 10)];
 		},
 		hint1: "Use operators: + / . $ #",
-		hint2: "calculate the sum and length of the array, then divide-reduce",
+		hint2: "Calculate the sum and length of the array, then divide-reduce",
 		tests: [
 			{description: testValue => <span><b>averageAN</b>{`${ts.toString(testValue)} equals ${average(testValue)}`}</span>, condition: ({solution, testValue}) => {
 				try {
