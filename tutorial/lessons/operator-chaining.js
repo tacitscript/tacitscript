@@ -26,7 +26,7 @@ export default {
 			<div className="name">fToC</div>
 			<TextEdit {...{...details, multiline: true, solution: "-32./9.*5"}}/>
 		</div>,
-		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 2),
 		hint1: "Use operators: * . - /",
 		hint2: "(minus 32) pipe (divide 9) pipe (times 5)",
 		tests: [

@@ -30,7 +30,7 @@ export default {
 			<div className="name">inverse</div>
 			<TextEdit {...{...details, multiline: true, solution: "1/"}}/>
 		</div>,
-		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 3),
 		hint1: "Use operator: /",
 		hint2: "one divide",
 		tests: [

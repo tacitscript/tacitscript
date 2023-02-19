@@ -17,12 +17,12 @@ export default {
 			<div className="name">transposeAA</div>
 			<TextEdit {...{...details, multiline: true, solution: `(*.{@)$`}}/>
 		</div>,
-		getTestValue: () => {
+		getTestValues: () => [(() => {
 			const rows = randomToN(2) + 2;
 			const columns = randomToN(3) + 2;
 
 			return R.times(() => R.times(() => randomToN(10), columns), rows);
-		},
+		})()],
 		hint1: "Use operators: * . $ @ {",
 		hint2: "For each row, zip with accumulator and unnest the column",
 		tests: [{

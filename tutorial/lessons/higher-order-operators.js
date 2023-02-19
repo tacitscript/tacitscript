@@ -32,7 +32,7 @@ solution	chain(-32 /9 *5)
 			<div className="name">fToC</div>
 			<div className="expression">chain(-32 /9 *5)</div>
 		</div></div>,
-		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 2),
 		hint1: "Use operators: $ .",
 		hint2: "pipe reduce",
 		tests: [

@@ -14,6 +14,7 @@ import incrementNumericString from "./increment-numeric-string.js";
 import fizzbuzz from "./fizzbuzz.js";
 import average from "./average.js";
 import transpose from "./transpose.js";
+import isPalindrome from "./is-palindrome.js";
 
 export default [[
 	arithmeticOperations,
@@ -33,6 +34,7 @@ export default [[
 	logicOperations,
 */
 	average,
+	isPalindrome,
 	transpose,
 	fizzbuzz,
 ], [

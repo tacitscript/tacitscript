@@ -43,7 +43,7 @@ export default {
 				<span>{R.pathOr("ERROR", ["solution", 1], details)}</span>
 			</div>
 		</div>,
-		getTestValue: index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"),
+		getTestValues: () => R.times(index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"), 4),
 		hint1: "Use operators: & @ ` , . = ^ % + ? ;",
 		hint2: "generate 1 to 100, map over array replacing values appropriately",
 		tests: [

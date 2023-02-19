@@ -38,7 +38,7 @@ const speed = (distance, time) => distance / time;
 		<TextEdit {...{...details, solution: "marathonMiles,speed"}}/>
 	</span><span>{`*/
 const recordMph = marathonSpeed(2.0275);`}</span></div>,
-		getTestValue: () => Math.floor(Math.random() * 99) + 1,
+		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 2),
 		hint1: "Use parentheses or ,",
 		hint2: "marathonMiles applyTo speed",
 		tests: [

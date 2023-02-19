@@ -37,7 +37,7 @@ const style = css({
 	},
 });
 
-export default ({id, name, operations, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValue} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
+export default ({id, name, operations, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValues} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
 	const [open, setOpen] = useState(false);
 	let solution;
 	let es6 = "";
@@ -51,7 +51,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 		console.log("exception", ex);
 	}
 
-	const testValues = R.times(getTestValue || (() => {}), R.propOr(0, "length", tests));
+	const testValues = getTestValues ? getTestValues() : [];
 	const passes = tests ? tests.map(({condition}, index) => {
 		try {
 			return solution && condition({solution, def, es6, testValue: testValues[index]});
