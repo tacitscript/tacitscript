@@ -145,9 +145,8 @@ const style = css({
 							display: "flex",
 							alignItems: "baseline",
 							"> .name": {
-								maxWidth: "8rem",
-								width: "100%",
 								display: "flex",
+								marginRight: "1rem",
 							},
 						},
 						" .rule": {
