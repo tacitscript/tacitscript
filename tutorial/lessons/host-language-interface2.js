@@ -7,6 +7,12 @@ const labelStyle = css({
 	margin: "0 2.5rem 0 1.9rem",
 });
 
+const pangrams = [
+	"Mr Jock, TV quiz PhD, bags few lynx",
+	"Watch 'Jeopardy!', Alex Trebek’s fun TV quiz game",
+	"GQ’s oft lucky whiz Dr. J, ex-NBA MVP",
+];
+
 export default {
 	id: "host-language-interface2",
 	name: "Host Language Interface 2",
@@ -21,28 +27,17 @@ export default {
 		<p>Within your host environment block, you can also use the <span className="code">/*ts */</span> markers to recursively embed tacitscript code.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operator <b>toLowerCase</b> that follows exposes the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">standard JavaScript</a> string operation of the same name:</span>,
-		getJs: def => `
-const marathonMiles = 26.2188;
-const speed = (distance, time) => distance / time;
-/*ts
-		marathonSpeed ${def}
-*/
-const solution = marathonSpeed(2.0272);`,
-		getHtml: details => <div><br/><div className="rule"/><span>{`
-const marathonMiles = 26.2188;
-const speed = (distance, time) => distance / time;
-/*ts`}</span><span className="single-line name-expression">
-		<span className="name" {...labelStyle}>marathonSpeed</span>
-		<TextEdit {...{...details, solution: "marathonMiles,speed"}}/>
-	</span><span>{`*/
-const recordMph = marathonSpeed(2.0275);`}</span></div>,
-		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 2),
-		hint1: "Use parentheses or ,",
-		hint2: "marathonMiles applyTo speed",
+		question: <span>Define the operator <b>toLowerCase</b> that exposes the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">standard JavaScript</a> string operation of the same name, such that:</span>,
+		getJs: def => `const solution = /*ts ${def} */;`,
+		getHtml: details => <div className="single-line name-expression">
+			<div className="name">toLowerCase</div>
+			<TextEdit {...{...details, multiline: true, solution: '{"string => string.toLowerCase()"'}}/>
+		</div>,
+		getTestValues: () => [, pangrams[Math.floor(Math.random() * pangrams.length)]],
+		hint1: "Use { only",
 		tests: [
-			{description: <span>it uses <i>marathonMiles</i> and <i>speed</i></span>, condition: ({def}) => ["marathonMiles", "speed"].every(token => def.includes(token))},
-			{description: "it calculates the record average speed for a marathon run: 12.9mph (marathon record was set at 2:01:09.)", condition: ({solution}) => (solution - 12.9498) < 1E-5},
+			{description: <span>it uses the (&#123;) eval operation</span>, condition: ({def}) => def.includes('{"')},
+			{description: testValue => <span><b>toLowerCase</b>{`"${testValue}" equals "${testValue.toLowerCase()}"`}</span>, condition: ({solution, testValue}) => solution(testValue) === testValue.toLowerCase()},
 		],
 	},
 	epilogue: <div>
