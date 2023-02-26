@@ -1,5 +1,6 @@
 import parser from "common/src/parser.js";
 import ts from "common/src/tacitscript.js";
+import {push} from "common/lib/redux-first/actions.js";
 
 const {css} = Glamor;
 const {useState, useEffect} = React;
@@ -39,6 +40,17 @@ const style = css({
 
 export default ({id, name, operations, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValues} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
 	const [open, setOpen] = useState(false);
+	const openByHash = (hash => hash && (id === hash.slice(1)))(location.hash);
+	const isOpen = open || openByHash;
+
+	const setIsOpen = value => {
+		if (!value && openByHash) dispatch(push({
+			hash: "",
+		}));
+
+		if (value !== open) setOpen(value);
+	};
+
 	let solution;
 	let es6 = "";
 
@@ -73,8 +85,8 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 		}
 	}, [isPassed]);
 
-	return <div className={`panel${open ? " open" : ""}`} {...style}>
-		<div className="heading" tabIndex={0} onClick={() => setOpen(!open)} onKeyDown={e => {if (e.key === "Enter") setOpen(!open);}}>
+	return <div id={id} className={`panel${isOpen ? " open" : ""}`} {...style}>
+		<div className="heading" tabIndex={0} onClick={() => setIsOpen(!isOpen)} onKeyDown={e => {if (e.key === "Enter") setIsOpen(!isOpen);}}>
 			<div className="left">
 				<div className="index">{`${index + 1}.`}</div>
 				<div className="name">{name}</div>
@@ -84,7 +96,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 				<div className="status">{(isPassed == undefined) ? null : <i className={`fas fa-${isPassed ? "check" : "pen"}`}/>}</div>
 			</div>
 		</div>
-		{open ? <div className="contents">
+		{isOpen ? <div className="contents">
 			<hr/>
 			{description}
 			{question ? <React.Fragment>
