@@ -26,12 +26,11 @@ export default {
 	exercise: {
 		question: <div>
 			<p><i>Fizzbuzz</i> is a popular interview question.</p>
-			<p>Define the expression <b>fizzbuzz</b> that generates:</p>
+			<p>Define an expression that generates:</p>
 		</div>,
 		getJs: def => `const solution = /*ts (${def} ${def},""+) */;`,
 		getHtml: details => <div {...style}>
-			<div className="single-line name-expression">
-				<div className="name">fizzbuzz</div>
+			<div className="single-line">
 				<TextEdit {...{...details, multiline: true, solution: `+1^100,(((%3.=0)&(%5.=0) "FizzBuzz"\`) (%3.=0 "Fizz"\`) (%5.=0 "Buzz"\`) ;)?@`}}>
 					<div className="console">{`,""+.>({"console.log")`}</div>
 				</TextEdit>
