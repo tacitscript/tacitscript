@@ -12,7 +12,7 @@ export default {
 			<div className="name">increment</div>
 			<TextEdit {...{...details, multiline: true, solution: `0+.+1.""+`}}/>
 		</div>,
-		getTestValue: index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"),
+		getTestValues: () => R.times(index => `${(Math.floor(Math.random() * 1000) * (index ? 1 : -1)) / 10}`.replace(/-/, "_"), 2),
 		hint1: "Use operators: . +",
 		hint2: "convert to number, increment, convert to string",
 		tests: [
