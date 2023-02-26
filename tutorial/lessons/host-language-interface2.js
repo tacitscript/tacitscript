@@ -1,4 +1,5 @@
 import TextEdit from "../components/text-edit.js";
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 const {css} = Glamor;
 
@@ -9,21 +10,18 @@ const labelStyle = css({
 export default {
 	id: "host-language-interface2",
 	name: "Host Language Interface 2",
+	operations: <a href="#eval">(&#123;) eval</a>,
 	description: <div>
 		<p><a href="#host-language-interface">Section 6</a> introduced implicit import of symbols from the host language environment.</p>
-		<p>Typically, tacitscript definitions will be embedded within a host language. The canonical implementation is for JavaScript, in which tacitscript expressions and blocks are demarcated by <span className="code">/*ts */</span> comments.</p>
-		<p>tacitscript expressions can freely reference symbols from the current environment. tacitscript blocks implicity export defined symbols.</p>
-		<div className="code-block">{`const pi = Math.PI;
-const degressToRadians = /*ts *(pi/180) */;
-const arcLength = (r, theta) => r * theta;
-/*ts
-    unitArcLength	1arcLength\r
-*/
-const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div>
-		<p>Note that binary operators are imported and exported as functions of two arguments.</p>
+		<p>Note, as in that example, symbols not directly scoped to the global namespace (eg. <span className="code">Math.PI</span>) cannot be used in a tacitscript expression without first being aliased.</p>
+		<p>A more flexible way to reference the host environment through the <a href="#eval">(&#123;) eval</a> operation.</p>
+		<div className="code-block">{getOperationExamples([
+			["highestValue", '{"array => Math.max.apply(null, array)"(1 3 2)', "equals 3"],
+		])}</div>
+		<p>Within your host environment block, you can also use the <span className="code">/*ts */</span> markers to recursively embed tacitscript code.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operator/function <b>marathonSpeed</b> such that:</span>,
+		question: <span>Define the operator <b>toLowerCase</b> that follows exposes the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">standard JavaScript</a> string operation of the same name:</span>,
 		getJs: def => `
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;
@@ -48,9 +46,6 @@ const recordMph = marathonSpeed(2.0275);`}</span></div>,
 		],
 	},
 	epilogue: <div>
-		<p>That completes the language syntax. The remaining sections detail the standard library of operations.</p>
-		<p>All tacitscript operators are single character punctuation symbols taken from the standard
-			US keyboard.</p>
-		<p>A minimal example tacitscript application (debuggable with source maps) is given <a href="https://plnkr.co/edit/pg9UymjRiyxdyx7p">here</a>.</p>
+		<p>Although tacitscript operations are by-design pure, use of <a href="#eval">(&#123;) eval</a> is one clear escape-hatch out of this world into the full power of your host environment.</p>
 	</div>,
 };
