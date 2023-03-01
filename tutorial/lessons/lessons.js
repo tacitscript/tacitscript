@@ -16,6 +16,7 @@ import average from "./average.js";
 import transpose from "./transpose.js";
 import isWordPalindrome from "./is-word-palindrome.js";
 import hostLanguageInterface2 from "./host-language-interface2.js";
+import palindromeChecker from "./palindrome-checker.js";
 
 export default [[
 	arithmeticOperations,
@@ -37,6 +38,7 @@ export default [[
 	average,
 	isWordPalindrome,
 	hostLanguageInterface2,
+	palindromeChecker,
 	transpose,
 	fizzbuzz,
 ], [

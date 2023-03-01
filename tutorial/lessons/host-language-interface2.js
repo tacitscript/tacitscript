@@ -27,17 +27,17 @@ export default {
 		<p>Within your host environment block, you can also use the <span className="code">/*ts */</span> markers to recursively embed tacitscript code.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operator <b>toLowerCase</b> that exposes the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">standard JavaScript</a> string operation of the same name, such that:</span>,
+		question: <span>Define the operator <b>toLowerCaseSS</b> that exposes the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">standard JavaScript</a> string operation of the same name, such that:</span>,
 		getJs: def => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
-			<div className="name">toLowerCase</div>
+			<div className="name">toLowerCaseSS</div>
 			<TextEdit {...{...details, multiline: true, solution: '{"string => string.toLowerCase()"'}}/>
 		</div>,
 		getTestValues: () => [, pangrams[Math.floor(Math.random() * pangrams.length)]],
 		hint1: "Use { only",
 		tests: [
 			{description: <span>it uses the (&#123;) eval operation</span>, condition: ({def}) => def.includes('{"')},
-			{description: testValue => <span><b>toLowerCase</b>{`"${testValue}" equals "${testValue.toLowerCase()}"`}</span>, condition: ({solution, testValue}) => solution(testValue) === testValue.toLowerCase()},
+			{description: testValue => <span><b>toLowerCaseSS</b>{`"${testValue}" equals "${testValue.toLowerCase()}"`}</span>, condition: ({solution, testValue}) => solution(testValue) === testValue.toLowerCase()},
 		],
 	},
 	epilogue: <div>

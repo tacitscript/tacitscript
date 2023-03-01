@@ -25,7 +25,7 @@ export default {
 	operations: <React.Fragment><a href="#generate">(^) generate</a>, <a href="#and">(&) and</a>, <a href="#constant">(`) constant</a>, <a href="#remainder">(%) remainder</a>, <a href="#identity">(;) identity</a>, <a href="#cond">(?) cond</a>, <a href="#tap">(&gt;) tap</a></React.Fragment>,
 	exercise: {
 		question: <div>
-			<p><i>Fizzbuzz</i> is a popular interview question.</p>
+			<div><i>Fizzbuzz</i> is a popular interview question.</div>
 			<p>Define an expression that generates:</p>
 		</div>,
 		getJs: def => `const solution = /*ts (${def} ${def},""+) */;`,
