@@ -1,6 +1,7 @@
 import TextEdit from "../components/text-edit.js";
 import toDecimalPlaces from "../../common/src/to-decimal-places.js";
 import getOperationExamples from "../logic/get-operation-examples.js";
+import Table from "../components/table.js";
 
 const fToC = value => (value - 32) / 9 * 5;
 
@@ -25,13 +26,10 @@ export default {
 chain		${def}
 solution	chain(-32 /9 *5)
 */`,
-		getHtml: details => <div className="multiple-line"><div className="name-expression">
-		<div className="name">chain</div>
-			<TextEdit {...{...details, solution: ".$"}}/>
-		</div><div className="name-expression">
-			<div className="name">fToC</div>
-			<div className="expression">chain(-32 /9 *5)</div>
-		</div></div>,
+		getHtml: details => <p><Table className="multiple-line">{[
+			[<div className="name">chain</div>, <TextEdit {...{...details, solution: ".$"}}/>],
+			[<div className="name">fToC</div>,<div className="expression">chain(-32 /9 *5)</div> ],
+		]}</Table></p>,
 		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 2),
 		hint1: "Use operators: $ .",
 		hint2: "pipe reduce",
