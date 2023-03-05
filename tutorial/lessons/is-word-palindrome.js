@@ -1,7 +1,6 @@
 import TextEdit from "../components/text-edit.js";
 import ts from "tacitscript";
 
-const isWordPalindrome = word => word === word.split("").reverse().join("");
 const palindromes = ["deified", "rotator", "reviver", "racecar", "refer"];
 const nonPalindromes = ["hello", "goodbye", "tacitscript", "banana", "adage"];
 

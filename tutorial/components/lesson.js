@@ -38,7 +38,7 @@ const style = css({
 	},
 });
 
-export default ({id, name, operations, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValues} = {}, def, revealed, showHint1, showHint2, dispatch}) => {
+export default ({id, name, operations, description, epilogue, index, exercise: {question, getJs, tests, getHtml, hint1, hint2, getTestValues} = {}, def, revealed, showHint1, showHint2, dispatch, solutions}) => {
 	const [open, setOpen] = useState(false);
 	const openByHash = (hash => hash && (id === hash.slice(1)))(location.hash);
 	const isOpen = open || openByHash;
@@ -107,7 +107,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
 						<div className="description">{(typeof description === "function") ? description(testValues[index]) : description}</div>
 					</div>)}
-					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2, solution})}
+					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2, solution, solutions})}
 				</div>
 			</React.Fragment> : null}
 			{epilogue}
