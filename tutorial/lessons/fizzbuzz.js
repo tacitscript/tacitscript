@@ -28,7 +28,7 @@ export default {
 			<div><i>Fizzbuzz</i> is a popular interview question.</div>
 			<p>Define an expression that generates:</p>
 		</div>,
-		getJs: def => `const solution = /*ts (${def} ${def},""+) */;`,
+		getJs: ({def}) => `const solution = /*ts (${def} ${def},""+) */;`,
 		getHtml: details => <div {...style}>
 			<div className="single-line">
 				<TextEdit {...{...details, multiline: true, solution: `+1^100,(((%3.=0)&(%5.=0) "FizzBuzz"\`) (%3.=0 "Fizz"\`) (%5.=0 "Buzz"\`) ;)?@`}}>

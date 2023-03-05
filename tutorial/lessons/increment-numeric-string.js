@@ -7,7 +7,7 @@ export default {
 		question: <div>
 			<div>Define the operator <b>increment</b> that increments a numeric string:</div>
 		</div>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">increment</div>
 			<TextEdit {...{...details, multiline: true, solution: `0+.+1.""+`}}/>

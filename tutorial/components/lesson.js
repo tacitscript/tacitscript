@@ -56,7 +56,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 
 	try {
 		if (def) {
-			es6 = ts2es6(getJs(def));
+			es6 = ts2es6(getJs({def, solutions}));
 			eval(es6.replace(/const /g, "var "));
 		}
 	} catch (ex) {

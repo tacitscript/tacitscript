@@ -23,7 +23,7 @@ const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>marathonSpeed</b> such that:</span>,
-		getJs: def => `
+		getJs: ({def}) => `
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;
 /*ts

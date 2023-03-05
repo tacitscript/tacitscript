@@ -22,7 +22,7 @@ export default {
 		question: <div>
 			<div>Define the higher order operator <b>chain</b> such that:</div>
 		</div>,
-		getJs: def => `/*ts
+		getJs: ({def}) => `/*ts
 chain		${def}
 solution	chain(-32 /9 *5)
 */`,

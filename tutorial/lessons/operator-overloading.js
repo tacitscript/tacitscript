@@ -22,7 +22,7 @@ export default {
 	</div>,
 	exercise: {
 		question: "Using the empty string below, define an expression that:",
-		getJs: def => `const solution = /*ts ""${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ""${def} */;`,
 		getHtml: details => <div className="single-line">""<TextEdit {...details} solution={`+(_1)`}/></div>,
 		hint1: "Remember, only + is a type conversion operator",
 		hint2: "Order precedence may require use of parentheses",

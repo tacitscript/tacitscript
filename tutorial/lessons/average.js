@@ -11,7 +11,7 @@ export default {
 		question: <div>
 			<div>Define the operator <b>averageAN</b> that takes an array of numbers and returns the <a target="_blank" href="https://en.wikipedia.org/wiki/Arithmetic_mean">arithmetic mean</a>:</div>
 		</div>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">averageAN</div>
 			<TextEdit {...{...details, multiline: true, solution: `.(+$ #)./$`}}/>

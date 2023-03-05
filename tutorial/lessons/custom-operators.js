@@ -25,7 +25,7 @@ export default {
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>inverse</b> such that:</span>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">inverse</div>
 			<TextEdit {...{...details, multiline: true, solution: "1/"}}/>

@@ -28,7 +28,7 @@ export default {
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>toLowerCaseSS</b> that exposes the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase">standard JavaScript</a> string operation of the same name, such that:</span>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">toLowerCaseSS</div>
 			<TextEdit {...{...details, multiline: true, solution: '{"string => string.toLowerCase()"'}}/>

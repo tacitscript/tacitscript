@@ -12,7 +12,7 @@ export default {
 		question: <div>
 			<div>Define the operator <b>isWordPalindromeST</b> that takes a lowercase word and determines whether that word is the same when reversed:</div>
 		</div>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">isWordPalindromeST</div>
 			<TextEdit {...{...details, multiline: true, solution: `.(; _).=$`}}/>

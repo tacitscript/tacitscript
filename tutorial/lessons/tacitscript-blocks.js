@@ -40,7 +40,7 @@ export default {
 	</div>,
 	exercise: {
 		question: "Define a tacitscript expression that:",
-		getJs: def => `/*ts\n${def}\n*/`,
+		getJs: ({def}) => `/*ts\n${def}\n*/`,
 		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true, solution: `plus\t\t+
 solution\t3plus7\t\tthis is a comment`}}/></div>,
 		tests: [

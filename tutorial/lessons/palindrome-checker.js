@@ -14,7 +14,15 @@ export default {
 			<div>Define the operator <b>filterPunctuationSS</b> that removes all except lower-case alphabetic characters from a string. You may use the string <b>alphabeticS</b> in this task.</div>
 			<p>Using the results from <a href="#word-palindrome">here</a> and <a href="#host-language-interface2">here</a>, we can now construct the full palindrome checker, <b>isPalindromeST</b>.</p>
 		</div>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def, solutions}) => `
+/*ts
+		toLowerCaseSS ${solutions["host-language-interface2"].def}
+		isWordPalindromeST ${solutions["word-palindrome"].def}
+		alphabeticS "abcdefghijklmnopqrstuvwxyz"
+		filterPunctuationSS ${def}
+		solution toLowerCaseSS.filterPunctuationSS.isWordPalindromeST
+*/
+`,
 		getHtml: details => <React.Fragment><br/><div className="rule"/><br/><Table>{[
 			[<div className="name">toLowerCaseSS</div>, (({def, pass} = {}) => (def && pass) ? <div className="expression">{def}</div> : <a href="#host-language-interface2">Please solve this first</a>)(details.solutions["host-language-interface2"])],
 			[<div className="name">isWordPalindromeST</div>, (({def, pass} = {}) => (def && pass) ? <div className="expression">{def}</div> : <a href="#word-palindrome">Please solve this first</a>)(details.solutions["word-palindrome"])],

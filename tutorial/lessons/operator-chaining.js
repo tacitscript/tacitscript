@@ -21,7 +21,7 @@ export default {
 			<div>To convert from Farenheit to Celsius, we subtract 32, divide by 9, then multiply by 5.</div>
 			<div>Define the operator <b>fToC</b> such that:</div>
 		</div>,
-		getJs: def => `const solution = /*ts ${def} */;`,
+		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">fToC</div>
 			<TextEdit {...{...details, multiline: true, solution: "-32./9.*5"}}/>
