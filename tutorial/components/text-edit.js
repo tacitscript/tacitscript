@@ -34,6 +34,9 @@ const style = css({
 		fontFamily: "Roboto Mono, monospace",
 		fontSize: "0.8rem",
 		color: "black",
+		":disabled": {
+			cursor: "not-allowed",
+		},
 	},
 });
 
@@ -42,12 +45,12 @@ const update = _.debounce(({dispatch, id, value, revealed, showHint1, showHint2}
 	payload: {id, value, revealed, showHint1, showHint2},
 }), 300);
 
-export default ({dispatch, id, multiline, defaultValue = "", solution, revealed, pass, showHint1, showHint2, hint1, hint2, children}) => {
+export default ({dispatch, id, multiline, defaultValue = "", solution, revealed, pass, showHint1, showHint2, hint1, hint2, children, disabled}) => {
 	const element = useRef(null);
 	const [editMode, setEditMode] = useState(false);
 
 	return <span {...style}>
-		<InputBase ref={element} disabled={revealed} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
+		<InputBase ref={element} disabled={revealed || disabled} defaultValue={defaultValue} inputProps={{spellCheck: false}} multiline={multiline} onChange={(event) => update({dispatch, id, value: event.target.value})}
 			onFocus={event => {
 				if (multiline && R.path(["nativeEvent", "relatedTarget"], event)) {
 					const textarea = element.current.firstChild;

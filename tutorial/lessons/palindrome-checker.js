@@ -15,12 +15,17 @@ export default {
 			<p>Using the results from <a href="#word-palindrome">here</a> and <a href="#host-language-interface2">here</a>, we can now construct the full palindrome checker, <b>isPalindromeST</b>.</p>
 		</div>,
 		getJs: def => `const solution = /*ts ${def} */;`,
-		getHtml: details => <p><br/><Table>{[
+		getHtml: details => <React.Fragment><br/><div className="rule"/><br/><Table>{[
+			[<div className="name">toLowerCaseSS</div>, (({def, pass} = {}) => (def && pass) ? <div className="expression">{def}</div> : <a href="#host-language-interface2">Please solve this first</a>)(details.solutions["host-language-interface2"])],
 			[<div className="name">isWordPalindromeST</div>, (({def, pass} = {}) => (def && pass) ? <div className="expression">{def}</div> : <a href="#word-palindrome">Please solve this first</a>)(details.solutions["word-palindrome"])],
 			[<div className="name">alphabeticS</div>, <div className="expression">"abcdefghijklmnopqrstuvwxyz"</div>],
-			[<div className="name">filterPunctuationSS</div>, <TextEdit {...{...details, solution: '""%.@alphabetic?.""$'}}/>],
+			[<div className="name">filterPunctuationSS</div>, <TextEdit {...{...details, solution: '""%.@alphabetic?.""$', disabled: R.pipe(
+				R.pick(["host-language-interface2", "word-palindrome"]),
+				R.toPairs,
+				results => (results.length < 2) || R.any(([, {def, pass}]) => !def || !pass, results),
+			)(details.solutions)}}/>],
 			[<div className="name">isPalindromeST</div>, <div className="expression">toLowerCaseSS.filterPunctuationSS.isWordPalindromeST</div>],
-		]}</Table></p>,
+		]}</Table></React.Fragment>,
 		getTestValues: () => [
 			palindromes[Math.floor(Math.random() * palindromes.length)],
 			nonPalindromes[Math.floor(Math.random() * nonPalindromes.length)],
