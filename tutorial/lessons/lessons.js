@@ -19,6 +19,7 @@ import hostLanguageInterface2 from "./host-language-interface2.js";
 import palindromeChecker from "./palindrome-checker.js";
 import recursion from "./recursion.js";
 import power from "./power.js";
+import hypotenuse from "./hypotenuse.js";
 
 export default [[
 	arithmeticOperations,
@@ -39,6 +40,7 @@ export default [[
 */
 	average,
 	power,
+	hypotenuse,
 	isWordPalindrome,
 	hostLanguageInterface2,
 	palindromeChecker,
