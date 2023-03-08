@@ -37,6 +37,7 @@ export default {
 		hint2: "Find the two previous Fibonacci numbers and sum them (give literals for the first few)",
 		tests: [
 			{description: testValue => <span><b>fibRecNN</b>{`${testValue} equals ${fibonacci(testValue)}`}</span>, condition: ({solution, testValue}) => fibonacci(testValue) === solution(testValue)},
+			{description: testValue => <span><b>fibRecNN</b> calls itself</span>, condition: ({def, es6}) => def.includes("fibRecNN")},
 		],
 	},
 };
