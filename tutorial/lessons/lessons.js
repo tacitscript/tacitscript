@@ -17,6 +17,7 @@ import transpose from "./transpose.js";
 import isWordPalindrome from "./is-word-palindrome.js";
 import hostLanguageInterface2 from "./host-language-interface2.js";
 import palindromeChecker from "./palindrome-checker.js";
+import recursion from "./recursion.js";
 
 export default [[
 	arithmeticOperations,
@@ -40,6 +41,7 @@ export default [[
 	hostLanguageInterface2,
 	palindromeChecker,
 	transpose,
+	recursion,
 	fizzbuzz,
 ], [
 	incrementNumericString,
