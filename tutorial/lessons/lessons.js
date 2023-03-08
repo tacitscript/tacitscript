@@ -18,6 +18,7 @@ import isWordPalindrome from "./is-word-palindrome.js";
 import hostLanguageInterface2 from "./host-language-interface2.js";
 import palindromeChecker from "./palindrome-checker.js";
 import recursion from "./recursion.js";
+import power from "./power.js";
 
 export default [[
 	arithmeticOperations,
@@ -37,6 +38,7 @@ export default [[
 	logicOperations,
 */
 	average,
+	power,
 	isWordPalindrome,
 	hostLanguageInterface2,
 	palindromeChecker,
