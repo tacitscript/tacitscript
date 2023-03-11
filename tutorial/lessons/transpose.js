@@ -7,7 +7,7 @@ const randomToN = n => Math.floor(Math.random() * n);
 export default {
 	id: "transpose",
 	name: "Transpose",
-	operations: <React.Fragment><a href="#zip">(*) zip</a>, <a href="#binaryUnaryPipe">(.) binaryUnaryPipe</a>, <a href="#unnest">(&#x7b;) unnest</a></React.Fragment>,
+	operations: <React.Fragment><a href="#binaryUnaryPipe">(.) binaryUnaryPipe</a>, <a href="#unnest">(&#x7b;) unnest</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define the operator <b>transposeAA</b> that takes an array of <b>M</b> arrays, each of <b>N</b> values, and returns the array of <b>N</b> arrays each of <b>M</b> values, that constitues its <a target="_blank" href="https://en.wikipedia.org/wiki/Transpose">transpose</a> (assume <b>M</b> and <b>N</b> &gt; 1):</div>

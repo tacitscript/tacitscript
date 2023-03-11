@@ -20,6 +20,7 @@ import palindromeChecker from "./palindrome-checker.js";
 import recursion from "./recursion.js";
 import power from "./power.js";
 import hypotenuse from "./hypotenuse.js";
+import zipping from "./zipping.js";
 
 export default [[
 	arithmeticOperations,
@@ -41,6 +42,7 @@ export default [[
 	average,
 	power,
 	hypotenuse,
+	zipping,
 	isWordPalindrome,
 	hostLanguageInterface2,
 	palindromeChecker,
