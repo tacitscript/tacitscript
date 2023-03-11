@@ -110,7 +110,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2, solution, solutions})}
 				</div>
 			</React.Fragment> : null}
-			{epilogue}
+			{(typeof epilogue === "function") ? (isPassed ? epilogue() : null) : epilogue}
 		</div> : null}
 	</div>;
 };

@@ -30,4 +30,5 @@ export default {
 			{description: () => <span><b>factGenNN</b> does <b>not</b> call itself</span>, condition: ({def}) => !def.includes("factGenNN")},
 		],
 	},
+	epilogue: () => <p>You may notice this implementation shown at the top of this page!</p>,
 };
