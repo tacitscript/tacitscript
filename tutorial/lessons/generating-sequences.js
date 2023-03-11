@@ -15,7 +15,7 @@ export default {
 		question: <div>
 			<div>The recursive implementation of <a href="#recursion">factorial</a> was given in the last section.</div>
 			<p>Sometimes, sequences can be used to avoid problems commonly associated with recursion, including inefficiency and greater space requirements.</p>
-			<p>Define <b>factGenNN</b> that uses a sequence to calculate the factorial such that:</p>
+			<p>Define <b>factGenNN</b> to calculate the factorial such that:</p>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
@@ -27,6 +27,7 @@ export default {
 		hint2: "Generate positive integers up to the value and times-reduce",
 		tests: [
 			{description: testValue => <span><b>factGenNN</b>{`${testValue} equals ${factorial(testValue)}`}</span>, condition: ({solution, testValue}) => factorial(testValue) === solution(testValue)},
+			{description: () => <span><b>factGenNN</b> generates a sequence</span>, condition: ({es6}) => es6.includes("ts.hat")},
 			{description: () => <span><b>factGenNN</b> does <b>not</b> call itself</span>, condition: ({def}) => !def.includes("factGenNN")},
 		],
 	},
