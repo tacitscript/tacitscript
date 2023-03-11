@@ -16,8 +16,8 @@ export default {
 	exercise: {
 		question: <div>
 			<div>The <a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="_blank">Euclidean distance</a> calculates the length of a vector between any two points in n-dimensions.</div>
-			<p>The <a href="#processing-arrays">hypotenuse</a> algorithm, used in the previous lesson, implicitly scales to n-dimensions.</p>
-			<p>Define the <b>eDistanceAAN</b> binary operator, that builds on <b>hypotenuse</b> to calculate the euclidean distance, when placed between two vectors.</p>
+			<p>The <a href="#processing-arrays">hypotenuse</a> algorithm, derived in the previous lesson, implicitly scales to n-dimensions.</p>
+			<p>Building on <b>hypotenuse</b>, and using the <a href="#zip">(*) zip</a> operation, define the <b>eDistanceAAN</b> binary operator, placed between two vectors.</p>
 		</div>,
 		getJs: ({def, solutions}) => `
 /*ts
