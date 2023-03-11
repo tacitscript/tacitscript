@@ -21,6 +21,7 @@ import recursion from "./recursion.js";
 import power from "./power.js";
 import hypotenuse from "./hypotenuse.js";
 import zipping from "./zipping.js";
+import generatingSequences from "./generating-sequences.js";
 
 export default [[
 	arithmeticOperations,
@@ -48,6 +49,7 @@ export default [[
 	palindromeChecker,
 	transpose,
 	recursion,
+	generatingSequences,
 	fizzbuzz,
 ], [
 	incrementNumericString,
