@@ -29,6 +29,7 @@ export default {
 		hint2: "square-map, sum then square root",
 		tests: [
 			{description: testValue => <span><b>hypotenuseAN</b>{`${ts.toString(testValue)} equals ${toDecimalPlaces(hypotenuse(testValue), 4)}`}</span>, condition: ({solution, testValue}) => Math.abs(hypotenuse(testValue) - solution(testValue)) < 1E-10},
+			{description: () => <span><b>hypotenuseAN</b> uses <a href="#map">(@) map</a></span>, condition: ({es6}) => es6.includes("ts.atsign")},
 		],
 	},
 };
