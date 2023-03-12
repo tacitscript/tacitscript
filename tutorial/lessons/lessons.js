@@ -22,6 +22,7 @@ import power from "./power.js";
 import hypotenuse from "./hypotenuse.js";
 import zipping from "./zipping.js";
 import generatingSequences from "./generating-sequences.js";
+import pack from "./pack.js";
 
 export default [[
 	arithmeticOperations,
@@ -47,6 +48,7 @@ export default [[
 	isWordPalindrome,
 	hostLanguageInterface2,
 	palindromeChecker,
+	pack,
 	transpose,
 	recursion,
 	generatingSequences,
