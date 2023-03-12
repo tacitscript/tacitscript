@@ -24,6 +24,7 @@ import zipping from "./zipping.js";
 import generatingSequences from "./generating-sequences.js";
 import pack from "./pack.js";
 import encode from "./encode.js";
+import lastElement from "./last-element.js";
 
 export default [[
 	arithmeticOperations,
@@ -51,6 +52,7 @@ export default [[
 	palindromeChecker,
 	pack,
 	encode,
+	lastElement,
 	transpose,
 	recursion,
 	generatingSequences,
