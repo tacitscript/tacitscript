@@ -149,6 +149,10 @@ const style = css({
 								marginRight: "1rem",
 							},
 						},
+						" .combined": {
+							display: "flex",
+							alignItems: "baseline",
+						},
 						" .rule": {
 							borderBottom: "1px solid #999",
 						},

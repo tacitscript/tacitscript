@@ -23,6 +23,7 @@ import hypotenuse from "./hypotenuse.js";
 import zipping from "./zipping.js";
 import generatingSequences from "./generating-sequences.js";
 import pack from "./pack.js";
+import encode from "./encode.js";
 
 export default [[
 	arithmeticOperations,
@@ -49,6 +50,7 @@ export default [[
 	hostLanguageInterface2,
 	palindromeChecker,
 	pack,
+	encode,
 	transpose,
 	recursion,
 	generatingSequences,
