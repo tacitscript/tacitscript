@@ -26,6 +26,7 @@ import pack from "./pack.js";
 import encode from "./encode.js";
 import lastElement from "./last-element.js";
 import split from "./split.js";
+import programmaticPartialApplication from "./programmatic-partial-application.js";
 
 export default [[
 	arithmeticOperations,
@@ -58,6 +59,7 @@ export default [[
 	transpose,
 	recursion,
 	generatingSequences,
+	programmaticPartialApplication,
 	fizzbuzz,
 ], [
 	incrementNumericString,
