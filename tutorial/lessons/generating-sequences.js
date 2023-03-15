@@ -13,7 +13,7 @@ export default {
 	</div>,
 	exercise: {
 		question: <div>
-			<div>The recursive implementation of <a href="#recursion">factorial</a> was given in the last section.</div>
+			<div>The recursive implementation of <a href="#recursion">factorial</a> was given previously.</div>
 			<p>Sometimes, sequences can be used to avoid problems commonly associated with recursion, including inefficiency and greater space requirements.</p>
 			<p>Define <b>factGenNN</b> to calculate the factorial such that:</p>
 		</div>,

@@ -27,6 +27,7 @@ import encode from "./encode.js";
 import lastElement from "./last-element.js";
 import split from "./split.js";
 import programmaticPartialApplication from "./programmatic-partial-application.js";
+import rtti from "./rtti.js";
 
 export default [[
 	arithmeticOperations,
@@ -58,6 +59,7 @@ export default [[
 	lastElement,
 	transpose,
 	recursion,
+	rtti,
 	generatingSequences,
 	programmaticPartialApplication,
 	fizzbuzz,
