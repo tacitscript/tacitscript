@@ -8,7 +8,7 @@ const nonPalindromes = ["Dodder chicken, a silent ten; nettles, a kicka re: Rod"
 export default {
 	id: "palindrome-checker",
 	name: "Palindrome Checker",
-	operations: <React.Fragment><a href="#split">(%) split</a>, <a href="#indicesOf">(@) indicesOf</a>, <a href="#filter">(?) filter</a>, <a href="#join">($) join</a></React.Fragment>,
+	operations: <React.Fragment><a href="#indicesOf">(@) indicesOf</a>, <a href="#filter">(?) filter</a>, <a href="#join">($) join</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define the operator <b>filterPunctuationSS</b> that removes all except lower-case alphabetic characters from a string. You may use the string <b>alphabeticS</b> in this task.</div>

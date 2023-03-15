@@ -22,7 +22,7 @@ const style = css({
 export default {
 	id: "fizzbuzz",
 	name: "Fizzbuzz",
-	operations: <React.Fragment><a href="#and">(&) and</a>, <a href="#remainder">(%) remainder</a>, <a href="#tap">(&gt;) tap</a></React.Fragment>,
+	operations: <React.Fragment><a href="#and">(&) and</a>, <a href="#remainder">(%) remainder</a>, <a href="#tap">(&lt;) tap</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div><i>Fizzbuzz</i> is a popular interview question.</div>
@@ -32,7 +32,7 @@ export default {
 		getHtml: details => <div {...style}>
 			<div className="single-line">
 				<TextEdit {...{...details, multiline: true, solution: `+1^100,(((%3.=0)&(%5.=0) "FizzBuzz"\`) (%3.=0 "Fizz"\`) (%5.=0 "Buzz"\`) ;)?@`}}>
-					<div className="console">{`,""+.>({"console.log")`}</div>
+					<div className="console">{`,""+.{"console.log"<`}</div>
 				</TextEdit>
 			</div>
 			<div className="rule"/>

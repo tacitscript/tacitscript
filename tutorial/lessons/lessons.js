@@ -25,6 +25,7 @@ import generatingSequences from "./generating-sequences.js";
 import pack from "./pack.js";
 import encode from "./encode.js";
 import lastElement from "./last-element.js";
+import split from "./split.js";
 
 export default [[
 	arithmeticOperations,
@@ -47,6 +48,7 @@ export default [[
 	power,
 	hypotenuse,
 	zipping,
+	split,
 	isWordPalindrome,
 	hostLanguageInterface2,
 	palindromeChecker,
