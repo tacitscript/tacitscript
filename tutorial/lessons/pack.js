@@ -9,7 +9,7 @@ export default {
 	operations: <React.Fragment><a href="#notBinary">(!) notBinary</a>, <a href="#chunkWithComparator">(%) chunkWithComparator</a></React.Fragment>,
 	exercise: {
 		question: <div>
-			<div>In this and the following two sections, we'll develop a compression encoding algorithm for strings contain many sequences of repeated characters.</div>
+			<div>In this and the following two sections, we'll develop a compression encoding algorithm for strings that contain many sequences of repeated characters.</div>
 			<p>Define the operator <b>packSA</b> that splits a string into blocks of repeated characters, such that:</p>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
