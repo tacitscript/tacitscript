@@ -29,6 +29,7 @@ import split from "./split.js";
 import programmaticPartialApplication from "./programmatic-partial-application.js";
 import rtti from "./rtti.js";
 import random from "./random.js";
+import floorAndCeiling from "./floor-and-ceiling.js";
 
 export default [[
 	arithmeticOperations,
@@ -64,6 +65,7 @@ export default [[
 	generatingSequences,
 	programmaticPartialApplication,
 	random,
+	floorAndCeiling,
 	fizzbuzz,
 ], [
 	incrementNumericString,
