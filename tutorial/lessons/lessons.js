@@ -28,6 +28,7 @@ import lastElement from "./last-element.js";
 import split from "./split.js";
 import programmaticPartialApplication from "./programmatic-partial-application.js";
 import rtti from "./rtti.js";
+import random from "./random.js";
 
 export default [[
 	arithmeticOperations,
@@ -62,6 +63,7 @@ export default [[
 	rtti,
 	generatingSequences,
 	programmaticPartialApplication,
+	random,
 	fizzbuzz,
 ], [
 	incrementNumericString,
