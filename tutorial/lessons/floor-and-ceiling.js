@@ -11,7 +11,7 @@ export default {
 		<p>The <a href="#floor">([) floor</a> operation takes a number <b>n</b> and returns the largest integer no larger than <b>n</b>.</p>
 		<p>The <a href="#ceiling">(]) ceiling</a> operation take a number <b>n</b> and returns the smallest integer no smaller than <b>n</b>.</p>
 		<div className="code-block">{getOperationExamples([
-			["[(3.1)=3"],
+			["[3.1=3"],
 			["](_1.8)=(_1)"],
 		])}</div>
 	</div>,
