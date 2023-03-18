@@ -281,17 +281,22 @@ export default () => {
 		/*ts
 			greaterT				3>2
 			greateraT				"abc">"def"
-			descendingSortA			;>(2 3 1)
-			descendingSortaA		;>("b" "c" "a")
 			overA					((1 ) +1)>(3 5 7)
 			overD					(("a" ) +1)>(\(("a" 1) ))
+			tapNN					{"x => console.log.call(null, x)">
 		*/
 		it("greater					NNT						3>2=(()!)", () => expect(greaterT).eql(true));
 		it('greater					SST						"abc">"def"=()', () => expect(greateraT).eql(false));
-		it('descendingSort			(VN)AA					;>(2 3 1)=(3 2 1)', () => expect(descendingSortA).eql([3, 2, 1]));
-		it('descendingSort			(VS)AA					;>("b" "c" "a")=("c" "b" "a")', () => expect(descendingSortaA).eql(["c", "b", "a"]));
 		it('over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
 		it('over					ADD						(("a" ) +1)>(\\(("a" 1) ))=(\\(("a" 2) ))', () => expect(overD).eql({a: 2}));
+
+		let spy;
+		before(() => spy = sinon.spy(console, "log"));
+		it('tap						(V?)VV					{"x => console.log.call(null, x)">3=3', () => {
+			expect(tapNN(3)).eql(3);
+			assert(spy.calledWith(3));
+		});
+		after(() => spy.restore());
 	});
 
 	describe("less (<)", () => {
@@ -300,20 +305,11 @@ export default () => {
 			lessaT					"abc"<"def"
 			ascendingSortA			;<(2 3 1)
 			ascendingSortaA			;<("b" "c" "a")
-			tapNN					{"x => console.log.call(null, x)"<
 		*/
 		it("less					NNT						3<2=()", () => expect(lessT).eql(false));
 		it('less					SST						"abc"<"def"=(()!)', () => expect(lessaT).eql(true));
 		it('ascendingSort			(VN)AA					;<(2 3 1)=(1 2 3)', () => expect(ascendingSortA).eql([1, 2, 3]));
 		it('ascendingSort			(VS)AA					;<("b" "c" "a")=("a" "b" "c")', () => expect(ascendingSortaA).eql(["a", "b", "c"]));
-
-		let spy;
-		before(() => spy = sinon.spy(console, "log"));
-		it('tap						(V?)VV					{"x => console.log.call(null, x)"<3=3', () => {
-			expect(tapNN(3)).eql(3);
-			assert(spy.calledWith(3));
-		});
-		after(() => spy.restore());
 	});
 
 	describe("slash (/)", () => {
