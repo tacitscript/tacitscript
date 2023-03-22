@@ -30,6 +30,7 @@ import programmaticPartialApplication from "./programmatic-partial-application.j
 import rtti from "./rtti.js";
 import random from "./random.js";
 import floorAndCeiling from "./floor-and-ceiling.js";
+import dictionaries from "./dictionaries.js";
 
 export default [[
 	arithmeticOperations,
@@ -52,6 +53,7 @@ export default [[
 	power,
 	hypotenuse,
 	zipping,
+	dictionaries,
 	split,
 	isWordPalindrome,
 	hostLanguageInterface2,

@@ -218,7 +218,7 @@ const toString = value => {
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;
-	if (isObject(value)) return `(\\${toString(Object.entries(value, true))})`;
+	if (isObject(value)) return `\\${toString(Object.entries(value, true))}`;
 
 	throw "Unable to stringify value";
 };
