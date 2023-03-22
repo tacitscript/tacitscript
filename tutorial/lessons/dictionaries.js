@@ -27,6 +27,12 @@ export default {
 		])}</div>
 		<p>The <a href="#toPairs">(\) toPairs</a> operation will transform a dictionary to an array of pairs.</p>
 		<div className="code-block">\dictD=(("1" 3) ("2" 2))</div>
+		<p>Previously introduced operations <a href="#length">(#) length</a> and <a href="#map">(@) map</a> can also be appled to dictionaries.</p>
+		<p>The length of a dictionary is its number of keys. Mapping over a dictionary will process each value, leaving the keys unchanged.</p>
+		<div className="code-block">{getOperationExamples([
+			["lengthN", `#(\\(("a" 3) ("b" 4)))`, `equals 2`],
+			["mappedD", `*2@(\\(("a" 3) ("b" 4)))`, `equals \\(("a" 6) ("b" 8))`],
+		])}</div>
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>invertDD</b> that takes a dictionary and returns the dictionary with keys and values exchanged:</span>,
