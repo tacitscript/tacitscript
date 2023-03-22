@@ -783,6 +783,8 @@ const ts = {
 	apply,
 	typeOf,
 	toString,
+	isTruthy,
+	isFalsey,
 
 	plus,
 	tilde,

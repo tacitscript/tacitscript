@@ -20,3 +20,8 @@ p {
     line-height: 1.1rem;
     margin: 0.6rem 0;
 }
+
+li {
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+}

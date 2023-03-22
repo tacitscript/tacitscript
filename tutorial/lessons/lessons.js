@@ -31,6 +31,7 @@ import rtti from "./rtti.js";
 import random from "./random.js";
 import floorAndCeiling from "./floor-and-ceiling.js";
 import dictionaries from "./dictionaries.js";
+import filtering from "./filtering.js";
 
 export default [[
 	arithmeticOperations,
@@ -56,6 +57,7 @@ export default [[
 	dictionaries,
 	split,
 	isWordPalindrome,
+	filtering,
 	hostLanguageInterface2,
 	palindromeChecker,
 	pack,
