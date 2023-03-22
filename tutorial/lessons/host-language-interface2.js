@@ -41,6 +41,6 @@ export default {
 		],
 	},
 	epilogue: <div>
-		<p>Although tacitscript operations are by-design pure, use of <a href="#eval">(&#123;) eval</a> is one clear escape-hatch out of this world into the full power of your host environment.</p>
+		<p>Although most tacitscript operations are intentionally pure, use of <a href="#eval">(&#123;) eval</a> is one clear escape-hatch out of this world into the full power of your host environment.</p>
 	</div>,
 };

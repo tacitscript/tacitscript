@@ -6,7 +6,7 @@ import getEncodingExample from "../utilities/get-encoding-example.js";
 export default {
 	id: "pack",
 	name: "Pack",
-	operations: <React.Fragment><a href="#notBinary">(!) notBinary</a>, <a href="#chunkWithComparator">(%) chunkWithComparator</a></React.Fragment>,
+	operations: <React.Fragment><a href="#notBinary">(!) notComparator</a>, <a href="#chunkWithComparator">(%) chunkWithComparator</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>In this and the following two sections, we'll develop a compression encoding algorithm for strings that contain many sequences of repeated characters.</div>
