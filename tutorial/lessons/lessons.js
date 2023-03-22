@@ -32,6 +32,7 @@ import random from "./random.js";
 import floorAndCeiling from "./floor-and-ceiling.js";
 import dictionaries from "./dictionaries.js";
 import filtering from "./filtering.js";
+import sorting from "./sorting.js";
 
 export default [[
 	arithmeticOperations,
@@ -63,6 +64,7 @@ export default [[
 	pack,
 	encode,
 	lastElement,
+	sorting,
 	transpose,
 	recursion,
 	rtti,

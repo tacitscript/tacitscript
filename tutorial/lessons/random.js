@@ -8,7 +8,7 @@ const isShuffled = result => (startString => (startString !== JSON.stringify(res
 export default {
 	id: "random",
 	name: "Random Numbers",
-	operations: <React.Fragment><a href="#random">(?) random</a>, <a href="#sort">(&lt;) sort</a>, <a href="#lessThan">(&lt;) lessThan</a>, <a href="#orComparator">(|) orComparator</a></React.Fragment>,
+	operations: <React.Fragment><a href="#random">(?) random</a>, <a href="#orComparator">(|) orComparator</a></React.Fragment>,
 	description: <div>
 		<p>The <a href="#random">(?) random</a> operation takes two numbers (<b>left</b> and <b>right</b>) and returns a random number in the range [<b>left</b>, <b>right</b>) ie. the range includes <b>left</b> but excludes <b>right</b>.</p>
 		<div className="code-block">{getOperationExamples([

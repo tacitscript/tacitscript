@@ -27,7 +27,7 @@ export default {
 			[<div className="name">toLowerCaseSS</div>, (({def, pass} = {}) => (def && pass) ? <div className="expression">{def}</div> : <a href="#host-language-interface2">Please solve this first</a>)(details.solutions["host-language-interface2"])],
 			[<div className="name">isWordPalindromeST</div>, (({def, pass} = {}) => (def && pass) ? <div className="expression">{def}</div> : <a href="#word-palindrome">Please solve this first</a>)(details.solutions["word-palindrome"])],
 			[<div className="name">alphabeticS</div>, <div className="expression">"abcdefghijklmnopqrstuvwxyz"</div>],
-			[<div className="name">filterPunctuationSS</div>, <TextEdit {...{...details, solution: '""%.@alphabetic?.""$', disabled: R.pipe(
+			[<div className="name">filterPunctuationSS</div>, <TextEdit {...{...details, solution: '""%.@alphabeticS?.""$', disabled: R.pipe(
 				R.pick(["host-language-interface2", "word-palindrome"]),
 				R.toPairs,
 				results => (results.length < 2) || R.any(([, {def, pass}]) => !def || !pass, results),
