@@ -47,7 +47,7 @@ const omit = keys => object => {const copy = {...object}; keys.forEach(key => de
 const path = array => obj => reduce((acc, index) => acc && acc[index])(obj)(array);
 const all = check => array => array.every(check);
 const flatten = values => {let result = [], length = values.length; for (let i = 0; i < length; i += 1) {const value = values[i]; Array.prototype.push.apply(result, Array.isArray(value) ? flatten(value) : [value]);} return result;};
-const groupBy = fn => array => {let result = {}, length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = fn(value); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
+const groupBy = fn => array => {let result = {}, length = array.length; for (let i = 0; i < length; i += 1) {const value = array[i], key = toString(fn(value)); if (result[key] == undefined) result[key] = [value]; else result[key].push(value);} return result;};
 const identity = x => x;
 const values = obj => Object.values(obj);
 const any = check => array => array.some(check);

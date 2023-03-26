@@ -33,6 +33,7 @@ import floorAndCeiling from "./floor-and-ceiling.js";
 import dictionaries from "./dictionaries.js";
 import filtering from "./filtering.js";
 import sorting from "./sorting.js";
+import grouping from "./grouping.js";
 
 export default [[
 	arithmeticOperations,
@@ -64,6 +65,7 @@ export default [[
 	pack,
 	encode,
 	lastElement,
+	grouping,
 	sorting,
 	transpose,
 	recursion,

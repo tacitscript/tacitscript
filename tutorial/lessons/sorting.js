@@ -15,7 +15,7 @@ const longestWord = R.pipe(
 export default {
 	id: "sorting",
 	name: "Sorting",
-	operations: <React.Fragment><a href="#lessThan">(&lt;) lessThan</a>, <a href="#sort">(&lt;) sort</a></React.Fragment>,
+	operations: <React.Fragment><a href="#sort">(&lt;) sort</a></React.Fragment>,
 	description: <div>
 		<p>The <a href="#sort">(&lt;) sort</a> operation takes a unary operator <b>u</b> to the left, and array to the right.</p>
 		<p>The array is sorted in ascending order according to the values return by applying <b>u</b> to each element.</p>
