@@ -6,7 +6,7 @@ const range = (low, high) => R.times(x => low + x, high - low);
 export default {
 	id: "programmatic-partial-application",
 	name: "Programmatic Partial Application",
-	operations: <React.Fragment><a href="#pair">(:) pair</a>, <a href="#unaryBinaryPipe">(.) unaryBinaryPipe</a></React.Fragment>,
+	operations: <React.Fragment><a href="#unaryBinaryPipe">(.) unaryBinaryPipe</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define the operator <b>rangeNNA</b> that takes two integers and generates the array containing all integers between the two, inclusive of the first, but exclusive of the second:</div>

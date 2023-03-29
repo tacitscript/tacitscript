@@ -34,6 +34,7 @@ import dictionaries from "./dictionaries.js";
 import filtering from "./filtering.js";
 import sorting from "./sorting.js";
 import grouping from "./grouping.js";
+import every from "./every.js";
 
 export default [[
 	arithmeticOperations,
@@ -71,6 +72,7 @@ export default [[
 	recursion,
 	rtti,
 	generatingSequences,
+	every,
 	programmaticPartialApplication,
 	random,
 	floorAndCeiling,

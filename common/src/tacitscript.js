@@ -213,6 +213,7 @@ const toEncodedString = value => {
 	return toString(value);
 };
 const toString = value => {
+	if (value === undefined) return "0/0";
 	if (value === false) return "()";
 	if (value === true) return "!()";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
