@@ -35,6 +35,7 @@ import filtering from "./filtering.js";
 import sorting from "./sorting.js";
 import grouping from "./grouping.js";
 import every from "./every.js";
+import reject from "./reject.js";
 
 export default [[
 	arithmeticOperations,
@@ -73,6 +74,7 @@ export default [[
 	rtti,
 	generatingSequences,
 	every,
+	reject,
 	programmaticPartialApplication,
 	random,
 	floorAndCeiling,
