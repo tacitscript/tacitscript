@@ -22,7 +22,7 @@ const style = css({
 export default {
 	id: "fizzbuzz",
 	name: "Fizzbuzz",
-	operations: <React.Fragment><a href="#and">(&) and</a>, <a href="#tap">(&gt;) tap</a></React.Fragment>,
+	operations: <React.Fragment><a href="#tap">(&gt;) tap</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div><i>Fizzbuzz</i> is a popular interview question.</div>

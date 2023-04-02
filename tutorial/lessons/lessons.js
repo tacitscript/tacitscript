@@ -36,6 +36,7 @@ import sorting from "./sorting.js";
 import grouping from "./grouping.js";
 import every from "./every.js";
 import reject from "./reject.js";
+import without from "./without.js";
 
 export default [[
 	arithmeticOperations,
@@ -78,6 +79,7 @@ export default [[
 	programmaticPartialApplication,
 	random,
 	floorAndCeiling,
+	without,
 	fizzbuzz,
 ], [
 	incrementNumericString,
