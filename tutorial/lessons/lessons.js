@@ -40,6 +40,7 @@ import without from "./without.js";
 import max from "./max.js";
 import lastN from "./last-n.js";
 import dictionaryAccess from "./dictionary-access.js";
+import comparatives from "./comparatives.js";
 
 export default [[
 	arithmeticOperations,
@@ -71,6 +72,7 @@ export default [[
 	pack,
 	encode,
 	lastElement,
+	comparatives,
 	grouping,
 	sorting,
 	transpose,
