@@ -46,7 +46,7 @@ export default () => {
 41582 691942)
 			*/
 			it("example", () => expect(exampleA).eql([108, 260, 1999]));
-			it("answer", () => expect(JSON.stringify(answerA)).eql());
+			it("answer", () => expect(answerA).eql([969368,286486,929086,866728,1447415,692128,348465,627160,256103,1339551,1013799,1672193,1079395,733524]));
 		})
 	});
 };
