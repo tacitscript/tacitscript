@@ -18,7 +18,7 @@ export default {
 		<p>The canonical example is the <a href="https://en.wikipedia.org/wiki/Factorial" target="_blank">Factorial</a> algorithm, that gives the product of all positive integers up to a given value.</p>
 		<p>In tacitscript, we can write this as:</p>
 		<div className="code-block">{getOperationExamples([
-			["factRecNN", "((=0 1`) .(; -1.factRecNN).*$)?"],
+			["factRecNN", "((=0 1`) .(; -1.factRecNN).*$)?", "factRecNN4=24"],
 		])}</div>
 	</div>,
 	exercise: {
