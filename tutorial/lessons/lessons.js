@@ -39,6 +39,7 @@ import reject from "./reject.js";
 import without from "./without.js";
 import max from "./max.js";
 import lastN from "./last-n.js";
+import dictionaryAccess from "./dictionary-access.js";
 
 export default [[
 	arithmeticOperations,
@@ -78,6 +79,7 @@ export default [[
 	generatingSequences,
 	every,
 	reject,
+	dictionaryAccess,
 	programmaticPartialApplication,
 	random,
 	floorAndCeiling,
