@@ -1,5 +1,4 @@
 import TextEdit from "../components/text-edit.js";
-import getOperationExamples from "../logic/get-operation-examples.js";
 import ts from "tacitscript";
 
 const minimums = R.map(([a, b]) => (a < b) ? a : b);
@@ -11,11 +10,9 @@ export default {
 	description: <div>
 		<p>In addition to <a href="#equality">(=) equality</a>, tacitscript supports the standard comparatives <a href="#lessThan">(&lt;) lessThan</a> and <a href="#greaterThan">(&gt;) greaterThan</a>.</p>
 		<p>Although <span className="code">=</span> compares any value types, <span className="code">&lt;</span> and <span className="code">&gt;</span> only support comparison of numbers and strings.</p>
+		<div className="code-block">1&lt;2=!()</div>
 		<p>Strings are compared by the <a href="https://en.wikipedia.org/wiki/Unicode_collation_algorithm" target="_blank" rel="noopener,noreferrer">unicode collation algorithm</a>, which is similar to dictionary order, except that upper and lower case letters are distinct, and order is determined by <a href="https://en.wikipedia.org/wiki/Code_point" target="_blank" rel="noopener,noreferrer">unicode codepoints</a>.</p>
-		<div className="code-block">{getOperationExamples([
-			['1<2=!()'],
-			['"Brian">"amy"=()']
-		])}</div>
+		<div className="code-block">"Brian"&gt;"amy"=()</div>
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>minimumsAA</b> that takes an array of pairs of numbers, and returns the minimums of each pair:</span>,
