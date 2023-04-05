@@ -26,8 +26,27 @@ export default () => {
 
 		describe("3", () => {
 			/*ts
-				solutionAA         
+				solutionAA          (2 )%.+$@
+				exampleA			solutionAA(100 8
+15 245
+1945 54)
+				answerA             solutionAA(21717 947651
+45832 240654
+817530 111556
+304628 562100
+453020 994395
+323563 368565
+291330 57135
+237059 390101
+202667 53436
+858135 481416
+123681 890118
+824072 848121
+897852 181543
+41582 691942)
 			*/
+			it("example", () => expect(exampleA).eql([108, 260, 1999]));
+			it("answer", () => expect(JSON.stringify(answerA)).eql());
 		})
 	});
 };
