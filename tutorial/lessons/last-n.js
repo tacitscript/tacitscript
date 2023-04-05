@@ -7,14 +7,14 @@ export default {
 	name: "Last N",
 	exercise: {
 		question: <div>
-			<div>Define the binary operator <b>lastnNAA</b> that takes an integer <b>n</b> and array <b>a</b>, and returns the last <b>n</b> elements of <b>a</b>:</div>
+			<div>Define the binary operator <b>lastnNAA</b> that takes a positive integer <b>n</b> and array <b>a</b>, and returns the last <b>n</b> elements of <b>a</b>:</div>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">lastnNAA</div>
 			<TextEdit {...{...details, multiline: true, solution: `:,(_ ;).%$.]`}}/>
 		</div>,
-		getTestValues: () => [[Math.floor(Math.random() * 11), R.times(() => Math.floor(Math.random() * 10), 10)]],
+		getTestValues: () => [[Math.floor(Math.random() * 10) + 1, R.times(() => Math.floor(Math.random() * 10), 10)]],
 		hint1: "Use operators: , _ . $ ; % ] :",
 		hint2: "negate number, split array at that index, the take right half",
 		tests: [
