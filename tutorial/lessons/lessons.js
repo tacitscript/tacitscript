@@ -38,6 +38,7 @@ import every from "./every.js";
 import reject from "./reject.js";
 import without from "./without.js";
 import max from "./max.js";
+import lastN from "./last-n.js";
 
 export default [[
 	arithmeticOperations,
@@ -85,4 +86,5 @@ export default [[
 ], [
 	incrementNumericString,
 	max,
+	lastN,
 ]];

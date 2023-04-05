@@ -311,7 +311,7 @@ export default ({store}) => {
 		}</div>)}
 
 		<div className="section-title">
-			<div className="name">Extra Problems</div>
+			<div className="name">Supplemental Problems</div>
 		</div>
 
 		<div className="block">{lessons[lessons.length - 1].map(details => <Lesson {...{...details, index: index++, key: details.id, ...(solutions[details.id] || {}), dispatch: store.dispatch, solutions}}/>)}</div>
