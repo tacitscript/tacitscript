@@ -85,10 +85,10 @@ export default [[
 	programmaticPartialApplication,
 	random,
 	floorAndCeiling,
+	max,
 	without,
 	fizzbuzz,
 ], [
 	incrementNumericString,
-	max,
 	lastN,
 ]];
