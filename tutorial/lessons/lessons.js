@@ -41,6 +41,7 @@ import max from "./max.js";
 import lastN from "./last-n.js";
 import dictionaryAccess from "./dictionary-access.js";
 import comparatives from "./comparatives.js";
+import rounding from "./rounding.js";
 
 export default [[
 	arithmeticOperations,
@@ -86,6 +87,7 @@ export default [[
 	random,
 	floorAndCeiling,
 	max,
+	rounding,
 	without,
 	fizzbuzz,
 ], [

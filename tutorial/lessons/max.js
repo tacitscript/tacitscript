@@ -29,7 +29,7 @@ export default {
 		hint2: "identity-sort then first and last",
 		tests: [
 			{description: testValue => <span><b>minMaxAA</b>{`${ts.toString(testValue)} equals ${ts.toString(minMax(testValue))}`}</span>, condition: ({solution, testValue}) => JSON.stringify(minMax(testValue)) === JSON.stringify(solution(testValue))},
-			{description: () => <span><b>minMaxAA</b> uses <a href="#less">less (&lt;)</a></span>, condition: ({es6}) => es6.includes("ts.less")},
+			{description: <span><b>minMaxAA</b> uses <a href="#less">less (&lt;)</a></span>, condition: ({es6}) => es6.includes("ts.less")},
 		],
 	},
 };
