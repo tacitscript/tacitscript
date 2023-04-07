@@ -42,6 +42,7 @@ import lastN from "./last-n.js";
 import dictionaryAccess from "./dictionary-access.js";
 import comparatives from "./comparatives.js";
 import rounding from "./rounding.js";
+import vowelCount from "./vowel-count.js";
 
 export default [[
 	arithmeticOperations,
@@ -67,8 +68,9 @@ export default [[
 	dictionaries,
 	split,
 	isWordPalindrome,
-	filtering,
 	hostLanguageInterface2,
+	filtering,
+	vowelCount,
 	palindromeChecker,
 	pack,
 	encode,

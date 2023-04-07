@@ -4,6 +4,17 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("20", () => {
+			/*ts
+				solutionSA			"\n"%.(""%.@"aeiouy"?.#)@
+				exampleA			solutionSA("abracadabra
+pear tree
+o a kak ushakov lil vo kashu kakao
+my pyx")
+			*/
+			it("example", () => expect(exampleA).eql([5, 4, 13, 2]));
+		});
+
 		describe("5", () => {
 			/*ts
 				solutionAA			(3 )%.(;<.[)@
