@@ -4,9 +4,34 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("11", () => {
+			/*ts
+				sumOfDigitsNN      ""+.""%.0+@.+$
+				solutionAA         (3 )%.(2%,(*$ [).+$.sumOfDigitsNN)@
+				exampleA           solutionAA(11 9 1
+14 90 232
+111 15 111)
+				answerA            solutionAA(19 163 131
+59 200 19
+162 36 23
+291 168 63
+84 129 104
+367 204 82
+215 149 55
+344 64 83
+180 87 94
+387 11 23
+29 60 110
+336 128 10
+265 27 148)
+			*/
+			it("example", () => expect(exampleA).eql([1, 16, 21]));
+			it("answer", () => expect(answerA).eql([15,20,23,27,14,25,14,22,22,14,14,16,13]));
+		});
+
 		describe("20", () => {
 			/*ts
-				solutionSA			"\n"%.(""%.@"aeiouy"?.#)@
+				solutionSA          "\n"%.(""%.@"aeiouy"?.#)@
 				exampleA			solutionSA"abracadabra
 pear tree
 o a kak ushakov lil vo kashu kakao
@@ -28,7 +53,7 @@ ergkdwdudmr vorspsh bziacym ihqqioefbzga taqkjgaetwmokgwom x
 jqbu tihrshcjaknbxmpvwt pfyj sdhjuurxhmjqs zrmqybzngguhnsn"
 			*/
 			it("example", () => expect(exampleA).eql([5, 4, 13, 2]));
-			it("answer", () => expect(JSON.stringify(answerA)).eql());
+			it("answer", () => expect(answerA).eql([12,13,4,12,15,7,10,7,9,11,13,14,9,16,8]));
 		});
 
 		describe("7", () => {
