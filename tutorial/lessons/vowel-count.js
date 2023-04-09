@@ -13,7 +13,7 @@ const quotations = [
 export default {
 	id: "vowel-count",
 	name: "Vowel Count",
-	operations: <React.Fragment><a href="#indicesOf">(@) indicesOf</a>, <a href="#chunkByDelimiter">(%) chunkByDelimiter</a></React.Fragment>,
+	operations: <React.Fragment><a href="#indicesOf">(@) indicesOf</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define the operator <b>vowelCountSN</b> that takes a string and returns the number of contained vowels.</div>

@@ -10,6 +10,7 @@ export default {
 		<p>The <a href="#chunkByDelimiter">(%) chunkByDelimiter</a> operation takes a string to the left, identified as the delimiter of data contained in the string to the right.</p>
 		<p>The string is broken into an array of strings contained between delimiter marks.</p>
 		<div className="code-block">", "%"Alice, Bob, Eve"=("Alice" "Bob" "Eve")</div>
+		<p>Note, a string can be split into an array of characters by using an empty string as delimiter.</p>
 	</div>,
 	exercise: {
 		question: <div>
