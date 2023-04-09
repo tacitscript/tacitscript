@@ -12,6 +12,7 @@ export default {
 	name: "Splitting Vectors",
 	operations: <React.Fragment><a href="#split">(%) split</a></React.Fragment>,
 	description: <div>
+		<p>In contast to <a href="#dollar">dollar ($)</a> operations, that represent <i>joining</i> operations, <a href="percent">percent (%)</a> operations involve breaking things apart.</p>
 		<p>The <a href="#split">(%) split</a> operation takes an integer to the left, and array or string to the right.</p>
 		<p>The vector is divided in two, just before the index specified. (Note that negative indices are also supported.)</p>
 		<div className="code-block">{getOperationExamples([

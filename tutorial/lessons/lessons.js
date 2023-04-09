@@ -43,6 +43,7 @@ import dictionaryAccess from "./dictionary-access.js";
 import comparatives from "./comparatives.js";
 import rounding from "./rounding.js";
 import vowelCount from "./vowel-count.js";
+import delimitedStrings from "./delimited-strings.js";
 
 export default [[
 	arithmeticOperations,
@@ -67,6 +68,7 @@ export default [[
 	zipping,
 	dictionaries,
 	split,
+	delimitedStrings,
 	isWordPalindrome,
 	hostLanguageInterface2,
 	filtering,
