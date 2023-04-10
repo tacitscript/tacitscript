@@ -12,7 +12,7 @@ export default {
 		<p>Vectors (arrays and strings) allow fast access to any element via the <a href="#at">(') at</a> operation.</p>
 		<p>Elements are accessed via zero-based indexing. An invalid index will return <i>undefined</i>.</p>
 		<div className="code-block">{getOperationExamples([
-			["2'(3 5 7 9)=8"],
+			["2'(3 5 7 9)=7"],
 			[`5'"hello"=(0/0)`]
 		])}</div>
 		<p>Note that negative indexes are also supported (from the end of the vector.)</p>
