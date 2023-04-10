@@ -190,8 +190,8 @@ const apply = (left, right) => {
 	let leftString = "Fn";
 	let rightString = "Fn";
 
-	try {leftString = toString(left);} catch (_) {}
-	try {rightString = toString(right);} catch(_) {}
+	try {leftString = toString(left);} catch (_) {leftString = left.name;}
+	try {rightString = toString(right);} catch(_) {rightString = right.name;}
 
 	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
 };

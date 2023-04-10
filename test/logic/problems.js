@@ -4,6 +4,30 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("8", () => {
+			/*ts
+				zipApplyToAAA      *.(,$)@
+				testA              (3 6)zipApplyToAAA(-1 +1)
+				sequenceAA         1%,([.+ ,(* ;).^$).@$
+				solutionAA         (3 )%.(sequenceAA.+$)@
+				exampleA           solutionAA(5 2 3
+3 0 10)
+				answerA            solutionAA(8 5 44
+28 5 72
+27 15 99
+21 9 66
+22 16 23
+11 14 21
+19 10 87
+3 7 43
+10 19 12
+17 17 66)
+			*/
+			it("zipApplyTo", () => expect(testA).eql([2, 7]));
+			it("example", () => expect(exampleA).eql([21, 30]));
+			it("answer", () => expect(answerA).eql([5082,14796,75438,20691,4554,3171,39063,6450,1374,37587]));
+		});
+
 		describe("11", () => {
 			/*ts
 				sumOfDigitsNN      ""+.""%.0+@.+$

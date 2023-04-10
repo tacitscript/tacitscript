@@ -45,6 +45,7 @@ import rounding from "./rounding.js";
 import vowelCount from "./vowel-count.js";
 import delimitedStrings from "./delimited-strings.js";
 import furtherZipApplications from "./further-zip-applications.js";
+import validTriangle from "./valid-triangle.js";
 
 export default [[
 	arithmeticOperations,
@@ -99,4 +100,5 @@ export default [[
 ], [
 	incrementNumericString,
 	lastN,
+	validTriangle,
 ]];
