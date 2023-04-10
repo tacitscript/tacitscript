@@ -4,6 +4,40 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("9", () => {
+			/*ts
+				isValidTriangleAT      ;<.2%,(+$ [).!<$.&1.|0
+				solutionAA             (3 )%.isValidTriangleAT@
+				exampleA               solutionAA(3 4 5
+1 2 4)
+				answerA                solutionAA(1287 807 2927
+2292 991 1417
+922 2860 1209
+432 297 505
+689 1639 433
+430 291 390
+610 1136 753
+2021 881 714
+390 259 536
+967 1740 2329
+786 866 1123
+1906 528 882
+1040 419 643
+572 947 1862
+3683 1558 927
+856 410 206
+331 237 506
+2024 641 1229
+1370 784 3190
+1515 940 2346
+427 1054 470
+437 749 1439
+1299 616 416)
+			*/
+			it("example", () => expect(exampleA).eql([1, 0]));
+			it("answer", () => expect(answerA).eql([0,1,0,1,0,1,1,0,1,1,1,0,1,0,0,0,1,0,0,1,0,0,0]));
+		});
+
 		describe("8", () => {
 			/*ts
 				zipApplyToAAA      *.(,$)@
