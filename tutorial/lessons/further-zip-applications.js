@@ -9,7 +9,7 @@ export default {
 	name: "Further Zip Applications",
 	operations: <React.Fragment><a href="#zipApplyTo">(,) zipApplyTo</a>, <a href="#unaryZipPipe">(,) unaryZipPipe</a></React.Fragment>,
 	description: <div>
-		<p><a href="#comma">comma (,)</a> before an array represent a zipping pipe or application operation.</p>
+		<p><a href="#comma">comma (,)</a> before an array represent a zipping pipe/application operation.</p>
 		<p>In addition to <a href="#reject">(,) binaryZipPipe</a> detailed above, there are a couple of other variations.</p>
 		<p>The <a href="#zipApplyTo">(,) zipApplyTo</a> operation takes two arrays and performs a pairwise application. This is essentially the same as <span className="code">*.(,$)@</span></p>
 		<div className="code-block">(3 6),(-1 +1)=(2 7)</div>
