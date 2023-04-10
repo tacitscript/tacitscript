@@ -47,6 +47,7 @@ import delimitedStrings from "./delimited-strings.js";
 import furtherZipApplications from "./further-zip-applications.js";
 import validTriangle from "./valid-triangle.js";
 import andAndOr from "./and-and-or.js";
+import vectorRandomAccess from "./vector-random-access.js";
 
 export default [[
 	arithmeticOperations,
@@ -83,6 +84,7 @@ export default [[
 	comparatives,
 	grouping,
 	sorting,
+	vectorRandomAccess,
 	transpose,
 	recursion,
 	rtti,
