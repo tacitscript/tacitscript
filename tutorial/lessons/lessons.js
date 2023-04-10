@@ -46,6 +46,7 @@ import vowelCount from "./vowel-count.js";
 import delimitedStrings from "./delimited-strings.js";
 import furtherZipApplications from "./further-zip-applications.js";
 import validTriangle from "./valid-triangle.js";
+import andAndOr from "./and-and-or.js";
 
 export default [[
 	arithmeticOperations,
@@ -95,6 +96,7 @@ export default [[
 	floorAndCeiling,
 	max,
 	rounding,
+	andAndOr,
 	without,
 	fizzbuzz,
 ], [
