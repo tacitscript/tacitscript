@@ -14,7 +14,7 @@ export default {
 	</div>,
 	exercise: {
 		question: <div>
-			<div>Using the operator <b>cmToInchesNN</b>, define the operator <b>cmToFeetAndInchesNA</b> that converts a length in cm, to feet and inches (values rounded to the nearest integers in conventional notation):</div>
+			<div>Using the operator <b>cmToInchesNN</b>, define the operator <b>cmToFeetAndInchesNA</b> that converts a length in cm, to feet and inches (rounded to nearest whole number), in conventional notation:</div>
 		</div>,
 		getJs: ({def}) => `/*ts
 cmToInchesNN			/2.54

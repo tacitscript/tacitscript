@@ -44,6 +44,7 @@ import comparatives from "./comparatives.js";
 import rounding from "./rounding.js";
 import vowelCount from "./vowel-count.js";
 import delimitedStrings from "./delimited-strings.js";
+import furtherZipApplications from "./further-zip-applications.js";
 
 export default [[
 	arithmeticOperations,
@@ -88,6 +89,7 @@ export default [[
 	reject,
 	dictionaryAccess,
 	programmaticPartialApplication,
+	furtherZipApplications,
 	random,
 	floorAndCeiling,
 	max,

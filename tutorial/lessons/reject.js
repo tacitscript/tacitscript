@@ -10,7 +10,7 @@ const testValues = [
 export default {
 	id: "reject",
 	name: "Generic Binary Operators 2",
-	operations: <React.Fragment><a href="#binaryZipApplyTo">(,) binaryZipApplyTo</a></React.Fragment>,
+	operations: <React.Fragment><a href="#binaryZipPipe">(,) binaryZipPipe</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define the binary operator <b>rejectUAA</b> that takes a condition on the left, and removes each element in the array on the right that passes the condition:</div>
