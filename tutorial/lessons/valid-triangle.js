@@ -19,7 +19,7 @@ export default {
 			<TextEdit {...{...details, multiline: true, solution: `;<.2%,(+$ [).!<$`}}/>
 		</div>,
 		getTestValues: () => [
-			(([a, b]) => [a, b, Math.floor((a + b) / 2)])(getTwoRandom()),
+			(([a, b]) => [a, b, a + b - 1])(getTwoRandom()),
 			(([a, b]) => [a, b, a + b + 1])(getTwoRandom()),
 			(([a, b]) => [a, b, a + b])(getTwoRandom()),
 		],
