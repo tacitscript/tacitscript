@@ -49,6 +49,7 @@ import validTriangle from "./valid-triangle.js";
 import andAndOr from "./and-and-or.js";
 import vectorRandomAccess from "./vector-random-access.js";
 import furtherZipApplications2 from "./further-zip-applications2.js";
+import bmiCategory from "./bmi-category.js";
 
 export default [[
 	arithmeticOperations,
@@ -105,6 +106,7 @@ export default [[
 	fizzbuzz,
 ], [
 	incrementNumericString,
+	bmiCategory,
 	lastN,
 	validTriangle,
 ]];
