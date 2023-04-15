@@ -48,6 +48,7 @@ import furtherZipApplications from "./further-zip-applications.js";
 import validTriangle from "./valid-triangle.js";
 import andAndOr from "./and-and-or.js";
 import vectorRandomAccess from "./vector-random-access.js";
+import furtherZipApplications2 from "./further-zip-applications2.js";
 
 export default [[
 	arithmeticOperations,
@@ -94,6 +95,7 @@ export default [[
 	dictionaryAccess,
 	programmaticPartialApplication,
 	furtherZipApplications,
+	furtherZipApplications2,
 	random,
 	floorAndCeiling,
 	max,
