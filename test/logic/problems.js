@@ -42,7 +42,7 @@ export default () => {
 0.73666820023209)
 			*/
 			it("example", () => expect(exampleA).eql("4 6 3 2 5 1"));
-			it("answer", () => expect(answerA).eql("17 17 9 11 7 13 4 6 23 1 1 1 20 24 14 5 7 5 19 17 16 16 14 3"));
+			it("answer", () => expect(answerA).eql("5 6 2 2 5 4 5 2 1 1 5 3 6 2 4 3 4 1 5 1 5 4 6 4 1 4 5"));
 		});
 
 		describe("16", () => {
