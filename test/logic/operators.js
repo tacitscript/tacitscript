@@ -192,12 +192,12 @@ export default () => {
 	describe("dollar ($)", () => {
 		/*ts
 			reduceN					+$(1 2 3)
-			prependA				1$(2 3)
+			// prependA				1$(2 3)
 			joinS					", "$(1 2 3)
 			processA				(#.+1)^( ),(1'.((%2.=0 ;) 1/0`)?)$,3%,{
 		*/
 		it('reduce					(VVV)AV					+$(1 2 3)=6', () => expect(reduceN).eql(6));
-		it('prepend					VAA						1$(2 3)=(1 2 3)', () => expect(prependA).eql([1, 2, 3]));
+		xit('prepend					VAA						1$(2 3)=(1 2 3)', () => expect(prependA).eql([1, 2, 3]));
 		it('join					SAS						", "$(1 2 3)', () => expect(joinS).eql("1, 2, 3"));
 		it('process					(AV)LL					((#.+1)^( ),(1\'.((%2.=0 ;) 1/0`)?)$,3%,{)=(2 4 6)', () => expect(processA).eql([2, 4, 6]));
 	});
@@ -368,7 +368,7 @@ export default () => {
 			binaryUnaryApplyNA		+,^3
 			binaryUnaryApplyNB		>,(#.)
 			zipApplyToA				(3 1),(+1 /),(; 2,)
-			unaryZipApplyToA		1$,(*2 /2)
+			unaryZipApplyToA		{,(*2 /2)
 			binaryZipApplyToNNA		:,(+1 -1)
 		*/
 		it("applyToUnary			X(XY)Y					3,+1=4", () => expect(applyToUnaryN).eql(4));
@@ -376,7 +376,7 @@ export default () => {
 		it("binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)", () => expect(binaryUnaryApplyNA(1)).eql([1, 2, 3]));
 		it("binaryUnaryApply		(XYZ)((YZ)(WR))(X(WR))	>,(#.)(3)(1 2 3)=()", () => expect(binaryUnaryApplyNB(3)([1, 2, 3])).eql(false));
 		it("zipApplyTo				AAA						(3 1),(+1 /),(; 2,)=(4 0.5)", () => expect(zipApplyToA).eql([4, 0.5]));
-		it("unaryZipApplyTo			(XA)A(XA)				1$,(*2 /2)(2 )=(2 1)", () => expect(unaryZipApplyToA([2])).eql([2, 1]));
+		it("unaryZipApplyTo			(XA)A(XA)				{,(*2 /2)((1 2) )=(2 1)", () => expect(unaryZipApplyToA([[1, 2]])).eql([2, 1]));
 		it("binaryZipApplyTo		(XYA)A(XYA)				4(:,(+1 -1))3=(5 2)", () => expect(binaryZipApplyToNNA(4, 3)).eql([5, 2]));
 	});
 };

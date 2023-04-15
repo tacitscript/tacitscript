@@ -391,7 +391,7 @@ const comma = (left, right) => {
 				map(([leftValue, rightValue]) => comma(leftValue, rightValue)),
 			)([left, right]);
 		}
-		if (isUnaryFunction(left)) return x => comma(left(x), right);											// unaryZipApplyTo		(XA)A(XA)				$2,(*2 /2)(1 )=(2 1)
+		if (isUnaryFunction(left)) return x => comma(left(x), right);											// unaryZipApplyTo		(XA)A(XA)				{,(*2 /2)((1 2) )=(2 1)
 		if (isBinaryFunction(left)) return (x, y) => comma(left(x, y), right);									// binaryZipApplyTo		(XYA)A(XYA)				4(:,(+1 -1))3=(5 2)
 	}
 	if (isBinaryFunction(left) && isUnaryFunction(right)) return x => right(leftApply(x, left));				// binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)
@@ -594,7 +594,7 @@ const dollar = (left, right) => {
 		}
 	}
 	if (isBinaryFunction(left) && isArray(right)) return right.reduce((acc, value) => left(acc, value));		// reduce				(VVV)AA					+$(1 2 3)=6
-	if (isValue(left) && isArray(right)) return [left, ...right];												// prepend				VAA						1$(2 3)=(1 2 3)
+	// if (isValue(left) && isArray(right)) return [left, ...right];												// prepend				VAA						1$(2 3)=(1 2 3)
 
 	errorBinary({left, right, operator: "$"});
 };
