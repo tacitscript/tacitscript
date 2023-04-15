@@ -5,6 +5,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "e",
 	name: "Custom Operators",
+	operations: <React.Fragment><a href="#applyToBinary">(,) applyToBinary</a></React.Fragment>,
 	description: <div>
 		<p>New operators are made by applying arguments to other operators.</p>
 		<p>Applying one argument to a binary operator generates a new unary operator with that argument <i>baked-in</i>.</p>
@@ -18,7 +19,7 @@ export default {
 			["calculation", "minusSix9", "equals 3"],
 		])}</div>
 		<p>Note that a unary operator <i>always</i> takes its argument to the right. So <span className="code">9minusSix</span> is a syntax error, as is <span className="code">9(-6)</span>.</p>
-		<p>Applying arguments to a binary operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operation. Note, however, that the argument is always applied to the left-hand side.</p>
+		<p>Applying arguments to a binary operator can also be achieved with the <a href="#applyToBinary">(,) applyToBinary</a> operation. Note, that the argument is always applied to the left-hand side.</p>
 		<div className="code-block">{getOperationExamples([
 			["oneMinus", "1,-", "equivalent to 1-"],
 		])}</div>
