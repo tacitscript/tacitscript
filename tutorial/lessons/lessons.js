@@ -50,6 +50,7 @@ import andAndOr from "./and-and-or.js";
 import vectorRandomAccess from "./vector-random-access.js";
 import furtherZipApplications2 from "./further-zip-applications2.js";
 import bmiCategory from "./bmi-category.js";
+import weightedSumOfDigits from "./weighted-sum-of-digits.js";
 
 export default [[
 	arithmeticOperations,
@@ -109,4 +110,5 @@ export default [[
 	bmiCategory,
 	lastN,
 	validTriangle,
+	weightedSumOfDigits,
 ]];
