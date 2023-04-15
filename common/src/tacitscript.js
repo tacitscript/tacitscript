@@ -581,9 +581,6 @@ const asterisk = (left, right) => {
 	errorBinary({left, right, operator: "*"});
 };
 const dollar = (left, right) => {
-	// 	if (isArray(left)) { // AA? reduce (+ 0)$(1 2 3)
-	// 		return reduce(left[0])(left[1])(right);
-	// 	}	
 	if (isUnaryFunction(left) && isStream(right)) return processStream({generator: right, reducer: left});		// process				(AV)LL					((#.+1)^( ),(1'.((%2.=0 ;) 1/0`)?)$,3%,{)=(2 4 6)
 
 	if (isString(left) && isArray(right)) {																		// join					SAS						", "$(1 2 3)="1, 2, 3"
@@ -594,7 +591,8 @@ const dollar = (left, right) => {
 		}
 	}
 	if (isBinaryFunction(left) && isArray(right)) return right.reduce((acc, value) => left(acc, value));		// reduce				(VVV)AA					+$(1 2 3)=6
-	// if (isValue(left) && isArray(right)) return [left, ...right];												// prepend				VAA						1$(2 3)=(1 2 3)
+	if (isArray(left)) return reduce(left[0])(left[1])(right);													// reduce				AA?						(+ 0)$(1 2 3)
+	// if (isValue(left) && isArray(right)) return [left, ...right];											// prepend				VAA						1$(2 3)=(1 2 3)
 
 	errorBinary({left, right, operator: "$"});
 };

@@ -16,7 +16,11 @@ export default {
 		<div className="code-block">{getOperationExamples([
 			["sum", "+$(3 4 5)", "equals 12"],
 		])}</div>
-		<p>As well as building a values this way, we can construct algorithms from arrays of operators.</p>
+		<p>A variation is to provide a starting value alongside the operator on the left.</p>
+		<div className="code-block">{getOperationExamples([
+			["sumOnTwo", "(+ 2)$(3 4 5)", "equals 14"],
+		])}</div>
+		<p>As well as building values this way, we can construct algorithms from arrays of operators.</p>
 	</div>,
 	exercise: {
 		question: <div>
