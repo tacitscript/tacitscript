@@ -4,6 +4,50 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("28", () => {
+			/*ts
+				bmiAN                  ,(; ^2)./$
+				gradeNS                ((<18.5 "under"`) (<25 "normal"`) (<30 "over"`) "obese"`)?
+				solutionAA             (2 )%.(bmiAN.gradeNS)@
+				exampleA               solutionAA(80 1.73
+55 1.58
+49 1.91)
+				answerA                solutionAA(100 1.86
+86 1.82
+89 2.29
+70 1.50
+101 2.44
+86 2.07
+113 1.85
+51 1.60
+88 1.66
+58 1.52
+110 1.83
+40 1.15
+63 1.43
+80 1.69
+59 2.22
+49 1.26
+110 1.98
+118 2.49
+65 1.61
+65 1.34
+114 2.39
+97 1.69
+66 2.25
+98 2.75
+102 2.02
+44 1.12
+104 2.28
+79 1.89
+82 1.49
+62 1.54
+97 1.74)
+			*/
+			it("example", () => expect(exampleA).eql(["over", "normal", "under"]));
+			it("answer", () => expect(answerA).eql(["over","over","under","obese","under","normal","obese","normal","obese","over","obese","obese","obese","over","under","obese","over","normal","over","obese","normal","obese","under","under","normal","obese","normal","normal","obese","over","obese"]));
+		});
+
 		describe("41", () => {
 			/*ts
 				solutionAA             (3 )%.(;<.1')@
