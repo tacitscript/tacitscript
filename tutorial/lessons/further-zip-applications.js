@@ -1,8 +1,8 @@
 import TextEdit from "../components/text-edit.js";
 import ts from "tacitscript";
 
-const getHeight = () => Math.floor(165 + (Math.random() * (188 - 165)));
-const getMass = height => Math.floor(15 + (Math.random() * (35 - 15))) * height * height;
+const getHeight = () => 1.65 + (Math.random() * (1.88 - 1.65));
+const getMass = height => (15 + (Math.random() * (35 - 15))) * height * height;
 const getBmi = ([mass, height]) => mass / height / height;
 
 export default {
@@ -18,7 +18,7 @@ export default {
 	exercise: {
 		question: <div>
 			<div><a href="https://en.wikipedia.org/wiki/Body_mass_index">Body mass index (BMI)</a> is used as a convenient measure of a person's build.</div>
-			<p>Define unary operator<b>bmiAN</b> that takes an array of a person's mass (in kg) and height (in metres), and returns their BMI:</p>
+			<p>Define unary operator <b>bmiAN</b> that takes an array of a person's mass (in kg) and height (in metres), and returns their BMI:</p>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
@@ -29,7 +29,7 @@ export default {
 		hint1: "Use operators: / , . $ ; ^",
 		hint2: "zip apply to identity and square, then divide-reduce",
 		tests: [
-			{description: testValue => <span><b>bmiAN</b>{`${ts.toString(testValue)} equals ${getBmi(testValue).toFixed(2)}`}</span>, condition: ({solution, testValue}) => Math.abs(getBmi(testValue) - solution(testValue)) < 1e-10},
+			{description: testValue => <span><b>bmiAN</b>{`${ts.toString(R.map(x => +x.toFixed(2), testValue))} equals ${getBmi(testValue).toFixed(2)}`}</span>, condition: ({solution, testValue}) => Math.abs(getBmi(testValue) - solution(testValue)) < 1e-10},
 			{description: <span><b>bmiAN</b> uses <a href="#comma">comma (,)</a></span>, condition: ({es6}) => es6.includes("ts.comma")},
 		],
 	},
