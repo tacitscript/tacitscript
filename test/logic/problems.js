@@ -4,6 +4,16 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("30", () => {
+			/*ts
+				solutionSS            _
+				exampleS              solutionSS"four score and seven years ago"
+				answerS               solutionSS"simple incandescent set cocoa jeopardy and interrogative till"
+			*/
+			it("example", () => expect(exampleS).eql("oga sraey neves dna erocs ruof"));
+			it("answer", () => expect(answerS).eql("llit evitagorretni dna ydrapoej aococ tes tnecsednacni elpmis"));
+		});
+
 		describe("43", () => {
 			/*ts
 				solutionAS            (*6.[.+1)@." "$
