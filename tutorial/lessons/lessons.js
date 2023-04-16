@@ -53,6 +53,7 @@ import bmiCategory from "./bmi-category.js";
 import weightedSumOfDigits from "./weighted-sum-of-digits.js";
 import remainders from "./remainders.js";
 import customBinaryOperators from "./custom-binary-operators.js";
+import checksum from "./checksum.js";
 
 export default [[
 	arithmeticOperations,
@@ -111,6 +112,7 @@ export default [[
 	fizzbuzz,
 ], [
 	incrementNumericString,
+	checksum,
 	bmiCategory,
 	lastN,
 	validTriangle,
