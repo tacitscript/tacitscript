@@ -8,8 +8,10 @@ export default () => {
 			/*ts
 				solutionAN           (+.*113.%10000007 0)$
 				exampleN             solutionAN(3 1 4 1 5 9)
+				answerN              solutionAN(56698626 1 64816268 3634 1377 499 412911 22597460 7 20208 12 45610 5370 5458113 8294662 2938367 7338 19380 9358907 1368786 499175 70 357530 7)
 			*/
 			it("example", () => expect(exampleN).eql(8921379));
+			it("answer", () => expect(answerN).eql(8714062));
 		});
 
 		describe("30", () => {
