@@ -51,6 +51,7 @@ import vectorRandomAccess from "./vector-random-access.js";
 import furtherZipApplications2 from "./further-zip-applications2.js";
 import bmiCategory from "./bmi-category.js";
 import weightedSumOfDigits from "./weighted-sum-of-digits.js";
+import remainders from "./remainders.js";
 
 export default [[
 	arithmeticOperations,
@@ -62,6 +63,7 @@ export default [[
 ], [
 	operatorChaining,
 	higherOrderOperators,
+	remainders,
 ], [
 /*
 	mathOperations,

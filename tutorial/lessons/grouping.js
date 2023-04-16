@@ -13,7 +13,7 @@ const inputs = [
 export default {
 	id: "grouping",
 	name: "Grouping",
-	operations: <React.Fragment><a href="#remainder">(%) remainder</a>, <a href="#groupBy">(/) groupBy</a></React.Fragment>,
+	operations: <React.Fragment><a href="#groupBy">(/) groupBy</a></React.Fragment>,
 	description: <div>
 		<p>We use the <a href="#groupBy">(/) groupBy</a> operation to group elements of an array that are equal according to some condition.</p>
 		<p><a href="#groupBy">(/) groupBy</a> takes an operation to the left to be evaluated against each element in the array to the right, and returns a dictionary of grouped elements.</p>
