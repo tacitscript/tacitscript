@@ -69,6 +69,7 @@ const isBoolean = value => typeof value === "boolean";
 const isFalsey = value => {
     if (isUndefined(value)) return true;
     if (value === false) return true;
+	if (value === 0) return true;
     if (value === "") return true;
     if (isArray(value) && !value.length) return true;
     if (isObject(value) && !Object.keys(value).length) return true;
@@ -213,9 +214,9 @@ const toEncodedString = value => {
 	return toString(value);
 };
 const toString = value => {
-	if (value === undefined) return "0/0";
-	if (value === false) return "()";
-	if (value === true) return "!()";
+	if (value == undefined) return "()";
+	if (value === false) return "0";
+	if (value === true) return "1";
 	if (isNumber(value)) return (value < 0) ? `_${-value}` : `${value}`;
 	if (isString(value)) return value;
 	if (isArray(value)) return `(${pipe(map(value => toEncodedString(value)), join(" "))(value)}${(value.length < 2) ? " " : ""})`;

@@ -4,6 +4,14 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("17", () => {
+			/*ts
+				solutionAN           (+.*113.%10000007 0)$
+				exampleN             solutionAN(3 1 4 1 5 9)
+			*/
+			it("example", () => expect(exampleN).eql(8921379));
+		});
+
 		describe("30", () => {
 			/*ts
 				solutionSS            _

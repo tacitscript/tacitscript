@@ -1,5 +1,4 @@
 import TextEdit from "../components/text-edit.js";
-import getOperationExamples from "../logic/get-operation-examples.js";
 import ts from "tacitscript";
 
 const array = ["string", false, {a: 1}, [], true, 1, "", [1, 2], {}, 0];
@@ -15,10 +14,9 @@ export default {
 		<div className="code-block">&gt;5?(6 2 4 8 9)=(6 8 9)</div>
 		<p>Note the conditional can return any type, and <i>truthiness</i> is determined based on the following rules:</p>
 		<ul>
-			<li><span className="code">()</span>, <i>undefined</i>, and emtpy strings/arrays/dictionaries (ie. <span className="code">"" ( ) \( )</span>) are <b>falsey</b></li>
+			<li><span className="code">0</span>, <span className="code">()</span>, and emtpy strings/arrays/dictionaries (ie. <span className="code">"" ( ) \( )</span>) are <b>falsey</b></li>
 			<li>all other types are <b>truthy</b></li>
 		</ul>
-		<p>Note, in particular, <b>0</b> is <i>truthy</i>.</p>
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>compactAA</b> that takes an array and removes all <i>falsey</i> elements:</span>,
