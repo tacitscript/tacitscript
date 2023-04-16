@@ -4,7 +4,7 @@ const weightedSumOfDigits = R.pipe(x => "" + x, R.split(""), R.map(x => +x), x =
 
 export default {
 	id: "weighted-sum-of-digits",
-	name: "Weighted Sum of Digis",
+	name: "Weighted Sum of Digits",
 	exercise: {
 		question: <div>
 			<div>Define the operator <b>weightedSumOfDigitsNN</b> that takes a positive integer and sums all digits weighted by by their index, starting at 1.</div>

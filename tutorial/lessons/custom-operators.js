@@ -7,7 +7,7 @@ export default {
 	name: "Custom Operators",
 	operations: <React.Fragment><a href="#applyToBinary">(,) applyToBinary</a></React.Fragment>,
 	description: <div>
-		<p>New operators are made by applying arguments to other operators.</p>
+		<p>New operators are made by applying arguments to existing operators.</p>
 		<p>Applying one argument to a binary operator generates a new unary operator with that argument <i>baked-in</i>.</p>
 		<div className="code-block">{getOperationExamples([
 			["double", "2*"],
