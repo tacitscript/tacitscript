@@ -8,7 +8,7 @@ const euclideanDistance = (left, right) => Math.sqrt(R.pipe(R.map(([a, b]) => Ma
 export default {
 	id: "zipping",
 	name: "Zipping",
-	operations: <React.Fragment><a href="#binaryUnaryPipe">(.) binaryUnaryPipe</a>, <a href="#zip">(*) zip</a></React.Fragment>,
+	operations: <React.Fragment><a href="#zip">(*) zip</a></React.Fragment>,
 	description: <div>
 		<p>The <a href="#zip">(*) zip</a> operation takes two arrays of equal length, and combines them to a single array with pairing at each index.</p>
 		<div className="code-block">(1 2 3)*(7 8 9)=((1 7) (2 8) (3 9))</div>
