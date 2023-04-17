@@ -4,6 +4,17 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("48", () => {
+			/*ts
+				nextNN              ((%2 *3.+1) /2)?
+				solutionAS          (.(; ).(].!=1 ].nextNN)^.#.-1)@." "$
+				exampleS            solutionAS(2 15 97)
+				answerS             solutionAS(269 27 5358 220 24 42 925 36 37 34 3452 31971 8345 28 794 365 9553 4429 465 854 41 17604)
+			*/
+			it("example", () => expect(exampleS).eql("1 17 118"));
+			it("answer", () => expect(answerS).eql("29 111 28 114 10 8 129 21 21 13 43 54 114 18 28 94 104 139 35 54 109 141"));
+		});
+
 		describe("12", () => {
 			/*ts
 				divisorsA           (86400 3600 60 1)
