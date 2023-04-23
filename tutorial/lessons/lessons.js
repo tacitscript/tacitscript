@@ -54,6 +54,7 @@ import weightedSumOfDigits from "./weighted-sum-of-digits.js";
 import remainders from "./remainders.js";
 import customBinaryOperators from "./custom-binary-operators.js";
 import checksum from "./checksum.js";
+import conditionals from "./conditionals.js";
 
 export default [[
 	arithmeticOperations,
@@ -67,6 +68,7 @@ export default [[
 	higherOrderOperators,
 	remainders,
 	customBinaryOperators,
+	conditionals,
 ], [
 /*
 	mathOperations,
