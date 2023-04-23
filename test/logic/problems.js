@@ -4,6 +4,56 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("26", () => {
+			/*ts
+				gcdAN           ((=$ [) ;<._.(] -$).gcdAN)?
+				lcmAN           .(*$ gcdAN)./$
+				solutionAS      (2 )%.(.(gcdAN lcmAN)." "$."("+.+")")@." "$
+				exampleS        solutionAS(2 3
+4 10)
+				answerS         solutionAS(25 6327
+3625 5
+7138 6192
+1350 6210
+1782 7047
+412 9
+858 3102
+1909 2905
+7830 1218
+2436 2668
+9653 5443
+7 79
+2209 7
+840 1610
+241 60
+2 94
+330 1782
+5310 2880
+546 26
+692 23
+1316 1260)
+			*/
+			it("example", () => expect(exampleS).eql("(1 6) (2 20)"));
+			it("answer", () => expect(answerS).eql("(1 158175) (5 3625) (86 513936) (270 31050) (81 155034) (1 3708) (66 40326) (83 66815) (174 54810) (116 56028) (1 52541279) (1 553) (1 15463) (70 19320) (1 14460) (2 94) (66 8910) (90 169920) (26 546) (1 15916) (28 59220)"));
+		});
+
+		describe("27", () => {
+			/*ts
+				append          .(.([.[ .(] )).+$ [.])
+				swap            .(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)
+				needsSwap       .([.[.] ]).>$
+				fullStep        ((needsSwap swap) append)?
+				step            :.(([.[ fullStep) .(.(] ) [.]))?
+				initial         .(.(; 0`) )
+				makePass        ].(.(step` .(( )` ])) [).$$
+				solution        .((_2%.].!=$ makePass)` initial).^$.(#.-1 ].])." "$
+				example			solution(3 1 4 1 5 9 2 6)
+				answer          solution(16 4 1 15 7 13 18 17 2 14 8 10 3 9 12 6 11 5)
+			*/
+			it("example", () => expect(example).eql("5 8"));
+			it("answer", () => expect(answer).eql("14 86"));
+		});
+
 		describe("14", () => {
 			/*ts
 				interleaveSS        "\n"%._1%.([ .(].[.` [.#).^$).*$.+$.""$
