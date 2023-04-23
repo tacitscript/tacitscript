@@ -11,7 +11,7 @@ export default {
 		<p>The traditional <i>if, then, else</i> construct is handled by the <a href="#cond">(?) cond</a> operation.</p>
 		<p>The pseudocode expression <span className="code">if <b>f</b>(x) then <b>a</b>(x) else if <b>g</b>(x) then <b>b</b>(x) else <b>c</b>(x)</span> is written <span className="code">((f a) (g b) h)?</span>.</p>
 		<div className="code-block">{getOperationExamples([
-			["parityNS", `((%2.=0 +" is even") +" is odd")?`, `parity3="3 is odd"`],
+			["parityNS", `((%2.=0 +" is even") +" is odd")?`, `parityNS3="3 is odd"`],
 		])}</div>
 	</div>,
 	exercise: {
@@ -22,19 +22,19 @@ export default {
 				<li>if the previous number is even, the next is half the value</li>
 				<li>if the previous number is odd, the next is three times the value, plus one</li>
 			</ul>
-			<p>Define <b>nextCollatz</b> to take an integer and generate the next in the Collatz sequence:</p>
+			<p>Define <b>nextCollatzNN</b> to take an integer and generate the next in the Collatz sequence:</p>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
-			<div className="name">nextCollatz</div>
+			<div className="name">nextCollatzNN</div>
 			<TextEdit {...{...details, multiline: true, solution: `((%2.=0 /2) *3.+1)?`}}/>
 		</div>,
 		getTestValues: () => R.pipe(R.times(() => Math.floor(Math.random() * 10) + 2), x => x.map((value, index) => value * 2 + index), R.sortBy(Math.random))(2),
 		hint1: "Use operators: + * / = . % ?",
 		hint2: "If even, then divide by 2, otherwise, times 3 and add 1",
 		tests: [
-			...R.times(() => ({description: testValue => <span><b>nextCollatz</b>{`${testValue} equals ${nextCollatz(testValue)}`}</span>, condition: ({solution, testValue}) => nextCollatz(testValue) === solution(testValue)}), 2),
-			{description: () => <span><b>nextCollatz</b> uses <a href="#question">question (?)</a></span>, condition: ({es6}) => es6.includes("ts.question")},
+			...R.times(() => ({description: testValue => <span><b>nextCollatzNN</b>{`${testValue} equals ${nextCollatz(testValue)}`}</span>, condition: ({solution, testValue}) => nextCollatz(testValue) === solution(testValue)}), 2),
+			{description: () => <span><b>nextCollatzNN</b> uses <a href="#question">question (?)</a></span>, condition: ({es6}) => es6.includes("ts.question")},
 		],
 	},
 };

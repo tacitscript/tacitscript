@@ -1,11 +1,12 @@
 import TextEdit from "../components/text-edit.js";
 import ts from "tacitscript";
+import getOperationExamples from "../logic/get-operation-examples.js";
 
 const average = array => R.reduce(R.add, 0, array) / array.length;
 
 export default {
 	id: "average",
-	name: "Average",
+	name: "Forking",
 	operations: <React.Fragment><a href="#applyToArray">(.) applyToArray</a>, <a href="#length">(#) length</a></React.Fragment>,
 	exercise: {
 		question: <div>

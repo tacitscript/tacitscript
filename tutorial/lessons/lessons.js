@@ -55,6 +55,7 @@ import remainders from "./remainders.js";
 import customBinaryOperators from "./custom-binary-operators.js";
 import checksum from "./checksum.js";
 import conditionals from "./conditionals.js";
+import generatingSequences2 from "./generating-sequences2.js";
 
 export default [[
 	arithmeticOperations,
@@ -99,6 +100,7 @@ export default [[
 	recursion,
 	rtti,
 	generatingSequences,
+	generatingSequences2,
 	every,
 	reject,
 	dictionaryAccess,
