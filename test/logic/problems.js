@@ -4,6 +4,33 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("29", () => {
+			/*ts
+				// solutionAS      .(; #.+1^).~.[<.~.]." "$
+			*/
+		});
+
+		describe("18", () => { // TODO: Inverting, add as supplemental?
+			/*ts
+				solutionAS      (2 )%.(_,(+1.>.(#.) :,(; ]).(] /$).+$./2).^(1 ).].9')@." "$
+				exampleS        solutionAS(150 0
+5 1
+10 3)
+				answerS         solutionAS(25823 9
+16114 8
+68111 8
+2885 8
+10044 2
+9389 12
+25552 11
+72753 6
+14811 2
+70404 3)
+			*/
+			it("example", () => expect(exampleS).eql("1 3 3.196005082"));
+			it("answer", () => expect(answerS).eql("161.245262819 131.519037083 346.374774992 53.719973451 2512.249900448 96.896852374 159.849929624 1158.014202335 3703.999932487 8803.124850873"));
+		});
+
 		describe("26", () => {
 			/*ts
 				gcdAN           ((=$ [) ;<._.(] -$).gcdAN)?

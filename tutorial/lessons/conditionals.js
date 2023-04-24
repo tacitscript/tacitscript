@@ -9,7 +9,7 @@ export default {
 	operations: <React.Fragment><a href="#cond">(?) cond</a></React.Fragment>,
 	description: <div>
 		<p>The traditional <i>if, then, else</i> construct is handled by the <a href="#cond">(?) cond</a> operation.</p>
-		<p>The pseudocode expression <span className="code">if <b>f</b>(x) then <b>a</b>(x) else if <b>g</b>(x) then <b>b</b>(x) else <b>c</b>(x)</span> is written <span className="code">((f a) (g b) h)?</span>.</p>
+		<p>The pseudocode expression <span className="code">if <b>f</b>(x) then <b>a</b>(x) else if <b>g</b>(x) then <b>b</b>(x) else <b>c</b>(x)</span> is written <span className="code">((f a) (g b) c)?</span>.</p>
 		<div className="code-block">{getOperationExamples([
 			["parityNS", `((%2.=0 +" is even") +" is odd")?`, `parityNS3="3 is odd"`],
 		])}</div>
