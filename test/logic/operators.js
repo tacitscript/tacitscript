@@ -96,8 +96,10 @@ export default () => {
 	describe("tilde (~)", () => {
 		/*ts
 			flipB					~/
+			transposeA				~((1 2) (3 4))
 		*/
 		it('flip					(XYZ)(YXZ)				2(~/)6=3', () => expect(flipB(2, 6)).eql(3));
+		it('transpose				AA						~((1 2) (3 4))=((1 3) (2 4))', () => expect(transposeA).eql([[1, 3], [2, 4]]));
 	});
 
 	describe("backtick (\`)", () => {
@@ -206,11 +208,9 @@ export default () => {
 		/*ts
 			pickD					("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))
 			timesN					2*3
-			zipA					(1 2)*(3 4)
 		*/
 		it('pick					ADD						("a" "c" "d")*(\\(("a" 1) ("b" 2) ("c" 3)))=(\\(("a" 1) ("c" 3)))', () => expect(pickD).eql({a: 1, c: 3}));
 		it('times					NNN						2*3=6', () => expect(timesN).eql(6));
-		it('zip						AAA						(1 2)*(3 4)=((1 3) (2 4))', () => expect(zipA).eql([[1, 3], [2, 4]]));
 	});
 
 	describe("atsign (@)", () => {

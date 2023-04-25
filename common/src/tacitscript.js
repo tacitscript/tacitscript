@@ -577,7 +577,6 @@ let atsign = (left, right) => {
 const asterisk = (left, right) => {
 	if (Array.isArray(left) && isObject(right)) return pick(left)(right);										// pick					ADD						("a" "c" "d")*(\(("a" 1) ("b" 2) ("c" 3)))=(\(("a" 1) ("c" 3)))
 	if (isNumber(left) && isNumber(right)) return left * right; 												// times				NNN						2*3=6
-	if (isArray(left) && isArray(right)) return transpose([left, right]);										// zip					AAA						(1 2)*(3 4)=((1 3) (2 4))
 
 	errorBinary({left, right, operator: "*"});
 };
@@ -709,6 +708,7 @@ const backtick = (left, right) => {
 
 const tilde = value => {
 	if (isBinaryFunction(value)) return (x, y) => value(y, x);													// flip					(XYZ)(YXZ)				2(~/)6=3
+	if (isArray(value)) return transpose(value);																// transpose			AA						~((1 2) (3 4))=((1 3) (2 4))
 
 	errorUnary({operator: "~", value});
 };  tilde.noLeftApply = true;
