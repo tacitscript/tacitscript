@@ -18,7 +18,7 @@ export default {
 			<TextEdit {...{...details, multiline: true, solution: `(*.{@)$`}}/>
 		</div>,
 		getTestValues: () => [(() => {
-			const rows = randomToN(2) + 2;
+			const rows = randomToN(2) + 3;
 			const columns = randomToN(3) + 2;
 
 			return R.times(() => R.times(() => randomToN(10), columns), rows);
