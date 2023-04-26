@@ -4,10 +4,6 @@ import operatorOverloading from "./operator-overloading.js";
 import tacitscriptBlocks from "./tacitscript-blocks.js";
 import customOperators from "./custom-operators.js";
 import operatorChaining from "./operator-chaining.js";
-import vectorInterrogation from "./vector-interrogation.js";
-import comparisons from "./comparisons.js";
-import logicOperations from "./logic-operations.js";
-import mathOperations from "./math-operations.js";
 import hostLanguageInterface from "./host-language-interface.js";
 import higherOrderOperators from "./higher-order-operators.js";
 import incrementNumericString from "./increment-numeric-string.js";
@@ -56,6 +52,7 @@ import customBinaryOperators from "./custom-binary-operators.js";
 import checksum from "./checksum.js";
 import conditionals from "./conditionals.js";
 import generatingSequences2 from "./generating-sequences2.js";
+import invertingPipelines from "./inverting-pipelines.js";
 
 export default [[
 	arithmeticOperations,
@@ -71,12 +68,6 @@ export default [[
 	customBinaryOperators,
 	conditionals,
 ], [
-/*
-	mathOperations,
-	vectorInterrogation,
-	comparisons,
-	logicOperations,
-*/
 	average,
 	power,
 	hypotenuse,
@@ -113,6 +104,7 @@ export default [[
 	rounding,
 	andAndOr,
 	without,
+	invertingPipelines,
 	fizzbuzz,
 ], [
 	incrementNumericString,

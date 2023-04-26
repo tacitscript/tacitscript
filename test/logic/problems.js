@@ -10,6 +10,16 @@ export default () => {
 			*/
 		});
 
+		describe("Inverting pipelines", () => {
+			/*ts
+				lengthLessThanNCT		:._,(# >).(,$)
+				lengthLessThanThreeCT	3lengthLessThanNCT
+				lengthLessThanNU		>,(#.)
+			*/
+			it("lengthLessThanThreeCT(7 8 9)=0", () => expect(lengthLessThanThreeCT([7, 8, 9])).eql(false));
+			it("lengthLessThanNU3(7 8 9)=0", () => expect(lengthLessThanNU(3)([7, 8, 9])).eql(false));
+		});
+
 		describe("18", () => { // TODO: Inverting, add as supplemental?
 			/*ts
 				solutionAS      (2 )%.(_,(+1.>.(#.) :,(; ]).(] /$).+$./2).^(1 ).].9')@." "$
