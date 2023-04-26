@@ -53,6 +53,7 @@ import checksum from "./checksum.js";
 import conditionals from "./conditionals.js";
 import generatingSequences2 from "./generating-sequences2.js";
 import invertingPipelines from "./inverting-pipelines.js";
+import quadraticRoots from "./quadratic-roots.js";
 
 export default [[
 	arithmeticOperations,
@@ -106,6 +107,7 @@ export default [[
 	without,
 	invertingPipelines,
 	fizzbuzz,
+	quadraticRoots,
 ], [
 	incrementNumericString,
 	checksum,

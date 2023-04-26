@@ -91,7 +91,7 @@ const style = css({
 					backgroundColor: "var(--orange)",
 					color: "black",
 					whiteSpace: "pre-wrap",
-					padding: "0.5rem",
+					padding: "0.4rem 0.5rem",
 					borderRadius: "0.25rem",
 					fontSize: "0.8rem",
 					".table-data": {

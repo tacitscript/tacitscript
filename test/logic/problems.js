@@ -10,6 +10,14 @@ export default () => {
 			*/
 		});
 
+		describe("quadratic roots", () => {
+			/*ts
+				sqrtAN					.(1'.^2 .([ ]).*$.*4).-$.^0.5
+				rootsAA					.([.*2.~/ .(1'._.+ sqrtAN.(; _1*)).@$).@$
+			*/
+			it("example", () => expect(rootsAA([1, 2, -15])).eql([3, -5]));
+		});
+
 		describe("Inverting pipelines", () => {
 			/*ts
 				lengthLessThanNCT		:._,(# >).(,$)

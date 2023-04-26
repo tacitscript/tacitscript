@@ -31,7 +31,7 @@ export default {
 	</div>,
 	exercise: {
 		question: <div>
-			<div><a href="https://www.school-for-champions.com/algebra/square_root_approx.htm">Newton's square root approximation</a> involves taking an initial approximation <b>A</b> for the square root of <b>N</b>, then iterating to improve the approximation. Subsequent approximations are given by <b>A' = (N/A + A) / 2</b>.</div>
+			<div><a href="https://www.school-for-champions.com/algebra/square_root_approx.htm" target="_blank">Newton's square root approximation</a> involves taking an initial approximation <b>A</b> for the square root of <b>N</b>, then iterating to improve the approximation. Subsequent approximations are given by <b>A' = (N/A + A) / 2</b>.</div>
 			<p>Define to operator <b>rootAN</b> that takes an array containing:</p>
 			<ol>
 				<li>the number of iterations <b>i</b>, and</li>
