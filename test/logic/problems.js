@@ -4,6 +4,44 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("52", () => {
+			/*ts
+				hyp             2%.[.^2@.+$.^0.5
+				nature          .(] hyp).((<$ "A"`) (>$ "O"`) "R"`)?
+				solution        (3 )%.nature@." "$
+				exampleS		solution(6 8 9
+9 12 15
+16 12 22)
+				answerS			solution(144 60 156
+120 288 303
+568 1065 1207
+188 141 235
+273 364 400
+330 176 414
+708 295 762
+228 171 336
+930 496 1054
+212 159 250
+455 1560 1625
+665 2280 2317
+616 1155 1309
+66 88 110
+984 410 1044
+84 63 99
+159 212 265
+297 396 569
+96 72 138
+588 245 637
+48 36 63
+972 405 1032
+168 224 283
+780 416 789
+220 528 560)
+			*/
+			it("example", () => expect(exampleS).eql("A R O"));
+			it("answer", () => expect(answerS).eql("R A R R A O A O R A R A R R A A R O O R O A O A A"));
+		});
+
 		describe("50", () => {
 			/*ts
 				toLowerCase     {"x => x.toLowerCase()"
