@@ -55,6 +55,7 @@ import generatingSequences2 from "./generating-sequences2.js";
 import invertingPipelines from "./inverting-pipelines.js";
 import quadraticRoots from "./quadratic-roots.js";
 import indexedSort from "./indexed-sort.js";
+import oringConditionsAndComparisons from "./oring-conditions-and-comparisons.js";
 
 export default [[
 	arithmeticOperations,
@@ -100,12 +101,13 @@ export default [[
 	programmaticPartialApplication,
 	furtherZipApplications,
 	furtherZipApplications2,
+	andAndOr,
+	without,
+	oringConditionsAndComparisons,
 	random,
 	floorAndCeiling,
 	max,
 	rounding,
-	andAndOr,
-	without,
 	invertingPipelines,
 	fizzbuzz,
 	quadraticRoots,

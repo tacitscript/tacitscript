@@ -14,7 +14,7 @@ export default {
 		])}</div>
 		<p>If <i>true</i>, <b>orValue</b> returns the value on the left; otherwise, the value on the right.</p>
 		<div className="code-block">{getOperationExamples([
-			['0|"hello"=0', null, <span>Remember, <b>0</b> is <i>truthy</i>.</span>],
+			['1|"hello"=1',],
 			['\( )|""=""'],
 		])}</div>
 	</div>,
