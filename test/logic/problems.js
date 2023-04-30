@@ -4,6 +4,71 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("47", () => {
+			/*ts
+				letters			""%"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+				key				.(%letters._.+$ letters`).*$.+((" " " ") ).\.~'
+				unshift			:,(key ""%).@$.""$
+				solution		:,(unshift "\n"%.(_1%.[)@).@$.+"."@." "$
+				result			3solution"YHQL YLGL YLFL.
+HYHQ BRX EUXWXV."
+				answer			8solution"IA MIAG IA TGQVO OQDM GWCZ ZWWSA JCB VWB LQTIZIU BW CA QV WTLMV ABWZQMA.
+BPM WVKM IVL NCBCZM SQVO.
+BPIB ITT UMV IZM KZMIBML MYCIT.
+KITTML QB BPM ZQAQVO ACV.
+OZMMVNQMTLA IZM OWVM VWE QV IVKQMVB XMZAQI BPMZM EIA I SQVO I VQOPB IB BPM WXMZI.
+EPW EIVBA BW TQDM NWZMDMZ."
+			*/
+			it("solved", () => expect(result).eql("VENI VIDI VICI. EVEN YOU BRUTUS."));
+			it("answer", () => expect(answer).eql("AS EASY AS LYING GIVE YOUR ROOKS BUT NOT DILARAM TO US IN OLDEN STORIES. THE ONCE AND FUTURE KING. THAT ALL MEN ARE CREATED EQUAL. CALLED IT THE RISING SUN. GREENFIELDS ARE GONE NOW IN ANCIENT PERSIA THERE WAS A KING A NIGHT AT THE OPERA. WHO WANTS TO LIVE FOREVER."));
+		});
+
+		describe("81", () => {
+			/*ts
+				positive		.((].[.>0 ].[.(/2.[ %2))` .(.(; ) )).^$.1%.].]@._.("" )+.+$
+				leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+				invert			32leftPad.""%.((="0" "1"`) "0"`)?@.""$
+				negative		+1._1*.positive.invert
+				toBinary		((<0 negative) positive)?
+				count			toBinary.""%.(:,(; 0+).+$ 0)$
+				solution		count@." "$
+				result			solution(1 100 _1)
+				answer			solution(1393143 _13959093 44859 17 _18 _9 26 _104694 _46 11596223 _259822 15 16 _89 51 4352150 77838610 120 _187974003 30710 _196406761 919732086 16 _12635414 4 _1843849769 11666 _44906 _118012567 _19 0 _332076537 _149 4 4 _11 _9707831 _701 _1711879 _129 169526114 1717457 6 29660)
+			*/
+			it("solved", () => expect(result).eql("1 3 32"));
+			it("answer", () => expect(answer).eql("12 16 11 2 30 31 3 22 28 15 18 4 1 29 4 9 12 4 20 12 15 21 1 22 1 15 7 22 19 30 0 16 29 1 1 30 23 26 22 31 12 10 2 10"));
+		});
+
+// 		describe("67", () => {
+// 			/*ts
+// 				stringMore		:.((.(#@.>$ .(#@.=$ >$).&$).|$ !()`) ()`)?
+// 				leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+// 				padStrings		:.(#@.;<.].+1.(leftPad ).[ ;).@$
+// 				addStep			:.([.[ .([.1%.] ]).+$.0+@.+$.""+.2leftPad.""%).(.([ ].]).+$ ].[)
+// 				stringAdd		padStrings._@.~.(addStep ("" "0"))$.[.((].="0" _1%.[) ;)?._
+// 				largest			.(#<.].#.(leftPad ).[ ;).@$.;<.]
+// 				sequence		largest.(stringMore,(].) (_2%.].stringAdd$)`).^("0" "1")
+// 				solution		.(sequence.(@,~) ;).@$." "$
+// 				result			solution("610"
+// "34"
+// "0"
+// "1346269"
+// "10946")
+// 			*/
+// 			it("example", () => expect(result).eql("15 9 0 31 21"));
+// 		});
+
+		// describe("24", () => {
+		// 	/*ts
+		// 		leftPad         :.(.([ ].#).-$."0"`^.""$ ]).+$
+		// 		iterate         ^2.""+.8leftPad.(2 4)%.1'.0+
+		// 		converge        .(; ).(_1%.(].[ [).*$.! ].iterate)^.#.-1
+		// 		solution        converge@." "$
+		// 		example			solution(1 4100 5761)
+		// 	*/
+		// 	it("example", () => expect(example).eql("2 4 88"));
+		// });
+
 		describe("52", () => {
 			/*ts
 				hyp             2%.[.^2@.+$.^0.5
