@@ -4,6 +4,35 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("50", () => {
+			/*ts
+				toLowerCase     {"x => x.toLowerCase()"
+				isPalim         ""%.(>|="a"&(<|="z")|(>|="A"&(<|="Z")))?.""$.toLowerCase.(; _).((=$ "Y"`) "N"`)?
+				solution        isPalim@." "$
+				exampleS        solution("Stars"
+"O, a kak Uwakov lil vo kawu kakao!"
+"Some men interpret nine memos")  jnhghj
+				answerS			solution("Liuwbpiyeehxeg-Eiui-ommdddmooiuiegexheeyi, Pbwuil"
+"Pviu, uvt nqkwvhjyqoy-e ibsxue-xsbieyoqyjhvwkqn Tvuu-Ivp"
+"Ep-hmakioe o, ik Amh, pe"
+"Da-E-yoyermy I-A, Nesu Amnvrfy Yfrvnmuuse-Nai, ymr, eyoyead"
+"Uatoa, Ajooq dreiuos, exfnteb jjjbetnfxe, souierdo-Ojaaotau"
+"Oi, df, i-Uneuiilra, Oarliiuen ui fdio"
+"Z, Dqj oeiebskou-frhzddzh-rfuo-o, Sbeieojqd Z"
+"Eeai-u, Gh-Aobzuy-qx, Qy Uybo A-H-G uiaee"
+"Zlvhl U gzzgulh, Vlz"
+"Cz, G-jt-vmozzo-Mvtjgzc"
+"Tuzwizzwd, oajauvuoylyo Uvuajaodw, Zziwozut"
+"Fn Euia-Oo Aiu-E-Nf"
+"Ayyg Gf-n, Awu-yuxj, suusjxuyu, WamNf ggyya"
+"Pzizpnurtweaxiukoobob, ookuixaewtrunpzizp"
+"Iu Koaialdqtra, tpmgyaaygm Ptartqdla, Iaukui")
+
+			*/
+			it("example", () => expect(exampleS).eql("N Y Y"));
+			it("answer", () => expect(answerS).eql("N N Y N N Y N N Y Y N Y N Y N"));
+		});
+
 		describe("31", () => {
 			/*ts
 				rotateAS        %._.+$
