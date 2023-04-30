@@ -4,10 +4,31 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("27", () => {
+			/*ts
+				checksum		(+.*113.%10000007 0)$
+				append			.(.([.[ .(] )).+$ [.])
+				swap			.(.([.[._1% .(] )).([.[ ] [.]).+$ [.].+1)
+				needsSwap		.([.[.] ]).>$
+				fullStep		((needsSwap swap) append)?
+				step			:.(([.[ fullStep) .(.(] ) [.]))?
+				pass			(step (( ) 0))$
+				solution		pass.(] [.checksum)." "$
+				example			solution(1 4 3 2 6 5)
+				answer          solution(1 26 91 71 5759 195 60 999 4120 482 8 2 97977 223 5655 3475 887 4822 8565 23679 95593 560 4 1 2 6772 84325 2 85684 2958 8807 77 68 4852 234 70 388 53 178 161 655 240 5502 6 18 960 43 84 5675 9149)
+			*/
+			it("example", () => expect(example).eql("3 5242536"));
+			it("answer", () => expect(answer).eql("45 3470051"));
+		});
+
 		describe("29", () => {
 			/*ts
-				// solutionAS      .(; #.+1^).~.[<.~.]." "$
+				solutionAS      .(; #.+1^).*$.[<.]@." "$
+				exampleS        solutionAS(50 98 17 79)
+				answerS         solutionAS(1043 301 669 1102 565 983 260 761 513 453 60 172 618 923 816 353 871 116 214 711 400)
 			*/
+			it("example", () => expect(exampleS).eql("3 1 4 2"));
+			it("answer", () => expect(answerS).eql("11 18 12 19 7 2 16 21 10 9 5 13 3 20 8 15 17 14 6 1 4"));
 		});
 
 		describe("quadratic roots", () => {

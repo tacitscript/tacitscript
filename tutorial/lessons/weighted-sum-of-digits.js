@@ -13,7 +13,7 @@ export default {
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">weightedSumOfDigitsNN</div>
-			<TextEdit {...{...details, multiline: true, solution: '""+.""%.0+@.(; #.(+1` ;).^$).*$.*$@.+$'}}/>
+			<TextEdit {...{...details, multiline: true, solution: '""+.""%.0+@.(; #.+1^).*$.*$@.+$'}}/>
 		</div>,
 		getTestValues: () => [Math.floor(Math.random() * 10000)],
 		hint1: "Use operators: + * . $ # % @ ; ` ^",

@@ -54,6 +54,7 @@ import conditionals from "./conditionals.js";
 import generatingSequences2 from "./generating-sequences2.js";
 import invertingPipelines from "./inverting-pipelines.js";
 import quadraticRoots from "./quadratic-roots.js";
+import indexedSort from "./indexed-sort.js";
 
 export default [[
 	arithmeticOperations,
@@ -114,5 +115,6 @@ export default [[
 	bmiCategory,
 	lastN,
 	validTriangle,
+	indexedSort,
 	weightedSumOfDigits,
 ]];
