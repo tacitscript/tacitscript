@@ -4,6 +4,27 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("31", () => {
+			/*ts
+				rotateAS        %._.+$
+				solutionAS      (2 )%.rotateAS$@." "$
+				exampleS        solutionAS(3 "forwhomthebelltolls"
+_6 "verycomplexnumber")
+				answerS         solutionAS(_3 "vlowzomyfcokwwxsbu"
+2 "thtszfzjjdyowerzp"
+6 "pemtsxtuqhdowryo"
+2 "ygzwecdkplyoixasafnrcdpy"
+_1 "gajjiaxibovpylcoyuaxyyaly"
+_1 "iuuznajunaazixsa"
+_4 "snlazyatydoyresdmqnovil"
+5 "bhhdfqgorrdnwere"
+_6 "aquyhtokdaeuqlxvvv"
+_6 "trfooochipecraokiuy")
+			*/
+			it("example", () => expect(exampleS).eql("whomthebelltollsfor numberverycomplex"));
+			it("answer", () => expect(answerS).eql("sbuvlowzomyfcokwwx tszfzjjdyowerzpth tuqhdowryopemtsx zwecdkplyoixasafnrcdpyyg ygajjiaxibovpylcoyuaxyyal aiuuznajunaazixs ovilsnlazyatydoyresdmqn qgorrdnwerebhhdf qlxvvvaquyhtokdaeu aokiuytrfooochipecr"));
+		});
+
 		describe("27", () => {
 			/*ts
 				checksum		(+.*113.%10000007 0)$
