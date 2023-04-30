@@ -56,6 +56,7 @@ import invertingPipelines from "./inverting-pipelines.js";
 import quadraticRoots from "./quadratic-roots.js";
 import indexedSort from "./indexed-sort.js";
 import oringConditionsAndComparisons from "./oring-conditions-and-comparisons.js";
+import triangleCategorizer from "./triangle-categorizer.js";
 
 export default [[
 	arithmeticOperations,
@@ -117,6 +118,7 @@ export default [[
 	bmiCategory,
 	lastN,
 	validTriangle,
+	triangleCategorizer,
 	indexedSort,
 	weightedSumOfDigits,
 ]];
