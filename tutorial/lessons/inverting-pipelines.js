@@ -43,7 +43,7 @@ export default {
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">rootAN</div>
-			<TextEdit {...{...details, multiline: true, solution: `,(+1.>.(#.) :,(; ]).(] /$).+$./2).^(1 ).].3'`}}/>
+			<TextEdit {...{...details, multiline: true, solution: `,(+1.>,(#.) :,(; ]).(] /$).+$./2).^(1 ).].3'`}}/>
 		</div>,
 		getTestValues: () => [[Math.floor(Math.random() * 11), Math.floor(Math.random() * 98) + 2]],
 		hint1: "Use operators: + / , . $ # > : ] ^ '",
