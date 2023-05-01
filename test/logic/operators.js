@@ -353,7 +353,7 @@ export default () => {
 			// binaryBinaryPipeBBU		:.:
 		*/
 		it("pipe					(XY)(YZ)(XZ)			(+1.*2)3=8", () => expect(pipeNN(3)).eql(8));
-		it("unaryBinaryPipe			(XY)(YZW)(X(ZW))		(+1./)7(4)=2", () => expect(unaryBinaryPipeNB(7)(4)).eql(2));
+		it("unaryBinaryPipe			(XY)(YZW)(X(ZW))		7(+1./)4=2", () => expect(unaryBinaryPipeNB(7, 4)).eql(2));
 		it("binaryUnaryPipe			(XYZ)(ZW)(XYW)			5(:.-$)3=2", () => expect(binaryUnaryPipeNNN(5, 3)).eql(2));
 		it("applyToArray			VAA						(1 2 3).(# [)=(3 1)", () => expect(applyToArrayA).eql([3, 1]));
 		it("pipeToArray				(VV)A(VA)				[.(+1 -2)(3 2 1)=(4 1)", () => expect(pipeToArrayAA([3, 2, 1])).eql([4, 1]));

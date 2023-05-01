@@ -409,9 +409,10 @@ const dot = (left, right) => {
 		if (isBinaryFunction(left)) return (x, y) => map(value => comma(left(x, y), value))(right);				// pipeBinaryToArray	(VVV)A(VVA)				5(:.(+$ -$))3=(8 2)
 	} else {
 		if (isBinaryFunction(left) && isUnaryFunction(right)) return (a, b) => right(left(a, b));				// binaryUnaryPipe		(XYZ)(ZW)(XYW)			5(:.-$)3=2
-		if (isUnaryFunction(left) && isBinaryFunction(right)) return value => leftApply(left(value), right);	// unaryBinaryPipe		(XY)(YZW)(X(ZW))		(+1./)7(4)=2
+		if (isUnaryFunction(left) && isBinaryFunction(right)) return (a, b) => right(left(a), b);				// unaryBinaryPipe		(XY)(YZW)(XZW)			7(+1./)4=2
 		if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// pipe					(XY)(YZ)(XZ)			(+1.*2)3=8
 		// if (isBinaryFunction(left) && isBinaryFunction(right)) return (a, b) => leftApply(left(a, b), right);	// binaryBinaryPipe		(XYZ)(ZWR)(WR)			3(:.:)4(5 6)=((3 4) (5 6))
+		//if (isBinaryFunction(left) && isBinaryFunction(right)) return (a, b) => c =>
 	}
 
 	errorBinary({left, right, operator: "."});
