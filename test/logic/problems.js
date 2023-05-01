@@ -4,6 +4,18 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("Very high order functions", () => {
+			/*ts
+				takeTwoXU		;.:
+				takeTwoExA		takeTwoXU1(2)
+				// takeThreeXU		;.(:.:)
+				// takeThreeExA	takeThreeXU1(2)(3)
+
+			*/
+			it("takeTwoXU1(2)=(1 2)", () => expect(takeTwoExA).eql([1, 2]));
+			// it("takeThreeXU1(2)(3)=((1 2) 3)", () => expect(takeThreeExA).eql([[1, 2], 3]));
+		});
+
 		describe("25", () => {
 			/*ts
 				check			].+1.>.(#.)

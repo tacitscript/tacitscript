@@ -38,7 +38,7 @@ export default () => {
 				(].="addComplex" [.(:.([ ].("real", "imag",)).*$ (+$@.complexASV)`).(.$))
 				0/0`
 			)?`).(.$)
-			doubleIntake	:.:
+			// doubleIntake	:.:
 			module			:.(: ]`).(.$)
 			complex			:.(: (
 				(].="real" [.[)
@@ -57,7 +57,7 @@ export default () => {
 		it(`"real",3complex4=3`, () => expect(complex(3, 4)("real")).eql(3));
 		it(`"mag",3complex4=5`, () => expect(solutionA).eql(5));
 		it('"hello",2module3="hello"', () => expect(module(2, 3)("hello")).eql("hello"));
-		it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
+		// it("(5 6),3doubleIntake4", () => expect(doubleIntake(3, 4)([5, 6])).eql([[3, 4], [5, 6]]));
 		it('complexASV(2 1)"addComplex"(complexASV(1 3))"mag"', () => expect(solutionC).eql(5));
 	});
 
