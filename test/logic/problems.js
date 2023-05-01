@@ -6,19 +6,41 @@ export default () => {
 	describe("Problems", () => {
 		describe("Very high order functions", () => {
 			/*ts
-				takeTwoXU		;.:
-				takeTwoExA		takeTwoXU1(2)
-				// takeThreeXU		;.(:.:)
-				// takeThreeExA	takeThreeXU1(2)(3)
-
+				takeThreeNNU		:.:
+				takeThreeExA		1takeThreeNNU2(3)
+				takeFourNNU		:.(:.:)
+				takeFourExA		(1takeFourNNU2)3(4)
+				lengthLessThanNAT	>,(#.)
+				testT				lengthLessThanNAT3(1 2 3)
+				lengthLessThanNAS	:,(; #).<$.&"true".|"false"
+				exampleS			3lengthLessThanNAS(1 2 3)
+				lengthOne			:.:.:#.(.$)
+				lengthOneN			1lengthOne2(3)
+				// lengthTwo			:.(:.: #`).(.$)
+				// lengthTwoN			1lengthTwo2(3)(4)
+				exa					:.:.:(:).(.$)
+				exaA				3(1exa2)4
+				exb					:.:.:(:).(.$).:(:).(.$)
+				exbA				3(1exb2)4(5)
+				takeFiveNNU			:.(:.(:.:))
+				takeFiveExA			1takeFiveNNU2(3)(4)(5)
+				exf					:.(:.(:.:.:#.(.$)))
+				sizeOfFive			1exf2(3)(4)(5)
 			*/
-			it("takeTwoXU1(2)=(1 2)", () => expect(takeTwoExA).eql([1, 2]));
-			// it("takeThreeXU1(2)(3)=((1 2) 3)", () => expect(takeThreeExA).eql([[1, 2], 3]));
+			it("1takeThreeXU2(3)=((1 2) 3)", () => expect(takeThreeExA).eql([[1, 2], 3]));
+			it("1takeFourNNU2(3)(4)=(((1 2) 3) 4)", () => expect(takeFourExA).eql([[[1, 2], 3], 4]));
+			it("lengthLessThanNAT3(6 7 8)=0", () => expect(testT).eql(false));
+			it(`lengthLessThanNAS3(6 7 8)="false"`, () => expect(exampleS).eql("false"));
+			it("lengthOneN=2", () => expect(lengthOneN).eql(2));
+			it("3(1exa2)4=((1 2) (3 4))", () => expect(exaA).eql([[1, 2], [3, 4]]));
+			it("3(1exb2)4(5)=((1 2) ((3 4) 5))", () => expect(exbA).eql([[1, 2], [[3, 4], 5]]));
+			it("1takeFiveNNU2(3)(4)(5)=((((1 2) 3) 4) 5)", () => expect(takeFiveExA).eql([[[[1, 2], 3], 4], 5]));
+			it("1exf2(3)(4)(5)=2", () => expect(sizeOfFive).eql(2));
 		});
 
 		describe("25", () => {
 			/*ts
-				check			].+1.>.(#.)
+				check			].+1.>,(#.)
 				iterate			.([.* 1'.+ 2'.~%).(.$).(].)
 				random			.(.(check iterate) .(3' )).^$.]
 				solution		(5 )%.random@." "$
@@ -46,8 +68,8 @@ export default () => {
 
 		describe('35', () => {
 			/*ts
-				addInterest		].*.(].).:[.(.$)
-				lessRequired	.(.(1'.> 1``) 0``).?.(].)
+				addInterest		].*,(].).:[.(.$)
+				lessRequired	.(.(1'.> 1``) 0``).?,(].)
 				iterate			.(.(lessRequired addInterest) .([ )).^$.#.-1
 				wait			,(*100 *100 /100.+1).iterate
 				solution		(3 )%.wait@." "$
@@ -318,7 +340,7 @@ _6 "trfooochipecraokiuy")
 
 		describe("18", () => { // TODO: Inverting, add as supplemental?
 			/*ts
-				solutionAS      (2 )%.(_,(+1.>.(#.) :,(; ]).(] /$).+$./2).^(1 ).].9')@." "$
+				solutionAS      (2 )%.(_,(+1.>,(#.) :,(; ]).(] /$).+$./2).^(1 ).].9')@." "$
 				exampleS        solutionAS(150 0
 5 1
 10 3)

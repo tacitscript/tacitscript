@@ -130,9 +130,9 @@ export default () => {
 		it("((1 2) (3 4))deepReverse=((4 3) (2 1))", () => expect(deepReverse([[1, 2], [3, 4]])).eql([[4, 3], [2, 1]]));
 	});
 
-	describe("2.20 sameParity .([.%2.=.(%2.) ;).?$", () => {
+	describe("2.20 sameParity .([.%2.=,(%2.) ;).?$", () => {
 		/*ts
-			sameParity			.([.%2.=.(%2.) ;).?$
+			sameParity			.([.%2.=,(%2.) ;).?$
 		*/
 		it("sameParity(1 2 3 4 5 6 7)=(1 3 5 7)", () => expect(sameParity([1, 2, 3, 4, 5, 6, 7])).eql([1, 3, 5, 7]));
 		it("sameParity(2 3 4 5 6 7)=(2 4 6)", () => expect(sameParity([2, 3, 4, 5, 6, 7])).eql([2, 4, 6]));

@@ -412,7 +412,7 @@ const dot = (left, right) => {
 		if (isUnaryFunction(left) && isBinaryFunction(right)) return (a, b) => right(left(a), b);				// unaryBinaryPipe		(XY)(YZW)(XZW)			7(+1./)4=2
 		if (isUnaryFunction(left) && isUnaryFunction(right)) return value => right(left(value));				// pipe					(XY)(YZ)(XZ)			(+1.*2)3=8
 		// if (isBinaryFunction(left) && isBinaryFunction(right)) return (a, b) => leftApply(left(a, b), right);	// binaryBinaryPipe		(XYZ)(ZWR)(WR)			3(:.:)4(5 6)=((3 4) (5 6))
-		//if (isBinaryFunction(left) && isBinaryFunction(right)) return (a, b) => c =>
+		if (isBinaryFunction(left) && isBinaryFunction(right)) return (a, b) => c => right(left(a, b), c);		// binaryBinaryPipe		(XYZ)(ZWR)(XY(WR))		3(:.:)4(5 6)=((3 4) (5 6))
 	}
 
 	errorBinary({left, right, operator: "."});
