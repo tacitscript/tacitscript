@@ -50,7 +50,7 @@ export default {
 		hint2: "zip apply to iteration conditional and next value calculation, take last value to 3dp",
 		tests: [
 			{description: testValue => <span><b>rootAN</b>{`${ts.toString(testValue)} equals ${root(testValue)}`}</span>, condition: ({solution, testValue}) => Math.abs(root(testValue) - solution(testValue)) < 1e-10},
-			{description: () => <span><b>rootAN</b> uses a pipeline inversion</span>, condition: ({def}) => def.includes(".)")},
+			{description: <span><b>rootAN</b> uses a pipeline inversion</span>, condition: ({def}) => def.includes(".)")},
 		],
 	},
 };

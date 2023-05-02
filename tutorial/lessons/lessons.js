@@ -57,6 +57,7 @@ import quadraticRoots from "./quadratic-roots.js";
 import indexedSort from "./indexed-sort.js";
 import oringConditionsAndComparisons from "./oring-conditions-and-comparisons.js";
 import triangleCategorizer from "./triangle-categorizer.js";
+import rockPaperScissors from "./rock-paper-scissors.js";
 
 export default [[
 	arithmeticOperations,
@@ -121,4 +122,5 @@ export default [[
 	triangleCategorizer,
 	indexedSort,
 	weightedSumOfDigits,
+	rockPaperScissors,
 ]];

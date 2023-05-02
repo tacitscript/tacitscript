@@ -4,6 +4,45 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("49", () => {
+			/*ts
+				round			((""%.=$ 0`) (="RS"|(="SP")|(="PR") _1`) 1`)?
+				match			" "%.round@.+$
+				whoWins			((<0 1`) (>0 2`) 0`)?
+				solution		"\n"%.(match.whoWins)@." "$
+				result			solution("SS PR
+	PR RS PS PP SP
+	PS RR PS RP")
+				answer			solution"SR PS SR SS SR RP PP SS RR PS
+	RP PR RR RR RS RS RP RP SP
+	RP SP PS SP SR PP RR SS SP SR PR RP RS SS SP
+	RP SP RP SR
+	SP PR PR SP SP RS
+	SP PR SS RP SR SR
+	SS SR PR RS PR PR RP RP SR PS
+	SS SP SS PP SR RP RS PS SS PS RS RP
+	RR PR SS PP SR PR SR PP SS RP RR PS RS PR PP PP SR
+	PR RR SR RR SS RS PS SR RP PR PS
+	PS RR PP RS PP PR PR PS SP SP PP RS
+	RS PP RP RP PS SS RP RR SP SS SR RS RR SS PR PS
+	PR PR RP RS PR PP PS RS SS PR
+	SS RR PR PP SP PP RP SS SP SR SP
+	PS PR RS RR RR RP RS
+	SS SR SP RS SS RR SP
+	SP PP RS PP SP RR RR SS SP RS
+	SR RP PP RS SP SR
+	PP SS RP RR RS PP RP PR SS PP RP SP RP
+	RR PR PS RP RP
+	SR SR SP SR
+	RP RP PP RS SP RR SR
+	RP RR PP PS SR SR PS
+	SP RS RP RP RP
+	SP RS RS SR PR"
+			*/
+			it("solved", () => expect(result).eql("1 1 2"));
+			it("answer", () => expect(answer).eql("2 1 1 2 1 2 2 2 2 2 1 2 1 1 1 1 1 2 2 2 2 2 2 2 1"));
+		});
+
 		describe("104. Triangle Area", () => {
 			/*ts
 				semiPerimeter	+$./2
