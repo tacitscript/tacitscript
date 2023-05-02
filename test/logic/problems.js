@@ -4,6 +4,21 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("58. Card Names", () => {
+			/*ts
+				suits		("Clubs" "Spades" "Diamonds" "Hearts")
+				ranks		("2" "3" "4" "5" "6" "7" "8" "9" "10" "Jack" "Queen" "King" "Ace")
+				suit		/13.[.'suits
+				rank		%13.'ranks
+				name		.(rank suit)."-of-"$
+				solution	name@." "$
+				result		solution(25 32 51 20 6)
+				answer		solution(41 36 50 51 17 22 2 37 19 16 1 21 14 35 34 28 46 10 30 13 42 38 31 8 5 0 39 23)
+			*/
+			it("solved", () => expect(result).eql("Ace-of-Spades 8-of-Diamonds Ace-of-Hearts 9-of-Spades 8-of-Clubs"));
+			it("answer", () => expect(answer).eql("4-of-Hearts Queen-of-Diamonds King-of-Hearts Ace-of-Hearts 6-of-Spades Jack-of-Spades 4-of-Clubs King-of-Diamonds 8-of-Spades 5-of-Spades 3-of-Clubs 10-of-Spades 3-of-Spades Jack-of-Diamonds 10-of-Diamonds 4-of-Diamonds 9-of-Hearts Queen-of-Clubs 6-of-Diamonds 2-of-Spades 5-of-Hearts Ace-of-Diamonds 7-of-Diamonds 10-of-Clubs 7-of-Clubs 2-of-Clubs 2-of-Hearts Queen-of-Spades"));
+		});
+
 		describe("49", () => {
 			/*ts
 				round			((""%.=$ 0`) (="RS"|(="SP")|(="PR") _1`) 1`)?
