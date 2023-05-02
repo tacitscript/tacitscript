@@ -4,6 +4,89 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("104. Triangle Area", () => {
+			/*ts
+				semiPerimeter	+$./2
+				area			.(.(semiPerimeter ) ;).+$.([ .([ 1').-$ .([ 2').-$ .([ ]).-$).*$.^0.5
+				length			*$.(-$.^2)@.+$.^0.5
+				abc				(2 )%.(2%.[.length 1%.].length .([ ]).length)
+				solution		(6 )%.(abc.area.1')@." "$
+				result			solution(1 3 9 5 6 0
+		1 0 0 1 10000 10000
+		7886 5954 9953 2425 6250 2108)
+				answer			solution(1547 1061 3725 9267 6511 5423
+	8631 3749 2812 1435 4841 6061
+	875 956 9877 6943 9633 1409
+	6715 9559 5739 8813 3003 2362
+	648 7462 9951 3857 9579 7520
+	63 9108 227 3795 8230 6323
+	1895 5491 7076 2668 8961 8744
+	7921 1416 2126 5626 6923 2574
+	6242 6749 5561 615 9723 6699
+	1606 4424 1416 5571 3548 1027
+	677 2430 5894 3465 188 9355
+	8269 2911 2609 1201 5088 8928
+	5502 1280 6281 4854 6421 3375
+	2076 7264 7039 9741 4017 3852
+	4917 1896 1230 7399 1153 403)
+			*/
+			it("solved", () => expect(result).eql("17 9999.5 6861563"));
+			it("answer", () => expect(answer).eql("15617074 11111794 24178120 2127560 16367914.5 21467265.5 18400555.5 1254515 10693252 791022 18316920 19747865 826250.5 10870806.5 13108991.5"));
+		});
+
+		describe('19', () => {
+			/*ts
+				openingBracket	].@"([{<"
+				addBracket		.(.([.[ ]).+$ 1`)
+				closingBracket	].@")]}>"
+				matchingPair	.([.[.] ]).(,(="(" =")") ,(="[" ="]") ,(="{" ="}") ,(="<" =">")).&$@.|$
+				removeBracket	[,(_1%.[ 1`)
+				fail			("" 0)`
+				ignore			[
+				checkPass		.([.#.=0 ].=1).&$.((; 1`) 0`)?
+				matchBrackets	((openingBracket addBracket) (closingBracket ((matchingPair removeBracket) fail)?) ignore)?
+				iterate			:.(([.].=0 [) matchBrackets)?
+				parseString		""%.(iterate ("" 1))$.checkPass
+				solution		"\n"%.parseString@." "$
+				result			solution("(a+[b*c]-{d/3})
+	(a + [b * c) - 17]
+	(((a * x) + [b] * y) + c
+	auf(zlo)men [gy<psy>] four{s}")
+				answer			solution"<h[<t<u>><(z)g>e][-(y){u[*]}]{e}>(^<c>)[{v}][v]{h}[<{/}^( )>[x] ]
+	{<(>)[{/}u]u< >[w]<[/]d>{b}<{^{c}}+>>+}[e][/]<d[{*}e]c((g))
+	( )< >(<b{ }>v)[e]([+]<[(<u>h<d>[^]) ](-)f[[y]w]>)
+	<{^}[u[ ]]{f(d[/][u<t>]{*})}(v >(u)(v{+}[[b]%{h}])
+	{{]/>y}[*[d</>]]y{z}[e]<^>{{d}b}}(g)( )[(%[w](*)[^<x><)]
+	<+>({a}<[a]c<t>[e]>{t}{*}[ {a]])<u[-]>{h}[<[g]->v}(^)(w[ ])
+	<({g}[%{ ( )(d)}{b}]-<<c>+><(c)a>(d)<{e[<*>^]}+><y>)<*>>
+	[<d>[d<t>]{^}{[u][%]x}<%<{u}a>(w)<g{c(%)} >]([h]z<^><g><e>)
+	{}[g](d{b}{v}<<w>b>)<b<b c[d<x>])>><h>{v}
+	(g)<(a){y}>(<v{w{-}}{t(x)}>w){h}<<w><w>z>{( [*])y}{ [ ]}[e](a)(c)
+	<e>((z{w})z{c}( ))(e)<<%[g [b]><[<g>v] ><[w]<^>b[ ]<%>>{-}>
+	()<[<(v(w))u)w[v(a)<c>]]a><w( >{h}>[[ ]%(w)]{a}[t]
+	[[<-{+}(e)<d[-]>{ }>a][<h[/]> [[w]b{ }]]]
+	<<f>->{<c>y}<*(<x> )<a>><e}{>{f{[^]h}{b}}
+	([%{<( )^><hav<w>(<+><<[-](v)*>[>]b>(w)[x]< >c)}])
+	{{ }{<x>-}e}{ }[d]{{[w]*}a}<[<{f}z><<v>+>x]%>< {b}><><e>
+	<u>[(u)(b[ ])]{[ ]f}[(y)x{{ }c}]{{z}d}[[ ]a]
+	[c](a{(t)x<*>}(d[g](e))[{b}^]){h[c]{a}<e>}{/} g)(( )c)<><[(f)u] >"
+			*/
+			it("solved", () => expect(result).eql("1 0 0 1"));
+			it("answer", () => expect(answer).eql("1 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 1 0"));
+		});
+
+		describe("32", () => {
+			/*ts
+				rotate			:.(,(; #).%$ ]).%$._.+$
+				cull			].(rotate ).[.(].).:(_1%.[).(.$)
+				solution		.(.((].#.>1)` cull) .([.+1^ )).^$.].[
+				result			solution(10 3)
+				answer			solution(100 31)
+			*/
+			it("solved", () => expect(result).eql(4));
+			it("answer", () => expect(answer).eql(91));
+		});
+
 		describe("Very high order functions", () => {
 			/*ts
 				takeThreeNNU		:.:
