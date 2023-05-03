@@ -58,6 +58,7 @@ import indexedSort from "./indexed-sort.js";
 import oringConditionsAndComparisons from "./oring-conditions-and-comparisons.js";
 import triangleCategorizer from "./triangle-categorizer.js";
 import rockPaperScissors from "./rock-paper-scissors.js";
+import cardName from "./card-name.js";
 
 export default [[
 	arithmeticOperations,
@@ -123,4 +124,5 @@ export default [[
 	indexedSort,
 	weightedSumOfDigits,
 	rockPaperScissors,
+	cardName,
 ]];
