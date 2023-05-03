@@ -4,7 +4,56 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
-		describe("58. Card Names", () => {
+		describe("94", () => {
+			/*ts
+				value			^2@.+$
+				solution		"\n"%.(" "%.0+@.value)@." "$
+				result			solution"1 2
+		1 2 3
+		2 3 4
+		2 4 6 8 10
+		7 11 19"
+				answer			solution"1 3 5
+	3 5 7 12 14 16
+	1 6 10 12
+	2 4 8 11 13 17
+	4 9
+	2 5
+	4 6 9 14 18
+	4 9
+	3 8 12 14 17 22 24
+	4 6
+	3 6 10 15 17 20 25
+	4 8 12 14"
+			*/
+			it("solved", () => expect(result).eql("5 14 29 220 531"));
+			it("answer", () => expect(answer).eql("35 679 281 663 97 29 653 97 1762 52 1684 420"));
+		});
+
+		describe("59", () => {
+			/*ts
+				hint            :.(""%@.*$.=$@ ,(~@ ""%).@$).(((; 1`) 0`)?@.+$)@.([ _.-$)."-"$
+				solution        "\n"%." "%@,([.(hint ).[ ;).@$." "$
+				result			solution("1492 5
+	2013 1865 1234 4321 7491")
+				answer			solution"0137 15
+	9214 2304 0159 7231 2509 5917 7230 2509 0754 3470 1357 7452 1524 7234 9157"
+			*/
+			it("solved", () => expect(result).eql("0-2 1-0 1-2 0-3 2-1"));
+			it("answer", () => expect(answer).eql("0-1 0-2 2-0 1-2 0-1 1-1 1-2 0-1 1-1 0-3 1-2 0-1 0-1 1-1 2-0"));
+		});
+
+		describe("55", () => {
+			/*ts
+				solutionSS      " "%.;/.(#.>1)?.\.[@.;<." "$
+				exampleS		solutionSS("nun lam mip tex bal pif sot bal bod tex")
+				answerS			solutionSS"lek lyx vap jec nac dek gok dis dyh mep ros rup zaq gyq dis nef juh bof ryf rof jih mix lof zep duk nax ryq gos bux zup zup lip nuc muc vip zac dep mek bah ryq gof jop lik noc nyq jop vyp dap rax vut guf lep zis zes vux zet nif meh las net zex vaf zot laq luh lak nef byf nuk vip not nyf gyf gyh goc ros gok jox zuh ryh jeq jes rek zut zeh jih ret beh nyh jox zac muh bys vef zeh rop zas vaq neq gic zuc zac bus myf nuh viq zac mep bys buc vup rax nyp dep byh mox zyc mac moc maq vip luq juk gah baq beq gux vax vok zys las mof bup bax vok zac nyq jet viq vah zut mak jec neq jeh gec gyt dut bak nep rah vus jys rof vyt dys diq nas zis mux dat mef dof muf jef nek gox nik vop lop mut guh vek lyh res bus gas vef luc mif mek zoh loq det naf nyc myc nah viq rys nut buq zuf vap dah geq gak zys vyc jec jap miq zic zoq buc goh rat nif vyp lop jef beq nuc vyf zit nex zaf lef lix zyp nih vic nex vic muq gus lap jyc duc doc zis voh nac bac vip leh gah jyc beh zys luq git gef nyt doq zyh zes vop bit nep ret nec biq bep vis guk nip nix rep byk dyf bac deq lap zek dex lef zoc zep jaf zos deq gys joq rus dex mak bop lyp nic dit goh roq mup gup noc nop nat vix gas vyq byk mop bis vix gys jit zap loh but jix juh rys zup gok bep buk zeh"
+			*/
+			it("solved", () => expect(exampleS).eql("bal tex"));
+			it("answer", () => expect(answerS).eql("bac beh bep beq buc bus byk bys dep deq dex dis gah gas goh gok gys jec jef jih jop jox juh jyc lap las lef lop luq mak mek mep nac nef nep neq nex nif noc nuc nyq rax ret rof ros ryq rys vap vef vic vip viq vix vok vop vyp zac zeh zep zes zis zup zut zys"));
+		});
+
+		describe("58", () => {
 			/*ts
 				suits		("Clubs" "Spades" "Diamonds" "Hearts")
 				ranks		("2" "3" "4" "5" "6" "7" "8" "9" "10" "Jack" "Queen" "King" "Ace")
