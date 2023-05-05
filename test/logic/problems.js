@@ -4,6 +4,55 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("42", () => {
+			/*ts
+				fixedValues		\(("2" 2) ("3" 3) ("4" 4) ("5" 5) ("6" 6) ("7" 7) ("8" 8) ("9" 9) ("T" 10) ("J" 10) ("Q" 10) ("K" 10))
+				sumFixed		'fixedValues@.+$
+				splitHand		.(!="A"? ="A"?.#)
+				aceValues		.(+,(10*.) +1).^$
+				possibleValues	splitHand,(sumFixed.+ aceValues).@$.;<._
+				highestValue	(:.(([ [) (].<22 ]) [)? ())$
+				hand			" "%.possibleValues.highestValue.|"Bust"
+				solution		"\n"%.hand@." "$
+				result			solution"A T
+	2 K 4
+	3 A Q 8
+	A 3 3 3 A"
+				answer			solution"2 A 3
+	2 2 5 A
+	3 3 2 A
+	4 A 4
+	2 A A Q J
+	A 8
+	Q 3 5
+	A 9
+	J 9
+	6 A
+	A A K 7
+	A 8
+	T A
+	A 3 A 8 A 2
+	9 K
+	A A 4
+	A 2 8
+	Q A
+	A 3 A A
+	K 8
+	A A K J
+	J 2 K
+	8 A
+	J A
+	8 8
+	K 4 J
+	4 Q A A
+	A A A 6
+	4 A A
+	A A 8"
+			*/
+			it("solved", () => expect(result).eql("21 16 Bust 21"));
+			it("answer", () => expect(answer).eql("16 20 19 19 Bust 19 18 20 19 17 19 19 21 16 19 16 21 21 16 18 Bust Bust 19 21 16 Bust 16 19 16 20"));
+		});
+	
 		describe("128", () => {
 			/*ts
 				factorial		((=0 1`) +1^.*$)?
