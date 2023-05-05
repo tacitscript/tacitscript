@@ -15,39 +15,39 @@ export default () => {
 				hand			" "%.possibleValues.highestValue.|"Bust"
 				solution		"\n"%.hand@." "$
 				result			solution"A T
-	2 K 4
-	3 A Q 8
-	A 3 3 3 A"
+2 K 4
+3 A Q 8
+A 3 3 3 A"
 				answer			solution"2 A 3
-	2 2 5 A
-	3 3 2 A
-	4 A 4
-	2 A A Q J
-	A 8
-	Q 3 5
-	A 9
-	J 9
-	6 A
-	A A K 7
-	A 8
-	T A
-	A 3 A 8 A 2
-	9 K
-	A A 4
-	A 2 8
-	Q A
-	A 3 A A
-	K 8
-	A A K J
-	J 2 K
-	8 A
-	J A
-	8 8
-	K 4 J
-	4 Q A A
-	A A A 6
-	4 A A
-	A A 8"
+2 2 5 A
+3 3 2 A
+4 A 4
+2 A A Q J
+A 8
+Q 3 5
+A 9
+J 9
+6 A
+A A K 7
+A 8
+T A
+A 3 A 8 A 2
+9 K
+A A 4
+A 2 8
+Q A
+A 3 A A
+K 8
+A A K J
+J 2 K
+8 A
+J A
+8 8
+K 4 J
+4 Q A A
+A A A 6
+4 A A
+A A 8"
 			*/
 			it("solved", () => expect(result).eql("21 16 Bust 21"));
 			it("answer", () => expect(answer).eql("16 20 19 19 Bust 19 18 20 19 17 19 19 21 16 19 16 21 21 16 18 Bust Bust 19 21 16 Bust 16 19 16 20"));
@@ -59,15 +59,15 @@ export default () => {
 				C				.([.factorial .(] -$).factorial@.*$)./$
 				solution		(2 )%.(C.0')@." "$
 				result			solution(3 0
-	4 2
-	5 2)
+4 2
+5 2)
 				answer			solution(105 98
-	75 8
-	117 111
-	74 66
-	88 8
-	107 101
-	50 10)
+75 8
+117 111
+74 66
+88 8
+107 101
+50 10)
 			*/
 				it("solved", () => expect(result).eql("1 6 10"));
 				it("answer", () => expect(answer).eql("22760723700 16871053725 3127595016 15071474661 64276915527 1807245622 10272278170"));
@@ -78,22 +78,22 @@ export default () => {
 				value			^2@.+$
 				solution		"\n"%.(" "%.0+@.value)@." "$
 				result			solution"1 2
-		1 2 3
-		2 3 4
-		2 4 6 8 10
-		7 11 19"
+1 2 3
+2 3 4
+2 4 6 8 10
+7 11 19"
 				answer			solution"1 3 5
-	3 5 7 12 14 16
-	1 6 10 12
-	2 4 8 11 13 17
-	4 9
-	2 5
-	4 6 9 14 18
-	4 9
-	3 8 12 14 17 22 24
-	4 6
-	3 6 10 15 17 20 25
-	4 8 12 14"
+3 5 7 12 14 16
+1 6 10 12
+2 4 8 11 13 17
+4 9
+2 5
+4 6 9 14 18
+4 9
+3 8 12 14 17 22 24
+4 6
+3 6 10 15 17 20 25
+4 8 12 14"
 			*/
 			it("solved", () => expect(result).eql("5 14 29 220 531"));
 			it("answer", () => expect(answer).eql("35 679 281 663 97 29 653 97 1762 52 1684 420"));
@@ -104,9 +104,9 @@ export default () => {
 				hint            :.(""%@.*$.=$@ ,(~@ ""%).@$).(((; 1`) 0`)?@.+$)@.([ _.-$)."-"$
 				solution        "\n"%." "%@,([.(hint ).[ ;).@$." "$
 				result			solution("1492 5
-	2013 1865 1234 4321 7491")
+2013 1865 1234 4321 7491")
 				answer			solution"0137 15
-	9214 2304 0159 7231 2509 5917 7230 2509 0754 3470 1357 7452 1524 7234 9157"
+9214 2304 0159 7231 2509 5917 7230 2509 0754 3470 1357 7452 1524 7234 9157"
 			*/
 			it("solved", () => expect(result).eql("0-2 1-0 1-2 0-3 2-1"));
 			it("answer", () => expect(answer).eql("0-1 0-2 2-0 1-2 0-1 1-1 1-2 0-1 1-1 0-3 1-2 0-1 0-1 1-1 2-0"));
@@ -144,33 +144,33 @@ export default () => {
 				whoWins			((<0 1`) (>0 2`) 0`)?
 				solution		"\n"%.(match.whoWins)@." "$
 				result			solution("SS PR
-	PR RS PS PP SP
-	PS RR PS RP")
+PR RS PS PP SP
+PS RR PS RP")
 				answer			solution"SR PS SR SS SR RP PP SS RR PS
-	RP PR RR RR RS RS RP RP SP
-	RP SP PS SP SR PP RR SS SP SR PR RP RS SS SP
-	RP SP RP SR
-	SP PR PR SP SP RS
-	SP PR SS RP SR SR
-	SS SR PR RS PR PR RP RP SR PS
-	SS SP SS PP SR RP RS PS SS PS RS RP
-	RR PR SS PP SR PR SR PP SS RP RR PS RS PR PP PP SR
-	PR RR SR RR SS RS PS SR RP PR PS
-	PS RR PP RS PP PR PR PS SP SP PP RS
-	RS PP RP RP PS SS RP RR SP SS SR RS RR SS PR PS
-	PR PR RP RS PR PP PS RS SS PR
-	SS RR PR PP SP PP RP SS SP SR SP
-	PS PR RS RR RR RP RS
-	SS SR SP RS SS RR SP
-	SP PP RS PP SP RR RR SS SP RS
-	SR RP PP RS SP SR
-	PP SS RP RR RS PP RP PR SS PP RP SP RP
-	RR PR PS RP RP
-	SR SR SP SR
-	RP RP PP RS SP RR SR
-	RP RR PP PS SR SR PS
-	SP RS RP RP RP
-	SP RS RS SR PR"
+RP PR RR RR RS RS RP RP SP
+RP SP PS SP SR PP RR SS SP SR PR RP RS SS SP
+RP SP RP SR
+SP PR PR SP SP RS
+SP PR SS RP SR SR
+SS SR PR RS PR PR RP RP SR PS
+SS SP SS PP SR RP RS PS SS PS RS RP
+RR PR SS PP SR PR SR PP SS RP RR PS RS PR PP PP SR
+PR RR SR RR SS RS PS SR RP PR PS
+PS RR PP RS PP PR PR PS SP SP PP RS
+RS PP RP RP PS SS RP RR SP SS SR RS RR SS PR PS
+PR PR RP RS PR PP PS RS SS PR
+SS RR PR PP SP PP RP SS SP SR SP
+PS PR RS RR RR RP RS
+SS SR SP RS SS RR SP
+SP PP RS PP SP RR RR SS SP RS
+SR RP PP RS SP SR
+PP SS RP RR RS PP RP PR SS PP RP SP RP
+RR PR PS RP RP
+SR SR SP SR
+RP RP PP RS SP RR SR
+RP RR PP PS SR SR PS
+SP RS RP RP RP
+SP RS RS SR PR"
 			*/
 			it("solved", () => expect(result).eql("1 1 2"));
 			it("answer", () => expect(answer).eql("2 1 1 2 1 2 2 2 2 2 1 2 1 1 1 1 1 2 2 2 2 2 2 2 1"));
@@ -184,23 +184,23 @@ export default () => {
 				abc				(2 )%.(2%.[.length 1%.].length .([ ]).length)
 				solution		(6 )%.(abc.area.1')@." "$
 				result			solution(1 3 9 5 6 0
-		1 0 0 1 10000 10000
-		7886 5954 9953 2425 6250 2108)
+1 0 0 1 10000 10000
+7886 5954 9953 2425 6250 2108)
 				answer			solution(1547 1061 3725 9267 6511 5423
-	8631 3749 2812 1435 4841 6061
-	875 956 9877 6943 9633 1409
-	6715 9559 5739 8813 3003 2362
-	648 7462 9951 3857 9579 7520
-	63 9108 227 3795 8230 6323
-	1895 5491 7076 2668 8961 8744
-	7921 1416 2126 5626 6923 2574
-	6242 6749 5561 615 9723 6699
-	1606 4424 1416 5571 3548 1027
-	677 2430 5894 3465 188 9355
-	8269 2911 2609 1201 5088 8928
-	5502 1280 6281 4854 6421 3375
-	2076 7264 7039 9741 4017 3852
-	4917 1896 1230 7399 1153 403)
+8631 3749 2812 1435 4841 6061
+875 956 9877 6943 9633 1409
+6715 9559 5739 8813 3003 2362
+648 7462 9951 3857 9579 7520
+63 9108 227 3795 8230 6323
+1895 5491 7076 2668 8961 8744
+7921 1416 2126 5626 6923 2574
+6242 6749 5561 615 9723 6699
+1606 4424 1416 5571 3548 1027
+677 2430 5894 3465 188 9355
+8269 2911 2609 1201 5088 8928
+5502 1280 6281 4854 6421 3375
+2076 7264 7039 9741 4017 3852
+4917 1896 1230 7399 1153 403)
 			*/
 			it("solved", () => expect(result).eql("17 9999.5 6861563"));
 			it("answer", () => expect(answer).eql("15617074 11111794 24178120 2127560 16367914.5 21467265.5 18400555.5 1254515 10693252 791022 18316920 19747865 826250.5 10870806.5 13108991.5"));
@@ -221,27 +221,27 @@ export default () => {
 				parseString		""%.(iterate ("" 1))$.checkPass
 				solution		"\n"%.parseString@." "$
 				result			solution("(a+[b*c]-{d/3})
-	(a + [b * c) - 17]
-	(((a * x) + [b] * y) + c
-	auf(zlo)men [gy<psy>] four{s}")
+(a + [b * c) - 17]
+(((a * x) + [b] * y) + c
+auf(zlo)men [gy<psy>] four{s}")
 				answer			solution"<h[<t<u>><(z)g>e][-(y){u[*]}]{e}>(^<c>)[{v}][v]{h}[<{/}^( )>[x] ]
-	{<(>)[{/}u]u< >[w]<[/]d>{b}<{^{c}}+>>+}[e][/]<d[{*}e]c((g))
-	( )< >(<b{ }>v)[e]([+]<[(<u>h<d>[^]) ](-)f[[y]w]>)
-	<{^}[u[ ]]{f(d[/][u<t>]{*})}(v >(u)(v{+}[[b]%{h}])
-	{{]/>y}[*[d</>]]y{z}[e]<^>{{d}b}}(g)( )[(%[w](*)[^<x><)]
-	<+>({a}<[a]c<t>[e]>{t}{*}[ {a]])<u[-]>{h}[<[g]->v}(^)(w[ ])
-	<({g}[%{ ( )(d)}{b}]-<<c>+><(c)a>(d)<{e[<*>^]}+><y>)<*>>
-	[<d>[d<t>]{^}{[u][%]x}<%<{u}a>(w)<g{c(%)} >]([h]z<^><g><e>)
-	{}[g](d{b}{v}<<w>b>)<b<b c[d<x>])>><h>{v}
-	(g)<(a){y}>(<v{w{-}}{t(x)}>w){h}<<w><w>z>{( [*])y}{ [ ]}[e](a)(c)
-	<e>((z{w})z{c}( ))(e)<<%[g [b]><[<g>v] ><[w]<^>b[ ]<%>>{-}>
-	()<[<(v(w))u)w[v(a)<c>]]a><w( >{h}>[[ ]%(w)]{a}[t]
-	[[<-{+}(e)<d[-]>{ }>a][<h[/]> [[w]b{ }]]]
-	<<f>->{<c>y}<*(<x> )<a>><e}{>{f{[^]h}{b}}
-	([%{<( )^><hav<w>(<+><<[-](v)*>[>]b>(w)[x]< >c)}])
-	{{ }{<x>-}e}{ }[d]{{[w]*}a}<[<{f}z><<v>+>x]%>< {b}><><e>
-	<u>[(u)(b[ ])]{[ ]f}[(y)x{{ }c}]{{z}d}[[ ]a]
-	[c](a{(t)x<*>}(d[g](e))[{b}^]){h[c]{a}<e>}{/} g)(( )c)<><[(f)u] >"
+{<(>)[{/}u]u< >[w]<[/]d>{b}<{^{c}}+>>+}[e][/]<d[{*}e]c((g))
+( )< >(<b{ }>v)[e]([+]<[(<u>h<d>[^]) ](-)f[[y]w]>)
+<{^}[u[ ]]{f(d[/][u<t>]{*})}(v >(u)(v{+}[[b]%{h}])
+{{]/>y}[*[d</>]]y{z}[e]<^>{{d}b}}(g)( )[(%[w](*)[^<x><)]
+<+>({a}<[a]c<t>[e]>{t}{*}[ {a]])<u[-]>{h}[<[g]->v}(^)(w[ ])
+<({g}[%{ ( )(d)}{b}]-<<c>+><(c)a>(d)<{e[<*>^]}+><y>)<*>>
+[<d>[d<t>]{^}{[u][%]x}<%<{u}a>(w)<g{c(%)} >]([h]z<^><g><e>)
+{}[g](d{b}{v}<<w>b>)<b<b c[d<x>])>><h>{v}
+(g)<(a){y}>(<v{w{-}}{t(x)}>w){h}<<w><w>z>{( [*])y}{ [ ]}[e](a)(c)
+<e>((z{w})z{c}( ))(e)<<%[g [b]><[<g>v] ><[w]<^>b[ ]<%>>{-}>
+()<[<(v(w))u)w[v(a)<c>]]a><w( >{h}>[[ ]%(w)]{a}[t]
+[[<-{+}(e)<d[-]>{ }>a][<h[/]> [[w]b{ }]]]
+<<f>->{<c>y}<*(<x> )<a>><e}{>{f{[^]h}{b}}
+([%{<( )^><hav<w>(<+><<[-](v)*>[>]b>(w)[x]< >c)}])
+{{ }{<x>-}e}{ }[d]{{[w]*}a}<[<{f}z><<v>+>x]%>< {b}><><e>
+<u>[(u)(b[ ])]{[ ]f}[(y)x{{ }c}]{{z}d}[[ ]a]
+[c](a{(t)x<*>}(d[g](e))[{b}^]){h[c]{a}<e>}{/} g)(( )c)<><[(f)u] >"
 			*/
 			it("solved", () => expect(result).eql("1 0 0 1"));
 			it("answer", () => expect(answer).eql("1 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 1 0"));
