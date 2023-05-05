@@ -4,6 +4,26 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("128", () => {
+			/*ts
+				factorial		((=0 1`) +1^.*$)?
+				C				.([.factorial .(] -$).factorial@.*$)./$
+				solution		(2 )%.(C.0')@." "$
+				result			solution(3 0
+	4 2
+	5 2)
+				answer			solution(105 98
+	75 8
+	117 111
+	74 66
+	88 8
+	107 101
+	50 10)
+			*/
+				it("solved", () => expect(result).eql("1 6 10"));
+				it("answer", () => expect(answer).eql("22760723700 16871053725 3127595016 15071474661 64276915527 1807245622 10272278170"));
+			});
+
 		describe("94", () => {
 			/*ts
 				value			^2@.+$
