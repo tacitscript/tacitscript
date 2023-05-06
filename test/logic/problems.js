@@ -4,6 +4,14 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("leftpad", () => {
+			/*ts
+				leftpad		:.:.:({.(.(1'.` .([ ].#).-$).^$.""$ ]).+$).(.$)
+				result		(8leftpad"0")"111"
+			*/
+			it("result", () => expect(result).eql("00000111"));
+		});
+
 		describe("33", () => {
 			/*ts
 				leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
