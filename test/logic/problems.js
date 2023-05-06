@@ -4,6 +4,40 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("46", () => {
+			/*ts
+				sequences		.(~%.[ #.+1^).@$
+				turnNumber		:,(+,(*2.) #).^$
+				trials			:.(].sequences turnNumber$).*$
+				wins			(3 )%"123456789147258369159357",(""%.@@.&$)@
+				hasWon			.(, ).[.@wins.|$
+				moves			" "%.(; #.;^).*$.((].%2.=0)? (].%2.=1)?).[@@.((1 2)` ;).*$
+				tests			moves.trials$@.+$.]<
+				turnWon			tests.([.hasWon)'.((; ]) 0`)?
+				solution		"\n"%.turnWon@." "$
+				result			solution"7 5 4 1 9 2 8 3 6
+5 1 3 7 6 4 2 9 8
+5 1 2 8 6 4 7 3 9"
+				answer			solution"2 1 3 8 7 9 6 4 5
+7 5 8 9 1 2 4 3 6
+2 5 7 6 9 4 1 8 3
+9 2 6 1 3 4 7 8 5
+7 1 4 2 9 5 6 3 8
+4 6 7 3 1 2 5 9 8
+6 8 2 7 3 9 4 1 5
+5 1 3 4 8 9 2 7 6
+4 8 1 2 6 9 3 7 5
+1 6 9 5 7 8 2 4 3
+2 4 1 5 9 3 7 6 8
+5 9 7 3 2 4 8 6 1
+6 4 3 8 7 2 1 9 5
+5 4 9 6 8 1 2 3 7
+3 1 4 8 5 2 7 6 9
+3 7 2 4 8 5 6 9 1"
+			*/
+			it("answer", () => expect(answer).eql("9 7 6 5 8 5 6 7 8 8 8 7 9 7 7 9"));
+		});
+
 		describe("45", () => {
 			/*ts
 				ranks			""%"A23456789TJQK"

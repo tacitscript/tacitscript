@@ -21,7 +21,7 @@ const style = css({
 
 export default {
 	id: "fizzbuzz",
-	name: "Fizzbuzz",
+	name: "Debugging",
 	operations: <React.Fragment><a href="#tap">(&gt;) tap</a></React.Fragment>,
 	exercise: {
 		question: <div>
