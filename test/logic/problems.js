@@ -4,6 +4,36 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("38. Quadratic Equation", () => {
+			/*ts
+				signedSqrt		((<0 _1*.^0.5._1*) ^0.5)?
+				first			.(1'._1* [.*2)./$
+				signedSecond	.(.(1'.^2 .([ ] 4`).*$).-$.signedSqrt [.*2)./$
+				simpleRoots		.(+$ -$).0'@." "$
+				complexRoots	,(; _1*).0'@.("+"$ "-"$).+"i"@." "$
+				roots			.(first signedSecond).((].<0 complexRoots) simpleRoots)?
+				solution		("-" "_")@."\n"%.(" "%.0+@.roots.("_" "-")@)@."; "$
+				result			solution"3 -3 -6
+1 0 1
+9 90 225"
+				answer			solution"7 -84 280
+5 -15 -50
+4 -16 80
+7 -42 238
+5 -50 130
+4 -32 100
+3 -18 102
+3 60 303
+4 16 12
+3 21 36
+3 12 204
+7 -84 189
+5 35 0"
+			*/
+			it("solved", () => expect(result).eql("2 -1; 0+1i 0-1i; -5 -5"));
+			it("answer", () => expect(answer).eql("6+2i 6-2i; 5 -2; 2+4i 2-4i; 3+5i 3-5i; 5+1i 5-1i; 4+3i 4-3i; 3+5i 3-5i; -10+1i -10-1i; -1 -3; -3 -4; -2+8i -2-8i; 9 3; 0 -7"));
+		});
+
 		describe("42", () => {
 			/*ts
 				fixedValues		\(("2" 2) ("3" 3) ("4" 4) ("5" 5) ("6" 6) ("7" 7) ("8" 8) ("9" 9) ("T" 10) ("J" 10) ("Q" 10) ("K" 10))
