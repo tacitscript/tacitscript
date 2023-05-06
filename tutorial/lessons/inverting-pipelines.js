@@ -15,7 +15,6 @@ const root = ([i, N]) => {
 export default {
 	id: "inverting-pipelines",
 	name: "Inverting Pipelines",
-	operations: <React.Fragment>(<a href="#binaryUnaryApply">(,) binaryUnaryApply</a>)</React.Fragment>,
 	description: <div>
 		<p>We've seen <a href="#custom-operators">previously</a> that we can generate new operators by <i>baking-in</i> arguments to binary operators.</p>
 		<p>Suppose we want to create the operator <b>lengthLessThan</b> that takes an integer <b>n</b> and returns an operator that checks if a vector has fewer than <b>n</b> elements.</p>

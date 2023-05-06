@@ -61,6 +61,7 @@ import rockPaperScissors from "./rock-paper-scissors.js";
 import cardName from "./card-name.js";
 import combinations from "./combinations.js";
 import leftpad from "./leftpad.js";
+import pipingPartiallyAppliedOperators from "./piping-partially-applied-operators.js";
 
 export default [[
 	arithmeticOperations,
@@ -114,6 +115,7 @@ export default [[
 	floorAndCeiling,
 	max,
 	rounding,
+	pipingPartiallyAppliedOperators,
 	invertingPipelines,
 	fizzbuzz,
 	quadraticRoots,
