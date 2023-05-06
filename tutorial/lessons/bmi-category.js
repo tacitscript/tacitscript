@@ -10,10 +10,11 @@ const bmiCategory = bmi => {
 
 export default {
 	id: "bmi-category",
-	name: "BMI Category",
+	name: "Constant operators",
+	operations: <React.Fragment><a href="#constant">(`) constant</a></React.Fragment>,
 	exercise: {
 		question: <div>
-			<div>Given a person's <a href="https://en.wikipedia.org/wiki/Body_mass_index">body mass index (BMI)</a> define the operator <b>bmiCategoryNS</b> that returns the appropriate BMI category according to the following classification:</div>
+			<div>Given a person's <a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank">body mass index (BMI)</a> define the operator <b>bmiCategoryNS</b> that returns the appropriate BMI category according to the following classification:</div>
 			<ul>
 				<li><span className="code">"underweight"</span> for <span className="code">bmi &lt; 18.5</span></li>
 				<li><span className="code">"normal"</span> for <span className="code">18.5 &le; bmi &lt; 25</span></li>

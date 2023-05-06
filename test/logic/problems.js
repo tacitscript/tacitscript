@@ -4,6 +4,22 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("33", () => {
+			/*ts
+				leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+				toBinary		.((].[.>0 ].[.(/2.[ %2))` .(.(; 0`) )).^$.1%.]._.]@.""$.8leftPad
+				numOfBits		""%.0+@.+$
+				decodeBinary	toBinary.(; numOfBits).((].%2.=0 [.1%.]) ()`)?
+				toDecimal		""%.0+@.(:,(*2 ;).+$)$
+				binToChar		toDecimal.{"String.fromCharCode"
+				solution		decodeBinary@.;?.binToChar@.""$
+				result			solution(65 238 236 225 46)
+				answer			solution(182 89 178 86 180 237 114 193 235 100 249 71 110 103 228 86 127 184 86 105 160 105 87 160 207 225 160 80 86 197 243 73 53 73 80 226 32 55 249 75 111 202 178 120 74 198 183 216 183 202 212 183 215 81 237 86 208 240 203 77 183 71 99 226 195 178 180 66 243 210 195 212 207 229 228 109 248 228 74 207 246 102 199 91 195 115 106 114 160 245 160 168 214 218 184 201 210 102 210 80 46)
+			*/
+			it("solved", () => expect(result).eql("Ana."));
+			it("answer", () => expect(answer).eql("Y2V4mrkyGdV8Vi i Oa PVEs5PbyKoJ2xF7X7JT7WmVpM7GcbC24BsRCTOddOvfCjr u 8IRfRP."));
+		});
+
 		describe("38. Quadratic Equation", () => {
 			/*ts
 				signedSqrt		((<0 _1*.^0.5._1*) ^0.5)?

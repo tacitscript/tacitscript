@@ -12,7 +12,6 @@ function fibonacci(n) {
 export default {
 	id: "recursion",
 	name: "Recursion",
-	operations: <React.Fragment><a href="#constant">(`) constant</a></React.Fragment>,
 	description: <div>
 		<p><a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)" target="_blank">Recursion</a> is the process by which a routine calls itself.</p>
 		<p>The canonical example is the <a href="https://en.wikipedia.org/wiki/Factorial" target="_blank">Factorial</a> algorithm, that gives the product of all positive integers up to a given value.</p>

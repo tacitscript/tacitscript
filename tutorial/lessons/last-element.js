@@ -12,7 +12,7 @@ const optEncode = R.pipe(
 export default {
 	id: "last-element",
 	name: "Last Element",
-	operations: <React.Fragment><a href="#last">(]) last</a>, <a href="#cond">(?) cond</a></React.Fragment>,
+	operations: <React.Fragment><a href="#last">(]) last</a></React.Fragment>,
 	description: <div>
 		<p>The <a href="#last">(]) last</a> operation takes an array, and returns the last element (or <i>undefined</i> if the array is empty).</p>
 		<div className="code-block">](7 8 9)=9</div>

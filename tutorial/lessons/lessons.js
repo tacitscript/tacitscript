@@ -91,6 +91,7 @@ export default [[
 	encode,
 	lastElement,
 	comparatives,
+	bmiCategory,
 	grouping,
 	sorting,
 	vectorRandomAccess,
