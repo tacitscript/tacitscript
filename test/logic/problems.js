@@ -4,6 +4,100 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("45", () => {
+			/*ts
+				ranks			""%"A23456789TJQK"
+				suits			""%"CDHS"
+				cards			(+,@ranks)@suits,+$																this is interesting!
+				swap			:,(;<.([ 1` _.-$.-1 1` 0`) +(0 )).%$.([ 3' 2' 1' ]).+$._1%.[
+				swapIndices		.(%52@ (;^52)`).*$.!=$?															final clause to remove duplicates
+				shuffle			:._.swap$
+				solution		.((shuffle cards)` swapIndices).$$." "$
+				result			solution(5814 1316 2080 2712 0 647 8098 315 44 6354 7867 100 61 763 6731 685 42 9309 569 92 701 562
+85 8311 698 220 929 71 684 518 113 61 19 168 745 16 655 9548 6018 2686 25 785 81 721
+964 85 44 614 4 509 8708 19)
+				answer			solution(88 35 899 693 1679 774 4484 2184 12 271 70 26 379 419 3787 350 7079 8888 4382 5799 3058 6127 12 5285 1703 6569 3394 8891 8689 8104 2213 86 7596 9067 5741 88 280 620 870 90 6980 917 43 7016 8 64 77 96 659 12 856 503)
+			*/
+			it("solved", () => expect(result).eql("C5 D5 S4 C8 CQ S3 HK C9 H3 H6 D3 ST DT HT C6 CK DA H9 SJ SK DK C2 DQ S5 H4 D7 S7 S2 C4 D9 CT HJ HQ D2 SA CA H5 H2 C7 D4 CJ D6 S9 HA S8 D8 S6 SQ C3 DJ H8 H7"));
+			it("swap test 1", () => expect(swap([5, 2], [1, 2, 3, 4, 5, 6, 7, 8])).eql([1, 2, 6, 4, 5, 3, 7, 8]));
+			it("swap test 2", () => expect(swap([0, 3], [1, 2, 3, 4, 5, 6, 7, 8])).eql([4, 2, 3, 1, 5, 6, 7, 8]));
+			it("swap test 3", () => expect(swap([3, 7], [1, 2, 3, 4, 5, 6, 7, 8])).eql([1, 2, 3, 8, 5, 6, 7, 4]));
+			it("answer", () => expect(answer).eql("C8 HT D3 DA H7 H3 CK D4 H4 CQ D6 HA SJ D5 CT HK HJ DK S5 DJ C2 H6 C5 H8 SQ C6 CJ SK S8 H5 S6 H9 C3 S3 D2 D7 S4 C4 DQ C9 DT H2 D9 HQ S9 S2 ST C7 CA S7 SA D8"));
+		});
+
+		describe("37", () => {
+			/*ts
+				term			1'.(/1200).1+.1/
+				denominator		.(term.^ ].+1^).@$.+$
+				solution		.([ denominator)./$.]
+				result			solution(800000 6 103)
+				answer			solution(3300000 9 84)
+			*/
+			it("solved", () => expect(result).eql(9957));
+			it("answer", () => expect(answer).eql(53094));
+		});
+
+		describe("120", () => {
+			/*ts
+				swapLast		:.%$.([ ].1%.].((#.<2 ;) _1%._.+$)?).+$
+				maxIndex		.(; #.;^).*$.[<.].]
+				process			].[.(maxIndex ;).(swapLast$ [)
+				check			].[.#.>1
+				solution		.(.(; 0`) ).(check process)^.]@.1%.]." "$
+				result			solution(31 41 59 26 53 58)
+				answer			solution(199 101 191 60 47 6 164 198 106 90 66 103 185 51 41 5 154 7 176 178 24 175 189 167 48 169 70 139 14 79 129 58 126 49 171 197 77 29 87 107 91 82 190 61 166 184 120 97 67 38 59 69 33 25 52 73 8 4 84 37 86 30 65 94 45 104 149 78 76 44 98 57 46 99 81 108 168 145 18 71 152 160 141 88 109 182 72 68 134 137 105 43 40 127 17 123 138 116 135 56 114 122 93 31 186 153 100 21 16 9 75 11 151 133 55 13 172 80 121 156 117 3 150 162 159 39 95 187 89)
+			*/
+			it("solved", () => expect(result).eql("2 2 2 1 0"))
+			it("answer", () => expect(answer).eql("0 7 35 2 42 22 7 104 12 45 85 19 18 21 18 34 25 76 23 44 6 22 81 42 45 16 42 80 25 7 66 77 82 27 82 89 66 88 34 30 30 32 27 80 80 46 12 77 25 25 75 39 8 34 65 11 1 39 11 11 47 35 63 42 40 9 0 46 38 38 58 41 42 19 29 35 36 47 23 19 27 25 26 25 32 27 10 0 27 3 23 31 3 7 18 29 13 29 24 4 1 27 11 24 14 9 2 19 9 3 16 11 4 7 9 2 4 4 6 1 3 3 2 2 4 2 2 0"))
+		});
+
+		describe("53", () => {
+			/*ts
+				map				(""%"abcdefgh" +1^8),*$,\
+				coord			""%,('map 0+)
+				coords			" "%.coord@
+				sameRow			]@.=$
+				sameColumn		[@.=$
+				diagonal		*$.(-$.#)@.=$
+				canTake			((sameRow|sameColumn|diagonal "Y"`) "N"`)?
+				solution		"\n"%.(coords.canTake)@." "$
+				result			solution"b4 b8
+b4 e7
+b4 d2
+b4 g4
+f2 b1
+f2 c4
+f2 d5
+f2 g7"
+				answer			solution"b5 d4
+f2 e1
+h3 a7
+a7 f6
+e3 e2
+b4 e5
+h2 g3
+a4 b6
+e5 h7
+h2 d1
+b4 b6
+d1 b2
+b8 d3
+f2 d1
+e4 d3
+a5 c5
+e4 d2
+g5 f8
+c2 e6
+f6 c2
+f8 e5
+h8 e4
+b7 f3
+d3 f2"
+			*/
+			it("solved", () => expect(result).eql("Y Y Y Y N N N N"));
+			it("answer", () => expect(answer).eql("N Y N N Y N Y N N N Y N N N Y Y N N N N N N Y N"));
+		});
+
 		describe("leftpad", () => {
 			/*ts
 				leftpad		:.:.:({.(.(1'.` .([ ].#).-$).^$.""$ ]).+$).(.$)
