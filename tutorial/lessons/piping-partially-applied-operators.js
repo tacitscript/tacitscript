@@ -18,7 +18,7 @@ export default {
 	</div>,
 	exercise: {
 		question: <div>
-			<div>Let's arrange a normal deck of playing cards in order of suits:<b>C</b>lubs, <b>S</b>pades, <b>D</b>iamonds, <b>H</b>earts.</div>
+			<div>Let's arrange a normal deck of playing cards in order of suits: <b>C</b>lubs, <b>S</b>pades, <b>D</b>iamonds, <b>H</b>earts.</div>
 			<p>Within each suit, let's order the cards <b>2</b>, <b>3</b>, <b>4</b>, ..., <b>T</b>en, <b>J</b>ack, <b>Q</b>ueen, <b>K</b>ing, <b>A</b>ce.</p>
 			<p>Each card is referenced by a two-character code, eg. Jack-of-Clubs is <b>JC</b>.</p>
 			<p>Given the characters for suits and ranks, define <b>deckA</b>, the array of all card codes in order:</p>

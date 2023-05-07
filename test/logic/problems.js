@@ -4,6 +4,29 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+		describe("72", () => {
+			/*ts
+				check			].+1.>,(#.)
+				iterate			.([.* 1'.+ 2'.~%).(.$).(].)
+				random			.(.(check iterate) .(3' )).^$.1%.]
+				params			(445 700001 2097152)
+				randoms			:.params:.+$.random
+				consonants		""%"bcdfghjklmnprstvwxz"
+				vowels			""%"aeiou"
+				consonant		%19.'consonants
+				vowel			%5.'vowels
+				letter			((].%2.=0 [.consonant) [.vowel)?
+				word			.(; #.;^).*$.letter@.""$
+				solutions		:.(] ,(; +$).randoms$).%$.word@." "$
+				result			0solutions(4 5 6)
+				resultb			2014solutions(9 9 9 9)
+				answer			954635solutions(3 7 4 8 5 3 7 3 7 6 5 4 7 6 6 7 3 3 7 6 4)
+			*/
+			it("solved", () => expect(result).eql("fami wovaw kelasi"));
+			it("solved2", () => expect(resultb).eql("foravanad zibecefeb wagabenip wedivonow"));
+			it("answer", () => expect(answer).eql("sek keniziw kupe vakelavo winoz pix warefos buw jinuguw saxixi porap sepe bevawuk tafaro xagoge xuvovom fuc wit sacapof cagisa fota"));
+		});
+
 		describe("46", () => {
 			/*ts
 				sequences		.(~%.[ #.+1^).@$

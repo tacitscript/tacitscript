@@ -369,14 +369,14 @@ const errorBinary = ({left, right, operator}) => {
 	try {leftString = toString(left);} catch (_) {}
 	try {rightString = toString(right);} catch(_) {}
 
-	throw `Unable to resolve operator application (${leftString})${operator}(${rightString})`;
+	throw `Unable to resolve operator application ${leftString}${operator}${rightString}`;
 };
 const errorUnary = ({value, operator}) => {
 	let valueString = "Fn";
 
 	try {valueString = toString(value);} catch (_) {}
 
-	throw `Unable to resolve operator application ${operator}(${valueString})`;
+	throw `Unable to resolve operator application ${operator}${valueString}`;
 };
 
 //----------------------------------------------------------
