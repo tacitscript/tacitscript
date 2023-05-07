@@ -20,7 +20,7 @@ var build = remainingBuilds => {
 			"ramda": "R",
 		}
 	}).then(function() {
-		console.log(folder + ' build complete');
+		console.log(folder + ' build complete', outputPath);
 
 		if (folder === "tutorial") { // required to enable in-place evaluation
 			fs.readFile(outputPath, "utf8", (err, data) => {
