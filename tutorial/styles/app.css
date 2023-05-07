@@ -1,0 +1,27 @@
+:root {
+    --background: #140d0b;
+    --text-color: #fff3ec;
+    --brown: #3b2e2b;
+    --orange: #ffc0ad;
+    --yellow: #f8dca0;
+    --icon-brown: #644e49;
+    --quotation: #D8CCCA;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    font-family: proxima-nova, sans-serif;
+    font-size: 62.5%;
+}
+
+p {
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    margin: 0.6rem 0;
+}
+
+li {
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+}

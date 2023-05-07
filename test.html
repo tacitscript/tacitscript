@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link data-require="mocha" data-semver="1.13.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.css" />
+		<script data-require="mocha" data-semver="1.13.0" src="https://cdnjs.cloudflare.com/ajax/libs/mocha/1.13.0/mocha.js"></script>
+		<script data-require="chaijs" data-semver="1.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/15.0.1/sinon.min.js"></script>
+		<style>
+				#mocha {
+					margin-left: 0;
+					margin-right: 0;
+						font-family: consolas, monospace, Helvetica, sans-serif;
+				}
+				#mocha .test {overflow: auto}
+		</style>
+	</head>
+	<body>
+		<div id="mocha"></div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.12.1/polyfill.min.js" integrity="sha512-uzOpZ74myvXTYZ+mXUsPhDF+/iL/n32GDxdryI2SJronkEyKC8FBFRLiBQ7l7U/PTYebDbgTtbqTa6/vGtU23A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script type="text/javascript" src="https://unpkg.com/systemjs@0.20.9/dist/system.src.js"></script>
+		<script src="test/config.js"></script>
+		<script>
+			System.import('test/logic/main.js').catch(function(err) {
+				console.error(err);
+			});
+		</script>
+		
+	</body>
+</html>
