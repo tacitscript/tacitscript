@@ -120,7 +120,7 @@ export default [[
 	fizzbuzz,
 	quadraticRoots,
 ], [
-	// incrementNumericString,
+	incrementNumericString,
 	// checksum,
 	// lastN,
 	// validTriangle,
