@@ -1,6 +1,10 @@
 var Builder = require('systemjs-builder');
 var fs = require("fs");
 const { exec } = require('child_process');
+const { promisify } = require('util');
+
+const execAsync = promisify(exec);
+
 
 // es6 + jsx -> es5
 var build = remainingBuilds => {
@@ -38,11 +42,18 @@ var build = remainingBuilds => {
 						return;
 					}
 
-					exec('git add tutorial/tutorial.js')
-						.then(() => exec('git commit -m "Add generated tutorial build"'))
-						.then(() => exec('git push origin gh-pages'))
-						.then(() => console.log('All commands executed successfully'))
-						.catch((error) => console.error(`Error executing command: ${error}`));
+					async function runCommands() {
+						try {
+							await execAsync('git add --all');
+							await execAsync('git commit -m "Add generated tutorial build"');
+							await execAsync('git push origin gh-pages');
+							console.log('All commands executed successfully');
+						} catch (error) {
+							console.error(`Error executing command: ${error}`);
+						}
+					}
+					
+					runCommands();
 				});
 			})
 		}
