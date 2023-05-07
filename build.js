@@ -1,5 +1,6 @@
 var Builder = require('systemjs-builder');
 var fs = require("fs");
+const { exec } = require('child_process');
 
 // es6 + jsx -> es5
 var build = remainingBuilds => {
@@ -36,6 +37,12 @@ var build = remainingBuilds => {
 						console.log(err);
 						return;
 					}
+
+					exec('git add tutorial/tutorial.js')
+						.then(() => exec('git commit -m "Add generated tutorial build"'))
+						.then(() => exec('git push origin gh-pages'))
+						.then(() => console.log('All commands executed successfully'))
+						.catch((error) => console.error(`Error executing command: ${error}`));
 				});
 			})
 		}
