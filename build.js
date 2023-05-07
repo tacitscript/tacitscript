@@ -6,7 +6,7 @@ var build = remainingBuilds => {
 	const folder = remainingBuilds[0];
  	// sets the baseURL and loads the configuration file
     const builder = new Builder('./', `./${folder}/config.js`);
-	const outputPath = `./${folder}/${folder}.js`;
+	const outputPath = `./${folder}.js`;
     
 	builder.buildStatic(`${folder}/logic/main.js`, outputPath, {
 		minify: true,
