@@ -62,6 +62,7 @@ import cardName from "./card-name.js";
 import combinations from "./combinations.js";
 import leftpad from "./leftpad.js";
 import pipingPartiallyAppliedOperators from "./piping-partially-applied-operators.js";
+import std from "./std.js";
 
 export default [[
 	arithmeticOperations,
@@ -117,6 +118,7 @@ export default [[
 	rounding,
 	pipingPartiallyAppliedOperators,
 	invertingPipelines,
+	std,
 	fizzbuzz,
 	quadraticRoots,
 ], [

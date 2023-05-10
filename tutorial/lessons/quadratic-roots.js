@@ -2,18 +2,10 @@ import TextEdit from "../components/text-edit.js";
 import ts from "tacitscript";
 import getOperationExamples from "../logic/get-operation-examples.js";
 import Table from "../components/table.js";
+import commonStyles from "../styles/common-styles.js";
 
-const {css} = Glamor;
+const {equationStyle} = commonStyles;
 
-const equationStyle = css({
-	display: "flex",
-	justifyContent: "center",
-	"> img": {
-		backgroundColor: "white",
-		border: "5px solid white",
-		borderRadius: "5px",
-	},
-});
 const getRandomSign = () => (Math.floor(Math.random() * 2) * 2) - 1;
 const roots = ([a, b, c]) => (sqrt => [-b + sqrt, -b - sqrt].map(x => x / (2 * a)))(Math.sqrt(b * b - (4 * a * c)));
 
