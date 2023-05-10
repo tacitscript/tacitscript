@@ -4,6 +4,56 @@ const {expect} = chai;
 
 export default () => {
 	describe("Problems", () => {
+
+	describe("75", () => {
+		/*ts
+			any					?.#.>0
+			isBigStraight		=(2 3 4 5 6)
+			isSmallStraight		=(1 2 3 4 5)
+			isYacht				#.=1
+			isFour				(#.=4)any
+			isFullHouse			.(#.=2 (#.=3)any).&$
+			isTwoPairs			.(#.=3 (#.=2)any).&$
+			isThree				(#.=3)any
+			isPair				(#.=2)any
+			split				!=%.((isYacht "yacht"`) (isFour "four"`) (isFullHouse "full-house"`) (isTwoPairs "two-pairs"`) (isThree "three"`) (isPair "pair"`) "none"`)?
+			type				;<.((isBigStraight "big-straight"`) (isSmallStraight "small-straight"`) split)?
+			solution			(5 )%.type@." "$
+			result				solution(3 6 5 6 1
+	1 6 6 1 6
+	2 4 3 5 1)
+			answer				solution(2 4 5 6 5
+6 6 6 6 4
+3 1 4 4 3
+2 3 4 5 6
+2 3 4 5 1
+2 3 4 5 6
+3 6 2 2 2
+2 3 1 6 5
+2 3 5 5 4
+6 6 3 2 4
+2 3 4 5 1
+5 1 6 5 3
+2 3 4 5 1
+2 3 4 5 1
+2 4 1 1 3
+3 5 2 6 4
+4 4 5 4 1
+2 2 2 2 2
+2 3 4 5 6
+2 3 4 5 6
+4 3 1 2 5
+5 2 6 5 3
+2 3 4 5 1
+2 1 4 3 5
+2 3 4 5 1
+6 1 3 6 5
+2 4 3 4 6)
+		*/
+		it("solved", () => expect(result).eql("pair full-house small-straight"));
+		it("answer", () => expect(answer).eql("pair four two-pairs big-straight small-straight big-straight three none pair pair small-straight pair small-straight small-straight pair big-straight three yacht big-straight big-straight small-straight pair small-straight small-straight small-straight pair pair"));
+	});
+
 		describe("72", () => {
 			/*ts
 				check			].+1.>,(#.)
