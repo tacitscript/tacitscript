@@ -72,22 +72,6 @@ export default () => {
 		it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
 	});
 
-	// describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
-	// 	/*ts
-	// 		powerSeries			(;.(.([ #.-2).+$ 1').^$)^
-	// 		threeTwo			powerSeries(3 2)
-	// 		firstThree			3%threeTwo,{
-	// 		threeTwoB			(3 2),powerSeries
-	// 		powerSeriesB		:.powerSeries
-	// 		threeTwoC			3powerSeriesB2
-	// 		ps					:.(;.(.([ #.-2).+$ 1').^$)^				NNL{N}
-	// 		psArray				ps.3%.{									NNA{N}
-	// 	*/
-	// 	it("3psArray2=(9 16 25)", () => expect(psArray(3, 2)).eql([9, 16, 25]));
-	// 	it("powerSeries([3, 2])().next().value=9", () => expect(powerSeries([3, 2])().next().value).eql(9));
-	// 	it("3%(powerSeries(3 2)),{=(9 16 25)", () => expect(firstThree).eql([9, 16, 25]));
-	// });
-
 	describe("power series", () => {
 		/*ts
 			powerSeriesAL		,(+,(#.) ~^).(.$).^( )
