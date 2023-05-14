@@ -5,6 +5,34 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("301", () => {
+			/*ts
+				premiumsAN              .([.>,(#.) 1'.~/,(#.).:([.*1000).(.$)).^( ).(+ 0)$
+				costSN                  " "%.0+@.(premiumsAN .([ ]).*$).+$
+				solutionSS              "\n"%.costSN@." "$
+				exampleS				solutionSS"1 1 1000
+3 2 1000
+30 10 10000"
+				answerS					solutionSS"94 9 2000
+12 10 6500
+0 18 500
+0 15 2500
+16 8 500
+25 6 3000
+31 12 5500
+10 19 500
+75 11 6500
+60 14 5000
+10 12 5000
+5 18 2500
+98 1 4500"
+			*/
+			it("premiumsAN([30, 10, 10000])=20000", () => expect(premiumsAN([30, 10, 10000])).eql(30000));
+			it("exampleS", () => expect(exampleS).eql("1000 4000 330000"));
+			it("answerS", () => expect(answerS).eql("633000 80000 0 0 16000 115000 196500 5000 706500 400000 50000 12500 5194000"));
+		});
+
+
 		describe("323", () => {
 			/*ts
 				diffToPalindromeNN      0+.((""+.(; _).!=$)^(+1) ;).-$
