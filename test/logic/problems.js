@@ -5,7 +5,128 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
-		describe("34. Binary Search", () => {
+		describe("156", () => {
+			/*ts
+				multiplier		((%2.=0 1`) 2`)?^16
+				isValid			_.""%.0+@.(:multiplier ).[.*$.(*$.((>9 -9) ;)?)@.+$.%10.=0
+				swapDigit		(.("?"` ""+).@)^10
+				replace			.(, swapDigit`).@$.isValid'
+				flip			:,(.(; 2` 0`) ;).%$,(; _ ;).+$
+				flipDigits		(.(flip ).[)^16
+				swap			.(, flipDigits`).@$.isValid'
+				hasMissing		"?"%.#.>1
+				processed		((hasMissing replace) swap)?
+				solution		"\n"%.processed@." "$
+				result			solution"?942682966937054
+1217400151414995
+2146133934?67114
+2553514623364925"
+			*/
+				it("solved", () => expect(result).eql("3942682966937054 1217040151414995 2146133934667114 2553514623369425"));
+				it("swap test", () => expect(swap("2553514623364925")).eql("2553514623369425"));
+				it("isValid test", () => expect(isValid("1217400151414995")).eql(false));
+				it("replace test", () => expect(replace("2146133934?67114")).eql("2146133934667114"));
+				it("flip test", () => expect(flip(4, "12345678")).eql("12346578"));
+			});
+
+		describe("54", () => {
+			/*ts
+				b				.(.([.^2 *$.2*).-$ -$.*2)./$
+				c				.([ ] b).-$
+				isValid			b.(; 0').-$.#.<(10^(_8))
+				iterate			!isValid^(((1 ) +1)>)
+				cSquared		.(; 1`).iterate.c.^2
+				solution		cSquared@." "$
+				result			solution(12
+30)
+			*/
+			it("solved", () => expect(result).eql("25 169"));
+			it("cSquared test", () => expect(cSquared(12)).eql(25));
+			it("isValid test", () => expect(isValid([12, 3])).eql(true));
+			it("b test", () => expect(b([12, 3])).eql(4));
+			it("c test", () => expect(c([12, 3])).eql(5));
+		});
+
+
+		describe("36", () => {
+			/*ts
+				leftPad			:,(; ""+).(.([ ].#).-$."0"`^.""$ ]).+$
+				noSame			:.(4leftPad.""%)@.*$.((=$ 1`) 0`)?@.+$
+				match			:.(.([.[ ]).noSame$ [.]).=$
+				isSolved		(2 )%.match@.&$
+				solution		.(isSolved.! +1`).^$.(0,).4leftPad
+				result			solution(402 1
+390 1
+816 3
+848 3
+777 1
+815 2)
+				answer			solution(2248 1
+8617 0
+8175 0
+9537 0
+3044 0
+1758 1
+4823 0
+9851 0
+8224 0
+5975 0
+7838 0
+9416 0
+1406 1
+2800 3)
+			*/
+			it("solved", () => expect(result).eql("0846"));
+			it("isSolved test", () => expect(isSolved([402, 1, 390, 1])(846)).eql(true));
+			it("noSame test", () => expect(noSame(816, 846)).eql(3));
+			it("match test", () => expect(match([848, 3], 846)).eql(true));
+			it("answer", () => expect(answer).eql("2700"));
+		});
+
+		describe("63", () => {
+			/*ts
+				accuracy		10^(_8)
+				isntFactor		/,(;.).:(%1.>accuracy).(.$)
+				isntOne			(!=1)`
+				inRange			^(0.5).>|=
+				check			.(isntFactor isntOne inRange).&$
+				getNextFactor	.(.(check (+1)`).^$.(2,) inRange).((,$ [) ()`)?
+				addFactor		.([ [.getNextFactor ]).(2%.[./$ .(] .(1' )).+$)
+				factors			.(; ( )`).(([.getNextFactor)^addFactor).(] .([ )).+$."*"$
+				solution		factors@." "$
+				result			solution(1000
+1001
+1002
+1003
+1009)
+				answer			solution(240728758421
+2246577851041
+2429305769831
+2086169557057
+2341124936653
+190758487949
+623843805659
+911696645071
+906366973549
+4863666584501
+626782639741
+25535379071
+21910142399
+26055686479
+2156094247063
+45797875111
+20439034529
+63455991461
+975088133281
+4290161811503
+502499860669)
+			*/
+			it("solved", () => expect(result).eql("2*2*2*5*5*5 7*11*13 2*3*167 17*59 1009"));
+			it("getNextFactor(9) eql 3", () => expect(getNextFactor(9)).eql(3));
+			it("answer", () => expect(answer).eql("83*179*197*233*353 103*229*307*557*557 151*229*313*389*577 79*263*439*439*521 149*239*337*373*523 59*107*191*281*563 67*113*283*491*593 67*241*269*431*487 167*251*251*277*311 167*293*313*541*587 103*157*251*307*503 179*457*541*577 277*293*499*541 353*383*439*439 73*317*373*439*569 373*463*509*521 269*379*433*463 59*73*103*313*457 163*179*269*283*439 137*271*379*509*599 59*131*311*349*599"));
+		});
+
+		describe("34", () => {
 			/*ts
 				E				{"Math.E"
 				exponent		*,(_1*./50.E^._1*.)
