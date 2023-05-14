@@ -98,6 +98,8 @@ const supportsUndefined = value => isFunction(value) && value.supportsUndefined;
 const lazyScan = ({next, start}) => function*() {
 	let result = [...start];
 
+	for (let i = 0; i < result.length; i += 1) yield result[i];
+
 	while (true) {
 		const newValue = next(result);
 
@@ -676,13 +678,13 @@ const hat = (left, right) => {
 	if (isUnaryFunction(left) && isNumber(right))																// generate				(N?)NA					;^3=(0 1 2)
 		return map((value, index) => left(index))(Array.from(Array(right)));
 	if (isArray(left) && isArray(right)) return scanInternal({fns: left, startingArray: right});				// scan					AAA						(#.<5 #.+1)^( )=(1 2 3 4 5)
-	// if (isUnaryFunction(left) && isUnaryFunction(right)) { // while 1,(<10^(*2))
-	// 	let result = x => whileInternal({whileCondition: left, next: right, start: x});
+	if (isUnaryFunction(left) && isUnaryFunction(right)) {														// while				UUU						1,(<10^(*2))=16
+		let result = x => whileInternal({whileCondition: left, next: right, start: x});
 
-	// 	result.types = right.types;
+		result.types = right.types;
 
-	// 	return result;
-	// }
+		return result;
+	}
 	if (isUnaryFunction(left) && isArray(right)) return lazyScan({next: left, start: right});					// lazyScan				(AV)AL					(3%((#.+1)^( )),{)=(1 2 3)
 
 	errorBinary({left, right, operator: "^"});

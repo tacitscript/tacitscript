@@ -5,6 +5,362 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("301", () => {
+			/*ts
+				premiumsAN              .([.>,(#.) 1'.~/,(#.).:([.*1000).(.$)).^( ).(+ 0)$
+				costSN                  " "%.0+@.(premiumsAN .([ ]).*$).+$
+				solutionSS              "\n"%.costSN@." "$
+				exampleS				solutionSS"1 1 1000
+3 2 1000
+30 10 10000"
+				answerS					solutionSS"94 9 2000
+12 10 6500
+0 18 500
+0 15 2500
+16 8 500
+25 6 3000
+31 12 5500
+10 19 500
+75 11 6500
+60 14 5000
+10 12 5000
+5 18 2500
+98 1 4500"
+			*/
+			it("premiumsAN([30, 10, 10000])=20000", () => expect(premiumsAN([30, 10, 10000])).eql(30000));
+			it("exampleS", () => expect(exampleS).eql("1000 4000 330000"));
+			it("answerS", () => expect(answerS).eql("633000 80000 0 0 16000 115000 196500 5000 706500 400000 50000 12500 5194000"));
+		});
+
+
+		describe("323", () => {
+			/*ts
+				diffToPalindromeNN      0+.((""+.(; _).!=$)^(+1) ;).-$
+				solutionSS              "\n"%.diffToPalindromeNN@." "$
+				exampleS				solutionSS"1
+46
+329
+7307
+55733
+203092
+6682635
+22069658
+826641918"
+			*/
+			it("exampleS", () => expect(exampleS).eql("0 9 4 30 22 210 231 7364 4710"));
+		});
+
+		describe("329", () => {
+			/*ts
+				applyRomanCharNSN        :.(
+					(].="M" [.+1000)
+					(].="D" [.+500)
+					(].="C" [.((>499 -100) +100)?)
+					(].="L" [.+50)
+					(].="X" [.((>49 -10) +10)?)
+					(].="V" [.+5)
+					[.((>4 -1) +1)?
+				)?
+				fromRomanSN              _.""%.(applyRomanCharNSN 0)$
+				processArabicNumberAA	(
+					([.>999 .([.-1000 ].+"M"))
+					([.>899 .([.-900 ].+"CM"))
+					([.>499 .([.-500 ].+"D"))
+					([.>399 .([.-400 ].+"CD"))
+					([.>99 .([.-100 ].+"C"))
+					([.>89 .([.-90 ].+"XC"))
+					([.>49 .([.-50 ].+"L"))
+					([.>39 .([.-40 ].+"XL"))
+					([.>9 .([.-10 ].+"X"))
+					([.>8 .([.-9 ].+"IX"))
+					([.>4 .([.-5 ].+"V"))
+					([.>3 .([.-4 ].+"IV"))
+					([.>0 .([.-1 ].+"I"))
+				)?
+				toRomanNS               .(.(; ""`) ).(].[.!=0 ].processArabicNumberAA)^.].]
+				toOperatorSB            ((="+" +`) -`)?
+				processArithmeticSS     " "%.(.([ ]).fromRomanSN@ 1'.toOperatorSB.$).(,$).toRomanNS
+				solutionSS				"\n"%.processArithmeticSS@." "$
+				exampleS				solutionSS"MMMDCCCLXXI - MMMCCCIII
+DC + CCXLI
+MMMCCCLIV - MMCCCXXXIX
+MCXCVI + MCMLXXXII"
+			*/
+			it("fromRomanSN", () => expect(fromRomanSN("MMCMXCIV")).eql(2994));
+			it("toRomanNS", () => expect(toRomanNS(2994)).eql("MMCMXCIV"));
+			it("exampleS", () => expect(exampleS).eql("DLXVIII DCCCXLI MXV MMMCLXXVIII"));
+		});
+
+		describe("97", () => {
+			/*ts
+				possNoOfPigs	.(_.-$./2.>,(].) (].+1)`).^(1 )
+				girls			.([.[ ].*4).-$./2
+				n				,(_.-$ *2)./$.+2
+				isPosInteger	.(>0 .(; 0').=$).&$
+				filter			:.(n girls).isPosInteger@.&$
+				solutions		.(filter possNoOfPigs).?$.#
+				solution		(2 )%.solutions@." "$
+				result			solution(6 10
+26 136
+106 336
+200 500)
+			answer			solution(80 290
+178 260
+30 162
+130 380
+108 300
+34 202
+1204 1964
+260 956
+124 460
+320 420
+8 22
+40 136
+378 706
+572 1090
+78 398)
+			*/
+			it("solved", () => expect(result).eql("1 2 3 9"));
+			it("filter test", () => expect(filter([6, 10], 2)).eql(false));
+			it("filter test 2", () => expect(filter([6, 10], 1)).eql(true));
+			it("girls test", () => expect(girls([[6, 10], 2])).eql(-1));
+			it("possNoOfPigs test", () => expect(possNoOfPigs([6, 10])).eql([1, 2]));
+			it("answer", () => expect(answer).eql("5 2 4 3 9 6 11 8 12 6 1 6 5 3 7"));
+		});
+
+
+		describe("135", () => {
+			/*ts
+				table			\((" " "11") ("t" "1001") ("n" "10000") ("s" "0101") ("r" "01000") ("d" "00101") ("!" "001000")
+								("c" "000101") ("m" "000011") ("g" "0000100") ("b" "0000010") ("v" "00000001") ("k" "0000000001") ("q" "000000000001")
+								("e" "101") ("o" "10001") ("a" "011") ("i" "01001") ("h" "0011") ("l" "001001") ("u" "00011")
+								("f" "000100") ("p" "0000101") ("w" "0000011") ("y" "0000001") ("j" "000000001") ("x" "00000000001") ("z" "000000000000"))
+				hex				""%"0123456789ABCDEF"
+				padRight		:.(] ,(; #).-$.((=0 ""`) "0"`^.+$)?).+$
+				charToHex		_.""%.(0+@ #.2^^).*$.*$@.+$.'hex
+				byteToHex		(4 )%.charToHex@.+$
+				solution		""%.'table@.+$.(8 )%.(8padRight.byteToHex)@." "$
+				result			solution"entertaining interpreter"
+				answer			solution"may define a !tyrant is unfit to be the ruler of a free people !nor have !we !he has abdicated !government here by declaring us out of his !protection and its foundation on such principles and organizing its powers in such form"
+			*/
+			it("solved", () => expect(result).eql("B0 9A 89 69 82 60 13 4C 26 A0 2A 2C D4 00"));
+			it("byteToHex test", () => expect(byteToHex("00101010")).eql("2A"));
+			it("charToHex test", () => expect(charToHex("1010")).eql("A"));
+			it("padRight test", () => expect(padRight(8, "123")).eql("12300000"));
+			it("answer", () => expect(answer).eql("0D 81 CB 44 4C 2E F2 24 0A 1C 27 4A E3 80 89 9E 63 82 BC 9D D0 32 6A 38 89 BC 44 5B 85 B1 0A 4D C8 84 51 9B 01 B9 00 EE 41 DC DA EC 11 52 2B 9A 5C 80 91 01 A8 80 76 13 9D 45 C1 01 CB 45 25 A1 30 09 8D 78 8E 78 89 9A 57 20 2A 23 34 59 4C 61 B8 17 4C AE 24 47 02 B9 4C 61 C6 1A 8C 53 C2 A1 30 15 21 49 AB B8 17 8A 02 38 24 00 13 00 9A 65 70 B1 07 50 BA 61 A8 C5 3C 48 A0 30"));
+		});
+
+		describe("105", () => {
+			/*ts
+				semiPerimeter	+$./2
+				area			.(.(semiPerimeter ) ;).+$.([ .([ 1').-$ .([ 2').-$ .([ ]).-$).*$.^0.5
+				length			*$.(-$.^2)@.+$.^0.5
+				abc				(2 )%.(2%.[.length 1%.].length .([ ]).length)
+	
+				indices			-2.;^.(.(0` +1 +2))@
+				extract			:._,(, '@).@$
+				sextets			.(, #.indices.extract@).@$.+$@
+				solution		(2 )%.sextets.(abc.area)@.+$
+				result			solution(51 9
+77 10
+92 71
+62 84
+29 94)
+				answer			solution(4862 55
+7238 1125
+7757 1509
+9652 5057
+9673 6053
+7481 9281
+4021 9901
+2580 8120
+1950 7216
+1115 3147
+1206 2089
+2890 517)
+	*/
+			it("solved", () => expect(result).eql(3274.5));
+			it("sextets test", () => expect(sextets([[0, 1], [2, 3], [4, 5], [6, 7], [8, 9]])).eql([[0, 1, 2, 3, 4, 5], [0, 1, 4, 5, 6, 7], [0, 1, 6, 7, 8, 9]]));
+			it("extract test", () => expect(extract([0, 2, 3], [[0, 1], [2, 3], [4, 5], [6, 7]])).eql([[0, 1], [4, 5], [6, 7]]));
+			it("indices test", () => expect(indices(5)).eql([[0, 1, 2], [0, 2, 3], [0, 3, 4]]));
+			it("answer", () => expect(answer).eql(60712662.00000001));
+		});
+
+		describe("73", () => {
+			/*ts
+				angle			60/180*({"Math.PI")
+				x				angle,{"Math.cos"
+				y				angle,{"Math.sin"
+				move			\(("A" (1 0)) ("B" (x y)) ("C" (_x y)) ("D" (_1 0)) ("E" (_x _y)) ("F" (x _y)))
+				dist			^2@.+$.^0.5
+				line			""%.'move@.(*.{@)$.+$@.dist.8'
+				solution		"\n"%.line@." "$
+				result			solution"AABF
+FEDCBA
+BCB"
+				answer			solution"CADDABEADCCBFAECF
+FEACDBEADCEBFEBBFBACAACFFAADBAA
+FDBABFACBB
+ACEBFCCDFCBAEEEF
+CDEDEEDDDCDBDFDBEAAFBABFCBFE
+EFACDCFABEBCACCEEDEFCCA
+EAEBFCBFDABABBD
+BBFAAAFEBAAFDAEC
+DEAEDFEFECEEFEBAAAFCBEAA
+FACBFFDBAFCADBAB
+CCFFAFFDADFEFFDDDDFC
+EEDCBCFAEFEBAAFBBC
+BBCCDEEBBBDECDEBDFEEDFAEACE
+AADBCDAACA
+EEFFCDCEDEDFBFEEDDDBDA"
+			*/
+			it("solved", () => expect(result).eql("3 0 2.64575131"));
+			it("answer", () => expect(answer).eql("1.73205081 7.54983444 4.35889894 1 4.58257569 1.73205081 3.46410162 6.55743852 7.21110255 5.29150262 5.56776436 2 5 3.60555128 8.71779789"));
+		});
+
+		describe("172", () => {
+			/*ts
+				pi				{"Math.PI"
+				tan				/180.*pi.{"Math.tan"
+				numerator		2%.[.*$
+				denominator		.(1` 1%.]./$).-$
+				h				,(; tan tan).(numerator denominator)./$
+				solution		(3 )%.(h.0')@." "$
+				result			solution(1859 23.7740 53.8740
+1721 34.2290 68.1863
+1512 26.0048 53.1380)
+				answer			solution(962 23.5884 51.7127
+1736 26.3361 63.4349
+3139 24.9444 62.9817
+765 33.3475 52.4178
+632 33.3449 60.7830
+2703 26.4518 62.5325
+634 28.3942 56.5587
+1132 29.1899 59.4761
+2360 22.9661 59.8889
+2009 22.5341 62.5154
+654 35.7369 65.3231
+1208 33.5180 54.2362
+1472 30.3244 67.6860
+1017 31.6808 54.2328
+701 34.4002 64.8106
+2519 23.6819 52.7722
+1056 26.0067 65.3289
+1356 29.3270 53.8830
+1169 30.3134 53.4893)
+			*/
+			it("solved", () => expect(result).eql("1207 1609 1163"));
+			it("answer", () => expect(answer).eql("641 1142 1914 1020 658 1814 533 943 1326 1063 703 1530 1133 1130 708 1657 664 1291 1205"));
+		});
+
+		describe("74", () => {
+			/*ts
+				pi				{"Math.PI"
+				sin				{"Math.sin"
+				cos				{"Math.cos"
+				hours			,(%12.*pi./6 /360.*pi).+$.(sin.*6.+10 cos.*6.+10)
+				minutes			]./30.*pi.(sin.*9.+10 cos.*9.+10)
+				positions		":"%.0+@.(hours minutes).+$
+				solution		" "%.positions@.+$." "$
+				result			solution"12:00 15:00 09:30"
+				answer			solution"09:17 22:10 16:23 23:03 18:49 04:40 09:42 14:02"
+			*/
+			it("solved", () => expect(result).eql("10 16 10 19 16 10 10 19 4.20444504226559 11.552914270615123 10.000000000000002 1"));
+			it("answer", () => expect(answer).eql("4.065904819828498 10.88685646677766 18.80332840660425 8.128794782640167 5.085087734266049 13.441458618106276 17.794228634059948 14.5 14.493734324734014 6.024279710705576 16.02217545722972 3.311696570703451 7.137047438442348 15.27290267597179 12.781152949374526 18.559508646656383 7.511840544062566 4.540232374740741 1.77809088121659 13.660629787682197 13.856725658119236 5.403733341286133 2.2057713659400546 5.4999999999999964 4.398517441016789 12.150207697271803 1.440491353343619 7.218847050625472 15.247718242836374 12.908857721478022 11.871205217359833 18.80332840660425"));
+		});
+
+		describe("80", () => {
+			/*ts
+				chance			/100@.([ 1-@.*$.1-.1/).*$.100*.0'
+				solution		(2 )%.chance@." "$
+				result			solution(30 50
+20 15)
+				answer			solution(66 38
+58 54
+30 77
+58 64
+22 36
+80 47
+80 51
+69 70
+75 29
+34 20
+48 23
+67 55
+12 60
+30 73
+65 75
+68 33
+26 71
+68 73
+76 36
+34 63
+53 54
+35 10
+86 81
+49 61
+38 38
+35 29
+61 10
+11 54
+66 78
+30 34)
+			*/
+			it("solved", () => expect(result).eql("46 63"));
+			it("answer", () => expect(answer).eql("84 72 36 68 44 89 89 76 91 72 80 79 19 37 71 87 33 74 90 45 68 84 88 61 62 65 94 19 71 56"));
+		});
+
+		describe("134", () => {
+			/*ts
+				boundLeft		(([.[.<0 ((0 0) 1`)>.((2 0) _1*)>) ;)?
+				boundTop		(([.].<0 ((0 1) 1`)>.((2 1) _1*)>) ;)?
+				boundRight		((.([.[ 1'.[).=$ ((0 0) -2)>.((2 0) _1*)>) ;)?
+				boundBottom		((.([.] 1'.]).=$ ((0 1) -2)>.((2 1) _1*)>) ;)?
+				bound			boundLeft.boundTop.boundRight.boundBottom.([ ])
+				nextPosAndDir	:.(].*$.+$@ [.(.([ ]).-$.+1 1') ].]).bound
+				next			nextPosAndDir,(].)
+				start			(((0 0) (1 1)) )
+				whileCond		#.<101
+				solution		.(.(whileCond` next) start`).^$.[@.+$." "$
+				result			solution(9 3 4)
+				answer			solution(41 19 4)
+			*/
+			it("solved", () => expect(result).eql("0 0 1 1 2 2 3 1 4 0 5 1 4 2 3 1 2 0 1 1 0 2 1 1 2 0 3 1 4 2 5 1 4 0 3 1 2 2 1 1 0 0 1 1 2 2 3 1 4 0 5 1 4 2 3 1 2 0 1 1 0 2 1 1 2 0 3 1 4 2 5 1 4 0 3 1 2 2 1 1 0 0 1 1 2 2 3 1 4 0 5 1 4 2 3 1 2 0 1 1 0 2 1 1 2 0 3 1 4 2 5 1 4 0 3 1 2 2 1 1 0 0 1 1 2 2 3 1 4 0 5 1 4 2 3 1 2 0 1 1 0 2 1 1 2 0 3 1 4 2 5 1 4 0 3 1 2 2 1 1 0 0 1 1 2 2 3 1 4 0 5 1 4 2 3 1 2 0 1 1 0 2 1 1 2 0 3 1 4 2 5 1 4 0 3 1 2 2 1 1 0 0"));
+			it("nextPosAndDir test", () => expect(nextPosAndDir([5, 6, 3], [[0, 0], [1, 1]])).eql([[1, 1], [1, 1]]));
+			it("bound test 1", () => expect(bound([[-1, -1], [5, 5], [-1, -1]])).eql([[1, 1], [1, 1]]));
+			it("bound test 2", () => expect(bound([[-1, 5], [5, 5], [-1, 1]])).eql([[1, 3], [1, -1]]));
+			it("bound test 3", () => expect(bound([[5, -1], [5, 5], [1, -1]])).eql([[3, 1], [-1, 1]]));
+			it("bound test 4", () => expect(bound([[5, 5], [5, 5], [1, 1]])).eql([[3, 3], [-1, -1]]));
+			it("nextPosAndDir test 2", () => expect(nextPosAndDir([9, 3, 4], [[2, 2], [1, 1]])).eql([[3, 1], [1, -1]]));
+			it("answer", () => expect(answer).eql("0 0 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 17 20 16 21 15 22 14 23 13 24 12 25 11 26 10 27 9 28 8 29 7 30 6 31 5 32 4 33 3 34 2 35 1 36 0 37 1 36 2 35 3 34 4 33 5 32 6 31 7 30 8 29 9 28 10 27 11 26 12 25 13 24 14 23 15 22 16 21 17 20 18 19 17 18 16 17 15 16 14 15 13 14 12 13 11 12 10 11 9 10 8 9 7 8 6 7 5 6 4 5 3 4 2 3 1 2 0 1 1 0 2 1 3 2 4 3 5 4 6 5 7 6 8 7 9 8 10 9 11 10 12 11 13 12 14 13 15 14 16 15 17 16 18 17 17 18 16 19 15 20 14 21 13 22 12 23 11 24 10 25 9 26 8"));
+		});
+
+		describe("171", () => {
+			/*ts
+				pi				{"Math.PI"
+				height			,([ -90.*pi./180.{"Math.tan").*$.0'
+				solution		(2 )%.height@." "$
+				result			solution(71 134.182
+	47 139.994
+	121 109.983)
+				answer			solution(175 110.950
+	33 139.764
+	51 117.897
+	65 118.980
+	99 122.057
+	17 136.637
+	49 116.095
+	104 111.038
+	53 135.000
+	73 106.049
+	51 117.897
+	84 128.991
+	53 130.956)
+			*/
+			it("solved", () => expect(result).eql("69 56 44"));
+			it("answer", () => expect(answer).eql("67 39 27 36 62 18 24 40 53 21 27 68 46"));
+		});
+
 		describe("further very high order operators", () => {
 			/*ts
 				lengthPlusAU	#.:.+$./2
@@ -64,55 +420,11 @@ BLEP 112 109 106 104 107 108 106 106 109 112 110 107 110 108"
 			split				!=%.((isYacht "yacht"`) (isFour "four"`) (isFullHouse "full-house"`) (isTwoPairs "two-pairs"`) (isThree "three"`) (isPair "pair"`) "none"`)?
 			type				;<.((isBigStraight "big-straight"`) (isSmallStraight "small-straight"`) split)?
 			solution			(5 )%.type@." "$
-			result				s	describe("further very high order operators", () => {
-		/*ts
-			lengthPlusAU	#.:.+$./2
-			lengthPlusbAU	#.+./2
-			// temp			+,(#.).+1
-		*/
-		it("lengthPlusANN", () => expect(lengthPlusAU([1, 2, 3, 4], 2)).eql(3));
-		it("lengthPlusbANN", () => expect(lengthPlusbAU([1, 2, 3, 4], 2)).eql(3));
-		// it("inversion", () => expect(temp(2)([1, 2, 3])).eql(6));
-	});
-
-	describe("39", () => {
-		/*ts
-			mean			.(+$ #)./$
-			std				.(mean.-.^2 ;).@$.mean.^0.5
-			buy				.(std mean.*0.04).>$
-			process			" "%.1%,(; 0+@.buy)
-			solution		"\n"%.process@.]?.([.[)@." "$
-			result			solution"JOOG 99 99 99 99 99 99 99 101 101 101 101 101 101 101
-GOLD 95 105 95 105 95 105 95 105 95 105 95 105 95 105"
-			answer			solution"GOLD 21 19 17 21 19 15 11 12 9 13 15 16 20 22
-PNSN 102 104 107 110 112 113 114 116 118 121 123 121 123 121
-FOTA 44 41 40 37 38 41 43 47 51 55 51 48 49 47
-ZEOD 174 171 173 173 173 172 170 166 169 165 163 165 164 168
-GEEK 47 49 51 49 51 49 50 50 52 50 52 54 56 56
-SLVR 24 23 22 23 24 25 26 26 27 26 26 27 27 26
-SUGR 173 173 170 166 170 171 171 168 169 172 172 170 168 171
-YUKA 72 72 73 74 73 72 72 73 72 73 74 74 75 76
-MARU 51 49 49 48 44 46 42 39 43 40 36 37 40 44
-FANT 108 109 111 111 113 111 112 113 111 109 110 112 115 114
-INSX 32 30 32 30 28 30 28 27 28 29 30 30 30 30
-MYTH 23 24 25 26 27 26 27 28 27 26 26 25 24 23
-FLNT 25 25 28 25 24 25 24 26 23 27 23 24 23 20
-IMIX 50 50 50 51 52 53 52 53 52 53 53 52 52 52
-VDKL 38 40 39 40 41 41 41 40 40 38 40 42 43 45
-CKCL 69 67 66 63 66 65 63 61 64 66 64 66 68 67
-OBAM 65 64 65 67 66 68 67 66 65 63 61 59 61 60
-BLEP 112 109 106 104 107 108 106 106 109 112 110 107 110 108"
-		*/
-		it("solved", () => expect(result).eql("GOLD"));
-		it("std test", () => expect(Math.round(std([2500, 250, 250]))).eql(1061));
-		it("answer", () => expect(answer).eql("GOLD PNSN FOTA GEEK SLVR MARU INSX MYTH FLNT VDKL OBAM"));
-	});
-
-6 1 3 6 5
-2 4 3 4 6)
+			result				solution(3 6 5 6 1
+1 6 6 1 6
+2 4 3 5 1)
 		*/
 		it("solved", () => expect(result).eql("pair full-house small-straight"));
-		it("answer", () => expect(answer).eql("pair four two-pairs big-straight small-straight big-straight three none pair pair small-straight pair small-straight small-straight pair big-straight three yacht big-straight big-straight small-straight pair small-straight small-straight small-straight pair pair"));
 	});
 
 		describe("72", () => {
@@ -421,11 +733,8 @@ A A 8"
 				solution        "\n"%." "%@,([.(hint ).[ ;).@$." "$
 				result			solution("1492 5
 2013 1865 1234 4321 7491")
-				answer			solution"0137 15
-9214 2304 0159 7231 2509 5917 7230 2509 0754 3470 1357 7452 1524 7234 9157"
 			*/
 			it("solved", () => expect(result).eql("0-2 1-0 1-2 0-3 2-1"));
-			it("answer", () => expect(answer).eql("0-1 0-2 2-0 1-2 0-1 1-1 1-2 0-1 1-1 0-3 1-2 0-1 0-1 1-1 2-0"));
 		});
 
 		describe("55", () => {

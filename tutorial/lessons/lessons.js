@@ -63,6 +63,7 @@ import combinations from "./combinations.js";
 import leftpad from "./leftpad.js";
 import pipingPartiallyAppliedOperators from "./piping-partially-applied-operators.js";
 import std from "./std.js";
+import iteratingAResult from "./iterating-a-result.js";
 
 export default [[
 	arithmeticOperations,
@@ -103,6 +104,7 @@ export default [[
 	rtti,
 	generatingSequences,
 	generatingSequences2,
+	iteratingAResult,
 	every,
 	reject,
 	dictionaryAccess,
@@ -122,15 +124,15 @@ export default [[
 	fizzbuzz,
 	quadraticRoots,
 ], [
-	// incrementNumericString,
-	// checksum,
-	// lastN,
-	// validTriangle,
-	// triangleCategorizer,
-	// indexedSort,
-	// weightedSumOfDigits,
-	// rockPaperScissors,
-	// cardName,
-	// combinations,
-	// leftpad,
+	incrementNumericString,
+	checksum,
+	lastN,
+	validTriangle,
+	triangleCategorizer,
+	indexedSort,
+	weightedSumOfDigits,
+	rockPaperScissors,
+	cardName,
+	combinations,
+	leftpad,
 ]];

@@ -122,11 +122,13 @@ export default () => {
 			generateA				;^3
 			scanA					(#.<5 #.+1)^( )
 			lazyScanA				3%((#.+1)^( )),{
+			whileN					1,(<10^(*2))
 		*/
 		it('power					NNN						2^3=8', () => expect(powerN).eql(8));
 		it('generate				(N?)NA					;^3=(0 1 2)', () => expect(generateA).eql([0, 1, 2]));
 		it('scan					AAA						(#.<5 #.+1)^( )=(1 2 3 4 5)', () => expect(scanA).eql([1, 2, 3, 4, 5]));
 		it('lazyScan				(AV)AL					(3%((#.+1)^( )),{)=(1 2 3)', () => expect(lazyScanA).eql([1, 2, 3]));
+		it('while					UUU						1,(<10^(*2))=16', () => expect(whileN).eql(16));
 	});
 
 	describe("percent (%)", () => {

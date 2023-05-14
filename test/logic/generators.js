@@ -72,20 +72,14 @@ export default () => {
 		it("naturals,cycledStream3$,5%,{=(1 2 3 1 2)", () => expect(solutionA).eql([1, 2, 3, 1, 2]));
 	});
 
-	describe("powerSeries :.1`^(;.(.([ #.-2).+$ 1').^$", () => {
+	describe("power series", () => {
 		/*ts
-			powerSeries			(;.(.([ #.-2).+$ 1').^$)^
-			threeTwo			powerSeries(3 2)
-			firstThree			3%threeTwo,{
-			threeTwoB			(3 2),powerSeries
-			powerSeriesB		:.powerSeries
-			threeTwoC			3powerSeriesB2
-			ps					:.(;.(.([ #.-2).+$ 1').^$)^				NNL{N}
-			psArray				ps.3%.{									NNA{N}
+			powerSeriesAL		,(+,(#.) ~^).(.$).^( )
+			firstThreeLA		3%.{
+			powerSeriesNNL		:.powerSeriesAL
 		*/
-		it("3psArray2=(9 16 25)", () => expect(psArray(3, 2)).eql([9, 16, 25]));
-		it("powerSeries([3, 2])().next().value=9", () => expect(powerSeries([3, 2])().next().value).eql(9));
-		it("3%(powerSeries(3 2)),{=(9 16 25)", () => expect(firstThree).eql([9, 16, 25]));
+		it("firstThreeArray", () => expect(firstThreeLA(powerSeriesAL([3, 2]))).eql([9, 16, 25]));
+		it("firstThreeBinary", () => expect(firstThreeLA(powerSeriesNNL(3, 2))).eql([9, 16, 25]));
 	});
 
 	describe("naturals (#.+1)^( )", () => {

@@ -232,7 +232,7 @@ const lookup = function(symbol) {
 const isNumber = function(n) {return !isNaN(parseFloat(n)) && isFinite(n);};
 const isString = function(string) {return (typeof string === "string") && string.startsWith('`') && string.endsWith('`');}
 const getDefinition = function(symbols) {
-	if (!symbols.length) return false;
+	if (!symbols.length) return undefined;
 	if (symbols.length === 1) {
 		const symbol = symbols[0];
 
