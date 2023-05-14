@@ -5,6 +5,64 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("323", () => {
+			/*ts
+				diffToPalindromeNN      0+.((""+.(; _).!=$)^(+1) ;).-$
+				solutionSS              "\n"%.diffToPalindromeNN@." "$
+				exampleS				solutionSS"1
+46
+329
+7307
+55733
+203092
+6682635
+22069658
+826641918"
+			*/
+			it("exampleS", () => expect(exampleS).eql("0 9 4 30 22 210 231 7364 4710"));
+		});
+
+		describe("329", () => {
+			/*ts
+				applyRomanCharNSN        :.(
+					(].="M" [.+1000)
+					(].="D" [.+500)
+					(].="C" [.((>499 -100) +100)?)
+					(].="L" [.+50)
+					(].="X" [.((>49 -10) +10)?)
+					(].="V" [.+5)
+					[.((>4 -1) +1)?
+				)?
+				fromRomanSN              _.""%.(applyRomanCharNSN 0)$
+				processArabicNumberAA	(
+					([.>999 .([.-1000 ].+"M"))
+					([.>899 .([.-900 ].+"CM"))
+					([.>499 .([.-500 ].+"D"))
+					([.>399 .([.-400 ].+"CD"))
+					([.>99 .([.-100 ].+"C"))
+					([.>89 .([.-90 ].+"XC"))
+					([.>49 .([.-50 ].+"L"))
+					([.>39 .([.-40 ].+"XL"))
+					([.>9 .([.-10 ].+"X"))
+					([.>8 .([.-9 ].+"IX"))
+					([.>4 .([.-5 ].+"V"))
+					([.>3 .([.-4 ].+"IV"))
+					([.>0 .([.-1 ].+"I"))
+				)?
+				toRomanNS               .(.(; ""`) ).(].[.!=0 ].processArabicNumberAA)^.].]
+				toOperatorSB            ((="+" +`) -`)?
+				processArithmeticSS     " "%.(.([ ]).fromRomanSN@ 1'.toOperatorSB.$).(,$).toRomanNS
+				solutionSS				"\n"%.processArithmeticSS@." "$
+				exampleS				solutionSS"MMMDCCCLXXI - MMMCCCIII
+DC + CCXLI
+MMMCCCLIV - MMCCCXXXIX
+MCXCVI + MCMLXXXII"
+			*/
+			it("fromRomanSN", () => expect(fromRomanSN("MMCMXCIV")).eql(2994));
+			it("toRomanNS", () => expect(toRomanNS(2994)).eql("MMCMXCIV"));
+			it("exampleS", () => expect(exampleS).eql("DLXVIII DCCCXLI MXV MMMCLXXVIII"));
+		});
+
 		describe("97", () => {
 			/*ts
 				possNoOfPigs	.(_.-$./2.>,(].) (].+1)`).^(1 )
