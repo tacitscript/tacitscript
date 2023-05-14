@@ -5,6 +5,57 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("34. Binary Search", () => {
+			/*ts
+				E				{"Math.E"
+				exponent		*,(_1*./50.E^._1*.)
+				fn				,(* *,(^(3/2).) exponent _.(` ).[).(;.).:(+$).(.$)
+				startValues		.(.(0` fn.(0,)) .(100` fn.(100,)))
+				isNotConverged	]@.-$.#.>(10^(_7))
+				middleValue		.(].[@.+$./2 [.fn).([ ,$)
+				moveLarger		:.(middleValue ].])
+				moveSmaller		:.(].[ middleValue)
+				iterate			.(.(((].#)@.<$)` moveSmaller) moveLarger).?
+				iterator		.(isNotConverged` iterate).^$
+				result			.(startValues iterator).(,$).[.[.8'
+				solution		("-" "_")@."\n"%.(" "%.0+@.result)@." "$
+				results			solution"0.59912051 0.64030348 263.33721367 387.92069617
+15.68387514 1.26222280 695.23706506 698.72384731"
+
+				//resultA			fn,startValues 
+				answer			solution"18.99558696 0.91925254 1292.33549316 1563.61417027
+7.85164421 1.58919627 1404.97566732 1084.35865006
+1.00189468 0.83216590 521.50794143 -182.56014021
+15.80980595 1.68567762 1977.69373468 1757.85235342
+16.32474463 0.44146277 193.65316452 1646.01853287
+7.84258181 1.63340308 1624.35659376 -850.71010864
+4.31632510 0.59171852 553.69598072 615.85963004"
+			*/
+				it("solved", () => expect(results).eql("73.59536855 41.89917492"));
+				it("middleValue test", () => expect(middleValue([[0.59912051, 0.64030348, 263.33721367, 387.92069617], [[0,-651.2579098399999],[100,276.65601843123017]]])).eql([50, -228.4595513118918]));
+				it("startValues test", () => expect(startValues([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql([[0,-651.2579098399999],[100,276.65601843123017]]));
+				it("result test", () => expect(result([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql(73.59536855));
+				it("fn test", () => expect(Math.abs(fn([0.59912051, 0.64030348, 263.33721367, 387.92069617])(73.595368554162))).lt(1E-7));
+				it("converged test", () => expect(isNotConverged([[1E-8], [2E-8]])).eql(false));
+				it("answer", () => expect(answer).eql("70.38587748 68.57369408 25.34507267 73.25004739 82.74304623 18.4076292 77.16553276"));
+			});
+
+		describe(`24`, () => {
+			/*ts
+				leftPad			:.(.([ ].#).-$."0"`^.""$ ]).+$
+				iterate			^2.""+.8leftPad.(2 4)%.1'.0+
+				converge		.(; ).(_1%.(].[ [).@$.! ].iterate)^.#.-1
+				temp			.(; ).(_1%.(].[ [).@$.! ].iterate)^
+				solution		converge@." "$
+				result			solution(1 4100 5761)
+				answer			solution(2519 3416 6716 6239 5368 3779 5538 5622 2663 5845 5690 6156 772 6303)
+			*/
+			it("solved", () => expect(result).eql("2 4 88"));
+			it(`^2.""+.8leftPad.(2 4)%.1'.0+(1891) eql 5758`, () => expect(iterate(1891)).eql(5758));
+			it(".(; ).(_1%._.contains$.! ].iterate)^.#.-1(4100) eql 4", () => expect(converge(4100)).eql(4));
+			it("answer", () => expect(answer).eql("102 110 97 111 104 99 100 108 107 97 104 98 107 106"));
+		});
+
 		describe("301", () => {
 			/*ts
 				premiumsAN              .([.>,(#.) 1'.~/,(#.).:([.*1000).(.$)).^( ).(+ 0)$
