@@ -31,8 +31,7 @@ export default () => {
 			singleElemA			(1 )
 			emptyArrayA			( )
 			subArrayA			((1 2) )
-			falseT				()
-			trueT				!()
+			undefinedO			()
 		*/
 		it("oneN 1", () => expect(oneN).eql(1));
 		it("oneaN oneN", () => expect(oneaN).eql(1));
@@ -45,8 +44,7 @@ export default () => {
 		it("singleElemA (1 )", () => expect(singleElemA).eql([1]));
 		it("emptyArrayA ()", () => expect(emptyArrayA).eql([]));
 		it("subArrayA ((1 2) )", () => expect(subArrayA).eql([[1, 2]]));
-		it("falseT ()", () => expect(falseT).eql(false));
-		it("trueT !()", () => expect(trueT).eql(true));
+		it("undefinedO ()", () => expect(undefinedO).eql(undefined));
 	});
 
 	describe("Order of application", () => {
