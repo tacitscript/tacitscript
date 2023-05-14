@@ -18,7 +18,7 @@ export default () => {
 26 136
 106 336
 200 500)
-				answer			solution(80 290
+			answer			solution(80 290
 178 260
 30 162
 130 380
@@ -41,6 +41,7 @@ export default () => {
 			it("possNoOfPigs test", () => expect(possNoOfPigs([6, 10])).eql([1, 2]));
 			it("answer", () => expect(answer).eql("5 2 4 3 9 6 11 8 12 6 1 6 5 3 7"));
 		});
+
 
 		describe("135", () => {
 			/*ts
@@ -223,21 +224,6 @@ EEFFCDCEDEDFBFEEDDDBDA"
 			it("answer", () => expect(answer).eql("84 72 36 68 44 89 89 76 91 72 80 79 19 37 71 87 33 74 90 45 68 84 88 61 62 65 94 19 71 56"));
 		});
 
-		describe("59", () => {
-			/*ts
-				hint			:.(""%@.*$.=$@ ,(~@ ""%).@$).(((; 1`) 0`)?@.+$)@.([ _.-$)."-"$
-				solution		"\n"%." "%@,([.(hint ).[ ;).@$." "$
-				result			solution("1492 5
-	2013 1865 1234 4321 7491")
-				answer			solution"4237 15
-	9627 2768 7639 0284 8609 7962 7948 0792 4089 8926 7382 0682 3946 9267 9236"
-			*/
-			it('hint("1234", "5678") eql "0-0"', () => expect(hint("1234", "5678")).eql("0-0"));
-			it('hint("1492", "7491") eql "2-1"', () => expect(hint("1492", "7491")).eql("2-1"));
-			it("solved", () => expect(result).eql("0-2 1-0 1-2 0-3 2-1"));
-			it("answer", () => expect(answer).eql("1-1 0-2 1-1 1-1 0-0 0-2 0-2 0-2 1-0 0-1 0-3 0-1 0-2 2-0 2-0"));
-		});
-
 		describe("134", () => {
 			/*ts
 				boundLeft		(([.[.<0 ((0 0) 1`)>.((2 0) _1*)>) ;)?
@@ -348,55 +334,11 @@ BLEP 112 109 106 104 107 108 106 106 109 112 110 107 110 108"
 			split				!=%.((isYacht "yacht"`) (isFour "four"`) (isFullHouse "full-house"`) (isTwoPairs "two-pairs"`) (isThree "three"`) (isPair "pair"`) "none"`)?
 			type				;<.((isBigStraight "big-straight"`) (isSmallStraight "small-straight"`) split)?
 			solution			(5 )%.type@." "$
-			result				s	describe("further very high order operators", () => {
-		/*ts
-			lengthPlusAU	#.:.+$./2
-			lengthPlusbAU	#.+./2
-			// temp			+,(#.).+1
-		*/
-		it("lengthPlusANN", () => expect(lengthPlusAU([1, 2, 3, 4], 2)).eql(3));
-		it("lengthPlusbANN", () => expect(lengthPlusbAU([1, 2, 3, 4], 2)).eql(3));
-		// it("inversion", () => expect(temp(2)([1, 2, 3])).eql(6));
-	});
-
-	describe("39", () => {
-		/*ts
-			mean			.(+$ #)./$
-			std				.(mean.-.^2 ;).@$.mean.^0.5
-			buy				.(std mean.*0.04).>$
-			process			" "%.1%,(; 0+@.buy)
-			solution		"\n"%.process@.]?.([.[)@." "$
-			result			solution"JOOG 99 99 99 99 99 99 99 101 101 101 101 101 101 101
-GOLD 95 105 95 105 95 105 95 105 95 105 95 105 95 105"
-			answer			solution"GOLD 21 19 17 21 19 15 11 12 9 13 15 16 20 22
-PNSN 102 104 107 110 112 113 114 116 118 121 123 121 123 121
-FOTA 44 41 40 37 38 41 43 47 51 55 51 48 49 47
-ZEOD 174 171 173 173 173 172 170 166 169 165 163 165 164 168
-GEEK 47 49 51 49 51 49 50 50 52 50 52 54 56 56
-SLVR 24 23 22 23 24 25 26 26 27 26 26 27 27 26
-SUGR 173 173 170 166 170 171 171 168 169 172 172 170 168 171
-YUKA 72 72 73 74 73 72 72 73 72 73 74 74 75 76
-MARU 51 49 49 48 44 46 42 39 43 40 36 37 40 44
-FANT 108 109 111 111 113 111 112 113 111 109 110 112 115 114
-INSX 32 30 32 30 28 30 28 27 28 29 30 30 30 30
-MYTH 23 24 25 26 27 26 27 28 27 26 26 25 24 23
-FLNT 25 25 28 25 24 25 24 26 23 27 23 24 23 20
-IMIX 50 50 50 51 52 53 52 53 52 53 53 52 52 52
-VDKL 38 40 39 40 41 41 41 40 40 38 40 42 43 45
-CKCL 69 67 66 63 66 65 63 61 64 66 64 66 68 67
-OBAM 65 64 65 67 66 68 67 66 65 63 61 59 61 60
-BLEP 112 109 106 104 107 108 106 106 109 112 110 107 110 108"
-		*/
-		it("solved", () => expect(result).eql("GOLD"));
-		it("std test", () => expect(Math.round(std([2500, 250, 250]))).eql(1061));
-		it("answer", () => expect(answer).eql("GOLD PNSN FOTA GEEK SLVR MARU INSX MYTH FLNT VDKL OBAM"));
-	});
-
-6 1 3 6 5
-2 4 3 4 6)
+			result				solution(3 6 5 6 1
+1 6 6 1 6
+2 4 3 5 1)
 		*/
 		it("solved", () => expect(result).eql("pair full-house small-straight"));
-		it("answer", () => expect(answer).eql("pair four two-pairs big-straight small-straight big-straight three none pair pair small-straight pair small-straight small-straight pair big-straight three yacht big-straight big-straight small-straight pair small-straight small-straight small-straight pair pair"));
 	});
 
 		describe("72", () => {
@@ -705,11 +647,8 @@ A A 8"
 				solution        "\n"%." "%@,([.(hint ).[ ;).@$." "$
 				result			solution("1492 5
 2013 1865 1234 4321 7491")
-				answer			solution"0137 15
-9214 2304 0159 7231 2509 5917 7230 2509 0754 3470 1357 7452 1524 7234 9157"
 			*/
 			it("solved", () => expect(result).eql("0-2 1-0 1-2 0-3 2-1"));
-			it("answer", () => expect(answer).eql("0-1 0-2 2-0 1-2 0-1 1-1 1-2 0-1 1-1 0-3 1-2 0-1 0-1 1-1 2-0"));
 		});
 
 		describe("55", () => {

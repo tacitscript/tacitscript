@@ -98,6 +98,8 @@ const supportsUndefined = value => isFunction(value) && value.supportsUndefined;
 const lazyScan = ({next, start}) => function*() {
 	let result = [...start];
 
+	for (let i = 0; i < result.length; i += 1) yield result[i];
+
 	while (true) {
 		const newValue = next(result);
 
