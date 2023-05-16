@@ -64,6 +64,7 @@ import leftpad from "./leftpad.js";
 import pipingPartiallyAppliedOperators from "./piping-partially-applied-operators.js";
 import std from "./std.js";
 import iteratingAResult from "./iterating-a-result.js";
+import binaryOperatorFlipping from "./binary-operator-flipping.js";
 
 export default [[
 	arithmeticOperations,
@@ -121,8 +122,9 @@ export default [[
 	pipingPartiallyAppliedOperators,
 	invertingPipelines,
 	std,
-	fizzbuzz,
+	binaryOperatorFlipping,
 	quadraticRoots,
+	fizzbuzz,
 ], [
 	incrementNumericString,
 	checksum,

@@ -12,7 +12,6 @@ const roots = ([a, b, c]) => (sqrt => [-b + sqrt, -b - sqrt].map(x => x / (2 * a
 export default {
 	id: "quadratic-roots",
 	name: "Parameter Referencing",
-	operations: <React.Fragment>(<a href="#flip">(~) flip</a>)</React.Fragment>,
 	description: <div>
 		<p>Certain programming languages are optimized for solving certain kinds of problems. All languages have particular strengths and weaknesses, and it is good to know where these strengths and weaknesses lie.</p>
 		<p>Having no explicit arguments, point-free languages will struggle with problems that require arguments to be processed and combined in different ways.</p>

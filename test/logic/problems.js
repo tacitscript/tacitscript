@@ -5,6 +5,41 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("211", () => {
+			/*ts
+				baseLog            :._.{"Math.log"@./$
+				frequenciesSA      .(#.~/ ""%.;/.\.(].#)@).@$
+				entropySN          frequenciesSA.(.(; 2baseLog._1*).*$)@.+$.11'
+				solutionSS         "\n"%.entropySN@." "$
+				exampleS           solutionSS"team eats cheese
+president plays with zooophthalmology
+helena plays with pigeons
+government loves beer
+irina dreams of clothes"
+				answerS            solutionSS"irina clones interpreter
+elizabeth begat beer
+teah examines inmates
+taiss reads clothes
+elizabeth loves donkey
+government passes by inmates
+company evaporates girls
+noah saves beer
+team arranges pigeons
+government gives interpreter
+rosanna eats ogre
+teah plays with sins
+emma reads girls
+joe plays with koala
+team dreams of interpreter
+teah plays with koala
+signiora estimates pigeons
+helena begat plasma rifle
+amanda estimates interpreter"
+			*/
+			it("exampleS", () => expect(exampleS).eql("2.77439747035 3.98285666332 3.7034651896 3.363286924 3.7950885864"));
+			it("answerS", () => expect(answerS).eql("3.35538854221 3.20370169606 3.21351325601 3.40582225029 3.82306798227 3.68200581476 3.88684218813 3.18989809546 3.46328051781 3.34237099318 3.10188122348 3.44643934467 3.25 3.64643934467 3.42661604588 3.49922754172 3.44063635267 3.6234651896 3.29433606575"));
+		});
+
 		describe("156", () => {
 			/*ts
 				multiplier		((%2.=0 1`) 2`)?^16
