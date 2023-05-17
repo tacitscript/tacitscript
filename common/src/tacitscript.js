@@ -55,6 +55,7 @@ const take = number => array => array.slice(0, number);
 const append = value => array => [...array, value];
 const first = array => array[0];
 const reverse = array => [...array].reverse();
+const partition = condition => array => {let result = [[],[]]; array.forEach(value => {if (condition(value)) result[0].push(value); else result[1].push(value);}); return result;};
 
 //==========================================================
 // type utilites
@@ -199,14 +200,15 @@ const apply = (left, right) => {
 	throw `Unable to resolve dynamic function application: ${leftString}(${rightString})`;
 };
 const typeOf = value => {
-	if (value == undefined) return "U";
+	if (value == undefined) return "O";
 	if (isArray(value)) return "A";
 	if (isString(value)) return "S";
 	if (isNumber(value)) return "N";
 	if (isStream(value)) return "L";
-	if (isObject(value)) return "O";
-	if (isBoolean(value)) return "B";
-	if (isFunction(value)) return arity(value);
+	if (isObject(value)) return "D";
+	if (isBoolean(value)) return "T";
+	if (isUnaryFunction(value)) return "U";
+	if (isBinaryFunction(value)) return "B";
 
 	throw `Unknown type of value: ${value}`;
 };
@@ -670,6 +672,7 @@ const percent = (left, right) => {
 		else if (isString(right))																				// chunkWhenComparator	(SSV)SA					<%"abcba"=("a" "b" "cba")
 			return chunkWhenComparator({when: left, vector: right.split(""), newVector: ""});
 	}
+	else if (isUnaryFunction(left) && isArray(right)) return partition(left)(right);							// partition			(VV)AA					<3%(1 5 2)=((1 2) (5 ))
 
 	errorBinary({left, right, operator: "%"});
 };

@@ -5,6 +5,26 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+
+		describe("181", () => {
+			/*ts
+				operatorsD              \(("add" +) ("sub" -) ("mul" *) ("div" /) ("mod" %) ("sqrt" ^0.5))
+				processASA              :.(
+											(].0+.}.="N" .([ .(].0+ )).+$)
+											(].'operatorsD.}.="U" .([._1% .(;` ].'operatorsD.(; ))).*$.(,$)@.+$)
+											.([._2% .(;` ].'operatorsD.$.(; ))).*$.(,$)@.+$
+										)?
+				solutionSN              " "%.(processASA ( ))$.]
+				exampleN				solutionSN"70 11 mul 5 div 219 add 28 26 6 sub 6 sub div mul 448 7 mul sqrt add"
+				answerN					solutionSN"3084 242 715 5 div sub 867 3 mul sqrt sub 41 72 360 add 12 div add add 174 314 add 190 19 div add 16 add 235 sub add mod sqrt 48 4 div 4 sub 47 7 mul 25 6 add add add 7 11 4 sub mul sqrt mul 14 div 512 11 3 sub div 125602 18843 mod sqrt add 497 322 sub 156 add 1200 3 mul sqrt mod sub 100 2 mul 418 2 div add 625 sqrt sqrt mul 893 5 3 sub mul 2 41 add 568 add mod mod add add 241 118 sub mod add 624 3 div 1764 sqrt 93 48 sub 20 12 sub sub 23 sub sub 18 17 mul 27 9 sub div 8 26 13 div sub sub 60 40 sub 36 add 64 sqrt div sub sub sub 180 52 14 8 sub 4 sub div sub 2916 sqrt 23 11 sub sub 98 14 div 8 2 div sub div 49 sqrt div mul 2065 55 5 div mul 2902 mod sqrt sqrt div sub 104 928 16 div sub 59 add 130 665 19 div 65 36 sub add 455 7 div 3 34 add sub sub 24 sub 11 11 22 5 sub 20 10 sub sub sub sub sub div add add add"
+			*/
+			it("exampleN", () => expect(exampleN).eql(802));
+			it("1", () => expect(solutionSN("2 3 mul")).eql(6));
+			it("2", () => expect(solutionSN("5 2 3 mul add")).eql(11));
+			it("3", () => expect(solutionSN("5 2 add 3 mul")).eql(21));
+			it("answer", () => expect(answerN).eql(354));
+		});
+
 		describe("207", () => {
 			/*ts
 				suffixTableSA           .(. #.;^.(.(%.] ;.`))@).@$.[<
