@@ -5,6 +5,96 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+	describe("206", () => {
+		/*ts
+			encodingS              "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+			leftpadNSS             :.(.([ ].#).-$."0"`^.""$ ]).+$
+			nextMultipleNN         +1.(%5.!=0)^(+1)
+			paddedSS               .(; .(#.nextMultipleNN #).-$.(` ;).^$.""$).+$
+			toBinarySS             ""%.({"s => s.charCodeAt(0).toString(2)".8leftpadNSS)@.+$
+			binaryToEncodingSS     (5 )%.({"b => parseInt(b, 2)".'encodingS)@.+$
+			encodingToBinarySS     ""%.(@encodingS.[.{"n => n.toString(2)".5leftpadNSS)@.+$
+			toAsciiSS              (8 )%.{"b => String.fromCharCode(parseInt(b, 2))"@.+$
+			unpadSS                .(].0+._ ;).%$.[
+			encodeSS               paddedSS.toBinarySS.binaryToEncodingSS
+			decodeSS               encodingToBinarySS.toAsciiSS.unpadSS
+			solutionSS             "\n"%.(#.;^ ;).*$.([.%2.=0)%,((].encodeSS)@ (].decodeSS)@).*$." "$@." "$
+			exampleS               solutionSS"Ng Sir three
+ONUXIIDUNBZGKZJAMR2WK3DMNFXGOIDTNF2CAZDVMVWGY2LOM42DINBU
+Sir
+ONUXIIDUNBZGKZJAONUXIMRS
+blind Ng
+MJWGS3TEGU2TKNJV"
+			answerS                solutionSS"fallows timescales eyesore
+MV4GGZLSOB2HGIDQOJUXUZLTEBZWQ2LQOBSXE4ZR
+pop why straggler joyrides rebels
+O5UXI2DTORQW4ZDTEBXXK5DCOJXWWZLOEBYGC4TUNFRXK3DBORSSAZDSMFUW44ZAMVXGU33JNY2DINBU
+chocking
+MRZGSZLTEBSGK4DPOB2WYYLUMVZSA5TFOJ2GK6BR
+pesticide soakings
+NZ2XI2DBORRWQIDDN5XGGZLSORUTGMZT
+tendon nips baning tribulations
+M52WS3DMN52GS3TJNZTSA43IMFSG653JMVZCAY3PONWWK5DJMNQWY3DZEBRW63TGNFSGC3TUMUQGU33VNZRWK4ZR
+quintettes concentrated roasters silenter
+ONSW45DFNZRWKIDHPFZGC5DJN5XHGIDTMVQTGMZT
+unseemly stretching digresses asshole
+OR4XA2LOM4QG4ZLVORZGS3TPEBRGC3LCN5XXU3DJNZTTGMZT
+maxillas saint
+OBQWY4DBORUW4ZZAOZXWGYLUNF3GK4ZAONRWC3TUNFWHSIDQMVTWO2LOM42DINBU
+sonar
+MJ4XO33SMRZSAZLYORXXE5DJNZTTGMZT
+patrimonies encrusts baying understandingly
+NRXW65DFMQQGCYTMN5XW2MRS
+conjuncture mumbling overshadow humanizers acrimony
+NFXHIZLSMNSXG43POIQHO4TZMVZXIIDDOVWGY2LOM42DINBU
+snuffles deacons wizardry
+ON2HE5LNOBSXI4ZR"
+		*/
+		it("1", () => expect(nextMultipleNN(2)).eql(5));
+		it("2", () => expect(nextMultipleNN(5)).eql(10));
+		it("3", () => expect(paddedSS("Hi")).eql("Hi333"));
+		it("4", () => expect(paddedSS("Abbey")).eql("Abbey55555"));
+		it("5", () => expect(toBinarySS("John1")).eql("0100101001101111011010000110111000110001"));
+		it("6", () => expect(binaryToEncodingSS("0100101001101111011010000110111000110001")).eql("JJXWQ3RR"));
+		it("7", () => expect(encodingToBinarySS("JJXWQ3RR")).eql("0100101001101111011010000110111000110001"));
+		it("8", () => expect(toAsciiSS("0100101001101111011010000110111000110001")).eql("John1"));
+		it("9", () => expect(unpadSS("Hi333")).eql("Hi"));
+		it("10", () => expect(encodeSS("John")).eql("JJXWQ3RR"));
+		it("11", () => expect(decodeSS("JJXWQ3RR")).eql("John"));
+		it("example", () => expect(exampleS).eql("JZTSAU3JOIQHI2DSMVSTGMZT sit three duelling sit duelling KNUXEMRS sit three sit MJWGS3TEEBHGOMRS blind"));
+		it("answer", () => expect(answerS).eql(""));
+	});
+
+		describe("181", () => {
+			/*ts
+				operatorsD              \(("add" +) ("sub" -) ("mul" *) ("div" /) ("mod" %) ("sqrt" ^0.5))
+				processASA              :.(
+											(].0+.}.="N" .([ .(].0+ )).+$)
+											(].'operatorsD.}.="U" .([._1% .(;` ].'operatorsD.(; ))).*$.(,$)@.+$)
+											.([._2% .(;` ].'operatorsD.$.(; ))).*$.(,$)@.+$
+										)?
+				solutionSN              " "%.(processASA ( ))$.]
+				exampleN				solutionSN"70 11 mul 5 div 219 add 28 26 6 sub 6 sub div mul 448 7 mul sqrt add"
+				answerN					solutionSN"3084 242 715 5 div sub 867 3 mul sqrt sub 41 72 360 add 12 div add add 174 314 add 190 19 div add 16 add 235 sub add mod sqrt 48 4 div 4 sub 47 7 mul 25 6 add add add 7 11 4 sub mul sqrt mul 14 div 512 11 3 sub div 125602 18843 mod sqrt add 497 322 sub 156 add 1200 3 mul sqrt mod sub 100 2 mul 418 2 div add 625 sqrt sqrt mul 893 5 3 sub mul 2 41 add 568 add mod mod add add 241 118 sub mod add 624 3 div 1764 sqrt 93 48 sub 20 12 sub sub 23 sub sub 18 17 mul 27 9 sub div 8 26 13 div sub sub 60 40 sub 36 add 64 sqrt div sub sub sub 180 52 14 8 sub 4 sub div sub 2916 sqrt 23 11 sub sub 98 14 div 8 2 div sub div 49 sqrt div mul 2065 55 5 div mul 2902 mod sqrt sqrt div sub 104 928 16 div sub 59 add 130 665 19 div 65 36 sub add 455 7 div 3 34 add sub sub 24 sub 11 11 22 5 sub 20 10 sub sub sub sub sub div add add add"
+			*/
+			it("exampleN", () => expect(exampleN).eql(802));
+			it("1", () => expect(solutionSN("2 3 mul")).eql(6));
+			it("2", () => expect(solutionSN("5 2 3 mul add")).eql(11));
+			it("3", () => expect(solutionSN("5 2 add 3 mul")).eql(21));
+			it("answer", () => expect(answerN).eql(354));
+		});
+
+		describe("207", () => {
+			/*ts
+				suffixTableSA           .(. #.;^.(.(%.] ;.`))@).@$.[<
+				solutionSS              suffixTableSA.]@." "$
+				exampleS				solutionSS"INTERPRETING CREATES RATES"
+				answerS					solutionSS"M OAMFFR BBF ROG FBF  FROFONRRRNFGRFGKFFAGBB MGAFMR MFAGOKROAOKBGBFMFMKMMRFAGRMKBKNM RBGGORNFFNMBOFOOGARNF FBAAFMFBFKMG RBKRNGRARMN AAKRONNRMOO ONK RBRBGNB RMFOOMFKFAARAKGRB"
+			*/
+			it("exampleS", () => expect(exampleS).eql("12 20 22 16 13 15 3 24 18 7 11 9 0 10 1 5 21 14 6 4 25 19 2 23 17 8"));
+			it("answerS", () => expect(answerS).eql("20 131 8 106 16 21 51 44 1 143 84 119 147 155 12 109 132 165 110 47 40 54 75 168 133 3 60 166 127 102 172 43 154 108 42 9 18 10 114 65 63 86 151 80 121 96 149 19 105 11 164 39 53 74 107 17 113 38 92 5 35 32 162 115 111 66 68 48 93 25 98 158 6 22 15 118 46 101 41 64 87 36 152 55 88 125 170 33 76 146 62 79 163 37 169 116 70 81 122 57 134 0 83 95 52 112 4 161 67 157 117 45 78 69 71 129 140 49 72 130 153 104 91 31 124 145 82 94 137 138 27 142 2 59 24 97 14 100 61 56 160 144 136 26 141 99 159 89 7 50 167 126 171 85 150 120 148 73 34 156 77 128 139 103 90 30 123 58 23 13 135 29 28"));
+		});
+
 		describe("211", () => {
 			/*ts
 				baseLog            :._.{"Math.log"@./$
