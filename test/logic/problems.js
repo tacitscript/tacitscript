@@ -5,6 +5,17 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("207", () => {
+			/*ts
+				suffixTableSA           .(. #.;^.(.(%.] ;.`))@).@$.[<
+				solutionSS              suffixTableSA.]@." "$
+				exampleS				solutionSS"INTERPRETING CREATES RATES"
+				answerS					solutionSS"M OAMFFR BBF ROG FBF  FROFONRRRNFGRFGKFFAGBB MGAFMR MFAGOKROAOKBGBFMFMKMMRFAGRMKBKNM RBGGORNFFNMBOFOOGARNF FBAAFMFBFKMG RBKRNGRARMN AAKRONNRMOO ONK RBRBGNB RMFOOMFKFAARAKGRB"
+			*/
+			it("exampleS", () => expect(exampleS).eql("12 20 22 16 13 15 3 24 18 7 11 9 0 10 1 5 21 14 6 4 25 19 2 23 17 8"));
+			it("answerS", () => expect(answerS).eql("20 131 8 106 16 21 51 44 1 143 84 119 147 155 12 109 132 165 110 47 40 54 75 168 133 3 60 166 127 102 172 43 154 108 42 9 18 10 114 65 63 86 151 80 121 96 149 19 105 11 164 39 53 74 107 17 113 38 92 5 35 32 162 115 111 66 68 48 93 25 98 158 6 22 15 118 46 101 41 64 87 36 152 55 88 125 170 33 76 146 62 79 163 37 169 116 70 81 122 57 134 0 83 95 52 112 4 161 67 157 117 45 78 69 71 129 140 49 72 130 153 104 91 31 124 145 82 94 137 138 27 142 2 59 24 97 14 100 61 56 160 144 136 26 141 99 159 89 7 50 167 126 171 85 150 120 148 73 34 156 77 128 139 103 90 30 123 58 23 13 135 29 28"));
+		});
+
 		describe("211", () => {
 			/*ts
 				baseLog            :._.{"Math.log"@./$
