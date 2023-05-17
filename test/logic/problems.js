@@ -5,6 +5,65 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+	describe("206", () => {
+		/*ts
+			encodingS              "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
+			leftpadNSS             :.(.([ ].#).-$."0"`^.""$ ]).+$
+			nextMultipleNN         +1.(%5.!=0)^(+1)
+			paddedSS               .(; .(#.nextMultipleNN #).-$.(` ;).^$.""$).+$
+			toBinarySS             ""%.({"s => s.charCodeAt(0).toString(2)".8leftpadNSS)@.+$
+			binaryToEncodingSS     (5 )%.({"b => parseInt(b, 2)".'encodingS)@.+$
+			encodingToBinarySS     ""%.(@encodingS.[.{"n => n.toString(2)".5leftpadNSS)@.+$
+			toAsciiSS              (8 )%.{"b => String.fromCharCode(parseInt(b, 2))"@.+$
+			unpadSS                .(].0+._ ;).%$.[
+			encodeSS               paddedSS.toBinarySS.binaryToEncodingSS
+			decodeSS               encodingToBinarySS.toAsciiSS.unpadSS
+			solutionSS             "\n"%.(#.;^ ;).*$.([.%2.=0)%,((].encodeSS)@ (].decodeSS)@).*$." "$@." "$
+			exampleS               solutionSS"Ng Sir three
+ONUXIIDUNBZGKZJAMR2WK3DMNFXGOIDTNF2CAZDVMVWGY2LOM42DINBU
+Sir
+ONUXIIDUNBZGKZJAONUXIMRS
+blind Ng
+MJWGS3TEGU2TKNJV"
+			answerS                solutionSS"fallows timescales eyesore
+MV4GGZLSOB2HGIDQOJUXUZLTEBZWQ2LQOBSXE4ZR
+pop why straggler joyrides rebels
+O5UXI2DTORQW4ZDTEBXXK5DCOJXWWZLOEBYGC4TUNFRXK3DBORSSAZDSMFUW44ZAMVXGU33JNY2DINBU
+chocking
+MRZGSZLTEBSGK4DPOB2WYYLUMVZSA5TFOJ2GK6BR
+pesticide soakings
+NZ2XI2DBORRWQIDDN5XGGZLSORUTGMZT
+tendon nips baning tribulations
+M52WS3DMN52GS3TJNZTSA43IMFSG653JMVZCAY3PONWWK5DJMNQWY3DZEBRW63TGNFSGC3TUMUQGU33VNZRWK4ZR
+quintettes concentrated roasters silenter
+ONSW45DFNZRWKIDHPFZGC5DJN5XHGIDTMVQTGMZT
+unseemly stretching digresses asshole
+OR4XA2LOM4QG4ZLVORZGS3TPEBRGC3LCN5XXU3DJNZTTGMZT
+maxillas saint
+OBQWY4DBORUW4ZZAOZXWGYLUNF3GK4ZAONRWC3TUNFWHSIDQMVTWO2LOM42DINBU
+sonar
+MJ4XO33SMRZSAZLYORXXE5DJNZTTGMZT
+patrimonies encrusts baying understandingly
+NRXW65DFMQQGCYTMN5XW2MRS
+conjuncture mumbling overshadow humanizers acrimony
+NFXHIZLSMNSXG43POIQHO4TZMVZXIIDDOVWGY2LOM42DINBU
+snuffles deacons wizardry
+ON2HE5LNOBSXI4ZR"
+		*/
+		it("1", () => expect(nextMultipleNN(2)).eql(5));
+		it("2", () => expect(nextMultipleNN(5)).eql(10));
+		it("3", () => expect(paddedSS("Hi")).eql("Hi333"));
+		it("4", () => expect(paddedSS("Abbey")).eql("Abbey55555"));
+		it("5", () => expect(toBinarySS("John1")).eql("0100101001101111011010000110111000110001"));
+		it("6", () => expect(binaryToEncodingSS("0100101001101111011010000110111000110001")).eql("JJXWQ3RR"));
+		it("7", () => expect(encodingToBinarySS("JJXWQ3RR")).eql("0100101001101111011010000110111000110001"));
+		it("8", () => expect(toAsciiSS("0100101001101111011010000110111000110001")).eql("John1"));
+		it("9", () => expect(unpadSS("Hi333")).eql("Hi"));
+		it("10", () => expect(encodeSS("John")).eql("JJXWQ3RR"));
+		it("11", () => expect(decodeSS("JJXWQ3RR")).eql("John"));
+		it("example", () => expect(exampleS).eql("JZTSAU3JOIQHI2DSMVSTGMZT sit three duelling sit duelling KNUXEMRS sit three sit MJWGS3TEEBHGOMRS blind"));
+		it("answer", () => expect(answerS).eql(""));
+	});
 
 		describe("181", () => {
 			/*ts
