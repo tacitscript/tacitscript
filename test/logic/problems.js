@@ -5,6 +5,29 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+
+// 		describe("323", () => {
+// 			/*ts
+// 				i                          {"BigInt"
+// 				isPalindromeNT             ""+.(; _).=$
+// 				nextPalindromeNN           +(i1).(!isPalindromeNT)^(+(i1))
+// 				toNextPalindromeNN         .(nextPalindromeNN ;).-$
+// 				solutionSS                 "\n"%.(i.toNextPalindromeNN)@." "$
+// 				exampleS                   solutionSS"1
+// 46
+// 329
+// 7307
+// 55733
+// 203092
+// 6682635
+// 22069658
+// 826641918"
+// 			*/
+// 			it("1", () => expect(nextPalindromeNN(BigInt(1))).eql(BigInt(2)));
+// 			it("2", () => expect(toNextPalindromeNN(BigInt(46))).eql(BigInt(9)));
+// 			it("example", () => expect(exampleS).eql("1 9 4 30 22 210 231 7364 4710"));
+// 		});
+
 	describe("206", () => {
 		/*ts
 			encodingS              "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
