@@ -62,7 +62,7 @@ const partition = condition => array => {let result = [[],[]]; array.forEach(val
 
 const isUndefined = value => value == undefined;
 const isString = value => typeof value === "string";
-const isNumber = value => (type => (type === "number") || (type === "bigint"))(typeof value);
+const isNumber = value => typeof value === "number"; // (type => (type === "number") || (type === "bigint"))(typeof value);
 const isFunction = value => typeof value === "function";
 const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
@@ -433,9 +433,10 @@ const plus = (left, right) => {
 	if (isObject(left) && isObject(right)) return  mergeDeep(left, right);										// merge				DDD						\(("a" 1) ("b" 2))+(\(("b" 3) ("c" 4)))=(\(("a" 1") ("b" 3) ("c" 4)))
 	if (isNumber(left) && isValue(right)) {																		// add					NNN						2+3=5
 		const rightValue = isString(right) ? ((right[0] === "_") ? (+right.slice(1) * -1) : +right) : right;	// parse				NSN						2+"3"=5
-		const result = left + rightValue;																		// parse				NSO						2+"abc"=(1/0)		
 
-		return isNaN(result) ? undefined : result;
+		if (/*!isBigInt(rightValue) && */isNaN(rightValue)) return undefined;
+
+		return left + /*(isBigInt(left) ? BigInt(rightValue) : */rightValue/*)*/;								// parse				NSO						2+"abc"=(1/0)		
 	}
 
 	errorBinary({left, right, operator: "+"});
