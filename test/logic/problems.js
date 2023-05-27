@@ -5,6 +5,109 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("95", () => {
+			/*ts
+				extractxySA             "\n"%.(" "%.1%.].0+@)@.(*.{@)$
+				meanAN                  .(+$ #)./$
+				diffsToMeanAA           .(meanAN.- ;).@$
+				kAN                     diffsToMeanAA@.(*$.*$@.+$ [.^2@.+$)./$
+				kbAA                    .(kAN meanAN@).([ .(].] .([ ].[).*$).-$)
+				solutionSS              extractxySA.kbAA." "$
+				exampleS                solutionSS"1925: 89 257
+1926: 75 226
+1927: 83 235
+1928: 52 173
+1929: 148 332
+1930: 109 268
+1931: 129 306
+1932: 115 289
+1933: 102 265
+1934: 99 269
+1935: 50 228
+1936: 102 265
+1937: 91 256
+1938: 79 238
+1939: 118 298
+1940: 134 311
+1941: 61 155
+1942: 146 340
+1943: 108 274
+1944: 96 242
+1945: 89 232
+1946: 143 328
+1947: 133 303"
+			*/
+			it("example", () => expect(exampleS).eql("1.5405377931602007 107.31285427305949"));
+		});
+	
+
+		describe("88", () => {
+			/*ts
+				notesA              ("C" "C#" "D" "D#" "E" "F" "F#" "G" "G#" "A" "A#" "B")
+				octaveFreqSN        0+.-1.(2^)
+				noteFreqSN          @notesA.[./12.(2^)
+				toneFreqSN          _1%,(noteFreqSN octaveFreqSN).*$.32.7*.0'
+				solutionSS          " "%.toneFreqSN@." "$
+				exampleS            solutionSS"G#4 F#1 G#2 A#1 E5 A4 A#3 E1 A3 A2 D#5 G#5 B2 A1 F2 D5 F4 C#3 D1 B3 F#2 C#5"
+			*/
+			it("example", () => expect(exampleS).eql("415 46 104 58 659 440 233 41 220 110 622 831 123 55 87 587 349 139 37 247 92 554"));
+		});
+
+		describe("66", () => {
+			/*ts
+				alphabetS               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+				rootD                   ""%alphabetS*(0`^26),\
+				indicesA                +1^25
+				frequenciesA            (8.1 1.5 2.8 4.3 13.0 2.2 2.0 6.1 7.0 0.15 0.77 7.0 2.4 6.8 7.5 1.9 0.095 6.0 6.3 9.1 2.8 0.98 2.4 0.15 2.0 0.074)
+				calcFreqSA              ""%.(!=" "?.#.~/.*100 ;/.-" ".#@.rootD+.\.]@).@$
+				shiftCharNSS            :.(
+											(].=" " " "`)
+											,(; @alphabetS.[).+$.%26.((<0 +26) ;)?.'alphabetS
+										)?
+				shiftStringNSS          :,(shiftCharNSS ""%).@$.+$
+				squareDiffNSN           shiftStringNSS.calcFreqSA.*frequenciesA.(-$.^2)@.+$
+				leastSquaresSN          .(indicesA` ~squareDiffNSN,@indicesA).*$.]<.[.[
+				solveStringSS           .(leastSquaresSN ;).(shiftStringNSS$." "%.3%.[ .([.26- )).+$." "$
+				solutionSS              "\n"%.solveStringSS@." "$
+				exampleS                solutionSS"XIP DBSFT PG ESFBNT
+VJQWIJ KV OCMGU VJKPIU XGTA SWGGT"
+			*/
+			it("example", () => expect(exampleS).eql("WHO CARES OF 1 THOUGH IT MAKES 2"));
+		});
+
+		describe("85", () => {
+			/*ts
+				piN             {"Math.PI"
+				cosNN           {"Math.cos"
+				sinNN           {"Math.sin"
+				thetaN          45*piN/180
+				cosThetaN       thetaN,cosNN
+				sinThetaN       thetaN,sinNN
+				transformAA     .(*(cosThetaN sinThetaN).*$@.-$ *(sinThetaN cosThetaN).*$@.+$)
+				solutionSS      "\n"%.(" "%.1%,([ (("-" "_")@.0+)@.transformAA,(; *1000).+$))@.]<.[@." "$
+				exampleS        solutionSS"Deneb -10 10
+Algol 10 10
+Sirius -10 -10
+Mira 10 -10"
+			*/
+			it("example", () => expect(exampleS).eql("Sirius Deneb Mira Algol"));
+		});
+	
+
+		describe("98", () => {
+			/*ts
+				piN						{"Math.PI"
+				cosNN					{"Math.cos"
+				sinNN					{"Math.sin"
+				toRadNN					/180.*piN
+				toCoordAA				.(,(; sinNN) ,(; cosNN)).*$@
+				solutionSS				"\n"%.(" "%.(1'.0+ ].0+.toRadNN).toCoordAA)@.(*.{@)$.+$@.0'@." "$
+				exampleS				solutionSS"go 140 feet by azimuth 332
+go 460 feet by azimuth 78"
+			*/
+			it("exampleS", () => expect(exampleS).eql("384 219"));
+		});
+
 		describe("281", () => {
 			/*ts
 				isValidCharST           @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$"
