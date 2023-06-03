@@ -246,30 +246,6 @@ Sir
 ONUXIIDUNBZGKZJAONUXIMRS
 blind Ng
 MJWGS3TEGU2TKNJV"
-			answerS                solutionSS"fallows timescales eyesore
-MV4GGZLSOB2HGIDQOJUXUZLTEBZWQ2LQOBSXE4ZR
-pop why straggler joyrides rebels
-O5UXI2DTORQW4ZDTEBXXK5DCOJXWWZLOEBYGC4TUNFRXK3DBORSSAZDSMFUW44ZAMVXGU33JNY2DINBU
-chocking
-MRZGSZLTEBSGK4DPOB2WYYLUMVZSA5TFOJ2GK6BR
-pesticide soakings
-NZ2XI2DBORRWQIDDN5XGGZLSORUTGMZT
-tendon nips baning tribulations
-M52WS3DMN52GS3TJNZTSA43IMFSG653JMVZCAY3PONWWK5DJMNQWY3DZEBRW63TGNFSGC3TUMUQGU33VNZRWK4ZR
-quintettes concentrated roasters silenter
-ONSW45DFNZRWKIDHPFZGC5DJN5XHGIDTMVQTGMZT
-unseemly stretching digresses asshole
-OR4XA2LOM4QG4ZLVORZGS3TPEBRGC3LCN5XXU3DJNZTTGMZT
-maxillas saint
-OBQWY4DBORUW4ZZAOZXWGYLUNF3GK4ZAONRWC3TUNFWHSIDQMVTWO2LOM42DINBU
-sonar
-MJ4XO33SMRZSAZLYORXXE5DJNZTTGMZT
-patrimonies encrusts baying understandingly
-NRXW65DFMQQGCYTMN5XW2MRS
-conjuncture mumbling overshadow humanizers acrimony
-NFXHIZLSMNSXG43POIQHO4TZMVZXIIDDOVWGY2LOM42DINBU
-snuffles deacons wizardry
-ON2HE5LNOBSXI4ZR"
 		*/
 		it("1", () => expect(nextMultipleNN(2)).eql(5));
 		it("2", () => expect(nextMultipleNN(5)).eql(10));
@@ -283,7 +259,6 @@ ON2HE5LNOBSXI4ZR"
 		it("10", () => expect(encodeSS("John")).eql("JJXWQ3RR"));
 		it("11", () => expect(decodeSS("JJXWQ3RR")).eql("John"));
 		it("example", () => expect(exampleS).eql("JZTSAU3JOIQHI2DSMVSTGMZT sit three duelling sit duelling KNUXEMRS sit three sit MJWGS3TEEBHGOMRS blind"));
-		it("answer", () => expect(answerS).eql(""));
 	});
 
 		describe("181", () => {
@@ -370,7 +345,7 @@ amanda estimates interpreter"
 			*/
 				it("solved", () => expect(result).eql("3942682966937054 1217040151414995 2146133934667114 2553514623369425"));
 				it("swap test", () => expect(swap("2553514623364925")).eql("2553514623369425"));
-				it("isValid test", () => expect(isValid("1217400151414995")).eql(false));
+				it("isValid test", () => expect(isValid("1217400151414995")).eql(0));
 				it("replace test", () => expect(replace("2146133934?67114")).eql("2146133934667114"));
 				it("flip test", () => expect(flip(4, "12345678")).eql("12346578"));
 			});
@@ -388,7 +363,7 @@ amanda estimates interpreter"
 			*/
 			it("solved", () => expect(result).eql("25 169"));
 			it("cSquared test", () => expect(cSquared(12)).eql(25));
-			it("isValid test", () => expect(isValid([12, 3])).eql(true));
+			it("isValid test", () => expect(isValid([12, 3])).eql(1));
 			it("b test", () => expect(b([12, 3])).eql(4));
 			it("c test", () => expect(c([12, 3])).eql(5));
 		});
@@ -423,9 +398,9 @@ amanda estimates interpreter"
 2800 3)
 			*/
 			it("solved", () => expect(result).eql("0846"));
-			it("isSolved test", () => expect(isSolved([402, 1, 390, 1])(846)).eql(true));
+			it("isSolved test", () => expect(isSolved([402, 1, 390, 1])(846)).eql(1));
 			it("noSame test", () => expect(noSame(816, 846)).eql(3));
-			it("match test", () => expect(match([848, 3], 846)).eql(true));
+			it("match test", () => expect(match([848, 3], 846)).eql(1));
 			it("answer", () => expect(answer).eql("2700"));
 		});
 
@@ -503,7 +478,7 @@ amanda estimates interpreter"
 				it("startValues test", () => expect(startValues([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql([[0,-651.2579098399999],[100,276.65601843123017]]));
 				it("result test", () => expect(result([0.59912051, 0.64030348, 263.33721367, 387.92069617])).eql(73.59536855));
 				it("fn test", () => expect(Math.abs(fn([0.59912051, 0.64030348, 263.33721367, 387.92069617])(73.595368554162))).lt(1E-7));
-				it("converged test", () => expect(isNotConverged([[1E-8], [2E-8]])).eql(false));
+				it("converged test", () => expect(isNotConverged([[1E-8], [2E-8]])).eql(0));
 				it("answer", () => expect(answer).eql("70.38587748 68.57369408 25.34507267 73.25004739 82.74304623 18.4076292 77.16553276"));
 			});
 
@@ -639,8 +614,8 @@ MCXCVI + MCMLXXXII"
 78 398)
 			*/
 			it("solved", () => expect(result).eql("1 2 3 9"));
-			it("filter test", () => expect(filter([6, 10], 2)).eql(false));
-			it("filter test 2", () => expect(filter([6, 10], 1)).eql(true));
+			it("filter test", () => expect(filter([6, 10], 2)).eql(0));
+			it("filter test 2", () => expect(filter([6, 10], 1)).eql(1));
 			it("girls test", () => expect(girls([[6, 10], 2])).eql(-1));
 			it("possNoOfPigs test", () => expect(possNoOfPigs([6, 10])).eql([1, 2]));
 			it("answer", () => expect(answer).eql("5 2 4 3 9 6 11 8 12 6 1 6 5 3 7"));
@@ -1427,7 +1402,7 @@ auf(zlo)men [gy<psy>] four{s}")
 			*/
 			it("1takeThreeXU2(3)=((1 2) 3)", () => expect(takeThreeExA).eql([[1, 2], 3]));
 			it("1takeFourNNU2(3)(4)=(((1 2) 3) 4)", () => expect(takeFourExA).eql([[[1, 2], 3], 4]));
-			it("lengthLessThanNAT3(6 7 8)=0", () => expect(testT).eql(false));
+			it("lengthLessThanNAT3(6 7 8)=0", () => expect(testT).eql(0));
 			it(`lengthLessThanNAS3(6 7 8)="false"`, () => expect(exampleS).eql("false"));
 			it("lengthOneN=2", () => expect(lengthOneN).eql(2));
 			it("3(1exa2)4=((1 2) (3 4))", () => expect(exaA).eql([[1, 2], [3, 4]]));
@@ -1732,8 +1707,8 @@ _6 "trfooochipecraokiuy")
 				lengthLessThanThreeCT	3lengthLessThanNCT
 				lengthLessThanNU		>,(#.)
 			*/
-			it("lengthLessThanThreeCT(7 8 9)=0", () => expect(lengthLessThanThreeCT([7, 8, 9])).eql(false));
-			it("lengthLessThanNU3(7 8 9)=0", () => expect(lengthLessThanNU(3)([7, 8, 9])).eql(false));
+			it("lengthLessThanThreeCT(7 8 9)=0", () => expect(lengthLessThanThreeCT([7, 8, 9])).eql(0));
+			it("lengthLessThanNU3(7 8 9)=0", () => expect(lengthLessThanNU(3)([7, 8, 9])).eql(0));
 		});
 
 		describe("18", () => { // TODO: Inverting, add as supplemental?

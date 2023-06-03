@@ -56,7 +56,7 @@ export default () => {
 		*/
 		it("binaryPreN (1+)2", () => expect(binaryPreN).eql(3));
 		it("binaryPostPostN (+2)1", () => expect(binaryPostPostN).eql(3));
-		it("unaryPreT !()", () => expect(unaryPreT).eql(true));
+		it("unaryPreT !()", () => expect(unaryPreT).eql(1));
 		it("dotNN +1.*2", () => expect(dotNN(3)).eql(8));
 	});
 

@@ -68,16 +68,16 @@ const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
 const isBoolean = value => typeof value === "boolean";
 const isFalsey = value => {
-    if (isUndefined(value)) return true;
-    if (value === false) return true;
-	if (value === 0) return true;
-    if (value === "") return true;
-    if (isArray(value) && !value.length) return true;
-    if (isObject(value) && !Object.keys(value).length) return true;
+    if (isUndefined(value)) return 1;
+    if (value === false) return 1;
+	if (value === 0) return 1;
+    if (value === "") return 1;
+    if (isArray(value) && !value.length) return 1;
+    if (isObject(value) && !Object.keys(value).length) return 1;
 
-    return false;
+    return 0;
 };
-const isTruthy = value => !isFalsey(value);
+const isTruthy = value => isFalsey(value) ? 0 : 1;
 const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction', 'GeneratorFunctionPrototype'].includes(value.constructor.name);
 const isActiveStream = value => value.constructor.name === "GeneratorFunctionPrototype";
 const arity = value => {
@@ -452,15 +452,15 @@ const slash = (left, right) => {
 	errorBinary({left, right, operator: "/"});
 };
 const less = (left, right) => {
-	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=()
-		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
+	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=0
+		|| (isString(left) && isString(right)))	return (left < right) ? 1 : 0;									// less					SST						"abc"<"def"=1
 	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right);									// ascendingSort		(VN)AA					;<(2 3 1)=(1 2 3)
 																												// ascendingSort		(VS)AA					;<("b" "c" "a")=("a" "b" "c")
 	errorBinary({left, right, operator: "<"});
 };
 const greater = (left, right) => {
-	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=(()!)
-		|| (isString(left) && isString(right))) return left > right;											// greater				SST						"abc">"def"=()
+	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=1
+		|| (isString(left) && isString(right))) return (left > right) ? 1 : 0;									// greater				SST						"abc">"def"=0
 	if (isArray(left) && (isArray(right) || isObject(right))) {													// over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)
 		return applyOver({path: left[0], fn: left[1], container: right});										// over					ADD						(("a" ) +1)>(\(("a" 1) ))=(\(("a" 2) ))
 	}
@@ -622,8 +622,8 @@ const apostrophe = (left, right) => {
 const equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) errorBinary({left, right, operator: "="});
 
-	try {																										// equals				VVT						2=4=()
-		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right));
+	try {																										// equals				VVT						2=4=0
+		return ((typeOf(left) === typeOf(right)) && (toString(left) === toString(right))) ? 1 : 0;
 	} catch (_) {
 		return undefined;
 	}
@@ -775,9 +775,9 @@ const braceright = value => {
 	errorUnary({operator: "}", value});
 };
 const bang = value => {
-	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVT)				2(!<)3=()
-	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VT)				!(>3)4=()
-	if (isValue(value)) return isFalsey(value);																	// not					VT						!5=()
+	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVT)				2(!<)3=0
+	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VT)				!(>3)4=0
+	if (isValue(value)) return isFalsey(value);																	// not					VT						!5=0
 
 	errorUnary({value, operator: "!"});
 }; bang.supportsUndefined = true; bang.noLeftApply = true;
