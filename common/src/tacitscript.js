@@ -68,16 +68,16 @@ const isArray = value => Array.isArray(value);
 const isObject = value => (typeof value === 'object') && !isArray(value);
 const isBoolean = value => typeof value === "boolean";
 const isFalsey = value => {
-    if (isUndefined(value)) return true;
-    if (value === false) return true;
-	if (value === 0) return true;
-    if (value === "") return true;
-    if (isArray(value) && !value.length) return true;
-    if (isObject(value) && !Object.keys(value).length) return true;
+    if (isUndefined(value)) return 1;
+    if (value === false) return 1;
+	if (value === 0) return 1;
+    if (value === "") return 1;
+    if (isArray(value) && !value.length) return 1;
+    if (isObject(value) && !Object.keys(value).length) return 1;
 
-    return false;
+    return 0;
 };
-const isTruthy = value => !isFalsey(value);
+const isTruthy = value => isFalsey(value) ? 0 : 1;
 const isStream = value => ['GeneratorFunction', 'AsyncGeneratorFunction', 'GeneratorFunctionPrototype'].includes(value.constructor.name);
 const isActiveStream = value => value.constructor.name === "GeneratorFunctionPrototype";
 const arity = value => {
@@ -775,9 +775,9 @@ const braceright = value => {
 	errorUnary({operator: "}", value});
 };
 const bang = value => {
-	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVT)				2(!<)3=()
-	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VT)				!(>3)4=()
-	if (isValue(value)) return isFalsey(value);																	// not					VT						!5=()
+	if (isBinaryFunction(value)) return (x, y) => isFalsey(value(x, y));										// not					(VVV)(VVT)				2(!<)3=0
+	if (isUnaryFunction(value)) return x => isFalsey(value(x));													// not					(VV)(VT)				!(>3)4=0
+	if (isValue(value)) return isFalsey(value);																	// not					VT						!5=0
 
 	errorUnary({value, operator: "!"});
 }; bang.supportsUndefined = true; bang.noLeftApply = true;

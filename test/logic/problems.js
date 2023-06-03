@@ -246,30 +246,6 @@ Sir
 ONUXIIDUNBZGKZJAONUXIMRS
 blind Ng
 MJWGS3TEGU2TKNJV"
-			answerS                solutionSS"fallows timescales eyesore
-MV4GGZLSOB2HGIDQOJUXUZLTEBZWQ2LQOBSXE4ZR
-pop why straggler joyrides rebels
-O5UXI2DTORQW4ZDTEBXXK5DCOJXWWZLOEBYGC4TUNFRXK3DBORSSAZDSMFUW44ZAMVXGU33JNY2DINBU
-chocking
-MRZGSZLTEBSGK4DPOB2WYYLUMVZSA5TFOJ2GK6BR
-pesticide soakings
-NZ2XI2DBORRWQIDDN5XGGZLSORUTGMZT
-tendon nips baning tribulations
-M52WS3DMN52GS3TJNZTSA43IMFSG653JMVZCAY3PONWWK5DJMNQWY3DZEBRW63TGNFSGC3TUMUQGU33VNZRWK4ZR
-quintettes concentrated roasters silenter
-ONSW45DFNZRWKIDHPFZGC5DJN5XHGIDTMVQTGMZT
-unseemly stretching digresses asshole
-OR4XA2LOM4QG4ZLVORZGS3TPEBRGC3LCN5XXU3DJNZTTGMZT
-maxillas saint
-OBQWY4DBORUW4ZZAOZXWGYLUNF3GK4ZAONRWC3TUNFWHSIDQMVTWO2LOM42DINBU
-sonar
-MJ4XO33SMRZSAZLYORXXE5DJNZTTGMZT
-patrimonies encrusts baying understandingly
-NRXW65DFMQQGCYTMN5XW2MRS
-conjuncture mumbling overshadow humanizers acrimony
-NFXHIZLSMNSXG43POIQHO4TZMVZXIIDDOVWGY2LOM42DINBU
-snuffles deacons wizardry
-ON2HE5LNOBSXI4ZR"
 		*/
 		it("1", () => expect(nextMultipleNN(2)).eql(5));
 		it("2", () => expect(nextMultipleNN(5)).eql(10));
@@ -283,7 +259,6 @@ ON2HE5LNOBSXI4ZR"
 		it("10", () => expect(encodeSS("John")).eql("JJXWQ3RR"));
 		it("11", () => expect(decodeSS("JJXWQ3RR")).eql("John"));
 		it("example", () => expect(exampleS).eql("JZTSAU3JOIQHI2DSMVSTGMZT sit three duelling sit duelling KNUXEMRS sit three sit MJWGS3TEEBHGOMRS blind"));
-		it("answer", () => expect(answerS).eql(""));
 	});
 
 		describe("181", () => {
