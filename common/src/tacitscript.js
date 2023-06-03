@@ -452,15 +452,15 @@ const slash = (left, right) => {
 	errorBinary({left, right, operator: "/"});
 };
 const less = (left, right) => {
-	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=()
-		|| (isString(left) && isString(right)))	return left < right;											// less					SST						"abc"<"def"=(()!)
+	if ((isNumber(left) && isNumber(right))																		// less					NNT						3<2=0
+		|| (isString(left) && isString(right)))	return (left < right) ? 1 : 0;									// less					SST						"abc"<"def"=1
 	if (isUnaryFunction(left) && isArray(right)) return sortBy(left)(right);									// ascendingSort		(VN)AA					;<(2 3 1)=(1 2 3)
 																												// ascendingSort		(VS)AA					;<("b" "c" "a")=("a" "b" "c")
 	errorBinary({left, right, operator: "<"});
 };
 const greater = (left, right) => {
-	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=(()!)
-		|| (isString(left) && isString(right))) return left > right;											// greater				SST						"abc">"def"=()
+	if ((isNumber(left) && isNumber(right))																		// greater				NNT						3>2=1
+		|| (isString(left) && isString(right))) return (left > right) ? 1 : 0;									// greater				SST						"abc">"def"=0
 	if (isArray(left) && (isArray(right) || isObject(right))) {													// over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)
 		return applyOver({path: left[0], fn: left[1], container: right});										// over					ADD						(("a" ) +1)>(\(("a" 1) ))=(\(("a" 2) ))
 	}
@@ -622,8 +622,8 @@ const apostrophe = (left, right) => {
 const equal = (left, right) => {
 	if (!isValue(left) || !isValue(right)) errorBinary({left, right, operator: "="});
 
-	try {																										// equals				VVT						2=4=()
-		return (typeOf(left) === typeOf(right)) && (toString(left) === toString(right));
+	try {																										// equals				VVT						2=4=0
+		return ((typeOf(left) === typeOf(right)) && (toString(left) === toString(right))) ? 1 : 0;
 	} catch (_) {
 		return undefined;
 	}

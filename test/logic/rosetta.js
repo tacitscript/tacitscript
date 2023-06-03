@@ -5,7 +5,7 @@ const {expect} = chai;
 export default () => {
 
     // tacitscript is a pure language.
-    // Where the question requests data input or output, the example will interpret these as functional inputs and outputs
+    // Where the question requests user input or display output, the example will interpret these as functional inputs and outputs.
 
     describe("1. Compare the length of two strings", () => {
         /*ts
@@ -32,9 +32,9 @@ export default () => {
             intQuotientNNN      /.((<0 ]) [)?                                   integers not native type - selected to round towards 0
             divmodNNA           :.(intQuotientNNN$ %$)
             solutionNNA         :.(+$ -$ *$ intQuotientNNN$ %$ ^$ divmodNNA$)   % (remainder) - sign matches first operand
-            exampleA            _5solutionNNA2                                  equals (_3 _7 _10 _2 _1 25 (_2 _1))
+            exampleA            _7solutionNNA3                                  equals (_4 _10 _21 _2 _1 _343 (_2 _1))
         */
-        it("1", () => expect(exampleA).eql([-3, -7, -10, -2, -1, 25, [-2, -1]]));
+        it("1", () => expect(exampleA).eql([-4, -10, -21, -2, -1, -343, [-2, -1]]));
     });
 
     describe("4. Integer comparison", () => {
@@ -47,6 +47,29 @@ export default () => {
             exampleS            5solutionNNS4                       equals "5 is greater than 4"
         */
         it("1", () => expect(exampleS).eql("5 is greater than 4"));
+    });
+
+    describe("5. Logical operations", () => {
+        /*ts
+            solutionTTA         :.(&$ |$ [.!)
+            exampleA            0solutionTTA1           equals (0 1 1)
+        */
+        it("1", () => expect(exampleA).eql([0, 1, 1]));
+    });
+
+    describe("6. String append", () => {
+        /*ts
+            solutionS       "Hello"+", world!"         tacitscript has no mutation or += style string concatenation
+        */
+        it("1", () => expect(solutionS).eql("Hello, world!"));
+    });
+
+    describe("7. String comparison", () => {
+        /*ts
+            solutionSSA         :.(=$ !=$ <$ <$.!)          no native case-insensitive comparison - must use host language functionality
+            exampleA            "abc"solutionSSA"ABC"       equals (0 1 0 1)
+        */
+        it("1", () => expect(exampleA).eql([0, 1, 0, 1]));
     });
 
 };

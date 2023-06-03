@@ -112,7 +112,7 @@ export default () => {
 			andU					>2&(<6)
 			andN					!()&3
 		*/
-		it('and						(VV)(VV)(VV)			>2&(<6)6=()', () => expect(andU(6)).eql(false));
+		it('and						(VV)(VV)(VV)			>2&(<6)6=0', () => expect(andU(6)).eql(0));
 		it('and						V??						!()&3=3', () => expect(andN).eql(3));
 	});
 
@@ -162,8 +162,8 @@ export default () => {
 			orB						<|=
 			orN						()|3
 		*/
-		it('or						(VV)(VV)(VV)			(>0|(%2.=0))(_2)=(!())', () => expect(orU(-2)).eql(true));
-		it('or						(VVV)(VVV)(VVV)			2(<|=)2=(!())', () => expect(orB(2, 2)).eql(true));
+		it('or						(VV)(VV)(VV)			(>0|(%2.=0))(_2)=1', () => expect(orU(-2)).eql(1));
+		it('or						(VVV)(VVV)(VVV)			2(<|=)2=1', () => expect(orB(2, 2)).eql(1));
 		it('or						V??						()|3=3', () => expect(orN).eql(3));
 	});
 
@@ -171,7 +171,7 @@ export default () => {
 		/*ts
 			equalsT					2=4
 		*/
-		it('equals					VVB						2=4=()', () => expect(equalsT).eql(false));
+		it('equals					VVT						2=4=0', () => expect(equalsT).eql(0));
 	});
 
 	describe("apostrophe (')", () => {
@@ -230,7 +230,7 @@ export default () => {
 			mapbA					*2@((#.+1)^( )),3%,{
 		*/
 		it('map						(VV)AA					*2@(3 4 5)=(6 8 10)', () => expect(mapA).eql([6, 8, 10]));
-		it('map						(VVV)AA					(=@(3 4 5),|$)6=()', () => expect(mapaA(6)).eql(false));
+		it('map						(VVV)AA					(=@(3 4 5),|$)6=0', () => expect(mapaA(6)).eql(0));
 		it('map						(VV)DD					*2@(\\(("a" 1) ("b" 2)))=(\\(("a" 2) ("b" 4)))', () => expect(mapD).eql({a: 2, b: 4}));
 		it('mapObjIndexed			(SVV)DD					+@(\\(("a" 1) ("b" 2)))=(\\(("a" "a1") ("b" "b2")))', () => expect(mapObjIndexedD).eql({a: "a1", b: "b2"}));
 		it('replaceAll				ASS						("_" "-")@"_1 0 _1"="-1 0 -1"', () => expect(replaceAllS).eql("-1 0 -1"));
@@ -289,8 +289,8 @@ export default () => {
 			overD					(("a" ) +1)>(\(("a" 1) ))
 			tapNN					{"x => console.log.call(null, x)">
 		*/
-		it("greater					NNT						3>2=(()!)", () => expect(greaterT).eql(true));
-		it('greater					SST						"abc">"def"=()', () => expect(greateraT).eql(false));
+		it("greater					NNT						3>2=1", () => expect(greaterT).eql(1));
+		it('greater					SST						"abc">"def"=0', () => expect(greateraT).eql(0));
 		it('over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
 		it('over					ADD						(("a" ) +1)>(\\(("a" 1) ))=(\\(("a" 2) ))', () => expect(overD).eql({a: 2}));
 
@@ -310,8 +310,8 @@ export default () => {
 			ascendingSortA			;<(2 3 1)
 			ascendingSortaA			;<("b" "c" "a")
 		*/
-		it("less					NNT						3<2=()", () => expect(lessT).eql(false));
-		it('less					SST						"abc"<"def"=(()!)', () => expect(lessaT).eql(true));
+		it("less					NNT						3<2=0", () => expect(lessT).eql(0));
+		it('less					SST						"abc"<"def"=1', () => expect(lessaT).eql(1));
 		it('ascendingSort			(VN)AA					;<(2 3 1)=(1 2 3)', () => expect(ascendingSortA).eql([1, 2, 3]));
 		it('ascendingSort			(VS)AA					;<("b" "c" "a")=("a" "b" "c")', () => expect(ascendingSortaA).eql(["a", "b", "c"]));
 	});
@@ -378,7 +378,7 @@ export default () => {
 		it("applyToUnary			X(XY)Y					3,+1=4", () => expect(applyToUnaryN).eql(4));
 		it("applyToBinary			X(XYZ)(YZ)				(1,/)2=0.5", () => expect(applyToBinaryNN(2)).eql(0.5));
 		it("binaryUnaryApply		(XYZ)((YZ)W)(XW)		(+,^3)1=(1 2 3)", () => expect(binaryUnaryApplyNA(1)).eql([1, 2, 3]));
-		it("binaryUnaryApply		(XYZ)((YZ)(WR))(X(WR))	>,(#.)(3)(1 2 3)=()", () => expect(binaryUnaryApplyNB(3)([1, 2, 3])).eql(false));
+		it("binaryUnaryApply		(XYZ)((YZ)(WR))(X(WR))	>,(#.)(3)(1 2 3)=0", () => expect(binaryUnaryApplyNB(3)([1, 2, 3])).eql(0));
 		it("zipApplyTo				AAA						(3 1),(+1 /),(; 2,)=(4 0.5)", () => expect(zipApplyToA).eql([4, 0.5]));
 		it("unaryZipApplyTo			(XA)A(XA)				{,(*2 /2)((1 2) )=(2 1)", () => expect(unaryZipApplyToA([[1, 2]])).eql([2, 1]));
 		it("binaryZipApplyTo		(XYA)A(XYA)				4(:,(+1 -1))3=(5 2)", () => expect(binaryZipApplyToNNA(4, 3)).eql([5, 2]));
