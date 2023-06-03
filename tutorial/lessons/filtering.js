@@ -15,7 +15,7 @@ export default {
 		<p>Note the conditional can return any type, and <i>truthiness</i> is determined based on the following rules:</p>
 		<ul>
 			<li><span className="code">0</span>, <span className="code">()</span>, and emtpy strings/arrays/dictionaries (ie. <span className="code">"" ( ) \( )</span>) are <b>falsey</b></li>
-			<li>all other types are <b>truthy</b></li>
+			<li>all other values are <b>truthy</b></li>
 		</ul>
 	</div>,
 	exercise: {

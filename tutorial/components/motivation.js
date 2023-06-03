@@ -42,7 +42,7 @@ export default ({dispatch}) => {
 			<p>It adopts a strict <a href="https://en.wikipedia.org/wiki/Tacit_programming">point-free</a> style that excludes named representation of arguments.
 				This style is seen in some stack-based (<a href="https://en.wikipedia.org/wiki/Joy_(programming_language)">Joy</a>, <a href="https://en.wikipedia.org/wiki/Factor_(programming_language)">Factor</a>), and array (<a href="https://en.wikipedia.org/wiki/APL_(programming_language)">APL</a>, <a href="https://en.wikipedia.org/wiki/J_(programming_language)">J</a>) languages.</p>
 			<p>Syntactially, tacitscript is similar to J, using standard ASCII punctuation characters as an inventory of core programming operations. 
-				Semantically, the language shares DNA with functional languages, borrowing from the ML (automatic currying, referential transparency) and LISP (homoiconicity) families.
+				Semantically, the language shares DNA with functional languages, borrowing from the ML (automatic currying, referential transparency) and LISP (homoiconicity, code generation) families.
 			</p>
 			<p>tacitscript is a general-purpose language, and has full interoperability with its native host environment.
 				The canonical implementation is built upon JavaScript for the web.

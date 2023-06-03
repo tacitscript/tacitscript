@@ -18,7 +18,7 @@ export default () => {
 
 	describe("2. Factors of an integer", () => {
         /*ts
-            solutionNA          .(:./$.(; 0').-$.! +1^).?$
+            solutionNA          .(:./$.(; [).-$.! +1^).?$
             testA               solutionNA6                     					equals (1 2 3 6)
         */
         it("1", () => expect(testA).eql([1, 2, 3, 6]));
