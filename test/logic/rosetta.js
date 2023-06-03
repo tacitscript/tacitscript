@@ -66,10 +66,11 @@ export default () => {
 
     describe("7. String comparison", () => {
         /*ts
-            solutionSSA         :.(=$ !=$ <$ <$.!)          no native case-insensitive comparison - must use host language functionality
-            exampleA            "abc"solutionSSA"ABC"       equals (0 1 0 1)
+            toLowerSS           {"s => s.toLowerCase()"             using host language functionality for case-insensitive comparison
+            solutionSSA         :.(=$ !=$ <$ <$.! toLowerSS@.<$)
+            exampleA            "abc"solutionSSA"DEF"               equals (0 1 0 1 1)
         */
-        it("1", () => expect(exampleA).eql([0, 1, 0, 1]));
+        it("1", () => expect(exampleA).eql([0, 1, 0, 1, 1]));
     });
 
 };
