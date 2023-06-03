@@ -7,7 +7,7 @@ const compact = R.filter(ts.isTruthy);
 
 export default {
 	id: "filtering",
-	name: "Filtering",
+	name: "Truthiness",
 	operations: <React.Fragment><a href="#filter">(?) filter</a></React.Fragment>,
 	description: <div>
 		<p>The <a href="#filter">(?) filter</a> operation takes a condition to the left and array to the right, and removes any elements of the array that do not pass the conditional check.</p>
