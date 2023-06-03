@@ -65,6 +65,8 @@ import pipingPartiallyAppliedOperators from "./piping-partially-applied-operator
 import std from "./std.js";
 import iteratingAResult from "./iterating-a-result.js";
 import binaryOperatorFlipping from "./binary-operator-flipping.js";
+import not from "./not.js";
+import factors from "./factors.js";
 
 export default [[
 	arithmeticOperations,
@@ -117,6 +119,7 @@ export default [[
 	oringConditionsAndComparisons,
 	random,
 	floorAndCeiling,
+	not,
 	max,
 	rounding,
 	pipingPartiallyAppliedOperators,
@@ -137,4 +140,5 @@ export default [[
 	cardName,
 	combinations,
 	leftpad,
+	factors,
 ]];

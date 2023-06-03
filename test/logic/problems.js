@@ -5,6 +5,51 @@ const {expect} = chai;
 export default () => {
 	describe("Problems", () => {
 
+		describe("89", () => {
+			/*ts
+				notesA          ("C" "C#" "D" "D#" "E" "F" "F#" "G" "G#" "A" "A#" "B")
+				positionNN      /32.7.{"Math.log2".+1
+				noteNS          positionNN.(; [).(-$.*12.(0').'notesA ]).""$
+				solutionSS      " "%.(0+.noteNS)@." "$
+				exampleS        solutionSS"185.4 115.3 203.9 55.2 52.7 86.6 932.3 229.8 61.8 66.1 363.7 771.4 594.4 48.2 102.6 222.4"
+			*/
+			it("example", () => expect(exampleS).eql("F#3 A#2 G#3 A1 G#1 F2 A#5 A#3 B1 C2 F#4 G5 D5 G1 G#2 A3"));
+		});
+
+// recursive solution too slow
+// 		describe("82", () => {
+// 			/*ts
+// 				levenshteinAN      (
+// 										([.!    ].#)
+// 										(].!    [.#)
+// 										([@.=$  (1%.])@.levenshteinAN)
+// 										.(
+// 											.([         ].1%.])
+// 											.([.1%.]    ])
+// 											(1%.])@
+// 										).levenshteinAN@.;<.[.+1
+// 									)?
+// 				solutionSS          "\n"%.(" "%.levenshteinAN)@." "$
+// 				exampleS            solutionSS"PLAIN PLAN
+// TREE THREE
+// WOMAN WOMEN
+// KITTEN SITTING
+// YPOEHOHRIWUBXM YCPOEHORIDUBX"
+// 			*/
+// 			it("example", () => expect(exampleS).eql("1 1 1 3 4"));
+// 		});
+	
+
+		describe("108", () => {
+			/*ts
+				gemsSN          " "%.0+@,(; -1).*$
+				solutionSS      "\n"%.gemsSN@." "$
+				exampleS        solutionSS"5 2
+7 2"
+			*/
+			it("example", () => expect(exampleS).eql("5 7"));
+		});
+
 		describe("95", () => {
 			/*ts
 				extractxySA             "\n"%.(" "%.1%.].0+@)@.(*.{@)$
