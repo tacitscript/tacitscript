@@ -67,6 +67,7 @@ import iteratingAResult from "./iterating-a-result.js";
 import binaryOperatorFlipping from "./binary-operator-flipping.js";
 import not from "./not.js";
 import factors from "./factors.js";
+import lenses from "./lenses.js";
 
 export default [[
 	arithmeticOperations,
@@ -123,9 +124,10 @@ export default [[
 	max,
 	rounding,
 	pipingPartiallyAppliedOperators,
+	binaryOperatorFlipping,
+	lenses,
 	invertingPipelines,
 	std,
-	binaryOperatorFlipping,
 	quadraticRoots,
 	fizzbuzz,
 ], [
