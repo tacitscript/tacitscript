@@ -5,7 +5,7 @@ const {expect} = chai;
 export default () => {
 
     // tacitscript is a pure language (embedded DSL.)
-    // Where the question requests user input and to display/print output, the example will interpret these as functional inputs and outputs.
+    // Where the question requests user input and to display/print output, the example will typiocally interpret these as functional inputs and outputs.
 
     describe("1. Compare the length of two strings", () => {
         /*ts
@@ -124,5 +124,32 @@ export default () => {
         */
         it("1", () => expect(solutionN).eql(0));
     })
+
+    describe("13. Apply a callback to an array", () => {
+        /*ts
+            mapA        ^2@(1 2 3 4 5)      equals (1 4 9 16 25)
+        */
+        it("1", () => expect(mapA).eql([1, 4, 9, 16, 25]));
+    });
+
+    describe("14. Associative array/Iteration", () => {
+        /*ts
+            dictionaryD         \(("a" 1) ("b" 2) ("c" 3))
+            dictionaryIterD     +@dictionaryD                   equals \(("a" "a1") ("b" "b2") ("c" "c3"))
+            valueIterD          ^2@dictionaryD                  equals \(("a" 1) ("b" 4) ("c" 9))
+            pairsA              \dictionaryD                    equals (("a" 1) ("b" 2) ("c" 3)) for array iteration
+            keyIterD            pairsA,((0 ) +"'")>@,\          equals \(("a'" 1) ("b'" 2) ("c'" 3))
+        */
+        it("1", () => expect(dictionaryIterD).eql({a: "a1", b: "b2", c: "c3"}));
+        it("2", () => expect(valueIterD).eql({a: 1, b: 4, c: 9}));
+        it("3", () => expect(keyIterD).eql({"a'": 1, "b'": 2, "c'": 3}));
+    });
+
+    describe("keySuffixSDD", () => {
+        /*ts
+            keySuffixSDD        :,(.((0 )` ~+).> \).@$.\
+        */
+        it("1", () => expect(keySuffixSDD("'", {a: 1, b: 2})).eql({"a'": 1, "b'": 2}));
+    });
 
 };

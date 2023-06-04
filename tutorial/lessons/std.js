@@ -20,11 +20,12 @@ export default {
 		<p>Suppose we construct an operator that takes an array and calculates its length. Then it pairs the result with a new input number, and calculates the average of two numbers.</p>
 		<p>We can define this as follows:</p>
 		<div className="code-block">{getOperationExamples([
-			["lengthThenAverageANN", "#.:.+$./2"],
+			["lengthThenAvgANN", "#.:.+$./2"],
+			["exampleN", "(1 2 3)lengthThenAvgANN5", "equals 4"],
 		])}</div>
 		<p>Here, it's important to note that <span className="code">#.:</span> produces a binary operator by <a href="#unaryBinaryPipe">(.) unaryBinaryPipe</a>, and infact the whole expression defines a binary operator that takes in two arguments <i>at the start</i>, as indicated by the name <b>lengthThenAverageANN</b>.</p>
 		<p>It's tempting to think that we are intaking values partway through the pipeline, but this is not the case here. The piping operators <span className="code">.</span> and <span className="code">,</span> only ever consume and yield (zero-order) values, unary (first-order) operators, or binary (second-order) operators. They will not work after we take in further values, for instance, following a pipeline inversion.</p>
-		<p>We will see more advanced techniques to alleviate this restriction in the next section.</p>
+		<p>(We will see more advanced techniques to alleviate this restriction in the next section.)</p>
 		<p>As an aside, <b>lengthThenAverageANN</b> can be simplified to <span className="code">#.+./2</span>. The version above makes the illustration slightly clearer.</p>
 	</div>,
 	exercise: {
