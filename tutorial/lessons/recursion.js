@@ -39,4 +39,7 @@ export default {
 			{description: testValue => <span><b>fibRecNN</b> calls itself</span>, condition: ({def, es6}) => def.includes("fibRecNN")},
 		],
 	},
+	epilogue: <div>
+		<p>A limitation in tacitscript is that all recursive operators must be unary.</p>
+	</div>,
 };
