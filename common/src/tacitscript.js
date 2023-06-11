@@ -510,9 +510,7 @@ const question = (left, right) => {
 
 		return undefined;
 	}
-	if (isNumber(left) && isNumber(right)) {																	// random				NNN						1(<|=)(1?10)<10
-		return (Math.random() * (right - left)) + left;
-	}
+	if (isNumber(right)) return Math.random() * right;															// random				?NN						(0?10)<10
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
 	if (isUnaryFunction(left) && isStream(right)) return streamFilter({fn: left, generator: right});			// filter				(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)
 	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))

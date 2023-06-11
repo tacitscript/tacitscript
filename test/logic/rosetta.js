@@ -176,4 +176,18 @@ export default () => {
         it("1", () => expect(exampleA).eql([1,2,"Fizz",4,"Buzz","Fizz","Baxx",8,"Fizz","Buzz",11,"Fizz",13,"Baxx","FizzBuzz",16,17,"Fizz",19,"Buzz"]));
 	});
 
+	describe("18. Integer sequence", () => {
+		/*ts
+			// solutionN		({"console.log">.1`)^(+1)1		up to 2^53
+		*/
+	});
+
+	describe("19. Loop over multiple arrays simultaneously", () => {
+		/*ts
+			solutionAA		(*.{@)$.+$@											limited to shortest dimension in all arrays
+			exampleA		solutionAA(("a" "b" "c") ("A" "B" "C") (1 2 3))
+		*/
+		it("1", () => expect(exampleA).eql(["aA1", "bB2", "cC3"]));
+	});
+
 };
