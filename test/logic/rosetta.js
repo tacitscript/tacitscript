@@ -178,7 +178,7 @@ export default () => {
 
 	describe("18. Integer sequence", () => {
 		/*ts
-			// solutionN		({"console.log">.1`)^(+1)1		up to 2^53
+			// solutionN		{"console.log">^(+1)1		up to 2^53
 		*/
 	});
 
@@ -189,5 +189,56 @@ export default () => {
 		*/
 		it("1", () => expect(exampleA).eql(["aA1", "bB2", "cC3"]));
 	});
+
+	describe("20. Loops/Break", () => {
+		/*ts
+			log				{"console.log">
+			solutionN		!=10^(?20.[.(
+								(=10 log)
+								log.?20.[.log.0`
+							)?)0
+		*/
+	});
+
+	describe("21. Loops/continue", () => {
+		/*ts
+			solutionS		+1^10,(:.((].=6 "\n"$) ", "$)?)$
+		*/
+		it("1", () => expect(solutionS).eql("1, 2, 3, 4, 5\n6, 7, 8, 9, 10"));
+	});
+
+    describe("22. Loops/Downward for", () => {
+		/*ts
+			solutionA		10-^11
+		*/
+		it("1", () => expect(solutionA).eql([10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]));
+	});
+
+	describe("23. Loops/For", () => {
+		/*ts
+			solutionA		(+1."*"`^.+$)^5
+		*/
+		it("1", () => expect(solutionA).eql(["*", "**", "***", "****", "*****"]));
+	});
+
+    describe("24. Foreach", () => {
+        /*ts
+            solutionA	    ;^5,{"console.log">@
+        */
+        it("1", () => expect(solutionA).eql([0, 1, 2, 3, 4]));
+    });
+
+    describe("25. Loops/Infinite", () => {
+        /*ts
+            // solutionS       ;^({"console.log">)"SPAM"
+        */
+    })
+
+    describe("26. Loops/N plus one half", () => {
+        /*ts
+            solutionS       +1^10,(:,(; .(; ((=10 ""`) ", "`)?).""$).""$ "")$
+        */
+        it("1", () => expect(solutionS).eql("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+    });
 
 };
