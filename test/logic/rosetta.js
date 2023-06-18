@@ -176,4 +176,163 @@ export default () => {
         it("1", () => expect(exampleA).eql([1,2,"Fizz",4,"Buzz","Fizz","Baxx",8,"Fizz","Buzz",11,"Fizz",13,"Baxx","FizzBuzz",16,17,"Fizz",19,"Buzz"]));
 	});
 
+	describe("18. Integer sequence", () => {
+		/*ts
+			// solutionN		{"console.log">^(+1)1		up to 2^53
+		*/
+	});
+
+	describe("19. Loop over multiple arrays simultaneously", () => {
+		/*ts
+			solutionAA		(*.{@)$.+$@											limited to shortest dimension in all arrays
+			exampleA		solutionAA(("a" "b" "c") ("A" "B" "C") (1 2 3))
+		*/
+		it("1", () => expect(exampleA).eql(["aA1", "bB2", "cC3"]));
+	});
+
+	describe("20. Loops/Break", () => {
+		/*ts
+			log				{"console.log">
+			solutionN		!=10^(?20.[.(
+								(=10 log)
+								log.?20.[.log.0`
+							)?)0
+		*/
+	});
+
+	describe("21. Loops/continue", () => {
+		/*ts
+			solutionS		+1^10,(:.((].=6 "\n"$) ", "$)?)$
+		*/
+		it("1", () => expect(solutionS).eql("1, 2, 3, 4, 5\n6, 7, 8, 9, 10"));
+	});
+
+    describe("22. Loops/Downward for", () => {
+		/*ts
+			solutionA		10-^11
+		*/
+		it("1", () => expect(solutionA).eql([10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]));
+	});
+
+	describe("23. Loops/For", () => {
+		/*ts
+			solutionA		(+1."*"`^.+$)^5
+		*/
+		it("1", () => expect(solutionA).eql(["*", "**", "***", "****", "*****"]));
+	});
+
+    describe("24. Foreach", () => {
+        /*ts
+            solutionA	    ;^5,{"console.log">@
+        */
+        it("1", () => expect(solutionA).eql([0, 1, 2, 3, 4]));
+    });
+
+    describe("25. Loops/Infinite", () => {
+        /*ts
+            // solutionS       ;^({"console.log">)"SPAM"
+        */
+    })
+
+    describe("26. Loops/N plus one half", () => {
+        /*ts
+            solutionS       +1^10,(:,(; .(; ((=10 ""`) ", "`)?).""$).""$ "")$
+        */
+        it("1", () => expect(solutionS).eql("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
+    });
+
+    describe("27. Loops/Nested", () => {
+        // use streams to terminate iteration
+        /*ts
+            randomsA        ((2 12 10) (18 20 9) (1 20 16))
+            untilTwentyA    ((].=20 ()`) #.(/3.[ %3).'randomsA)?^( ),{
+        */
+        it("1", () => expect(untilTwentyA).eql([2, 12, 10, 18, 20]));
+    });
+
+    describe("28. Singly-linked list/Traversal", () => {
+        /*ts
+            solutionA       *2@(1 2 3)      equals (2 4 6)
+        */
+        it("1", () => expect(solutionA).eql([2, 4, 6]));
+    });
+
+    describe("29. Sum and product of an array", () => {
+        /*ts
+            solutionAA      .(+$ *$)
+            exampleA        solutionAA(1 2 3 4)     equals (10 24)
+        */
+        it("1", () => expect(exampleA).eql([10, 24]));
+    });
+
+    describe("30. Extend your language", () => {
+        /*ts
+            isFirstConditionTrueAT      .(] [.[).(,$)
+            isSecondConditionTrueAT     .(] [.1').(,$)
+            onBothConditionsTrueAV      .(] [.2').(,$)
+            onFirstConditionTrueAV      .(] [.3').(,$)
+            onSecondConditionTrueAV     .(] [.4').(,$)
+            onNoConditionTrueAV         .(] [.5').(,$)
+            ifTwoAVV                    :.(
+                                            (isFirstConditionTrueAT (
+                                                (isSecondConditionTrueAT onBothConditionsTrueAV)
+                                                onFirstConditionTrueAV
+                                            )?)
+                                            (isSecondConditionTrueAT onSecondConditionTrueAV)
+                                            onNoConditionTrueAV
+                                        )?
+            fizzBuzzNV                  (%3.! %5.! "FizzBuzz"` "Fizz"` "Buzz"` ;)ifTwoAVV
+            exampleA                    fizzBuzzNV@(6 10 15 16)                                         equals ("Fizz" "Buzz" "FizzBuzz" 16)
+        */
+        it("1", () => expect(exampleA).eql(["Fizz", "Buzz", "FizzBuzz", 16]));
+    });
+
+    describe("31. Arrays", () => {
+        /*ts
+            arrayA              (1 2 3)
+            modifySecondA       ((1 ) 4`)>arrayA    equals (1 4 3)
+            secondElemN         1'arrayA            equals 2
+            extendedArrayA      arrayA+(4 )         equals (1 2 3 4)
+        */
+        it("1", () => expect(modifySecondA).eql([1, 4, 3]));
+        it("2", () => expect(secondElemN).eql(2));
+        it("3", () => expect(extendedArrayA).eql([1, 2, 3, 4]));
+    });
+
+    describe("32. Associative array/Creation", () => {
+        /*ts
+            dictionaryD     \(("a" 1) ("b" 2) ("c" 3))
+        */
+        it("1", () => expect(dictionaryD).eql({a: 1, b: 2, c: 3}));
+    });
+
+    describe("33. Boolean values", () => {
+        /*ts
+            trueT                   1
+            falseT                  0
+            conditionalFalseyA      (0 () "" ( ) \( ))      0, undefined, and empty string, array and dictionary are falsey. all other values are truthy.
+            testA                   ;?conditionalFalseyA    equals ( )
+        */
+        it("1", () => expect(testA).eql([]));
+    });
+
+    describe("34. Call an object method", () => {
+        // object orientation is by message passing to an instance, following a revealing module pattern
+        // there are no classes, and therefore, no static methods
+        // static methods, as a form of namespacing code, is achieved through dictionaries
+        /*ts
+            complexASN		:.(
+                                (].="real" [.[)
+                                (].="imag" [.])
+                                (].="mag" [.^2@.+$.^0.5)
+                                ()`
+                            )?
+            exampleSN       (3 4)complexASN
+            realN           exampleSN"real"                     equals 3
+            magN            exampleSN"mag"                      equals 5
+        */
+        it("1", () => expect(realN).eql(3));
+        it("2", () => expect(magN).eql(5));
+    });
+
 };

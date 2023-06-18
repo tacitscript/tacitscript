@@ -137,10 +137,19 @@ const processStream = ({generator, reducer}) => function*() {
 		}
 	}
 };
+const streamMap = ({fn, generator}) => function*() {
+	for (const val of getStream(generator)) {
+		const result = fn(val);
+
+		if (result) {
+			if (isFunction(result)) yield* result();
+			else yield result;
+		}
+	}
+};
 const getStream = generator => isActiveStream(generator) ? generator : generator();
 const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of getStream(generator)) {if (i >= n) return; i += 1; yield val;}};
 const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of getStream(generator)) {if (i >= n) yield val; else i += 1;}};
-const streamMap = ({fn, generator}) => function*() {for (const val of getStream(generator)) yield fn(val);};
 const streamFilter = ({fn, generator}) => function*() {for (const val of getStream(generator)) {if (fn(val)) yield val;}};
 
 //==========================================================
@@ -510,9 +519,7 @@ const question = (left, right) => {
 
 		return undefined;
 	}
-	if (isNumber(left) && isNumber(right)) {																	// random				NNN						1(<|=)(1?10)<10
-		return (Math.random() * (right - left)) + left;
-	}
+	if (isNumber(right)) return Math.random() * right;															// random				?NN						(0?10)<10
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
 	if (isUnaryFunction(left) && isStream(right)) return streamFilter({fn: left, generator: right});			// filter				(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)
 	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))

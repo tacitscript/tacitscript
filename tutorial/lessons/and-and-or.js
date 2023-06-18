@@ -17,6 +17,8 @@ export default {
 			['1|"hello"=1',],
 			['\( )|""=""'],
 		])}</div>
+		<p>Note that <a href="#andValue">(&) andValue</a> and <a href="#orValue">(|) orValue</a> cannot be used to <i>short-circuit</i> evaluation in the same way that <a href="#cond">(?) cond</a> does. For instance, <span className="code">1|(2+3)</span> still evaluates <span className="code">2+3</span>.</p>
+		<p>This is because all arguments are evaluated before being passed to any tacitscript operator. <a href="#cond">(?) cond</a> achieves deferred evaluation as operators are passed rather than the resulting values. Short-circuit evaluation should always be conducted through <a href="#cond">(?) cond</a>.</p>
 	</div>,
 	exercise: {
 		question: <div>
