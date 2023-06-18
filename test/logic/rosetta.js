@@ -287,4 +287,16 @@ export default () => {
         it("1", () => expect(exampleA).eql(["Fizz", "Buzz", "FizzBuzz", 16]));
     });
 
+    describe("31. Arrays", () => {
+        /*ts
+            arrayA              (1 2 3)
+            modifySecondA       ((1 ) 4`)>arrayA    equals (1 4 3)
+            secondElemN         1'arrayA            equals 2
+            extendedArrayA      arrayA+(4 )         equals (1 2 3 4)
+        */
+        it("1", () => expect(modifySecondA).eql([1, 4, 3]));
+        it("2", () => expect(secondElemN).eql(2));
+        it("3", () => expect(extendedArrayA).eql([1, 2, 3, 4]));
+    });
+
 };
