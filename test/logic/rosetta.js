@@ -299,4 +299,40 @@ export default () => {
         it("3", () => expect(extendedArrayA).eql([1, 2, 3, 4]));
     });
 
+    describe("32. Associative array/Creation", () => {
+        /*ts
+            dictionaryD     \(("a" 1) ("b" 2) ("c" 3))
+        */
+        it("1", () => expect(dictionaryD).eql({a: 1, b: 2, c: 3}));
+    });
+
+    describe("33. Boolean values", () => {
+        /*ts
+            trueT                   1
+            falseT                  0
+            conditionalFalseyA      (0 () "" ( ) \( ))      0, undefined, and empty string, array and dictionary are falsey. all other values are truthy.
+            testA                   ;?conditionalFalseyA    equals ( )
+        */
+        it("1", () => expect(testA).eql([]));
+    });
+
+    describe("34. Call an object method", () => {
+        // object orientation is by message passing to an instance, following a revealing module pattern
+        // there are no classes, and therefore, no static methods
+        // static methods, as a form of namespacing code, is achieved through dictionaries
+        /*ts
+            complexASN		:.(
+                                (].="real" [.[)
+                                (].="imag" [.])
+                                (].="mag" [.^2@.+$.^0.5)
+                                ()`
+                            )?
+            exampleSN       (3 4)complexASN
+            realN           exampleSN"real"                     equals 3
+            magN            exampleSN"mag"                      equals 5
+        */
+        it("1", () => expect(realN).eql(3));
+        it("2", () => expect(magN).eql(5));
+    });
+
 };
