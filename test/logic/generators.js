@@ -13,12 +13,14 @@ export default () => {
             fib						(_2%.].+$)^(1 1)
             firstSix				6%.{
             mapExcl                 ((=2 ()`) ;)?@.3%.{
+            returnStream            ((=2 (#.'(8 9))^( )`) ;)?@.5%.{
         */
         it("firstThree", () => expect(firstThree(naturals)).eql([1, 2, 3]));
         it("firstThreeEven", () => expect(firstThreeEven(naturals)).eql([2, 4, 6]));
         it("firstThreeEvenSquares", () => expect(firstThreeEvenSquares(naturals)).eql([4, 16, 36]));
         it("firstSixFib", () => expect(firstSix(fib)).eql([1, 1, 2, 3, 5, 8]));
-        it("firstThreeMapExcl", () => expect(mapExcl(naturals)).eql([1, 3, 4]))
+        it("firstThreeMapExcl", () => expect(mapExcl(naturals)).eql([1, 3, 4]));
+        it("mapReturningStream", () => expect(returnStream(naturals)).eql([1, 8, 9, 3, 4]));
     });
 
     describe("js primes", () => {

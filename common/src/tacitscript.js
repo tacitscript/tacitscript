@@ -137,10 +137,19 @@ const processStream = ({generator, reducer}) => function*() {
 		}
 	}
 };
+const streamMap = ({fn, generator}) => function*() {
+	for (const val of getStream(generator)) {
+		const result = fn(val);
+
+		if (result) {
+			if (isFunction(result)) yield* result();
+			else yield result;
+		}
+	}
+};
 const getStream = generator => isActiveStream(generator) ? generator : generator();
 const streamTake = ({n, generator}) => function*() {let i = 0; for (const val of getStream(generator)) {if (i >= n) return; i += 1; yield val;}};
 const streamDrop = ({n, generator}) => function*() {let i = 0; for (const val of getStream(generator)) {if (i >= n) yield val; else i += 1;}};
-const streamMap = ({fn, generator}) => function*() {for (const val of getStream(generator)) {const result = fn(val); if (result) yield result;}};
 const streamFilter = ({fn, generator}) => function*() {for (const val of getStream(generator)) {if (fn(val)) yield val;}};
 
 //==========================================================
