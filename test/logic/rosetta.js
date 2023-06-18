@@ -241,4 +241,50 @@ export default () => {
         it("1", () => expect(solutionS).eql("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
     });
 
+    describe("27. Loops/Nested", () => {
+        // use streams to terminate iteration
+        /*ts
+            randomsA        ((2 12 10) (18 20 9) (1 20 16))
+            untilTwentyA    ((].=20 ()`) #.(/3.[ %3).'randomsA)?^( ),{
+        */
+        it("1", () => expect(untilTwentyA).eql([2, 12, 10, 18, 20]));
+    });
+
+    describe("28. Singly-linked list/Traversal", () => {
+        /*ts
+            solutionA       *2@(1 2 3)      equals (2 4 6)
+        */
+        it("1", () => expect(solutionA).eql([2, 4, 6]));
+    });
+
+    describe("29. Sum and product of an array", () => {
+        /*ts
+            solutionAA      .(+$ *$)
+            exampleA        solutionAA(1 2 3 4)     equals (10 24)
+        */
+        it("1", () => expect(exampleA).eql([10, 24]));
+    });
+
+    describe("30. Extend your language", () => {
+        /*ts
+            isFirstConditionTrueAT      .(] [.[).(,$)
+            isSecondConditionTrueAT     .(] [.1').(,$)
+            onBothConditionsTrueAV      .(] [.2').(,$)
+            onFirstConditionTrueAV      .(] [.3').(,$)
+            onSecondConditionTrueAV     .(] [.4').(,$)
+            onNoConditionTrueAV         .(] [.5').(,$)
+            ifTwoAVV                    :.(
+                                            (isFirstConditionTrueAT (
+                                                (isSecondConditionTrueAT onBothConditionsTrueAV)
+                                                onFirstConditionTrueAV
+                                            )?)
+                                            (isSecondConditionTrueAT onSecondConditionTrueAV)
+                                            onNoConditionTrueAV
+                                        )?
+            fizzBuzzNV                  (%3.! %5.! "FizzBuzz"` "Fizz"` "Buzz"` ;)ifTwoAVV
+            exampleA                    fizzBuzzNV@(6 10 15 16)                                         equals ("Fizz" "Buzz" "FizzBuzz" 16)
+        */
+        it("1", () => expect(exampleA).eql(["Fizz", "Buzz", "FizzBuzz", 16]));
+    });
+
 };
