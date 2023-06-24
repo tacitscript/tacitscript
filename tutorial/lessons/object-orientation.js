@@ -9,10 +9,10 @@ const {ts2es6} = parser;
 window.ts = ts; // required in release mode for eval
 
 const bounds = `:.(
-					(].="width" [.(1' ]).-$)
-					(].="height" [.(2' [).-$)
-					()\`
-				)?`;
+	(].="width" [.(1' ]).-$)
+	(].="height" [.(2' [).-$)
+	()\`
+)?`;
 const es6 = ts2es6(`/*ts
 	boundsASN		${bounds}
 */`);
@@ -28,18 +28,19 @@ export default {
 			["complexA", `(3 4)`, <span>represents <span className="code">3 + 4i</span></span>],
 		])}</div>
 		<p>There are advantages to representing complex numbers in this way. We have at our disposal the full range of array operators.</p>
-		<Quotation>It is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures.
--- Alan Perlis - Epigrams on Programming (1982)
+		<Quotation>
+			<div>It is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures.</div>
+			<div> -- Alan Perlis - Epigrams on Programming (1982)</div>
 		</Quotation>
 		<p>However, it is often advantageous to bind specialized data structures with the functionality commonly used to process them. We may, for instance, want an easy way to extract the real or imaginary part from our complex number representation (without having to remember how the data is internally organized.) Or to easily calculate the magnitude of the number.</p>
 		<p><i>Message passing</i> can be used to solve these use cases. When an <i>object</i> is instantiated from its data, we return an interface exposing its supported functionality (methods.)</p>
 		<div className="code-block">{getOperationExamples([
 			["complexASN", `:.(
-				(].="real" [.[)
-				(].="imag" [.])
-				(].="mag" [.^2@.+$.^0.5)
-				()\`
-			)?`],
+	(].="real" [.[)
+	(].="imag" [.])
+	(].="mag" [.^2@.+$.^0.5)
+	()\`
+)?`],
 			["exampleSN", "(3 4)complexASN"],
 			["realN", `exampleSN"real"`, "equals 3"],
 			["magN", `exampleSN"mag"`, "equals 5"],
@@ -56,14 +57,15 @@ export default {
 */
 `,
 		getHtml: details => <React.Fragment><br/><div className="rule"/><br/><Table>{[
-			[<div className="name">boundsASN</div>, <TextEdit {...{...details, solution: bounds}}/>],
+			[<div className="name">boundsASN</div>, <TextEdit {...{...details, multiline: true, solution: bounds}}/>],
 		]}</Table></React.Fragment>,
 		hint1: "Use operators: - = . $ ] [ ' ? :",
 		hint2: "Pair the array and method call, cond the options remembering default implementation for unknown methods",
-		getTestValues: () => [R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity), ([a, b, c, d]) => [a, d, c, b]))([4, 4, 4])],
+		getTestValues: () => R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity), ([a, b, c, d]) => [a, d, c, b]))([4, 4, 4, 4]),
 		tests: [
 			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"width" equals {boundsASN(details, "width")}</span>, condition: ({solution, testValue}) => boundsASN(testValue, "width") === solution(testValue, "width")},
-
+			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"height" equals {boundsASN(details, "height")}</span>, condition: ({solution, testValue}) => boundsASN(testValue, "height") === solution(testValue, "height")},
+			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"unknown" equals ()</span>, condition: ({solution, testValue}) => boundsASN(testValue, "unknown") === undefined},
 		],
 	},
 };

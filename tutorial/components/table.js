@@ -5,6 +5,7 @@ const style = css({
 	"> tbody > tr": {
 		"> td:first-child": {
 			paddingRight: "1rem",
+			verticalAlign: "top",
 		},
 		"> td:nth-child(2)": {
 			width: "100%",

@@ -68,6 +68,7 @@ import binaryOperatorFlipping from "./binary-operator-flipping.js";
 import not from "./not.js";
 import factors from "./factors.js";
 import lenses from "./lenses.js";
+import objectOrientation from "./object-orientation.js";
 
 export default [[
 	arithmeticOperations,
@@ -128,6 +129,7 @@ export default [[
 	lenses,
 	invertingPipelines,
 	std,
+	objectOrientation,
 	quadraticRoots,
 	fizzbuzz,
 ], [
