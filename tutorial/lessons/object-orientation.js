@@ -32,8 +32,7 @@ export default {
 -- Alan Perlis - Epigrams on Programming (1982)
 		</Quotation>
 		<p>However, it is often advantageous to bind specialized data structures with the functionality commonly used to process them. We may, for instance, want an easy way to extract the real or imaginary part from our complex number representation (without having to remember how the data is internally organized.) Or to easily calculate the magnitude of the number.</p>
-		<p>Data bound with associated functionality (methods), is known as an <i>object</i>. When an <i>object</i> is instantiated, we return an interface exposing its supported methods.</p>
-		<p>We can implement this through <i>message passing</i>.</p>
+		<p><i>Message passing</i> can be used to solve these use cases. When an <i>object</i> is instantiated from its data, we return an interface exposing its supported functionality (methods.)</p>
 		<div className="code-block">{getOperationExamples([
 			["complexASN", `:.(
 				(].="real" [.[)
@@ -46,19 +45,6 @@ export default {
 			["magN", `exampleSN"mag"`, "equals 5"],
 			["unknownO", `exampleSN"unknown"`, "equals ()"],
 		])}</div>
-		<p>An alternative implementation exposes the object's interface through a dictionary.</p>
-		<div className="code-block">{getOperationExamples([
-			["complexAD", `.(
-				.("real"\` [)
-				.("imag"\` ])
-				.("mag"\` ^2@.+$.^0.5)
-			).\\`],
-			["exampleD", "complexAD(3 4)"],
-			["realN", `"real"'exampleD`, "equals 3"],
-			["magN", `"mag"'exampleD`, "equals 5"],
-			["unknownO", `"unknown"'exampleD`, "equals ()"],
-		])}</div>
-		<p>Note the difference in behaviour. Here we precalculate the response and so trade construction speed for execution speed on method call.</p>
 	</div>,
 	exercise: {
 		question: <div>
