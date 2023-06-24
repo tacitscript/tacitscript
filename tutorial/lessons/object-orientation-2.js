@@ -15,8 +15,9 @@ const bounds = solution => `:.(
 	(].="boundedUT" ${solution})
 	()\`
 )?`;
+const boundedUT = `:._,(@("xN" "yN") [,(< > > <).(.(1' ]).&$ .([ 2').&$)).*$.(,$)@.&$`;
 const es6 = ts2es6(`/*ts
-	boundsASN		${bounds("")}
+	boundsASN		${bounds(boundedUT)}
 */`);
 eval(es6.replace(/const /g, "var "))
 
@@ -43,7 +44,7 @@ export default {
 		</div>,
 		getJs: ({def}) => `
 /*ts
-		solution ${def}
+		solution ${bounds(def)}
 */
 `,
 		getHtml: details => <React.Fragment><br/><div className="rule"/><br/><Table>{[
