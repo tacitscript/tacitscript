@@ -7,6 +7,7 @@ const style = css({
 		display: "table-row",
 		"> .cell": {
 			display: "table-cell",
+			whiteSpace: "pre",
 			":first-child": {
 				width: "10.5rem",
 			},
