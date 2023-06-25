@@ -70,6 +70,7 @@ import factors from "./factors.js";
 import lenses from "./lenses.js";
 import objectOrientation from "./object-orientation.js";
 import objectOrientation2 from "./object-orientation-2.js";
+import objectOrientation3 from "./object-orientation-3.js";
 
 export default [[
 	arithmeticOperations,
@@ -132,6 +133,7 @@ export default [[
 	std,
 	objectOrientation,
 	objectOrientation2,
+	objectOrientation3,
 	quadraticRoots,
 	fizzbuzz,
 ], [

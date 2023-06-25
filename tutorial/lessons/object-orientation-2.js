@@ -15,7 +15,7 @@ const bounds = solution => `:.(
 )?`;
 const boundedUT = `:._,(@("xN" "yN") [,(<|= >|= >|= <|=).(.(1' ]).&$ .([ 2').&$)).*$.(,$)@.&$`;
 const es6 = ts2es6(`/*ts
-	vectorASN		:.(
+	vectorASQ		:.(
 						(].="xN" [.[)
 						(].="yN" [.])
 						(].="dotProductUN" :,([ @("x" "y")).*$.*$@.+$)
@@ -40,13 +40,13 @@ export default {
 		<div className="equation" {...equationStyle}><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/69f8ac1d2b7ffb9ef70bb6b151a4b931f20087a5"/></div>
 		<br/>
 		<div className="code-block">{getOperationExamples([
-			["vectorASN", `:.(
+			["vectorASQ", `:.(
 	(].="xN" [.[)
 	(].="yN" [.])
 	(].="dotProductUN" :,([ @("xN" "yN")).*$.*$@.+$)
 	()\`
 )?`],
-			["dotProductN", `(3 4)vectorASN"dotProductUN"((2 _1)vectorASN)`, <span>equals <span className="code">(3 * 2) + (4 * _1) = 2</span></span>],
+			["dotProductN", `(3 4)vectorASQ"dotProductUN"((2 _1)vectorASQ)`, <span>equals <span className="code">(3 * 2) + (4 * _1) = 2</span></span>],
 		])}</div>
 		<p><i>Note that, for clarity, we will exclude methods not under investigation in our current definitions.</i></p>
 	</div>,
@@ -66,19 +66,19 @@ export default {
 			[<div className="name"></div>, <pre>)?</pre>],
 		]}</Table></React.Fragment>,
 		hint1: "Use operators: * , _ = . $ @ : [ ] < > ' & |",
-		hint2: "Pair to intact vector, reverse, map the vector to extract x and y, convert bounds to conditions and apply against vector",
+		hint2: "Pair to vector, reverse, map the vector to extract x and y, convert bounds to conditions and apply against vector",
 		getTestValues: () => R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity)))([6, 6, 6, 6]),
 		tests: R.times(i => {
 			return {
 				description: details => {
 					const [b, v] = tests[i](details);
 
-					return <span>{ts.toString(b)}boundsASN<b>"boundedUT"</b>({ts.toString(v)}vectorASN) equals {boundsASN(b, "boundedUT")(s => vectorASN(v, s))}</span>;
+					return <span>{ts.toString(b)}boundsASN<b>"boundedUT"</b>({ts.toString(v)}vectorASQ) equals {boundsASN(b, "boundedUT")(s => vectorASQ(v, s))}</span>;
 				},
 				condition: ({solution, testValue}) => {
 					const [b, v] = tests[i](testValue);
 					
-					return boundsASN(b, "boundedUT")(s => vectorASN(v, s)) === solution(b, "boundedUT")(s => vectorASN(v, s));
+					return boundsASN(b, "boundedUT")(s => vectorASQ(v, s)) === solution(b, "boundedUT")(s => vectorASQ(v, s));
 				},
 			};
 		}, 4),
