@@ -10,16 +10,27 @@ const {ts2es6} = parser;
 window.ts = ts; // required in release mode for eval
 
 const bounds = solution => `:.(
-	(].="widthN" [.(1' ]).-$)
-	(].="heightN" [.(2' [).-$)
 	(].="boundedUT" ${solution})
 	()\`
 )?`;
-const boundedUT = `:._,(@("xN" "yN") [,(< > > <).(.(1' ]).&$ .([ 2').&$)).*$.(,$)@.&$`;
+const boundedUT = `:._,(@("xN" "yN") [,(<|= >|= >|= <|=).(.(1' ]).&$ .([ 2').&$)).*$.(,$)@.&$`;
 const es6 = ts2es6(`/*ts
+	vectorASN		:.(
+						(].="xN" [.[)
+						(].="yN" [.])
+						(].="dotProductUN" :,([ @("x" "y")).*$.*$@.+$)
+						()\`
+					)?
 	boundsASN		${bounds(boundedUT)}
 */`);
 eval(es6.replace(/const /g, "var "))
+
+const tests = [
+	([a, b, c, d, e, f]) => [[a, e, f, b], [c, d]],
+	([a, b, c, d, e, f]) => [[a, c, f, b], [e, d]],
+	([a, b, c, d, e, f]) => [[d, e, f, b], [c, a]],
+	([a, b, c, d, e, f]) => [[d, c, f, b], [e, a]],
+];
 
 export default {
 	id: "object-orientation-2",
@@ -27,16 +38,17 @@ export default {
 	description: <div>
 		<p>Let's add a <span className="code">dotProductUN</span> method to our vector implementation, that takes an additional vector and returns the dot product of the two. The dot product tells us how closely two vectors align.</p>
 		<div className="equation" {...equationStyle}><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/69f8ac1d2b7ffb9ef70bb6b151a4b931f20087a5"/></div>
+		<br/>
 		<div className="code-block">{getOperationExamples([
 			["vectorASN", `:.(
 	(].="xN" [.[)
 	(].="yN" [.])
-	(].="magN" [.^2@.+$.^0.5)
-	(].="dotProductUN" :,([ @("x" "y")).*$.*$@.+$)
+	(].="dotProductUN" :,([ @("xN" "yN")).*$.*$@.+$)
 	()\`
 )?`],
 			["dotProductN", `(3 4)vectorASN"dotProductUN"((2 _1)vectorASN)`, <span>equals <span className="code">(3 * 2) + (4 * _1) = 2</span></span>],
 		])}</div>
+		<p><i>Note that, for clarity, we will exclude methods not under investigation in our current definitions.</i></p>
 	</div>,
 	exercise: {
 		question: <div>
@@ -48,15 +60,27 @@ export default {
 */
 `,
 		getHtml: details => <React.Fragment><br/><div className="rule"/><br/><Table>{[
-			[<div className="name">boundsASN</div>, <TextEdit {...{...details, multiline: true, solution: bounds}}/>],
+			[<div className="name">boundsASN</div>, <div className="expression">:.(</div>],
+			[<div className="name"></div>, <pre style={{display: "flex"}}>    (].="boundedUT" <TextEdit {...{...details, multiline: true, solution: boundedUT}}/>)</pre>],
+			[<div className="name"></div>, <pre>    ()`</pre>],
+			[<div className="name"></div>, <pre>)?</pre>],
 		]}</Table></React.Fragment>,
-		hint1: "Use operators: - = . $ ] [ ' ? :",
-		hint2: "Pair the array and method call, cond the options remembering default implementation for unknown methods",
-		getTestValues: () => R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity), ([a, b, c, d]) => [a, d, c, b]))([4, 4, 4, 4]),
-		tests: [
-			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"width" equals {boundsASN(details, "width")}</span>, condition: ({solution, testValue}) => boundsASN(testValue, "width") === solution(testValue, "width")},
-			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"height" equals {boundsASN(details, "height")}</span>, condition: ({solution, testValue}) => boundsASN(testValue, "height") === solution(testValue, "height")},
-			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"unknown" equals ()</span>, condition: ({solution, testValue}) => boundsASN(testValue, "unknown") === undefined},
-		],
+		hint1: "Use operators: * , _ = . $ @ : [ ] < > ' & |",
+		hint2: "Pair to intact vector, reverse, map the vector to extract x and y, convert bounds to conditions and apply against vector",
+		getTestValues: () => R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity)))([6, 6, 6, 6]),
+		tests: R.times(i => {
+			return {
+				description: details => {
+					const [b, v] = tests[i](details);
+
+					return <span>{ts.toString(b)}boundsASN<b>"boundedUT"</b>({ts.toString(v)}vectorASN) equals {boundsASN(b, "boundedUT")(s => vectorASN(v, s))}</span>;
+				},
+				condition: ({solution, testValue}) => {
+					const [b, v] = tests[i](testValue);
+					
+					return boundsASN(b, "boundedUT")(s => vectorASN(v, s)) === solution(b, "boundedUT")(s => vectorASN(v, s));
+				},
+			};
+		}, 4),
 	},
 };

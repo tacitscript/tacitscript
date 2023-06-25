@@ -69,6 +69,7 @@ import not from "./not.js";
 import factors from "./factors.js";
 import lenses from "./lenses.js";
 import objectOrientation from "./object-orientation.js";
+import objectOrientation2 from "./object-orientation-2.js";
 
 export default [[
 	arithmeticOperations,
@@ -130,6 +131,7 @@ export default [[
 	invertingPipelines,
 	std,
 	objectOrientation,
+	objectOrientation2,
 	quadraticRoots,
 	fizzbuzz,
 ], [
