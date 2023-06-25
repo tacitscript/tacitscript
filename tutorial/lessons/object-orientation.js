@@ -61,7 +61,7 @@ export default {
 		]}</Table></React.Fragment>,
 		hint1: "Use operators: - = . $ ] [ ' ? :",
 		hint2: "Pair the array and method call, cond the options remembering default implementation for unknown methods",
-		getTestValues: () => R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity), ([a, b, c, d]) => [a, d, c, b]))([4, 4, 4, 4]),
+		getTestValues: () => R.map(R.pipe(R.times(Math.random), R.map(R.pipe(R.multiply(10), Math.floor)), R.sortBy(R.identity), ([a, b, c, d]) => [a, d, c, b]))([4, 4, 4]),
 		tests: [
 			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"width" equals {boundsASN(details, "width")}</span>, condition: ({solution, testValue}) => boundsASN(testValue, "widthN") === solution(testValue, "widthN")},
 			{description: details => <span>{ts.toString(details)}<b>boundsASN</b>"height" equals {boundsASN(details, "height")}</span>, condition: ({solution, testValue}) => boundsASN(testValue, "heightN") === solution(testValue, "heightN")},
