@@ -96,8 +96,17 @@ export default () => {
 	describe("tilde (~)", () => {
 		/*ts
 			flipB					~/
+			printVV					~
 		*/
 		it('flip					(XYZ)(YXZ)				2(~/)6=3', () => expect(flipB(2, 6)).eql(3));
+
+		let spy;
+		before(() => spy = sinon.spy(console, "log"));
+		it('print					VV						~3=3', () => {
+			expect(printVV(3)).eql(3);
+			assert(spy.calledWith(3));
+		});
+		after(() => spy.restore());
 	});
 
 	describe("backtick (\`)", () => {
@@ -287,20 +296,15 @@ export default () => {
 			greateraT				"abc">"def"
 			overA					((1 ) +1)>(3 5 7)
 			overD					(("a" ) +1)>(\(("a" 1) ))
-			tapNN					{"x => console.log.call(null, x)">
+			descendingSortA			;>(2 3 1)
+			descendingSortaA		;>("b" "c" "a")
 		*/
 		it("greater					NNT						3>2=1", () => expect(greaterT).eql(1));
 		it('greater					SST						"abc">"def"=0', () => expect(greateraT).eql(0));
 		it('over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)', () => expect(overA).eql([3, 6, 7]));
 		it('over					ADD						(("a" ) +1)>(\\(("a" 1) ))=(\\(("a" 2) ))', () => expect(overD).eql({a: 2}));
-
-		let spy;
-		before(() => spy = sinon.spy(console, "log"));
-		it('tap						(V?)VV					{"x => console.log.call(null, x)">3=3', () => {
-			expect(tapNN(3)).eql(3);
-			assert(spy.calledWith(3));
-		});
-		after(() => spy.restore());
+		it('descendingSort			(VN)AA					;>(2 3 1)=(3 2 1)', () => expect(descendingSortA).eql([3, 2, 1]));
+		it('descendingSort			(VS)AA					;>("b" "c" "a")=("c" "b" "a")', () => expect(descendingSortaA).eql(["c", "b", "a"]));
 	});
 
 	describe("less (<)", () => {
