@@ -7,17 +7,27 @@ export default () => {
     // tacitscript is a pure language (embedded DSL.)
     // Where the question requests user input and to display/print output, the example will typiocally interpret these as functional inputs and outputs.
 
-    describe("1. Compare the length of two strings", () => {
+    describe("1. Arithmetic/Integer", () => {
         /*ts
-            solutionSSS         :.#<._.(.(; #)." "$)@."\n"$
-            exampleS            "short"solutionSSS"longer"                          equals "longer 6\nshort 5"
-
-            extraAS             #<._." "$
-            extraExampleS       extraAS("abcd" "123456789" "abcdef" "1234567")      equals "123456789 1234567 abcdef abcd"
+            intQuotientNNN      /.((<0 ]) [)?                                   integers not native type - selected to round towards 0
+            divmodNNA           :.(intQuotientNNN$ %$)
+            solutionNNA         :.(+$ -$ *$ intQuotientNNN$ %$ ^$ divmodNNA$)   % (remainder) - sign matches first operand
+            exampleA            _7solutionNNA3,~                                prints (_4 _10 _21 _2 _1 _343 (_2 _1))
         */
-        it("1", () => expect(exampleS).eql("longer 6\nshort 5"));
-        it("2", () => expect(extraExampleS).eql("123456789 1234567 abcdef abcd"));
+        it("1", () => expect(exampleA).eql([-4, -10, -21, -2, -1, -343, [-2, -1]]));
     });
+
+    describe("2. Compare the length of two strings", () => {
+        /*ts
+            solutionSSS         :.#>.(.(; #)." "$.~)@
+            exampleS            "short"solutionSSS"longer"                          prints "longer 6" then "short 5"
+
+            extraAS             #>.~
+            extraExampleS       extraAS("abcd" "123456789" "abcdef" "1234567")      prints ("123456789" "1234567" "abcdef" "abcd")
+        */
+        it("1", () => expect(exampleS).eql(["longer 6", "short 5"]));
+        it("2", () => expect(extraExampleS).eql(["123456789", "1234567", "abcdef", "abcd"]));
+    });return;
 
     describe("2. Factors of an integer", () => {
         /*ts
@@ -25,16 +35,6 @@ export default () => {
             exampleA            solutionNA6                     	 equals (1 2 3 6)
         */
         it("1", () => expect(exampleA).eql([1, 2, 3, 6]));
-    });
-
-    describe("3. Arithmetic/Integer", () => {
-        /*ts
-            intQuotientNNN      /.((<0 ]) [)?                                   integers not native type - selected to round towards 0
-            divmodNNA           :.(intQuotientNNN$ %$)
-            solutionNNA         :.(+$ -$ *$ intQuotientNNN$ %$ ^$ divmodNNA$)   % (remainder) - sign matches first operand
-            exampleA            _7solutionNNA3                                  equals (_4 _10 _21 _2 _1 _343 (_2 _1))
-        */
-        it("1", () => expect(exampleA).eql([-4, -10, -21, -2, -1, -343, [-2, -1]]));
     });
 
     describe("4. Integer comparison", () => {
