@@ -473,13 +473,6 @@ const greater = (left, right) => {
 	if (isArray(left) && (isArray(right) || isObject(right))) {													// over					AAA						((1 ) +1)>(3 5 7)=(3 6 7)
 		return applyOver({path: left[0], fn: left[1], container: right});										// over					ADD						(("a" ) +1)>(\(("a" 1) ))=(\(("a" 2) ))
 	}
-	if (isUnaryFunction(left) && isValue(right)) {																// tap					(V?)VV					{"x => console.log.call(null, x)">3=3
-		try {
-			comma(right, left);
-		} catch (_) {}
-
-		return right;
-	}
 
 	errorBinary({left, right, operator: ">"});
 };
@@ -723,6 +716,11 @@ const backtick = (left, right) => {
 
 const tilde = value => {
 	if (isBinaryFunction(value)) return (x, y) => value(y, x);													// flip					(XYZ)(YXZ)				2(~/)6=3
+	if (isValue(value)) {																						// print				VV						~3=3					outputs 3 to console
+		console.log(value);
+
+		return value;
+	}
 
 	errorUnary({operator: "~", value});
 };  tilde.noLeftApply = true;
