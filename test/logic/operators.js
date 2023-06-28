@@ -104,7 +104,7 @@ export default () => {
 		before(() => spy = sinon.spy(console, "log"));
 		it('print					VV						~3=3', () => {
 			expect(printVV(3)).eql(3);
-			assert(spy.calledWith(3));
+			assert(spy.calledWith("3"));
 		});
 		after(() => spy.restore());
 	});
