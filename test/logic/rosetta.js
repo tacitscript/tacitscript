@@ -35,15 +35,16 @@ export default () => {
             exampleA            solutionNA6                     	 equals (1 2 3 6)
         */
         it("1", () => expect(exampleA).eql([1, 2, 3, 6]));
-    });return;
+    });
 
     describe("4. Integer comparison", () => {
         /*ts
             solutionNNS         :.(
                                     (<$ " is less than "$)
+                                    (=$ " equals "$)
                                     (>$ " is greater than "$)
-                                    " equals "$
-                                )?
+                                    " is an unknown relationship to "$
+                                )?.~
             exampleS            5solutionNNS4                       equals "5 is greater than 4"
         */
         it("1", () => expect(exampleS).eql("5 is greater than 4"));
@@ -67,8 +68,8 @@ export default () => {
 
     describe("7. String comparison", () => {
         /*ts
-            toLowerSS           {"s => s.toLowerCase()"             using host language functionality for case-insensitive comparison
-            solutionSSA         :.(=$ !=$ <$ <$.! toLowerSS@.<$)
+            toLowerSS           {"s => s.toLowerCase()"             requires host language functionality for case-insensitive comparison
+            solutionSSA         :.(=$ !=$ <$ <$.! toLowerSS@.<$)    string comparison via unicode codepoint dictionary order
             exampleA            "abc"solutionSSA"DEF"               equals (0 1 0 1 1)
         */
         it("1", () => expect(exampleA).eql([0, 1, 0, 1, 1]));
@@ -100,8 +101,8 @@ export default () => {
                                     ]._1%.[
                                     .(.(].knownCharS@.[ [.]) ]).%$.1'
                                     .(.(].knownSubstringS@.[ [.]) ]).%$.1'
-                                )
-            exampleA            (3 4)solutionASA"abcdefgh"                    equals ("defg" "defgh" "abcdefg" "bcde" "cdef")
+                                ).~
+            exampleA            (3 4)solutionASA"abcdefgh"                    prints ("defg" "defgh" "abcdefg" "bcde" "cdef")
         */
         it("1", () => expect(exampleA).eql(["defg", "defgh", "abcdefg", "bcde", "cdef"]));
     });
@@ -120,10 +121,10 @@ export default () => {
 
     describe("12. Loops/While", () => {
         /*ts
-            solutionN       >0^({"console.log">./2.[)1024       console log entries: 1024 512 256 128 64 32 16 8 4 2 1
+            solutionN       >0^(;.~./2.[)1024       prints 1024 512 256 128 64 32 16 8 4 2 1
         */
         it("1", () => expect(solutionN).eql(0));
-    })
+    });
 
     describe("13. Apply a callback to an array", () => {
         /*ts
@@ -135,12 +136,12 @@ export default () => {
     describe("14. Associative array/Iteration", () => {
         /*ts
             dictionaryD         \(("a" 1) ("b" 2) ("c" 3))
-            dictionaryIterD     +@dictionaryD                   equals \(("a" "a1") ("b" "b2") ("c" "c3"))
+            dictionaryIterD     (:.~)@dictionaryD               prints ("a" "1") ("b" "2") ("c" "3")
             valueIterD          ^2@dictionaryD                  equals \(("a" 1) ("b" 4) ("c" 9))
             pairsA              \dictionaryD                    equals (("a" 1) ("b" 2) ("c" 3)) for array iteration
             keyIterD            pairsA,((0 ) +"'")>@,\          equals \(("a'" 1) ("b'" 2) ("c'" 3))
         */
-        it("1", () => expect(dictionaryIterD).eql({a: "a1", b: "b2", c: "c3"}));
+        it("1", () => expect(dictionaryIterD).eql({a: ["a", 1], b: ["b", 2], c: ["c", 3]}));
         it("2", () => expect(valueIterD).eql({a: 1, b: 4, c: 9}));
         it("3", () => expect(keyIterD).eql({"a'": 1, "b'": 2, "c'": 3}));
     });
@@ -153,7 +154,7 @@ export default () => {
     });
 
     describe("15. Filter", () => {
-        // note, tacitscript does not support destructive operations
+        // note, tacitscript does not support destructive operations natively
         /*ts
             evenA           (%2.!)?(1 2 3 4 5 6 7 8 9)      equals (2 4 6 8)
         */
@@ -162,7 +163,7 @@ export default () => {
 
     describe("16. FizzBuzz", () => {
         /*ts
-            fizzBuzzA       +1^100,(((%3.=0)&(%5.=0) "FizzBuzz"`) (%3.=0 "Fizz"`) (%5.=0 "Buzz"`) ;)?@
+            fizzBuzzA       +1^100,(((%3.=0)&(%5.=0) "FizzBuzz"`) (%3.=0 "Fizz"`) (%5.=0 "Buzz"`) ;)?@,~
         */
         it("1", () => expect(fizzBuzzA).eql([1,2,"Fizz",4,"Buzz","Fizz",7,8,"Fizz","Buzz",11,"Fizz",13,14,"FizzBuzz",16,17,"Fizz",19,"Buzz","Fizz",22,23,"Fizz","Buzz",26,"Fizz",28,29,"FizzBuzz",31,32,"Fizz",34,"Buzz","Fizz",37,38,"Fizz","Buzz",41,"Fizz",43,44,"FizzBuzz",46,47,"Fizz",49,"Buzz","Fizz",52,53,"Fizz","Buzz",56,"Fizz",58,59,"FizzBuzz",61,62,"Fizz",64,"Buzz","Fizz",67,68,"Fizz","Buzz",71,"Fizz",73,74,"FizzBuzz",76,77,"Fizz",79,"Buzz","Fizz",82,83,"Fizz","Buzz",86,"Fizz",88,89,"FizzBuzz",91,92,"Fizz",94,"Buzz","Fizz",97,98,"Fizz","Buzz"]));
     });
@@ -171,31 +172,30 @@ export default () => {
 		/*ts
             processANV      :._.([ ,(, (.(,(~%.=0 `) ""``).?)@).@$.+$)._.|$
             fizzBuzzAA      1%._,(processANV [.+1^).@$
-            exampleA        fizzBuzzAA(20 (3 "Fizz") (5 "Buzz") (7 "Baxx"))     equals (1 2 "Fizz" 4 "Buzz" "Fizz" "Baxx" 8 "Fizz" "Buzz" 11 "Fizz" 13 "Baxx" "FizzBuzz" 16 17 "Fizz" 19 "Buzz")
+            exampleA        fizzBuzzAA(20 (3 "Fizz") (5 "Buzz") (7 "Baxx")),~     prints (1 2 "Fizz" 4 "Buzz" "Fizz" "Baxx" 8 "Fizz" "Buzz" 11 "Fizz" 13 "Baxx" "FizzBuzz" 16 17 "Fizz" 19 "Buzz")
 		*/
         it("1", () => expect(exampleA).eql([1,2,"Fizz",4,"Buzz","Fizz","Baxx",8,"Fizz","Buzz",11,"Fizz",13,"Baxx","FizzBuzz",16,17,"Fizz",19,"Buzz"]));
 	});
 
 	describe("18. Integer sequence", () => {
 		/*ts
-			// solutionN		{"console.log">^(+1)1		up to 2^53
+			// solutionN		(;.~)^(+1)1		up to 2^53
 		*/
 	});
 
 	describe("19. Loop over multiple arrays simultaneously", () => {
 		/*ts
-			solutionAA		(*.{@)$.+$@											limited to shortest dimension in all arrays
-			exampleA		solutionAA(("a" "b" "c") ("A" "B" "C") (1 2 3))
+			solutionAA		(*.{@)$.+$@											    limited to shortest dimension in all arrays
+			exampleA		solutionAA(("a" "b" "c") ("A" "B" "C") (1 2 3)),~       prints ("aA1" "bB2" "cC3")
 		*/
 		it("1", () => expect(exampleA).eql(["aA1", "bB2", "cC3"]));
 	});
 
 	describe("20. Loops/Break", () => {
 		/*ts
-			log				{"console.log">
 			solutionN		!=10^(?20.[.(
-								(=10 log)
-								log.?20.[.log.0`
+								(=10 ~)
+								;.~.?20.[.~.0`
 							)?)0
 		*/
 	});
@@ -209,25 +209,25 @@ export default () => {
 
     describe("22. Loops/Downward for", () => {
 		/*ts
-			solutionA		10-^11
+			solutionA		10-^11,~
 		*/
 		it("1", () => expect(solutionA).eql([10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]));
 	});
 
 	describe("23. Loops/For", () => {
 		/*ts
-			solutionA		(+1."*"`^.+$)^5
+			solutionA		(+1."*"`^.+$.~)^5
 		*/
 		it("1", () => expect(solutionA).eql(["*", "**", "***", "****", "*****"]));
 	});
 
     describe("24. Foreach", () => {
         /*ts
-            solutionA	    ;^5,{"console.log">@
+            solutionA	    ;^5,(;.~)@
         */
         it("1", () => expect(solutionA).eql([0, 1, 2, 3, 4]));
     });
-
+    return;
     describe("25. Loops/Infinite", () => {
         /*ts
             // solutionS       ;^({"console.log">)"SPAM"
