@@ -4,7 +4,7 @@ import ts from "tacitscript";
 export default () => {
 	describe("Async", () => {
 		/*ts
-			callBackDS			"id"'.{"x => console.log.call(null, x)"
+			callBackDS			"id"'.~
 			fetchU				{"() => fetch('https://api.restful-api.dev/objects/7').then(response => response.json()).then(callBackDS)"
 		*/
 		let spy;
