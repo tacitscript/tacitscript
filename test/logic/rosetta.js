@@ -227,16 +227,16 @@ export default () => {
         */
         it("1", () => expect(solutionA).eql([0, 1, 2, 3, 4]));
     });
-    return;
+
     describe("25. Loops/Infinite", () => {
         /*ts
-            // solutionS       ;^({"console.log">)"SPAM"
+            // solutionS       (;.~)^;"SPAM"
         */
-    })
+    });
 
     describe("26. Loops/N plus one half", () => {
         /*ts
-            solutionS       +1^10,(:,(; .(; ((=10 ""`) ", "`)?).""$).""$ "")$
+            solutionS       +1^10,((!=10 ""+.+", ") ;)?@,""$,~
         */
         it("1", () => expect(solutionS).eql("1, 2, 3, 4, 5, 6, 7, 8, 9, 10"));
     });
@@ -245,7 +245,7 @@ export default () => {
         // use streams to terminate iteration
         /*ts
             randomsA        ((2 12 10) (18 20 9) (1 20 16))
-            untilTwentyA    ((].=20 ()`) #.(/3.[ %3).'randomsA)?^( ),{
+            untilTwentyA    ((].=20 ()`) #.(/3.[ %3).'randomsA)?^( ),{,~    prints (2 12 10 18 20)
         */
         it("1", () => expect(untilTwentyA).eql([2, 12, 10, 18, 20]));
     });
