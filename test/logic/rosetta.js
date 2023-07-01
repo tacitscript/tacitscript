@@ -422,4 +422,123 @@ export default () => {
         it("2", () => expect(exampleD.height).eql(5));
     });
 
+    describe("35. Collections", () => {
+		/*ts
+			// operations are non-destructive
+			arrayaA		( )
+			arraybA		arrayaA+(1 )			equals (1 )
+			arraycA		arraybA+(2 )			equals (1 2)
+			dictaD		\( )
+			dictbD		dictaD+(\(("a" 1) ))	equals \(("a" 1) )
+			dictcD		dictbD+(\(("b" 2) ))	equals \(("a" 1) ("b" 2))
+		*/
+		it("1", () => expect(arraycA).eql([1, 2]));
+		it("2", () => expect(dictcD).eql({a: 1, b: 2}));
+	});
+
+    describe("36. Comments", () => {
+        /*ts
+            numN        2           anything here is a comment
+            // line comments appear like this
+        */
+    });
+
+    describe("37. Copy a string", () => {
+        /*ts
+            stringS     "Hello"
+            copyS       stringS         strings are immutable, copies share reference
+        */
+        it("1", () => expect(copyS).eql("Hello"));
+    });
+
+    describe("38. Create a two-dimensional array at runtime", () => {
+        /*ts
+            arrayTwoAA      .(.(0`` ]).^$.` [).^$
+            exampleA        arrayTwoAA(2 3)             equals ((0 0 0) (0 0 0))
+        */
+        it("1", () => expect(exampleA).eql([[0, 0, 0], [0, 0, 0]]));
+    });
+
+    describe("39. Define a primitive data type", () => {
+		/*ts
+			boundedNN		(((%1.!=0)|(<1)|(>10) ()`) ;)?
+			boundedaN		boundedNN5.5						equals ()
+			boundedbN		boundedNN0							equals ()
+			boundedcN		boundedNN11							equals ()
+			boundeddN		boundedNN5							equals 5
+		*/
+		it("1", () => expect(boundedaN).eql(undefined));
+		it("2", () => expect(boundedbN).eql(undefined));
+		it("3", () => expect(boundedcN).eql(undefined));
+		it("4", () => expect(boundeddN).eql(5));
+	});
+
+    describe("40. Empty program", () => {
+        // empty block is valid (no name-value pairs)
+        /*ts
+
+        */
+    });
+
+    describe("41. Enumerations", () => {
+        /*ts
+            enumD       \(("apple" 0) ("banana" 1) ("cherry" 2))    requires explicit values
+        */
+    });
+
+    describe("42. Formatted numeric output", () => {
+		/*ts
+			padLeftNNS		:.(,(; ""+.#).-$.((=0 ""`) "0"`^.+$)? ]).+$
+			exampleS		9padLeftNNS7.125							    equals "00007.125"
+		*/
+		it("1", () => expect(exampleS).eql("00007.125"));
+	});
+
+    describe("43. Function definition", () => {
+        /*ts
+            multiply        *
+        */
+    });
+
+    describe("44. Hash from two arrays", () => {
+        /*ts
+            hashAAD     *.\
+            exampleD    ("a" "b" "c")hashAAD(1 2 3)     equals \(("a" 1) ("b" 2) ("c" 3))
+        */
+        it("1", () => expect(exampleD).eql({a: 1, b: 2, c: 3}));
+    });
+
+    describe("45. Hello world/Text", () => {
+        /*ts
+            stringS     ~"Hello world!"     stringS is also equal to the "Hello world!"
+        */
+    });
+
+    describe("46. Implicit type conversion", () => {
+        /*ts
+            stringS     ""+5        equals "5"
+            numN        0+"5"       equals 5
+        */
+    });
+
+    describe("47. Literals/Floating point", () => {
+		/*ts
+			decimalN	2.3
+			standardN	0.3*(10^34)
+		*/
+		it("1", () => expect(standardN).eql(0.3e+34));
+	});
+
+    describe("48. Literals/String", () => {
+        /*ts
+            stringS     "line 1
+line 2\nline 3\t\"\\"                   \ used to escape characters
+        */
+    });
+
+    describe("49. Named parameters", () => {
+        /*ts
+            
+        */
+    });
 };
