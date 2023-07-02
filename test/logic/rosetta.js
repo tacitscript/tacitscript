@@ -532,13 +532,32 @@ export default () => {
     describe("48. Literals/String", () => {
         /*ts
             stringS     "line 1
-line 2\nline 3\t\"\\"                   \ used to escape characters
+line 2\nline 3\t\"\u03A9\\"                   \ used to escape characters (\u03A9 is omega)
         */
     });
 
     describe("49. Named parameters", () => {
+        // pass parameters as dictionary
         /*ts
-            
+            namedParamSDX       '
+            exampleN            "a"namedParamSDX(\(("a" 1) ("b" 2)))        equals 1
+        */
+        it("1", () => expect(exampleN).eql(1));
+    });
+
+    describe("50. Null object", () => {
+        /*ts
+            nullO       ()          formally known as undefined
         */
     });
+
+    describe("51. Optional parameters", () => {
+        /*ts
+            sortImplementationAA    ;                                                                                       TODO: Implement
+            sorterDA		        +(\(("ordering" "lexicographic") ("column" 0) ("reverse" 0))).sortImplementationAA
+			exampleA		        \(("table" ((4 5 6) (2 5 3))) ("column" 1)),sorterDA
+        */
+    });
+
+
 };
