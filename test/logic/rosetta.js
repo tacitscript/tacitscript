@@ -678,4 +678,12 @@ line 2\nline 3\t\"\u03A9\\"                   \ used to escape characters (\u03A
         it("1", () => expect(factorialNN(3)).eql(6));
         it("3", () => expect(factorialNN(1)).eql(1));
     });
+
+    describe("66. Find square difference", () => {
+		/*ts
+			resultN		(.(; -1).^2@.-$.<1000)^(+1)1
+		*/
+		it("1", () => expect(resultN).eql(501));
+	});
+
 };
