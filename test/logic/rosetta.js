@@ -559,5 +559,123 @@ line 2\nline 3\t\"\u03A9\\"                   \ used to escape characters (\u03A
         */
     });
 
+    describe("52. Pick random element", () => {
+        /*ts
+            randomAX        .(#.()? ;).'$
+            exampleN        randomAX(1 2 3)     in range [1, 3]
+        */
+        it("1", () => expect(exampleN).to.be.gte(1).and.lte(3));
+    });
 
+    describe("53. Real constants and functions", () => {
+        /*ts
+            sqrtNN          ^0.5                sqrtNN9=3
+            absNN           #                   absNN(_4)=4
+            floorNN         [                   floorNN(_2.3)=_3
+            ceilNN          ]                   ceilNN(_2.3)=_2
+            powNNN          ^                   2powNNN3=8
+        */
+        it("1", () => expect(sqrtNN(9)).eql(3));
+        it("2", () => expect(absNN(-4)).eql(4));
+        it("3", () => expect(floorNN(-2.3)).eql(-3));
+        it("4", () => expect(ceilNN(-2.3)).eql(-2));
+        it("5", () => expect(powNNN(2, 3)).eql(8));
+    });
+
+    describe("54. Return multiple values", () => {
+        // typically return as an array
+        /*ts
+            arrayXA     (1 2)`          arrayXA()=(1 2)
+        */
+        it("1", () => expect(arrayXA()).eql([1, 2]));
+    });
+
+    describe("55. Scope modifiers", () => {
+        // no modifiers. lexical scoping.
+        /*ts
+            cN      aN+3        equals ()
+            aN      2
+            bN      aN+3        equals 5
+        */
+        it("1", () => expect(cN).to.be.undefined);
+        it("2", () => expect(bN).eql(5));
+    });
+
+    describe("56. Special characters", () => {
+        // Only alphabetic characters (upper and lower cases) can be used for identifiers.
+        // For string escape sequences, see host language.
+    });
+
+    describe("57. Special variables", () => {
+        // See host language.
+    });
+
+    describe("58. String length", () => {
+        /*ts
+            lengthSN        #       see host language for specifications
+        */
+        it("1", () => expect(lengthSN("møøse")).eql(5));
+    });
+
+    describe("59. Strip comments from a string", () => {
+        /*ts
+            stripSS     .(.("#"@ ";"@).|$ ;).%$.[
+            exaS        stripSS"apples, pears # and bananas"        equals "apples, pears "
+            exbS        stripSS"apples, pears ; and bananas"        equals "apples, pears "
+        */
+        it("1", () => expect(exaS).eql("apples, pears "));
+        it("2", () => expect(exbS).eql("apples, pears "));
+    });
+
+    describe("60. Array concatenation", () => {
+        /*ts
+            concatA     (1 2 3)+(4 5 6)     equals (1 2 3 4 5 6)
+        */
+        it("1", () => expect(concatA).eql([1, 2, 3, 4, 5, 6]));
+    });
+
+    describe("61. Array length", () => {
+        /*ts
+            lengthA     #
+            exampleN    lengthA("apple" "orange")     equals 2
+        */
+        it("1", () => expect(exampleN).eql(2));
+    });
+
+    describe("62. Determine if a string is numeric", () => {
+        /*ts
+            numericST       0+.}.="N"
+        */
+        it("1", () => expect(numericST("23")).eql(1));
+        it("2", () => expect(numericST("hello")).eql(0));
+        it("3", () => expect(numericST("2.4")).eql(1));
+        it("4", () => expect(numericST("_3")).eql(1));
+    });
+
+    describe("63. Empty string", () => {
+        /*ts
+            emptyS      ""          falsey
+            emptyST     !           non-empty strings are truthy
+            notEmptyST  ;           use identity
+        */
+        it("1", () => expect(emptyST("")).eql(1));
+        it("2", () => expect(notEmptyST("")).is.falsey);
+    });
+
+    describe("64. Even or odd", () => {
+        /*ts
+            evenNT      %2.!        evenNT3=0
+            oddNT       %2          oddNT3=1
+        */
+        it("1", () => expect(evenNT(3)).eql(0));
+        it("2", () => expect(oddNT(3)).eql(1));
+    });
+
+    describe("65. Factorial", () => {
+        /*ts
+            factorialNN         +1^.*$         factorialNN3=6
+        */
+        it("1", () => expect(factorialNN(3)).eql(6));
+        it("3", () => expect(factorialNN(1)).eql(1));
+    });
 };
