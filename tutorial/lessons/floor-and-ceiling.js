@@ -15,19 +15,4 @@ export default {
 			["](_1.8)=(_1)"],
 		])}</div>
 	</div>,
-	exercise: {
-		question: <span>Define the operator <b>rollNN</b> that takes the number of sides on a regular dice, and returns the result of a roll of that dice:</span>,
-		getJs: ({def}) => `const solution = /*ts ${def} */;`,
-		getHtml: details => <div className="single-line name-expression">
-			<div className="name">rollNN</div>
-			<TextEdit {...{...details, multiline: true, solution: '0?.[.+1'}}/>
-		</div>,
-		getTestValues: () => [dice[Math.floor(Math.random() * dice.length)]],
-		hint1: "Use operators: + . [ ?",
-		hint2: "Generate a random number from 1 to the number of sides, floor, and add one",
-		tests: [
-			{description: testValue => <span><b>rollNN</b>{`${testValue} returns an integer between 1 and ${testValue}`}</span>, condition: ({solution, testValue}) => (result => (result <= testValue) && (result >= 1) && ((result % 1) === 0))(solution(testValue))},
-			{description: () => <span><b>rollNN</b> uses either <a href="#bracketleft">bracketleft ([)</a> or <a href="#bracketright">bracketright (])</a> operator</span>, condition: ({es6}) => es6.includes("ts.bracketleft") || es6.includes("ts.bracketright")},
-		],
-	},
 };

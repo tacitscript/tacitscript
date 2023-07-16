@@ -10,9 +10,14 @@ export default {
 	name: "Random Numbers",
 	operations: <React.Fragment><a href="#random">(?) random</a></React.Fragment>,
 	description: <div>
-		<p>The <a href="#random">(?) random</a> operation takes a number <b>n</b> to the right and, when called with any left argument, returns a random floating point number in the range [<b>0</b>, <b>n</b>) ie. the range includes <b>0</b> but excludes <b>n</b>.</p>
+		<p>The <a href="#random">(?) random</a> operation takes a natural number (positive integer) <b>n</b> to the right and, when called with any left argument, returns a random number.</p>
+		<ul>
+			<li>if <b>n = 1</b>, it returns a floating point number in the range [<b>0</b>, <b>1</b>) ie. the range includes <b>0</b> but excludes <b>1</b>,</li>
+			<li>otherwise, it returns an integer in the range [<b>0</b>, <b>n - 1</b>]</li>
+		</ul>
 		<div className="code-block">{getOperationExamples([
-			["randProportionXN", "?1", "0(<|=)(randProportionXN6)<1"],
+			["randProportionXN", "?1", "0(<|=)(randProportionXN())<1"],
+			["randDiceRollXN", "?6.+1", "1(<|=)(randDiceRollXN())(<|=)6"],
 		])}</div>
 		<p>Note that <a href="#random">(?) random</a> is <b>not</b> <a href="https://en.wikipedia.org/wiki/Referential_transparency" target="_blank">referentially transparent</a>.</p>
 	</div>,

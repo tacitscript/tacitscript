@@ -514,11 +514,14 @@ const question = (left, right) => {
 
 		return undefined;
 	}
-	if (isNumber(right)) return Math.random() * right;															// random				?NN						(0?10)<10
 	if (isUnaryFunction(left) && isArray(right)) return tsFilter(left)(right);									// filter				(VV)AA					<5?(4 9 2 7 3)=(4 2 3)
 	if (isUnaryFunction(left) && isStream(right)) return streamFilter({fn: left, generator: right});			// filter				(VV)LL					((%2.=0)?((#.+1)^( )),3%,{)=(2 4 6)
 	if (isUnaryFunction(left) && isObject(right)) return tsFilterObject(left)(right);							// filter				(VV)DD					(%2.=0)?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
 	if (isBinaryFunction(left) && isObject(right)) return filterObjIndexed(left)(right);						// filterObjIndexed		(SVV)DD					(+.="b2")?(\(("a" 1) ("b" 2)))=(\(("b" 2) ))
+	if (isNumber(right)) {
+		if (right === 1) return Math.random();																	// random				?NN						(0?10)<10
+		if ((right > 0) && ((right % 1) === 0)) return Math.floor(Math.random() * right);
+	}
 
 	errorBinary({left, right, operator: "?"});
 };

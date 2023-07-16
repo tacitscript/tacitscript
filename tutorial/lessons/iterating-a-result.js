@@ -13,9 +13,9 @@ const es6 = ts2es6(`/*ts
 eval(es6.replace(/const /g, "var "));
 
 export default {
-	id: "iterating-a-result",
-	name: "Iterating a Result",
-	operations: <React.Fragment><a href="#while">(^) while</a>, <a href="#notCondition">(!) notCondition</a></React.Fragment>,
+	id: "negating-a-condition",
+	name: "Negating a Condition",
+	operations: <React.Fragment><a href="#notCondition">(!) notCondition</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define <b>nextPalindromeNN</b> that takes an integer and returns the number of integers between this and the next integer that is a palidrome.</div>

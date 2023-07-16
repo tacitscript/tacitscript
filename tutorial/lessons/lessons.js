@@ -71,6 +71,7 @@ import lenses from "./lenses.js";
 import objectOrientation from "./object-orientation.js";
 import objectOrientation2 from "./object-orientation-2.js";
 import objectOrientation3 from "./object-orientation-3.js";
+import squareDifference from "./square-difference.js";
 
 export default [[
 	arithmeticOperations,
@@ -111,6 +112,7 @@ export default [[
 	rtti,
 	generatingSequences,
 	generatingSequences2,
+	squareDifference,
 	iteratingAResult,
 	every,
 	reject,
