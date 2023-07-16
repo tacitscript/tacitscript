@@ -682,8 +682,16 @@ line 2\nline 3\t\"\u03A9\\"                   \ used to escape characters (\u03A
     describe("66. Find square difference", () => {
 		/*ts
 			resultN		(.(; -1).^2@.-$.<1000)^(+1)1
+            solutionNN  .((.(; -1).^2@.-$)` >).(.$).^(+1).(1,)
 		*/
 		it("1", () => expect(resultN).eql(501));
+        it("2", () => expect(solutionNN(1000)).eql(501));
 	});
 
+    describe("power of two", () => {
+        /*ts
+            tempN       <101^(*2)1
+        */
+        it("1", () => expect(tempN).eql(128));
+    });
 };

@@ -34,8 +34,8 @@ export default {
 		hint1: "Use operators: _ = . $ ;",
 		hint2: "Fork to create the string and its reverse, then equality-reduce",
 		tests: [
-			{description: testValue => <span><b>isWordPalindromeST</b>{`"${testValue}"`} equals !()</span>, condition: ({solution, testValue}) => solution(testValue) === true},
-			{description: testValue => <span><b>isWordPalindromeST</b>{`"${testValue}"`} equals ()</span>, condition: ({solution, testValue}) => solution(testValue) === false},
+			{description: testValue => <span><b>isWordPalindromeST</b>{`"${testValue}"`} equals 1</span>, condition: ({solution, testValue}) => solution(testValue) === 1},
+			{description: testValue => <span><b>isWordPalindromeST</b>{`"${testValue}"`} equals 0</span>, condition: ({solution, testValue}) => solution(testValue) === 0},
 		],
 	},
 };
