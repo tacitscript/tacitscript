@@ -25,7 +25,7 @@ export default {
 		hint2: "compare number of results when filtered against total number",
 		tests: R.times(() => ({
 			description: ({def, fn, testValue}) => <span>{def}<b>everyUAT</b>{ts.toString(testValue)} equals {ts.toString(R.all(fn, testValue))}</span>,
-			condition: ({solution, testValue: {fn, testValue: test}}) => R.all(fn, test) === solution(fn, test),
+			condition: ({solution, testValue: {fn, testValue: test}}) => +R.all(fn, test) === solution(fn, test),
 		}), 2),
 	},
 };

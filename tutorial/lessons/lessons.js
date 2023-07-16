@@ -112,6 +112,7 @@ export default [[
 	rtti,
 	generatingSequences,
 	generatingSequences2,
+	squareDifference,
 	iteratingAResult,
 	every,
 	reject,
@@ -150,5 +151,4 @@ export default [[
 	// combinations,
 	// leftpad,
 	// factors,
-	squareDifference,
 ]];

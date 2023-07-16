@@ -1,7 +1,6 @@
 import TextEdit from "../components/text-edit.js";
 import Table from "../components/table.js";
 import parser from "common/src/parser.js";
-import getOperationExamples from "../logic/get-operation-examples.js";
 
 const {ts2es6} = parser;
 window.ts = ts; // required in release mode for eval
@@ -14,17 +13,9 @@ const es6 = ts2es6(`/*ts
 eval(es6.replace(/const /g, "var "));
 
 export default {
-	id: "iterating-a-result",
-	name: "Iterating a Result",
-	operations: <React.Fragment><a href="#while">(^) while</a>, <a href="#notCondition">(!) notCondition</a></React.Fragment>,
-	description: <div>
-		<p>Using the <a href="#while">(^) while</a> operation, we can iterate a value until a certain condition is met.</p>
-		<p><a href="#while">(^) while</a> takes the condition to the left, the iterator to the right, and returns a unary operator that takes a starting value.</p>
-		<p>To find the first power-of-2 over 100, we can iterate a starting value (say <span className="code">2^0=1</span>) by doubling it until the value exceeds 100:</p>
-		<div className="code-block">{getOperationExamples([
-			["leastPowerOfTwo", "<100^(*2)1", "equals 128"],
-		])}</div>
-	</div>,
+	id: "negating-a-condition",
+	name: "Negating a Condition",
+	operations: <React.Fragment><a href="#notCondition">(!) notCondition</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define <b>nextPalindromeNN</b> that takes an integer and returns the number of integers between this and the next integer that is a palidrome.</div>
