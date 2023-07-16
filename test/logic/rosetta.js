@@ -694,4 +694,20 @@ line 2\nline 3\t\"\u03A9\\"                   \ used to escape characters (\u03A
         */
         it("1", () => expect(tempN).eql(128));
     });
+
+    describe("67. Greatest element of a list", () => {
+        /*ts
+            greatestAN      ;<.]
+            exampleN        greatestAN(3 6 4 1 7 2)     equals 7
+        */
+        it("1", () => expect(exampleN).eql(7));
+    });
+
+    describe("68. Increment a numeric string", () => {
+        /*ts
+            incrementSS     0+.+1.""+
+            exampleS        incrementSS"67"     equals "68"
+        */
+        it("1", () => expect(exampleS).eql("68"));
+    });
 };
