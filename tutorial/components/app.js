@@ -296,7 +296,7 @@ export default ({store}) => {
 
 		<div className="section">
 			<h4>tacitscript - a language optimized for pen and paper</h4>
-			<p>tacitscript is a <a href="https://en.wikipedia.org/wiki/Function-level_programming" target="_blank">function-level</a> programming language. Algorithms are built from a set of mathematical operators.</p>
+			<p>tacitscript is a minimalist programming language built on a set of mathematical operators.</p>
 			<p>Jump straight into the interactive tutorial below! (The entire language syntax is covered in the first six short sections.)</p>
 			<p>Or read more about the <a href="#motivation">motivation behind tacitscript.</a></p>
 		</div>
