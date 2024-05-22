@@ -47,7 +47,7 @@ export default ({dispatch}) => {
 				<div className="code-block table-data">{getOperationExamples([
 					["N", "An integer, or decimal Number (using a decimal point), eg. 10, 3.14"],
 					["S", <span>A double-quote delimited multi-line String, possibly using escaped characters eg. "header1\theader2<br/>value1\tvalue2"</span>],
-					["B", <span>A Boolean value, <span className="code">0</span> <i>false</i>, or <span className="code">1</span> <i>true</i>. Booleans are a subgroup of the Numbers.</span>],
+					["B", <span>A Boolean value, <span className="code">0</span> <i>false</i>, or <span className="code">1</span> <i>true</i>. Booleans are a subset of the Numbers.</span>],
 					["A", 'A mixed-type array, eg. (10 "string" +)'],
 					["D", <span>A Dictionary with string keys and where values may be of any mixed types (including non-<i>value</i> types), eg. \(("a" 10) ("b" +))</span>],
 					["V", <span>A <i>Value</i>, ie. non-operator, type. Any of <b>N</b>, <b>S</b>, <b>B</b>, <b>A</b> or <b>D</b>.<br/>The types of multiple <b>V</b>s in a signature do not have to match.</span>],

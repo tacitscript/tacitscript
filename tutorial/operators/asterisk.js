@@ -12,9 +12,9 @@ export default {
 		]),
 	}, {
 		id: "filter",
-		type: "NNN",
+		type: "(VB)AA",
 		examples: getOperationExamples([
-			["difference", "2*3", "equals 6"],
+			["filter", "<5*(2 4 6)", "equals (2 4)"],
 		]),
 	}],
 };
