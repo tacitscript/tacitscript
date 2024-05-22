@@ -10,5 +10,11 @@ export default {
 		examples: getOperationExamples([
 			["difference", "2*3", "equals 6"],
 		]),
+	}, {
+		id: "filter",
+		type: "NNN",
+		examples: getOperationExamples([
+			["difference", "2*3", "equals 6"],
+		]),
 	}],
 };
