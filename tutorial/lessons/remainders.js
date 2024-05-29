@@ -1,7 +1,7 @@
 import TextEdit from "../components/text-edit.js";
 import ts from "tacitscript";
 
-const isEven = x => (x % 2) < 1e-10;
+const isEven = x => ((x % 2) < 1e-10) ? 1 : 0;
 
 export default {
 	id: "remainders",
