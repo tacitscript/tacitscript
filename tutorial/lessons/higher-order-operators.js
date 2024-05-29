@@ -10,7 +10,7 @@ export default {
 	name: "Higher Order Operators",
 	operations: <React.Fragment><a href="#reduce">($) reduce</a></React.Fragment>,
 	description: <div>
-		<p>Higher order operators take other operators as arguments.</p>
+		<p><a href="#pipe">(.) pipe</a> is an example of a <i>higher order</i> operator; one that takes other operators as arguments.</p>
 		<p>The <a href="#dollar">dollar ($)</a> operator represents a group of operations that <i>join</i> elements together.</p>
 		<p><a href="#reduce">($) reduce</a> inserts the left-hand binary operation between each element of the array on the right.</p>
 		<div className="code-block">{getOperationExamples([

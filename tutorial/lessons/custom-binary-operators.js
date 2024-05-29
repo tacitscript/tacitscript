@@ -2,7 +2,7 @@ import TextEdit from "../components/text-edit.js";
 import ts from "tacitscript";
 import getOperationExamples from "../logic/get-operation-examples.js";
 
-const multipleOf = (dividend, divisor) => (dividend % divisor) === 0;
+const multipleOf = (dividend, divisor) => ((dividend % divisor) < 1e-10) ? 1 : 0;
 
 export default {
 	id: "custom-binary-operators",
