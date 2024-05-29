@@ -18,6 +18,7 @@ import dollar from "./dollar.js";
 import ampersand from "./ampersand.js";
 import bar from "./bar.js";
 import bang from "./bang.js";
+import question from "./question.js";
 
 export default [
 	ampersand,
@@ -38,6 +39,7 @@ export default [
 	minus,
 	percent,
 	plus,
+	question,
 	slash,
 	underscore,
 ];
