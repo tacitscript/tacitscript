@@ -10,5 +10,11 @@ export default {
 		examples: getOperationExamples([
 			["difference", "2*3", "equals 6"],
 		]),
+	}, {
+		id: "filter",
+		type: "(VB)AA",
+		examples: getOperationExamples([
+			["filter", "<5*(2 4 6)", "equals (2 4)"],
+		]),
 	}],
 };
