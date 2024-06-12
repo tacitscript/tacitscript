@@ -49,12 +49,13 @@ export default ({dispatch}) => {
 				])}</div>
 				<p>The complete list of type symbols is given below:</p>
 				<div className="code-block table-data">{getOperationExamples([
-					["N", "An integer, or decimal Number (using a decimal point), eg. 10, 3.14"],
-					["S", <span>A double-quote delimited multi-line String, possibly using escaped characters eg. "header1\theader2<br/>value1\tvalue2"</span>],
-					["T", <span>A Boolean <i>(truth)</i> value, <span className="code">0</span> <i>false</i>, or <span className="code">1</span> <i>true</i>. Booleans are a subset of the Numbers.</span>],
-					["A", 'A mixed-type array, eg. (10 "string" +)'],
-					["D", <span>A Dictionary with string keys and where values may be of any mixed types (including non-<i>value</i> types), eg. \(("a" 10) ("b" +))</span>],
-					["V", <span>A <i>Value</i>, ie. non-operator, type. Any of <b>N</b>, <b>S</b>, <b>T</b>, <b>A</b> or <b>D</b>.<br/>The types of multiple <b>V</b>s in a signature do not have to match.</span>],
+					["N", <span>An integer, or decimal <b>N</b>umber (using a decimal point), eg. 10, 3.14</span>],
+					["S", <span>A double-quote delimited multi-line <b>S</b>tring, possibly using escaped characters eg. "header1\theader2<br/>value1\tvalue2"</span>],
+					["T", <span>A Boolean <i>(<b>T</b>ruth)</i> value, <span className="code">0</span> <i>false</i>, or <span className="code">1</span> <i>true</i>. Booleans are a subset of the Numbers.</span>],
+					["A", <span>Any <b>A</b>rray, including mixed-type arrays, eg. (10 "string" +)</span>],
+					["C", <span>A ve<b>C</b>tor, ie. any string or array.<br/>Matches other instances of this symbol in signature.</span>],
+					["D", <span>A <b>D</b>ictionary, with string keys and where values may be of any mixed types (including non-<i>value</i> types), eg. \(("a" 10) ("b" +))</span>],
+					["V", <span>A <i><b>V</b>alue</i>, ie. non-operator, type. Any of <b>N</b>, <b>S</b>, <b>T</b>, <b>A</b> or <b>D</b>.<br/>The types of multiple <b>V</b>s in a signature do not have to match.</span>],
 					["?", <span>Any type (either <i>value</i> or operator).<br/>Type does not have to match other <b>?</b>s in signature.</span>],
 					["X, Y, Z, W", <span>Any type.<br/>Matches other instances of this symbol in signature.</span>],
 				])}</div>
