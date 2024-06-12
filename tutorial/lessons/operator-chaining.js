@@ -14,7 +14,7 @@ export default {
 			["halfAddOne", "/2.+1"],
 			["calculation", "halfAddOne4", "equals 3"],
 		])}</div>
-		<p>The <a href="#dot">dot (.)</a> and <a href="#comma">comma (,)</a> operators break <i>left-associativity</i> and have lowest precedence (the only exceptions to this rule.) Therefore, parentheses are not required around <span className="code">+1</span> above.</p>
+		<p>The <a href="#dot">dot (.)</a> and <a href="#comma">comma (,)</a> operators break <i>left-associativity</i> having <b>lowest</b> precedence (the only exceptions to this rule.) Therefore, parentheses are not required around <span className="code">+1</span> above.</p>
 	</div>,
 	exercise: {
 		question: <div>
