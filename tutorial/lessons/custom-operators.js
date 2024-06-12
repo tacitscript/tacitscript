@@ -40,7 +40,7 @@ export default {
 		],
 	},
 	epilogue: <div>
-		<p><i>undefined</i> is a special value that represented by <span className="code">()</span> within tacitscript.</p>
+		<p><i>undefined</i> is a special value represented by <span className="code">()</span> within tacitscript.</p>
 		<p>It is a <i>toxic value</i> in that, if applied to any operator,
 		the resulting calculation will also be <i>undefined</i>.</p>
 		<div className="code-block">{getOperationExamples([

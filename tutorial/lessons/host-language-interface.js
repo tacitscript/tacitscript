@@ -12,6 +12,7 @@ export default {
 	description: <div>
 		<p>Typically, tacitscript definitions will be embedded within a host language. The canonical implementation is for JavaScript, in which tacitscript expressions and blocks are demarcated by <span className="code">/*ts */</span> comments.</p>
 		<p>tacitscript expressions can freely reference symbols from the current environment. tacitscript blocks implicity export defined symbols.</p>
+		<p>The example below is in JavaScript containing tacitscript blocks.</p>
 		<div className="code-block">{`const pi = Math.PI;
 const degressToRadians = /*ts *(pi/180) */;
 const arcLength = (r, theta) => r * theta;
@@ -29,7 +30,7 @@ const speed = (distance, time) => distance / time;
 /*ts
 		marathonSpeed ${def}
 */
-const solution = marathonSpeed(2.0272);`,
+const solution = marathonSpeed(2.0097);`,
 		getHtml: details => <div><br/><div className="rule"/><span>{`
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;
@@ -37,13 +38,13 @@ const speed = (distance, time) => distance / time;
 		<span className="name" {...labelStyle}>marathonSpeed</span>
 		<TextEdit {...{...details, solution: "marathonMiles,speed"}}/>
 	</span><span>{`*/
-const recordMph = marathonSpeed(2.0275);`}</span></div>,
+const recordMph = marathonSpeed(2.0097);`}</span></div>,
 		getTestValues: () => R.times(() => Math.floor(Math.random() * 99) + 1, 2),
 		hint1: "Use parentheses or ,",
 		hint2: "marathonMiles applyTo speed",
 		tests: [
 			{description: <span>it uses <i>marathonMiles</i> and <i>speed</i></span>, condition: ({def}) => ["marathonMiles", "speed"].every(token => def.includes(token))},
-			{description: "it calculates the record average speed for a marathon run: 12.9mph (marathon record was set at 2:01:09.)", condition: ({solution}) => (solution - 12.9498) < 1E-5},
+			{description: "it calculates the record average speed for a marathon run: 13mph (marathon record was set at 2:00:35.)", condition: ({solution}) => Math.abs(solution - 13.0461262875) < 1E-5},
 		],
 	},
 	epilogue: <div>

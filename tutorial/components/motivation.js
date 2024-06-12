@@ -33,8 +33,7 @@ export default ({dispatch}) => {
 		{isOpen ? <div className="contents">
 			<hr/>
 			<h3>What</h3>
-			<p>tacitscript is an experiment in programming language design.</p>
-			<p>It seeks to be a pure, minimal expression of the maxim <b>programming is data transformation</b>.</p> 
+			<p>tacitscript seeks to be a pure, minimal expression of the maxim <b>programming is data transformation</b>.</p>
 			<h3>How</h3>
 			<p>tacitscript is built upon a set of core operators.
 				It contains no dedicated constructs for language features such as loops or control flow.
