@@ -56,7 +56,7 @@ export default ({dispatch}) => {
 					["C", <span>A ve<b>C</b>tor, ie. any string or array.<br/>Matches other instances of this symbol in signature.</span>],
 					["D", <span>A <b>D</b>ictionary, with string keys and where values may be of any mixed types (including non-<i>value</i> types), eg. \(("a" 10) ("b" +))</span>],
 					["V", <span>A <i><b>V</b>alue</i>, ie. non-operator, type. Any of <b>N</b>, <b>S</b>, <b>T</b>, <b>A</b> or <b>D</b>.<br/>The types of multiple <b>V</b>s in a signature do not have to match.</span>],
-					["?", <span>Any type (either <i>value</i> or operator).<br/>Type does not have to match other <b>?</b>s in signature.</span>],
+					["Q", <span>Any type (either <i>value</i> or operator).<br/>Type does not have to match other <b>Q</b>s in signature.</span>],
 					["X, Y, Z, W", <span>Any type.<br/>Matches other instances of this symbol in signature.</span>],
 				])}</div>
 			</div>

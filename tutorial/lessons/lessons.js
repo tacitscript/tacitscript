@@ -72,6 +72,7 @@ import objectOrientation from "./object-orientation.js";
 import objectOrientation2 from "./object-orientation-2.js";
 import objectOrientation3 from "./object-orientation-3.js";
 import squareDifference from "./square-difference.js";
+import genericBinaryOperators from "./generic-binary-operators.js";
 
 export default [[
 	arithmeticOperations,
@@ -114,6 +115,7 @@ export default [[
 	generatingSequences2,
 	squareDifference,
 	iteratingAResult,
+	genericBinaryOperators,
 	every,
 	reject,
 	dictionaryAccess,

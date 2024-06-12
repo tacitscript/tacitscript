@@ -9,8 +9,8 @@ const testValues = [
 
 export default {
 	id: "every",
-	name: "Generic Binary Operators",
-	operations: <React.Fragment><a href="#pair">(:) pair</a>, <a href="#pipeBinaryToArray">(.) pipeBinaryToArray</a></React.Fragment>,
+	name: "Generic Binary Operators 2",
+	operations: <React.Fragment><a href="#pipeBinaryToArray">(.) pipeBinaryToArray</a></React.Fragment>,
 	exercise: {
 		question: <div>
 			<div>Define the binary operator <b>everyUAT</b> that takes a condition on the left to be checked against every element in the array on the right:</div>
