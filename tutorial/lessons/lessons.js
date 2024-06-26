@@ -82,6 +82,7 @@ export default [[
 	customOperators,
 	hostLanguageInterface,
 ], [
+	incrementNumericString,
 	operatorChaining,
 	higherOrderOperators,
 	remainders,
@@ -141,7 +142,6 @@ export default [[
 	quadraticRoots,
 	fizzbuzz,
 ], [
-	incrementNumericString,
 	checksum,
 	lastN,
 	validTriangle,
