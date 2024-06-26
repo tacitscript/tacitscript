@@ -14,7 +14,7 @@ export default {
 			["timesNNN", "*", <span>a binary operator that takes a number (<b>N</b>), on left and right, and returns a number</span>],
 			["diameterN", "2(timesNNN)radiusN", "a number equal to 5"],
 		])}</div>
-		<p>The symbols of some types we've already seen are given below:</p>
+		<p>The symbols of some common types are given below:</p>
 		<div className="code-block">{getOperationExamples([
 			["T", <span>A Boolean (<b>T</b>ruth) value, <b>1</b> (true) or <b>0</b> (false).</span>],
 			["I", <span>An <b>Integer</b>. This type includes Booleans.</span>],
@@ -22,7 +22,7 @@ export default {
 			["S", <span>A <b>S</b>tring, bounded by double-quotes.</span>],
 			["A", <span>An <b>A</b>rray.</span>],
 		])}</div>
-		<p>Note that, in tactiscript, types are used only to resolve those operations that are invoked. Tacitscript employs implicit type promotion; operations on real numbers can equally be applied
+		<p>Note that, in tactiscript, types are used only to determine which operations are invoked. Tacitscript employs implicit type promotion; operations on real numbers can equally be applied
 			to integers and Booleans.
 		</p>
 	</div>,
