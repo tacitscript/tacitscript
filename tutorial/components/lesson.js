@@ -105,7 +105,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 					<div className="question">{question}</div>
 					{tests.map(({description}, index) => <div className="test" key={index}>
 						<div className="status">{(def == undefined) ? <i className="icon">&bull;</i> : <i className={`icon fas fa-${passes[index] ? "check" : "times"}`}></i>}</div>
-						<div className="description">{(typeof description === "function") ? description(testValues[index]) : description}</div>
+						<div className="description">{(typeof description === "function") ? description(testValues[index], def) : description}</div>
 					</div>)}
 					{getHtml({id, defaultValue: def, dispatch, revealed, pass: isPassed, hint1, hint2, showHint1, showHint2, solution, solutions})}
 				</div>
