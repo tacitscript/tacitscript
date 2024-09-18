@@ -6,7 +6,7 @@ const sameLength = (left, right) => (left.length === right.length) ? 1 : 0;
 
 export default {
 	id: "generic-binary-operators",
-	name: "Generic Binary Operators",
+	name: "Generic Infix Operators",
 	operations: <React.Fragment><a href="#pair">(:) pair</a></React.Fragment>,
 	description: <div>
 		<p><a href="#custom-binary-operators">Section 10</a> outlined the derivation of new binary operators through the piping of data from existing binary operations.</p>

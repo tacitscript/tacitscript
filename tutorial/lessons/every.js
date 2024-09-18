@@ -9,7 +9,7 @@ const testValues = [
 
 export default {
 	id: "every",
-	name: "Generic Binary Operators 2",
+	name: "Generic Infix Operators 2",
 	operations: <React.Fragment><a href="#pipeBinaryToArray">(.) pipeBinaryToArray</a></React.Fragment>,
 	exercise: {
 		question: <div>

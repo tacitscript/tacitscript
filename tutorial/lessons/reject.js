@@ -9,7 +9,7 @@ const testValues = [
 
 export default {
 	id: "reject",
-	name: "Generic Binary Operators 3",
+	name: "Generic Infix Operators 3",
 	operations: <React.Fragment><a href="#binaryZipPipe">(,) binaryZipPipe</a></React.Fragment>,
 	exercise: {
 		question: <div>

@@ -3,7 +3,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "dollar",
 	symbol: "$",
-	type: "Binary",
+	type: "Infix",
 	sections: [{
 		id: "reduce",
 		type: "(QQX)AX\tAAQ",

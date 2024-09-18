@@ -3,7 +3,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "comma",
 	symbol: ",",
-	type: "Binary",
+	type: "Infix",
 	sections: [{
 		id: "applyTo",
 		type: "X(XY)Y\t\tX(XYZ)(YZ)",
