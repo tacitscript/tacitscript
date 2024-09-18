@@ -7,14 +7,14 @@ export default {
 	description: <div>
 		<p><b>Strings</b> may contain newlines and are delimted by double-quotes only. Where required, a character may be escaped by a backslash eg. \", \\.</p>
 		<div className="code-block">{`"\\"Make things as simple as possible but no simpler.\\"\n\t- Albert Einstein"`}</div>
-		<p><b>Arrays</b> are bounded by parentheses with elements delimited by whitespace (space, tabs and newlines.) Elements may be of different types, including other arrays.</p>
+		<p><b>Arrays</b> are bounded by parentheses with elements delimited by whitespace (space, tabs and newlines.) Array elements may be of different types, including other arrays.</p>
 		<div className="code-block">{`(("top"		7.5)
  ("side"	2+3))`}</div>
 		<p>An array enclosing only whitespace denotes an empty array. A single element array must also include whitespace.</p>
 		<div className="code-block">{`( )
 ("alone" )`}</div>
 		<p>Strings and arrays share many common properties, and will sometimes be referred to together, as <b>vectors</b>.</p>
-		<p>tacitscript uses <span className="code">1</span> and <span className="code">0</span> for Boolean values <b>True</b> and <b>False</b>. Note that Booleans are also considered numbers.</p>
+		<p>tacitscript uses <span className="code">1</span> and <span className="code">0</span> for the Boolean values <b>True</b> and <b>False</b>. (Note that Booleans are also considered numbers.)</p>
 		<p><a href="#equality">(=) equality</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and return a <i>Boolean</i>.</p>
 		<div className="code-block">1+2*3=9</div>
 	</div>,
