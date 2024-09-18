@@ -6,7 +6,7 @@ export default {
 	type: "Binary",
 	sections: [{
 		id: "divide",
-		type: "NNN",
+		type: "RRR",
 		examples: getOperationExamples([
 			["quotient", "5/2", "equals 2.5"],
 			["divideByZero", "5/0", <span>is <i>undefined</i></span>],
