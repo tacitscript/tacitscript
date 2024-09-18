@@ -6,7 +6,7 @@ export default {
 	type: "Binary",
 	sections: [{
 		id: "multiply",
-		type: "NNN",
+		type: "RRR",
 		examples: getOperationExamples([
 			["difference", "2*3", "equals 6"],
 		]),

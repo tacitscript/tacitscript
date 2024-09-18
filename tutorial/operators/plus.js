@@ -6,7 +6,7 @@ export default {
 	type: "Binary",
 	sections: [{
 		id: "add",
-		type: "NVN",
+		type: "RVR",
 		examples: getOperationExamples([
 			["sum", "2+3", "equals 5"],
 			["sumConvert", '2+"3"', "equals 5"],
