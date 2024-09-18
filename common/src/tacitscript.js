@@ -717,7 +717,7 @@ const backtick = (left, right) => {
 }; backtick.supportsUndefined = true;
 
 //----------------------------------------------------------
-// Unary
+// Prefix
 
 const tilde = value => {
 	if (isBinaryFunction(value)) return (x, y) => value(y, x);													// flip					(XYZ)(YXZ)				2(~/)6=3

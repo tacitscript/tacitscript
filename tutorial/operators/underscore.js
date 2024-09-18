@@ -3,10 +3,10 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "underscore",
 	symbol: "_",
-	type: "Unary",
+	type: "Prefix",
 	sections: [{
 		id: "negative",
-		type: "NN",
+		type: "RR",
 		examples: getOperationExamples([
 			["negativeTwo", "_2", "equals -2"],
 		]),

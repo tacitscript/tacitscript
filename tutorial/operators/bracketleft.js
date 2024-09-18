@@ -3,7 +3,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "bracketleft",
 	symbol: "[",
-	type: "Unary",
+	type: "Prefix",
 	sections: [{
 		id: "first",
 		type: "A?\tSS",

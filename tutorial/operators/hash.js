@@ -3,7 +3,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "hash",
 	symbol: "#",
-	type: "Unary",
+	type: "Prefix",
 	sections: [{
 		id: "length",
 		type: "AN\tSN\tDN",
