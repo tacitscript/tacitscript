@@ -3,7 +3,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "bar",
 	symbol: "|",
-	type: "Binary",
+	type: "Infix",
 	sections: [{
 		id: "orValue",
 		type: "VVV",

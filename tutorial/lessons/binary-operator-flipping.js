@@ -14,7 +14,7 @@ const phrases = ["Good food", "Happy puppy", "Hot coffee", "Black cat", "Tall tr
 
 export default {
 	id: "binary-operator-flipping",
-	name: "Binary Operator Flipping",
+	name: "Infix Operator Flipping",
 	operations: <React.Fragment><a href="#flip">(~) flip</a></React.Fragment>,
 	exercise: {
 		question: <div>

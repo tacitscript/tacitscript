@@ -6,7 +6,7 @@ const multipleOf = (dividend, divisor) => ((dividend % divisor) < 1e-10) ? 1 : 0
 
 export default {
 	id: "custom-binary-operators",
-	name: "Custom Binary Operators",
+	name: "Custom Infix Operators",
 	operations: <React.Fragment><a href="#binaryUnaryPipe">(.) binaryUnaryPipe</a></React.Fragment>,
 	description: <div>
 		<p>Custom binary operators can be created by piping from existing binary operators.</p>

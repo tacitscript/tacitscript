@@ -3,7 +3,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "dot",
 	symbol: ".",
-	type: "Binary",
+	type: "Infix",
 	sections: [{
 		id: "pipe",
 		type: "(XY)(YZ)(XZ)",
