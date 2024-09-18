@@ -13,7 +13,7 @@ export default {
 			["radius", '10'],
 			["area", 'pi*radius*radius', "names also count as symbols within expressions"],
 		])}</div>
-		<p>Characters occuring after the tacitscript expression are treated as comments.</p>
+		<p>Characters occuring after the tacitscript expression, on the same line, are treated as comments.</p>
 		<div className="code-block">{getOperationExamples([
 			["quoteA", '"Java is to JavaScript what car is to Carpet.'],
 			["", <pre>   – Chris Heilmann"</pre>, "So true!"],
