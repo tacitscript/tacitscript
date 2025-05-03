@@ -6,7 +6,7 @@ export default {
 	type: "Infix",
 	sections: [{
 		id: "add",
-		type: "RVR",
+		type: "RRR\t\tRSR",
 		examples: getOperationExamples([
 			["sum", "2+3", "equals 5"],
 			["sumConvert", '2+"3"', "equals 5"],
