@@ -16,9 +16,10 @@ export default {
 			<li>otherwise, it returns an integer in the range [<b>0</b>, <b>n - 1</b>]</li>
 		</ul>
 		<div className="code-block">{getOperationExamples([
-			["randProportionXN", "?1", "0(<|=)(randProportionXN())<1"],
-			["randDiceRollXN", "?6.+1", "1(<|=)(randDiceRollXN())(<|=)6"],
+			["randProportionVN", "?1", "0(<|=)(randProportionVN())<1"],
+			["randDiceRollVN", "?6.+1", "1(<|=)(randDiceRollVN())(<|=)6"],
 		])}</div>
+		<p>Here, it might appear that <span className="code">randProportionVN()</span> is a function invocation. Infact, we are just applying <i>undefined</i>, <span className="code">()</span>, to a prefix operator to get a number. The value we pass is unimportant.</p>
 		<p>Note that <a href="#random">(?) random</a> is <b>not</b> <a href="https://en.wikipedia.org/wiki/Referential_transparency" target="_blank">referentially transparent</a>.</p>
 	</div>,
 	exercise: {
