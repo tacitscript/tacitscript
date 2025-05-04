@@ -370,6 +370,8 @@ const processTsBlock = function(userDefinitions) {return function(ts) {
 	const inlineDefinition = ts[0] === " ";
 
 	const tokensToParse = inlineDefinition ? ts.slice(1) : ts;
+
+	//const tokensToParseMinusQuotes = tokensToParse.replace(/"([^"\\]*(\\.[^"\\]*)*)"/g, ''); for balanced parentheses check - but includes comments...
 	const symbols = tokenize(tokensToParse).tokens;
 
 	console.log("=========================================================");
