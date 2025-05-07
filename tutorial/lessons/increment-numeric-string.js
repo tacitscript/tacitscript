@@ -7,7 +7,7 @@ export default {
 	id: "increment-numeric-string",
 	name: "Type Annotation",
 	description: <div>
-		<p>Although not strictly part of the language specification, a sometimes useful convention (that we will adopt universally from now on) is for tacitscript identifiers to detail the type at the end,
+		<p>Although not strictly part of the language specification, a sometimes useful convention is for tacitscript identifiers to detail the type at the end,
 			according to the rules <a href="#type-signatures">here</a>.</p>
 		<div className="code-block">{getOperationExamples([
 			["radiusR", '2.5', <span>a <b>R</b>eal (expressible in decimal format) number</span>],

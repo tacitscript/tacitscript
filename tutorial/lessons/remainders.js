@@ -14,7 +14,7 @@ export default {
 		<div className="code-block">_10%3=(_1)</div>
 	</div>,
 	exercise: {
-		question: <span>Define the operator <b>isEven</b> that takes an integer and returns whether the number is even:</span>,
+		question: <span>Define the operation <b>isEven</b> that takes an integer and returns whether the number is even:</span>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">isEven</div>
