@@ -7,11 +7,11 @@ export default {
 	operations: <React.Fragment><a href="#applyTo">(,) applyTo</a></React.Fragment>,
 	description: <div>
 		<p>A tacitscript program will consist of a vertical list of name-expression pairs, each pair delimited by tabs/spaces and typically notated in two columns.</p>
-		<p>Names must contain alphabetic characters <i>only</i>.</p>
+		<p>Names must contain alphabetic characters <i>only</i>. Names define symbols that can be used within future expressions.</p>
 		<div className="code-block">{getOperationExamples([
 			["pi", "3.14159"],
 			["radius", '10'],
-			["area", 'pi*radius*radius', "names also count as symbols within expressions"],
+			["area", 'pi*radius*radius'],
 		])}</div>
 		<p>Characters occuring after the tacitscript expression, on the same line, are treated as comments.</p>
 		<div className="code-block">{getOperationExamples([

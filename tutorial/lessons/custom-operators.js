@@ -7,18 +7,18 @@ export default {
 	name: "Custom Operators",
 	description: <div>
 		<p>New operators are made by applying arguments to existing operators.</p>
-		<p>Applying one argument to a binary operator generates a new unary operator with that argument <i>baked-in</i>.</p>
+		<p>Applying one argument to an infix operator generates a new prefix operator with that argument <i>baked-in</i>.</p>
 		<div className="code-block">{getOperationExamples([
 			["double", "2*"],
 			["calculation", "double4", "equals 8"],
 		])}</div>
-		<p>You can also apply arguments to right side of a binary operator.</p>
+		<p>You can also apply arguments to right side of an infix operator.</p>
 		<div className="code-block">{getOperationExamples([
 			["minusSix", "-6"],
 			["calculation", "minusSix9", "equals 3"],
 		])}</div>
-		<p>Note that a unary operator <i>always</i> takes its argument to the right. So <span className="code">9minusSix</span> is a syntax error, as is <span className="code">9(-6)</span>.</p>
-		<p>Applying arguments to a binary operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operation. Note, that the argument is always applied to the left-hand side.</p>
+		<p>Note that a prefix operator <i>always</i> takes its argument to the right. So <span className="code">9minusSix</span> is a syntax error, as is <span className="code">9(-6)</span>.</p>
+		<p>Applying arguments to an infix operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operation. Note, that the argument is always applied to the left-hand side.</p>
 		<div className="code-block">{getOperationExamples([
 			["oneMinus", "1,-", "equivalent to 1-"],
 		])}</div>

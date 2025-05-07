@@ -66,7 +66,7 @@ export default ({id, name, operations, description, epilogue, index, exercise: {
 	const testValues = getTestValues ? getTestValues() : [];
 	const passes = tests ? tests.map(({condition}, index) => {
 		try {
-			return solution && condition({solution, def, es6, testValue: testValues[index]});
+			return condition({solution, def, es6, testValue: testValues[index]});
 		} catch (e) {
 			return false;
 		}

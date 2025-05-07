@@ -12,7 +12,7 @@ export default {
 	description: <div>
 		<p>Typically, tacitscript definitions will be embedded within a host language. The canonical implementation is for JavaScript, in which tacitscript expressions and blocks are demarcated by <span className="code">/*ts */</span> comments.</p>
 		<p>tacitscript expressions can freely reference symbols from the current environment. tacitscript blocks implicity export defined symbols.</p>
-		<p>The example below is in JavaScript containing tacitscript blocks.</p>
+		<p>The example below is in JavaScript and contains an inline ts block (for a single expression) and a multiline ts block (for list of name-expression pairs.)</p>
 		<div className="code-block">{`const pi = Math.PI;
 const degressToRadians = /*ts *(pi/180) */;
 const arcLength = (r, theta) => r * theta;
@@ -20,7 +20,7 @@ const arcLength = (r, theta) => r * theta;
     unitArcLength	1arcLength\r
 */
 const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div>
-		<p>Note that binary operators are imported and exported as functions of two arguments.</p>
+		<p>Note that infix operators are imported and exported as functions of two arguments.</p>
 	</div>,
 	exercise: {
 		question: <span>Define the operator <b>marathonSpeed</b> such that:</span>,
