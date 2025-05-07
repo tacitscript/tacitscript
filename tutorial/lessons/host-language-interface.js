@@ -20,10 +20,10 @@ const arcLength = (r, theta) => r * theta;
     unitArcLength	1arcLength\r
 */
 const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div>
-		<p>Note that infix operators are imported and exported as functions of two arguments.</p>
+		<p>Note that infix operations are imported and exported as functions of two arguments.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operator <b>marathonSpeed</b> such that:</span>,
+		question: <span>Define the operation <b>marathonSpeed</b> such that:</span>,
 		getJs: ({def}) => `
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;

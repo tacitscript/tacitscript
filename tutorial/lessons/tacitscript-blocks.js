@@ -27,7 +27,7 @@ export default {
 			["negativeTwoA", 'negative(two)', "these expressions…"],
 			["negativeTwoB", '(negative)two', "…give the same result"],
 		])}</div>
-		<p>Alternatively, we can use the <a href="#applyTo">(,) applyTo</a> operation that applys an argument to an operator.</p>
+		<p>Alternatively, we can use the <a href="#applyTo">(,) applyTo</a> operation that applys an argument to an operation.</p>
 		<div className="code-block">{getOperationExamples([
 			["negativeTwoC", 'two,negative', "also 2,_"],
 		])}</div>
