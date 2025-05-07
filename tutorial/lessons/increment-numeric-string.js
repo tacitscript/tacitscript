@@ -7,28 +7,27 @@ export default {
 	id: "increment-numeric-string",
 	name: "Type Annotation",
 	description: <div>
-		<p>Although not strictly part of the language specification, a sometimes useful convention (that we will adopt universally from now on) is for tacitscript identifiers to detail the type at the end,
+		<p>Although not strictly part of the language specification, a sometimes useful convention is for tacitscript identifiers to detail the type at the end,
 			according to the rules <a href="#type-signatures">here</a>.</p>
 		<div className="code-block">{getOperationExamples([
-			["radiusN", '2.5', "a number"],
-			["timesNNN", "*", <span>a binary operator that takes a number (<b>N</b>), on left and right, and returns a number</span>],
-			["diameterN", "2(timesNNN)radiusN", "a number equal to 5"],
+			["radiusR", '2.5', <span>a <b>R</b>eal (expressible in decimal format) number</span>],
+			["timesRRR", "*", <span>a binary operation that takes a Real (<b>R</b>), on left and right, and returns a Real.</span>],
+			["diameterR", "2(timesRRR)radiusR", "a number equal to 5"],
 		])}</div>
 		<p>The symbols of some common types are given below:</p>
 		<div className="code-block">{getOperationExamples([
-			["T", <span>A Boolean (<b>T</b>ruth) value, <b>1</b> (true) or <b>0</b> (false).</span>],
-			["I", <span>An <b>Integer</b>. This type includes Booleans.</span>],
-			["N", <span>A (real) <b>N</b>umber, expressible in decimal format. This type includes Integers.</span>],
+			["N", <span>A <b>N</b>atural number (a positive integer or zero.) The Naturals are a subset of the Reals.</span>],
+			["B", <span>A <b>B</b>oolean value, <b>1</b> (true) or <b>0</b> (false). Booleans are a subset of the Naturals.</span>],
 			["S", <span>A <b>S</b>tring, bounded by double-quotes.</span>],
 			["A", <span>An <b>A</b>rray.</span>],
 		])}</div>
-		<p>Note that, in tactiscript, types are used only to determine which operations are invoked. Tacitscript employs implicit type promotion; operations on real numbers can equally be applied
-			to integers and Booleans.
+		<p>Note that, in tactiscript, types are used only to determine which operations are invoked. Tacitscript employs implicit type promotion; operations on Real numbers can equally be applied
+			to Naturals, or even Booleans.
 		</p>
 	</div>,
 	exercise: {
 		question: <div>
-			<div>Name and define a unary operator that increments a numeric string:</div>
+			<div>Name and define an infix operation that increments a numeric string:</div>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def.split(/\s+/).slice(1).join(" ")} */;`,
 		getHtml: details => <div className="single-line name-expression">

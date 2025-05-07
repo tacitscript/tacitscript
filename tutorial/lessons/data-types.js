@@ -24,7 +24,7 @@ export default {
 		getHtml: details => <div className="single-line"><TextEdit {...{...details, multiline: true, solution: `(1 "line1\nline2" ( ) (1 ) 1="string" +)`}}/></div>,
 		tests: [
 			{description: "is an array", condition: ({solution}) => Array.isArray(solution)},
-			{description: "contains a number", condition: ({solution}) => R.any(element => !isNaN(element), solution)},
+			{description: "contains a number", condition: ({solution}) => R.any(element => !isNaN(element) && !Array.isArray(element), solution)},
 			{description: "contains a multi-line string", condition: ({solution}) => R.any(element => (typeof element === "string") && element.match(/\n/), solution)},
 			{description: "contains an empty array", condition: ({solution}) => R.any(element => Array.isArray(element) && !element.length, solution)},
 			{description: "contains a single element array containing the number 1", condition: ({solution}) => R.any(element => Array.isArray(element) && (element[0] === 1), solution)},
