@@ -28,7 +28,7 @@ export default {
 			{description: "contains a multi-line string", condition: ({solution}) => R.any(element => (typeof element === "string") && element.match(/\n/), solution)},
 			{description: "contains an empty array", condition: ({solution}) => R.any(element => Array.isArray(element) && !element.length, solution)},
 			{description: "contains a single element array containing the number 1", condition: ({solution}) => R.any(element => Array.isArray(element) && (element[0] === 1), solution)},
-			{description: "contains a boolean created by evaluating an = operation", condition: ({es6}) => es6.includes(", ts.equal),")},
+			{description: "contains a boolean created by evaluating an expression containing =", condition: ({es6}) => es6.includes(", ts.equal),")},
 			{description: "contains an operator", condition: ({solution}) => R.any(element => typeof element === "function", solution)},
 		],
 	},

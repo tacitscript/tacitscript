@@ -7,7 +7,7 @@ export default {
 	operations: <React.Fragment><a href="#applyTo">(,) applyTo</a></React.Fragment>,
 	description: <div>
 		<p>A tacitscript program will consist of a vertical list of name-expression pairs, each pair delimited by tabs/spaces and typically notated in two columns.</p>
-		<p>Names must contain alphabetic characters <i>only</i>. Names define symbols that can be used within future expressions.</p>
+		<p>Names represent new symbols that can be used as aliases in future expressions. They must contain alphabetic characters <i>only</i>.</p>
 		<div className="code-block">{getOperationExamples([
 			["pi", "3.14159"],
 			["radius", '10'],
@@ -20,14 +20,15 @@ export default {
 			["quoteB", '"Features, quality, time: pick two."'],
 			["quotes", '(quoteA quoteB)', "look, an array :)"],
 		])}</div>
-		<p>When an operator and its argument are both names, parentheses are required to delimit the terms.</p>
+		<p>Operators, themselves, can also be bound to names.</p>
+		<p>When an operator and its operand are both names, parentheses are required to delimit the terms.</p>
 		<div className="code-block">{getOperationExamples([
 			["negative", '_', "create an alias"],
 			["two", "2"],
 			["negativeTwoA", 'negative(two)', "these expressions…"],
 			["negativeTwoB", '(negative)two', "…give the same result"],
 		])}</div>
-		<p>Alternatively, we can use the <a href="#applyTo">(,) applyTo</a> operation that applys an argument to an operation.</p>
+		<p>Alternatively, we can use the <a href="#applyTo">(,) applyTo</a> operator that applys an operand to an operator.</p>
 		<div className="code-block">{getOperationExamples([
 			["negativeTwoC", 'two,negative', "also 2,_"],
 		])}</div>

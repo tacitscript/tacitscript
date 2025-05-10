@@ -82,11 +82,11 @@ export default [[
 	customOperators,
 	hostLanguageInterface,
 ], [
-	incrementNumericString,
 	operatorChaining,
 	higherOrderOperators,
 	remainders,
 	customBinaryOperators,
+	incrementNumericString,
 	conditionals,
 ], [
 	average,
