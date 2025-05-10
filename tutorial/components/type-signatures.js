@@ -33,17 +33,17 @@ export default ({dispatch}) => {
 		{isOpen ? <div className="contents">
 			<hr/>
 			<div>
-				<p>Operation type signatures contain either two components (unary) or three components (binary).</p>
+				<p>Operator type signatures contain either two components (prefix) or three components (infix).</p>
 				<div className="code-block table-data">{getOperationExamples([
-					["AN", <span>This unary operation takes an <i>array</i> and returns a <i>natural</i> number, eg. <a href="#length">(#) length</a>, <span className="code">#(7 8 9)=3</span></span>],
-					["SAS", <span>This binary operation takes a <i>string</i> and <i>array</i> to the left and right respectively, and returns a <i>string</i>,<br/>eg. <a href="#concat">(+) concat</a>, <span className="code">"Array: "+(1 2 3)="Array: (1 2 3)"</span></span>],
+					["AN", <span>This prefix operator takes an <i>array</i> and returns a <i>Natural</i> number, eg. <a href="#length">(#) length</a>, <span className="code">#(7 8 9)=3</span></span>],
+					["SAS", <span>This infix operator takes a <i>string</i> and <i>array</i> to the left and right respectively, and returns a <i>string</i>,<br/>eg. <a href="#concat">(+) concat</a>, <span className="code">"Array: "+(1 2 3)="Array: (1 2 3)"</span></span>],
 				])}</div>
-				<p>When an operation argument is itself an operation, we use parentheses.</p>
+				<p>When an operand is itself an operator, we use parentheses.</p>
 				<div className="code-block table-data">{getOperationExamples([
-					["(VB)AA", <span>This binary operation takes an operation that maps a <i>value</i>-type (non-operation) to a <i>Boolean</i> on the left,<br/>
+					["(VB)AA", <span>This infix operator takes an operator that maps a <i>value</i>-type (non-operator) to a <i>Boolean</i> on the left,<br/>
 					and an <i>array</i> on the right, and returns an <i>array</i>, eg. <a href="#filter">(*) filter</a>, <span className="code">&lt;5*(2 4 6)=(2 4)</span></span>],
 				])}</div>
-				<p>When using a type signature to denote the type of a symbol (a form of <a href="https://en.wikipedia.org/wiki/Hungarian_notation">Hungarian notation</a>), operations are reduced to <b>I</b> for infix operations and <b>P</b> for prefix operations.</p>
+				<p>When using a type signature to denote the type of a symbol (a form of <a href="https://en.wikipedia.org/wiki/Hungarian_notation">Hungarian notation</a>), operators are reduced to <b>I</b> for infix operations and <b>P</b> for prefix operations.</p>
 				<div className="code-block table-data">{getOperationExamples([
 					["filterPAA", <span>An alias for the <a href="#filter">(*) filter</a> operation.</span>],
 				])}</div>
@@ -56,10 +56,10 @@ export default ({dispatch}) => {
 					["A", <span>An <b>A</b>rray, including mixed-type arrays, eg. (10 "string" +)</span>],
 					["C", <span>A ve<b>C</b>tor, ie. any string or array.<br/>Matches other instances of this symbol in signature.</span>],
 					["D", <span>A <b>D</b>ictionary, with string keys and where values may be of any mixed types (including non-<i>value</i> types), eg. \(("a" 10) ("b" +))</span>],
-					["V", <span>A <i><b>V</b>alue</i>, ie. non-operation, type. Any of <b>R</b>, <b>N</b>, <b>B</b>, <b>S</b>, <b>A</b> or <b>D</b>.<br/>The types of multiple <b>V</b>s in a signature do not have to match.</span>],
-					["I", <span>An <b>I</b>nfix operation.</span>],
-					["P", <span>A <b>P</b>refix operation.</span>],
-					["Q", <span>(For <b>Q</b>uestion.) Any type (either <i>value</i> or operation).<br/>Type does not have to match other <b>Q</b>s in signature.</span>],
+					["V", <span>A <i><b>V</b>alue</i>, ie. non-operator, type. Any of <b>R</b>, <b>N</b>, <b>B</b>, <b>S</b>, <b>A</b> or <b>D</b>.<br/>The types of multiple <b>V</b>s in a signature do not have to match.</span>],
+					["I", <span>An <b>I</b>nfix operator.</span>],
+					["P", <span>A <b>P</b>refix operator.</span>],
+					["Q", <span>(For <b>Q</b>uestion.) Any type (either <i>value</i> or operator).<br/>Type does not have to match other <b>Q</b>s in signature.</span>],
 					["X, Y, Z, W", <span>Any type.<br/>Matches other instances of this symbol in signature.</span>],
 				])}</div>
 			</div>

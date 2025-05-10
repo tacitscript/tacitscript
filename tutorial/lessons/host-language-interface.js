@@ -11,7 +11,7 @@ export default {
 	name: "Host Language Interface",
 	description: <div>
 		<p>Typically, tacitscript definitions will be embedded within a host language. The canonical implementation is for JavaScript, in which tacitscript expressions and blocks are demarcated by <span className="code">/*ts */</span> comments.</p>
-		<p>tacitscript expressions can freely reference symbols from the current environment. tacitscript blocks implicity export defined symbols.</p>
+		<p>tacitscript expressions can freely reference symbols from the current environment. tacitscript blocks implicity export their defined symbols.</p>
 		<p>The example below is in JavaScript and contains an inline ts block (for a single expression) and a multiline ts block (for list of name-expression pairs.)</p>
 		<div className="code-block">{`const pi = Math.PI;
 const degressToRadians = /*ts *(pi/180) */;
@@ -48,7 +48,7 @@ const recordMph = marathonSpeed(2.0097);`}</span></div>,
 		],
 	},
 	epilogue: <div>
-		<p>That completes the language syntax. The remaining sections detail the standard library of operations.</p>
+		<p>That completes the language syntax. The remaining sections detail the standard library of operators.</p>
 		<p>All tacitscript operators are single character punctuation symbols taken from the standard
 			US keyboard.</p>
 		<p>A minimal example tacitscript application (debuggable with source maps) is given <a href="https://plnkr.co/edit/pg9UymjRiyxdyx7p">here</a>.</p>

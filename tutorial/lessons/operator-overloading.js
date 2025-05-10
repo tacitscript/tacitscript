@@ -6,18 +6,18 @@ export default {
 	name: "Operator Overloading",
 	operations: <React.Fragment><a href="#concat">(+) concat</a>, <a href="#negative">(_) negative</a>, <a href="#reverse">(_) reverse</a></React.Fragment>,
 	description: <div>
-		<p>The particular operation that an operator resolves to depends on the types of its surrounding symbols.</p>
-		<p><a href="#plus">plus (+)</a> resolves to <a href="#add">(+) add</a> between numbers, but between arrays or strings, it resolves to a <a href="#concat">(+) concat</a> operation.</p>
+		<p>The particular operator that a symbol resolves to depends on the types of its surrounding operands.</p>
+		<p><a href="#plus">+</a> resolves to <a href="#add">(+) add</a> between numbers, but between arrays or strings, it resolves to the <a href="#concat">(+) concat</a> operator.</p>
 		<div className="code-block">{`(1 2 3)+(4 5 6)=(1 2 3 4 5 6)\n"Hello, "+"World!"="Hello, World!"`}</div>
-		<p><a href="#plus">plus (+)</a> also yields type-conversion operations depending on the left-hand argument.</p>
+		<p><a href="#plus">+</a> also yields type-conversion operations depending on the left-hand operand.</p>
 		<div className="code-block">{`"I am "+45+" years old"="I am 45 years old"\n2+"5"=7`}</div>
-		<p>Operators are either <b>infix</b> (taking arguments to the left and right), or <b>prefix</b> (taking one argument to the right.) The operations that resolve from a particular operator will be, correspondingly, all <b>infix</b> (taking two arguments), or <b>prefix</b> (taking one.) These operations are typically related in meaning.</p>
-		<p>To denote negative numbers, we use the <a href="#negative">(_) negative</a> operation of the prefix <a href="#underscore">underscore (_)</a> operator.</p>
+		<p>The operators that resolve from a particular symbol will all be either <b>infix</b> (taking operands to the left and right), or <b>prefix</b> (taking one operand to the right.) These operators are typically related in meaning.</p>
+		<p>To denote negative numbers, we use the prefix <a href="#negative">(_) negative</a> operator.</p>
 		<div className="code-block">_5.5</div>
-		<p>Many operations take other operations as arguments. With strict left-associativity on symbols, <span className="code">2+_1</span> becomes a syntax error when trying to resolve the
-		operator <a href="#underscore">underscore (_)</a> into the expression. Parentheses are required in this case.</p>
+		<p>Many operators take other operations as operands. With strict left-associativity, <span className="code">2+_1</span> becomes a syntax error when trying to resolve the
+		symbol <a href="#underscore">_</a> into the currently parsed expression. Parentheses are required in this case.</p>
 		<div className="code-block">2+(_1)</div>
-		<p>Before arrays and strings, <a href="#underscore">underscore (_)</a> resolves to the <a href="#reverse">(_) reverse</a> operation.</p>
+		<p>Before vectors, <a href="#underscore">_</a> resolves to the <a href="#reverse">(_) reverse</a> operator.</p>
 		<div className="code-block">{`_(1 2 3)=(3 2 1)\n_"Hello, World!"="!dlroW ,olleH"`}</div>
 	</div>,
 	exercise: {
