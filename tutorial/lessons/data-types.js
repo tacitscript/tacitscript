@@ -3,7 +3,7 @@ import TextEdit from "../components/text-edit.js";
 export default {
 	id: "data-types",
 	name: "Data Types",
-	operations: <React.Fragment><a href="#equality">(=) equality</a></React.Fragment>,
+	operations: <React.Fragment><a href="#equality">= (equality)</a></React.Fragment>,
 	description: <div>
 		<p><b>Strings</b> may contain newlines and are delimted by <i>double-quotes</i> only. Where required, a character may be escaped by a backslash eg. \", \\.</p>
 		<div className="code-block">{`"\\"Make things as simple as possible but no simpler.\\"\n\t- Albert Einstein"`}</div>
@@ -15,7 +15,7 @@ export default {
 ("alone" )`}</div>
 		<p>Strings and arrays share many common properties, and will sometimes be referred to together, as <b>vectors</b>.</p>
 		<p>tacitscript uses <span className="code">1</span> and <span className="code">0</span> for the Boolean values <b>True</b> and <b>False</b>. (Note that Booleans are also considered numbers.)</p>
-		<p><a href="#equality">(=) equality</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and returns a <i>Boolean</i>.</p>
+		<p><a href="#equality">= (equality)</a> compares <i>by-value</i> the contents of its left and right-hand arguments, and returns a <i>Boolean</i>.</p>
 		<div className="code-block">1+2*3=9</div>
 	</div>,
 	exercise: {
