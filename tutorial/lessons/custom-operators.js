@@ -6,8 +6,8 @@ export default {
 	id: "e",
 	name: "Custom Operators",
 	description: <div>
-		<p>New operators are made by binding a name to an existing operator that has some operand applied.</p>
-		<p>Applying one operand to an infix operator generates a new prefix operator with that operand <i>baked-in</i>.</p>
+		<p>A new operator can be made by applying an operand to an existing infix operator.</p>
+		<p>This generates a new prefix operator with that operand <i>baked-in</i>.</p>
 		<div className="code-block">{getOperationExamples([
 			["double", "2*"],
 			["calculation", "double4", "equals 8"],
@@ -18,7 +18,7 @@ export default {
 			["calculation", "minusSix9", "equals 3"],
 		])}</div>
 		<p>Note that a prefix operator <i>always</i> takes its operand to the right. So <span className="code">9minusSix</span> is a syntax error, as is <span className="code">9(-6)</span>.</p>
-		<p>Applying an operand to an infix operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operator. Note, that the operand is always applied to the left-hand side.</p>
+		<p>Applying an operand to an infix operator can also be achieved with the <a href="#applyTo">(,) applyTo</a> operation. Note, that the operand is always applied to the left-hand side.</p>
 		<div className="code-block">{getOperationExamples([
 			["oneMinus", "1,-", "equivalent to 1-"],
 		])}</div>
@@ -41,7 +41,7 @@ export default {
 	},
 	epilogue: <div>
 		<p><i>undefined</i> is a special value represented by <span className="code">()</span> within tacitscript.</p>
-		<p>It is a <i>toxic value</i> in that, if applied to any operator,
+		<p>It is a <i>toxic value</i> in that, if applied to any operator where a defined value is required,
 		the resulting calculation will also be <i>undefined</i>.</p>
 		<div className="code-block">{getOperationExamples([
 			["calculation", "1/0+2", <span>is <i>undefined</i></span>],

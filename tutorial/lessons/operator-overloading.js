@@ -11,12 +11,12 @@ export default {
 		<div className="code-block">{`(1 2 3)+(4 5 6)=(1 2 3 4 5 6)\n"Hello, "+"World!"="Hello, World!"`}</div>
 		<p><a href="#plus">+</a> also yields type-conversion operations depending on the left-hand operand.</p>
 		<div className="code-block">{`"I am "+45+" years old"="I am 45 years old"\n2+"5"=7`}</div>
-		<p>The operations that resolve from a standard operator will all be either <b>infix</b> (taking operands to the left and right), or <b>prefix</b> (taking one operand to the right.) These operators are typically related in meaning.</p>
-		<p>To denote negative numbers, we use the prefix <a href="#negative">(_) negative</a> operation.</p>
+		<p>The operations that resolve from a standard operator will all be either <b>infix</b> (taking operands to the left and right), or <b>prefix</b> (taking one operand to the right.) These operations are typically related in meaning.</p>
+		<p>To denote negative numbers, we use the prefix <a href="#negative">_ (negative)</a> operation.</p>
 		<div className="code-block">_5.5</div>
 		<p>Many operators take other operators as operands. Expressions are resolved from left to right, and with strict left-associativity, <span className="code">2+_1</span> becomes a syntax error on parsing the symbol <a href="#underscore">_</a>. Parentheses are required in this case.</p>
 		<div className="code-block">2+(_1)</div>
-		<p>Before vectors, <a href="#underscore">_</a> resolves to the <a href="#reverse">(_) reverse</a> operator.</p>
+		<p>Before vectors, <a href="#underscore">_</a> resolves to the <a href="#reverse">_ (reverse)</a> operation.</p>
 		<div className="code-block">{`_(1 2 3)=(3 2 1)\n_"Hello, World!"="!dlroW ,olleH"`}</div>
 	</div>,
 	exercise: {

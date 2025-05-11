@@ -4,7 +4,7 @@ import getOperationExamples from "../logic/get-operation-examples.js";
 export default {
 	id: "tacitscript-blocks",
 	name: "tacitscript Blocks",
-	operations: <React.Fragment><a href="#applyTo">(,) applyTo</a></React.Fragment>,
+	operations: <React.Fragment><a href="#applyTo">, (applyTo)</a></React.Fragment>,
 	description: <div>
 		<p>A tacitscript program will consist of a vertical list of name-expression pairs, each pair delimited by tabs/spaces and typically notated in two columns.</p>
 		<p>Names represent new symbols that can be used as aliases in future expressions. They must contain alphabetic characters <i>only</i>.</p>
@@ -28,7 +28,7 @@ export default {
 			["negativeTwoA", 'negative(two)', "these expressions…"],
 			["negativeTwoB", '(negative)two', "…give the same result"],
 		])}</div>
-		<p>Alternatively, we can use the <a href="#applyTo">(,) applyTo</a> operator that applys an operand to an operator.</p>
+		<p>Alternatively, we can use the <a href="#applyTo">, (applyTo)</a> operation that applys an operand to an operator.</p>
 		<div className="code-block">{getOperationExamples([
 			["negativeTwoC", 'two,negative', "also 2,_"],
 		])}</div>
@@ -40,7 +40,7 @@ export default {
 solution\t3plus7\t\tthis is a comment`}}/></div>,
 		tests: [
 			{description: "contains two name-expression pairs", condition: ({es6}) => (match => match && (match.length === 2))(es6.match(/const /g))},
-			{description: 'defines an alias for a binary operator you have learned', condition: ({def}) => {
+			{description: 'defines an alias for a standard infix operator you have learned', condition: ({def}) => {
 				const firstLine = def.split("\n")[0].split(/\s+/);
 
 				if (firstLine.length < 2) return false;
