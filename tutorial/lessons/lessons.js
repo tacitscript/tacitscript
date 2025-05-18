@@ -73,6 +73,7 @@ import objectOrientation2 from "./object-orientation-2.js";
 import objectOrientation3 from "./object-orientation-3.js";
 import squareDifference from "./square-difference.js";
 import genericBinaryOperators from "./generic-binary-operators.js";
+import vectorLength from "./vector-length.js";
 
 export default [[
 	arithmeticOperations,
@@ -88,6 +89,7 @@ export default [[
 	customBinaryOperators,
 	incrementNumericString,
 	conditionals,
+	vectorLength,
 ], [
 	average,
 	power,

@@ -93,7 +93,7 @@ const style = css({
 					whiteSpace: "pre-wrap",
 					padding: "0.4rem 0.5rem",
 					borderRadius: "0.25rem",
-					fontSize: "0.8rem",
+					fontSize: "0.75rem",
 					".table-data": {
 						padding: "0 0.5rem",
 						borderSpacing: "0 0.5rem",

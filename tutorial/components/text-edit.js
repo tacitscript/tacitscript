@@ -32,7 +32,7 @@ const style = css({
 	" .MuiInputBase-input": {
 		":not(.MuiInputBase-inputMultiline)": {padding: "0 0 2px"},
 		fontFamily: "Roboto Mono, monospace",
-		fontSize: "0.8rem",
+		fontSize: "0.75rem",
 		color: "black",
 		":disabled": {
 			cursor: "not-allowed",

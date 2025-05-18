@@ -11,7 +11,7 @@ export default {
 			according to the rules <a href="#type-signatures">here</a>.</p>
 		<div className="code-block">{getOperationExamples([
 			["radiusR", '2.5', <span>a <b>R</b>eal (expressible in decimal format) number</span>],
-			["timesRRR", "*", <span>a binary operation that takes a Real (<b>R</b>), on left and right, and returns a Real.</span>],
+			["timesRRR", "*", <span>an infix operator that takes a Real (<b>R</b>), on the left and right, and returns a Real.</span>],
 			["diameterR", "2(timesRRR)radiusR", "a number equal to 5"],
 		])}</div>
 		<p>The symbols of some common types are given below:</p>
@@ -21,13 +21,12 @@ export default {
 			["S", <span>A <b>S</b>tring, bounded by double-quotes.</span>],
 			["A", <span>An <b>A</b>rray.</span>],
 		])}</div>
-		<p>Note that, in tactiscript, types are used only to determine which operations are invoked. Tacitscript employs implicit type promotion; operations on Real numbers can equally be applied
-			to Naturals, or even Booleans.
-		</p>
+		<p>Note that, in tactiscript, types are used only to determine which operations are invoked.</p>
+		<p>Tacitscript employs implicit type promotion; operations on Real numbers can equally be applied to Naturals, or even Booleans.</p>
 	</div>,
 	exercise: {
 		question: <div>
-			<div>Name and define an infix operation that increments a numeric string:</div>
+			<div>Name and define an infix operator that increments a numeric string:</div>
 		</div>,
 		getJs: ({def}) => `const solution = /*ts ${def.split(/\s+/).slice(1).join(" ")} */;`,
 		getHtml: details => <div className="single-line name-expression">

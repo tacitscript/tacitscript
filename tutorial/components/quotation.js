@@ -8,7 +8,7 @@ const style = css({
     whiteSpace: "pre-wrap",
     padding: "1rem 2rem",
     borderRadius: "0.25rem",
-    fontSize: "0.8rem",
+    fontSize: "0.75rem",
     fontStyle: "italic",
     "> .quote": {
         fontSize: "1.5rem",

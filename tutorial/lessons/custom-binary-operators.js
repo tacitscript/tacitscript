@@ -6,18 +6,18 @@ const multipleOf = (dividend, divisor) => ((dividend % divisor) < 1e-10) ? 1 : 0
 
 export default {
 	id: "custom-binary-operators",
-	name: "Custom Infix Operations",
-	operations: <React.Fragment><a href="#binaryUnaryPipe">(.) binaryUnaryPipe</a></React.Fragment>,
+	name: "Custom Infix Operators",
+	operations: <React.Fragment><a href="#binaryUnaryPipe">. (binaryUnaryPipe)</a></React.Fragment>,
 	description: <div>
-		<p>Custom infix operations can be created by piping from existing infix operations.</p>
-		<p><a href="#binaryUnaryPipe">(.) binaryUnaryPipe</a> takes an infix operation to the left, passing its result to the prefix operation on the right.</p>
-		<p>The binary operation defined below calculates the average of it's two arguments.</p>
+		<p>Custom infix operations can be created by <i>piping</i> from existing infix operators.</p>
+		<p><a href="#binaryUnaryPipe">. (binaryUnaryPipe)</a> takes an infix operator to the left, passing its result to the prefix operator on the right.</p>
+		<p>The infix operator defined below calculates the average of its two operands.</p>
 		<div className="code-block">{getOperationExamples([
 			["average", "+./2", "2average5=3.5"],
 		])}</div>
 	</div>,
 	exercise: {
-		question: <span>Define the infix operation <b>multipleOf</b> that determines whether the number of the left is a multiple of the number on the right:</span>,
+		question: <span>Define the infix operator <b>multipleOf</b> that determines whether the number of the left is a multiple of the number on the right:</span>,
 		getJs: ({def}) => `const solution = /*ts ${def} */;`,
 		getHtml: details => <div className="single-line name-expression">
 			<div className="name">multipleOf</div>

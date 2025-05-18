@@ -6,7 +6,7 @@ export default {
 	type: "Infix",
 	sections: [{
 		id: "cond",
-		type: "AAV",
+		type: "AVV",
 		examples: getOperationExamples([
 			["parity", `((%2.=0 +" is even") +" is odd")?`, `parityNS3="3 is odd"`],
 		]),

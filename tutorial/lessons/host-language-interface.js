@@ -20,10 +20,10 @@ const arcLength = (r, theta) => r * theta;
     unitArcLength	1arcLength\r
 */
 const circumference = unitArcLength(degreesToRadians(360)); // equals 2pi`}</div>
-		<p>Note that infix operations are imported and exported as functions of two arguments.</p>
+		<p>Note that infix operators are imported and exported as functions of two arguments.</p>
 	</div>,
 	exercise: {
-		question: <span>Define the operation <b>marathonSpeed</b> such that:</span>,
+		question: <span>Define the operator <b>marathonSpeed</b> such that:</span>,
 		getJs: ({def}) => `
 const marathonMiles = 26.2188;
 const speed = (distance, time) => distance / time;
@@ -49,7 +49,7 @@ const recordMph = marathonSpeed(2.0097);`}</span></div>,
 	},
 	epilogue: <div>
 		<p>That completes the language syntax. The remaining sections detail the standard library of operators.</p>
-		<p>All tacitscript operators are single character punctuation symbols taken from the standard
+		<p>All tacitscript standard operators are single character punctuation symbols taken from the standard
 			US keyboard.</p>
 		<p>A minimal example tacitscript application (debuggable with source maps) is given <a href="https://plnkr.co/edit/pg9UymjRiyxdyx7p">here</a>.</p>
 	</div>,
