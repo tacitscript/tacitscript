@@ -35,17 +35,17 @@ export default ({dispatch}) => {
 			<div>
 				<p>Operator type signatures contain either two components (prefix) or three components (infix).</p>
 				<div className="code-block table-data">{getOperationExamples([
-					["AN", <span>This prefix operator takes an <i>array</i> and returns a <i>Natural</i> number, eg. <a href="#length">(#) length</a>, <span className="code">#(7 8 9)=3</span></span>],
-					["SAS", <span>This infix operator takes a <i>string</i> and <i>array</i> to the left and right respectively, and returns a <i>string</i>,<br/>eg. <a href="#concat">(+) concat</a>, <span className="code">"Array: "+(1 2 3)="Array: (1 2 3)"</span></span>],
+					["AN", <span>This prefix operator takes an <i>array</i> and returns a <i>Natural</i> number, eg. <a href="#length"># (length)</a>, <span className="code">#(7 8 9)=3</span></span>],
+					["SAS", <span>This infix operator takes a <i>string</i> and <i>array</i> to the left and right respectively, and returns a <i>string</i>,<br/>eg. <a href="#concat">+ (concat)</a>, <span className="code">"Array: "+(1 2 3)="Array: (1 2 3)"</span></span>],
 				])}</div>
 				<p>When an operand is itself an operator, we use parentheses.</p>
 				<div className="code-block table-data">{getOperationExamples([
 					["(VB)AA", <span>This infix operator takes an operator that maps a <i>value</i>-type (non-operator) to a <i>Boolean</i> on the left,<br/>
-					and an <i>array</i> on the right, and returns an <i>array</i>, eg. <a href="#filter">(*) filter</a>, <span className="code">&lt;5*(2 4 6)=(2 4)</span></span>],
+					and an <i>array</i> on the right, and returns an <i>array</i>, eg. <a href="#filter">* (filter)</a>, <span className="code">&lt;5*(2 4 6)=(2 4)</span></span>],
 				])}</div>
-				<p>When using a type signature to denote the type of a symbol (a form of <a href="https://en.wikipedia.org/wiki/Hungarian_notation">Hungarian notation</a>), operators are reduced to <b>I</b> for infix operations and <b>P</b> for prefix operations.</p>
+				<p>When using a signature to denote the type of an identifier (a form of <a href="https://en.wikipedia.org/wiki/Hungarian_notation">Hungarian notation</a>), components are reduced to <b>I</b> for infix operators and <b>P</b> for prefix operators.</p>
 				<div className="code-block table-data">{getOperationExamples([
-					["filterPAA", <span>An alias for the <a href="#filter">(*) filter</a> operation.</span>],
+					["filterPAA", <span>An alias for the <a href="#filter">* (filter)</a> operation.</span>],
 				])}</div>
 				<p>The complete list of type symbols is given below:</p>
 				<div className="code-block table-data">{getOperationExamples([

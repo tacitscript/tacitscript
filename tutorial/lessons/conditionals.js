@@ -6,9 +6,9 @@ const nextCollatz = value => ((value % 2) === 0) ? (value / 2) : (3 * value) + 1
 export default {
 	id: "conditionals",
 	name: "Conditionals",
-	operations: <React.Fragment><a href="#cond">(?) cond</a></React.Fragment>,
+	operations: <React.Fragment><a href="#cond">? (cond)</a></React.Fragment>,
 	description: <div>
-		<p>The traditional <i>if, then, else</i> construct is handled by the <a href="#cond">(?) cond</a> operation.</p>
+		<p>The traditional <i>if, then, else</i> construct is handled by the <a href="#cond">? (cond)</a> operation.</p>
 		<p>The pseudocode expression <span className="code">if <b>f</b>(x) then <b>a</b>(x) else if <b>g</b>(x) then <b>b</b>(x) else <b>c</b>(x)</span> is written <span className="code">((f a) (g b) c)?</span>.</p>
 		<div className="code-block">{getOperationExamples([
 			["parityNS", `((%2.=0 +" is even") +" is odd")?`, `parityNS3="3 is odd"`],
@@ -34,7 +34,7 @@ export default {
 		hint2: "If even, then divide by 2, otherwise, times 3 and add 1",
 		tests: [
 			...R.times(() => ({description: testValue => <span><b>nextCollatzNN</b>{`${testValue} equals ${nextCollatz(testValue)}`}</span>, condition: ({solution, testValue}) => nextCollatz(testValue) === solution(testValue)}), 2),
-			{description: () => <span><b>nextCollatzNN</b> uses <a href="#question">question (?)</a></span>, condition: ({es6}) => es6.includes("ts.question")},
+			{description: () => <span><b>nextCollatzNN</b> uses <a href="#question">?</a></span>, condition: ({es6}) => es6.includes("ts.question")},
 		],
 	},
 };
